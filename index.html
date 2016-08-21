@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-08-21 Sun 16:49 -->
+<!-- 2016-08-21 Sun 18:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs org-mode examples</title>
@@ -171,23 +171,41 @@ where org expects to seeks its libraries by default config:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp">(expand-file-name
-<span style="color: #00cdcd;">"ditaa.jar"</span>
-(file-name-as-directory
-(expand-file-name
-<span style="color: #00cdcd;">"scripts"</span>
-(file-name-as-directory
-(expand-file-name
-<span style="color: #00cdcd;">"../contrib"</span>
-(file-name-directory (org-find-library-dir <span style="color: #00cdcd;">"org"</span>)))))))
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC elisp :exports both</span>
+  (expand-file-name
+  <span style="color: #00cdcd;">"ditaa.jar"</span>
+  (file-name-as-directory
+  (expand-file-name
+  <span style="color: #00cdcd;">"scripts"</span>
+  (file-name-as-directory
+  (expand-file-name
+  <span style="color: #00cdcd;">"../contrib"</span>
+  (file-name-directory (org-find-library-dir <span style="color: #00cdcd;">"org"</span>)))))))
+<span style="color: #ff0087;">#+END_SRC</span>
+
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #b2b2b2;">: /home/antony/.emacs.d/elpa/contrib/scripts/ditaa.jar</span>
 </pre>
 </div>
 
-<pre class="example">
-/home/antony/.emacs.d/elpa/contrib/scripts/ditaa.jar
-</pre>
-
 <ul class="org-ul">
+<li><p>
+Java required by defalut
+</p>
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC shell :exports both</span>
+java -version 2&gt;&amp;1
+
+<span style="color: #ff0087;">#+END_SRC</span>
+
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #87d7ff;">| java    | version | 1.6.0_39    |           |            |                                 |       |</span>
+<span style="color: #87d7ff;">| OpenJDK | Runtime | Environment | (IcedTea6 |   1.13.11) | (6b39-1.13.11-0ubuntu0.14.04.1) |       |</span>
+<span style="color: #87d7ff;">| OpenJDK | Server  | VM          | (build    | 23.25-b01, | mixed                           | mode) |</span>
+</pre>
+</div></li>
+
 <li>Download, unzip, rename <a href="http://ditaa.sourceforge.net/">java package</a> and locate it there</li>
 <li>Add <code>(ditaa . t)</code> into org-babel-load-languages in your .emacs</li>
 </ul>
@@ -197,7 +215,7 @@ where org expects to seeks its libraries by default config:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #cd00cd;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
   /----\ /----\
   |c33F| |cC02|
   |    | |    |
@@ -207,10 +225,10 @@ where org expects to seeks its libraries by default config:
   |c1FF| |c1AB|
   |    | |    |
   \----/ \----/
-<span style="color: #cd00cd;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #cd00cd;">#+RESULTS:</span>
-<span style="color: #00cdcd; text-decoration: underline;">file:img/color_test.png</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #00ffff; text-decoration: underline;">file:img/color_test.png</span>
 </pre>
 </div>
 
@@ -222,7 +240,7 @@ where org expects to seeks its libraries by default config:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #cd00cd;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
   Color codes
   /-------------+-------------\
   |cRED RED     |cBLU BLU     |
@@ -232,10 +250,10 @@ where org expects to seeks its libraries by default config:
   |cBLK BLK     |cYEL YEL     |
   \-------------+-------------/
 
-<span style="color: #cd00cd;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #cd00cd;">#+RESULTS:</span>
-<span style="color: #00cdcd; text-decoration: underline;">file:img/second_color_test.png</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #00ffff; text-decoration: underline;">file:img/second_color_test.png</span>
 </pre>
 </div>
 
@@ -269,7 +287,7 @@ where org expects to seeks its libraries by default config:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Anton S. Kosinov</p>
-<p class="date">Created: 2016-08-21 Sun 16:49</p>
+<p class="date">Created: 2016-08-21 Sun 18:37</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

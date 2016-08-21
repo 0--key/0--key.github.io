@@ -1,6 +1,7 @@
 #+TITLE:     Emacs org-mode examples
 #+AUTHOR:    Anton S. Kosinov
 #+EMAIL:     a.s.kosinov@gmail.com
+#+STARTUP: showall
 #+LANGUAGE: en
 
 * It's first export to html test
@@ -11,6 +12,7 @@
     Evaluate expression below in *scratch* buffer to determine
     where org expects to seeks its libraries by default config:
 
+    #+BEGIN_SRC org
     #+BEGIN_SRC elisp :exports both
       (expand-file-name
       "ditaa.jar"
@@ -21,10 +23,24 @@
       (expand-file-name
       "../contrib"
       (file-name-directory (org-find-library-dir "org")))))))
-    #+END_SRC
+    ,#+END_SRC
 
     #+RESULTS:
     : /home/antony/.emacs.d/elpa/contrib/scripts/ditaa.jar
+    #+END_SRC
+
+    - Java required by defalut
+      #+BEGIN_SRC org
+      #+BEGIN_SRC shell :exports both
+      java -version 2>&1
+      
+      ,#+END_SRC
+
+      #+RESULTS:
+      | java    | version | 1.6.0_39    |           |            |                                 |       |
+      | OpenJDK | Runtime | Environment | (IcedTea6 |   1.13.11) | (6b39-1.13.11-0ubuntu0.14.04.1) |       |
+      | OpenJDK | Server  | VM          | (build    | 23.25-b01, | mixed                           | mode) |
+      #+END_SRC
 
     - Download, unzip, rename [[http://ditaa.sourceforge.net/][java package]] and locate it there
     - Add ~(ditaa . t)~ into org-babel-load-languages in your .emacs
