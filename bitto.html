@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-08-23 Tue 05:32 -->
+<!-- 2016-08-23 Tue 08:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs org-mode examples</title>
@@ -144,17 +144,35 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Emacs org-mode examples</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">It's first export to html test</a></li>
+<li><a href="#orgheadline6">Scientific usage proves that it might be awesome</a>
+<ul>
+<li><a href="#orgheadline2">Installation Guide</a></li>
+<li><a href="#orgheadline5">Test it:</a>
+<ul>
+<li><a href="#orgheadline3">Ditaa</a></li>
+<li><a href="#orgheadline4">PlantUML</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1">It's first export to html test</h2>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Scientific usage proves that it might be awesome</h2>
-<div class="outline-text-2" id="text-orgheadline2">
-<p>
-<b>Installation Guide</b>
-</p>
-
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Scientific usage proves that it might be awesome</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Installation Guide</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 Evaluate expression below in <b>scratch</b> buffer to determine
 where org expects to seeks its libraries by default config:
@@ -163,14 +181,14 @@ where org expects to seeks its libraries by default config:
 <div class="org-src-container">
 
 <pre class="src src-elisp">(expand-file-name
-<span style="color: #d7af87; font-style: italic;">"ditaa.jar"</span>
+<span style="color: #00cdcd;">"ditaa.jar"</span>
 (file-name-as-directory
 (expand-file-name
-<span style="color: #d7af87; font-style: italic;">"scripts"</span>
+<span style="color: #00cdcd;">"scripts"</span>
 (file-name-as-directory
 (expand-file-name
-<span style="color: #d7af87; font-style: italic;">"../contrib"</span>
-(file-name-directory (org-find-library-dir <span style="color: #d7af87; font-style: italic;">"org"</span>)))))))
+<span style="color: #00cdcd;">"../contrib"</span>
+(file-name-directory (org-find-library-dir <span style="color: #00cdcd;">"org"</span>)))))))
 </pre>
 </div>
 
@@ -182,13 +200,17 @@ where org expects to seeks its libraries by default config:
 <li>Download, unzip, rename <a href="http://ditaa.sourceforge.net/">java package</a> and locate it there</li>
 <li>Add <code>(ditaa . t)</code> into org-babel-load-languages in your .emacs</li>
 </ul>
-
-<p>
-<b>Test it</b>:
-</p>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Test it:</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+</div><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Ditaa</h4>
+<div class="outline-text-4" id="text-orgheadline3">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
   /----\ /----\
   |c33F| |cC02|
   |    | |    |
@@ -198,9 +220,9 @@ where org expects to seeks its libraries by default config:
   |c1FF| |c1AB|
   |    | |    |
   \----/ \----/
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/color_test.png</span>
 </pre>
 </div>
@@ -213,7 +235,7 @@ where org expects to seeks its libraries by default config:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
   Color codes
   /-------------+-------------\
   |cRED RED     |cBLU BLU     |
@@ -223,9 +245,9 @@ where org expects to seeks its libraries by default config:
   |cBLK BLK     |cYEL YEL     |
   \-------------+-------------/
 
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/second_color_test.png</span>
 </pre>
 </div>
@@ -235,7 +257,11 @@ where org expects to seeks its libraries by default config:
 <p><img src="img/second_color_test.png" alt="second_color_test.png" />
 </p>
 </div>
-
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">PlantUML</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 
 <div class="figure">
 <p><img src="img/tryout.png" alt="tryout.png" />
@@ -258,9 +284,11 @@ where org expects to seeks its libraries by default config:
 </div>
 </div>
 </div>
+</div>
+</div>
 <div id="postamble" class="status">
 <p class="author">Author: Anton S. Kosinov</p>
-<p class="date">Created: 2016-08-23 Tue 05:32</p>
+<p class="date">Created: 2016-08-23 Tue 08:08</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
