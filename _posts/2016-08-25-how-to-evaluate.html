@@ -7,44 +7,75 @@ categories: [emacs, literate programming, practice]
 tags: [emacs, org-mode, babel]
 ---
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Prerequisites</h2>
-<div class="outline-text-2" id="text-orgheadline1">
-<ul class="org-ul">
-<li><p>
-Emacs
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Emacs</h3>
+<div class="outline-text-3" id="text-orgheadline1">
+<p>
+Type in your terminal:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">emacs --version 2&gt;&amp;1
+<pre class="src src-sh">emacs --version
 </pre>
-</div></li>
+</div>
 
-<li><p>
-Org-mode
+<pre class="example">
+GNU Emacs 24.5.1
+Copyright (C) 2015 Free Software Foundation, Inc.
+GNU Emacs comes with ABSOLUTELY NO WARRANTY.
+You may redistribute copies of Emacs
+under the terms of the GNU General Public License.
+For more information about these matters, see the file named COPYING.
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Org-mode</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Type <code>M-x org-version</code>
 </p>
 <div class="org-src-container">
 
 <pre class="src src-elisp">org-version
 </pre>
-</div></li>
+</div>
 
-<li><p>
-Language support
+<pre class="example">
+8.3.5   
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Language support</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Check source code support languages accessible in babel. Evaluate
+this statement in emacs:
 </p>
 <div class="org-src-container">
 
 <pre class="src src-elisp">(print org-babel-load-languages)
 </pre>
-</div></li>
-</ul>
+</div>
+
+<pre class="example">
+((python . t) (emacs-lisp . t) (shell . t) (js . t) (ditaa . t) (plantuml . t))
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Settings</h2>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Settings</h2>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">Evaluation</h2>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Evaluation</h2>
 </div>
