@@ -1,0 +1,50 @@
+---
+layout: post
+title: Bake code inside emacs
+tagline: " Ensure yourself"
+permalink: /emacs/how-to-evaluate-code-inside-emacs.html
+categories: [emacs, literate programming, practice]
+tags: [emacs, org-mode, babel]
+---
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<ul class="org-ul">
+<li><p>
+Emacs
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">emacs --version 2&gt;&amp;1
+</pre>
+</div></li>
+
+<li><p>
+Org-mode
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp">org-version
+</pre>
+</div></li>
+
+<li><p>
+Language support
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp">(print org-babel-load-languages)
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Settings</h2>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Evaluation</h2>
+</div>

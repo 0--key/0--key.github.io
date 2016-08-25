@@ -1,58 +1,19 @@
 ---
-layout: post
-title: Intro
-tagline: "Cook it gently"
+layout: page
+title: Data visualisation
+tagline: " A picture worths a hundred words"
 categories: [emacs, literate programming]
-tags: [web, org-mode, emacs, publishing, org, blog, github, git]
+tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 ---
 
+
+
 <div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">It's first export to html test</h2>
-</div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Scientific usage proves that it might be awesome</h2>
-<div class="outline-text-2" id="text-orgheadline6">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Installation Guide</h3>
-<div class="outline-text-3" id="text-orgheadline2">
-<p>
-Evaluate expression below in <b>scratch</b> buffer to determine
-where org expects to seeks its libraries by default config:
-</p>
-
+<h2 id="orgheadline1">Ditaa</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-elisp">(expand-file-name
-<span style="color: #d7af87; font-style: italic;">"ditaa.jar"</span>
-(file-name-as-directory
-(expand-file-name
-<span style="color: #d7af87; font-style: italic;">"scripts"</span>
-(file-name-as-directory
-(expand-file-name
-<span style="color: #d7af87; font-style: italic;">"../contrib"</span>
-(file-name-directory (org-find-library-dir <span style="color: #d7af87; font-style: italic;">"org"</span>)))))))
-</pre>
-</div>
-
-<pre class="example">
-/home/antony/.emacs.d/elpa/contrib/scripts/ditaa.jar
-</pre>
-
-<ul class="org-ul">
-<li>Download, unzip, rename <a href="http://ditaa.sourceforge.net/">java package</a> and locate it there</li>
-<li>Add <code>(ditaa . t)</code> into org-babel-load-languages in your .emacs</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Test it:</h3>
-<div class="outline-text-3" id="text-orgheadline5">
-</div><div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3">Ditaa</h4>
-<div class="outline-text-4" id="text-orgheadline3">
-<div class="org-src-container">
-
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
   /----\ /----\
   |c33F| |cC02|
   |    | |    |
@@ -62,9 +23,9 @@ where org expects to seeks its libraries by default config:
   |c1FF| |c1AB|
   |    | |    |
   \----/ \----/
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff5f00;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff5f00;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/color_test.png</span>
 </pre>
 </div>
@@ -77,7 +38,7 @@ where org expects to seeks its libraries by default config:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
   Color codes
   /-------------+-------------\
   |cRED RED     |cBLU BLU     |
@@ -87,42 +48,252 @@ where org expects to seeks its libraries by default config:
   |cBLK BLK     |cYEL YEL     |
   \-------------+-------------/
 
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff5f00;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff5f00;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/second_color_test.png</span>
 </pre>
 </div>
 
 
 <div class="figure">
-<p><img src="file:///assets/img/second_color_test.png" alt="second_color_test.png" />
+<p><img src="http://0--key.github.io/assets/img/second_color_test.png" alt="second_color_test.png" />
 </p>
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">PlantUML</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/tryout.png :exports both</span>
+Alice -&gt; Bob: synchronous call
+Alice -&gt;&gt; Bob: asynchronous call
+<span style="color: #ff5f00;">#+END_SRC</span>
+
+<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #00ffff; text-decoration: underline;">file:img/tryout.png</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/tryout.png" alt="tryout.png" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/comp.png :exports both</span>
+package "Some Group" {
+HTTP - [First Component]
+[Another Component]
+}
+
+node "Other Groups" {
+FTP - [Second Component]
+[First Component] --&gt; FTP
+}
+
+cloud {
+[Example 1]
+}
+
+
+database "MySql" {
+folder "This is my folder" {
+[Folder 3]
+}
+frame "Foo" {
+[Frame 4]
+}
+}
+
+
+[Another Component] --&gt; [Example 1]
+[Example 1] --&gt; [Folder 3]
+[Folder 3] --&gt; [Frame 4]
+<span style="color: #ff5f00;">#+END_SRC</span>
+
+<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #00ffff; text-decoration: underline;">file:img/comp.png</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/comp.png" alt="comp.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/gradient.png :exports both</span>
+skinparam backgroundcolor AntiqueWhite/Gold
+skinparam classBackgroundColor Wheat|CornflowerBlue
+
+class Foo #red-green
+note left of Foo #blue\9932CC
+this is my
+note on this class
+end note
+
+package example #GreenYellow/LightGoldenRodYellow {
+class Dummy
+}
+<span style="color: #ff5f00;">#+END_SRC</span>
+
+<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #00ffff; text-decoration: underline;">file:img/gradient.png</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/gradient.png" alt="gradient.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">How to achive similar functionality</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+</div><div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Prerequsites:</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">JVM required</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<div class="org-src-container">
+
+<pre class="src src-sh">java -version 2&gt;&amp;1
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">java</td>
+<td class="org-left">version</td>
+<td class="org-left">1.6.0_39</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">OpenJDK</td>
+<td class="org-left">Runtime</td>
+<td class="org-left">Environment</td>
+<td class="org-left">(IcedTea6</td>
+<td class="org-left">1.13.11)</td>
+<td class="org-left">(6b39-1.13.11-0ubuntu0.14.04.1)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">OpenJDK</td>
+<td class="org-left">Server</td>
+<td class="org-left">VM</td>
+<td class="org-left">(build</td>
+<td class="org-left">23.25-b01,</td>
+<td class="org-left">mixed</td>
+<td class="org-left">mode)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+If it is not so, you'll need to install it.
+</p>
+</div>
+</div>
+
 <div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4">PlantUML</h4>
+<h4 id="orgheadline4">Define java plugins path for emacs usage</h4>
 <div class="outline-text-4" id="text-orgheadline4">
-
-<div class="figure">
-<p><img src="img/tryout.png" alt="tryout.png" />
+<p>
+Evaluate expression below in <b>scratch</b> buffer to determine
+where org expects to seeks its libraries by default config:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(expand-file-name
+<span style="color: #ffaf87;">"ditaa.jar"</span>
+(file-name-as-directory
+(expand-file-name
+<span style="color: #ffaf87;">"scripts"</span>
+(file-name-as-directory
+(expand-file-name
+<span style="color: #ffaf87;">"../contrib"</span>
+(file-name-directory (org-find-library-dir <span style="color: #ffaf87;">"org"</span>)))))))
+</pre>
+</div>
+
+<pre class="example">
+/home/antony/.emacs.d/elpa/contrib/scripts/ditaa.jar
+</pre>
+</div>
 </div>
 
 
-
-<div class="figure">
-<p><img src="img/comp.png" alt="comp.png" />
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Install plantUML and ditaa libraries</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<p>
+Download, unzip, rename <a href="http://ditaa.sourceforge.net/">java package</a> and locate it there
 </p>
 </div>
-
-
-
-<div class="figure">
-<p><img src="./img/gradient.png" alt="gradient.png" />
-</p>
 </div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Extend Babel src languages list</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<p>
+Add a couple strings <code>into org-babel-load-languages</code> in your
+<code>.emacs.el</code> or <code>init.el</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-lisp">(ditaa . t)
+(plantuml . t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Test it</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<p>
+<a href="http://0--key.github.io/emacs/how-to-evaluate-code-inside-emacs.html">Try to evaluate</a> the code snippets in the top of this page.
+</p>
 </div>
 </div>
 </div>
