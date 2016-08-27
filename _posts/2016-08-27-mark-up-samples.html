@@ -1,0 +1,202 @@
+---
+layout: page
+title: Make a stress on words
+tagline: " Keep your thought clear"
+permalink: /org-mode/mark-up-samples.html
+categories: [mark-up, org-mode]
+tags: [html, mark-up, samples]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Individual emphasis</a>
+<ul>
+<li><a href="#orgheadline2">Bold</a></li>
+<li><a href="#orgheadline3">Italic</a></li>
+<li><a href="#orgheadline4">Underlined</a></li>
+<li><a href="#orgheadline5">Verbatim</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline6">Group emphasis</a>
+<ul>
+<li><a href="#orgheadline7">Poetry</a></li>
+<li><a href="#orgheadline8">Quotes</a></li>
+<li><a href="#orgheadline9">Center</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">Horizontal line</a></li>
+<li><a href="#orgheadline11">Tables formatting</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Individual emphasis</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Bold</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+<b>It's a bold text there</b>
+</p>
+<pre class="example">
+*It's a bold text there*
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Italic</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+<i>Suppose it might be italic</i>
+</p>
+<pre class="example">
+/Suppose it might be italic/
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Underlined</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<pre class="example">
+_This is underlined sentence._
+</pre>
+
+<p>
+<span class="underline">This is underlined sentence.</span>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Verbatim</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<pre class="example">
+=and this is a verbatim sample=
+</pre>
+
+<p>
+<code>and this is a verbatim sample</code>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Group emphasis</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Poetry</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<pre class="example">
+#+BEGIN_VERSE
+ Great clouds overhead
+ Tiny black birds rise and fall
+ Snow covers Emacs
+
+     -- AlexSchroeder
+#+END_VERSE
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Quotes</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<pre class="example">
+#+BEGIN_QUOTE
+Everything should be made as simple as possible,
+but not any simpler -- Albert Einstein
+#+END_QUOTE
+</pre>
+
+<blockquote>
+<p>
+Everything should be made as simple as possible,
+but not any simpler &#x2013; Albert Einstein
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Center</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<pre class="example">
+#+BEGIN_CENTER
+Everything should be made as simple as possible, \\
+but not any simpler
+#+END_CENTER
+</pre>
+
+<div class="org-center">
+<p>
+Everything should be made as simple as possible, <br  />
+but not any simpler
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Horizontal line</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+line at least of 5 dashes
+</p>
+<pre class="example">
+------
+</pre>
+
+<hr  />
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Tables formatting</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<blockquote>
+<p>
+The default setting makes tables without cell borders and frame. If
+you would like to change this for individual tables, place something
+like the following before the table:
+</p>
+</blockquote>
+<pre class="example">
+#+CAPTION: This is a table with lines around and between cells
+#+ATTR_HTML: :border 2 :rules all :frame border
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Firts row</th>
+<th scope="col" class="org-left">Second row</th>
+<th scope="col" class="org-left">Third row</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">this</td>
+<td class="org-left">is</td>
+<td class="org-left">a test</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
