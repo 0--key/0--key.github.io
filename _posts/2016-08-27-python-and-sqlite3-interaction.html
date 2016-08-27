@@ -1,0 +1,579 @@
+---
+layout: page
+title: SQLite3
+tagline: " Small, fast, reliable!"
+permalink: /python/stdlib/sqlite3/interaction.html
+categories: [org-mode, Python, SQLite3]
+tags: [TDD, samples]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Documentation</a>
+<ul>
+<li><a href="#orgheadline3">Python stdlib library</a></li>
+<li><a href="#orgheadline4">SQLite3 official documentation</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline5">Prerequisites</a>
+<ul>
+<li><a href="#orgheadline6">Manual testing</a></li>
+<li><a href="#orgheadline7">Preparing Emacs</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">Emacs + Python + SQLite3</a>
+<ul>
+<li><a href="#orgheadline9">Test existing DB</a></li>
+<li><a href="#orgheadline10">Combine approach</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline11">Full-fledged example</a>
+<ul>
+<li><a href="#orgheadline12">Goal definition</a></li>
+<li><a href="#orgheadline13">RDBMS theory</a></li>
+<li><a href="#orgheadline14">Possible solution</a></li>
+<li><a href="#orgheadline15">Testing</a></li>
+<li><a href="#orgheadline16">Refactoring</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline17">Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Definition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+The main aim of this page is to discover SQLite3 features its general
+functionality. All tests implemented in venv with:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python --version
+</pre>
+</div>
+
+<pre class="example">
+Python 3.4.3
+</pre>
+
+
+<p>
+and SQLite3
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sqlite3 --version
+</pre>
+</div>
+
+<pre class="example">
+3.8.2 2013-12-06 14:53:30 27392118af4c38c5203a04b8013e1afdb1cebd0d
+</pre>
+
+
+<p>
+on Ubuntu host:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">uname -a
+</pre>
+</div>
+
+<pre class="example">
+Linux antony-ThinkPad 3.13.0-93-generic #140-Ubuntu SMP Mon Jul 18 21:20:08 UTC 2016 i686 i686 i686 GNU/Linux
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Python stdlib library</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Detailed interaction <a href="https://docs.python.org/3/library/sqlite3.html">SQLite3 and Python</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">SQLite3 official documentation</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+from this <a href="https://www.sqlite.org/">site</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+</div><div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Manual testing</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+SQLite3 has extremeley powerful innate shell and it's might be
+useful to use it in many cases. Just open your terminal tab and type
+</p>
+<pre class="example">
+john@john-Thinkpad:~/sqlite3
+SQLite version 3.8.2 2013-12-06 14:53:30
+Enter ".help" for instructions
+Enter SQL statements terminated with a ";"
+sqlite&gt;
+</pre>
+
+<p>
+RDBMS is ready to listen your input
+</p>
+
+<pre class="example">
+   sqlite&gt; .help
+.backup ?DB? FILE      Backup DB (default "main") to FILE
+.bail ON|OFF           Stop after hitting an error.  Default OFF
+.databases             List names and files of attached databases
+.dump ?TABLE? ...      Dump the database in an SQL text format
+                         If TABLE specified, only dump tables matching
+                         LIKE pattern TABLE.
+.echo ON|OFF           Turn command echo on or off
+.exit                  Exit this program
+.explain ?ON|OFF?      Turn output mode suitable for EXPLAIN on or off.
+                         With no args, it turns EXPLAIN on.
+.header(s) ON|OFF      Turn display of headers on or off
+.help                  Show this message
+.import FILE TABLE     Import data from FILE into TABLE
+.indices ?TABLE?       Show names of all indices
+                         If TABLE specified, only show indices for tables
+                         matching LIKE pattern TABLE.
+.load FILE ?ENTRY?     Load an extension library
+.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?     Set output mode where MODE is one of:
+                         csv      Comma-separated values
+                         column   Left-aligned columns.  (See .width)
+                         html     HTML &lt;table&gt; code
+                         insert   SQL insert statements for TABLE
+                         line     One value per line
+                         list     Values delimited by .separator string
+                         tabs     Tab-separated values
+                         tcl      TCL list elements
+.nullvalue STRING      Use STRING in place of NULL values
+.open ?FILENAME?       Close existing database and reopen FILENAME
+.output FILENAME       Send output to FILENAME
+.output stdout         Send output to the screen
+.print STRING...       Print literal STRING
+.prompt MAIN CONTINUE  Replace the standard prompts
+.quit                  Exit this program
+.read FILENAME         Execute SQL in FILENAME
+.restore ?DB? FILE     Restore content of DB (default "main") from FILE
+.schema ?TABLE?        Show the CREATE statements
+                         If TABLE specified, only show tables matching
+                         LIKE pattern TABLE.
+.separator STRING      Change separator used by output mode and .import
+.show                  Show the current values for various settings
+.stats ON|OFF          Turn stats on or off
+.tables ?TABLE?        List names of tables
+                         If TABLE specified, only list tables matching
+                         LIKE pattern TABLE.
+.timeout MS            Try opening locked tables for MS milliseconds
+.trace FILE|off        Output each SQL statement as it is run
+.vfsname ?AUX?         Print the name of the VFS stack
+.width NUM1 NUM2 ...   Set column widths for "column" mode
+.timer ON|OFF          Turn the CPU timer measurement on or off
+sqlite&gt;
+</pre>
+
+
+<p>
+With no doubt it's a comprehensive list of commands and feel free
+to review it in a much precise manner. This interaction through
+native SQLite3 shell allows you to do any kind of stuff in a manual
+mode, but our goal is to reach much literate level of interaction.
+We take an attempt to include and intersect emacs org-mode
+documents, SQLite3 tables and Python flexibility.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">'Hi'</span>)
+</pre>
+</div>
+
+<pre class="example">
+Hi
+</pre>
+
+<p>
+The latter output proves that Python was activated in Babel
+already. In case when you're got another result - don't worry, we
+fix this issue in very next chapter.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Preparing Emacs</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+</div><div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18">Language support</h4>
+<div class="outline-text-4" id="text-orgheadline18">
+<p>
+Now, when it is clear that SQLite3 and Python3 are installed
+properly and accessible in terminal it's time to pull it inside
+emacs org file. First of all you need ensure in supported languages
+inside org-mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(print org-babel-load-languages)
+</pre>
+</div>
+
+<pre class="example">
+((python . t) (emacs-lisp . t) (shell . t) (js . t) (ditaa . t) (plantuml . t))
+</pre>
+
+
+<p>
+Obviously that:
+</p>
+<ul class="org-ul">
+<li>in out case SQLite3 not supported;</li>
+<li>Python was activated and ready to serve inside org-mode files.</li>
+</ul>
+
+<p>
+Lets activate all required languages support by evaluation this
+elisp code snippet:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(org-babel-do-load-languages
+'org-babel-load-languages
+'((python . t)
+(emacs-lisp . t)
+(shell . t)
+(js . t)
+(ditaa . t)
+(plantuml . t)
+(sqlite . t)
+))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19">Integrity inside Emacs</h4>
+<div class="outline-text-4" id="text-orgheadline19">
+<p>
+Ensure yourself, evaluate this, please:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(print org-babel-load-languages)
+</pre>
+</div>
+
+<pre class="example">
+((python . t) (emacs-lisp . t) (shell . t) (js . t) (ditaa . t) (plantuml . t) (sqlite . t))
+</pre>
+
+<p>
+As well-described on <a href="http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sqlite.html">this page</a>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite" id="orgsrcblock1"><span style="color: #87d7ff;">drop</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">if</span> <span style="color: #87d7ff;">exists</span> greeting;
+<span style="color: #87d7ff;">create</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">greeting</span>(one <span style="color: #87ff87; font-size: 90%; font-weight: bold;">varchar</span>(10), two <span style="color: #87ff87; font-size: 90%; font-weight: bold;">varchar</span>(10));
+<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> greeting <span style="color: #87d7ff;">values</span>(<span style="color: #d7af87; font-style: italic;">'Hello'</span>, <span style="color: #d7af87; font-style: italic;">'world!'</span>);
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite" id="orgsrcblock2"><span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
+</pre>
+</div>
+<p>
+Hello world!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ls | grep .db
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">test_sqlite.db</td>
+</tr>
+
+<tr>
+<td class="org-left">test-sqlite.db</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+SQLite3 DB file was successfully created, initial data store in it.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite">.databases
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Emacs + Python + SQLite3</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Test existing DB</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+By means studying <a href="https://docs.python.org/3/library/sqlite3.html">this manual</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
+<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'test-sqlite.db'</span>) <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">created in previous section</span>
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM greeting'</span>)
+<span style="color: #87d7ff;">print</span>(c.fetchone())
+conn.close()
+</pre>
+</div>
+
+<p>
+It proves read access from python. Lets up-to-date the existing table:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite">.tables
+.<span style="color: #87d7ff;">schema</span> greeting
+</pre>
+</div>
+
+<p>
+It is its schema. Try to fulfill it by data out from org-table:
+</p>
+
+<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">one</th>
+<th scope="col" class="org-left">two</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Hi</td>
+<td class="org-left">Tony!</td>
+</tr>
+
+<tr>
+<td class="org-left">Hello</td>
+<td class="org-left">guys!</td>
+</tr>
+
+<tr>
+<td class="org-left">Good morning</td>
+<td class="org-left">Vikky!</td>
+</tr>
+
+<tr>
+<td class="org-left">How are you</td>
+<td class="org-left">doing?</td>
+</tr>
+
+<tr>
+<td class="org-left">Suppose it</td>
+<td class="org-left">clear?</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">drop</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">if</span> <span style="color: #87d7ff;">exists</span> greeting;
+.mode csv
+.import $orgtable greeting
+<span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Combine approach</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<p>
+Right now we have one table <code>greeting</code> with 4 rows there:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'test-sqlite.db'</span>) <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">created in the section above</span>
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM greeting'</span>)
+<span style="color: #87d7ff;">print</span>(c.fetchall())
+conn.close()
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726c0e0&gt;
+[('Hello', 'guys!'), ('Good morning', 'Vikky!'), ('How are you', 'doing?'), ('Suppose it', 'clear?'), ('Insertion', 'test'), ('Insertion', 'test')]
+</pre>
+
+<p>
+As you could noticed it's necessary to open and close connection
+after each one operation. In a flip side you have Python session
+which share variables inside. The code below built on the
+connection from the next snippet and in <code>stdlib</code> Python session in
+Babel environment:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'test-sqlite.db'</span>) <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">created in the section above</span>
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT count(*) FROM greeting'</span>)
+c.fetchone()
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb718c5a0&gt;
+(6,)
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-python">c.execute(<span style="color: #d7af87; font-style: italic;">'select * from greeting limit 2'</span>)
+c.fetchall()
+<span style="color: #5f87af;">type</span>(c.fetchall())
+</pre>
+</div>
+
+<pre class="example">
+&lt;sqlite3.Cursor object at 0xb718c5a0&gt;
+[('Hello', 'guys!'), ('Good morning', 'Vikky!')]
+&lt;class 'list'&gt;
+</pre>
+
+<p>
+The output from SQLite3 is a list.
+</p>
+
+<p>
+Lets insert some values into our table <code>greeting</code> in pure Python:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">c.execute(<span style="color: #d7af87; font-style: italic;">"INSERT INTO greeting VALUES ('Insertion', 'test')"</span>)
+conn.commit()
+c.execute(<span style="color: #d7af87; font-style: italic;">'select * from greeting'</span>)
+c.fetchall()
+</pre>
+</div>
+
+<pre class="example">
+&lt;sqlite3.Cursor object at 0xb726c0e0&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726c0e0&gt;
+[('Hello', 'guys!'), ('Good morning', 'Vikky!'), ('How are you', 'doing?'), ('Suppose it', 'clear?'), ('Insertion', 'test'), ('Insertion', 'test')]
+</pre>
+
+<hr  />
+<p>
+Now it's time to close our connection to SQLite3 db and move
+further for more complex examples.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">conn.close()
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Full-fledged example</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+</div><div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Goal definition</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<p>
+Now, when you're whetted your appetite, try to explain what results you
+expect to achieve by SQLite3.
+</p>
+
+<ul class="org-ul">
+<li>Create DB schema
+<ul class="org-ul">
+<li>tables;</li>
+<li>relations;</li>
+</ul></li>
+<li>Write data into tables;</li>
+<li>Update data in DB;</li>
+<li>Delete particular data out from DB;
+<ul class="org-ul">
+<li>Restriction test;</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">RDBMS theory</h3>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Possible solution</h3>
+</div>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Testing</h3>
+</div>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Refactoring</h3>
+</div>
+</div>
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">Conclusion</h2>
+</div>
