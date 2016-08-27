@@ -4,7 +4,7 @@ title: Make a stress on words
 tagline: " Keep your thought clear"
 permalink: /org-mode/mark-up-samples.html
 categories: [mark-up, org-mode]
-tags: [html, mark-up, samples]
+tags: [html export, mark-up, samples]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -16,17 +16,20 @@ tags: [html, mark-up, samples]
 <li><a href="#orgheadline3">Italic</a></li>
 <li><a href="#orgheadline4">Underlined</a></li>
 <li><a href="#orgheadline5">Verbatim</a></li>
+<li><a href="#orgheadline6">Code displaying</a></li>
+<li><a href="#orgheadline7">And the final one</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">Group emphasis</a>
+<li><a href="#orgheadline8">Group emphasis</a>
 <ul>
-<li><a href="#orgheadline7">Poetry</a></li>
-<li><a href="#orgheadline8">Quotes</a></li>
-<li><a href="#orgheadline9">Center</a></li>
+<li><a href="#orgheadline9">Poetry</a></li>
+<li><a href="#orgheadline10">Quotes</a></li>
+<li><a href="#orgheadline11">Center</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">Horizontal line</a></li>
-<li><a href="#orgheadline11">Tables formatting</a></li>
+<li><a href="#orgheadline12">Horizontal line</a></li>
+<li><a href="#orgheadline13">Tables formatting</a></li>
+<li><a href="#orgheadline14">Images embedding</a></li>
 </ul>
 </div>
 </div>
@@ -83,14 +86,39 @@ _This is underlined sentence._
 </p>
 </div>
 </div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Code displaying</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+<code>this is a specific type</code>
+</p>
+
+<pre class="example">
+~this is a specific type~
+</pre>
+</div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Group emphasis</h2>
-<div class="outline-text-2" id="text-orgheadline6">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Poetry</h3>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">And the final one</h3>
 <div class="outline-text-3" id="text-orgheadline7">
+<p>
+<del>how it looks on this page?</del>
+</p>
+<pre class="example">
++how it looks on this page?+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Group emphasis</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Poetry</h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <pre class="example">
 #+BEGIN_VERSE
  Great clouds overhead
@@ -103,9 +131,9 @@ _This is underlined sentence._
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Quotes</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Quotes</h3>
+<div class="outline-text-3" id="text-orgheadline10">
 <pre class="example">
 #+BEGIN_QUOTE
 Everything should be made as simple as possible,
@@ -123,9 +151,9 @@ but not any simpler &#x2013; Albert Einstein
 </div>
 
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Center</h3>
-<div class="outline-text-3" id="text-orgheadline9">
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Center</h3>
+<div class="outline-text-3" id="text-orgheadline11">
 <pre class="example">
 #+BEGIN_CENTER
 Everything should be made as simple as possible, \\
@@ -144,9 +172,9 @@ but not any simpler
 </div>
 
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">Horizontal line</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">Horizontal line</h2>
+<div class="outline-text-2" id="text-orgheadline12">
 <p>
 line at least of 5 dashes
 </p>
@@ -158,9 +186,9 @@ line at least of 5 dashes
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11">Tables formatting</h2>
-<div class="outline-text-2" id="text-orgheadline11">
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">Tables formatting</h2>
+<div class="outline-text-2" id="text-orgheadline13">
 <blockquote>
 <p>
 The default setting makes tables without cell borders and frame. If
@@ -198,5 +226,21 @@ like the following before the table:
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Images embedding</h2>
+<div class="outline-text-2" id="text-orgheadline14">
+<pre class="example">
+#+CAPTION: An image with color samples
+#+ATTR_HTML: :alt four figures image :title Color test :align right
+</pre>
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/color_test.png" alt="four figures image" title="Color test" align="right" />
+</p>
+<p><span class="figure-number">Figure 1:</span> An image with color samples</p>
+</div>
 </div>
 </div>
