@@ -70,7 +70,7 @@ uname -a
 
 <blockquote>
 <p>
-<b>Tip</b> \
+<b>Tip</b> 
 Copy the code snippet above in your own org file, allocate point
 inside this code and type C-c C-c to evaluate it on your host.
 </p>
@@ -201,7 +201,7 @@ documents, SQLite3 tables and Python flexibility.
 
 <blockquote>
 <p>
-<b>Tip</b> \ It's easy to evaluate code snippets just copy it out from
+<b>Tip</b>  It's easy to evaluate code snippets just copy it out from
 browser page and paste it into your org-file. After that it would
 possible to evaluate the snippet when you allocate point on it and
 type <code>C-c C-c</code> The results should appear below the snippet.
@@ -378,7 +378,7 @@ table. As a start point we should know the schema:
 
 <blockquote>
 <p>
-<b>Tip</b> \ You need to close connection when you finish all
+<b>Tip</b>  You need to close connection when you finish all
  interactions with DB in Python. Thus <code>conn.close()</code> is the last
  string in our snippet.
 </p>
@@ -388,8 +388,8 @@ table. As a start point we should know the schema:
 
 <blockquote>
 <p>
-<b>Tip</b> \ Python in supports <i>sessions</i> in org-mode. In many cases
- it might be reasonable to <span class="underline">share sqlite3 connection</span> among the
+<b>Tip</b>  Python supports <i>sessions</i> in org-mode. In many cases
+ it might be reasonable to <i>share sqlite3 connection</i> among the
  snippets in the same session. In our case the session name is <code>stdlib</code>.
 </p>
 </blockquote>
@@ -488,13 +488,13 @@ c.fetchall()
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb71c10e0&gt;
+&gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb720cf20&gt;
 [('Hello', 'guys!'), ('Good morning', 'Vikky!'), ('How are you', 'doing?'), ('Suppose it', 'clear?'), ('Insertion', 'test'), ('Insertion', 'test')]
 </pre>
 
 <blockquote>
 <p>
-<b>Tip</b> \ As you might noticed the snippet above leave a connection
+<b>Tip</b>  As you might noticed the snippet above leave a connection
  open. Hence it might be convenient to use it (and <code>cursor</code>
  also) in the next code evaluation in <code>stdlib</code> Python session.
 </p>
@@ -563,7 +563,7 @@ conn.close()
 
 <blockquote>
 <p>
-<b>Tip</b> \ Org-mode opened your <code>stdlib</code> session in a separate buffer.
+<b>Tip</b>  Org-mode opened your <code>stdlib</code> session in a separate buffer.
  Its name is <code>*stdlib*</code> and feel free to interact with all session
  variables there directly and a straightforward manner.
 </p>
