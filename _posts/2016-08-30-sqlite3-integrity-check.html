@@ -1,0 +1,196 @@
+---
+layout: page
+title: SQLite3
+tagline: " Keep data purity"
+permalink: /sqlite3/data-integrity-testing.html
+categories: [org-mode, Python, SQLite3]
+tags: [TDD, samples, data integrity]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Prerequisites</a></li>
+<li><a href="#orgheadline4">Check strategy</a></li>
+<li><a href="#orgheadline5">Results analyse</a></li>
+<li><a href="#orgheadline6">Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Definition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Real data gathered in real world could be corrupted in its source.
+It's souns a bit enigmatic but it is. Sometimes somewhere something
+goes on wrong and destroy data correctness. For example could you
+imagine what happen if&#x2026;
+</p>
+
+<ul class="org-ul">
+<li>Network connection dramatically failed down;</li>
+<li>Data source would generate a fake data;</li>
+<li>Data source generates a noise data in less than 3% occasions;</li>
+<li>etc.</li>
+</ul>
+
+<p>
+Exactly to prevent data corruption you're restricted to check its
+integrity on regular base. Ideally it might been implemented
+immediately after each insertion and update operation but it a
+tedious task even for computational machines. This approach 99.99%
+average data quality but demands a lot of processing time to
+implement. On a flip side of coin exactly this required for NASA
+calculations at effective orbit for Juno or on something much
+precise.
+</p>
+
+<p>
+The much simpler approach might been implemented as DB integrity
+check every minute, or day, or week. Combined with easy-backup
+strategy it is much even, less limited by CPU usage and could solve
+90% of arbitrary cases around data likely corruption or lost. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+Data itself has several innate properties, such as value and amount.
+If you pay attention on the <code>table</code> data the first one which you
+might notice is <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a> term which yarns data itself,
+relations, tables and databases.
+</p>
+
+<p>
+But, it is completely ideal and contrast case, the untouchable goal,
+which you should achieve or at least try to follow by it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<ul class="org-ul">
+<li>SQLite3 database;</li>
+<li>Emacs with particular properties.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Check strategy</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<p>
+Just unique fields. Uniqueness is matter.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">ls /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">activesport</td>
+</tr>
+
+<tr>
+<td class="org-left">log1.txt</td>
+</tr>
+
+<tr>
+<td class="org-left">log.txt</td>
+</tr>
+
+<tr>
+<td class="org-left">pseudo-log.txt</td>
+</tr>
+
+<tr>
+<td class="org-left">scrapy.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">scrapy_data.db</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Lets connect to DB:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sqlite">.<span style="color: #87d7ff;">schema</span>
+</pre>
+</div>
+
+<pre class="example">
+CREATE TABLE activesport(id INTEGER PRIMARY KEY,
+                                                                    title TEXT);
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
+<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
+</pre>
+</div>
+
+<pre class="example">
+981
+981
+</pre>
+
+<blockquote>
+<p>
+All titles are unique.
+</p>
+</blockquote>
+
+<p>
+Thus, ensure yourself:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=1;
+<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> activesport <span style="color: #87d7ff;">values</span>(982, "Wishbone Bike 3 <span style="color: #87d7ff;">in</span> 1 Recycled Edition Balance Bike");
+<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
+<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
+<span style="color: #87d7ff;">delete</span> <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=982;
+<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
+<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
+</pre>
+</div>
+
+<pre class="example">
+"Wishbone Bike 3 in 1 Recycled Edition Balance Bike"
+982
+982
+981
+981
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Results analyse</h2>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Conclusion</h2>
+</div>
