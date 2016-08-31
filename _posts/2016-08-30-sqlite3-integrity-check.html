@@ -13,9 +13,17 @@ tags: [TDD, samples, data integrity]
 <li><a href="#orgheadline1">Definition</a></li>
 <li><a href="#orgheadline2">Documentation</a></li>
 <li><a href="#orgheadline3">Prerequisites</a></li>
-<li><a href="#orgheadline4">Check strategy</a></li>
-<li><a href="#orgheadline5">Results analyse</a></li>
-<li><a href="#orgheadline6">Conclusion</a></li>
+<li><a href="#orgheadline4">Check strategy</a>
+<ul>
+<li><a href="#orgheadline5">Overview</a></li>
+<li><a href="#orgheadline6">Are the titles unique?</a></li>
+<li><a href="#orgheadline7">Python remedy:</a></li>
+<li><a href="#orgheadline8">Proof</a></li>
+<li><a href="#orgheadline9">Code refactoring</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">Results analyze</a></li>
+<li><a href="#orgheadline11">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -24,9 +32,9 @@ tags: [TDD, samples, data integrity]
 <h2 id="orgheadline1">Definition</h2>
 <div class="outline-text-2" id="text-orgheadline1">
 <p>
-Real data gathered in real world could be corrupted in its source.
-It's souns a bit enigmatic but it is. Sometimes somewhere something
-goes on wrong and destroy data correctness. For example could you
+Particular data gathered in the real world could be spoiled.
+It's sounds a bit enigmatic but it occurs mostly. Sometimes somewhere something
+goes on the wrong way and destroy data accuracy. For example could you
 imagine what happen if&#x2026;
 </p>
 
@@ -39,20 +47,18 @@ imagine what happen if&#x2026;
 
 <p>
 Exactly to prevent data corruption you're restricted to check its
-integrity on regular base. Ideally it might been implemented
-immediately after each insertion and update operation but it a
-tedious task even for computational machines. This approach 99.99%
-average data quality but demands a lot of processing time to
-implement. On a flip side of coin exactly this required for NASA
-calculations at effective orbit for Juno or on something much
-precise.
+integrity on a regular base. Ideally it might been implemented
+immediately after each insertion/update operation but it a tedious
+task even for computational machines. This approach performs 99.99%
+average data quality but demands a lot of processing time. On a flip
+side of coin exactly this required for NASA calculations of
+effective orbit for Juno or even for something much precise.
 </p>
 
 <p>
 The much simpler approach might been implemented as DB integrity
 check every minute, or day, or week. Combined with easy-backup
-strategy it is much even, less limited by CPU usage and could solve
-90% of arbitrary cases around data likely corruption or lost. 
+strategy it is much even and less bounded by CPU load. 
 </p>
 </div>
 </div>
@@ -63,13 +69,14 @@ strategy it is much even, less limited by CPU usage and could solve
 <p>
 Data itself has several innate properties, such as value and amount.
 If you pay attention on the <code>table</code> data the first one which you
-might notice is <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a> term which yarns data itself,
+might notice is <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a> term which intertwines data itself,
 relations, tables and databases.
 </p>
 
 <p>
-But, it is completely ideal and contrast case, the untouchable goal,
-which you should achieve or at least try to follow by it.
+But, it is a completely ideal and perfect case, an untouchable target,
+which you should strive to achieve or at least to take an attempt to
+follow.
 </p>
 </div>
 </div>
@@ -79,7 +86,7 @@ which you should achieve or at least try to follow by it.
 <div class="outline-text-2" id="text-orgheadline3">
 <ul class="org-ul">
 <li>SQLite3 database;</li>
-<li>Emacs with particular properties.</li>
+<li>Emacs with the particular properties.</li>
 </ul>
 </div>
 </div>
@@ -87,8 +94,14 @@ which you should achieve or at least try to follow by it.
 <div id="outline-container-orgheadline4" class="outline-2">
 <h2 id="orgheadline4">Check strategy</h2>
 <div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Overview</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+</div><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">DB location</h4>
+<div class="outline-text-4" id="text-orgheadline12">
 <p>
-Just unique fields. Uniqueness is matter.
+Just unique fields only. Uniqueness is matter.
 </p>
 <div class="org-src-container">
 
@@ -128,8 +141,11 @@ Just unique fields. Uniqueness is matter.
 </tr>
 </tbody>
 </table>
-
-
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">DB schema</h4>
+<div class="outline-text-4" id="text-orgheadline13">
 <p>
 Lets connect to DB:
 </p>
@@ -143,7 +159,111 @@ Lets connect to DB:
 CREATE TABLE activesport(id INTEGER PRIMARY KEY,
                                                                     title TEXT);
 </pre>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">DB content</h4>
+<div class="outline-text-4" id="text-orgheadline14">
+<div class="org-src-container">
 
+<pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">limit</span> 10;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">id</th>
+<th scope="col" class="org-left">title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Wishbone Bike 3 in 1 Recycled Edition Balance Bike</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Wishbone Bike 2 in 1 Recycled Edition Balance Bike</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Nicko Flower Pink Wooden Balance Bike - Running Bike</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Giant HalfWay City 2015</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">Wishbone Bike 3 in 1 - Original Balance Bike</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">CBR Hopper Training / Balance Bike 2015</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">Giant Prime E+ 2 2015</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">Giant TCR Advanced 1 2015</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left">Raleigh Red or Dead Starstruck Women's Classic Shopper Bike</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">Raleigh Stowaway 7 Folding Bike</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The <a href="https://sqlite.org/pragma.html#pragma_integrity_check">main tool</a> in SQLite3 toolbox for check data integrity in whole DB:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sqlite">pragma integrity_check;
+</pre>
+</div>
+
+<pre class="example">
+ok
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> title=(<span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">where</span> id=1);
+</pre>
+</div>
+
+<pre class="example">
+1
+</pre>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15">Count the number of rows in table:</h4>
+<div class="outline-text-4" id="text-orgheadline15">
 <div class="org-src-container">
 
 <pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
@@ -155,20 +275,20 @@ CREATE TABLE activesport(id INTEGER PRIMARY KEY,
 981
 981
 </pre>
+</div>
+</div>
+</div>
 
-<blockquote>
-<p>
-All titles are unique.
-</p>
-</blockquote>
-
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Are the titles unique?</h3>
+<div class="outline-text-3" id="text-orgheadline6">
 <p>
 Thus, ensure yourself:
 </p>
 <div class="org-src-container">
 
 <pre class="src src-sqlite"><span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=1;
-<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> activesport <span style="color: #87d7ff;">values</span>(982, "Wishbone Bike 3 <span style="color: #87d7ff;">in</span> 1 Recycled Edition Balance Bike");
+<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> activesport <span style="color: #87d7ff;">values</span>(982, (<span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=1));
 <span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
 <span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
 <span style="color: #87d7ff;">delete</span> <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=982;
@@ -184,13 +304,197 @@ Thus, ensure yourself:
 981
 981
 </pre>
+
+<p>
+Seems like <code>select count(*)</code> in SQLite3 not provide <a href="https://www.sqlite.org/lang_aggfunc.html#count">an uniqueness check</a> under particular data.
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Results analyse</h2>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Python remedy:</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+Extract all titles, count its number, convert into <code>set</code> and count its length.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
+
+<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
+<span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title FROM activesport'</span>)
+<span style="color: #d7afaf; font-style: italic;">#</span><span style="color: #d7afaf; font-style: italic;">print(c.fetchall())</span>
+<span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">print(num_rows)</span>
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">print(title_set)</span>
+<span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #5f87af;">len</span>(title_set)))
+conn.close()
+</pre>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Conclusion</h2>
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb70081e0&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb70081e0&gt;
+... &gt;&gt;&gt; ... ... There are 981 titles and 981 are unique
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Proof</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<ul class="org-ul">
+<li>Insert the existing title and check the uniqueness;</li>
+<li>Delete the test row and recover DB into its initial state.</li>
+</ul>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
+
+<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
+<span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title from activesport WHERE id=1'</span>)
+<span style="color: #87ffd7;">existing_title</span> = c.fetchone()[0]
+<span style="color: #87d7ff;">print</span>(existing_title)
+<span style="color: #87ffd7;">next_row</span> = num_rows + 1
+<span style="color: #87d7ff;">print</span>(next_row)
+c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO activesport values (?, ?)'</span>, (next_row, existing_title))
+conn.commit() <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">it is necessary after each INSERT/UPDATE operation</span>
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title FROM activesport'</span>)
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">collect all titles</span>
+<span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
+<span style="color: #87ffd7;">num_rows_new</span> = c.fetchone()[0]
+<span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows_new, <span style="color: #5f87af;">len</span>(title_set)))
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">clean-up</span>
+c.execute(<span style="color: #d7af87; font-style: italic;">'DELETE FROM activesport WHERE id&gt;?'</span>, (num_rows,))
+conn.commit()
+conn.close()
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7005be0&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7005be0&gt;
+&gt;&gt;&gt; Wishbone Bike 3 in 1 Recycled Edition Balance Bike
+&gt;&gt;&gt; 982
+&lt;sqlite3.Cursor object at 0xb7005be0&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7005be0&gt;
+... &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7005be0&gt;
+&gt;&gt;&gt; There are 982 titles and 981 are unique
+... &lt;sqlite3.Cursor object at 0xb7005be0&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Code refactoring</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<p>
+Now, when we already unveiled all subtleties around uniqueness it
+is time to utilize the core features of org-mode <code>sessions</code> and
+synthesize a much nicer code.
+</p>
+
+<p>
+Create a function:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">suppose that sqlite3 was already imported in the current session</span>
+<span style="color: #87d7ff;">def</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">uniq_field_test</span>(conn, tbl, field):
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87ffd7;">c</span> = conn.cursor()
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM %s'</span> % tbl 
+<span style="color: #ffd7af; background-color: #080808;"> </span>   c.execute(query)
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT %s FROM %s'</span> % (field, tbl)
+<span style="color: #ffd7af; background-color: #080808;"> </span>   c.execute(query)
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
+<span style="color: #ffd7af; background-color: #080808;"> </span>   <span style="color: #87d7ff;">return</span> (<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #5f87af;">len</span>(title_set)))
+
+<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+<span style="color: #87d7ff;">print</span>(uniq_field_test(conn, <span style="color: #d7af87; font-style: italic;">'activesport'</span>, <span style="color: #d7af87; font-style: italic;">'title'</span>))
+conn.close()
+</pre>
+</div>
+
+<pre class="example">
+... ... ... ... ... ... ... ... ... &gt;&gt;&gt; &gt;&gt;&gt; There are 981 titles and 981 are unique
+</pre>
+
+<p>
+Now, when the function <code>uniq_field_test</code> allocates in the <code>org session</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+<span style="color: #87ffd7;">tbl</span> = <span style="color: #d7af87; font-style: italic;">'activesport'</span>
+<span style="color: #87ffd7;">field</span> = <span style="color: #d7af87; font-style: italic;">'title'</span>
+<span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM %s'</span> % tbl
+c.execute(query)
+<span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
+<span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT %s FROM %s WHERE id=1'</span> % (field, tbl)
+c.execute(query)
+<span style="color: #87ffd7;">existing_value</span> = c.fetchone()[0]
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">fetchone() returns a tuple and we cut off the first element</span>
+<span style="color: #87d7ff;">print</span>(existing_value)
+<span style="color: #87d7ff;">print</span>(<span style="color: #5f87af;">type</span>(existing_value))
+<span style="color: #87ffd7;">next_row</span> = num_rows+1
+<span style="color: #87d7ff;">print</span>(next_row)
+c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO activesport VALUES (?, ?)'</span>, (next_row, existing_value))
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">INSERT demands table straight definition</span>
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">hence pre-formatted query not substitutes in the INSERT case</span>
+conn.commit() <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">writes data into table </span>
+<span style="color: #87d7ff;">print</span>(uniq_field_test(conn, tbl, field))
+<span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'DELETE FROM %s WHERE id=%d'</span> % (tbl, next_row)
+c.execute(query)
+conn.commit()
+<span style="color: #87d7ff;">print</span>(uniq_field_test(conn, tbl, field))
+conn.close()
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb6ff5f60&gt;
+&gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb6ff5f60&gt;
+&gt;&gt;&gt; ... Wishbone Bike 3 in 1 Recycled Edition Balance Bike
+&lt;class 'str'&gt;
+&gt;&gt;&gt; 982
+&lt;sqlite3.Cursor object at 0xb6ff5f60&gt;
+... ... &gt;&gt;&gt; There are 982 titles and 981 are unique
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb6ff5f60&gt;
+&gt;&gt;&gt; There are 981 titles and 981 are unique
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Results analyze</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+Code samples above confirms that it is possible to insert duplicate
+data in our table.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline11">
+<p>
+The database structure allows to user corrupt the data. There are
+several innate RDMBS methods to prevent this unwanted distortion.
+</p>
+</div>
 </div>
