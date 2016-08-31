@@ -1,0 +1,553 @@
+---
+layout: post
+title: SQLite3
+tagline: " Dynamic typing and Python lists"
+permalink: /sqlite3/data_types.html
+categories: [org-mode, Python, SQLite3, lists]
+tags: [tutorial, samples, data types]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Fixtures</a>
+<ul>
+<li><a href="#orgheadline4">Dynamic typing explanation</a></li>
+<li><a href="#orgheadline5">Python lists</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline6">Results</a></li>
+<li><a href="#orgheadline7">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Definition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Data types in any RDBMS serve for data integrity protection. Its
+plane definition in many cases might prevent data corruption by
+rejecting erroneous data writing into DB cells.
+</p>
+
+<p>
+SQLite3 in addition allows you to store Python lists in its tables.
+It is not a bug but a feature.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+The main <a href="https://www.sqlite.org/datatype3.html">article</a> about data types in SQLite3.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Fixtures</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Dynamic typing explanation</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">First name</th>
+<th scope="col" class="org-left">Last name</th>
+<th scope="col" class="org-right">Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">CREATE</span> <span style="color: #87d7ff;">TABLE</span> IF <span style="color: #87d7ff;">NOT</span> <span style="color: #87d7ff;">EXISTS</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">customers</span>(first_name TEXT, last_name TEXT, age <span style="color: #87ff87; font-size: 90%; font-weight: bold;">INT</span>);
+.mode csv
+.import $orgtable customers
+<span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
+<span style="color: #d7afaf; font-style: italic;">-- DROP TABLE customers; -- sometimes it is necessary</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">first_name</th>
+<th scope="col" class="org-left">last_name</th>
+<th scope="col" class="org-right">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+
+<tr>
+<td class="org-left">Phil</td>
+<td class="org-left">Collins</td>
+<td class="org-right">ABBA</td>
+</tr>
+
+<tr>
+<td class="org-left">Captain</td>
+<td class="org-left">Ahab</td>
+<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
+</tr>
+
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Perfect! Now take an attempt to insert the row with wrong data type.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">INSERT</span> <span style="color: #87d7ff;">INTO</span> customers <span style="color: #87d7ff;">VALUES</span>(<span style="color: #d7af87; font-style: italic;">'Phil'</span>, <span style="color: #d7af87; font-style: italic;">'Collins'</span>, <span style="color: #d7af87; font-style: italic;">'ABBA'</span>);
+<span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">first_name</th>
+<th scope="col" class="org-left">last_name</th>
+<th scope="col" class="org-right">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+
+<tr>
+<td class="org-left">Phil</td>
+<td class="org-left">Collins</td>
+<td class="org-right">ABBA</td>
+</tr>
+
+<tr>
+<td class="org-left">Captain</td>
+<td class="org-left">Ahab</td>
+<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
+</tr>
+
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+
+<tr>
+<td class="org-left">Phil</td>
+<td class="org-left">Collins</td>
+<td class="org-right">ABBA</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> typeof(age) <span style="color: #87d7ff;">FROM</span> customers;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">typeof(age)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>
+It is dynamic typing.
+In SQLite, the datatype of a value is associated with the value itself, not with its container.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Python lists</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
+
+<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'data_types.db'</span>)
+<span style="color: #87ffd7;">c</span> = conn.cursor()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM customers'</span>)
+<span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
+<span style="color: #87d7ff;">print</span>(num_rows)
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">conn.close()</span>
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7119ba0&gt;
+&gt;&gt;&gt; 9
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87ffd7;">sample_list</span> = [<span style="color: #d7af87; font-style: italic;">'This'</span>, <span style="color: #d7af87; font-style: italic;">'is'</span>, <span style="color: #d7af87; font-style: italic;">'a'</span>, <span style="color: #d7af87; font-style: italic;">'sample'</span>, <span style="color: #d7af87; font-style: italic;">'list'</span>]
+c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO customers VALUES(?, ?, ?)'</span>, (<span style="color: #d7af87; font-style: italic;">'Captain'</span>, <span style="color: #d7af87; font-style: italic;">'Ahab'</span>, <span style="color: #5f87af;">repr</span>(sample_list)))
+conn.commit()
+c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM customers'</span>)
+<span style="color: #87ffd7;">result</span> = c.fetchall()
+<span style="color: #87d7ff;">print</span>(result)
+</pre>
+</div>
+
+<pre class="example">
+&lt;sqlite3.Cursor object at 0xb7119ba0&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7119ba0&gt;
+&gt;&gt;&gt; [('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']"), ('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']")]
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">first_name</th>
+<th scope="col" class="org-left">last_name</th>
+<th scope="col" class="org-right">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+
+<tr>
+<td class="org-left">Phil</td>
+<td class="org-left">Collins</td>
+<td class="org-right">ABBA</td>
+</tr>
+
+<tr>
+<td class="org-left">Captain</td>
+<td class="org-left">Ahab</td>
+<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
+</tr>
+
+<tr>
+<td class="org-left">John</td>
+<td class="org-left">Doe</td>
+<td class="org-right">33</td>
+</tr>
+
+<tr>
+<td class="org-left">Ian</td>
+<td class="org-left">Lord</td>
+<td class="org-right">69</td>
+</tr>
+
+<tr>
+<td class="org-left">Steven</td>
+<td class="org-left">Fry</td>
+<td class="org-right">66</td>
+</tr>
+
+<tr>
+<td class="org-left">Phil</td>
+<td class="org-left">Collins</td>
+<td class="org-right">ABBA</td>
+</tr>
+
+<tr>
+<td class="org-left">Captain</td>
+<td class="org-left">Ahab</td>
+<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> typeof(age) <span style="color: #87d7ff;">FROM</span> customers;
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">typeof(age)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">integer</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+
+<tr>
+<td class="org-left">text</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Seems like a plain text representation of Python list. Try to
+retrieve the sample list out form SQLite3:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT age FROM customers WHERE first_name=?'</span>, (<span style="color: #d7af87; font-style: italic;">'Captain'</span>,))
+<span style="color: #87ffd7;">sample_list</span> = <span style="color: #5f87af;">eval</span>(c.fetchone()[0])
+<span style="color: #5f87af;">type</span>(sample_list)
+<span style="color: #87d7ff;">print</span>(sample_list)
+conn.close()
+</pre>
+</div>
+
+<pre class="example">
+&lt;sqlite3.Cursor object at 0xb7119ba0&gt;
+&gt;&gt;&gt; &lt;class 'list'&gt;
+['This', 'is', 'a', 'sample', 'list']
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Results</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<blockquote>
+<p>
+Be careful, though that you are certain no user-generated data can
+get into the column, or the eval() is a security risk.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline7">
+<ul class="org-ul">
+<li>Dynamic typing requres to check your data apard and before any table
+INSERT/UPDATE operation;</li>
+<li>Yes, it is possible to store Python lists in SQLite3 cells;</li>
+<li>List locates in a table cell as its representation, thus any SQL
+operations under its content are unavailable.</li>
+</ul>
+</div>
+</div>
