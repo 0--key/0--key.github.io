@@ -190,8 +190,8 @@ documents, SQLite3 tables and Python flexibility.
 <hr  />
 <blockquote>
 <p>
-<b>Tip</b> To evaluate code in the snippet below you Python support in
- Babel requred
+<b>Tip</b> To evaluate code in the snippet below you need to activate
+ <a href="file:///emacs/how-to-evaluate-code-inside-emacs.html">Python support</a> in Babel.
 </p>
 </blockquote>
 
@@ -495,8 +495,10 @@ c.fetchall()
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb720cf20&gt;
-[('Hello', 'guys!'), ('Good morning', 'Vikky!'), ('How are you', 'doing?'), ('Suppose it', 'clear?'), ('Insertion', 'test'), ('Insertion', 'test')]
+&gt;&gt;&gt; &gt;&gt;&gt; Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+sqlite3.OperationalError: no such table: greeting
+[]
 </pre>
 
 <blockquote>
