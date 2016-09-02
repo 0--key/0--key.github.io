@@ -13,7 +13,7 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 <div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/color_test.png :exports both</span>
   /----\ /----\
   |c33F| |cC02|
   |    | |    |
@@ -23,9 +23,9 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
   |c1FF| |c1AB|
   |    | |    |
   \----/ \----/
-<span style="color: #ff5f00;">#+END_SRC</span>
+<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/color_test.png</span>
 </pre>
 </div>
@@ -38,7 +38,7 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
+<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC ditaa :file img/second_color_test.png :exports both</span>
   Color codes
   /-------------+-------------\
   |cRED RED     |cBLU BLU     |
@@ -48,9 +48,9 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
   |cBLK BLK     |cYEL YEL     |
   \-------------+-------------/
 
-<span style="color: #ff5f00;">#+END_SRC</span>
+<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/second_color_test.png</span>
 </pre>
 </div>
@@ -68,12 +68,12 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 <div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/tryout.png :exports both</span>
+<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC plantuml :file img/tryout.png :exports both</span>
 Alice -&gt; Bob: synchronous call
 Alice -&gt;&gt; Bob: asynchronous call
-<span style="color: #ff5f00;">#+END_SRC</span>
+<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/tryout.png</span>
 </pre>
 </div>
@@ -87,7 +87,7 @@ Alice -&gt;&gt; Bob: asynchronous call
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/comp.png :exports both</span>
+<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC plantuml :file img/comp.png :exports both</span>
 package "Some Group" {
 HTTP - [First Component]
 [Another Component]
@@ -116,9 +116,9 @@ frame "Foo" {
 [Another Component] --&gt; [Example 1]
 [Example 1] --&gt; [Folder 3]
 [Folder 3] --&gt; [Frame 4]
-<span style="color: #ff5f00;">#+END_SRC</span>
+<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/comp.png</span>
 </pre>
 </div>
@@ -131,7 +131,7 @@ frame "Foo" {
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff5f00;">#+BEGIN_SRC plantuml :file img/gradient.png :exports both</span>
+<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC plantuml :file img/gradient.png :exports both</span>
 skinparam backgroundcolor AntiqueWhite/Gold
 skinparam classBackgroundColor Wheat|CornflowerBlue
 
@@ -144,9 +144,9 @@ end note
 package example #GreenYellow/LightGoldenRodYellow {
 class Dummy
 }
-<span style="color: #ff5f00;">#+END_SRC</span>
+<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff5f00;">#+RESULTS:</span>
+<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
 <span style="color: #00ffff; text-decoration: underline;">file:img/gradient.png</span>
 </pre>
 </div>
@@ -241,14 +241,14 @@ where org expects to seeks its libraries by default config:
 <div class="org-src-container">
 
 <pre class="src src-elisp">(expand-file-name
-<span style="color: #ffaf87;">"ditaa.jar"</span>
+<span style="color: #d7af87; font-style: italic;">"ditaa.jar"</span>
 (file-name-as-directory
 (expand-file-name
-<span style="color: #ffaf87;">"scripts"</span>
+<span style="color: #d7af87; font-style: italic;">"scripts"</span>
 (file-name-as-directory
 (expand-file-name
-<span style="color: #ffaf87;">"../contrib"</span>
-(file-name-directory (org-find-library-dir <span style="color: #ffaf87;">"org"</span>)))))))
+<span style="color: #d7af87; font-style: italic;">"../contrib"</span>
+(file-name-directory (org-find-library-dir <span style="color: #d7af87; font-style: italic;">"org"</span>)))))))
 </pre>
 </div>
 
@@ -257,7 +257,6 @@ where org expects to seeks its libraries by default config:
 </pre>
 </div>
 </div>
-
 
 <div id="outline-container-orgheadline5" class="outline-3">
 <h3 id="orgheadline5">Install plantUML and ditaa libraries</h3>

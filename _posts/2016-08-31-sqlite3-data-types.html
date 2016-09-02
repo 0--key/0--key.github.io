@@ -137,36 +137,6 @@ The main <a href="https://www.sqlite.org/datatype3.html">article</a> about data 
 <td class="org-left">Fry</td>
 <td class="org-right">66</td>
 </tr>
-
-<tr>
-<td class="org-left">Phil</td>
-<td class="org-left">Collins</td>
-<td class="org-right">ABBA</td>
-</tr>
-
-<tr>
-<td class="org-left">Captain</td>
-<td class="org-left">Ahab</td>
-<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
-</tr>
-
-<tr>
-<td class="org-left">John</td>
-<td class="org-left">Doe</td>
-<td class="org-right">33</td>
-</tr>
-
-<tr>
-<td class="org-left">Ian</td>
-<td class="org-left">Lord</td>
-<td class="org-right">69</td>
-</tr>
-
-<tr>
-<td class="org-left">Steven</td>
-<td class="org-left">Fry</td>
-<td class="org-right">66</td>
-</tr>
 </tbody>
 </table>
 
@@ -222,36 +192,6 @@ Perfect! Now take an attempt to insert the row with wrong data type.
 <td class="org-left">Collins</td>
 <td class="org-right">ABBA</td>
 </tr>
-
-<tr>
-<td class="org-left">Captain</td>
-<td class="org-left">Ahab</td>
-<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
-</tr>
-
-<tr>
-<td class="org-left">John</td>
-<td class="org-left">Doe</td>
-<td class="org-right">33</td>
-</tr>
-
-<tr>
-<td class="org-left">Ian</td>
-<td class="org-left">Lord</td>
-<td class="org-right">69</td>
-</tr>
-
-<tr>
-<td class="org-left">Steven</td>
-<td class="org-left">Fry</td>
-<td class="org-right">66</td>
-</tr>
-
-<tr>
-<td class="org-left">Phil</td>
-<td class="org-left">Collins</td>
-<td class="org-right">ABBA</td>
-</tr>
 </tbody>
 </table>
 
@@ -273,26 +213,6 @@ Perfect! Now take an attempt to insert the row with wrong data type.
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">text</td>
-</tr>
-
-<tr>
-<td class="org-left">text</td>
-</tr>
-
 <tr>
 <td class="org-left">integer</td>
 </tr>
@@ -337,8 +257,8 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FRO
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7119ba0&gt;
-&gt;&gt;&gt; 9
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&gt;&gt;&gt; 4
 </pre>
 
 <div class="org-src-container">
@@ -353,9 +273,9 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM custo
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb7119ba0&gt;
-&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7119ba0&gt;
-&gt;&gt;&gt; [('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']"), ('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']")]
+&lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&gt;&gt;&gt; [('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']")]
 </pre>
 
 <div class="org-src-container">
@@ -411,36 +331,6 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM custo
 <td class="org-left">Ahab</td>
 <td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
 </tr>
-
-<tr>
-<td class="org-left">John</td>
-<td class="org-left">Doe</td>
-<td class="org-right">33</td>
-</tr>
-
-<tr>
-<td class="org-left">Ian</td>
-<td class="org-left">Lord</td>
-<td class="org-right">69</td>
-</tr>
-
-<tr>
-<td class="org-left">Steven</td>
-<td class="org-left">Fry</td>
-<td class="org-right">66</td>
-</tr>
-
-<tr>
-<td class="org-left">Phil</td>
-<td class="org-left">Collins</td>
-<td class="org-right">ABBA</td>
-</tr>
-
-<tr>
-<td class="org-left">Captain</td>
-<td class="org-left">Ahab</td>
-<td class="org-right">['This', 'is', 'a', 'sample', 'list']</td>
-</tr>
 </tbody>
 </table>
 
@@ -481,26 +371,6 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM custo
 <tr>
 <td class="org-left">text</td>
 </tr>
-
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">integer</td>
-</tr>
-
-<tr>
-<td class="org-left">text</td>
-</tr>
-
-<tr>
-<td class="org-left">text</td>
-</tr>
 </tbody>
 </table>
 
@@ -519,7 +389,7 @@ conn.close()
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb7119ba0&gt;
+&lt;sqlite3.Cursor object at 0xb72b1f60&gt;
 &gt;&gt;&gt; &lt;class 'list'&gt;
 ['This', 'is', 'a', 'sample', 'list']
 </pre>
