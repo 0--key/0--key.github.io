@@ -1,12 +1,28 @@
 ---
-layout: page
+layout: post
 title: Data visualisation
 tagline: " A picture is worth a thousand words"
 categories: [emacs, literate programming]
 tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 ---
-
-
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Ditaa</a></li>
+<li><a href="#orgheadline2">PlantUML</a></li>
+<li><a href="#orgheadline3">How to achive similar functionality</a>
+<ul>
+<li><a href="#orgheadline4">JVM required</a></li>
+<li><a href="#orgheadline5">Define java plugins path for emacs usage</a></li>
+<li><a href="#orgheadline6">Install plantUML and ditaa libraries</a></li>
+<li><a href="#orgheadline7">Extend Babel src languages list</a></li>
+<li><a href="#orgheadline8">Test it</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1">Ditaa</h2>
@@ -32,7 +48,7 @@ tags: [org-mode, emacs, uml, plantuml, ditaa, schema, babel]
 
 
 <div class="figure">
-<p><img src="file:///assets/img/color_test.png" alt="color_test.png" />
+<p><img src="http://0--key.github.io/assets/img/color_test.png" alt="color_test.png" />
 </p>
 </div>
 
@@ -161,12 +177,12 @@ class Dummy
 
 
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8">How to achive similar functionality</h2>
-<div class="outline-text-2" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">JVM required</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">How to achive similar functionality</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">JVM required</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-sh">java -version 2&gt;&amp;1
@@ -230,9 +246,9 @@ If it is not so, you'll need to install it.
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Define java plugins path for emacs usage</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Define java plugins path for emacs usage</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <p>
 Evaluate expression below in <b>scratch</b> buffer to determine
 where org expects to seeks its libraries by default config:
@@ -258,18 +274,18 @@ where org expects to seeks its libraries by default config:
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Install plantUML and ditaa libraries</h3>
-<div class="outline-text-3" id="text-orgheadline5">
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Install plantUML and ditaa libraries</h3>
+<div class="outline-text-3" id="text-orgheadline6">
 <p>
 Download, unzip, rename <a href="http://ditaa.sourceforge.net/">java package</a> and locate it there
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">Extend Babel src languages list</h3>
-<div class="outline-text-3" id="text-orgheadline6">
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Extend Babel src languages list</h3>
+<div class="outline-text-3" id="text-orgheadline7">
 <p>
 Add a couple strings <code>into org-babel-load-languages</code> in your
 <code>.emacs.el</code> or <code>init.el</code>
@@ -284,9 +300,9 @@ Add a couple strings <code>into org-babel-load-languages</code> in your
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Test it</h3>
-<div class="outline-text-3" id="text-orgheadline7">
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Test it</h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <p>
 <a href="http://0--key.github.io/emacs/how-to-evaluate-code-inside-emacs.html">Try to evaluate</a> the code snippets in the top of this page.
 </p>

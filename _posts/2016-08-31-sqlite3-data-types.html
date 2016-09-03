@@ -94,7 +94,8 @@ The main <a href="https://www.sqlite.org/datatype3.html">article</a> about data 
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">CREATE</span> <span style="color: #87d7ff;">TABLE</span> IF <span style="color: #87d7ff;">NOT</span> <span style="color: #87d7ff;">EXISTS</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">customers</span>(first_name TEXT, last_name TEXT, age <span style="color: #87ff87; font-size: 90%; font-weight: bold;">INT</span>);
+<pre class="src src-sqlite"><span style="color: #87d7ff;">DROP</span> <span style="color: #87d7ff;">TABLE</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">IF</span> <span style="color: #87d7ff;">EXISTS</span> customers;
+<span style="color: #87d7ff;">CREATE</span> <span style="color: #87d7ff;">TABLE</span> IF <span style="color: #87d7ff;">NOT</span> <span style="color: #87d7ff;">EXISTS</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">customers</span>(first_name TEXT, last_name TEXT, age <span style="color: #87ff87; font-size: 90%; font-weight: bold;">INT</span>);
 .mode csv
 .import $orgtable customers
 <span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
@@ -257,7 +258,7 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FRO
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726ff60&gt;
 &gt;&gt;&gt; 4
 </pre>
 
@@ -273,8 +274,8 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM custo
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb72b1f60&gt;
-&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&lt;sqlite3.Cursor object at 0xb726ff60&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726ff60&gt;
 &gt;&gt;&gt; [('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']")]
 </pre>
 
@@ -389,7 +390,7 @@ conn.close()
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb72b1f60&gt;
+&lt;sqlite3.Cursor object at 0xb726ff60&gt;
 &gt;&gt;&gt; &lt;class 'list'&gt;
 ['This', 'is', 'a', 'sample', 'list']
 </pre>
