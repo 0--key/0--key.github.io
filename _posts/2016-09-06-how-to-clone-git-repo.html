@@ -1,0 +1,280 @@
+---
+layout: post
+title: Git
+tagline: " host all your code there"
+permalink: /git/tips/how-to-clone-repository.html
+categories: [git]
+tags: [tutorial, clone, remotes]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Prerequisites</a></li>
+<li><a href="#orgheadline4">Cloning itself</a>
+<ul>
+<li><a href="#orgheadline5">Browse at Github seeking something interesting to you</a></li>
+<li><a href="#orgheadline6">Open terminal tab and type:</a></li>
+<li><a href="#orgheadline7">When this repository resides in your file-system</a></li>
+<li><a href="#orgheadline8">Check up remotes:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline9">Results</a></li>
+<li><a href="#orgheadline10">Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Definition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Nowadays <a href="https://github.com/">Git</a> is a standard option to host your code and share it
+among collaborators. Seems like the best way to introduce it is to
+show how to get a copy of some project on your hard drive for
+further development, tests, adjustments etc.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+The definitive guide how-to do this meta-task is on the official
+Git <a href="https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository">documentation site</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+Of cause you need git installed on your host.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">git --version
+</pre>
+</div>
+
+<pre class="example">
+git version 2.9.3
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Cloning itself</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Browse at Github seeking something interesting to you</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+and get the link for your particular repo like this:
+</p>
+<blockquote>
+<p>
+<a href="https://github.com/0--key/org-pub.git">https://github.com/0--key/org-pub.git</a>
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Open terminal tab and type:</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-shell"><span style="color: #5f87af;">cd</span> /usr/local/share/DVCS/ <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">it's path for all repositories on my hard drive</span>
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">git clone https://github.com/0--key/org-pub.git</span>
+<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">uncomment the string above for the actual git clone</span>
+ls | grep org-pub
+</pre>
+</div>
+
+<pre class="example">
+org-pub
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">When this repository resides in your file-system</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+it's time to review what are inside:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #5f87af;">cd</span> /usr/local/share/DVCS/
+ls org-pub
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">2016-08-24-index.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-24-intro.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-24-intro.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-25-how-to-evaluate.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-26-disqus.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-27-mark-up-samples.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-27-python-and-sqlite3-interaction.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-30-sqlite3-integrity-check.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-08-31-sqlite3-data-types.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-06-fork-git-repository.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-06-fork-git-repository.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-06-how-to-clone-git-repo.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-06-how-to-clone-git-repo.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">data_types.db</td>
+</tr>
+
+<tr>
+<td class="org-left">img</td>
+</tr>
+
+<tr>
+<td class="org-left">LICENSE</td>
+</tr>
+
+<tr>
+<td class="org-left">README.md</td>
+</tr>
+
+<tr>
+<td class="org-left">README.md~</td>
+</tr>
+
+<tr>
+<td class="org-left">test-sqlite.db</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Seems like all are inside.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Check up remotes:</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #5f87af;">cd</span> /usr/local/share/DVCS/org-pub/
+git remote -v
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">origin</td>
+<td class="org-left"><a href="https://github.com/0--key/org-pub.git">https://github.com/0--key/org-pub.git</a> (fetch)</td>
+</tr>
+
+<tr>
+<td class="org-left">origin</td>
+<td class="org-left"><a href="https://github.com/0--key/org-pub.git">https://github.com/0--key/org-pub.git</a> (push)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Your local version should push and fetch code from a single remote.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">Results</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<p>
+We got the local version of some interesting repository hosted on
+Git. It allows to do anything with a personal clone, and, if you're
+previously accepted as a collaborator, even to contribute to
+project.
+</p>
+
+<p>
+It's a usual approach to share access as a collaborator to well-known
+persons. And it is a habitual treatment to organize software
+development among team members - the team leader create a repository
+on Github and grant access to all participants. For security reasons
+all other persons aside from officially invited by the project owner
+has a restricted read-only access to the project's files by default.
+</p>
+
+<p>
+But what about to obtain improvements and corrections from the
+completely unknown developers?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+It's time to go further and cope with <a href="http://0--key.github.io/git/tips/how-to-fork-repository.html">Git fork</a> technology.
+</p>
+</div>
+</div>
