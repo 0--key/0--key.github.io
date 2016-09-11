@@ -59,13 +59,14 @@ Check up does pytest installed already:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">pip freeze | grep pytest
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sh :results ouput pp :exports both</span>
+pip freeze | grep pytest
+<span style="color: #ff0087;">#+END_SRC</span>
+
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #b2b2b2;">: pytest==3.0.2</span>
 </pre>
 </div>
-
-<pre class="example">
-pytest==3.0.2
-</pre>
 
 <p>
 Seems like it's installed properly and we going on.
