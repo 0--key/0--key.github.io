@@ -87,16 +87,24 @@ Seems like it's installed properly and we going on.
 <div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #00cdcd;">"""This is an initial pytest sample file"""</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :noweb yes :tangle tests/test_sample.py</span>
+  <span style="color: #00cdcd;">"""This is an initial pytest sample file"""</span>
 
-<span style="color: #cd0000;">def</span> <span style="color: #af00ff;">func</span>(x):
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> x + 1
+  <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">func</span>(x):
+      <span style="color: #cd0000;">return</span> x + 1
 
 
-<span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_answer</span>():
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">assert</span> func(3) == 5
+  <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_answer</span>():
+      <span style="color: #cd0000;">assert</span> func(3) == 5
+<span style="color: #ff0087;">#+END_SRC</span>
 </pre>
 </div>
+
+<blockquote>
+<p>
+<b>Tip</b> Type <code>C-c C-v t</code> to generate <code>tests/test_sample.py</code>
+</p>
+</blockquote>
 </div>
 </div>
 
@@ -105,75 +113,81 @@ Seems like it's installed properly and we going on.
 <div class="outline-text-3" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-sh">ls tests | grep py
-py.test -v <span style="color: #ff0087;"># </span><span style="color: #ff0087;">-v means =verbose=</span>
+<pre class="src src-org"><span style="color: #ff0087;">   #+BEGIN_SRC sh :results output :exports both</span>
+   ls tests | grep py
+   py.test -v <span style="color: #ff0087;"># </span><span style="color: #ff0087;">-v means =verbose=</span>
+<span style="color: #ff0087;">   #+END_SRC</span>
+
+<span style="color: #ff0087;">   #+RESULTS:</span>
+<span style="color: #ff0087;">   #+begin_example</span>
+<span style="color: #b2b2b2;">   __pycache__</span>
+<span style="color: #b2b2b2;">   test_built-in_constants.py</span>
+<span style="color: #b2b2b2;">   test_built-in_constants.pyc</span>
+<span style="color: #b2b2b2;">   test_sample.py</span>
+<span style="color: #b2b2b2;">   test_sample.py~</span>
+<span style="color: #b2b2b2;">   test_sample.pyc</span>
+<span style="color: #b2b2b2;">   ============================= test session starts ==============================</span>
+<span style="color: #b2b2b2;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
+<span style="color: #b2b2b2;">   cachedir: .cache</span>
+<span style="color: #b2b2b2;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
+<span style="color: #b2b2b2;">   collecting ... collected 4 items</span>
+
+<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_false PASSED</span>
+<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_none PASSED</span>
+<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_true PASSED</span>
+<span style="color: #b2b2b2;">   tests/test_sample.py::test_answer FAILED</span>
+
+<span style="color: #b2b2b2;">   =================================== FAILURES ===================================</span>
+<span style="color: #b2b2b2;">   _________________________________ test_answer __________________________________</span>
+
+<span style="color: #b2b2b2;">       def test_answer():</span>
+<span style="color: #b2b2b2;">   &gt;       assert func(3) == 5</span>
+<span style="color: #b2b2b2;">   E       assert 4 == 5</span>
+<span style="color: #b2b2b2;">   E        +  where 4 = func(3)</span>
+
+<span style="color: #b2b2b2;">   tests/test_sample.py:6: AssertionError</span>
+<span style="color: #b2b2b2;">   ====================== 1 failed, 3 passed in 0.10 seconds ======================</span>
+<span style="color: #ff0087;">#+end_example</span>
 </pre>
 </div>
-
-<pre class="example">
-__pycache__
-test_built-in_constants.py
-test_built-in_constants.pyc
-test_sample.py
-test_sample.py~
-test_sample.pyc
-============================= test session starts ==============================
-platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3
-cachedir: .cache
-rootdir: /usr/local/share/DVCS/org-pub, inifile: 
-collecting ... collected 4 items
-
-tests/test_built-in_constants.py::TestBuiltInConstants::test_false PASSED
-tests/test_built-in_constants.py::TestBuiltInConstants::test_none PASSED
-tests/test_built-in_constants.py::TestBuiltInConstants::test_true PASSED
-tests/test_sample.py::test_answer FAILED
-
-=================================== FAILURES ===================================
-_________________________________ test_answer __________________________________
-
-    def test_answer():
-&gt;       assert func(3) == 5
-E       assert 4 == 5
-E        +  where 4 = func(3)
-
-tests/test_sample.py:8: AssertionError
-====================== 1 failed, 3 passed in 0.08 seconds ======================
-</pre>
-
+<hr  />
 <p>
 <code>pytest</code> evaluated all tests in folder <code>test</code>, but what if you want
 to test something <i>particular</i>?
 </p>
+<hr  />
 
 <div class="org-src-container">
 
-<pre class="src src-sh">py.test -v tests/test_sample.py
+<pre class="src src-org"><span style="color: #ff0087;">   #+BEGIN_SRC sh :results output :exports both</span>
+   py.test -v tests/test_sample.py
+<span style="color: #ff0087;">   #+END_SRC</span>
+
+<span style="color: #ff0087;">   #+RESULTS:</span>
+<span style="color: #ff0087;">   #+begin_example</span>
+<span style="color: #b2b2b2;">   ============================= test session starts ==============================</span>
+<span style="color: #b2b2b2;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
+<span style="color: #b2b2b2;">   cachedir: .cache</span>
+<span style="color: #b2b2b2;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
+<span style="color: #b2b2b2;">   collecting ... collected 1 items</span>
+
+<span style="color: #b2b2b2;">   tests/test_sample.py::test_answer FAILED</span>
+
+<span style="color: #b2b2b2;">   =================================== FAILURES ===================================</span>
+<span style="color: #b2b2b2;">   _________________________________ test_answer __________________________________</span>
+
+<span style="color: #b2b2b2;">       def test_answer():</span>
+<span style="color: #b2b2b2;">   &gt;       assert func(3) == 5</span>
+<span style="color: #b2b2b2;">   E       assert 4 == 5</span>
+<span style="color: #b2b2b2;">   E        +  where 4 = func(3)</span>
+
+<span style="color: #b2b2b2;">   tests/test_sample.py:6: AssertionError</span>
+<span style="color: #b2b2b2;">   =========================== 1 failed in 0.05 seconds ===========================</span>
+<span style="color: #ff0087;">#+end_example</span>
 </pre>
 </div>
-
-<pre class="example">
-============================= test session starts ==============================
-platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3
-cachedir: .cache
-rootdir: /usr/local/share/DVCS/org-pub, inifile: 
-collecting ... collected 1 items
-
-tests/test_sample.py::test_answer FAILED
-
-=================================== FAILURES ===================================
-_________________________________ test_answer __________________________________
-
-    def test_answer():
-&gt;       assert func(3) == 5
-E       assert 4 == 5
-E        +  where 4 = func(3)
-
-tests/test_sample.py:8: AssertionError
-=========================== 1 failed in 0.05 seconds ===========================
-</pre>
 </div>
 </div>
-
 
 <div id="outline-container-orgheadline7" class="outline-3">
 <h3 id="orgheadline7">Conclusion</h3>
