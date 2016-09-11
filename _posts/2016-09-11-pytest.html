@@ -1,0 +1,210 @@
+---
+layout: post
+title: Python
+tagline: " pytest module overview"
+permalink: /python/testing/pytest-in-babel.html
+categories: [python, pytest, literate programming]
+tags: [tutorial, testing]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Prerequisites</a></li>
+<li><a href="#orgheadline4">Working sample</a>
+<ul>
+<li><a href="#orgheadline5">Lets create a separate test file:</a></li>
+<li><a href="#orgheadline6">Run pytest</a></li>
+<li><a href="#orgheadline7">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Definition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<blockquote>
+<p>
+<i>pytest: helps you write better programs</i>
+</p>
+
+<p>
+The pytest framework makes it easy to write small tests, yet scales
+to support complex functional testing for applications and
+libraries.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+At the <a href="http://docs.pytest.org/en/latest/">official web-site</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+Check up does pytest installed already:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">pip freeze | grep pytest
+</pre>
+</div>
+
+<pre class="example">
+pytest==3.0.2
+</pre>
+
+<p>
+Seems like it's installed properly and we going on.
+</p>
+<blockquote>
+<p>
+<b>Tip</b> If you got an empty string as a result of code execution above
+ it signed on necessity to install pytest.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Working sample</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Lets create a separate test file:</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #00cdcd;">"""This is an initial pytest sample file"""</span>
+
+<span style="color: #cd0000;">def</span> <span style="color: #af00ff;">func</span>(x):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> x + 1
+
+
+<span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_answer</span>():
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">assert</span> func(3) == 5
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Run pytest</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-sh">ls tests | grep py
+py.test -v <span style="color: #ff0087;"># </span><span style="color: #ff0087;">-v means =verbose=</span>
+</pre>
+</div>
+
+<pre class="example">
+__pycache__
+test_built-in_constants.py
+test_built-in_constants.pyc
+test_sample.py
+test_sample.py~
+test_sample.pyc
+============================= test session starts ==============================
+platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3
+cachedir: .cache
+rootdir: /usr/local/share/DVCS/org-pub, inifile: 
+collecting ... collected 4 items
+
+tests/test_built-in_constants.py::TestBuiltInConstants::test_false PASSED
+tests/test_built-in_constants.py::TestBuiltInConstants::test_none PASSED
+tests/test_built-in_constants.py::TestBuiltInConstants::test_true PASSED
+tests/test_sample.py::test_answer FAILED
+
+=================================== FAILURES ===================================
+_________________________________ test_answer __________________________________
+
+    def test_answer():
+&gt;       assert func(3) == 5
+E       assert 4 == 5
+E        +  where 4 = func(3)
+
+tests/test_sample.py:8: AssertionError
+====================== 1 failed, 3 passed in 0.09 seconds ======================
+</pre>
+
+<p>
+<code>pytest</code> evaluated all tests in folder <code>test</code>, but what if you want
+to test something <i>particular</i>?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">py.test -v tests/test_sample.py
+</pre>
+</div>
+
+<pre class="example">
+============================= test session starts ==============================
+platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3
+cachedir: .cache
+rootdir: /usr/local/share/DVCS/org-pub, inifile: 
+collecting ... collected 1 items
+
+tests/test_sample.py::test_answer FAILED
+
+=================================== FAILURES ===================================
+_________________________________ test_answer __________________________________
+
+    def test_answer():
+&gt;       assert func(3) == 5
+E       assert 4 == 5
+E        +  where 4 = func(3)
+
+tests/test_sample.py:8: AssertionError
+=========================== 1 failed in 0.05 seconds ===========================
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Conclusion</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+#+BEGIN_QUOTE
+<b>Features</b>
+</p>
+</div>
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Detailed info on failing assert statements (no need to remember self.assert* names);</h4>
+</div>
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Auto-discovery of test modules and functions;</h4>
+</div>
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">Modular fixtures for managing small or parametrized long-lived test resources;</h4>
+</div>
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">Can run unittest (including trial) and nose test suites out of the box;</h4>
+</div>
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">Python2.6+, Python3.3+, PyPy-2.3, Jython-2.5 (untested);</h4>
+</div>
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Rich plugin architecture, with over 150+ external plugins and thriving community;</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+<p>
+#+END_QUOTE
+</p>
+</div>
+</div>
+</div>
+</div>
