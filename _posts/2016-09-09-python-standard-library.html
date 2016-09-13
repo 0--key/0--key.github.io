@@ -2,9 +2,9 @@
 layout: post
 title: Python
 tagline: " standard library disclosure"
-permalink: /python/tdd/stdlib.html
-categories: [python, TDD]
-tags: [tutorial, stdlib, testing]
+permalink: /python/tdd/unittest_init.html
+categories: [python, stdlib, TDD, literate programming]
+tags: [tutorial, unittest, methodology]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -30,7 +30,7 @@ tags: [tutorial, stdlib, testing]
 <p>
 In most cases the best approach to study how something works is to
 test its behavior in various circumstances. In a helicopter view it
-is an experimentation or a scrutiny.
+is a dissection or a scrutiny.
 </p>
 
 <p>
@@ -54,16 +54,16 @@ Lets create a mold for pouring by the test suits:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #00ff87; background-color: #000000;">#+BEGIN_SRC python :noweb yes :results none :tangle tests/test_built-in_constants.py</span>
-<span style="color: #00875f; background-color: #000000;">"""Discover how it works by a coherent testing"""</span>
-&lt;&lt;<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">import</span>-header&gt;&gt;
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :noweb yes :results none :tangle tests/test_built-in_constants.py</span>
+<span style="color: #00cdcd;">"""Discover how it works by a coherent testing"""</span>
+&lt;&lt;<span style="color: #cd0000;">import</span>-header&gt;&gt;
 
 
-&lt;&lt;built-<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">in</span>-constants-test&gt;&gt;
-<span style="color: #00ff87; background-color: #000000;"># </span><span style="color: #00ff87; background-color: #000000;">it might be several test cases</span>
-<span style="color: #00ff87; background-color: #000000;"># </span><span style="color: #00ff87; background-color: #000000;">thus several test classes</span>
-<span style="color: #00ff87; background-color: #000000;"># </span><span style="color: #00ff87; background-color: #000000;">as several include source code block</span>
-<span style="color: #00ff87; background-color: #000000;">#+END_SRC</span>
+&lt;&lt;built-<span style="color: #cd0000;">in</span>-constants-test&gt;&gt;
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">it might be several test cases</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">thus several test classes</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">as several include source code block</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 </pre>
 </div>
 
@@ -84,10 +84,10 @@ It's clear what you expected to test by means the <code>unittest</code> module:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #00ff87; background-color: #000000;">#+NAME: import-header</span>
-<span style="color: #00ff87; background-color: #000000;">#+BEGIN_SRC python</span>
-<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">import</span> unittest
-<span style="color: #00ff87; background-color: #000000;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+NAME: import-header</span>
+<span style="color: #ff0087;">#+BEGIN_SRC python</span>
+<span style="color: #cd0000;">import</span> unittest
+<span style="color: #ff0087;">#+END_SRC</span>
 </pre>
 </div>
 </div>
@@ -103,20 +103,20 @@ particular name for substitution into template.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #00ff87; background-color: #000000;">#+NAME: built-in-constants-test</span>
-<span style="color: #00ff87; background-color: #000000;">#+BEGIN_SRC python</span>
-  <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">class</span> <span style="color: #cdcd00;">TestBuiltInConstants</span>(unittest.TestCase):
+<pre class="src src-org"><span style="color: #ff0087;">#+NAME: built-in-constants-test</span>
+<span style="color: #ff0087;">#+BEGIN_SRC python</span>
+  <span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestBuiltInConstants</span>(unittest.TestCase):
 
-      <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">def</span> <span style="color: #00CC00; background-color: #000000; font-weight: bold;">test_true</span>(<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>):
-          <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>.assertTrue(1 + 3 == 4)
+      <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_true</span>(<span style="color: #cd0000;">self</span>):
+          <span style="color: #cd0000;">self</span>.assertTrue(1 + 3 == 4)
 
-      <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">def</span> <span style="color: #00CC00; background-color: #000000; font-weight: bold;">test_false</span>(<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>):
-          <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>.assertFalse(1 + 4 == 4)
+      <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_false</span>(<span style="color: #cd0000;">self</span>):
+          <span style="color: #cd0000;">self</span>.assertFalse(1 + 4 == 4)
 
-      <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">def</span> <span style="color: #00CC00; background-color: #000000; font-weight: bold;">test_none</span>(<span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>):
+      <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_none</span>(<span style="color: #cd0000;">self</span>):
           <span style="color: #ff87ff;">value</span> = <span style="color: #0000ee;">None</span>
-          <span style="color: #00cd00; background-color: #000000; text-decoration: underline;">self</span>.assertIsNone(value)
-<span style="color: #00ff87; background-color: #000000;">#+END_SRC</span>
+          <span style="color: #cd0000;">self</span>.assertIsNone(value)
+<span style="color: #ff0087;">#+END_SRC</span>
 </pre>
 </div>
 
@@ -135,18 +135,18 @@ Accustomed unittest as Python module:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #00ff87; background-color: #000000;">#+BEGIN_SRC sh :results output :exports both</span>
-  python -m unittest -v tests/test_built-in_constants.py 2&gt;&amp;1
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sh :results output :exports both</span>
+  python -m unittest -v tests/test_built-in_constants.py
 
-<span style="color: #00ff87; background-color: #000000;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #00ff87; background-color: #000000;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: test_false (tests.test_built-in_constants.TestBuiltInConstants) ... ok</span>
 <span style="color: #b2b2b2;">: test_none (tests.test_built-in_constants.TestBuiltInConstants) ... ok</span>
 <span style="color: #b2b2b2;">: test_true (tests.test_built-in_constants.TestBuiltInConstants) ... ok</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: ----------------------------------------------------------------------</span>
-<span style="color: #b2b2b2;">: Ran 3 tests in 0.000s</span>
+<span style="color: #b2b2b2;">: Ran 3 tests in 0.002s</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: OK</span>
 </pre>
