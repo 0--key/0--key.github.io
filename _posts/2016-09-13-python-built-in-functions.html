@@ -222,7 +222,7 @@ Lets create a mold for pouring by the test suits:
 <span style="color: #cd0000;">import</span> unittest
 
 
-<span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAbs</span>(unittest.TestCase):
+<span style="color: #cd0000;">class</span> TestAbs(unittest.TestCase):
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_positive</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">abs</span>(4) == 4)
@@ -231,7 +231,7 @@ Lets create a mold for pouring by the test suits:
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">abs</span>(-4) == -4)
 
 
-<span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAll</span>(unittest.TestCase):
+<span style="color: #cd0000;">class</span> TestAll(unittest.TestCase):
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_zero</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([0, 1]))
@@ -240,10 +240,10 @@ Lets create a mold for pouring by the test suits:
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([1, 2, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_false</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">False</span>, 3]))
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([False, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_None</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">None</span>, 3]))
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([None, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_negative</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([-1, -2]))
@@ -253,6 +253,47 @@ Lets create a mold for pouring by the test suits:
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_empty_string</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">""</span>, <span style="color: #00cdcd;">"Empty"</span>]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_empty_list</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'l'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'low'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'at the'</span>))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_non_iter_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertRaises(TypeError, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(11))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">assertRaises(exception, callable, *args, **kwds)</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_bool_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertRaises(TypeError, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(True))
+
+
+<span style="color: #cd0000;">class</span> TestAny(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_boolean_arguments</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>([True, True]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_mixed_arguments</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>([True, False]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_false_elements</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">any</span>([False, False]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>(<span style="color: #00cdcd;">"Blasphemy"</span>))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_empty_list</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">any</span>([]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
 </pre>
 </div>
 
@@ -295,7 +336,7 @@ particular name for substitution into template.
 <div class="outline-text-4" id="text-orgheadline9">
 <div class="org-src-container">
 
-<pre class="src src-python" id="orgsrcblock2"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAbs</span>(unittest.TestCase):
+<pre class="src src-python" id="orgsrcblock2"><span style="color: #cd0000;">class</span> TestAbs(unittest.TestCase):
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_positive</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">abs</span>(4) == 4)
@@ -312,7 +353,7 @@ particular name for substitution into template.
 <div class="outline-text-4" id="text-orgheadline10">
 <div class="org-src-container">
 
-<pre class="src src-python" id="orgsrcblock3"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAll</span>(unittest.TestCase):
+<pre class="src src-python" id="orgsrcblock3"><span style="color: #cd0000;">class</span> TestAll(unittest.TestCase):
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_zero</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([0, 1]))
@@ -321,10 +362,10 @@ particular name for substitution into template.
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([1, 2, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_false</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">False</span>, 3]))
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([False, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_None</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">None</span>, 3]))
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([None, 3]))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_negative</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([-1, -2]))
@@ -334,6 +375,55 @@ particular name for substitution into template.
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_empty_string</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">""</span>, <span style="color: #00cdcd;">"Empty"</span>]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_empty_list</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'l'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'low'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'at the'</span>))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_non_iter_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertRaises(TypeError, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(11))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">assertRaises(exception, callable, *args, **kwds)</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_bool_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertRaises(TypeError, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(True))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">any()</h4>
+<div class="outline-text-4" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-python" id="orgsrcblock4"><span style="color: #cd0000;">class</span> TestAny(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_boolean_arguments</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>([True, True]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_mixed_arguments</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>([True, False]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_false_elements</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">any</span>([False, False]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">any</span>(<span style="color: #00cdcd;">"Blasphemy"</span>))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_empty_list</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">any</span>([]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_(self):</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertTrue(any([True, True]))</span>
 </pre>
 </div>
 </div>
@@ -351,23 +441,14 @@ Accustomed unittest as Python module:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">python -m unittest -v tests/test_built-in_functions.py
+<pre class="src src-sh">python -m unittest tests/test_built-in_functions.py
 </pre>
 </div>
 
 <pre class="example">
-test_negative (tests.test_built-in_functions.TestAbs) ... ok
-test_positive (tests.test_built-in_functions.TestAbs) ... ok
-test_all_values_are_negative (tests.test_built-in_functions.TestAll) ... ok
-test_all_values_are_positive_numbers (tests.test_built-in_functions.TestAll) ... ok
-test_all_values_are_strings (tests.test_built-in_functions.TestAll) ... ok
-test_one_value_is_empty_string (tests.test_built-in_functions.TestAll) ... ok
-test_one_value_is_zero (tests.test_built-in_functions.TestAll) ... ok
-test_single_element_is_None (tests.test_built-in_functions.TestAll) ... ok
-test_single_element_is_false (tests.test_built-in_functions.TestAll) ... ok
-
+.................
 ----------------------------------------------------------------------
-Ran 9 tests in 0.001s
+Ran 17 tests in 0.002s
 
 OK
 </pre>
