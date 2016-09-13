@@ -1,0 +1,387 @@
+---
+layout: post
+title: Python
+tagline: " built-in functions in TDD"
+permalink: /python/stdlib/python-built-in-functions.html
+categories: [python, stdlib, TDD, literate programming]
+tags: [built-in functions, unittest]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Preamble</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Methodology</a>
+<ul>
+<li><a href="#orgheadline4">Template</a></li>
+<li><a href="#orgheadline5">Necessary imports</a></li>
+<li><a href="#orgheadline6">Test suits</a></li>
+<li><a href="#orgheadline7">Test runner</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+In most cases the best approach to study how something works is to
+test its behavior in various circumstances. In a helicopter view it
+is a dissection or a scrutiny.
+</p>
+
+<p>
+The same approach for studying programming language has a plethora
+benefits and the most significant is that it take you chance to play
+with code. Of cause studying by playing is a most natural way of
+learning.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+At <a href="https://docs.python.org/3/library/functions.html">official web-site</a>.
+</p>
+
+<p>
+The Python interpreter has a number of functions and types built into
+it that are always available. They are listed here in alphabetical
+order.
+</p>
+<blockquote>
+<p>
+<b>Built-in Functions</b>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">abs()</td>
+<td class="org-left">dict()</td>
+<td class="org-left">help()</td>
+<td class="org-left">min()</td>
+<td class="org-left">setattr()</td>
+</tr>
+
+<tr>
+<td class="org-left">all()</td>
+<td class="org-left">dir()</td>
+<td class="org-left">hex()</td>
+<td class="org-left">next()</td>
+<td class="org-left">slice()</td>
+</tr>
+
+<tr>
+<td class="org-left">any()</td>
+<td class="org-left">divmod()</td>
+<td class="org-left">id()</td>
+<td class="org-left">object()</td>
+<td class="org-left">sorted()</td>
+</tr>
+
+<tr>
+<td class="org-left">ascii()</td>
+<td class="org-left">enumerate()</td>
+<td class="org-left">input()</td>
+<td class="org-left">oct()</td>
+<td class="org-left">staticmethod()</td>
+</tr>
+
+<tr>
+<td class="org-left">bin()</td>
+<td class="org-left">eval()</td>
+<td class="org-left">int()</td>
+<td class="org-left">open()</td>
+<td class="org-left">str()</td>
+</tr>
+
+<tr>
+<td class="org-left">bool()</td>
+<td class="org-left">exec()</td>
+<td class="org-left">isinstance()</td>
+<td class="org-left">ord()</td>
+<td class="org-left">sum()</td>
+</tr>
+
+<tr>
+<td class="org-left">bytearray()</td>
+<td class="org-left">filter()</td>
+<td class="org-left">issubclass()</td>
+<td class="org-left">pow()</td>
+<td class="org-left">super()</td>
+</tr>
+
+<tr>
+<td class="org-left">bytes()</td>
+<td class="org-left">float()</td>
+<td class="org-left">iter()</td>
+<td class="org-left">print()</td>
+<td class="org-left">tuple()</td>
+</tr>
+
+<tr>
+<td class="org-left">callable()</td>
+<td class="org-left">format()</td>
+<td class="org-left">len()</td>
+<td class="org-left">property()</td>
+<td class="org-left">type()</td>
+</tr>
+
+<tr>
+<td class="org-left">chr()</td>
+<td class="org-left">frozenset()</td>
+<td class="org-left">list()</td>
+<td class="org-left">range()</td>
+<td class="org-left">vars()</td>
+</tr>
+
+<tr>
+<td class="org-left">classmethod()</td>
+<td class="org-left">getattr()</td>
+<td class="org-left">locals()</td>
+<td class="org-left">repr()</td>
+<td class="org-left">zip()</td>
+</tr>
+
+<tr>
+<td class="org-left">compile()</td>
+<td class="org-left">globals()</td>
+<td class="org-left">map()</td>
+<td class="org-left">reversed()</td>
+<td class="org-left">__import__()</td>
+</tr>
+
+<tr>
+<td class="org-left">complex()</td>
+<td class="org-left">hasattr()</td>
+<td class="org-left">max()</td>
+<td class="org-left">round()</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">delattr()</td>
+<td class="org-left">hash()</td>
+<td class="org-left">memoryview()</td>
+<td class="org-left">set()</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Methodology</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+Seems like the best approach is to test each function and ensure how they work.
+</p>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Template</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+Lets create a mold for pouring by the test suits:
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #00cdcd;">"""Discover how they work by a coherent testing"""</span>
+<span style="color: #cd0000;">import</span> unittest
+
+
+<span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAbs</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_positive</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">abs</span>(4) == 4)
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_negative</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">abs</span>(-4) == -4)
+
+
+<span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAll</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_zero</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([0, 1]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_positive_numbers</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([1, 2, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_false</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">False</span>, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_None</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">None</span>, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_negative</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([-1, -2]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_strings</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">"String"</span>, <span style="color: #00cdcd;">"value"</span>]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_empty_string</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">""</span>, <span style="color: #00cdcd;">"Empty"</span>]))
+</pre>
+</div>
+
+
+<blockquote>
+<p>
+<b>Tip</b> Use <code>C-c C-v t</code> to generate <i>(tangle)</i> the test file
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Necessary imports</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+It's clear what you expected to test by means the <code>unittest</code> module:
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="orgsrcblock1"><span style="color: #cd0000;">import</span> unittest
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Test suits</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+Each test case class as a separate source code block with a
+particular name for substitution into template.
+</p>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">abs()</h4>
+<div class="outline-text-4" id="text-orgheadline9">
+<div class="org-src-container">
+
+<pre class="src src-python" id="orgsrcblock2"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAbs</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_positive</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">abs</span>(4) == 4)
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_negative</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">abs</span>(-4) == -4)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">all()</h4>
+<div class="outline-text-4" id="text-orgheadline10">
+<div class="org-src-container">
+
+<pre class="src src-python" id="orgsrcblock3"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAll</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_zero</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([0, 1]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_positive_numbers</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([1, 2, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_false</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">False</span>, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_single_element_is_None</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #0000ee;">None</span>, 3]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_negative</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([-1, -2]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_all_values_are_strings</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">"String"</span>, <span style="color: #00cdcd;">"value"</span>]))
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_one_value_is_empty_string</span>(<span style="color: #cd0000;">self</span>):
+        <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">all</span>([<span style="color: #00cdcd;">""</span>, <span style="color: #00cdcd;">"Empty"</span>]))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Test runner</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+Accustomed unittest as Python module:
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python -m unittest -v tests/test_built-in_functions.py
+</pre>
+</div>
+
+<pre class="example">
+test_negative (tests.test_built-in_functions.TestAbs) ... ok
+test_positive (tests.test_built-in_functions.TestAbs) ... ok
+test_all_values_are_negative (tests.test_built-in_functions.TestAll) ... ok
+test_all_values_are_positive_numbers (tests.test_built-in_functions.TestAll) ... ok
+test_all_values_are_strings (tests.test_built-in_functions.TestAll) ... ok
+test_one_value_is_empty_string (tests.test_built-in_functions.TestAll) ... ok
+test_one_value_is_zero (tests.test_built-in_functions.TestAll) ... ok
+test_single_element_is_None (tests.test_built-in_functions.TestAll) ... ok
+test_single_element_is_false (tests.test_built-in_functions.TestAll) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.001s
+
+OK
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+<p>
+Now it is totally clear how to compose tests for Python standard
+library testing in a literate programming style.
+</p>
+</div>
+</div>
