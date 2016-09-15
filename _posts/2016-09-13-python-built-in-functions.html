@@ -21,11 +21,22 @@ tags: [built-in functions, unittest]
 <ul>
 <li><a href="#orgheadline6">Template</a></li>
 <li><a href="#orgheadline7">Necessary imports</a></li>
-<li><a href="#orgheadline8">Test suits</a></li>
-<li><a href="#orgheadline9">Test runner</a></li>
+<li><a href="#orgheadline8">Test suits</a>
+<ul>
+<li><a href="#orgheadline9">abs()</a></li>
+<li><a href="#orgheadline10">all()</a></li>
+<li><a href="#orgheadline11">any()</a></li>
+<li><a href="#orgheadline12">ascii()</a></li>
+<li><a href="#orgheadline13">bin()</a></li>
+<li><a href="#orgheadline14">bool()</a></li>
+<li><a href="#orgheadline15">bytearray()</a></li>
+<li><a href="#orgheadline16">bytes()</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">Conclusion</a></li>
+<li><a href="#orgheadline17">Test runner</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline18">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -318,7 +329,8 @@ order.
 <h2 id="orgheadline5">Methodology</h2>
 <div class="outline-text-2" id="text-orgheadline5">
 <p>
-Seems like the best approach is to test each function and ensure how they work.
+Seems like the best approach is to test each function and ensure how
+they work.
 </p>
 </div>
 
@@ -333,6 +345,7 @@ Lets create a mold for pouring by the test suits:
 #+BEGIN_SRC python :noweb yes :tangle tests/test_built-in_functions.py
 """Discover how they work by a coherent testing"""
 &lt;&lt;import-header&gt;&gt;
+# two lines between partitions isolate classes by PEP8
 
 
 &lt;&lt;abs-test-suite&gt;&gt;
@@ -381,9 +394,9 @@ particular name for substitution into template.
 </p>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11">abs()</h4>
-<div class="outline-text-4" id="text-orgheadline11">
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">abs()</h4>
+<div class="outline-text-4" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock2"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAbs</span>(unittest.TestCase):
@@ -395,15 +408,15 @@ particular name for substitution into template.
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">abs</span>(-4) == -4)
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">abs</span>(<span style="color: #00cdcd;">'A'</span>))
+        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd00cd;">abs</span>(<span style="color: #00cdcd;">'A'</span>))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12">all()</h4>
-<div class="outline-text-4" id="text-orgheadline12">
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">all()</h4>
+<div class="outline-text-4" id="text-orgheadline10">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock3"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAll</span>(unittest.TestCase):
@@ -436,20 +449,20 @@ particular name for substitution into template.
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'l'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'low'</span>) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">all</span>(<span style="color: #00cdcd;">'at the'</span>))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_non_iter_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(11))
+        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd00cd;">all</span>(11))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">assertRaises(exception, callable, *args, **kwds)</span>
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_bool_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">all</span>(<span style="color: #0000ee;">True</span>))
+        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd00cd;">all</span>(<span style="color: #0000ee;">True</span>))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13">any()</h4>
-<div class="outline-text-4" id="text-orgheadline13">
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">any()</h4>
+<div class="outline-text-4" id="text-orgheadline11">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock4"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAny</span>(unittest.TestCase):
@@ -473,9 +486,9 @@ particular name for substitution into template.
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-4">
-<h4 id="orgheadline14">ascii()</h4>
-<div class="outline-text-4" id="text-orgheadline14">
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">ascii()</h4>
+<div class="outline-text-4" id="text-orgheadline12">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock5"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestAscii</span>(unittest.TestCase):
@@ -493,24 +506,24 @@ particular name for substitution into template.
         <span style="color: #cd0000;">self</span>.assertNotEqual(<span style="color: #cd00cd;">ascii</span>({<span style="color: #00cdcd;">"first"</span>: 1, <span style="color: #00cdcd;">"second"</span>: 2}),
                             <span style="color: #00cdcd;">'{"second": 2, "first": 1}'</span>)
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">tests below have a hidden caveat: it passes SOMETIMES</span>
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">due unpredicted dictionary sequence</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">tests below have a HIDDEN CAVEAT: it might pass SOMETIMES</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">due undefined dictionary sequence</span>
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_dict_convertation_single_quotes_ordered(self):</span>
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertNotEqual(ascii({"first": 1, "second": 2}),</span>
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#                         </span><span style="color: #ff0087;">"{'first': 1, 'second': 2}")</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_dict_convertation_single_quotes_ordered(self):</span>
+<span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertNotEqual(ascii({"first": 1, "second": 2}),</span>
+<span style="color: #ff0087;">#                         </span><span style="color: #ff0087;">"{'first': 1, 'second': 2}")</span>
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_dict_convertation_single_quotes_unordered(self):</span>
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertEqual(ascii({"first": 1, "second": 2}),</span>
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;">#                      </span><span style="color: #ff0087;">"{'second': 2, 'first': 1}")</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">def test_dict_convertation_single_quotes_unordered(self):</span>
+<span style="color: #ff0087;">#     </span><span style="color: #ff0087;">self.assertEqual(ascii({"first": 1, "second": 2}),</span>
+<span style="color: #ff0087;">#                      </span><span style="color: #ff0087;">"{'second': 2, 'first': 1}")</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15">bin()</h4>
-<div class="outline-text-4" id="text-orgheadline15">
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">bin()</h4>
+<div class="outline-text-4" id="text-orgheadline13">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock6"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestBin</span>(unittest.TestCase):
@@ -522,24 +535,24 @@ particular name for substitution into template.
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd00cd;">bin</span>(-16), <span style="color: #00cdcd;">'-0b10000'</span>)
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">bin</span>(<span style="color: #00cdcd;">"A"</span>))
+        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd00cd;">bin</span>(<span style="color: #00cdcd;">"A"</span>))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_float_as_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span> x: <span style="color: #cd00cd;">bin</span>(16.3))
+        <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd00cd;">bin</span>(16.3))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16">bool()</h4>
-<div class="outline-text-4" id="text-orgheadline16">
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">bool()</h4>
+<div class="outline-text-4" id="text-orgheadline14">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock7"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestBool</span>(unittest.TestCase):
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_numeric_argument</span>(<span style="color: #cd0000;">self</span>):
-        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">bool</span>(1) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">bool</span>(-2))
+        <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">bool</span>(1) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">bool</span>(-2) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">bool</span>(1.3))
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_zero_or_false_argument</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertFalse(<span style="color: #cd00cd;">bool</span>(0) <span style="color: #cd0000;">and</span> <span style="color: #cd00cd;">bool</span>(<span style="color: #0000ee;">False</span>))
@@ -547,38 +560,38 @@ particular name for substitution into template.
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">bool</span>(<span style="color: #00cdcd;">"Abc"</span>))
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_mixed_arguments</span>(<span style="color: #cd0000;">self</span>):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_mixed_arguments_list</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertTrue(<span style="color: #cd00cd;">bool</span>([<span style="color: #00cdcd;">"A"</span>, <span style="color: #0000ee;">False</span>]))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17">bytearray()</h4>
-<div class="outline-text-4" id="text-orgheadline17">
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15">bytearray()</h4>
+<div class="outline-text-4" id="text-orgheadline15">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock8"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestByteArray</span>(unittest.TestCase):
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">setUp</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.seq = <span style="color: #cd00cd;">bytearray</span>([0x13, 0x00, 0x00, 0x07, 0x08, 0x00])
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_iterable_of_bytes</span>(<span style="color: #cd0000;">self</span>):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_as_iterable_of_bytes</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(), 0)
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(), 8)
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_pop_the_last_item</span>(<span style="color: #cd0000;">self</span>):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_add_and_pop_item</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.seq.append(0x09)
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(), 9)
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_string_as_argument</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">TypeError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd0000;">self</span>.seq.append(<span style="color: #00cdcd;">'Foo'</span>))
-        <span style="color: #ff0087;"># </span><span style="color: #ff0087;">it's array of integers from zero to 255</span>
+        <span style="color: #ff0087;"># </span><span style="color: #ff0087;">it's should be an array of integers from zero to 255</span>
 
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_unsupported_value</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertRaises(<span style="color: #cdcd00;">ValueError</span>, <span style="color: #cd0000;">lambda</span>: <span style="color: #cd0000;">self</span>.seq.append(0x257))
 
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_arbitrary_variable</span>(<span style="color: #cd0000;">self</span>):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_arbitrary_array_member</span>(<span style="color: #cd0000;">self</span>):
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(1), 0)
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(1), 0)
         <span style="color: #cd0000;">self</span>.assertEqual(<span style="color: #cd0000;">self</span>.seq.pop(1), 7)
@@ -590,9 +603,9 @@ particular name for substitution into template.
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18">bytes()</h4>
-<div class="outline-text-4" id="text-orgheadline18">
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16">bytes()</h4>
+<div class="outline-text-4" id="text-orgheadline16">
 <div class="org-src-container">
 
 <pre class="src src-python" id="orgsrcblock9"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">TestBytes</span>(unittest.TestCase):
@@ -617,9 +630,10 @@ particular name for substitution into template.
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Test runner</h3>
-<div class="outline-text-3" id="text-orgheadline9">
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Test runner</h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <p>
 Accustomed unittest as Python module:
 </p>
@@ -643,9 +657,9 @@ OK
 </div>
 
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10">Conclusion</h2>
-<div class="outline-text-2" id="text-orgheadline10">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline18">
 <p>
 Now it is totally clear how to compose tests for Python standard
 library testing in a literate programming style.
