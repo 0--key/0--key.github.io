@@ -1,0 +1,353 @@
+---
+layout: post
+title: Python inside Emacs
+tagline: " emulate web-browser in parallel"
+permalink: /emacs/spynner-installation.html
+categories: [Emacs, Literate Programming]
+tags: [python3, emacs, spynner, installation, Ubuntu 14.04]
+---
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+From the <a href="https://github.com/makinacorpus/spynner">official repository</a>
+</p>
+<blockquote>
+<p>
+Spynner is a stateful programmatic web browser module for Python. It is based upon PyQT and WebKit.
+It supports Javascript, AJAX, and every other technology that !WebKit is able to handle (Flash, SVG, &#x2026;).
+Spynner takes advantage of JQuery. a powerful Javascript library that makes the interaction with pages
+and event simulation really easy.
+</p>
+
+<p>
+Using Spynner you would able to simulate a web browser with no GUI (though a browsing window can be
+opened for debugging purposes), so it may be used to implement crawlers or acceptance testing tools.
+</p>
+
+<p>
+See usage <a href="https://github.com/makinacorpus/spynner/tree/master/src/spynner/tests/spynner.rst">here</a>
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Installation</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+</div><div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Dependencies</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+</div><div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Activate your virtual environment</h4>
+<div class="outline-text-4" id="text-orgheadline2">
+<p>
+The main goal of this article is to install spynner with Python3.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Check up current Python version:</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<div class="org-src-container">
+
+<pre class="src src-sh">python --version
+</pre>
+</div>
+
+<pre class="example">
+Python 3.4.3
+</pre>
+
+<p>
+Now we'll install <code>spynner</code> and its dependencies into your <code>venv</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">SIP</h4>
+<div class="outline-text-4" id="text-orgheadline4">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> ../soft/
+wget https://sourceforge.net/projects/pyqt/files/sip/sip-4.18.1/sip-4.18.1.tar.gz
+tar -xvf sip-4.18.1.tar.gz
+<span style="color: #cd00cd;">cd</span> sip-4.18.1/
+python configure.py
+make
+make install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">PyQt</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> ../soft/
+wget http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.4/PyQt-x11-gpl-4.11.4.tar.gz
+tar -xvf PyQt-x11-gpl-4.11.4.tar.gz
+<span style="color: #cd00cd;">cd</span> PyQt-x11-gpl-4.11.4/
+python configure-ng.py
+make
+make install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Test it up</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> PyQt4.QtGui <span style="color: #cd0000;">import</span> QImage
+</pre>
+</div>
+
+<p>
+If you successfully evaluate [by <code>C-c C-c=] =import</code> above -
+take my congratulations:
+<b>PyQt4 was istalled</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Build and install custom <code>autopy for python3</code></h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone git://github.com/msanders/autopy.git
+<span style="color: #cd00cd;">cd</span> autopy/
+python setup.py build
+python setup.py install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Pyside</h4>
+<div class="outline-text-4" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt-get install cmake
+pip install pyside
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Libxml2?</h4>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Spynner installation</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+</div><div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">Clone the repository</h4>
+<div class="outline-text-4" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> /usr/local/share/DVCS/
+git clone https://github.com/makinacorpus/spynner.git
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">Switch on py3 branch</h4>
+<div class="outline-text-4" id="text-orgheadline12">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> /usr/local/share/DVCS/spynner
+git checkout py3
+git branch -a
+</pre>
+</div>
+
+<pre class="example">
+Already on 'py3'
+M       examples/webkit_methods.py
+M       run_tests.sh
+Your branch is up-to-date with 'origin/py3'.
+  master
+* py3
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/py3
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Review the content</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> ../spynner
+ls
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">bootstrap.py</td>
+</tr>
+
+<tr>
+<td class="org-left">b.sh</td>
+</tr>
+
+<tr>
+<td class="org-left">build</td>
+</tr>
+
+<tr>
+<td class="org-left">buildout.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">CHANGES.rst</td>
+</tr>
+
+<tr>
+<td class="org-left">dist</td>
+</tr>
+
+<tr>
+<td class="org-left">examples</td>
+</tr>
+
+<tr>
+<td class="org-left">MANIFEST.in</td>
+</tr>
+
+<tr>
+<td class="org-left">minitage-buildout.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">minitage.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">minitage-test.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">README.rst</td>
+</tr>
+
+<tr>
+<td class="org-left">run_tests.sh</td>
+</tr>
+
+<tr>
+<td class="org-left">setup.cfg</td>
+</tr>
+
+<tr>
+<td class="org-left">setup.py</td>
+</tr>
+
+<tr>
+<td class="org-left">src</td>
+</tr>
+
+<tr>
+<td class="org-left">test</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">Install spynner</h4>
+<div class="outline-text-4" id="text-orgheadline14">
+<div class="org-src-container">
+
+<pre class="src src-sh">python setup.py install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15">Test spynner in general</h4>
+<div class="outline-text-4" id="text-orgheadline15">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">import</span> spynner
+<span style="color: #cd0000;">import</span> pyquery
+
+<span style="color: #ff87ff;">browser</span> = spynner.Browser(debug_level=spynner.DEBUG)
+browser.create_webview()
+browser.show()
+spynner.Browser(
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16">Create the executable file</h4>
+<div class="outline-text-4" id="text-orgheadline16">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> time <span style="color: #cd0000;">import</span> sleep
+<span style="color: #cd0000;">from</span> spynner <span style="color: #cd0000;">import</span> browser
+<span style="color: #ff87ff;">br</span> = browser.Browser(
+<span style="color: #ff0087;">#    </span><span style="color: #ff0087;">debug_level=4</span>
+)
+br.load(<span style="color: #00cdcd;">'http://pypi.python.org/pypi'</span>)
+br.create_webview()
+br.show()
+
+br.wk_fill(<span style="color: #00cdcd;">'input[id=term]'</span>, <span style="color: #00cdcd;">'spynner'</span>)
+br.wk_click(<span style="color: #00cdcd;">"input[id=submit]"</span>, wait_load=<span style="color: #0000ee;">True</span>, timeout=5)
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Noticed the search"</span>)
+sleep(3)
+
+<span style="color: #ff87ff;">anchors</span> = br.webframe.findAllElements(<span style="color: #00cdcd;">'#menu ul.level-two a'</span>)
+<span style="color: #ff87ff;">anchor</span> = [a <span style="color: #cd0000;">for</span> a <span style="color: #cd0000;">in</span> anchors <span style="color: #cd0000;">if</span> <span style="color: #00cdcd;">'Browse'</span> <span style="color: #cd0000;">in</span> a.toPlainText()][0]
+br.wk_click_element_link(anchor, timeout=10)
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Noticed the click on the browse"</span>)
+sleep(3)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-4">
+<h4 id="orgheadline17">Run script without X11</h4>
+<div class="outline-text-4" id="text-orgheadline17">
+<div class="org-src-container">
+
+<pre class="src src-sh">xvfb-run python spynner/myscript.py
+</pre>
+</div>
+
+<pre class="example">
+Noticed the search
+Noticed the click on the browse
+</pre>
+</div>
+</div>
+</div>
+</div>
