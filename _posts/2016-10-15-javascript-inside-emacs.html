@@ -1,0 +1,88 @@
+---
+layout: post
+title: JavaScript inside Emacs
+tagline: " do what you want in the literal manner"
+permalink: /emacs/javascript-intro.html
+categories: [emacs, javascript, nodejs]
+tags: [Emacs, Literate Programming, JavaScript]
+---
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+First of all lets check up does NodeJS already installed on our host:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">nodejs --version
+</pre>
+</div>
+
+<pre class="example">
+v0.10.25
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Activation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+In order to use JS inside Babel you'll need to activate its support. Find
+in your <code>.emacs</code> or <code>.init</code> strings with Babel's supported languages:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (emacs-lisp . t)
+   (shell . t)
+   (js . t)
+   (ditaa . t)
+   (plantuml . t)
+   (sqlite . t)
+   ))
+</pre>
+</div>
+
+<p>
+and ensure that JS is already included. Otherwise you should add the necessary
+string and evaluate the region by marking it <code>C-SPC</code> and execution <code>M-x eval-region</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Testing</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+Try to copy and paste code snippet below into your <code>org</code> file and evaluate it
+by yourself. Put the pointer between <code>#+BEGIN_SRC</code> and <code>#+END_SRC</code>
+and type <code>C-c C-c</code> to get results.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC js :cmd "nodejs"</span>
+  console.log(<span style="color: #00cdcd;">"Hello World!"</span>);
+<span style="color: #ff0087;">#+END_SRC</span>
+
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #b2b2b2;">: Hello World!</span>
+<span style="color: #b2b2b2;">: undefined</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<p>
+<b>Have a fun</b>
+</p>
+</div>
+</div>
