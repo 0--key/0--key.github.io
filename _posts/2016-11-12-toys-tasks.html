@@ -11,7 +11,7 @@ tags: [coding, algorithms]
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">#1</a></li>
-<li><a href="#orgheadline2">#2</a>
+<li><a href="#orgheadline2">#2 Last digit of a large number</a>
 <ul>
 <li><a href="#orgheadline3">Description</a></li>
 <li><a href="#orgheadline4">Code</a></li>
@@ -35,18 +35,18 @@ We will consider a, e, i, o, and u as vowels for this Kata.
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #ff0000; font-weight: bold; font-style: italic;">getCount</span>(inputStr):
-<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #eedd82; text-decoration: underline;">num_vowels</span> = 0
-<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #8b814c; font-style: italic;"># </span><span style="color: #8b814c; font-style: italic;">your code here</span>
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">getCount</span>(inputStr):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">num_vowels</span> = 0
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff1493;"># </span><span style="color: #ff1493;">your code here</span>
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">for</span> letter <span style="color: #ff0000;">in</span> inputStr:
-        <span style="color: #eedd82; text-decoration: underline;">list_of_vowels</span> = [<span style="color: #ffa500; font-style: italic;">'a'</span>, <span style="color: #ffa500; font-style: italic;">'e'</span>, <span style="color: #ffa500; font-style: italic;">'i'</span>, <span style="color: #ffa500; font-style: italic;">'o'</span>, <span style="color: #ffa500; font-style: italic;">'u'</span>]
+        <span style="color: #ee82ee;">list_of_vowels</span> = [<span style="color: #00ffff;">'a'</span>, <span style="color: #00ffff;">'e'</span>, <span style="color: #00ffff;">'i'</span>, <span style="color: #00ffff;">'o'</span>, <span style="color: #00ffff;">'u'</span>]
         <span style="color: #ff0000;">if</span> letter <span style="color: #ff0000;">in</span> list_of_vowels:
-            <span style="color: #eedd82; text-decoration: underline;">num_vowels</span> += 1
-            <span style="color: #8b814c; font-style: italic;">#</span><span style="color: #8b814c; font-style: italic;">print(letter)</span>
-            <span style="color: #8b814c; font-style: italic;">#</span><span style="color: #8b814c; font-style: italic;">print(num_vowels)</span>
+            <span style="color: #ee82ee;">num_vowels</span> += 1
+            <span style="color: #ff1493;">#</span><span style="color: #ff1493;">print(letter)</span>
+            <span style="color: #ff1493;">#</span><span style="color: #ff1493;">print(num_vowels)</span>
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> num_vowels
 
-<span style="color: #eedd82; text-decoration: underline;">input_string</span> = <span style="color: #ffa500; font-style: italic;">'John the dully boy write this book'</span>
+<span style="color: #ee82ee;">input_string</span> = <span style="color: #00ffff;">'John the dully boy write this book'</span>
 
 <span style="color: #ff0000;">print</span> getCount(input_string)
 <span style="color: #ff0000;">assert</span>(getCount(input_string) == 9)
@@ -57,20 +57,250 @@ We will consider a, e, i, o, and u as vowels for this Kata.
 
 
 <div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">#2</h2>
+<h2 id="orgheadline2">#2 Last digit of a large number</h2>
 <div class="outline-text-2" id="text-orgheadline2">
 </div><div id="outline-container-orgheadline3" class="outline-3">
 <h3 id="orgheadline3">Description</h3>
 <div class="outline-text-3" id="text-orgheadline3">
 <p>
-<i>toys</i>
+Define a function
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">last_digit</span>(n1, n2):
+<span style="color: #00ff00; background-color: #292929;"> </span>  <span style="color: #ff0000;">return</span>
+</pre>
+</div>
+
+<p>
+that takes in two numbers a and b and returns the last decimal digit of a^b. Note that a and b may be very large!
+</p>
+
+<p>
+For example, the last decimal digit of 9^7 is 9, since 9^7 = 4782969. The last decimal digit of (2^200)^(2^300), which has over 10^92 decimal digits, is 6.
+</p>
+
+<p>
+The inputs to your function will always be non-negative integers.
+Examples
+</p>
+
+<p>
+last_digit(4, 1)                # returns 4
+last_digit(4, 2)                # returns 6
+last_digit(9, 7)                # returns 9
+last_digit(10, 10 <b>* 10)        # returns 0
+last_digit(2 *</b> 200, 2 ** 300)  # returns 6
+</p>
+
+<p>
+Remarks
+JavaScript
+</p>
+
+<p>
+Since JavaScript doesn't have native arbitrary large integers, your arguments are going to be strings representing non-negative integers, e.g.
+</p>
+
+<p>
+lastDigit("10", "10000000000");
+</p>
+
+<p>
+The kata is still as hard as the variants for Haskell or Python, don't worry.
 </p>
 </div>
 </div>
 
 <div id="outline-container-orgheadline4" class="outline-3">
 <h3 id="orgheadline4">Code</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Visualise the matrix of number's orders</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">simple_array</span>():
+<span style="color: #00ff00; background-color: #292929;"> </span><span style="color: #ee82ee;">l</span> = []
+<span style="color: #00ff00; background-color: #292929;"> </span><span style="color: #ff0000;">for</span> i <span style="color: #ff0000;">in</span> <span style="color: #ff00ff;">range</span>(10):
+<span style="color: #00ff00; background-color: #292929;"> </span> l.append([i] + [<span style="color: #ff00ff;">str</span>(i**j)[-1] <span style="color: #ff0000;">for</span> j <span style="color: #ff0000;">in</span> <span style="color: #ff00ff;">range</span>(10)])
+<span style="color: #00ff00; background-color: #292929;"> </span><span style="color: #ff0000;">return</span> l
+
+<span style="color: #ff0000;">for</span> i <span style="color: #ff0000;">in</span> simple_array():
+<span style="color: #00ff00; background-color: #292929;"> </span><span style="color: #ff0000;">print</span>(i)
+</pre>
 </div>
+
+<pre class="example">
+[0, '1', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+[1, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+[2, '1', '2', '4', '8', '6', '2', '4', '8', '6', '2']
+[3, '1', '3', '9', '7', '1', '3', '9', '7', '1', '3']
+[4, '1', '4', '6', '4', '6', '4', '6', '4', '6', '4']
+[5, '1', '5', '5', '5', '5', '5', '5', '5', '5', '5']
+[6, '1', '6', '6', '6', '6', '6', '6', '6', '6', '6']
+[7, '1', '7', '9', '3', '1', '7', '9', '3', '1', '7']
+[8, '1', '8', '4', '2', '6', '8', '4', '2', '6', '8']
+[9, '1', '9', '1', '9', '1', '9', '1', '9', '1', '9']
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Seeking for the sequences</h4>
+<div class="outline-text-4" id="text-orgheadline8">
+<ul class="org-ul">
+<li>Static are 0, 1, 5, 6
+<ul class="org-ul">
+<li>0 as an order determiner has deviation from general
+rule</li>
+</ul></li>
+<li>Periodic are 2, 3, 4, 7, 8, 9
+<ul class="org-ul">
+<li>2: [2, 4, 6, 8]</li>
+<li>3: [3, 9, 7, 1]</li>
+<li>4: [4, 6, 4]</li>
+<li>7: [7, 9, 3, 1]</li>
+<li>8: [8, 4, 2, 6]</li>
+<li>9: [9, 1]</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Entire meta-data</h4>
+<div class="outline-text-4" id="text-orgheadline9">
+<p>
+For simplification purposes lets create a full set of rules.
+</p>
+<ul class="org-ul">
+<li>0: [0, 0]</li>
+<li>1: [1, 1]</li>
+<li>2: [2, 4, 6, 8]</li>
+<li>3: [3, 9, 7, 1]</li>
+<li>4: [4, 6, 4]</li>
+<li>5: [5, 5]</li>
+<li>6: [6, 6]</li>
+<li>7: [7, 9, 3, 1]</li>
+<li>8: [8, 4, 2, 6]</li>
+<li>9: [9, 1]</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">Predict sequence</h4>
+<div class="outline-text-4" id="text-orgheadline10">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq0</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> 0
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq1</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> 1
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq2</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">if</span> num &gt; 0:
+        <span style="color: #ee82ee;">s</span> = [2, 4, 8, 6]
+        <span style="color: #ff0000;">if</span> num &lt; 5:
+            <span style="color: #ff0000;">return</span> s[num-1]
+        <span style="color: #ff0000;">else</span>:
+            <span style="color: #ff0000;">return</span> s[num % 4 - 1]
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">else</span>:
+        <span style="color: #ff0000;">return</span> 1
+
+<span style="color: #ff0000;">assert</span>(seq1(22) == 1)
+<span style="color: #ff0000;">assert</span>(seq0(100) == 0)
+<span style="color: #ff0000;">assert</span>(seq2(2) == 4)
+<span style="color: #ff0000;">assert</span>(seq2(4) == 6)
+<span style="color: #ff0000;">assert</span>(seq2(5) == 2)
+<span style="color: #ff0000;">assert</span>(seq2(10) == 4)
+<span style="color: #ff0000;">print</span>(<span style="color: #00ffff;">'Tests passed'</span>)
+</pre>
+</div>
+
+<pre class="example">
+Tests passed
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">Function generator</h4>
+<div class="outline-text-4" id="text-orgheadline11">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">first</span>(n):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> n + 1
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">second</span>(n):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> n + 2
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">function_generator</span>(k, n):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">list_of_functions</span> = [first(n), second(n)]
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> list_of_functions[k]
+
+<span style="color: #ff0000;">print</span>(function_generator(0, 10))
+</pre>
+</div>
+
+<pre class="example">
+11
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">Ties these snippets together</h4>
+<div class="outline-text-4" id="text-orgheadline12">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq0</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> 0
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq1</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> 1
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">seq2</span>(num):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">if</span> num &gt; 0:
+        <span style="color: #ee82ee;">s</span> = [2, 4, 8, 6]
+        <span style="color: #ff0000;">if</span> num &lt; 5:
+            <span style="color: #ff0000;">return</span> s[num-1]
+        <span style="color: #ff0000;">else</span>:
+            <span style="color: #ff0000;">return</span> s[num % 4 - 1]
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">else</span>:
+        <span style="color: #ff0000;">return</span> 1
+
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">func_gen</span>(k, n):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">list_of_functions</span> = [seq0(n), seq1(n), seq2(n)]
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> list_of_functions[k]
+
+<span style="color: #ff0000;">assert</span>(func_gen(2, 10) == 4)
+<span style="color: #ff0000;">print</span>(<span style="color: #00ffff;">'It works!'</span>)
+</pre>
+</div>
+
+<pre class="example">
+It works!
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Further development</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+<p>
+Obvious that <code>seqN()</code> for other numbers should be similar.
+Following <i>DRY</i> principle lets take an attempt to cope with it
+and &#x2026;
+</p>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-orgheadline5" class="outline-3">
 <h3 id="orgheadline5">TestSuite</h3>
@@ -80,11 +310,11 @@ We will consider a, e, i, o, and u as vowels for this Kata.
 <pre class="src src-python"><span style="color: #ff0000;">import</span> unittest
 <span style="color: #ff0000;">from</span> .. toy_tasks <span style="color: #ff0000;">import</span> order
 
-<span style="color: #ff0000;">class</span> <span style="color: #8470ff; font-style: italic;">TestHiddenOrder</span>(unittest.TestCase):
+<span style="color: #ff0000;">class</span> <span style="color: #ffff00;">TestHiddenOrder</span>(unittest.TestCase):
 
-<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">def</span> <span style="color: #ff0000; font-weight: bold; font-style: italic;">test_simple_behaviour</span>(<span style="color: #ff0000;">self</span>):
-        <span style="color: #ff0000;">self</span>.assertEqual(order(<span style="color: #ffa500; font-style: italic;">"is2 Thi1s T4est 3a"</span>),
-                         <span style="color: #ffa500; font-style: italic;">"Thi1s is2 3a T4est"</span>)
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">def</span> <span style="color: #a020f0;">test_simple_behaviour</span>(<span style="color: #ff0000;">self</span>):
+        <span style="color: #ff0000;">self</span>.assertEqual(order(<span style="color: #00ffff;">"is2 Thi1s T4est 3a"</span>),
+                         <span style="color: #00ffff;">"Thi1s is2 3a T4est"</span>)
 </pre>
 </div>
 </div>
@@ -101,23 +331,25 @@ We will consider a, e, i, o, and u as vowels for this Kata.
 
 <pre class="example">
 Traceback (most recent call last):
-  File "/usr/lib/python2.7/runpy.py", line 162, in _run_module_as_main
-    "__main__", fname, loader, pkg_name)
-  File "/usr/lib/python2.7/runpy.py", line 72, in _run_code
-    exec code in run_globals
-  File "/usr/lib/python2.7/unittest/__main__.py", line 12, in &lt;module&gt;
+  File "/usr/lib/python3.4/runpy.py", line 170, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/usr/lib/python3.4/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/usr/lib/python3.4/unittest/__main__.py", line 18, in &lt;module&gt;
     main(module=None)
-  File "/usr/lib/python2.7/unittest/main.py", line 94, in __init__
+  File "/usr/lib/python3.4/unittest/main.py", line 92, in __init__
     self.parseArgs(argv)
-  File "/usr/lib/python2.7/unittest/main.py", line 149, in parseArgs
+  File "/usr/lib/python3.4/unittest/main.py", line 139, in parseArgs
     self.createTests()
-  File "/usr/lib/python2.7/unittest/main.py", line 158, in createTests
+  File "/usr/lib/python3.4/unittest/main.py", line 146, in createTests
     self.module)
-  File "/usr/lib/python2.7/unittest/loader.py", line 130, in loadTestsFromNames
+  File "/usr/lib/python3.4/unittest/loader.py", line 146, in loadTestsFromNames
     suites = [self.loadTestsFromName(name, module) for name in names]
-  File "/usr/lib/python2.7/unittest/loader.py", line 91, in loadTestsFromName
+  File "/usr/lib/python3.4/unittest/loader.py", line 146, in &lt;listcomp&gt;
+    suites = [self.loadTestsFromName(name, module) for name in names]
+  File "/usr/lib/python3.4/unittest/loader.py", line 105, in loadTestsFromName
     module = __import__('.'.join(parts_copy))
-ImportError: Import by filename is not supported.
+ImportError: No module named 'tests/test_toy_samples'
 </pre>
 </div>
 </div>
