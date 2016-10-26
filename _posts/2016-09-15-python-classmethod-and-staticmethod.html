@@ -1,0 +1,222 @@
+---
+layout: post
+title: Python
+tagline: " staticmethod and classmethod core features brief overview"
+permalink: /python3/stdlib/classmethod-and-staticmethod-overview.html
+categories: [python3, stdlib, literate programming]
+tags: [built-in functions, staticmethod, classmethod]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Preamble</a></li>
+<li><a href="#orgheadline2">Documentation</a></li>
+<li><a href="#orgheadline3">Fixture</a>
+<ul>
+<li><a href="#orgheadline4">Data model</a></li>
+<li><a href="#orgheadline5">Mockup objects creation</a></li>
+<li><a href="#orgheadline6">Test the classes' properties</a></li>
+<li><a href="#orgheadline7">Result analysis</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">Conclusion</a>
+<ul>
+<li><a href="#orgheadline9">Both <code>staticmethod</code> and <code>classmethod</code></a></li>
+<li><a href="#orgheadline10"><code>staticmethod</code></a></li>
+<li><a href="#orgheadline11"><code>classmethod</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<blockquote>
+<p>
+Sometimes, programs need to process data associated with classes instead of instances.
+Consider keeping track of the number of instances created from a class, or maintaining
+a list of all of a class’s instances that are currently in memory. This type of information
+and its processing are associated with the class rather than its instances. That is, the
+information is usually stored on the class itself and processed in the absence of any
+instance.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Documentation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+At <a href="https://docs.python.org/3/library/functions.html">official web-site</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Fixture</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Data model</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+In order to illustrate the core idea of these built-in functions lets
+create casual but colorful code snippet in accordion with OOP concept:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">Vehicle</span>:
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""Naturally it is a vehicle"""</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">counter</span> = 0
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">__init__</span>(<span style="color: #cd0000;">self</span>, **kwargs):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""by default all cars are black"""</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">Vehicle.counter</span> += 1  <span style="color: #ff0087;"># </span><span style="color: #ff0087;">increments the CLASS variable</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">self.counter += 1 - increments the PARTICULAR ITEM VARIABLE</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff0087;"># </span><span style="color: #ff0087;">the variables below are instance variables</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">if</span> kwargs:
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">self</span>.color = kwargs[<span style="color: #00cdcd;">'color'</span>]
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">else</span>:
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">self</span>.color = <span style="color: #00cdcd;">'black'</span>
+
+
+<span style="color: #cd0000;">class</span> <span style="color: #cdcd00;">Car</span>(Vehicle):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""Naturally it is a car properties definition"""</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">car_counter</span> = 0  <span style="color: #ff0087;"># </span><span style="color: #ff0087;">it's a class variable</span>
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cdcd00;">@classmethod</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">get_num_vehicles</span>(cls):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> cls.counter
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cdcd00;">@staticmethod</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">inc_counter</span>():
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">Car.car_counter</span> += 1
+
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">get_num_cars</span>():
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> Car.car_counter
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Mockup objects creation</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">my_car</span> = Car(color=<span style="color: #00cdcd;">'red'</span>)
+<span style="color: #ff87ff;">alice_car</span> = Car(color=<span style="color: #00cdcd;">'white'</span>)
+<span style="color: #ff87ff;">bob_car</span> = Car()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Test the classes' properties</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Number of vehicles = %s"</span> % Car.get_num_vehicles()) <span style="color: #ff0087;"># </span><span style="color: #ff0087;">accessed from classmethod</span>
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Parent class counter = %s"</span> % Vehicle.counter) <span style="color: #ff0087;"># </span><span style="color: #ff0087;">accessed as a class variable</span>
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"%s cars exists."</span> % (Car.car_counter))
+</pre>
+</div>
+
+<pre class="example">
+Number of vehicles = 3
+Parent class counter = 3
+0 cars exists.
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Result analysis</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+Obviously that we've created three <code>Car</code> objects but our code identified and counted them as
+<code>Vehicles</code>. Lets try to increment the particular <code>car_counter</code>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">Car.inc_counter()
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Now there is only %s car there"</span> % Car.car_counter)
+<span style="color: #ff87ff;">Car.car_counter</span> += 2 <span style="color: #ff0087;"># </span><span style="color: #ff0087;">evaluate the counter directly</span>
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Now there are %s cars there"</span> % Car.car_counter)
+</pre>
+</div>
+
+<pre class="example">
+Now there is only 1 car there
+&gt;&gt;&gt; Now there are 3 cars there
+</pre>
+
+<blockquote>
+<p>
+In Python 3.*, we need not declare such methods as static if they will be called
+through a class only, but we must do so in order to call them through an instance.
+</p>
+</blockquote>
+<div class="org-src-container">
+
+<pre class="src src-python">my_car.inc_counter()
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"There are %s cars"</span> % Car.get_num_cars())
+</pre>
+</div>
+
+<pre class="example">
+There are 4 cars
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Both <code>staticmethod</code> and <code>classmethod</code></h3>
+<div class="outline-text-3" id="text-orgheadline9">
+</div><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">can be called without the instance</h4>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><code>self</code> instance argument not passes to them</h4>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><code>staticmethod</code></h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<blockquote>
+<p>
+simple functions with no self argument that are nested in a class and are designed to work on class attributes
+instead of instance attributes. Static methods never receive an automatic self argument,
+whether called through a class or an instance. They usually keep track of information
+that spans all instances, rather than providing behavior for instances.    
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><code>classmethod</code></h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<blockquote>
+<p>
+methods of a class that are passed a class object in their first argument instead of an
+instance, regardless of whether they are called through an instance or a class. Such
+methods can access class data through their self class argument even if called through
+an instance. Normal methods (now known in formal circles as instance methods) still
+receive a subject instance when called; static and class methods do not.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
