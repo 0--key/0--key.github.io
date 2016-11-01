@@ -1,0 +1,40 @@
+---
+layout: post
+title: Treat Python by Elpy 
+tagline: " dissection with a pure joy"
+permalink: /emacs/tips-and-tricks/Elpy/how-to-pass-region-to-shell.html
+categories: [python, emacs, Elpy, shell]
+tags: [Emacs, tips and tricks]
+---
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+In many cases it might be extremely convenient to pass some particular
+code snippet (function, class or even entire file content) to Python
+shell and Elpy <a href="https://elpy.readthedocs.io/en/latest/ide.html#command-elpy-shell-send-region-or-buffer">allows</a> you to do this out from the box. <b>But</b> python-mode
+<a href="https://www.emacswiki.org/emacs/IndentingPython">configured by default</a> to use <span class="underline">mixed</span> TAB and SPACE indentation and if you're
+trying send region you're got this error:
+<code>TabError: inconsistent use of tabs and spaces in indentation</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Solution</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+Just try to customize <code>indent-tabs-mode</code> and set it up to <code>nil</code>
+It's possible by:
+<code>C-h v indent-tabs-mode</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Conclusion</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+After that customization feel free to mark the region which you want to
+dissect in the python shell and pass it there by typing <code>C-c C-c</code>
+</p>
+</div>
+</div>
