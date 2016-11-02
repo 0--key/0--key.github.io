@@ -1,10 +1,10 @@
 ---
 layout: post
-title: SQLite3
-tagline: " Dynamic typing and Python lists"
+title: SQLite3 dynamic typing
+tagline: " and Python lists"
 permalink: /sqlite3/data_types.html
-categories: [org-mode, Python, SQLite3, lists]
-tags: [tutorial, samples, data types]
+categories: [literate programming, org-mode, Python, SQLite3, lists]
+tags: [tutorial, samples, data types, emacs, babel]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -94,12 +94,12 @@ The main <a href="https://www.sqlite.org/datatype3.html">article</a> about data 
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">DROP</span> <span style="color: #87d7ff;">TABLE</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">IF</span> <span style="color: #87d7ff;">EXISTS</span> customers;
-<span style="color: #87d7ff;">CREATE</span> <span style="color: #87d7ff;">TABLE</span> IF <span style="color: #87d7ff;">NOT</span> <span style="color: #87d7ff;">EXISTS</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">customers</span>(first_name TEXT, last_name TEXT, age <span style="color: #87ff87; font-size: 90%; font-weight: bold;">INT</span>);
+<pre class="src src-sqlite"><span style="color: #cd0000;">DROP</span> <span style="color: #cd0000;">TABLE</span> <span style="color: #af00ff;">IF</span> <span style="color: #cd0000;">EXISTS</span> customers;
+<span style="color: #cd0000;">CREATE</span> <span style="color: #cd0000;">TABLE</span> IF <span style="color: #cd0000;">NOT</span> <span style="color: #cd0000;">EXISTS</span> <span style="color: #af00ff;">customers</span>(first_name TEXT, last_name TEXT, age <span style="color: #cdcd00;">INT</span>);
 .mode csv
 .import $orgtable customers
-<span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
-<span style="color: #d7afaf; font-style: italic;">-- DROP TABLE customers; -- sometimes it is necessary</span>
+<span style="color: #cd0000;">SELECT</span> * <span style="color: #cd0000;">FROM</span> customers;
+<span style="color: #ff0087;">-- DROP TABLE customers; -- sometimes it is necessary</span>
 </pre>
 </div>
 
@@ -147,8 +147,8 @@ Perfect! Now take an attempt to insert the row with wrong data type.
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">INSERT</span> <span style="color: #87d7ff;">INTO</span> customers <span style="color: #87d7ff;">VALUES</span>(<span style="color: #d7af87; font-style: italic;">'Phil'</span>, <span style="color: #d7af87; font-style: italic;">'Collins'</span>, <span style="color: #d7af87; font-style: italic;">'ABBA'</span>);
-<span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
+<pre class="src src-sqlite"><span style="color: #cd0000;">INSERT</span> <span style="color: #cd0000;">INTO</span> customers <span style="color: #cd0000;">VALUES</span>(<span style="color: #00cdcd;">'Phil'</span>, <span style="color: #00cdcd;">'Collins'</span>, <span style="color: #00cdcd;">'ABBA'</span>);
+<span style="color: #cd0000;">SELECT</span> * <span style="color: #cd0000;">FROM</span> customers;
 </pre>
 </div>
 
@@ -198,7 +198,7 @@ Perfect! Now take an attempt to insert the row with wrong data type.
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> typeof(age) <span style="color: #87d7ff;">FROM</span> customers;
+<pre class="src src-sqlite"><span style="color: #cd0000;">SELECT</span> typeof(age) <span style="color: #cd0000;">FROM</span> customers;
 </pre>
 </div>
 
@@ -246,42 +246,42 @@ In SQLite, the datatype of a value is associated with the value itself, not with
 <div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
+<pre class="src src-python"><span style="color: #cd0000;">import</span> sqlite3
 
-<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'data_types.db'</span>)
-<span style="color: #87ffd7;">c</span> = conn.cursor()
-c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM customers'</span>)
-<span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
-<span style="color: #87d7ff;">print</span>(num_rows)
-<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">conn.close()</span>
+<span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'data_types.db'</span>)
+<span style="color: #ff87ff;">c</span> = conn.cursor()
+c.execute(<span style="color: #00cdcd;">'SELECT COUNT(*) FROM customers'</span>)
+<span style="color: #ff87ff;">num_rows</span> = c.fetchone()[0]
+<span style="color: #cd0000;">print</span>(num_rows)
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">conn.close()</span>
 </pre>
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726ff60&gt;
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7233220&gt;
 &gt;&gt;&gt; 4
 </pre>
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #87ffd7;">sample_list</span> = [<span style="color: #d7af87; font-style: italic;">'This'</span>, <span style="color: #d7af87; font-style: italic;">'is'</span>, <span style="color: #d7af87; font-style: italic;">'a'</span>, <span style="color: #d7af87; font-style: italic;">'sample'</span>, <span style="color: #d7af87; font-style: italic;">'list'</span>]
-c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO customers VALUES(?, ?, ?)'</span>, (<span style="color: #d7af87; font-style: italic;">'Captain'</span>, <span style="color: #d7af87; font-style: italic;">'Ahab'</span>, <span style="color: #5f87af;">repr</span>(sample_list)))
+<pre class="src src-python"><span style="color: #ff87ff;">sample_list</span> = [<span style="color: #00cdcd;">'This'</span>, <span style="color: #00cdcd;">'is'</span>, <span style="color: #00cdcd;">'a'</span>, <span style="color: #00cdcd;">'sample'</span>, <span style="color: #00cdcd;">'list'</span>]
+c.execute(<span style="color: #00cdcd;">'INSERT INTO customers VALUES(?, ?, ?)'</span>, (<span style="color: #00cdcd;">'Captain'</span>, <span style="color: #00cdcd;">'Ahab'</span>, <span style="color: #cd00cd;">repr</span>(sample_list)))
 conn.commit()
-c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM customers'</span>)
-<span style="color: #87ffd7;">result</span> = c.fetchall()
-<span style="color: #87d7ff;">print</span>(result)
+c.execute(<span style="color: #00cdcd;">'SELECT * FROM customers'</span>)
+<span style="color: #ff87ff;">result</span> = c.fetchall()
+<span style="color: #cd0000;">print</span>(result)
 </pre>
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb726ff60&gt;
-&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726ff60&gt;
+&lt;sqlite3.Cursor object at 0xb7233220&gt;
+&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb7233220&gt;
 &gt;&gt;&gt; [('John', 'Doe', 33), ('Ian', 'Lord', 69), ('Steven', 'Fry', 66), ('Phil', 'Collins', 'ABBA'), ('Captain', 'Ahab', "['This', 'is', 'a', 'sample', 'list']")]
 </pre>
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> * <span style="color: #87d7ff;">FROM</span> customers;
+<pre class="src src-sqlite"><span style="color: #cd0000;">SELECT</span> * <span style="color: #cd0000;">FROM</span> customers;
 </pre>
 </div>
 
@@ -337,7 +337,7 @@ c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM custo
 
 <div class="org-src-container">
 
-<pre class="src src-sqlite"><span style="color: #87d7ff;">SELECT</span> typeof(age) <span style="color: #87d7ff;">FROM</span> customers;
+<pre class="src src-sqlite"><span style="color: #cd0000;">SELECT</span> typeof(age) <span style="color: #cd0000;">FROM</span> customers;
 </pre>
 </div>
 
@@ -381,16 +381,16 @@ retrieve the sample list out form SQLite3:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python">c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT age FROM customers WHERE first_name=?'</span>, (<span style="color: #d7af87; font-style: italic;">'Captain'</span>,))
-<span style="color: #87ffd7;">sample_list</span> = <span style="color: #5f87af;">eval</span>(c.fetchone()[0])
-<span style="color: #5f87af;">type</span>(sample_list)
-<span style="color: #87d7ff;">print</span>(sample_list)
+<pre class="src src-python">c.execute(<span style="color: #00cdcd;">'SELECT age FROM customers WHERE first_name=?'</span>, (<span style="color: #00cdcd;">'Captain'</span>,))
+<span style="color: #ff87ff;">sample_list</span> = <span style="color: #cd00cd;">eval</span>(c.fetchone()[0])
+<span style="color: #cd00cd;">type</span>(sample_list)
+<span style="color: #cd0000;">print</span>(sample_list)
 conn.close()
 </pre>
 </div>
 
 <pre class="example">
-&lt;sqlite3.Cursor object at 0xb726ff60&gt;
+&lt;sqlite3.Cursor object at 0xb7233220&gt;
 &gt;&gt;&gt; &lt;class 'list'&gt;
 ['This', 'is', 'a', 'sample', 'list']
 </pre>

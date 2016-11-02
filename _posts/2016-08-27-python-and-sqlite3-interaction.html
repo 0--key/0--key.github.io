@@ -1,10 +1,10 @@
 ---
 layout: post
-title: SQLite3
+title: SQLite3 in Babel
 tagline: " Small, fast, reliable!"
 permalink: /python/stdlib/sqlite3/interaction.html
-categories: [org-mode, Python, SQLite3]
-tags: [tutorial, samples]
+categories: [org-mode, Python, SQLite3, literate programming]
+tags: [tutorial, samples, babel, emacs]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -53,15 +53,15 @@ functionality. All tests implemented in venv with:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sh :results output :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sh :results output :exports both</span>
 python --version
-<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">sqlite installed by default</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">sqlite installed by default</span>
 sqlite3 --version
-<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">host description</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">host description</span>
 uname -a
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: Python 3.4.3</span>
 <span style="color: #b2b2b2;">: 3.8.2 2013-12-06 14:53:30 27392118af4c38c5203a04b8013e1afdb1cebd0d</span>
 <span style="color: #b2b2b2;">: Linux antony-ThinkPad 3.13.0-93-generic #140-Ubuntu SMP Mon Jul 18 21:20:08 UTC 2016 i686 i686 i686 GNU/Linux</span>
@@ -197,11 +197,11 @@ documents, SQLite3 tables and Python flexibility.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
-<span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">'Hi'</span>)
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">'Hi'</span>)
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: Hi</span>
 </pre>
 </div>
@@ -237,11 +237,11 @@ supported languages inside org-mode.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC elisp :results output :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC elisp :results output :exports both</span>
 (print org-babel-load-languages)
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: ((python . t) (emacs-lisp . t) (shell . t))</span>
 </pre>
@@ -264,7 +264,7 @@ elisp code snippet:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC elisp</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC elisp</span>
 (org-babel-do-load-languages
 'org-babel-load-languages
 '((python . t)
@@ -272,9 +272,9 @@ elisp code snippet:
 (shell . t)
 (sqlite . t)
 ))
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: ((python . t) (emacs-lisp . t) (shell . t) (sqlite . t))</span>
 </pre>
 </div>
@@ -290,11 +290,11 @@ Ensure yourself, evaluate this, please:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC elisp :results output :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC elisp :results output :exports both</span>
 (print org-babel-load-languages)
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: ((python . t) (emacs-lisp . t) (shell . t) (sqlite . t))</span>
 </pre>
@@ -308,34 +308,34 @@ org-mode. Lets test how SQLite3 works. As well-described on
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+name: sqlite-populate-test</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :results silent</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :dir ./</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :db test-sqlite.db</span>
-<span style="color: #d7afaf; font-style: italic;">#+begin_src sqlite</span>
-<span style="color: #87d7ff;">drop</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">if</span> <span style="color: #87d7ff;">exists</span> greeting;
-<span style="color: #87d7ff;">create</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">greeting</span>(one <span style="color: #87ff87; font-size: 90%; font-weight: bold;">varchar</span>(10), two <span style="color: #87ff87; font-size: 90%; font-weight: bold;">varchar</span>(10));
-<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> greeting <span style="color: #87d7ff;">values</span>(<span style="color: #d7af87; font-style: italic;">'Hello'</span>, <span style="color: #d7af87; font-style: italic;">'world!'</span>);
-<span style="color: #d7afaf; font-style: italic;">#+end_src</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+name: sqlite-populate-test</span>
+<span style="color: #ff0087;">#+header: :results silent</span>
+<span style="color: #ff0087;">#+header: :dir ./</span>
+<span style="color: #ff0087;">#+header: :db test-sqlite.db</span>
+<span style="color: #ff0087;">#+begin_src sqlite</span>
+<span style="color: #cd0000;">drop</span> <span style="color: #cd0000;">table</span> <span style="color: #af00ff;">if</span> <span style="color: #cd0000;">exists</span> greeting;
+<span style="color: #cd0000;">create</span> <span style="color: #cd0000;">table</span> <span style="color: #af00ff;">greeting</span>(one <span style="color: #cdcd00;">varchar</span>(10), two <span style="color: #cdcd00;">varchar</span>(10));
+<span style="color: #cd0000;">insert</span> <span style="color: #cd0000;">into</span> greeting <span style="color: #cd0000;">values</span>(<span style="color: #00cdcd;">'Hello'</span>, <span style="color: #00cdcd;">'world!'</span>);
+<span style="color: #ff0087;">#+end_src</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+name: sqlite-hello</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :list</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :separator \ </span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :results raw</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :dir ./</span>
-<span style="color: #d7afaf; font-style: italic;">#+header: :db test-sqlite.db</span>
-<span style="color: #d7afaf; font-style: italic;">#+begin_src sqlite</span>
-<span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
-<span style="color: #d7afaf; font-style: italic;">#+end_src</span>
+<span style="color: #ff0087;">#+name: sqlite-hello</span>
+<span style="color: #ff0087;">#+header: :list</span>
+<span style="color: #ff0087;">#+header: :separator \ </span>
+<span style="color: #ff0087;">#+header: :results raw</span>
+<span style="color: #ff0087;">#+header: :dir ./</span>
+<span style="color: #ff0087;">#+header: :db test-sqlite.db</span>
+<span style="color: #ff0087;">#+begin_src sqlite</span>
+<span style="color: #cd0000;">select</span> * <span style="color: #cd0000;">from</span> greeting;
+<span style="color: #ff0087;">#+end_src</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS: sqlite-hello</span>
+<span style="color: #ff0087;">#+RESULTS: sqlite-hello</span>
 Hello world!
 
-<span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sh :exports both</span>
+<span style="color: #ff0087;">#+BEGIN_SRC sh :exports both</span>
 ls | grep .db
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: test-sqlite.db</span>
 </pre>
 </div>
@@ -362,16 +362,16 @@ By means studying <a href="https://docs.python.org/3/library/sqlite3.html">this 
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib</span>
-<span style="color: #87d7ff;">import</span> sqlite3
-<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'test-sqlite.db'</span>) <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">created in previous section</span>
-<span style="color: #87ffd7;">c</span> = conn.cursor()
-c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM greeting'</span>)
-<span style="color: #87d7ff;">print</span>(c.fetchone())
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib</span>
+<span style="color: #cd0000;">import</span> sqlite3
+<span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'test-sqlite.db'</span>) <span style="color: #ff0087;"># </span><span style="color: #ff0087;">created in previous section</span>
+<span style="color: #ff87ff;">c</span> = conn.cursor()
+c.execute(<span style="color: #00cdcd;">'SELECT * FROM greeting'</span>)
+<span style="color: #cd0000;">print</span>(c.fetchone())
 conn.close()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb718c5a0&gt;</span>
 <span style="color: #b2b2b2;">: ('Hello', 'world!')</span>
@@ -408,12 +408,12 @@ table. As a start point we should know the schema:
 <div class="outline-text-4" id="text-orgheadline21">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :echo on :db test-sqlite.db :results output</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :echo on :db test-sqlite.db :results output</span>
 .tables
-.<span style="color: #87d7ff;">schema</span> greeting
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+.<span style="color: #cd0000;">schema</span> greeting
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: .tables</span>
 <span style="color: #b2b2b2;">: greeting</span>
 <span style="color: #b2b2b2;">: .schema greeting</span>
@@ -438,15 +438,15 @@ It is its schema. Try to fulfill it by data from org-table:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db test-sqlite.db :results output :colnames yes :var orgtable=tableexample</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db test-sqlite.db :results output :colnames yes :var orgtable=tableexample</span>
 
-<span style="color: #87d7ff;">drop</span> <span style="color: #87d7ff;">table</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">if</span> <span style="color: #87d7ff;">exists</span> greeting;
+<span style="color: #cd0000;">drop</span> <span style="color: #cd0000;">table</span> <span style="color: #af00ff;">if</span> <span style="color: #cd0000;">exists</span> greeting;
 .mode csv
 .import $orgtable greeting
-<span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #cd0000;">select</span> * <span style="color: #cd0000;">from</span> greeting;
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: Hi,Tony!</span>
 <span style="color: #b2b2b2;">: Hello,guys!</span>
 <span style="color: #b2b2b2;">: "Good morning",Vikky!</span>
@@ -467,11 +467,11 @@ Right now we have one table <code>greeting</code> with 4 rows there:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :echo on :db test-sqlite.db :results output</span>
-<span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> greeting;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :echo on :db test-sqlite.db :results output</span>
+<span style="color: #cd0000;">select</span> * <span style="color: #cd0000;">from</span> greeting;
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: select * from greeting;</span>
 <span style="color: #b2b2b2;">: Hello,guys!</span>
 <span style="color: #b2b2b2;">: "Good morning",Vikky!</span>
@@ -486,16 +486,16 @@ Try to do a similar operation in Python:
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #87d7ff;">import</span> sqlite3
-<span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'test-sqlite.db'</span>) <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">created in the section above</span>
-<span style="color: #87ffd7;">c</span> = conn.cursor()
-c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT * FROM greeting'</span>)
+<pre class="src src-python"><span style="color: #cd0000;">import</span> sqlite3
+<span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'test-sqlite.db'</span>) <span style="color: #ff0087;"># </span><span style="color: #ff0087;">created in the section above</span>
+<span style="color: #ff87ff;">c</span> = conn.cursor()
+c.execute(<span style="color: #00cdcd;">'SELECT * FROM greeting'</span>)
 c.fetchall()
 </pre>
 </div>
 
 <pre class="example">
-&gt;&gt;&gt; &gt;&gt;&gt; Traceback (most recent call last):
+Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 sqlite3.OperationalError: no such table: greeting
 []
@@ -511,22 +511,22 @@ sqlite3.OperationalError: no such table: greeting
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
-c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT count(*) FROM greeting'</span>)
-<span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">"Our database have %i rows now"</span> % c.fetchone()[0])
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
+c.execute(<span style="color: #00cdcd;">'SELECT count(*) FROM greeting'</span>)
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"Our database have %i rows now"</span> % c.fetchone()[0])
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: &lt;sqlite3.Cursor object at 0xb71c10e0&gt;</span>
 <span style="color: #b2b2b2;">: Our database have 4 rows now</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
-c.execute(<span style="color: #d7af87; font-style: italic;">'select * from greeting limit 2'</span>)
+<span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
+c.execute(<span style="color: #00cdcd;">'select * from greeting limit 2'</span>)
 c.fetchall()
-<span style="color: #5f87af;">type</span>(c.fetchall())
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #cd00cd;">type</span>(c.fetchall())
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: &lt;sqlite3.Cursor object at 0xb726c0e0&gt;</span>
 <span style="color: #b2b2b2;">: [('Hello', 'guys!'), ('Good morning', 'Vikky!')]</span>
 <span style="color: #b2b2b2;">: &lt;class 'list'&gt;</span>
@@ -543,14 +543,14 @@ Lets insert some values into our table <code>greeting</code> in pure Python:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both pp</span>
-c.execute(<span style="color: #d7af87; font-style: italic;">"INSERT INTO greeting VALUES ('Insertion', 'test')"</span>)
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both pp</span>
+c.execute(<span style="color: #00cdcd;">"INSERT INTO greeting VALUES ('Insertion', 'test')"</span>)
 conn.commit()
-c.execute(<span style="color: #d7af87; font-style: italic;">'select * from greeting'</span>)
+c.execute(<span style="color: #00cdcd;">'select * from greeting'</span>)
 c.fetchall()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: &lt;sqlite3.Cursor object at 0xb726c0e0&gt;</span>
 <span style="color: #b2b2b2;">: &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb726c0e0&gt;</span>
 <span style="color: #b2b2b2;">: [('Hello', 'guys!'), ('Good morning', 'Vikky!'), ('How are you', 'doing?'), ('Suppose it', 'clear?'), ('Insertion', 'test'), ('Insertion', 'test')]</span>
@@ -564,9 +564,9 @@ further for more complex examples.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results none :session stdlib :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results none :session stdlib :exports both</span>
 conn.close()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 </pre>
 </div>
 

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: SQLite3
+title: SQLite3 data integrity examination
 tagline: " Keep data purity"
 permalink: /sqlite3/data-integrity-testing.html
-categories: [org-mode, Python, SQLite3]
-tags: [TDD, samples, data integrity]
+categories: [org-mode, Python, SQLite3, literate programming]
+tags: [TDD, samples, data integrity, emacs]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -108,11 +108,11 @@ Just unique fields only. Uniqueness is matter.
 </blockquote>
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sh :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sh :exports both</span>
 ls /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #87d7ff;">| activesport    |</span>
 <span style="color: #87d7ff;">| log1.txt       |</span>
 <span style="color: #87d7ff;">| log.txt        |</span>
@@ -131,11 +131,11 @@ Lets connect to DB:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
-.<span style="color: #87d7ff;">schema</span>
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
+.<span style="color: #cd0000;">schema</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: CREATE TABLE activesport(id INTEGER PRIMARY KEY, title TEXT);</span>
 </pre>
 </div>
@@ -146,11 +146,11 @@ Lets connect to DB:
 <div class="outline-text-4" id="text-orgheadline14">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :exports both :colnames yes</span>
-<span style="color: #87d7ff;">select</span> * <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">limit</span> 10;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :exports both :colnames yes</span>
+<span style="color: #cd0000;">select</span> * <span style="color: #cd0000;">from</span> activesport <span style="color: #cd0000;">limit</span> 10;
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #87d7ff;">| id | title                                                       |</span>
 <span style="color: #87d7ff;">|----+-------------------------------------------------------------|</span>
 <span style="color: #87d7ff;">|  1 | Wishbone Bike 3 in 1 Recycled Edition Balance Bike          |</span>
@@ -172,11 +172,11 @@ The <a href="https://sqlite.org/pragma.html#pragma_integrity_check">main tool</a
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
 pragma integrity_check;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: ok</span>
 </pre>
 </div>
@@ -188,12 +188,12 @@ pragma integrity_check;
 <div class="outline-text-4" id="text-orgheadline15">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
-<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
-<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
+<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(*) <span style="color: #cd0000;">from</span> activesport;
+<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(title) <span style="color: #cd0000;">from</span> activesport;
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: 981</span>
 <span style="color: #b2b2b2;">: 981</span>
 </pre>
@@ -212,17 +212,17 @@ and re-count number of rows.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
-<span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=1;
-<span style="color: #87d7ff;">insert</span> <span style="color: #87d7ff;">into</span> activesport <span style="color: #87d7ff;">values</span>(((<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport) + 1), (<span style="color: #87d7ff;">select</span> title <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=1));
-<span style="color: #d7afaf; font-style: italic;">-- re-count titles</span>
-<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
-<span style="color: #87d7ff;">delete</span> <span style="color: #87d7ff;">from</span> activesport <span style="color: #87d7ff;">where</span> id=(<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport);
-<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(*) <span style="color: #87d7ff;">from</span> activesport;
-<span style="color: #87d7ff;">select</span> <span style="color: #5f87af;">count</span>(title) <span style="color: #87d7ff;">from</span> activesport;
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sqlite :db /home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db :results output :exports both</span>
+<span style="color: #cd0000;">select</span> title <span style="color: #cd0000;">from</span> activesport <span style="color: #cd0000;">where</span> id=1;
+<span style="color: #cd0000;">insert</span> <span style="color: #cd0000;">into</span> activesport <span style="color: #cd0000;">values</span>(((<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(*) <span style="color: #cd0000;">from</span> activesport) + 1), (<span style="color: #cd0000;">select</span> title <span style="color: #cd0000;">from</span> activesport <span style="color: #cd0000;">where</span> id=1));
+<span style="color: #ff0087;">-- re-count titles</span>
+<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(title) <span style="color: #cd0000;">from</span> activesport;
+<span style="color: #cd0000;">delete</span> <span style="color: #cd0000;">from</span> activesport <span style="color: #cd0000;">where</span> id=(<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(*) <span style="color: #cd0000;">from</span> activesport);
+<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(*) <span style="color: #cd0000;">from</span> activesport;
+<span style="color: #cd0000;">select</span> <span style="color: #cd00cd;">count</span>(title) <span style="color: #cd0000;">from</span> activesport;
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: "GT Bump 26 Jump Bike 2016"</span>
 <span style="color: #b2b2b2;">: 982</span>
 <span style="color: #b2b2b2;">: 981</span>
@@ -245,20 +245,20 @@ Extract all titles, count its number, convert into <code>set</code> and count it
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
-  <span style="color: #87d7ff;">import</span> sqlite3
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
+  <span style="color: #cd0000;">import</span> sqlite3
 
-  <span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
-  <span style="color: #87ffd7;">c</span> = conn.cursor()
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
-  <span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title FROM activesport'</span>)
-  <span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
-  <span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #5f87af;">len</span>(title_set)))
+  <span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+  <span style="color: #ff87ff;">c</span> = conn.cursor()
+  c.execute(<span style="color: #00cdcd;">'SELECT COUNT(*) FROM activesport'</span>)
+  <span style="color: #ff87ff;">num_rows</span> = c.fetchone()[0]
+  c.execute(<span style="color: #00cdcd;">'SELECT title FROM activesport'</span>)
+  <span style="color: #ff87ff;">title_set</span> = <span style="color: #cd00cd;">set</span>(t[0] <span style="color: #cd0000;">for</span> t <span style="color: #cd0000;">in</span> c.fetchall())
+  <span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #cd00cd;">len</span>(title_set)))
   conn.close()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb703d220&gt;</span>
 <span style="color: #b2b2b2;">: &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb703d220&gt;</span>
@@ -279,34 +279,34 @@ Delete the test row and recover DB into its initial state.
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output pp :session stdlib :exports both</span>
-  <span style="color: #87d7ff;">import</span> sqlite3
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output pp :session stdlib :exports both</span>
+  <span style="color: #cd0000;">import</span> sqlite3
 
-  <span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
-  <span style="color: #87ffd7;">c</span> = conn.cursor()
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
-  <span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title from activesport WHERE id=1'</span>)
-  <span style="color: #87ffd7;">existing_title</span> = c.fetchone()[0]
-  <span style="color: #87d7ff;">print</span>(existing_title)
-  <span style="color: #87ffd7;">next_row</span> = num_rows + 1
-  <span style="color: #87d7ff;">print</span>(next_row)
-  c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO activesport values (?, ?)'</span>, (next_row, existing_title))
-  conn.commit() <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">it is necessary after each INSERT/UPDATE operation</span>
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT title FROM activesport'</span>)
-  <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">collect all titles</span>
-  <span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
-  c.execute(<span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM activesport'</span>)
-  <span style="color: #87ffd7;">num_rows_new</span> = c.fetchone()[0]
-  <span style="color: #87d7ff;">print</span>(<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows_new, <span style="color: #5f87af;">len</span>(title_set)))
-  <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">clean-up</span>
-  c.execute(<span style="color: #d7af87; font-style: italic;">'DELETE FROM activesport WHERE id&gt;?'</span>, (num_rows,))
+  <span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+  <span style="color: #ff87ff;">c</span> = conn.cursor()
+  c.execute(<span style="color: #00cdcd;">'SELECT COUNT(*) FROM activesport'</span>)
+  <span style="color: #ff87ff;">num_rows</span> = c.fetchone()[0]
+  c.execute(<span style="color: #00cdcd;">'SELECT title from activesport WHERE id=1'</span>)
+  <span style="color: #ff87ff;">existing_title</span> = c.fetchone()[0]
+  <span style="color: #cd0000;">print</span>(existing_title)
+  <span style="color: #ff87ff;">next_row</span> = num_rows + 1
+  <span style="color: #cd0000;">print</span>(next_row)
+  c.execute(<span style="color: #00cdcd;">'INSERT INTO activesport values (?, ?)'</span>, (next_row, existing_title))
+  conn.commit() <span style="color: #ff0087;"># </span><span style="color: #ff0087;">it is necessary after each INSERT/UPDATE operation</span>
+  c.execute(<span style="color: #00cdcd;">'SELECT title FROM activesport'</span>)
+  <span style="color: #ff0087;"># </span><span style="color: #ff0087;">collect all titles</span>
+  <span style="color: #ff87ff;">title_set</span> = <span style="color: #cd00cd;">set</span>(t[0] <span style="color: #cd0000;">for</span> t <span style="color: #cd0000;">in</span> c.fetchall())
+  c.execute(<span style="color: #00cdcd;">'SELECT COUNT(*) FROM activesport'</span>)
+  <span style="color: #ff87ff;">num_rows_new</span> = c.fetchone()[0]
+  <span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">"There are %d titles and %d are unique"</span> % (num_rows_new, <span style="color: #cd00cd;">len</span>(title_set)))
+  <span style="color: #ff0087;"># </span><span style="color: #ff0087;">clean-up</span>
+  c.execute(<span style="color: #00cdcd;">'DELETE FROM activesport WHERE id&gt;?'</span>, (num_rows,))
   conn.commit()
   conn.close()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
-<span style="color: #d7afaf; font-style: italic;">#+begin_example</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+begin_example</span>
 
 <span style="color: #b2b2b2;">&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb71f9120&gt;</span>
 <span style="color: #b2b2b2;">&gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb71f9120&gt;</span>
@@ -317,7 +317,7 @@ Delete the test row and recover DB into its initial state.
 <span style="color: #b2b2b2;">... &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb71f9120&gt;</span>
 <span style="color: #b2b2b2;">&gt;&gt;&gt; There are 982 titles and 981 are unique</span>
 <span style="color: #b2b2b2;">... &lt;sqlite3.Cursor object at 0xb71f9120&gt;</span>
-<span style="color: #d7afaf; font-style: italic;">#+end_example</span>
+<span style="color: #ff0087;">#+end_example</span>
 </pre>
 </div></li>
 </ul>
@@ -345,24 +345,24 @@ Create a function:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
-  <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">suppose that sqlite3 was already imported in the current session</span>
-  <span style="color: #87d7ff;">def</span> <span style="color: #87d7ff; font-size: 90%; font-weight: bold;">uniq_field_test</span>(conn, tbl, field):
-      <span style="color: #87ffd7;">c</span> = conn.cursor()
-      <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM %s'</span> % tbl 
+<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :results output :session stdlib :exports both</span>
+  <span style="color: #ff0087;"># </span><span style="color: #ff0087;">suppose that sqlite3 was already imported in the current session</span>
+  <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">uniq_field_test</span>(conn, tbl, field):
+      <span style="color: #ff87ff;">c</span> = conn.cursor()
+      <span style="color: #ff87ff;">query</span> = <span style="color: #00cdcd;">'SELECT COUNT(*) FROM %s'</span> % tbl 
       c.execute(query)
-      <span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
-      <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT %s FROM %s'</span> % (field, tbl)
+      <span style="color: #ff87ff;">num_rows</span> = c.fetchone()[0]
+      <span style="color: #ff87ff;">query</span> = <span style="color: #00cdcd;">'SELECT %s FROM %s'</span> % (field, tbl)
       c.execute(query)
-      <span style="color: #87ffd7;">title_set</span> = <span style="color: #5f87af;">set</span>(t[0] <span style="color: #87d7ff;">for</span> t <span style="color: #87d7ff;">in</span> c.fetchall())
-      <span style="color: #87d7ff;">return</span> (<span style="color: #d7af87; font-style: italic;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #5f87af;">len</span>(title_set)))
+      <span style="color: #ff87ff;">title_set</span> = <span style="color: #cd00cd;">set</span>(t[0] <span style="color: #cd0000;">for</span> t <span style="color: #cd0000;">in</span> c.fetchall())
+      <span style="color: #cd0000;">return</span> (<span style="color: #00cdcd;">"There are %d titles and %d are unique"</span> % (num_rows, <span style="color: #cd00cd;">len</span>(title_set)))
 
-  <span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
-  <span style="color: #87d7ff;">print</span>(uniq_field_test(conn, <span style="color: #d7af87; font-style: italic;">'activesport'</span>, <span style="color: #d7af87; font-style: italic;">'title'</span>))
+  <span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+  <span style="color: #cd0000;">print</span>(uniq_field_test(conn, <span style="color: #00cdcd;">'activesport'</span>, <span style="color: #00cdcd;">'title'</span>))
   conn.close()
-<span style="color: #d7afaf; font-style: italic;">#+END_SRC</span>
+<span style="color: #ff0087;">#+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">#+RESULTS:</span>
+<span style="color: #ff0087;">#+RESULTS:</span>
 <span style="color: #b2b2b2;">: </span>
 <span style="color: #b2b2b2;">: ... ... ... ... ... ... ... ... ... &gt;&gt;&gt; &gt;&gt;&gt; There are 981 titles and 981 are unique</span>
 </pre>
@@ -374,36 +374,36 @@ Now, when the function <code>uniq_field_test</code> allocates in the <code>org s
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #d7afaf; font-style: italic;">   #+BEGIN_SRC python :results output pp :session stdlib :exports both</span>
-     <span style="color: #87ffd7;">conn</span> = sqlite3.connect(<span style="color: #d7af87; font-style: italic;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
-     <span style="color: #87ffd7;">c</span> = conn.cursor()
-     <span style="color: #87ffd7;">tbl</span> = <span style="color: #d7af87; font-style: italic;">'activesport'</span>
-     <span style="color: #87ffd7;">field</span> = <span style="color: #d7af87; font-style: italic;">'title'</span>
-     <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT COUNT(*) FROM %s'</span> % tbl
+<pre class="src src-org"><span style="color: #ff0087;">   #+BEGIN_SRC python :results output pp :session stdlib :exports both</span>
+     <span style="color: #ff87ff;">conn</span> = sqlite3.connect(<span style="color: #00cdcd;">'/home/vikky/Desktop/DVCS/stuff/scrapy/activesport/scrapy_data.db'</span>)
+     <span style="color: #ff87ff;">c</span> = conn.cursor()
+     <span style="color: #ff87ff;">tbl</span> = <span style="color: #00cdcd;">'activesport'</span>
+     <span style="color: #ff87ff;">field</span> = <span style="color: #00cdcd;">'title'</span>
+     <span style="color: #ff87ff;">query</span> = <span style="color: #00cdcd;">'SELECT COUNT(*) FROM %s'</span> % tbl
      c.execute(query)
-     <span style="color: #87ffd7;">num_rows</span> = c.fetchone()[0]
-     <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'SELECT %s FROM %s WHERE id=1'</span> % (field, tbl)
+     <span style="color: #ff87ff;">num_rows</span> = c.fetchone()[0]
+     <span style="color: #ff87ff;">query</span> = <span style="color: #00cdcd;">'SELECT %s FROM %s WHERE id=1'</span> % (field, tbl)
      c.execute(query)
-     <span style="color: #87ffd7;">existing_value</span> = c.fetchone()[0]
-     <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">fetchone() returns a tuple and we cut off the first element</span>
-     <span style="color: #87d7ff;">print</span>(existing_value)
-     <span style="color: #87d7ff;">print</span>(<span style="color: #5f87af;">type</span>(existing_value))
-     <span style="color: #87ffd7;">next_row</span> = num_rows+1
-     <span style="color: #87d7ff;">print</span>(next_row)
-     c.execute(<span style="color: #d7af87; font-style: italic;">'INSERT INTO activesport VALUES (?, ?)'</span>, (next_row, existing_value))
-     <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">INSERT demands table straight definition</span>
-     <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">hence pre-formatted query not substitutes in the INSERT case</span>
-     conn.commit() <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">writes data into table </span>
-     <span style="color: #87d7ff;">print</span>(uniq_field_test(conn, tbl, field))
-     <span style="color: #87ffd7;">query</span> = <span style="color: #d7af87; font-style: italic;">'DELETE FROM %s WHERE id=%d'</span> % (tbl, next_row)
+     <span style="color: #ff87ff;">existing_value</span> = c.fetchone()[0]
+     <span style="color: #ff0087;"># </span><span style="color: #ff0087;">fetchone() returns a tuple and we cut off the first element</span>
+     <span style="color: #cd0000;">print</span>(existing_value)
+     <span style="color: #cd0000;">print</span>(<span style="color: #cd00cd;">type</span>(existing_value))
+     <span style="color: #ff87ff;">next_row</span> = num_rows+1
+     <span style="color: #cd0000;">print</span>(next_row)
+     c.execute(<span style="color: #00cdcd;">'INSERT INTO activesport VALUES (?, ?)'</span>, (next_row, existing_value))
+     <span style="color: #ff0087;"># </span><span style="color: #ff0087;">INSERT demands table straight definition</span>
+     <span style="color: #ff0087;"># </span><span style="color: #ff0087;">hence pre-formatted query not substitutes in the INSERT case</span>
+     conn.commit() <span style="color: #ff0087;"># </span><span style="color: #ff0087;">writes data into table </span>
+     <span style="color: #cd0000;">print</span>(uniq_field_test(conn, tbl, field))
+     <span style="color: #ff87ff;">query</span> = <span style="color: #00cdcd;">'DELETE FROM %s WHERE id=%d'</span> % (tbl, next_row)
      c.execute(query)
      conn.commit()
-     <span style="color: #87d7ff;">print</span>(uniq_field_test(conn, tbl, field))
+     <span style="color: #cd0000;">print</span>(uniq_field_test(conn, tbl, field))
      conn.close()
-<span style="color: #d7afaf; font-style: italic;">   #+END_SRC</span>
+<span style="color: #ff0087;">   #+END_SRC</span>
 
-<span style="color: #d7afaf; font-style: italic;">   #+RESULTS:</span>
-<span style="color: #d7afaf; font-style: italic;">   #+begin_example</span>
+<span style="color: #ff0087;">   #+RESULTS:</span>
+<span style="color: #ff0087;">   #+begin_example</span>
 
 <span style="color: #b2b2b2;">   &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb70051e0&gt;</span>
 <span style="color: #b2b2b2;">   &gt;&gt;&gt; &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb70051e0&gt;</span>
@@ -414,7 +414,7 @@ Now, when the function <code>uniq_field_test</code> allocates in the <code>org s
 <span style="color: #b2b2b2;">   ... ... &gt;&gt;&gt; There are 982 titles and 981 are unique</span>
 <span style="color: #b2b2b2;">   &gt;&gt;&gt; &lt;sqlite3.Cursor object at 0xb70051e0&gt;</span>
 <span style="color: #b2b2b2;">   &gt;&gt;&gt; There are 981 titles and 981 are unique</span>
-<span style="color: #d7afaf; font-style: italic;">#+end_example</span>
+<span style="color: #ff0087;">#+end_example</span>
 </pre>
 </div>
 </div>

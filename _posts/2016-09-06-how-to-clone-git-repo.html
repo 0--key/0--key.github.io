@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Git
+title: Github account fulfilled by clones
 tagline: " host all your code there"
 permalink: /git/tips/how-to-clone-repository.html
-categories: [git]
-tags: [tutorial, clone, remotes]
+categories: [git, literate programming]
+tags: [tutorial, clone, remotes, emacs, babel]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -61,7 +61,7 @@ Of cause you need git installed on your host.
 </div>
 
 <pre class="example">
-git version 2.9.3
+git version 2.10.2
 </pre>
 </div>
 </div>
@@ -92,9 +92,9 @@ and type:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-shell"><span style="color: #5f87af;">cd</span> /usr/local/share/DVCS/ <span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">it's path for all repositories on my hard drive</span>
-<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">git clone https://github.com/0--key/org-pub.git</span>
-<span style="color: #d7afaf; font-style: italic;"># </span><span style="color: #d7afaf; font-style: italic;">uncomment the string above for the actual git clone</span>
+<pre class="src src-shell"><span style="color: #cd00cd;">cd</span> /usr/local/share/DVCS/ <span style="color: #ff0087;"># </span><span style="color: #ff0087;">it's path for all repositories on my hard drive</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">git clone https://github.com/0--key/org-pub.git</span>
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">uncomment the string above for the actual git clone</span>
 ls org-pub
 </pre>
 </div>
@@ -106,6 +106,10 @@ ls org-pub
 <col  class="org-left" />
 </colgroup>
 <tbody>
+<tr>
+<td class="org-left">1</td>
+</tr>
+
 <tr>
 <td class="org-left">2016-08-24-index.org</td>
 </tr>
@@ -159,6 +163,74 @@ ls org-pub
 </tr>
 
 <tr>
+<td class="org-left">2016-09-08-python-mock-object.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-08-python-mock-object.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-09-python-standard-library.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-09-python-standard-library.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-11-pytest.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-11-pytest.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-13-python-built-in-functions.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-13-python-built-in-functions.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-15-python-classmethod-and-staticmethod.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-09-15-python-classmethod-and-staticmethod.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-13-CV.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-13-emacs-pass-region-to-python-shell.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-13-emacs-pass-region-to-python-shell.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-13-emacs-python-spynner-test.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-13-emacs-python-spynner-test.org~</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-15-javascript-inside-emacs.org</td>
+</tr>
+
+<tr>
+<td class="org-left">2016-10-15-javascript-inside-emacs.org~</td>
+</tr>
+
+<tr>
 <td class="org-left">data_types.db</td>
 </tr>
 
@@ -179,6 +251,18 @@ ls org-pub
 </tr>
 
 <tr>
+<td class="org-left">scripts</td>
+</tr>
+
+<tr>
+<td class="org-left">spynner</td>
+</tr>
+
+<tr>
+<td class="org-left">tests</td>
+</tr>
+
+<tr>
 <td class="org-left">test-sqlite.db</td>
 </tr>
 </tbody>
@@ -196,7 +280,7 @@ inside.
 <div class="outline-text-3" id="text-orgheadline7">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #5f87af;">cd</span> /usr/local/share/DVCS/org-pub/
+<pre class="src src-sh"><span style="color: #cd00cd;">cd</span> /usr/local/share/DVCS/org-pub/
 git remote -v
 </pre>
 </div>
