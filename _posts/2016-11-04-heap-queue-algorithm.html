@@ -1,0 +1,398 @@
+---
+layout: post
+title: Heap queue
+tagline: " algorithm dissection"
+permalink: /python/stdlib/heapq.html
+categories: [emacs, Python, algorithms, heap, literate programming]
+tags: [heap queue, stdlib, heapq]
+---
+
+<div id="outline-container-orgheadline28" class="outline-2">
+<h2 id="orgheadline28">Theory overview</h2>
+<div class="outline-text-2" id="text-orgheadline28">
+</div><div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">6.006 Introduction to Algorithms Heaps and heap sort</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+</div><div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1">Applied usage as a <code>Priority Queue</code></h4>
+<div class="outline-text-4" id="text-orgheadline1">
+<blockquote>
+<p>
+Implements a set <code>S</code> of elements, each of elements associated with a key.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Typical operations</h4>
+<div class="outline-text-4" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline2" class="outline-5">
+<h5 id="orgheadline2">Insert(S, x): insett element x into set <code>S</code></h5>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-5">
+<h5 id="orgheadline3">Max(S): return element of <code>S</code> with a largest key</h5>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-5">
+<h5 id="orgheadline4">Extract_max(S): ^^^ and remove it from <code>S</code></h5>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-5">
+<h5 id="orgheadline5">Increase(S, x, k): increase the value of x's key to new value k</h5>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Heap as a Tree</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<ul class="org-ul">
+<li>Root of tree: first element</li>
+<li>Parent(i) = i/2</li>
+<li>Left(i) = 2i</li>
+<li>Right(i) = 2i + 1</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Linear view</h4>
+<div class="outline-text-4" id="text-orgheadline8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">2</th>
+<th scope="col" class="org-right">3</th>
+<th scope="col" class="org-right">4</th>
+<th scope="col" class="org-right">5</th>
+<th scope="col" class="org-right">6</th>
+<th scope="col" class="org-right">7</th>
+<th scope="col" class="org-right">8</th>
+<th scope="col" class="org-right">9</th>
+<th scope="col" class="org-right">10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">16</td>
+<td class="org-right">14</td>
+<td class="org-right">10</td>
+<td class="org-right">8</td>
+<td class="org-right">7</td>
+<td class="org-right">9</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Max-Heap property</h4>
+<div class="outline-text-4" id="text-orgheadline9">
+<p>
+The key of a node &gt;= the keys of its childen
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">Heap operations</h4>
+<div class="outline-text-4" id="text-orgheadline12">
+</div><div id="outline-container-orgheadline10" class="outline-5">
+<h5 id="orgheadline10">Build_max_heap:</h5>
+<div class="outline-text-5" id="text-orgheadline10">
+<p>
+produces a max heap from an unsorted array
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-5">
+<h5 id="orgheadline11">max_heapify:</h5>
+<div class="outline-text-5" id="text-orgheadline11">
+<p>
+correct a single violation of the heap property in a
+subtree's root
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Tree leaves definition</h4>
+<div class="outline-text-4" id="text-orgheadline13">
+<p>
+Elements A[n/2+1 &#x2026; n] are all leaves
+O(nlgn) simple analysis
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">Time complexity</h4>
+<div class="outline-text-4" id="text-orgheadline14">
+<blockquote>
+<p>
+Observe: <code>max_heapify</code> takes O(1) for nodes that are one level
+above the leaves and in general O(l) time for nodes that are l levels
+above the leaves
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Other sources</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<p>
+Wikipedia <a href="https://en.wikipedia.org/wiki/Heap_%28data_structure%29">article</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27">Python implementation</h3>
+<div class="outline-text-3" id="text-orgheadline27">
+</div><div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19">Docs</h4>
+<div class="outline-text-4" id="text-orgheadline19">
+</div><div id="outline-container-orgheadline17" class="outline-5">
+<h5 id="orgheadline17">Official <a href="https://docs.python.org/3/library/heapq.html">documentation</a> proclaims:</h5>
+<div class="outline-text-5" id="text-orgheadline17">
+<blockquote>
+<p>
+<code>Heapq.heapyfy(x)</code> ransform list x into a heap, in-place, in linear time
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-5">
+<h5 id="orgheadline18">Third-party <a href="http://www.techrepublic.com/article/python-priority-queues-the-heapq-module/">documentation</a></h5>
+<div class="outline-text-5" id="text-orgheadline18">
+<blockquote>
+<p>
+The heap is an integral component in many algorithms — a
+data structure that keeps elements organised so that it is always
+easy to <i>find the smallest value</i>. We'll show you how you can use
+the heapq module to implement heaps in Python in just a few lines
+of code.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20">Code samples</h4>
+<div class="outline-text-4" id="text-orgheadline20">
+<p>
+Lets take an attempt to disclose much unique and useful heapq features.
+</p>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-5">
+<h5 id="orgheadline23">Heap and numbers</h5>
+<div class="outline-text-5" id="text-orgheadline23">
+</div><ul class="org-ul"><li><a id="orgheadline21"></a>Integers<br  /><div class="outline-text-6" id="text-orgheadline21">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> heapify
+
+<span style="color: #ff87ff;">h1</span> = [-1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
+heapify(h1)
+<span style="color: #cd0000;">print</span>(h1)
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; [-1, 0, 2, 6, 3, 5, 4, 7, 8, 9]
+</pre>
+</div></li>
+
+
+
+<li><a id="orgheadline22"></a>Decimal<br  /><div class="outline-text-6" id="text-orgheadline22">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">h2</span> = [-2.2, 3.8, 1.1, -5]
+heapify(h2)
+<span style="color: #cd0000;">print</span>(h2)
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; [-5, -2.2, 1.1, 3.8]
+</pre>
+</div></li></ul>
+</div>
+
+
+<div id="outline-container-orgheadline24" class="outline-5">
+<h5 id="orgheadline24">Heap of letters</h5>
+<div class="outline-text-5" id="text-orgheadline24">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">h3</span> = [<span style="color: #00cdcd;">'f'</span>, <span style="color: #00cdcd;">'d'</span>, <span style="color: #00cdcd;">'q'</span>, <span style="color: #00cdcd;">'g'</span>, <span style="color: #00cdcd;">'b'</span>]
+heapify(h3)
+<span style="color: #cd0000;">print</span>(h3)
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; ['b', 'd', 'q', 'g', 'f']
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-5">
+<h5 id="orgheadline25">Heap of words</h5>
+<div class="outline-text-5" id="text-orgheadline25">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">h4</span> = [<span style="color: #00cdcd;">'break'</span>, <span style="color: #00cdcd;">'border'</span>, <span style="color: #00cdcd;">'backer'</span>, <span style="color: #00cdcd;">'bachelor'</span>, <span style="color: #00cdcd;">'baccara'</span>]
+heapify(h4)
+<span style="color: #cd0000;">print</span>(h4)
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; ['baccara', 'bachelor', 'backer', 'break', 'border']
+</pre>
+
+<p>
+The latter output <i>looks a bit odd</i>, but it's a <code>heap</code> by
+its definition (!)
+</p>
+
+<p>
+<b>Note!</b>
+</p>
+<hr  />
+<p>
+In the same manner, <code>nlargest</code> &amp; <code>nsmallest</code>
+<i>wouldn't</i> work as expected:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> nlargest, nsmallest, heappush
+
+<span style="color: #cd0000;">print</span>(nlargest(3, h4))
+<span style="color: #ff0087;"># </span><span style="color: #ff0087;">for clarity</span>
+heappush(h4, <span style="color: #00cdcd;">'baby'</span>)
+<span style="color: #cd0000;">print</span>(h4)
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">'\n'</span>)
+<span style="color: #cd0000;">print</span>(nsmallest(3, h4))
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; ['break', 'border', 'backer']
+... &gt;&gt;&gt; ['baby', 'bachelor', 'baccara', 'break', 'border', 'backer']
+
+['baby', 'baccara', 'bachelor']
+</pre>
+
+<p>
+Seems like <code>nlargest</code> return the largest values in a descendant order,
+but <code>nsmallest</code> do it in a rising one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-5">
+<h5 id="orgheadline26">Heap of tuples</h5>
+<div class="outline-text-5" id="text-orgheadline26">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> heappop
+
+
+<span style="color: #ff87ff;">h</span> = []
+heappush(h, (5, <span style="color: #00cdcd;">'write code'</span>))
+heappush(h, (7, <span style="color: #00cdcd;">'release product'</span>))
+heappush(h, (1, <span style="color: #00cdcd;">'write spec'</span>))
+heappush(h, (3, <span style="color: #00cdcd;">'create tests'</span>))
+<span style="color: #cd0000;">print</span>(<span style="color: #cd00cd;">type</span>(h),<span style="color: #00cdcd;">'\n'</span>, h)
+heappop(h)
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &lt;class 'list'&gt; 
+ [(1, 'write spec'), (3, 'create tests'), (5, 'write code'), (7, 'release product')]
+(1, 'write spec')
+</pre>
+
+
+<p>
+As you might recon a heap in this particular case is a specific list,
+which is sorted on the fly.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">heappush(h, (6, <span style="color: #00cdcd;">'test it up'</span>))
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">'\n'</span>, h)
+</pre>
+</div>
+
+<pre class="example">
+[(3, 'create tests'), (6, 'test it up'), (5, 'write code'), (7, 'release product')]
+</pre>
+
+
+<p>
+Obviously that order is corrupted, but it is strictly following by the
+<code>heap</code> definition.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">heappop(h)
+<span style="color: #cd0000;">print</span>(<span style="color: #00cdcd;">'\n'</span>, h)
+heappop(h)
+</pre>
+</div>
+
+<pre class="example">
+(3, 'create tests')
+[(5, 'write code'), (6, 'test it up'), (7, 'release product')]
+(5, 'write code')
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
