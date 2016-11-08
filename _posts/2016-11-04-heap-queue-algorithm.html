@@ -47,7 +47,7 @@ tags: [heap queue, stdlib, heapq]
 <li><a href="#orgheadline22">Time complexity</a>
 <ul>
 <li><a href="#orgheadline23">Algorithm analysis</a></li>
-<li><a href="#orgheadline24">Correct usage</a></li>
+<li><a href="#orgheadline24">Wrong usage #2</a></li>
 </ul>
 </li>
 </ul>
@@ -59,15 +59,7 @@ tags: [heap queue, stdlib, heapq]
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1">Theory overview</h2>
 <div class="outline-text-2" id="text-orgheadline1">
-
-<div class="figure">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Max-Heap.svg/240px-Max-Heap.svg.png" alt="Max-heap" title="Max-heap sample" align="right" />
-</p>
-<p><span class="figure-number">Figure 1:</span> Max-heap</p>
-</div>
-</div>
-
-<div id="outline-container-orgheadline2" class="outline-3">
+</div><div id="outline-container-orgheadline2" class="outline-3">
 <h3 id="orgheadline2">6.006 Introduction to Algorithms Heaps and heap sort</h3>
 <div class="outline-text-3" id="text-orgheadline2">
 </div><div id="outline-container-orgheadline3" class="outline-4">
@@ -85,20 +77,22 @@ Implements a set <code>S</code> of elements, each of elements associated with a 
 <div id="outline-container-orgheadline4" class="outline-4">
 <h4 id="orgheadline4">Typical operations</h4>
 <div class="outline-text-4" id="text-orgheadline4">
-</div><div id="outline-container-orgheadline25" class="outline-5">
-<h5 id="orgheadline25">Insert(S, x): insett element x into set <code>S</code></h5>
-</div>
+<ul class="org-ul">
+<li>Insert(S, x): insett element x into set <code>S</code></li>
 
-<div id="outline-container-orgheadline26" class="outline-5">
-<h5 id="orgheadline26">Max(S): return element of <code>S</code> with a largest key</h5>
-</div>
+<li>Max(S): return element of <code>S</code> with a largest key</li>
 
-<div id="outline-container-orgheadline27" class="outline-5">
-<h5 id="orgheadline27">Extract_max(S): ^^^ and remove it from <code>S</code></h5>
-</div>
+<li>Extract_max(S): ^^^ and remove it from <code>S</code></li>
 
-<div id="outline-container-orgheadline28" class="outline-5">
-<h5 id="orgheadline28">Increase(S, x, k): increase the value of x's key to new value k</h5>
+<li>Increase(S, x, k): increase the value of x's key to new value k</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Max-Heap.svg/240px-Max-Heap.svg.png" alt="Max-heap" title="Max-heap sample" align="right" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Max-heap</p>
+</div>
 </div>
 </div>
 
@@ -181,18 +175,18 @@ The key of a node &gt;= the keys of its childen
 <div id="outline-container-orgheadline8" class="outline-4">
 <h4 id="orgheadline8">Heap operations</h4>
 <div class="outline-text-4" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline29" class="outline-5">
-<h5 id="orgheadline29">Build_max_heap:</h5>
-<div class="outline-text-5" id="text-orgheadline29">
+</div><div id="outline-container-orgheadline25" class="outline-5">
+<h5 id="orgheadline25">Build_max_heap:</h5>
+<div class="outline-text-5" id="text-orgheadline25">
 <p>
 produces a max heap from an unsorted array
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-5">
-<h5 id="orgheadline30">max_heapify:</h5>
-<div class="outline-text-5" id="text-orgheadline30">
+<div id="outline-container-orgheadline26" class="outline-5">
+<h5 id="orgheadline26">max_heapify:</h5>
+<div class="outline-text-5" id="text-orgheadline26">
 <p>
 correct a single violation of the heap property in a
 subtree's root
@@ -280,9 +274,9 @@ Lets take an attempt to disclose much unique and useful heapq features.
 <div id="outline-container-orgheadline17" class="outline-4">
 <h4 id="orgheadline17">Heap and numbers</h4>
 <div class="outline-text-4" id="text-orgheadline17">
-</div><div id="outline-container-orgheadline31" class="outline-5">
-<h5 id="orgheadline31">Integers</h5>
-<div class="outline-text-5" id="text-orgheadline31">
+</div><div id="outline-container-orgheadline27" class="outline-5">
+<h5 id="orgheadline27">Integers</h5>
+<div class="outline-text-5" id="text-orgheadline27">
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> heapify
@@ -301,9 +295,9 @@ heapify(h1)
 
 
 
-<div id="outline-container-orgheadline32" class="outline-5">
-<h5 id="orgheadline32">Decimal</h5>
-<div class="outline-text-5" id="text-orgheadline32">
+<div id="outline-container-orgheadline28" class="outline-5">
+<h5 id="orgheadline28">Decimal</h5>
+<div class="outline-text-5" id="text-orgheadline28">
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #ff87ff;">h2</span> = [-2.2, 3.8, 1.1, -5]
@@ -552,10 +546,10 @@ Now it's time to evaluate with this data-set:
 </div>
 
 <pre class="example">
-[2, 6, 49, 52, 60, 80, 88, 90, 96, 99]
-0.00019359588623046875
-[2, 6, 18, 49, 52, 60, 64, 64, 68, 74]
-0.0005304813385009766
+[24, 29, 30, 34, 52, 54, 64, 65, 72, 93]
+0.00017976760864257812
+[1, 5, 24, 25, 27, 29, 30, 34, 41, 50]
+0.0005156993865966797
 </pre>
 </div>
 
@@ -575,16 +569,16 @@ Obviously that <code>heapq</code> module works 4 time slowly than a native sort.
 </div>
 
 <div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24">Correct usage</h4>
+<h4 id="orgheadline24">Wrong usage #2</h4>
 <div class="outline-text-4" id="text-orgheadline24">
 <p>
-Lets restrict
+Lets restrict our algorithm to <code>heapify</code> the data array only once.
 </p>
 
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #cd0000;">def</span> <span style="color: #af00ff;">custom_heap_algorithm</span>(n, h):
-<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""h is prepared heap"""</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""h is a preliminarily prepared heap"""</span>
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">result</span> = []
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">for</span> i <span style="color: #cd0000;">in</span> <span style="color: #cd00cd;">range</span>(n):
 <span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   heappush(h, randint(0, 100))
@@ -600,6 +594,13 @@ Lets restrict
 </pre>
 </div>
 
+<pre class="example">
+[1, 1, 5, 19, 23, 24, 25, 27, 29, 30]
+0.0001804828643798828
+[1, 1, 2, 5, 8, 14, 18, 19, 23, 24]
+0.00045680999755859375
+</pre>
+
 
 <div class="org-src-container">
 
@@ -607,6 +608,13 @@ Lets restrict
 <span style="color: #ff87ff;">i</span> = time(); heapify(numbers); custom_heap_algorithm(10**3, numbers); <span style="color: #cd0000;">print</span>(time()-i)
 </pre>
 </div>
+
+<pre class="example">
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+0.02643871307373047
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+0.2994558811187744
+</pre>
 </div>
 </div>
 </div>
