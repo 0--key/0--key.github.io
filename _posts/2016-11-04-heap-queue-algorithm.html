@@ -44,6 +44,12 @@ tags: [heap queue, stdlib, heapq]
 <li><a href="#orgheadline21">Heap of tuples</a></li>
 </ul>
 </li>
+<li><a href="#orgheadline22">Time complexity</a>
+<ul>
+<li><a href="#orgheadline23">Algorithm analysis</a></li>
+<li><a href="#orgheadline24">Correct usage</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -79,20 +85,20 @@ Implements a set <code>S</code> of elements, each of elements associated with a 
 <div id="outline-container-orgheadline4" class="outline-4">
 <h4 id="orgheadline4">Typical operations</h4>
 <div class="outline-text-4" id="text-orgheadline4">
-</div><div id="outline-container-orgheadline22" class="outline-5">
-<h5 id="orgheadline22">Insert(S, x): insett element x into set <code>S</code></h5>
+</div><div id="outline-container-orgheadline25" class="outline-5">
+<h5 id="orgheadline25">Insert(S, x): insett element x into set <code>S</code></h5>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-5">
-<h5 id="orgheadline23">Max(S): return element of <code>S</code> with a largest key</h5>
+<div id="outline-container-orgheadline26" class="outline-5">
+<h5 id="orgheadline26">Max(S): return element of <code>S</code> with a largest key</h5>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-5">
-<h5 id="orgheadline24">Extract_max(S): ^^^ and remove it from <code>S</code></h5>
+<div id="outline-container-orgheadline27" class="outline-5">
+<h5 id="orgheadline27">Extract_max(S): ^^^ and remove it from <code>S</code></h5>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-5">
-<h5 id="orgheadline25">Increase(S, x, k): increase the value of x's key to new value k</h5>
+<div id="outline-container-orgheadline28" class="outline-5">
+<h5 id="orgheadline28">Increase(S, x, k): increase the value of x's key to new value k</h5>
 </div>
 </div>
 
@@ -175,18 +181,18 @@ The key of a node &gt;= the keys of its childen
 <div id="outline-container-orgheadline8" class="outline-4">
 <h4 id="orgheadline8">Heap operations</h4>
 <div class="outline-text-4" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline26" class="outline-5">
-<h5 id="orgheadline26">Build_max_heap:</h5>
-<div class="outline-text-5" id="text-orgheadline26">
+</div><div id="outline-container-orgheadline29" class="outline-5">
+<h5 id="orgheadline29">Build_max_heap:</h5>
+<div class="outline-text-5" id="text-orgheadline29">
 <p>
 produces a max heap from an unsorted array
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-5">
-<h5 id="orgheadline27">max_heapify:</h5>
-<div class="outline-text-5" id="text-orgheadline27">
+<div id="outline-container-orgheadline30" class="outline-5">
+<h5 id="orgheadline30">max_heapify:</h5>
+<div class="outline-text-5" id="text-orgheadline30">
 <p>
 correct a single violation of the heap property in a
 subtree's root
@@ -274,9 +280,9 @@ Lets take an attempt to disclose much unique and useful heapq features.
 <div id="outline-container-orgheadline17" class="outline-4">
 <h4 id="orgheadline17">Heap and numbers</h4>
 <div class="outline-text-4" id="text-orgheadline17">
-</div><div id="outline-container-orgheadline28" class="outline-5">
-<h5 id="orgheadline28">Integers</h5>
-<div class="outline-text-5" id="text-orgheadline28">
+</div><div id="outline-container-orgheadline31" class="outline-5">
+<h5 id="orgheadline31">Integers</h5>
+<div class="outline-text-5" id="text-orgheadline31">
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> heapify
@@ -295,9 +301,9 @@ heapify(h1)
 
 
 
-<div id="outline-container-orgheadline29" class="outline-5">
-<h5 id="orgheadline29">Decimal</h5>
-<div class="outline-text-5" id="text-orgheadline29">
+<div id="outline-container-orgheadline32" class="outline-5">
+<h5 id="orgheadline32">Decimal</h5>
+<div class="outline-text-5" id="text-orgheadline32">
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #ff87ff;">h2</span> = [-2.2, 3.8, 1.1, -5]
@@ -446,6 +452,161 @@ heappop(h)
 [(5, 'write code'), (6, 'test it up'), (7, 'release product')]
 (5, 'write code')
 </pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22">Time complexity</h3>
+<div class="outline-text-3" id="text-orgheadline22">
+<p>
+From <a href="http://stackoverflow.com/questions/24666602/python-heapq-vs-sorted-complexity-and-performance/24668898#24668898">StackOverflow</a>
+</p>
+<blockquote>
+<p>
+If you use binary heap to pop all elements in order, the thing you do is basically heapsort. It is slower than sort algorightm in sorted function apart from it's implementation is pure python.
+</p>
+
+<p>
+The heapq is faster than sorted in case if you need to add elements on the fly i.e. additions and insertions could come in unspecified order. Adding new element preserving inner order in any heap is faster than resorting array after each insertion.
+</p>
+
+<p>
+The sorted is faster if you will need to retrieve all elements in order later.
+</p>
+
+<p>
+The only problem where they can compete - if you need some portion of smallest (or largest) elements from collection. Although there are special algorigthms for that case, whether heapq or sorted will be faster here depends on the size of the initial array and portion you'll need to extract.
+</p>
+</blockquote>
+
+<p>
+Lets compare how fast they are work
+</p>
+<blockquote>
+<p>
+<b>Comparison Task</b>: We have a large list of integers which is appended 1000 times with a single
+value during each iteration. Try to extract 10 smallest values out of
+it after every modification. Compare the execution time
+</p>
+</blockquote>
+<p>
+Lets create a random sequence of integers
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> random <span style="color: #cd0000;">import</span> randint
+<span style="color: #ff87ff;">numbers</span> = [randint(0,10000) <span style="color: #cd0000;">for</span> i <span style="color: #cd0000;">in</span> <span style="color: #cd00cd;">range</span>(100)]
+</pre>
+</div>
+
+<p>
+Comparison between <code>heapq</code> and <code>sort</code>
+</p>
+
+<p>
+Lets create a function to detect minimum values in the data-set:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">def</span> <span style="color: #af00ff;">min_10_values_by_native_sort</span>(l):
+<span style="color: #00ff00; background-color: #262626;"> </span>   l.sort()
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> l[:10]
+</pre>
+</div>
+
+<p>
+And using <code>heapq</code> module
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">from</span> heapq <span style="color: #cd0000;">import</span> nsmallest, heapify
+
+<span style="color: #cd0000;">def</span> <span style="color: #af00ff;">min_10_values_in_the_heap</span>(h):
+<span style="color: #00ff00; background-color: #262626;"> </span>   heapify(h)
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> nsmallest(10, h)
+</pre>
+</div>
+
+<p>
+Now it's time to evaluate with this data-set:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">def</span> <span style="color: #af00ff;">time_complexity_analysis</span>(n, l, f):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">result</span> = []
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">for</span> i <span style="color: #cd0000;">in</span> <span style="color: #cd00cd;">range</span>(n):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   l.append(randint(0,100))
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   result.append(f(l))
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> result[-1]
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">i</span> = time(); time_complexity_analysis(10, numbers, min_10_values_by_native_sort); <span style="color: #cd0000;">print</span>(time()-i)
+<span style="color: #ff87ff;">i</span> = time(); time_complexity_analysis(10, numbers, min_10_values_in_the_heap); <span style="color: #cd0000;">print</span>(time()-i)
+</pre>
+</div>
+
+<pre class="example">
+[2, 6, 49, 52, 60, 80, 88, 90, 96, 99]
+0.00019359588623046875
+[2, 6, 18, 49, 52, 60, 64, 64, 68, 74]
+0.0005304813385009766
+</pre>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23">Algorithm analysis</h4>
+<div class="outline-text-4" id="text-orgheadline23">
+<p>
+Obviously that <code>heapq</code> module works 4 time slowly than a native sort.
+<b>But</b> try to elaborate our algorithm:
+</p>
+<ul class="org-ul">
+<li><code>heapify</code> initial data-set once</li>
+<li><code>heappush</code> new values into it many times</li>
+<li>detect <code>nsmallest</code> after each modification</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24">Correct usage</h4>
+<div class="outline-text-4" id="text-orgheadline24">
+<p>
+Lets restrict
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #cd0000;">def</span> <span style="color: #af00ff;">custom_heap_algorithm</span>(n, h):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00cdcd;">"""h is prepared heap"""</span>
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #ff87ff;">result</span> = []
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">for</span> i <span style="color: #cd0000;">in</span> <span style="color: #cd00cd;">range</span>(n):
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   heappush(h, randint(0, 100))
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #00ff00; background-color: #262626;"> </span>   result.append(nsmallest(10, h))
+<span style="color: #00ff00; background-color: #262626;"> </span>   <span style="color: #cd0000;">return</span> result[-1]
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">i</span> = time(); time_complexity_analysis(10, numbers, min_10_values_by_native_sort); <span style="color: #cd0000;">print</span>(time()-i)
+<span style="color: #ff87ff;">i</span> = time(); heapify(numbers); custom_heap_algorithm(10, numbers); <span style="color: #cd0000;">print</span>(time()-i)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff87ff;">i</span> = time(); time_complexity_analysis(10**3, numbers, min_10_values_by_native_sort); <span style="color: #cd0000;">print</span>(time()-i)
+<span style="color: #ff87ff;">i</span> = time(); heapify(numbers); custom_heap_algorithm(10**3, numbers); <span style="color: #cd0000;">print</span>(time()-i)
+</pre>
+</div>
 </div>
 </div>
 </div>
