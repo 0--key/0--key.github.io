@@ -20,9 +20,9 @@ tags: [computation, complexity, analysis]
 <div class="outline-text-2" id="text-orgheadline1">
 
 <div class="figure">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comparison_computational_complexity.svg/250px-Comparison_computational_complexity.svg.png" alt="Time Complexity" title="Graphs of number of operations, N vs input size, n for common complexities, assuming a coefficient of 1" align="right" />
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comparison_computational_complexity.svg/250px-Comparison_computational_complexity.svg.png" alt="Time Complexity" title="Time Complexity proportion" align="right" />
 </p>
-<p><span class="figure-number">Figure 1:</span> TimeComplexity</p>
+<p><span class="figure-number">Figure 1:</span> Graphs of number of operations, N vs input size, n for common complexities, assuming a coefficient of 1</p>
 </div>
 <blockquote>
 <p>
@@ -33,9 +33,11 @@ commonly expressed using <b>big O</b> notation, which excludes coefficients and
 lower order terms. When expressed this way, the time complexity is said to
 be described asymptotically, i.e., as the input size goes to infinity. For
 example, if the time required by an algorithm on all inputs of size n is
-at most 5n&lt;sup&gt;3&lt;/sup&gt; + 3n for any n (bigger than some n0), the asymptotic time
-complexity is O(n3).
-&theta;
+at most 5n^3 + 3n for any n (bigger than some n_0), the asymptotic time
+complexity is O(n^3).
+</p>
+
+<p>
 Time complexity is commonly estimated by counting the number of elementary
 operations performed by the algorithm, where an elementary operation takes
 a fixed amount of time to perform. Thus, the amount of time taken and the
