@@ -11,6 +11,7 @@ tags: [computation, complexity, analysis]
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">Definition</a></li>
+<li><a href="#orgheadline2">Samples</a></li>
 </ul>
 </div>
 </div>
@@ -38,6 +39,10 @@ complexity is O(n<sup>3</sup>).
 </p>
 
 <p>
+The expression <b>O</b> is also called <code>Landau's symbol</code>.
+</p>
+
+<p>
 Time complexity is commonly estimated by counting the number of elementary
 operations performed by the algorithm, where an elementary operation takes
 a fixed amount of time to perform. Thus, the amount of time taken and the
@@ -45,5 +50,84 @@ number of elementary operations performed by the algorithm differ by at
 most a constant factor.
 </p>
 </blockquote>
+
+<p>
+In other words:
+</p>
+<blockquote>
+<p>
+The number of (machine) instructions which a program executes during its
+running time is called its time complexity in computer science.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Samples</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Running time</th>
+<th scope="col" class="org-left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">constant</td>
+<td class="org-left">O(1)</td>
+<td class="org-left">statement</td>
+</tr>
+
+<tr>
+<td class="org-left">linear</td>
+<td class="org-left">O(n)</td>
+<td class="org-left">single_loop(statement)</td>
+</tr>
+
+<tr>
+<td class="org-left">quadratic</td>
+<td class="org-left">O(n<sup>2</sup>)</td>
+<td class="org-left">double_loop(statement)</td>
+</tr>
+
+<tr>
+<td class="org-left">logarithmic</td>
+<td class="org-left">O(log<sub>2</sub>n)</td>
+<td class="org-left">binary search &bull;</td>
+</tr>
+
+<tr>
+<td class="org-left">inearithmic</td>
+<td class="org-left">n*O(log<sub>2</sub>n)</td>
+<td class="org-left">&bull; &bull;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+&bull; The running time of the algorithm is proportional to the number of
+times N can be divided by 2. This is because the algorithm divides the
+working area in half with each iteration.
+&bull; &bull; The running time consists of N loops (iterative or recursive)
+that are logarithmic, thus the algorithm is a combination of linear and
+logarithmic.
+</p>
+
+<p>
+The full <a href="https://en.wikipedia.org/wiki/Time_complexity#Table_of_common_time_complexities">list of common time complexities</a>  
+</p>
 </div>
 </div>
