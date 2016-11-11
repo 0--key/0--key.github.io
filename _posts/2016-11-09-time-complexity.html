@@ -105,23 +105,26 @@ running time is called its time complexity in computer science.
 <tr>
 <td class="org-left">logarithmic</td>
 <td class="org-left">O(log<sub>2</sub>n)</td>
-<td class="org-left">binary search &bull;</td>
+<td class="org-left">binary search &alpha;</td>
 </tr>
 
 <tr>
-<td class="org-left">inearithmic</td>
+<td class="org-left">linearithmic</td>
 <td class="org-left">n*O(log<sub>2</sub>n)</td>
-<td class="org-left">&bull; &bull;</td>
+<td class="org-left">&beta;</td>
 </tr>
 </tbody>
 </table>
 
 
 <p>
-&bull; The running time of the algorithm is proportional to the number of
+&alpha; The running time of the algorithm is proportional to the number of
 times N can be divided by 2. This is because the algorithm divides the
 working area in half with each iteration.
-&bull; &bull; The running time consists of N loops (iterative or recursive)
+</p>
+
+<p>
+&beta; The running time consists of N loops (iterative or recursive)
 that are logarithmic, thus the algorithm is a combination of linear and
 logarithmic.
 </p>
