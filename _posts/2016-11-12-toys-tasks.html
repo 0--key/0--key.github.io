@@ -1,127 +1,112 @@
-<div class="HTML">
-<p>
-&#x2014;
+---
 layout: post
 title: Write Python programs
 tagline: " by means of Emacs' toolbox"
 permalink: /coding/codewars-toy-tasks.html
 categories: [literate programming, Python, CodeWars, emacs]
 tags: [coding, algorithms]
-&#x2014;
-</p>
-
-</div>
+---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga845e02">#1</a></li>
-<li><a href="#org2a6cbb2">#2</a>
+<li><a href="#orgheadline1">#1</a></li>
+<li><a href="#orgheadline2">#2</a>
 <ul>
-<li><a href="#org808ee12">Description</a></li>
-<li><a href="#orga8e1fd8">Code</a></li>
-<li><a href="#org8c39442">TestSuite</a></li>
-<li><a href="#orgb70a742">TestRunner</a></li>
+<li><a href="#orgheadline3">Description</a></li>
+<li><a href="#orgheadline4">Code</a></li>
+<li><a href="#orgheadline5">TestSuite</a></li>
+<li><a href="#orgheadline6">TestRunner</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga845e02" class="outline-2">
-<h2 id="orga845e02">#1</h2>
-<div class="outline-text-2" id="text-orga845e02">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">#1</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <blockquote>
 <p>
 Return the number (count) of vowels in the given string.
-</p>
-
-<p>
 We will consider a, e, i, o, and u as vowels for this Kata.
 </p>
 </blockquote>
 
 <div class="org-src-container">
-<pre class="src src-python">import unittest
 
-def getCount(inputStr):
-    num_vowels = 0
-    # your code here
-    for letter in inputStr:
-	list_of_vowels = ['a', 'e', 'i', 'o', 'u']
-	if letter in list_of_vowels:
-	    num_vowels += 1
-	    #print(letter)
-	    #print(num_vowels)
-    return num_vowels
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">getCount</span>(inputStr):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">num_vowels</span> = 0
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff1493;"># </span><span style="color: #ff1493;">your code here</span>
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">for</span> letter <span style="color: #ff0000;">in</span> inputStr:
+        <span style="color: #ee82ee;">list_of_vowels</span> = [<span style="color: #00ffff;">'a'</span>, <span style="color: #00ffff;">'e'</span>, <span style="color: #00ffff;">'i'</span>, <span style="color: #00ffff;">'o'</span>, <span style="color: #00ffff;">'u'</span>]
+        <span style="color: #ff0000;">if</span> letter <span style="color: #ff0000;">in</span> list_of_vowels:
+            <span style="color: #ee82ee;">num_vowels</span> += 1
+            <span style="color: #ff1493;">#</span><span style="color: #ff1493;">print(letter)</span>
+            <span style="color: #ff1493;">#</span><span style="color: #ff1493;">print(num_vowels)</span>
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> num_vowels
 
-input_string = 'John the dully boy write this book'
+<span style="color: #ee82ee;">input_string</span> = <span style="color: #00ffff;">'John the dully boy write this book'</span>
 
-print(getCount(input_string))
-
-unittest.TestCase.assertEqual(getCount("abracadabra"), 5)
-
-class TestNumVowels(unittest.TestCase):
-
-    def test_simple_input(self):
-	self.assertEqual(getCount("abracadabra"), 4)
-
-print(TestNumVowels())
+<span style="color: #ff0000;">print</span>(getCount(input_string))
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python">import unittest
 
-def fun(x):
-    return x + 1
+<pre class="src src-python"><span style="color: #ff0000;">import</span> unittest
 
-class MyTest(unittest.TestCase):
-    def test(self):
-	self.assertEqual(fun(3), 4)
+<span style="color: #ff0000;">def</span> <span style="color: #a020f0;">fun</span>(x):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> x + 1
+
+<span style="color: #ff0000;">class</span> <span style="color: #ffff00;">MyTest</span>(unittest.TestCase):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">def</span> <span style="color: #a020f0;">test</span>(<span style="color: #ff0000;">self</span>):
+        <span style="color: #ff0000;">self</span>.assertEqual(fun(3), 4)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org2a6cbb2" class="outline-2">
-<h2 id="org2a6cbb2">#2</h2>
-<div class="outline-text-2" id="text-org2a6cbb2">
-</div><div id="outline-container-org808ee12" class="outline-3">
-<h3 id="org808ee12">Description</h3>
-<div class="outline-text-3" id="text-org808ee12">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">#2</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Description</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 <i>toys</i>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga8e1fd8" class="outline-3">
-<h3 id="orga8e1fd8">Code</h3>
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Code</h3>
 </div>
 
-<div id="outline-container-org8c39442" class="outline-3">
-<h3 id="org8c39442">TestSuite</h3>
-<div class="outline-text-3" id="text-org8c39442">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">TestSuite</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
-<pre class="src src-python">import unittest
-from .. toy_tasks import order
 
-class TestHiddenOrder(unittest.TestCase):
+<pre class="src src-python"><span style="color: #ff0000;">import</span> unittest
+<span style="color: #ff0000;">from</span> .. toy_tasks <span style="color: #ff0000;">import</span> order
 
-    def test_simple_behaviour(self):
-	self.assertEqual(order("is2 Thi1s T4est 3a"),
-			 "Thi1s is2 3a T4est")
+<span style="color: #ff0000;">class</span> <span style="color: #ffff00;">TestHiddenOrder</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">def</span> <span style="color: #a020f0;">test_simple_behaviour</span>(<span style="color: #ff0000;">self</span>):
+        <span style="color: #ff0000;">self</span>.assertEqual(order(<span style="color: #00ffff;">"is2 Thi1s T4est 3a"</span>),
+                         <span style="color: #00ffff;">"Thi1s is2 3a T4est"</span>)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb70a742" class="outline-3">
-<h3 id="orgb70a742">TestRunner</h3>
-<div class="outline-text-3" id="text-orgb70a742">
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">TestRunner</h3>
+<div class="outline-text-3" id="text-orgheadline6">
 <div class="org-src-container">
+
 <pre class="src src-sh">python -m unittest tests/test_toy_samples.py
 </pre>
 </div>
