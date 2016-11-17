@@ -1,0 +1,151 @@
+<div class="HTML">
+<p>
+&#x2014;
+layout: post
+title: Write Python programs
+tagline: " by means of Emacs' toolbox"
+permalink: /coding/codewars-toy-tasks.html
+categories: [literate programming, Python, CodeWars, emacs]
+tags: [coding, algorithms]
+&#x2014;
+</p>
+
+</div>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga845e02">#1</a></li>
+<li><a href="#org2a6cbb2">#2</a>
+<ul>
+<li><a href="#org808ee12">Description</a></li>
+<li><a href="#orga8e1fd8">Code</a></li>
+<li><a href="#org8c39442">TestSuite</a></li>
+<li><a href="#orgb70a742">TestRunner</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga845e02" class="outline-2">
+<h2 id="orga845e02">#1</h2>
+<div class="outline-text-2" id="text-orga845e02">
+<blockquote>
+<p>
+Return the number (count) of vowels in the given string.
+</p>
+
+<p>
+We will consider a, e, i, o, and u as vowels for this Kata.
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-python">import unittest
+
+def getCount(inputStr):
+    num_vowels = 0
+    # your code here
+    for letter in inputStr:
+	list_of_vowels = ['a', 'e', 'i', 'o', 'u']
+	if letter in list_of_vowels:
+	    num_vowels += 1
+	    #print(letter)
+	    #print(num_vowels)
+    return num_vowels
+
+input_string = 'John the dully boy write this book'
+
+print(getCount(input_string))
+
+unittest.TestCase.assertEqual(getCount("abracadabra"), 5)
+
+class TestNumVowels(unittest.TestCase):
+
+    def test_simple_input(self):
+	self.assertEqual(getCount("abracadabra"), 4)
+
+print(TestNumVowels())
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python">import unittest
+
+def fun(x):
+    return x + 1
+
+class MyTest(unittest.TestCase):
+    def test(self):
+	self.assertEqual(fun(3), 4)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2a6cbb2" class="outline-2">
+<h2 id="org2a6cbb2">#2</h2>
+<div class="outline-text-2" id="text-org2a6cbb2">
+</div><div id="outline-container-org808ee12" class="outline-3">
+<h3 id="org808ee12">Description</h3>
+<div class="outline-text-3" id="text-org808ee12">
+<p>
+<i>toys</i>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga8e1fd8" class="outline-3">
+<h3 id="orga8e1fd8">Code</h3>
+</div>
+
+<div id="outline-container-org8c39442" class="outline-3">
+<h3 id="org8c39442">TestSuite</h3>
+<div class="outline-text-3" id="text-org8c39442">
+<div class="org-src-container">
+<pre class="src src-python">import unittest
+from .. toy_tasks import order
+
+class TestHiddenOrder(unittest.TestCase):
+
+    def test_simple_behaviour(self):
+	self.assertEqual(order("is2 Thi1s T4est 3a"),
+			 "Thi1s is2 3a T4est")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb70a742" class="outline-3">
+<h3 id="orgb70a742">TestRunner</h3>
+<div class="outline-text-3" id="text-orgb70a742">
+<div class="org-src-container">
+<pre class="src src-sh">python -m unittest tests/test_toy_samples.py
+</pre>
+</div>
+
+<pre class="example">
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/usr/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/usr/lib/python2.7/unittest/__main__.py", line 12, in &lt;module&gt;
+    main(module=None)
+  File "/usr/lib/python2.7/unittest/main.py", line 94, in __init__
+    self.parseArgs(argv)
+  File "/usr/lib/python2.7/unittest/main.py", line 149, in parseArgs
+    self.createTests()
+  File "/usr/lib/python2.7/unittest/main.py", line 158, in createTests
+    self.module)
+  File "/usr/lib/python2.7/unittest/loader.py", line 130, in loadTestsFromNames
+    suites = [self.loadTestsFromName(name, module) for name in names]
+  File "/usr/lib/python2.7/unittest/loader.py", line 91, in loadTestsFromName
+    module = __import__('.'.join(parts_copy))
+ImportError: Import by filename is not supported.
+</pre>
+</div>
+</div>
+</div>
