@@ -1,0 +1,92 @@
+---
+layout: post
+title: How-To
+tagline: " force Emacs to work properly"
+permalink: /how-to/downgrade-emacs-package.html
+categories: [how-to, emacs, package]
+tags: [debugging, roll-back]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Preamble</a></li>
+<li><a href="#orgheadline2">Delete bug cause</a></li>
+<li><a href="#orgheadline3">Restart Emacs</a></li>
+<li><a href="#orgheadline4">Find an appropriate solution</a></li>
+<li><a href="#orgheadline5">Install it</a></li>
+<li><a href="#orgheadline6">Test it up</a></li>
+<li><a href="#orgheadline7">Roll-back deeper in the past</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Sometimes somewhere in Emacs your well-known function ceased working.
+It is absolutely normal situation in the World of Free Software.
+It's a complex and knotty realm, and you want to return to innocence.
+With no doubt it is possible to do by roll-back the average package.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Delete bug cause</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+First of all try to detect what is the cause of deny of service. In
+most cases it might occur <i>after your manipulation with packages</i>.
+Open the embedded package manager <code>M-x package-list-pakages</code> and take
+an attempt to determine the root of problem. Already installed
+packages are at the bottom of this list and it would be great to
+review the newest ones <code>M-&gt;</code> from the bottom up to the top.
+</p>
+
+<p>
+After than you find out the most matching candidate for downgrading -
+just mark it by typing <code>d</code> key. After that <code>x</code> should implement particular
+package removal.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Restart Emacs</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+Suppose it should be easy by <code>C-x C-c</code>. Or feel free to try the next
+step without restarting. It might be <i>necessary later</i>, after older candidate
+installation.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Find an appropriate solution</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<p>
+Look for matching replacement at <a href="http://elpa.gnu.org/packages/">Elpy</a>. Copy a necessary link to <code>.tar</code>
+archive.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Install it</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+<p>
+Activate <code>M-x url-handler-mode</code> and <code>M-x package-install-file</code> and
+paste <i>link to .tar archive</i> there. <code>Enter</code> should launch installation.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Test it up</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+<p>
+Does bug really disappear?
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Roll-back deeper in the past</h2>
+</div>
