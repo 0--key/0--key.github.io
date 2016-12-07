@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Pytest
-tagline: " module overview"
+tagline: " : helps you write better programs"
 permalink: /python/testing/pytest-in-babel.html
 categories: [python, pytest, literate programming]
 tags: [emacs, babel, tutorial, testing]
@@ -18,6 +18,13 @@ tags: [emacs, babel, tutorial, testing]
 <li><a href="#orgheadline5">Lets create a separate test file:</a></li>
 <li><a href="#orgheadline6">Run pytest</a></li>
 <li><a href="#orgheadline7">Conclusion</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">Calling pytest from Python code</a>
+<ul>
+<li><a href="#orgheadline9">Test all detected suites</a></li>
+<li><a href="#orgheadline10">Test particular case</a></li>
+<li><a href="#orgheadline11">Conclusion</a></li>
 </ul>
 </li>
 </ul>
@@ -59,12 +66,12 @@ Check up does pytest installed already:
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC sh :results ouput pp :exports both</span>
+<pre class="src src-org"><span style="color: #8b814c; font-style: italic;">#+BEGIN_SRC sh :results ouput pp :exports both</span>
 pip freeze | grep pytest
-<span style="color: #ff0087;">#+END_SRC</span>
+<span style="color: #8b814c; font-style: italic;">#+END_SRC</span>
 
-<span style="color: #ff0087;">#+RESULTS:</span>
-<span style="color: #b2b2b2;">: pytest==3.0.2</span>
+<span style="color: #8b814c; font-style: italic;">#+RESULTS:</span>
+<span style="color: #7f7f7f;">: pytest==3.0.2</span>
 </pre>
 </div>
 
@@ -88,16 +95,16 @@ Seems like it's installed properly and we going on.
 <div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff0087;">#+BEGIN_SRC python :noweb yes :tangle tests/test_sample.py</span>
-  <span style="color: #00cdcd;">"""This is an initial pytest sample file"""</span>
+<pre class="src src-org"><span style="color: #8b814c; font-style: italic;">#+BEGIN_SRC python :noweb yes :tangle tests/test_sample.py</span>
+  <span style="color: #ffa500; font-style: italic;">"""This is an initial pytest sample file"""</span>
 
-  <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">func</span>(x):
-      <span style="color: #cd0000;">return</span> x + 1
+  <span style="color: #ff0000;">def</span> <span style="color: #ff0000; font-weight: bold; font-style: italic;">func</span>(x):
+      <span style="color: #ff0000;">return</span> x + 1
 
 
-  <span style="color: #cd0000;">def</span> <span style="color: #af00ff;">test_answer</span>():
-      <span style="color: #cd0000;">assert</span> func(3) == 5
-<span style="color: #ff0087;">#+END_SRC</span>
+  <span style="color: #ff0000;">def</span> <span style="color: #ff0000; font-weight: bold; font-style: italic;">test_answer</span>():
+      <span style="color: #ff0000;">assert</span> func(3) == 5
+<span style="color: #8b814c; font-style: italic;">#+END_SRC</span>
 </pre>
 </div>
 
@@ -114,41 +121,41 @@ Seems like it's installed properly and we going on.
 <div class="outline-text-3" id="text-orgheadline6">
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff0087;">   #+BEGIN_SRC sh :results output :exports both</span>
+<pre class="src src-org"><span style="color: #8b814c; font-style: italic;">   #+BEGIN_SRC sh :results output :exports both</span>
    ls tests | grep py
-   py.test -v <span style="color: #ff0087;"># </span><span style="color: #ff0087;">-v means =verbose=</span>
-<span style="color: #ff0087;">   #+END_SRC</span>
+   py.test -v <span style="color: #8b814c; font-style: italic;"># </span><span style="color: #8b814c; font-style: italic;">-v means =verbose=</span>
+<span style="color: #8b814c; font-style: italic;">   #+END_SRC</span>
 
-<span style="color: #ff0087;">   #+RESULTS:</span>
-<span style="color: #ff0087;">   #+begin_example</span>
-<span style="color: #b2b2b2;">   __pycache__</span>
-<span style="color: #b2b2b2;">   test_built-in_constants.py</span>
-<span style="color: #b2b2b2;">   test_built-in_constants.pyc</span>
-<span style="color: #b2b2b2;">   test_sample.py</span>
-<span style="color: #b2b2b2;">   test_sample.py~</span>
-<span style="color: #b2b2b2;">   test_sample.pyc</span>
-<span style="color: #b2b2b2;">   ============================= test session starts ==============================</span>
-<span style="color: #b2b2b2;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
-<span style="color: #b2b2b2;">   cachedir: .cache</span>
-<span style="color: #b2b2b2;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
-<span style="color: #b2b2b2;">   collecting ... collected 4 items</span>
+<span style="color: #8b814c; font-style: italic;">   #+RESULTS:</span>
+<span style="color: #8b814c; font-style: italic;">   #+begin_example</span>
+<span style="color: #7f7f7f;">   __pycache__</span>
+<span style="color: #7f7f7f;">   test_built-in_constants.py</span>
+<span style="color: #7f7f7f;">   test_built-in_constants.pyc</span>
+<span style="color: #7f7f7f;">   test_sample.py</span>
+<span style="color: #7f7f7f;">   test_sample.py~</span>
+<span style="color: #7f7f7f;">   test_sample.pyc</span>
+<span style="color: #7f7f7f;">   ============================= test session starts ==============================</span>
+<span style="color: #7f7f7f;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
+<span style="color: #7f7f7f;">   cachedir: .cache</span>
+<span style="color: #7f7f7f;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
+<span style="color: #7f7f7f;">   collecting ... collected 4 items</span>
 
-<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_false PASSED</span>
-<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_none PASSED</span>
-<span style="color: #b2b2b2;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_true PASSED</span>
-<span style="color: #b2b2b2;">   tests/test_sample.py::test_answer FAILED</span>
+<span style="color: #7f7f7f;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_false PASSED</span>
+<span style="color: #7f7f7f;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_none PASSED</span>
+<span style="color: #7f7f7f;">   tests/test_built-in_constants.py::TestBuiltInConstants::test_true PASSED</span>
+<span style="color: #7f7f7f;">   tests/test_sample.py::test_answer FAILED</span>
 
-<span style="color: #b2b2b2;">   =================================== FAILURES ===================================</span>
-<span style="color: #b2b2b2;">   _________________________________ test_answer __________________________________</span>
+<span style="color: #7f7f7f;">   =================================== FAILURES ===================================</span>
+<span style="color: #7f7f7f;">   _________________________________ test_answer __________________________________</span>
 
-<span style="color: #b2b2b2;">       def test_answer():</span>
-<span style="color: #b2b2b2;">   &gt;       assert func(3) == 5</span>
-<span style="color: #b2b2b2;">   E       assert 4 == 5</span>
-<span style="color: #b2b2b2;">   E        +  where 4 = func(3)</span>
+<span style="color: #7f7f7f;">       def test_answer():</span>
+<span style="color: #7f7f7f;">   &gt;       assert func(3) == 5</span>
+<span style="color: #7f7f7f;">   E       assert 4 == 5</span>
+<span style="color: #7f7f7f;">   E        +  where 4 = func(3)</span>
 
-<span style="color: #b2b2b2;">   tests/test_sample.py:6: AssertionError</span>
-<span style="color: #b2b2b2;">   ====================== 1 failed, 3 passed in 0.10 seconds ======================</span>
-<span style="color: #ff0087;">#+end_example</span>
+<span style="color: #7f7f7f;">   tests/test_sample.py:6: AssertionError</span>
+<span style="color: #7f7f7f;">   ====================== 1 failed, 3 passed in 0.10 seconds ======================</span>
+<span style="color: #8b814c; font-style: italic;">#+end_example</span>
 </pre>
 </div>
 <hr  />
@@ -160,31 +167,31 @@ to test something <i>particular</i>?
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #ff0087;">   #+BEGIN_SRC sh :results output :exports both</span>
+<pre class="src src-org"><span style="color: #8b814c; font-style: italic;">   #+BEGIN_SRC sh :results output :exports both</span>
    py.test -v tests/test_sample.py
-<span style="color: #ff0087;">   #+END_SRC</span>
+<span style="color: #8b814c; font-style: italic;">   #+END_SRC</span>
 
-<span style="color: #ff0087;">   #+RESULTS:</span>
-<span style="color: #ff0087;">   #+begin_example</span>
-<span style="color: #b2b2b2;">   ============================= test session starts ==============================</span>
-<span style="color: #b2b2b2;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
-<span style="color: #b2b2b2;">   cachedir: .cache</span>
-<span style="color: #b2b2b2;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
-<span style="color: #b2b2b2;">   collecting ... collected 1 items</span>
+<span style="color: #8b814c; font-style: italic;">   #+RESULTS:</span>
+<span style="color: #8b814c; font-style: italic;">   #+begin_example</span>
+<span style="color: #7f7f7f;">   ============================= test session starts ==============================</span>
+<span style="color: #7f7f7f;">   platform linux -- Python 3.4.3, pytest-3.0.2, py-1.4.31, pluggy-0.3.1 -- /usr/local/share/DVCS/lib/Python/venv/bin/python3</span>
+<span style="color: #7f7f7f;">   cachedir: .cache</span>
+<span style="color: #7f7f7f;">   rootdir: /usr/local/share/DVCS/org-pub, inifile: </span>
+<span style="color: #7f7f7f;">   collecting ... collected 1 items</span>
 
-<span style="color: #b2b2b2;">   tests/test_sample.py::test_answer FAILED</span>
+<span style="color: #7f7f7f;">   tests/test_sample.py::test_answer FAILED</span>
 
-<span style="color: #b2b2b2;">   =================================== FAILURES ===================================</span>
-<span style="color: #b2b2b2;">   _________________________________ test_answer __________________________________</span>
+<span style="color: #7f7f7f;">   =================================== FAILURES ===================================</span>
+<span style="color: #7f7f7f;">   _________________________________ test_answer __________________________________</span>
 
-<span style="color: #b2b2b2;">       def test_answer():</span>
-<span style="color: #b2b2b2;">   &gt;       assert func(3) == 5</span>
-<span style="color: #b2b2b2;">   E       assert 4 == 5</span>
-<span style="color: #b2b2b2;">   E        +  where 4 = func(3)</span>
+<span style="color: #7f7f7f;">       def test_answer():</span>
+<span style="color: #7f7f7f;">   &gt;       assert func(3) == 5</span>
+<span style="color: #7f7f7f;">   E       assert 4 == 5</span>
+<span style="color: #7f7f7f;">   E        +  where 4 = func(3)</span>
 
-<span style="color: #b2b2b2;">   tests/test_sample.py:6: AssertionError</span>
-<span style="color: #b2b2b2;">   =========================== 1 failed in 0.05 seconds ===========================</span>
-<span style="color: #ff0087;">#+end_example</span>
+<span style="color: #7f7f7f;">   tests/test_sample.py:6: AssertionError</span>
+<span style="color: #7f7f7f;">   =========================== 1 failed in 0.05 seconds ===========================</span>
+<span style="color: #8b814c; font-style: italic;">#+end_example</span>
 </pre>
 </div>
 </div>
@@ -206,6 +213,101 @@ to test something <i>particular</i>?
 <li>Rich plugin architecture, with over 150+ external plugins and thriving community;</li>
 </ul>
 </blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Calling pytest from Python code</h2>
+<div class="outline-text-2" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Test all detected suites</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">import</span> pytest
+
+pytest.main()
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; ============================================================ test session starts =============================================================
+platform linux -- Python 3.4.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
+rootdir: /usr/local/share/DVCS/org-pub, inifile: 
+collecting 0 itemscollecting 3 itemscollecting 3 itemscollecting 6 itemscollecting 17 itemscollecting 22 itemscollecting 25 itemscollecting 29 itemscollecting 33 itemscollecting 38 itemscollecting 42 itemscollecting 47 itemscollecting 49 itemscollecting 51 itemscollecting 54 itemscollecting 55 itemscollecting 56 itemscollecting 58 itemscollecting 60 itemscollecting 62 itemscollecting 64 itemscollecting 67 itemscollecting 71 itemscollecting 73 itemscollecting 75 itemscollecting 78 itemscollecting 79 itemscollecting 81 itemscollecting 84 itemscollecting 86 itemscollecting 88 itemscollecting 90 itemscollecting 91 itemscollecting 95 itemscollecting 97 itemscollecting 99 itemscollecting 102 itemscollecting 104 itemscollecting 108 itemscollecting 111 itemscollecting 112 itemscollecting 117 itemscollecting 118 itemscollecting 121 itemscollecting 123 itemscollecting 124 itemscollecting 127 itemscollecting 128 itemscollecting 130 itemscollecting 133 itemscollecting 134 itemscollecting 138 itemscollecting 140 itemscollecting 142 itemscollecting 145 itemscollecting 147 itemscollecting 150 itemscollecting 153 itemscollecting 157 itemscollecting 158 itemscollecting 159 itemscollecting 163 itemscollecting 164 itemscollecting 168 itemscollecting 169 itemscollecting 171 itemscollecting 172 itemscollecting 172 itemscollecting 172 itemscollecting 172 itemscollecting 173 itemscollected 173 items 
+
+tests/test_built-in_constants.py ...
+tests/test_built-in_functions.py ..........................................................................................................................................................F..............
+tests/test_sample.py F
+
+================================================================== FAILURES ==================================================================
+___________________________________________________ TestStaticmethod.test_simple_behaviour ___________________________________________________
+
+self = &lt;test_built-in_functions.TestStaticmethod testMethod=test_simple_behaviour&gt;
+
+    def test_simple_behaviour(self):
+&gt;       self.assertEqual(staticmethod())
+E       TypeError: staticmethod expected 1 arguments, got 0
+
+tests/test_built-in_functions.py:997: TypeError
+________________________________________________________________ test_answer _________________________________________________________________
+
+    def test_answer():
+&gt;       assert func(3) == 5
+E       assert 4 == 5
+E        +  where 4 = func(3)
+
+tests/test_sample.py:8: AssertionError
+==================================================== 2 failed, 171 passed in 0.95 seconds ====================================================
+1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Test particular case</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #ff0000;">import</span> pytest
+
+pytest.main([<span style="color: #ffa500; font-style: italic;">'-k'</span>, <span style="color: #ffa500; font-style: italic;">'test_answer'</span>])
+</pre>
+</div>
+
+<pre class="example">
+&gt;&gt;&gt; ============================================================ test session starts =============================================================
+platform linux -- Python 3.4.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
+rootdir: /usr/local/share/DVCS/org-pub, inifile: 
+collecting 0 itemscollecting 3 itemscollecting 3 itemscollecting 6 itemscollecting 17 itemscollecting 22 itemscollecting 25 itemscollecting 29 itemscollecting 33 itemscollecting 38 itemscollecting 42 itemscollecting 47 itemscollecting 49 itemscollecting 51 itemscollecting 54 itemscollecting 55 itemscollecting 56 itemscollecting 58 itemscollecting 60 itemscollecting 62 itemscollecting 64 itemscollecting 67 itemscollecting 71 itemscollecting 73 itemscollecting 75 itemscollecting 78 itemscollecting 79 itemscollecting 81 itemscollecting 84 itemscollecting 86 itemscollecting 88 itemscollecting 90 itemscollecting 91 itemscollecting 95 itemscollecting 97 itemscollecting 99 itemscollecting 102 itemscollecting 104 itemscollecting 108 itemscollecting 111 itemscollecting 112 itemscollecting 117 itemscollecting 118 itemscollecting 121 itemscollecting 123 itemscollecting 124 itemscollecting 127 itemscollecting 128 itemscollecting 130 itemscollecting 133 itemscollecting 134 itemscollecting 138 itemscollecting 140 itemscollecting 142 itemscollecting 145 itemscollecting 147 itemscollecting 150 itemscollecting 153 itemscollecting 157 itemscollecting 158 itemscollecting 159 itemscollecting 163 itemscollecting 164 itemscollecting 168 itemscollecting 169 itemscollecting 171 itemscollecting 172 itemscollecting 172 itemscollecting 172 itemscollecting 172 itemscollecting 173 itemscollected 173 items 
+
+tests/test_sample.py F
+
+================================================================== FAILURES ==================================================================
+________________________________________________________________ test_answer _________________________________________________________________
+
+    def test_answer():
+&gt;       assert func(3) == 5
+E       assert 4 == 5
+E        +  where 4 = func(3)
+
+tests/test_sample.py:8: AssertionError
+============================================================ 172 tests deselected ============================================================
+================================================== 1 failed, 172 deselected in 0.31 seconds ==================================================
+1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Conclusion</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<p>
+These samples illustrate how to use <code>pytest</code> out from the <code>shell</code>.
+But this approach is pertinent for testing file content and not
+suitable for literate programming itself.
+</p>
 </div>
 </div>
 </div>
