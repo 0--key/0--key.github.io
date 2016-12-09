@@ -40,13 +40,13 @@ stem and when you're <code>C-c C-t</code> to test it up you got:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-elisp">-*- mode: compilation<span style="color: #ff1493;">; </span><span style="color: #ff1493;">default-directory: "/usr/local/share/DVCS/" -*-</span>
+<pre class="src src-sh">-*- mode: compilation; default-directory: <span style="color: #00ffff;">"/usr/local/share/DVCS/"</span> -*-
 Compilation started at Tue Dec  6 11:03:03
 
 python -m unittest discover
-EEEEEEEEEEEpython: can't open file 'behavioral/strategy.py': [Errno 2] No such file or directory
-E
-======================================================================
+EEEEEEEEEEEpython: can<span style="color: #00ffff;">'t open file '</span>behavioral/strategy.py<span style="color: #00ffff;">': [Errno 2] No such file or directory</span>
+<span style="color: #00ffff;">E</span>
+<span style="color: #00ffff;">======================================================================</span>
 </pre>
 </div>
 </div>
@@ -68,15 +68,15 @@ python -m unittest discover
 <pre class="example">
 ............................................................
 ----------------------------------------------------------------------
-Ran 60 tests in 0.579s
+Ran 60 tests in 0.606s
 
 OK
-We have a lovely &lt;MagicMock name='get_pet()' id='140704907805080'&gt;
-It says &lt;MagicMock name='get_pet().speak()' id='140704906404192'&gt;
-We also have &lt;MagicMock name='get_food()' id='140704906420464'&gt;
-We have a lovely &lt;MagicMock name='get_pet()' id='140704906465464'&gt;
-It says &lt;MagicMock name='get_pet().speak()' id='140704906498176'&gt;
-We also have &lt;MagicMock name='get_food()' id='140704906501480'&gt;
+We have a lovely &lt;MagicMock name='get_pet()' id='140012246876568'&gt;
+It says &lt;MagicMock name='get_pet().speak()' id='140012246389088'&gt;
+We also have &lt;MagicMock name='get_food()' id='140012246405360'&gt;
+We have a lovely &lt;MagicMock name='get_pet()' id='140012246450360'&gt;
+It says &lt;MagicMock name='get_pet().speak()' id='140012246483072'&gt;
+We also have &lt;MagicMock name='get_food()' id='140012246484528'&gt;
 renaming /usr/local/share/DVCS/python-patterns/tests/test_command/foo.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt
 renaming /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/baz.txt
 renaming /usr/local/share/DVCS/python-patterns/tests/test_command/baz.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt
@@ -105,7 +105,7 @@ As <code>Elpy</code> author <a href="https://github.com/jorgenschaefer/elpy/issu
 <blockquote>
 <p>
 Elpy runs tests in the library root.
-If your current directory has an <span class="underline"><span class="underline">init</span></span>.py file,
+If your current directory has an <code>__init__.py</code> file,
 Elpy assumes this directory is a package and moves
 up one directory. Does this help?
 </p>
@@ -123,67 +123,28 @@ ls
 </pre>
 </div>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">append_output.sh</td>
-</tr>
-
-<tr>
-<td class="org-left">behavioral</td>
-</tr>
-
-<tr>
-<td class="org-left">creational</td>
-</tr>
-
-<tr>
-<td class="org-left">fundamental</td>
-</tr>
-
-<tr>
-<td class="org-left">__init__.py</td>
-</tr>
-
-<tr>
-<td class="org-left">other</td>
-</tr>
-
-<tr>
-<td class="org-left">__pycache__</td>
-</tr>
-
-<tr>
-<td class="org-left">README.md</td>
-</tr>
-
-<tr>
-<td class="org-left">run_all.sh</td>
-</tr>
-
-<tr>
-<td class="org-left">structural</td>
-</tr>
-
-<tr>
-<td class="org-left">tests</td>
-</tr>
-</tbody>
-</table>
+<pre class="example">
+append_output.sh
+behavioral
+creational
+fundamental
+__init__.py
+other
+__pycache__
+README.md
+run_all.sh
+structural
+tests
+</pre>
+<hr  />
 </div>
 </div>
 </div>
-
 <div id="outline-container-orgheadline7" class="outline-2">
 <h2 id="orgheadline7">Solution</h2>
 <div class="outline-text-2" id="text-orgheadline7">
 <p>
-Just remove <span class="underline"><span class="underline">init</span></span>.py out from repository main folder.
+Just remove <code>__init__.py</code> out from repository main folder.
 </p>
 </div>
 </div>
