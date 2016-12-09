@@ -4,7 +4,7 @@ title: Git fork
 tagline: " a valuable project"
 permalink: /git/tips/how-to-fork-repository.html
 categories: [git, literate programming]
-tags: [tutorial, clone, remotes, emacs, babel]
+tags: [tutorial, clone, remotes, fork]
 ---
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -12,9 +12,18 @@ tags: [tutorial, clone, remotes, emacs, babel]
 <ul>
 <li><a href="#orgheadline1">Definition</a></li>
 <li><a href="#orgheadline2">Documentation</a></li>
-<li><a href="#orgheadline3">Fixtures</a></li>
-<li><a href="#orgheadline4">Results</a></li>
-<li><a href="#orgheadline5">Conclusion</a></li>
+<li><a href="#orgheadline3">Fixtures</a>
+<ul>
+<li><a href="#orgheadline4">Fork itself</a></li>
+<li><a href="#orgheadline5">Clone the fork</a></li>
+<li><a href="#orgheadline6">Check the remotes</a></li>
+<li><a href="#orgheadline7">Add upstream</a></li>
+<li><a href="#orgheadline8">Up-to-date local version</a></li>
+<li><a href="#orgheadline9">Merge the local branches</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">Results</a></li>
+<li><a href="#orgheadline11">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -45,23 +54,161 @@ to merge your improvements with the main code</i></li>
 <h2 id="orgheadline2">Documentation</h2>
 <div class="outline-text-2" id="text-orgheadline2">
 <p>
-The definitive guide how-to do all meta-tasks above are the official
-Git documentation site:
+The definitive guide how-to do all meta-tasks above are at the official
+<code>Git</code> <a href="https://help.github.com/articles/fork-a-repo/">documentation site</a>.
 </p>
-<ul class="org-ul">
-<li></li>
-</ul>
 </div>
 </div>
 
 <div id="outline-container-orgheadline3" class="outline-2">
 <h2 id="orgheadline3">Fixtures</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Fork itself</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+Just by pushing the button on useful project
+  page. It's enough to get its fork in your
+  repo.
+</p>
+</div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Results</h2>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Clone the fork</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+For illustration purposes lets fork the <a href="https://github.com/mikeckennedy/talk-python-transcripts">sample project</a> in my own repo
+and create the local version of it:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/
+<span style="color: #b0c4de; font-weight: bold; font-style: italic;">pwd</span>
+ls -la
+git clone https://github.com/0--key/talk-python-transcripts.git
+ls -la
+</pre>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Conclusion</h2>
+<pre class="example">
+/usr/local/share/DVCS
+total 32
+drwxrwsrwx 8 root   staff 4096 Jan  4 15:58 .
+drwxrwsr-x 9 root   staff 4096 Dec  7 09:50 ..
+drwxrwxrwx 9 antony staff 4096 Dec  7 09:57 0--key.github.io
+drwxr-sr-x 9 antony staff 4096 Dec  7 09:55 lib
+drwxr-sr-x 7 antony staff 4096 Jan  4 16:23 org-pub
+drwxr-sr-x 5 antony staff 4096 Jan  4 15:58 talk-python-transcripts
+drwxr-sr-x 6 antony staff 4096 Dec 18 16:19 venv2
+drwxr-sr-x 5 antony staff 4096 Dec 19 20:54 venv3
+fatal: destination path 'talk-python-transcripts' already exists and is not an empty directory.
+total 32
+drwxrwsrwx 8 root   staff 4096 Jan  4 15:58 .
+drwxrwsr-x 9 root   staff 4096 Dec  7 09:50 ..
+drwxrwxrwx 9 antony staff 4096 Dec  7 09:57 0--key.github.io
+drwxr-sr-x 9 antony staff 4096 Dec  7 09:55 lib
+drwxr-sr-x 7 antony staff 4096 Jan  4 16:23 org-pub
+drwxr-sr-x 5 antony staff 4096 Jan  4 15:58 talk-python-transcripts
+drwxr-sr-x 6 antony staff 4096 Dec 18 16:19 venv2
+drwxr-sr-x 5 antony staff 4096 Dec 19 20:54 venv3
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Check the remotes</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/talk-python-transcripts
+git remote -v
+</pre>
+</div>
+
+<pre class="example">
+origin  https://github.com/0--key/talk-python-transcripts.git (fetch)
+origin  https://github.com/0--key/talk-python-transcripts.git (push)
+upstream        https://github.com/mikeckennedy/talk-python-transcripts.git (fetch)
+upstream        https://github.com/mikeckennedy/talk-python-transcripts.git (push)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Add upstream</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/talk-python-transcripts
+git remote add upstream https://github.com/mikeckennedy/talk-python-transcripts.git
+git remote -v
+</pre>
+</div>
+
+<pre class="example">
+fatal: remote upstream already exists.
+origin  https://github.com/0--key/talk-python-transcripts.git (fetch)
+origin  https://github.com/0--key/talk-python-transcripts.git (push)
+upstream        https://github.com/mikeckennedy/talk-python-transcripts.git (fetch)
+upstream        https://github.com/mikeckennedy/talk-python-transcripts.git (push)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Up-to-date local version</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/talk-python-transcripts
+git fetch upstream
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Merge the local branches</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/talk-python-transcripts
+git merge upstream/master
+</pre>
+</div>
+
+<pre class="example">
+Already up-to-date.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Results</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+<p>
+Now we have a local version of our forked repository.
+It is up-to-dated with upstream repository but not synced yet
+with the origin.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b0c4de; font-weight: bold; font-style: italic;">cd</span> /usr/local/share/DVCS/talk-python-transcripts
+git status
+</pre>
+</div>
+
+<pre class="example">
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Conclusion</h2>
 </div>
