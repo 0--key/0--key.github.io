@@ -1,0 +1,189 @@
+---
+layout: post
+title: How-To test your Python
+tagline: " automatically"
+permalink: /how-to/elpy-compilation-default-directory.html
+categories: [how-to, emacs, niceties]
+tags: [debugging, elpy, autotesting]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Preamble</a>
+<ul>
+<li><a href="#orgheadline2">Auto testing failure</a></li>
+<li><a href="#orgheadline3">Manual test discover</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline4">Why it is so?</a>
+<ul>
+<li><a href="#orgheadline5">Idea</a></li>
+<li><a href="#orgheadline6">Verification</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline7">Solution</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Preamble</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Auto testing failure</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Sometimes when you're trying to run test suite for recently cloned
+<code>Git</code> repository and found that <code>Elpy</code> can't properly define project's
+stem and when you're <code>C-c C-t</code> to test it up you got:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp">-*- mode: compilation<span style="color: #ff1493;">; </span><span style="color: #ff1493;">default-directory: "/usr/local/share/DVCS/" -*-</span>
+Compilation started at Tue Dec  6 11:03:03
+
+python -m unittest discover
+EEEEEEEEEEEpython: can't open file 'behavioral/strategy.py': [Errno 2] No such file or directory
+E
+======================================================================
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Manual test discover</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Meanwhile the manual test discoverer works pretty well:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #ff00ff;">cd</span> ../python-patterns
+python -m unittest discover
+</pre>
+</div>
+
+<pre class="example">
+............................................................
+----------------------------------------------------------------------
+Ran 60 tests in 0.579s
+
+OK
+We have a lovely &lt;MagicMock name='get_pet()' id='140704907805080'&gt;
+It says &lt;MagicMock name='get_pet().speak()' id='140704906404192'&gt;
+We also have &lt;MagicMock name='get_food()' id='140704906420464'&gt;
+We have a lovely &lt;MagicMock name='get_pet()' id='140704906465464'&gt;
+It says &lt;MagicMock name='get_pet().speak()' id='140704906498176'&gt;
+We also have &lt;MagicMock name='get_food()' id='140704906501480'&gt;
+renaming /usr/local/share/DVCS/python-patterns/tests/test_command/foo.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt
+renaming /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/baz.txt
+renaming /usr/local/share/DVCS/python-patterns/tests/test_command/baz.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt
+renaming /usr/local/share/DVCS/python-patterns/tests/test_command/bar.txt to /usr/local/share/DVCS/python-patterns/tests/test_command/foo.txt
+DecimalViewer: Subject New Data Name has data 20
+HexViewer: Subject New Data Name has data 0x14
+Scanning... Station is 1380 AM
+Scanning... Station is 1510 AM
+Scanning... Station is 1250 AM
+Switching to FM
+Switching to AM
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Why it is so?</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Idea</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+As <code>Elpy</code> author <a href="https://github.com/jorgenschaefer/elpy/issues/963">said</a> about the compilation directory:
+</p>
+<blockquote>
+<p>
+Elpy runs tests in the library root.
+If your current directory has an <span class="underline"><span class="underline">init</span></span>.py file,
+Elpy assumes this directory is a package and moves
+up one directory. Does this help?
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Verification</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #ff00ff;">cd</span> ../python-patterns
+ls
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">append_output.sh</td>
+</tr>
+
+<tr>
+<td class="org-left">behavioral</td>
+</tr>
+
+<tr>
+<td class="org-left">creational</td>
+</tr>
+
+<tr>
+<td class="org-left">fundamental</td>
+</tr>
+
+<tr>
+<td class="org-left">__init__.py</td>
+</tr>
+
+<tr>
+<td class="org-left">other</td>
+</tr>
+
+<tr>
+<td class="org-left">__pycache__</td>
+</tr>
+
+<tr>
+<td class="org-left">README.md</td>
+</tr>
+
+<tr>
+<td class="org-left">run_all.sh</td>
+</tr>
+
+<tr>
+<td class="org-left">structural</td>
+</tr>
+
+<tr>
+<td class="org-left">tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Solution</h2>
+<div class="outline-text-2" id="text-orgheadline7">
+<p>
+Just remove <span class="underline"><span class="underline">init</span></span>.py out from repository main folder.
+</p>
+</div>
+</div>
