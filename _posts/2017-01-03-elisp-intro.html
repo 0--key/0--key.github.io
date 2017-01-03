@@ -1,0 +1,110 @@
+---
+layout: post
+title: Elisp 
+tagline: " is Emacs Lisp"
+permalink: /elisp/introduction.html
+categories: [literate programming, elisp, emacs]
+tags: [tutorial, elisp, intro]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3b34798">Primitive</a>
+<ul>
+<li><a href="#orgf3ae923">Ouput test</a></li>
+<li><a href="#org4d365f8">Ariphmetic and notation</a></li>
+<li><a href="#org086c163">Boolean</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3b34798" class="outline-2">
+<h2 id="org3b34798">Primitive</h2>
+<div class="outline-text-2" id="text-org3b34798">
+</div><div id="outline-container-orgf3ae923" class="outline-3">
+<h3 id="orgf3ae923">Ouput test</h3>
+<div class="outline-text-3" id="text-orgf3ae923">
+<div class="org-src-container">
+<pre class="src src-elisp">(current-buffer)
+</pre>
+</div>
+
+<pre class="example">
+#&lt;buffer 2017-01-03-elisp-intro.org&lt;2&gt;&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4d365f8" class="outline-3">
+<h3 id="org4d365f8">Ariphmetic and notation</h3>
+<div class="outline-text-3" id="text-org4d365f8">
+</div><div id="outline-container-org7dff978" class="outline-4">
+<h4 id="org7dff978"><a href="https://en.wikipedia.org/wiki/Polish_notation">Prefix notation</a> at glance:</h4>
+<div class="outline-text-4" id="text-org7dff978">
+<div class="org-src-container">
+<pre class="src src-elisp">(- 22 7)
+</pre>
+</div>
+
+<pre class="example">
+15
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2bd1bf3" class="outline-4">
+<h4 id="org2bd1bf3">String substitution for print</h4>
+<div class="outline-text-4" id="text-org2bd1bf3">
+<div class="org-src-container">
+<pre class="src src-elisp">(progn (print "hi: %d"))
+;; (print(progn (/ 12 4)))
+;; (format "An atom: ~S~%and a list: ~S~%and an integer: ~D~%"
+;;           nil (list 5) 6)
+</pre>
+</div>
+
+<pre class="example">
+"hi: %d"
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc61a0d3" class="outline-4">
+<h4 id="orgc61a0d3"></h4>
+<div class="outline-text-4" id="text-orgc61a0d3">
+<div class="org-src-container">
+<pre class="src src-elisp">(+ (+ 3 5) (* 3 3))
+</pre>
+</div>
+
+<pre class="example">
+17
+</pre>
+
+<p>
+Lucidly that spaces delimit operators and operands and the first
+preceded.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org086c163" class="outline-3">
+<h3 id="org086c163">Boolean</h3>
+<div class="outline-text-3" id="text-org086c163">
+<div class="org-src-container">
+<pre class="src src-elisp">(and t t t)
+(or t nil nil)
+</pre>
+</div>
+
+<pre class="example">
+t
+</pre>
+</div>
+</div>
+</div>
