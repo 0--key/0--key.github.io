@@ -1,0 +1,40 @@
+---
+layout: post
+title: Org-Jekyll
+tagline: " export with color highlighting"
+permalink: /emacs/org/export/jekyll/color-src-highlight.html
+categories: [literate programming, emacs, org]
+tags: [Jekyll, src hightlighting, html-export]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org283738b">Caveat</a></li>
+<li><a href="#orgd043e92">Define html export variables</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org283738b" class="outline-2">
+<h2 id="org283738b">Caveat</h2>
+<div class="outline-text-2" id="text-org283738b">
+<p>
+By default settings <code>Org</code> exports <i>src-blocks</i> with in-line
+syntax highlighting by <code>css</code> It seems a bit wierd and old-fashion,
+thus lets take an attempt to elaborate more neat solution.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd043e92" class="outline-2">
+<h2 id="orgd043e92">Define html export variables</h2>
+<div class="outline-text-2" id="text-orgd043e92">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> org-html-htmlize-output-type 'css)
+(<span class="org-keyword">setq</span> org-html-htmlize-font-prefix <span class="org-string">"org-"</span>)
+</pre>
+</div>
+</div>
+</div>
