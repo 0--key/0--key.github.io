@@ -1,0 +1,217 @@
+---
+layout: post
+title: Problem solving
+tagline: " technology"
+permalink: /general/problem-solving.html
+categories: [literate programming, programming fundamentals]
+tags: [problem, solving, technique]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org00ac1ba">Mathematical approach</a>
+<ul>
+<li><a href="#orgfe06bcc">You have to understand the problem.</a></li>
+<li><a href="#org0fea5f5">Find the connection between the data and the unknown.</a></li>
+<li><a href="#org4180f4f">Carry out your plan.</a></li>
+<li><a href="#orgd41041f">Examine the solution obtained.</a></li>
+</ul>
+</li>
+<li><a href="#org1fd9f07">Functional method</a>
+<ul>
+<li><a href="#org84ff025">From Problem Analysis to Data Definitions</a></li>
+<li><a href="#org5bd8264">Signature, Purpose Statement, Header</a></li>
+<li><a href="#org8b1d53f">Functional Examples</a></li>
+<li><a href="#org8e451a1">Function Template</a></li>
+<li><a href="#org86cc445">Function Definition</a></li>
+<li><a href="#org0a77c17">Testing</a></li>
+</ul>
+</li>
+<li><a href="#org4eaa152">Coder's technique</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org00ac1ba" class="outline-2">
+<h2 id="org00ac1ba">Mathematical approach</h2>
+<div class="outline-text-2" id="text-org00ac1ba">
+</div><div id="outline-container-orgfe06bcc" class="outline-3">
+<h3 id="orgfe06bcc">You have to understand the problem.</h3>
+<div class="outline-text-3" id="text-orgfe06bcc">
+<p>
+What is the unknown? What are the data? What is the condition? Is it
+possible to satisfy the condition? Is the condition sufficient to
+determine the unknown? Or is it insufficient? Or redundant? Or
+contradictory?
+</p>
+</div>
+<div id="outline-container-org9f5867f" class="outline-4">
+<h4 id="org9f5867f">Draw a figure. Introduce suitable notation.</h4>
+</div>
+
+<div id="outline-container-orgdcb4933" class="outline-4">
+<h4 id="orgdcb4933">Separate the various parts of the condition.</h4>
+<div class="outline-text-4" id="text-orgdcb4933">
+<p>
+Can you write them down?
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0fea5f5" class="outline-3">
+<h3 id="org0fea5f5">Find the connection between the data and the unknown.</h3>
+<div class="outline-text-3" id="text-org0fea5f5">
+<p>
+You may be obliged to consider auxiliary problems if an immediate
+connection cannot be found. You should obtain eventually a plan of
+the solution.
+</p>
+
+<p>
+Have you seen it before? Or have you seen the same problem in a
+slightly different form?
+</p>
+
+<p>
+Do you know a related problem? Do you know a theorem that could be
+useful?
+</p>
+
+<p>
+Look at the unknown! And try to think of a familiar problem having
+the same or a similar unknown.
+</p>
+
+<p>
+Here is a problem related to yours and solved before. Could you use
+it? Could you use its result? Could you use its method? Should you
+introduce some auxiliary element in order to make its use possible?
+</p>
+
+<p>
+Could you restate the problem? Could you restate it still
+differently? Go back to definitions.
+</p>
+
+<p>
+If you cannot solve the proposed problem try to solve first some
+related problem. Could you imagine a more accessible related problem?
+A more general problem? A more special problem? An analogous problem?
+Could you solve a part of the problem? Keep only a part of the
+condition, drop the other part; how far is the unknown then
+determined, how can it vary? Could you derive something useful from
+the data? Could you think of other data appropriate to determine the
+unknown? Could you change the unknown or the data, or both if
+necessary, so that the new unknown and the new data are nearer to
+each other?
+</p>
+
+<p>
+Did you use all the data? Did you use the whole condition? Have you
+taken into account all essential notions involved in the problem?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4180f4f" class="outline-3">
+<h3 id="org4180f4f">Carry out your plan.</h3>
+<div class="outline-text-3" id="text-org4180f4f">
+<p>
+Carrying out your plan of the solution, check each step. Can you see
+clearly that the step is correct? Can you prove that it is correct?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd41041f" class="outline-3">
+<h3 id="orgd41041f">Examine the solution obtained.</h3>
+<div class="outline-text-3" id="text-orgd41041f">
+<p>
+Can you check the result? Can you check the argument?
+</p>
+
+<p>
+Can you derive the result differently? Can you see it at a glance?
+</p>
+
+<p>
+Can you use the result, or the method, for some other problem?
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1fd9f07" class="outline-2">
+<h2 id="org1fd9f07">Functional method</h2>
+<div class="outline-text-2" id="text-org1fd9f07">
+</div><div id="outline-container-org84ff025" class="outline-3">
+<h3 id="org84ff025">From Problem Analysis to Data Definitions</h3>
+<div class="outline-text-3" id="text-org84ff025">
+<p>
+Identify the information that must be represented and how it is
+represented in the chosen programming language. Formulate data
+definitions and illustrate them with examples.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5bd8264" class="outline-3">
+<h3 id="org5bd8264">Signature, Purpose Statement, Header</h3>
+<div class="outline-text-3" id="text-org5bd8264">
+<p>
+State which data the desired function consumes and produces.
+Articulate what the function computes as a concise one-line statement.
+Define a stub that lives up to the signature.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8b1d53f" class="outline-3">
+<h3 id="org8b1d53f">Functional Examples</h3>
+<div class="outline-text-3" id="text-org8b1d53f">
+<p>
+Work through examples that illustrate the function’s purpose.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8e451a1" class="outline-3">
+<h3 id="org8e451a1">Function Template</h3>
+<div class="outline-text-3" id="text-org8e451a1">
+<p>
+Translate the data definitions into an outline of the function.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org86cc445" class="outline-3">
+<h3 id="org86cc445">Function Definition</h3>
+<div class="outline-text-3" id="text-org86cc445">
+<p>
+Fill in the gaps in the function template. Exploit the purpose
+statement and the examples.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a77c17" class="outline-3">
+<h3 id="org0a77c17">Testing</h3>
+<div class="outline-text-3" id="text-org0a77c17">
+<p>
+Articulate the examples as tests and ensure that the function passes
+all. Doing so discovers mistakes and also helps others read and
+understand the definition when the need arises—and it will arise for
+any serious program.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4eaa152" class="outline-2">
+<h2 id="org4eaa152">Coder's technique</h2>
+</div>
