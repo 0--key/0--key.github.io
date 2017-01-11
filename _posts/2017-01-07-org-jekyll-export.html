@@ -17,6 +17,12 @@ tags: [Jekyll, src hightlighting, html-export]
 <li><a href="#org9a3de88">Modificate Hooligan theme</a></li>
 <li><a href="#orgf09cc6d">Python scr block highlighting test</a></li>
 <li><a href="#org71e1b62">Python include file highlighting test</a></li>
+<li><a href="#org2d1a820">Corollary</a>
+<ul>
+<li><a href="#org49cef3b">Pros</a></li>
+<li><a href="#org064bfda">Cons</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -37,7 +43,9 @@ thus lets take an attempt to elaborate more neat solution.
 <div class="outline-text-2" id="text-orgd043e92">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span class="org-keyword">setq</span> org-html-htmlize-output-type 'css)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(setq org-html-htmlize-output-type 'inline-css) ;; default</span>
 (<span class="org-keyword">setq</span> org-html-htmlize-font-prefix <span class="org-string">"org-"</span>)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(setq org-html-htmlize-font-prefix "") ;; default</span>
 </pre>
 </div>
 </div>
@@ -262,6 +270,29 @@ string <code>&lt;link href="/assets/themes/css/org.css" rel="stylesheet" type="t
 
 <span class="org-keyword">print</span>(convertFracts([[1, 2], [1, 3], [1, 4]]))
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d1a820" class="outline-2">
+<h2 id="org2d1a820">Corollary</h2>
+<div class="outline-text-2" id="text-org2d1a820">
+</div><div id="outline-container-org49cef3b" class="outline-3">
+<h3 id="org49cef3b">Pros</h3>
+<div class="outline-text-3" id="text-org49cef3b">
+<p>
+HTML code which produced as an export out from <code>org</code> file is
+clearly much dense and terse, hence - becomes much readable.
+</p>
+</div>
+</div>
+<div id="outline-container-org064bfda" class="outline-3">
+<h3 id="org064bfda">Cons</h3>
+<div class="outline-text-3" id="text-org064bfda">
+<p>
+Inentation highlighting (wich is a perfect feature in <code>EWW</code>)
+disappeared.
+</p>
 </div>
 </div>
 </div>
