@@ -18,7 +18,6 @@ tags: [tutorial, elisp, intro]
 <li><a href="#org5a8dae1">Prefix notation</a></li>
 <li><a href="#orgc6335d0">Ariphmetic</a></li>
 <li><a href="#org2bd1bf3">String substitution for print</a></li>
-<li><a href="#org086c163">Boolean</a></li>
 </ul>
 </li>
 </ul>
@@ -458,6 +457,17 @@ preceded.
 </div>
 </div>
 </div>
+
+<div id="outline-container-org086c163" class="outline-4">
+<h4 id="org086c163">Boolean</h4>
+<div class="outline-text-4" id="text-org086c163">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #ff0000;">assert</span> (eq (<span style="color: #ff0000;">and</span> t t t) t))
+(<span style="color: #ff0000;">assert</span> (eq (<span style="color: #ff0000;">or</span> t nil nil) t))
+</pre>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -474,22 +484,6 @@ preceded.
 
 <pre class="example">
 "hi: %d"
-</pre>
-</div>
-</div>
-
-
-<div id="outline-container-org086c163" class="outline-3">
-<h3 id="org086c163">Boolean</h3>
-<div class="outline-text-3" id="text-org086c163">
-<div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #ff0000;">and</span> t t t)
-(<span style="color: #ff0000;">or</span> t nil nil)
-</pre>
-</div>
-
-<pre class="example">
-t
 </pre>
 </div>
 </div>
