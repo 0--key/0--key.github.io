@@ -1,0 +1,61 @@
+---
+layout: post
+title: Python3
+tagline: " new string formatting approach"
+permalink: /python3/string/formatting.html
+categories: [literate programming, emacs, Python3]
+tags: [strings, formatting]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1f61e95">PEP 3101 &#x2013; Advanced String Formatting</a></li>
+<li><a href="#org630c286">Abstract</a></li>
+<li><a href="#org6000b47">Samples</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1f61e95" class="outline-2">
+<h2 id="org1f61e95">PEP 3101 &#x2013; Advanced String Formatting</h2>
+<div class="outline-text-2" id="text-org1f61e95">
+<p>
+<a href="https://www.python.org/dev/peps/pep-3101/">link</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org630c286" class="outline-2">
+<h2 id="org630c286">Abstract</h2>
+<div class="outline-text-2" id="text-org630c286">
+<blockquote>
+<p>
+  This PEP proposes a new system for built-in string formatting
+operations, intended as a replacement for the existing '%' string
+formatting operator.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org6000b47" class="outline-2">
+<h2 id="org6000b47">Samples</h2>
+<div class="outline-text-2" id="text-org6000b47">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7fffd4;">a</span> = <span style="color: #deb887; font-style: italic;">'Python'</span>
+<span style="color: #7fffd4;">b</span> = <span style="color: #deb887; font-style: italic;">'Emacs'</span>
+<span style="color: #7fffd4;">d</span> = <span style="color: #deb887; font-style: italic;">'Babel'</span>
+<span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"The story of {0}, {1}, and {c}"</span>.<span style="color: #4682b4;">format</span>(a, b, c=d))
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">or</span>
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">format</span>(10.0, <span style="color: #deb887; font-style: italic;">"7.3g"</span>))
+</pre>
+</div>
+
+<pre class="example">
+The story of Python, Emacs, and Babel
+     10
+</pre>
+</div>
+</div>
