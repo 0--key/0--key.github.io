@@ -11,12 +11,17 @@ tags: [metaclass, gist, oop]
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">Definition</a></li>
-<li><a href="#orgheadline2">Samples</a>
+<li><a href="#orgheadline2">Classes are obects too</a></li>
+<li><a href="#orgheadline3">The class of a class</a></li>
+<li><a href="#orgheadline4">Metaclass</a></li>
+<li><a href="#orgheadline5">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></a></li>
+<li><a href="#orgheadline6">Metaclass's <span class="underline"><span class="underline">call</span></span></a></li>
+<li><a href="#orgheadline7">Examples</a>
 <ul>
-<li><a href="#orgheadline3">Trivial</a></li>
-<li><a href="#orgheadline4">Sophisticated</a></li>
-<li><a href="#orgheadline5">Complex</a></li>
-<li><a href="#orgheadline6">Full-fledged</a></li>
+<li><a href="#orgheadline8">Trivial</a></li>
+<li><a href="#orgheadline9">Sophisticated</a></li>
+<li><a href="#orgheadline10">Complex</a></li>
+<li><a href="#orgheadline11">Full-fledged</a></li>
 </ul>
 </li>
 </ul>
@@ -36,7 +41,19 @@ explanation about why).
 <p align="right">
 Python Guru Tim Peters
 </p>
-
+<hr  />
+<p>
+Python rightfully prides itself as a relatively straightforward language without a
+lot of "magic" hiding in its workings and features. Sometimes, however, to make
+interesting abstractions possible, one can dig deep in Python's more dusty and obscure
+corners to find language constructs that are a bit more magical than usual.
+Metaclasses are one such feature.
+</p>
+<p align="right">
+<a href="http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/">
+Eli Bendersky</a>
+</p>
+<hr  />
 <p>
 A metaclass is most commonly used as a class-factory.
 </p>
@@ -45,21 +62,45 @@ A metaclass is most commonly used as a class-factory.
 </div>
 
 <div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Samples</h2>
-<div class="outline-text-2" id="text-orgheadline2">
-</div><div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Trivial</h3>
+<h2 id="orgheadline2">Classes are obects too</h2>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Sophisticated</h3>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">The class of a class</h2>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Complex</h3>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Metaclass</h2>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6">Full-fledged</h3>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></h2>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Metaclass's <span class="underline"><span class="underline">call</span></span></h2>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Examples</h2>
+<div class="outline-text-2" id="text-orgheadline7">
+</div><div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Trivial</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+</div><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">string.Template</h4>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Sophisticated</h3>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Complex</h3>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Full-fledged</h3>
 </div>
 </div>
