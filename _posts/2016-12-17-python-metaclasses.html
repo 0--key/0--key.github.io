@@ -28,6 +28,7 @@ tags: [metaclass, gist, oop]
 </div>
 </div>
 
+
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1">Definition</h2>
 <div class="outline-text-2" id="text-orgheadline1">
@@ -63,20 +64,62 @@ A metaclass is most commonly used as a class-factory.
 
 <div id="outline-container-orgheadline2" class="outline-2">
 <h2 id="orgheadline2">Classes are obects too</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+And it is possible to generate them on the fly:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">make_sample_class</span>(**kw):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #4682b4;">type</span>(<span style="color: #deb887; font-style: italic;">'DemoClass'</span>, (<span style="color: #4682b4;">object</span>,), <span style="color: #4682b4;">dict</span>(**kw))
+</pre>
+</div>
+
+<p>
+Built-in function <code>type</code> produce a <code>DemoClass</code> blueprint. Lets
+compose the class itself:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #7fffd4;">sample_class</span> = make_sample_class(a=1, b=2)
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(sample_class))
+</pre>
+</div>
+
+<pre class="example">
+&lt;class 'type'&gt;
+</pre>
+
+<p>
+And now it is time to generate a particular instance:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #7fffd4;">instance</span> = sample_class()
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(instance))
+<span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"This is an instance's properties a: %s and b: %s "</span> % 
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> (instance.a, instance.b))
+</pre>
+</div>
+
+<pre class="example">
+&lt;class '__main__.DemoClass'&gt;
+... This is an instance's properties a: 1 and b: 2
+</pre>
+</div>
 </div>
 
 <div id="outline-container-orgheadline3" class="outline-2">
 <h2 id="orgheadline3">The class of a class</h2>
 </div>
-
 <div id="outline-container-orgheadline4" class="outline-2">
 <h2 id="orgheadline4">Metaclass</h2>
 </div>
-
 <div id="outline-container-orgheadline5" class="outline-2">
 <h2 id="orgheadline5">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></h2>
 </div>
-
 <div id="outline-container-orgheadline6" class="outline-2">
 <h2 id="orgheadline6">Metaclass's <span class="underline"><span class="underline">call</span></span></h2>
 </div>
