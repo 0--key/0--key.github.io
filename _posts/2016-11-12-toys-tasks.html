@@ -1,160 +1,168 @@
+<p>
 ---
 layout: post
 title: Write Python programs
 tagline: " by means of Emacs' toolbox"
 permalink: /coding/codewars-toy-tasks.html
 categories: [literate programming, Python, CodeWars, emacs]
-tags: [coding, algorithms]
+tags: [coding, algorithms, practice, TDD]
 ---
+</p>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#orgca9fe29">Modification in ox-html.el #2</a></li>
 <li><a href="#org4c98654">#1 Vowels counter</a></li>
 <li><a href="#org506a315">#2 Last digit of a large number</a>
 <ul>
-<li><a href="#orgebb8132">Description</a></li>
-<li><a href="#org8e84963">Code</a></li>
+<li><a href="#orga0cc475">Description</a></li>
+<li><a href="#orgec2f97a">Code</a></li>
 </ul>
 </li>
 <li><a href="#org047c17b">#3 How many times does it contain?</a>
 <ul>
-<li><a href="#org793cd8e">Description</a></li>
-<li><a href="#org34eaf5e">Code</a></li>
+<li><a href="#org5261e59">Description</a></li>
+<li><a href="#orgf88e594">Code</a></li>
 </ul>
 </li>
 <li><a href="#org20ff835">#4 Second Variation on Caesar Cipher</a>
 <ul>
-<li><a href="#org3bfda67">Description</a></li>
-<li><a href="#org58bc84d">Solution</a></li>
+<li><a href="#orgf2dcfa0">Description</a></li>
+<li><a href="#org76bd3a1">Solution</a></li>
 </ul>
 </li>
 <li><a href="#orgd75d642">#5 Did I Finish my Sudoku?</a>
 <ul>
-<li><a href="#orgc8630cd">Description</a></li>
-<li><a href="#orgfa69061">Solution</a></li>
+<li><a href="#org6716fbc">Description</a></li>
+<li><a href="#orge6407f4">Solution</a></li>
 <li><a href="#orgfd5b59a">Final solution</a></li>
 </ul>
 </li>
 <li><a href="#org27c64eb">#6 Vigenère Autokey Cipher Helper</a>
 <ul>
-<li><a href="#orgff5f310">Description</a></li>
-<li><a href="#orgafc2c36">Solution</a></li>
+<li><a href="#org9e27f49">Description</a></li>
+<li><a href="#org6b62473">Solution</a></li>
 </ul>
 </li>
 <li><a href="#orgb29b701">#7 Human readable duration format</a>
 <ul>
-<li><a href="#org2ce3eec">Description</a></li>
+<li><a href="#org8b77dfb">Description</a></li>
 </ul>
 </li>
 <li><a href="#orgaf2326a">#8 Battleship field validator</a>
 <ul>
-<li><a href="#orgb6c1eb9">Description</a></li>
+<li><a href="#org4cdaa43">Description</a></li>
 <li><a href="#org1abc0fc">Appropriate solution form</a></li>
 </ul>
 </li>
 <li><a href="#org872d819">#9 Instant Runoff Voting</a>
 <ul>
-<li><a href="#orga3ea028">Description</a></li>
-<li><a href="#org3c5d018">Appropriate solution format</a></li>
+<li><a href="#orgf13ec68">Description</a></li>
+<li><a href="#orga8c8688">Appropriate solution format</a></li>
 </ul>
 </li>
 <li><a href="#org426298a">#10 Base64 Numeric Translator</a>
 <ul>
-<li><a href="#orgf65b75d">Description</a></li>
-<li><a href="#orgd43de14">Appropriate solution format</a></li>
+<li><a href="#orge5878fb">Description</a></li>
+<li><a href="#org4619a44">Appropriate solution format</a></li>
 <li><a href="#org840367b">General considerations</a></li>
 </ul>
 </li>
 <li><a href="#orgf24c687">#11 Elementary Arithmetic - Carries Count</a>
 <ul>
-<li><a href="#org424580d">Description</a></li>
-<li><a href="#org88440a5">Appropriate solution format</a></li>
+<li><a href="#org31b5533">Description</a></li>
+<li><a href="#org18abe2e">Appropriate solution format</a></li>
 </ul>
 </li>
 <li><a href="#orgae17cb2">#12 Valid Parentheses</a>
 <ul>
-<li><a href="#org7ca0069">Description</a></li>
-<li><a href="#orgd5a3e7f">Appropriate solution format</a></li>
+<li><a href="#org18660d4">Description</a></li>
+<li><a href="#org6fe2542">Appropriate solution format</a></li>
 </ul>
 </li>
 <li><a href="#orga646b39">#13 Coordinates Validator</a>
 <ul>
-<li><a href="#org910a19c">Description</a></li>
+<li><a href="#org0381ad4">Description</a></li>
 <li><a href="#org8f779bb">Appropriate solution</a></li>
 </ul>
 </li>
 <li><a href="#orgca64f77">#14 Pete, the baker</a>
 <ul>
-<li><a href="#org936d6d0">Description</a></li>
-<li><a href="#orgae0c601">Solution</a></li>
+<li><a href="#orgab15950">Description</a></li>
+<li><a href="#org1a524bd">Solution</a></li>
 </ul>
 </li>
 <li><a href="#orgf1f08da"># Decode the Morse code</a>
 <ul>
-<li><a href="#orgf3faa43">Description</a></li>
-<li><a href="#org38f4126">Solution</a></li>
+<li><a href="#org25b823d">Description</a></li>
+<li><a href="#orgd18e8fc">Solution</a></li>
 <li><a href="#orgf467cff">Best practice</a></li>
 </ul>
 </li>
 <li><a href="#org23b8fc7">Next bigger number with the same digits</a>
 <ul>
-<li><a href="#org9879586">Description</a></li>
-<li><a href="#orgf6c8c22">Solution</a></li>
+<li><a href="#orge53ac18">Description</a></li>
+<li><a href="#org17f92c8">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org97126c4">Simple fraction to mixed number converter</a>
 <ul>
-<li><a href="#org08e448d">Description</a></li>
+<li><a href="#org775e479">Description</a></li>
 <li><a href="#org8124b1a">Fraction stdlib module</a></li>
-<li><a href="#orgebd7198">Solution</a></li>
+<li><a href="#org8e84f89">Solution</a></li>
 </ul>
 </li>
 <li><a href="#orgf50b031">Common denominator</a>
 <ul>
-<li><a href="#org5c8a109">Description</a></li>
-<li><a href="#org9225bdf">Solution</a></li>
+<li><a href="#org34c1c9e">Description</a></li>
+<li><a href="#org414929d">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org95ddbb5">Strip Url Params</a>
 <ul>
-<li><a href="#org6c97f62">Description</a></li>
-<li><a href="#orgc4301a9">Solution</a></li>
+<li><a href="#orge9009a6">Description</a></li>
+<li><a href="#org3200c8e">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org294a4e6">Strip Comments</a>
 <ul>
-<li><a href="#org3ce134f">Description</a></li>
-<li><a href="#org6613d92">Solution</a></li>
+<li><a href="#org938bf90">Description</a></li>
+<li><a href="#orge59ef83">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org91d9734">RGB To Hex Conversion</a>
 <ul>
-<li><a href="#org1dccf27">Description</a></li>
-<li><a href="#org618b2ac">Solution</a></li>
+<li><a href="#orge062e4b">Description</a></li>
+<li><a href="#org1903604">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org8daaaa4">Calculator</a>
 <ul>
-<li><a href="#org85e467b">Description</a></li>
-<li><a href="#org46a9cf1">Solution</a></li>
+<li><a href="#orgf13bf63">Description</a></li>
+<li><a href="#org4171ea7">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org00a0866">Twice linear</a>
 <ul>
-<li><a href="#org6db47c7">Description</a></li>
-<li><a href="#orgd0393ea">Solution</a></li>
+<li><a href="#org3545df9">Description</a></li>
+<li><a href="#orgd713eb8">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org495e194">Molecule to atoms</a>
 <ul>
-<li><a href="#orge8d89c2">Description</a></li>
-<li><a href="#orgc0d5118">Solution</a></li>
+<li><a href="#org2af7ab3">Description</a></li>
+<li><a href="#orge8913fe">Solution</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+
+<div id="outline-container-orgca9fe29" class="outline-2">
+<h2 id="orgca9fe29">Modification in ox-html.el #2</h2>
+</div>
+
 
 <div id="outline-container-org4c98654" class="outline-2">
 <h2 id="org4c98654">#1 Vowels counter</h2>
@@ -190,9 +198,9 @@ We will consider a, e, i, o, and u as vowels for this Kata.
 <div id="outline-container-org506a315" class="outline-2">
 <h2 id="org506a315">#2 Last digit of a large number</h2>
 <div class="outline-text-2" id="text-org506a315">
-</div><div id="outline-container-orgebb8132" class="outline-3">
-<h3 id="orgebb8132">Description</h3>
-<div class="outline-text-3" id="text-orgebb8132">
+</div><div id="outline-container-orga0cc475" class="outline-3">
+<h3 id="orga0cc475">Description</h3>
+<div class="outline-text-3" id="text-orga0cc475">
 <p>
 Define a function
 </p>
@@ -245,9 +253,9 @@ The kata is still as hard as the variants for Haskell or Python, don't worry.
 </div>
 </div>
 
-<div id="outline-container-org8e84963" class="outline-3">
-<h3 id="org8e84963">Code</h3>
-<div class="outline-text-3" id="text-org8e84963">
+<div id="outline-container-orgec2f97a" class="outline-3">
+<h3 id="orgec2f97a">Code</h3>
+<div class="outline-text-3" id="text-orgec2f97a">
 </div><div id="outline-container-orgc52d16d" class="outline-4">
 <h4 id="orgc52d16d">Visualise the matrix of number's orders</h4>
 <div class="outline-text-4" id="text-orgc52d16d">
@@ -519,9 +527,9 @@ fit into the one.
 <div id="outline-container-org047c17b" class="outline-2">
 <h2 id="org047c17b">#3 How many times does it contain?</h2>
 <div class="outline-text-2" id="text-org047c17b">
-</div><div id="outline-container-org793cd8e" class="outline-3">
-<h3 id="org793cd8e">Description</h3>
-<div class="outline-text-3" id="text-org793cd8e">
+</div><div id="outline-container-org5261e59" class="outline-3">
+<h3 id="org5261e59">Description</h3>
+<div class="outline-text-3" id="text-org5261e59">
 <blockquote>
 <p>
 Your task is to return how many times a string
@@ -542,9 +550,9 @@ and the character to find is "o", return 2.
 </div>
 </div>
 
-<div id="outline-container-org34eaf5e" class="outline-3">
-<h3 id="org34eaf5e">Code</h3>
-<div class="outline-text-3" id="text-org34eaf5e">
+<div id="outline-container-orgf88e594" class="outline-3">
+<h3 id="orgf88e594">Code</h3>
+<div class="outline-text-3" id="text-orgf88e594">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">string_counter</span>(string, char):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> string.count(char)
@@ -559,9 +567,9 @@ and the character to find is "o", return 2.
 <div id="outline-container-org20ff835" class="outline-2">
 <h2 id="org20ff835">#4 Second Variation on Caesar Cipher</h2>
 <div class="outline-text-2" id="text-org20ff835">
-</div><div id="outline-container-org3bfda67" class="outline-3">
-<h3 id="org3bfda67">Description</h3>
-<div class="outline-text-3" id="text-org3bfda67">
+</div><div id="outline-container-orgf2dcfa0" class="outline-3">
+<h3 id="orgf2dcfa0">Description</h3>
+<div class="outline-text-3" id="text-orgf2dcfa0">
 <blockquote>
 <p>
 Description:
@@ -652,9 +660,9 @@ decode?
 </div>
 
 
-<div id="outline-container-org58bc84d" class="outline-3">
-<h3 id="org58bc84d">Solution</h3>
-<div class="outline-text-3" id="text-org58bc84d">
+<div id="outline-container-org76bd3a1" class="outline-3">
+<h3 id="org76bd3a1">Solution</h3>
+<div class="outline-text-3" id="text-org76bd3a1">
 </div><div id="outline-container-orgce8a344" class="outline-4">
 <h4 id="orgce8a344">Appropriate view and test suite</h4>
 <div class="outline-text-4" id="text-orgce8a344">
@@ -704,6 +712,7 @@ decode?
 </div>
 </div>
 </div>
+
 <div id="outline-container-orgc354850" class="outline-4">
 <h4 id="orgc354850">Shift letter task</h4>
 <div class="outline-text-4" id="text-orgc354850">
@@ -735,6 +744,7 @@ decode?
 </div>
 </div>
 </div>
+
 <div id="outline-container-orge2ab8d4" class="outline-4">
 <h4 id="orge2ab8d4">Tie together</h4>
 <div class="outline-text-4" id="text-orge2ab8d4">
@@ -768,6 +778,10 @@ decode?
 <span style="color: #ff0000;">print</span>(<span style="color: #00ffff;">'Message from Emacs25'</span>)
 </pre>
 </div>
+
+<pre class="example">
+Message from Emacs25
+</pre>
 </div>
 </div>
 </div>
@@ -776,9 +790,9 @@ decode?
 <div id="outline-container-orgd75d642" class="outline-2">
 <h2 id="orgd75d642">#5 Did I Finish my Sudoku?</h2>
 <div class="outline-text-2" id="text-orgd75d642">
-</div><div id="outline-container-orgc8630cd" class="outline-3">
-<h3 id="orgc8630cd">Description</h3>
-<div class="outline-text-3" id="text-orgc8630cd">
+</div><div id="outline-container-org6716fbc" class="outline-3">
+<h3 id="org6716fbc">Description</h3>
+<div class="outline-text-3" id="text-org6716fbc">
 <blockquote>
 <p>
 Write a function done_or_not passing a board (list[list_lines]) as
@@ -853,9 +867,9 @@ the region.
 </div>
 </div>
 
-<div id="outline-container-orgfa69061" class="outline-3">
-<h3 id="orgfa69061">Solution</h3>
-<div class="outline-text-3" id="text-orgfa69061">
+<div id="outline-container-orge6407f4" class="outline-3">
+<h3 id="orge6407f4">Solution</h3>
+<div class="outline-text-3" id="text-orge6407f4">
 </div><div id="outline-container-orge7a3825" class="outline-4">
 <h4 id="orge7a3825">Appropriate view</h4>
 <div class="outline-text-4" id="text-orge7a3825">
@@ -870,9 +884,9 @@ the region.
 </div>
 </div>
 </div>
-<div id="outline-container-org1009db3" class="outline-4">
-<h4 id="org1009db3">Test suite</h4>
-<div class="outline-text-4" id="text-org1009db3">
+<div id="outline-container-orge2b8b6a" class="outline-4">
+<h4 id="orge2b8b6a">Test suite</h4>
+<div class="outline-text-4" id="text-orge2b8b6a">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ee82ee;">valid</span> = [
 <span style="color: #00ff00; background-color: #292929;"> </span>   [1, 3, 2, 5, 7, 9, 4, 6, 8],
@@ -1075,9 +1089,9 @@ the region.
 <div id="outline-container-org27c64eb" class="outline-2">
 <h2 id="org27c64eb">#6 Vigenère Autokey Cipher Helper</h2>
 <div class="outline-text-2" id="text-org27c64eb">
-</div><div id="outline-container-orgff5f310" class="outline-3">
-<h3 id="orgff5f310">Description</h3>
-<div class="outline-text-3" id="text-orgff5f310">
+</div><div id="outline-container-org9e27f49" class="outline-3">
+<h3 id="org9e27f49">Description</h3>
+<div class="outline-text-3" id="text-org9e27f49">
 <blockquote>
 <p>
 The Vigenère cipher is a classic cipher originally developed
@@ -1179,9 +1193,9 @@ c.encode('CODEWARS') # returns 'CODEWARS'
 </div>
 </div>
 
-<div id="outline-container-orgafc2c36" class="outline-3">
-<h3 id="orgafc2c36">Solution</h3>
-<div class="outline-text-3" id="text-orgafc2c36">
+<div id="outline-container-org6b62473" class="outline-3">
+<h3 id="org6b62473">Solution</h3>
+<div class="outline-text-3" id="text-org6b62473">
 </div><div id="outline-container-orge2f17ec" class="outline-4">
 <h4 id="orge2f17ec">Appropriate form</h4>
 <div class="outline-text-4" id="text-orge2f17ec">
@@ -1210,9 +1224,9 @@ c.encode('CODEWARS') # returns 'CODEWARS'
 </div>
 </div>
 
-<div id="outline-container-org4e5bd52" class="outline-4">
-<h4 id="org4e5bd52">Test suite</h4>
-<div class="outline-text-4" id="text-org4e5bd52">
+<div id="outline-container-org80ac07e" class="outline-4">
+<h4 id="org80ac07e">Test suite</h4>
+<div class="outline-text-4" id="text-org80ac07e">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff1493;"># </span><span style="color: #ff1493;">creates a cipher helper with each letter substituted</span>
 <span style="color: #ff1493;"># </span><span style="color: #ff1493;">by the corresponding character in the key</span>
@@ -1280,9 +1294,9 @@ is zero and this symbol not changed at all.
 <div id="outline-container-orgb29b701" class="outline-2">
 <h2 id="orgb29b701">#7 Human readable duration format</h2>
 <div class="outline-text-2" id="text-orgb29b701">
-</div><div id="outline-container-org2ce3eec" class="outline-3">
-<h3 id="org2ce3eec">Description</h3>
-<div class="outline-text-3" id="text-org2ce3eec">
+</div><div id="outline-container-org8b77dfb" class="outline-3">
+<h3 id="org8b77dfb">Description</h3>
+<div class="outline-text-3" id="text-org8b77dfb">
 <blockquote>
 <p>
 Your task in order to complete this Kata is to write a function
@@ -1358,9 +1372,9 @@ For the purpose of this Kata, a year is 365 days and a day is 24 hours.
 <div id="outline-container-orgaf2326a" class="outline-2">
 <h2 id="orgaf2326a">#8 Battleship field validator</h2>
 <div class="outline-text-2" id="text-orgaf2326a">
-</div><div id="outline-container-orgb6c1eb9" class="outline-3">
-<h3 id="orgb6c1eb9">Description</h3>
-<div class="outline-text-3" id="text-orgb6c1eb9">
+</div><div id="outline-container-org4cdaa43" class="outline-3">
+<h3 id="org4cdaa43">Description</h3>
+<div class="outline-text-3" id="text-org4cdaa43">
 <blockquote>
 <p>
 Write a method that takes a field for well-known board game "Battleship"
@@ -1425,9 +1439,9 @@ Test.assert_equals(validateBattlefield(battleField), <span style="color: #0000ff
 <div id="outline-container-org872d819" class="outline-2">
 <h2 id="org872d819">#9 Instant Runoff Voting</h2>
 <div class="outline-text-2" id="text-org872d819">
-</div><div id="outline-container-orga3ea028" class="outline-3">
-<h3 id="orga3ea028">Description</h3>
-<div class="outline-text-3" id="text-orga3ea028">
+</div><div id="outline-container-orgf13ec68" class="outline-3">
+<h3 id="orgf13ec68">Description</h3>
+<div class="outline-text-3" id="text-orgf13ec68">
 <blockquote>
 <p>
 Your task is to implement a function that calculates an
@@ -1467,9 +1481,9 @@ test for an example!
 </div>
 </div>
 
-<div id="outline-container-org3c5d018" class="outline-3">
-<h3 id="org3c5d018">Appropriate solution format</h3>
-<div class="outline-text-3" id="text-org3c5d018">
+<div id="outline-container-orga8c8688" class="outline-3">
+<h3 id="orga8c8688">Appropriate solution format</h3>
+<div class="outline-text-3" id="text-orga8c8688">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">first_place_leader_check</span>(bulletins):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">leaders</span> = [i[0] <span style="color: #ff0000;">for</span> i <span style="color: #ff0000;">in</span> bulletins]
@@ -1517,9 +1531,9 @@ test for an example!
 <div id="outline-container-org426298a" class="outline-2">
 <h2 id="org426298a">#10 Base64 Numeric Translator</h2>
 <div class="outline-text-2" id="text-org426298a">
-</div><div id="outline-container-orgf65b75d" class="outline-3">
-<h3 id="orgf65b75d">Description</h3>
-<div class="outline-text-3" id="text-orgf65b75d">
+</div><div id="outline-container-orge5878fb" class="outline-3">
+<h3 id="orge5878fb">Description</h3>
+<div class="outline-text-3" id="text-orge5878fb">
 <blockquote>
 <p>
 Our standard numbering system is (Base 10). That includes 0
@@ -1571,9 +1585,9 @@ number and output it's (Base 10) value as an integer.
 </div>
 </div>
 
-<div id="outline-container-orgd43de14" class="outline-3">
-<h3 id="orgd43de14">Appropriate solution format</h3>
-<div class="outline-text-3" id="text-orgd43de14">
+<div id="outline-container-org4619a44" class="outline-3">
+<h3 id="org4619a44">Appropriate solution format</h3>
+<div class="outline-text-3" id="text-org4619a44">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">converter</span>(order, symbol):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">s</span> = <span style="color: #00ffff;">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span>
@@ -1612,9 +1626,9 @@ xyz = x*b**2 + y*b**1 + z*b**0
 <div id="outline-container-orgf24c687" class="outline-2">
 <h2 id="orgf24c687">#11 Elementary Arithmetic - Carries Count</h2>
 <div class="outline-text-2" id="text-orgf24c687">
-</div><div id="outline-container-org424580d" class="outline-3">
-<h3 id="org424580d">Description</h3>
-<div class="outline-text-3" id="text-org424580d">
+</div><div id="outline-container-org31b5533" class="outline-3">
+<h3 id="org31b5533">Description</h3>
+<div class="outline-text-3" id="text-org31b5533">
 <blockquote>
 <p>
 In elementary arithmetic a "carry" is a digit that is transferred
@@ -1663,9 +1677,9 @@ Some Assumptions
 </div>
 </div>
 
-<div id="outline-container-org88440a5" class="outline-3">
-<h3 id="org88440a5">Appropriate solution format</h3>
-<div class="outline-text-3" id="text-org88440a5">
+<div id="outline-container-org18abe2e" class="outline-3">
+<h3 id="org18abe2e">Appropriate solution format</h3>
+<div class="outline-text-3" id="text-org18abe2e">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">solve</span>(input_string):
         <span style="color: #ff1493;">#</span><span style="color: #ff1493;">your code here</span>
@@ -1684,9 +1698,9 @@ Test.assert_equals(solve(<span style="color: #00ffff;">"1 9\n123456789 111111101
 <div id="outline-container-orgae17cb2" class="outline-2">
 <h2 id="orgae17cb2">#12 Valid Parentheses</h2>
 <div class="outline-text-2" id="text-orgae17cb2">
-</div><div id="outline-container-org7ca0069" class="outline-3">
-<h3 id="org7ca0069">Description</h3>
-<div class="outline-text-3" id="text-org7ca0069">
+</div><div id="outline-container-org18660d4" class="outline-3">
+<h3 id="org18660d4">Description</h3>
+<div class="outline-text-3" id="text-org18660d4">
 <blockquote>
 <p>
 Write a function called validParentheses that takes a string of parentheses,
@@ -1709,9 +1723,9 @@ All input strings will be nonempty, and will only consist of open parentheses '(
 </div>
 </div>
 
-<div id="outline-container-orgd5a3e7f" class="outline-3">
-<h3 id="orgd5a3e7f">Appropriate solution format</h3>
-<div class="outline-text-3" id="text-orgd5a3e7f">
+<div id="outline-container-org6fe2542" class="outline-3">
+<h3 id="org6fe2542">Appropriate solution format</h3>
+<div class="outline-text-3" id="text-org6fe2542">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">extract_parentheses</span>(string):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">if</span> string:
@@ -1774,9 +1788,9 @@ All input strings will be nonempty, and will only consist of open parentheses '(
 <div id="outline-container-orga646b39" class="outline-2">
 <h2 id="orga646b39">#13 Coordinates Validator</h2>
 <div class="outline-text-2" id="text-orga646b39">
-</div><div id="outline-container-org910a19c" class="outline-3">
-<h3 id="org910a19c">Description</h3>
-<div class="outline-text-3" id="text-org910a19c">
+</div><div id="outline-container-org0381ad4" class="outline-3">
+<h3 id="org0381ad4">Description</h3>
+<div class="outline-text-3" id="text-org0381ad4">
 <blockquote>
 <p>
 You need to create a function that will validate if given parameters
@@ -1858,9 +1872,9 @@ it.
 <div id="outline-container-orgca64f77" class="outline-2">
 <h2 id="orgca64f77">#14 Pete, the baker</h2>
 <div class="outline-text-2" id="text-orgca64f77">
-</div><div id="outline-container-org936d6d0" class="outline-3">
-<h3 id="org936d6d0">Description</h3>
-<div class="outline-text-3" id="text-org936d6d0">
+</div><div id="outline-container-orgab15950" class="outline-3">
+<h3 id="orgab15950">Description</h3>
+<div class="outline-text-3" id="text-orgab15950">
 <blockquote>
 <p>
 Pete likes to bake some cakes. He has some recipes and ingredients.
@@ -1888,9 +1902,9 @@ cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100},
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgae0c601" class="outline-3">
-<h3 id="orgae0c601">Solution</h3>
-<div class="outline-text-3" id="text-orgae0c601">
+<div id="outline-container-org1a524bd" class="outline-3">
+<h3 id="org1a524bd">Solution</h3>
+<div class="outline-text-3" id="text-org1a524bd">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">cakes</span>(recipe, available):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff1493;"># </span><span style="color: #ff1493;">TODO: insert code</span>
@@ -1916,9 +1930,9 @@ cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100},
 <div id="outline-container-orgf1f08da" class="outline-2">
 <h2 id="orgf1f08da"># Decode the Morse code</h2>
 <div class="outline-text-2" id="text-orgf1f08da">
-</div><div id="outline-container-orgf3faa43" class="outline-3">
-<h3 id="orgf3faa43">Description</h3>
-<div class="outline-text-3" id="text-orgf3faa43">
+</div><div id="outline-container-org25b823d" class="outline-3">
+<h3 id="org25b823d">Description</h3>
+<div class="outline-text-3" id="text-org25b823d">
 <blockquote>
 <p>
 In this kata you have to write a simple Morse code decoder. While
@@ -1961,17 +1975,17 @@ For example:
 </p>
 
 <p>
-decodeMorse('&#x2026;. . -.&#x2013;   .&#x2014; ..- -.. .')
+decodeMorse('&#x2026;. . -.--   .--- ..- -.. .')
 #should return "HEY JUDE"
 </p>
 
 <p>
 The Morse code table is preloaded for you as a dictionary, feel free to
 use it. In CoffeeScript, C++, JavaScript, PHP, Python, Ruby and TypeScript,
-the table can be accessed like this: MORSE_CODE['.&#x2013;'], in Java it is
-MorseCode.get('.&#x2013;'), in C# it is MorseCode.Get('.&#x2013;'), in Haskell the
+the table can be accessed like this: MORSE_CODE['.--'], in Java it is
+MorseCode.get('.--'), in C# it is MorseCode.Get('.--'), in Haskell the
 codes are in a Map String String and can be accessed like this:
-morseCodes ! ".&#x2013;".
+morseCodes ! ".--".
 </p>
 
 <p>
@@ -1988,9 +2002,9 @@ Good luck!
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org38f4126" class="outline-3">
-<h3 id="org38f4126">Solution</h3>
-<div class="outline-text-3" id="text-org38f4126">
+<div id="outline-container-orgd18e8fc" class="outline-3">
+<h3 id="orgd18e8fc">Solution</h3>
+<div class="outline-text-3" id="text-orgd18e8fc">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">decodeMorse</span>(morseCode):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> morseCode.replace(<span style="color: #00ffff;">'.'</span>, MORSE_CODE[<span style="color: #00ffff;">'.'</span>]).replace(<span style="color: #00ffff;">'-'</span>, MORSE_CODE[<span style="color: #00ffff;">'-'</span>]).replace(<span style="color: #00ffff;">' '</span>, <span style="color: #00ffff;">''</span>)
@@ -2026,9 +2040,9 @@ test.describe(<span style="color: #00ffff;">"Your own tests"</span>)
 <div id="outline-container-org23b8fc7" class="outline-2">
 <h2 id="org23b8fc7">Next bigger number with the same digits</h2>
 <div class="outline-text-2" id="text-org23b8fc7">
-</div><div id="outline-container-org9879586" class="outline-3">
-<h3 id="org9879586">Description</h3>
-<div class="outline-text-3" id="text-org9879586">
+</div><div id="outline-container-orge53ac18" class="outline-3">
+<h3 id="orge53ac18">Description</h3>
+<div class="outline-text-3" id="text-orge53ac18">
 <blockquote>
 <p>
 You have to create a function that takes a positive integer number
@@ -2050,9 +2064,9 @@ next_bigger(531)==-1
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgf6c8c22" class="outline-3">
-<h3 id="orgf6c8c22">Solution</h3>
-<div class="outline-text-3" id="text-orgf6c8c22">
+<div id="outline-container-org17f92c8" class="outline-3">
+<h3 id="org17f92c8">Solution</h3>
+<div class="outline-text-3" id="text-org17f92c8">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">next_bigger</span>(n):
 <span style="color: #00ff00; background-color: #292929;"> </span><span style="color: #ff1493;">#</span><span style="color: #ff1493;">your code here</span>
@@ -2070,9 +2084,9 @@ Test.assert_equals(next_bigger(144),414)
 <div id="outline-container-org97126c4" class="outline-2">
 <h2 id="org97126c4">Simple fraction to mixed number converter</h2>
 <div class="outline-text-2" id="text-org97126c4">
-</div><div id="outline-container-org08e448d" class="outline-3">
-<h3 id="org08e448d">Description</h3>
-<div class="outline-text-3" id="text-org08e448d">
+</div><div id="outline-container-org775e479" class="outline-3">
+<h3 id="org775e479">Description</h3>
+<div class="outline-text-3" id="text-org775e479">
 <blockquote>
 <p>
 Given a string representing a simple fraction x/y, your function must return a string
@@ -2152,9 +2166,9 @@ Make sure not to modify the input of your function in-place, it is a bad practic
 </div>
 </div>
 </div>
-<div id="outline-container-orgebd7198" class="outline-3">
-<h3 id="orgebd7198">Solution</h3>
-<div class="outline-text-3" id="text-orgebd7198">
+<div id="outline-container-org8e84f89" class="outline-3">
+<h3 id="org8e84f89">Solution</h3>
+<div class="outline-text-3" id="text-org8e84f89">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">from</span> fractions <span style="color: #ff0000;">import</span> Fraction
 
@@ -2225,9 +2239,9 @@ Make sure not to modify the input of your function in-place, it is a bad practic
 <div id="outline-container-orgf50b031" class="outline-2">
 <h2 id="orgf50b031">Common denominator</h2>
 <div class="outline-text-2" id="text-orgf50b031">
-</div><div id="outline-container-org5c8a109" class="outline-3">
-<h3 id="org5c8a109">Description</h3>
-<div class="outline-text-3" id="text-org5c8a109">
+</div><div id="outline-container-org34c1c9e" class="outline-3">
+<h3 id="org34c1c9e">Description</h3>
+<div class="outline-text-3" id="text-org34c1c9e">
 <blockquote>
 <p>
 You will have a list of rationals in the form
@@ -2267,9 +2281,9 @@ convertFracs [(1, 2), (1, 3), (1, 4)] `shouldBe` [(6, 12), (4, 12), (3, 12)]
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org9225bdf" class="outline-3">
-<h3 id="org9225bdf">Solution</h3>
-<div class="outline-text-3" id="text-org9225bdf">
+<div id="outline-container-org414929d" class="outline-3">
+<h3 id="org414929d">Solution</h3>
+<div class="outline-text-3" id="text-org414929d">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">from</span> fractions <span style="color: #ff0000;">import</span> Fraction, gcd
 
@@ -2320,9 +2334,9 @@ convertFracs [(1, 2), (1, 3), (1, 4)] `shouldBe` [(6, 12), (4, 12), (3, 12)]
 <div id="outline-container-org95ddbb5" class="outline-2">
 <h2 id="org95ddbb5">Strip Url Params</h2>
 <div class="outline-text-2" id="text-org95ddbb5">
-</div><div id="outline-container-org6c97f62" class="outline-3">
-<h3 id="org6c97f62">Description</h3>
-<div class="outline-text-3" id="text-org6c97f62">
+</div><div id="outline-container-orge9009a6" class="outline-3">
+<h3 id="orge9009a6">Description</h3>
+<div class="outline-text-3" id="text-orge9009a6">
 <blockquote>
 <p>
 Complete the method so that it does the following:
@@ -2345,9 +2359,9 @@ stripUrlParams('www.codewars.com', ['b']) // returns 'www.codewars.com'
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgc4301a9" class="outline-3">
-<h3 id="orgc4301a9">Solution</h3>
-<div class="outline-text-3" id="text-orgc4301a9">
+<div id="outline-container-org3200c8e" class="outline-3">
+<h3 id="org3200c8e">Solution</h3>
+<div class="outline-text-3" id="text-org3200c8e">
 <ul class="org-ul">
 <li>Split into header and arguments</li>
 <li>Split arguments into key=value pairs</li>
@@ -2384,9 +2398,9 @@ stripUrlParams('www.codewars.com', ['b']) // returns 'www.codewars.com'
 <div id="outline-container-org294a4e6" class="outline-2">
 <h2 id="org294a4e6">Strip Comments</h2>
 <div class="outline-text-2" id="text-org294a4e6">
-</div><div id="outline-container-org3ce134f" class="outline-3">
-<h3 id="org3ce134f">Description</h3>
-<div class="outline-text-3" id="text-org3ce134f">
+</div><div id="outline-container-org938bf90" class="outline-3">
+<h3 id="org938bf90">Description</h3>
+<div class="outline-text-3" id="text-org938bf90">
 <blockquote>
 <p>
 Complete the solution so that it strips all text that follows any of a set of comment
@@ -2427,9 +2441,9 @@ result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", 
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org6613d92" class="outline-3">
-<h3 id="org6613d92">Solution</h3>
-<div class="outline-text-3" id="text-org6613d92">
+<div id="outline-container-orge59ef83" class="outline-3">
+<h3 id="orge59ef83">Solution</h3>
+<div class="outline-text-3" id="text-orge59ef83">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">symbol_in_string</span>(s, symbols):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">result</span> = <span style="color: #0000ff;">False</span>
@@ -2483,9 +2497,9 @@ result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", 
 <div id="outline-container-org91d9734" class="outline-2">
 <h2 id="org91d9734">RGB To Hex Conversion</h2>
 <div class="outline-text-2" id="text-org91d9734">
-</div><div id="outline-container-org1dccf27" class="outline-3">
-<h3 id="org1dccf27">Description</h3>
-<div class="outline-text-3" id="text-org1dccf27">
+</div><div id="outline-container-orge062e4b" class="outline-3">
+<h3 id="orge062e4b">Description</h3>
+<div class="outline-text-3" id="text-orge062e4b">
 <blockquote>
 <p>
 The rgb() method is incomplete. Complete the method so that passing in RGB
@@ -2507,9 +2521,9 @@ rgb(148, 0, 211) # returns 9400D3
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org618b2ac" class="outline-3">
-<h3 id="org618b2ac">Solution</h3>
-<div class="outline-text-3" id="text-org618b2ac">
+<div id="outline-container-org1903604" class="outline-3">
+<h3 id="org1903604">Solution</h3>
+<div class="outline-text-3" id="text-org1903604">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">convert_value</span>(n):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #00ffff;">"""</span>
@@ -2547,9 +2561,9 @@ rgb(148, 0, 211) # returns 9400D3
 <div id="outline-container-org8daaaa4" class="outline-2">
 <h2 id="org8daaaa4">Calculator</h2>
 <div class="outline-text-2" id="text-org8daaaa4">
-</div><div id="outline-container-org85e467b" class="outline-3">
-<h3 id="org85e467b">Description</h3>
-<div class="outline-text-3" id="text-org85e467b">
+</div><div id="outline-container-orgf13bf63" class="outline-3">
+<h3 id="orgf13bf63">Description</h3>
+<div class="outline-text-3" id="text-orgf13bf63">
 <blockquote>
 <p>
 Create a simple calculator that given a string of operators (+ - * and /)
@@ -2569,9 +2583,9 @@ subtractions have a lower priority and should also be performed left-to-right.
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org46a9cf1" class="outline-3">
-<h3 id="org46a9cf1">Solution</h3>
-<div class="outline-text-3" id="text-org46a9cf1">
+<div id="outline-container-org4171ea7" class="outline-3">
+<h3 id="org4171ea7">Solution</h3>
+<div class="outline-text-3" id="text-org4171ea7">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">class</span> <span style="color: #ffff00;">Calculator</span>(<span style="color: #ff00ff;">object</span>):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">def</span> <span style="color: #a020f0;">evaluate</span>(<span style="color: #ff0000;">self</span>, string):
@@ -2591,9 +2605,9 @@ subtractions have a lower priority and should also be performed left-to-right.
 <div id="outline-container-org00a0866" class="outline-2">
 <h2 id="org00a0866">Twice linear</h2>
 <div class="outline-text-2" id="text-org00a0866">
-</div><div id="outline-container-org6db47c7" class="outline-3">
-<h3 id="org6db47c7">Description</h3>
-<div class="outline-text-3" id="text-org6db47c7">
+</div><div id="outline-container-org3545df9" class="outline-3">
+<h3 id="org3545df9">Description</h3>
+<div class="outline-text-3" id="text-org3545df9">
 <blockquote>
 <p>
 Consider a sequence u where u is defined as follows:
@@ -2638,9 +2652,9 @@ Focus attention on efficiency
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgd0393ea" class="outline-3">
-<h3 id="orgd0393ea">Solution</h3>
-<div class="outline-text-3" id="text-orgd0393ea">
+<div id="outline-container-orgd713eb8" class="outline-3">
+<h3 id="orgd713eb8">Solution</h3>
+<div class="outline-text-3" id="text-orgd713eb8">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">f2</span>(k):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> 2 * k + 1
@@ -2698,9 +2712,9 @@ Focus attention on efficiency
 <div id="outline-container-org495e194" class="outline-2">
 <h2 id="org495e194">Molecule to atoms</h2>
 <div class="outline-text-2" id="text-org495e194">
-</div><div id="outline-container-orge8d89c2" class="outline-3">
-<h3 id="orge8d89c2">Description</h3>
-<div class="outline-text-3" id="text-orge8d89c2">
+</div><div id="outline-container-org2af7ab3" class="outline-3">
+<h3 id="org2af7ab3">Description</h3>
+<div class="outline-text-3" id="text-org2af7ab3">
 <blockquote>
 <p>
 For a given chemical formula represented by a string, count the number
@@ -2740,9 +2754,9 @@ Index after the braces is optional.
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgc0d5118" class="outline-3">
-<h3 id="orgc0d5118">Solution</h3>
-<div class="outline-text-3" id="text-orgc0d5118">
+<div id="outline-container-orge8913fe" class="outline-3">
+<h3 id="orge8913fe">Solution</h3>
+<div class="outline-text-3" id="text-orge8913fe">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">parse_molecule</span> (formula):
 <span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">pass</span>
