@@ -6,32 +6,32 @@ permalink: /python/metaclass.html
 categories: [literate programming, Python, object-oriented-programming, emacs]
 tags: [metaclass, gist, oop]
 ---
+
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">Definition</a></li>
-<li><a href="#orgheadline2">Classes are obects too</a></li>
-<li><a href="#orgheadline3">The class of a class</a></li>
-<li><a href="#orgheadline4">Metaclass</a></li>
-<li><a href="#orgheadline5">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></a></li>
-<li><a href="#orgheadline6">Metaclass's <span class="underline"><span class="underline">call</span></span></a></li>
-<li><a href="#orgheadline7">Examples</a>
+<li><a href="#org441fd7f">Definition</a></li>
+<li><a href="#org7599dae">Classes are obects too</a></li>
+<li><a href="#org29d8e0a">The class of a class</a></li>
+<li><a href="#orge86260a">Metaclass</a></li>
+<li><a href="#org07d23f2">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></a></li>
+<li><a href="#org3547298">Metaclass's <span class="underline"><span class="underline">call</span></span></a></li>
+<li><a href="#org3f4e900">Examples</a>
 <ul>
-<li><a href="#orgheadline8">Trivial</a></li>
-<li><a href="#orgheadline9">Sophisticated</a></li>
-<li><a href="#orgheadline10">Complex</a></li>
-<li><a href="#orgheadline11">Full-fledged</a></li>
+<li><a href="#orgce17fab">Trivial</a></li>
+<li><a href="#org289f180">Sophisticated</a></li>
+<li><a href="#orga6a9626">Complex</a></li>
+<li><a href="#org99e85b5">Full-fledged</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Definition</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-org441fd7f" class="outline-2">
+<h2 id="org441fd7f">Definition</h2>
+<div class="outline-text-2" id="text-org441fd7f">
 <blockquote>
 <p>
 Metaclasses are deeper magic that 99% of users should never worry about.
@@ -39,10 +39,15 @@ If you wonder whether you need them, you don't (the people who actually
 need them know with certainty that they need them, and don't need an
 explanation about why).
 </p>
-<p align="right">
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;
 Python Guru Tim Peters
+&lt;/p&gt;
 </p>
-<hr  />
+
+</div>
+<hr />
 <p>
 Python rightfully prides itself as a relatively straightforward language without a
 lot of "magic" hiding in its workings and features. Sometimes, however, to make
@@ -50,11 +55,16 @@ interesting abstractions possible, one can dig deep in Python's more dusty and o
 corners to find language constructs that are a bit more magical than usual.
 Metaclasses are one such feature.
 </p>
-<p align="right">
-<a href="http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/">
-Eli Bendersky</a>
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;
+&lt;a href="<a href="http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/">http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/</a>"&gt;
+Eli Bendersky&lt;/a&gt;
+&lt;/p&gt;
 </p>
-<hr  />
+
+</div>
+<hr />
 <p>
 A metaclass is most commonly used as a class-factory.
 </p>
@@ -62,16 +72,15 @@ A metaclass is most commonly used as a class-factory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Classes are obects too</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-org7599dae" class="outline-2">
+<h2 id="org7599dae">Classes are obects too</h2>
+<div class="outline-text-2" id="text-org7599dae">
 <p>
 And it is possible to generate them on the fly:
 </p>
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">make_sample_class</span>(**kw):
-<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #4682b4;">type</span>(<span style="color: #deb887; font-style: italic;">'DemoClass'</span>, (<span style="color: #4682b4;">object</span>,), <span style="color: #4682b4;">dict</span>(**kw))
+<pre class="src src-python"><span style="color: #ff0000;">def</span> <span style="color: #a020f0;">make_sample_class</span>(**kw):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ff0000;">return</span> <span style="color: #ff00ff;">type</span>(<span style="color: #00ffff;">'DemoClass'</span>, (<span style="color: #ff00ff;">object</span>,), <span style="color: #ff00ff;">dict</span>(**kw))
 </pre>
 </div>
 
@@ -81,9 +90,8 @@ compose the class itself:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #7fffd4;">sample_class</span> = make_sample_class(a=1, b=2)
-<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(sample_class))
+<pre class="src src-python"><span style="color: #ee82ee;">sample_class</span> = make_sample_class(a=1, b=2)
+<span style="color: #ff0000;">print</span>(<span style="color: #ff00ff;">type</span>(sample_class))
 </pre>
 </div>
 
@@ -96,11 +104,10 @@ And now it is time to generate a particular instance:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-python"><span style="color: #7fffd4;">instance</span> = sample_class()
-<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(instance))
-<span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"This is an instance's properties a: %s and b: %s "</span> % 
-<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> (instance.a, instance.b))
+<pre class="src src-python"><span style="color: #ee82ee;">instance</span> = sample_class()
+<span style="color: #ff0000;">print</span>(<span style="color: #ff00ff;">type</span>(instance))
+<span style="color: #ff0000;">print</span>(<span style="color: #00ffff;">"This is an instance's properties a: %s and b: %s "</span> % 
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #00ff00; background-color: #292929;"> </span> (instance.a, instance.b))
 </pre>
 </div>
 
@@ -111,39 +118,114 @@ And now it is time to generate a particular instance:
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3">The class of a class</h2>
+<div id="outline-container-org29d8e0a" class="outline-2">
+<h2 id="org29d8e0a">The class of a class</h2>
+<div class="outline-text-2" id="text-org29d8e0a">
+<blockquote>
+<p>
+Every object (including built-ins) in Python has a class. We've
+just seen that classes are objects too, so classes must also have a
+class, right? Exactly. Python lets us examine the class of an
+object with the <span class="underline"><span class="underline">class</span></span> attribute. Let's see this in action:
+</p>
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;
+&lt;a href="<a href="http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/">http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/</a>"&gt;
+Eli Bendersky&lt;/a&gt;
+&lt;/p&gt;
+</p>
+
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Metaclass</h2>
-</div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></h2>
-</div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Metaclass's <span class="underline"><span class="underline">call</span></span></h2>
+</blockquote>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff0000;">class</span> <span style="color: #ffff00;">SampleClass</span>(<span style="color: #ff00ff;">object</span>): <span style="color: #ff0000;">pass</span>
+
+<span style="color: #ee82ee;">sample_object</span> = SampleClass()
+sample_object.__class__
+SampleClass.__class__
+</pre>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7">Examples</h2>
-<div class="outline-text-2" id="text-orgheadline7">
-</div><div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Trivial</h3>
-<div class="outline-text-3" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12">string.Template</h4>
+<pre class="example">
+&gt;&gt;&gt; &gt;&gt;&gt; &lt;class '__main__.SampleClass'&gt;
+&lt;class 'type'&gt;
+</pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Sophisticated</h3>
+<div id="outline-container-orge86260a" class="outline-2">
+<h2 id="orge86260a">Metaclass</h2>
+<div class="outline-text-2" id="text-orge86260a">
+<blockquote>
+<p>
+A metaclass is defined as "the class of a class". Any class whose
+instances are themselves classes, is a metaclass. So, according to
+what we've seen above, this makes <code>type</code> a metaclass - in fact, the
+most commonly used metaclass in Python, since it's the default
+metaclass of all classes.
+</p>
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;
+&lt;a href="<a href="http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/">http://eli.thegreenplace.net/2011/08/14/python-metaclasses-by-example/</a>"&gt;
+Eli Bendersky&lt;/a&gt;
+&lt;/p&gt;
+</p>
+
+</div>
+</blockquote>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff0000;">class</span> <span style="color: #ffff00;">Meta</span>(<span style="color: #ff00ff;">object</span>):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">meta_variable</span> = <span style="color: #00ffff;">'zero'</span>
+
+<span style="color: #ff0000;">class</span> <span style="color: #ffff00;">ExtClass</span>(<span style="color: #ff00ff;">object</span>):
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">__metaclass__</span> = Meta
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #ee82ee;">ext_variable</span> = <span style="color: #00ffff;">'infinity'</span>
+
+
+<span style="color: #ff0000;">print</span>(ExtClass.__metaclass__)
+<span style="color: #ee82ee;">dumb_objext</span> = ExtClass()
+<span style="color: #ff0000;">print</span>(dumb_objext.ext_variable)
+<span style="color: #ff0000;">print</span>(dumb_objext.__metaclass__.meta_variable)
+</pre>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10">Complex</h3>
+<pre class="example">
+... &gt;&gt;&gt; ... ... ... &gt;&gt;&gt; &gt;&gt;&gt; &lt;class '__main__.Meta'&gt;
+&gt;&gt;&gt; infinity
+zero
+</pre>
+</div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11">Full-fledged</h3>
+<div id="outline-container-org07d23f2" class="outline-2">
+<h2 id="org07d23f2">Metaclass's <span class="underline"><span class="underline">new</span></span> and <span class="underline"><span class="underline">init</span></span></h2>
+</div>
+<div id="outline-container-org3547298" class="outline-2">
+<h2 id="org3547298">Metaclass's <span class="underline"><span class="underline">call</span></span></h2>
+</div>
+
+<div id="outline-container-org3f4e900" class="outline-2">
+<h2 id="org3f4e900">Examples</h2>
+<div class="outline-text-2" id="text-org3f4e900">
+</div><div id="outline-container-orgce17fab" class="outline-3">
+<h3 id="orgce17fab">Trivial</h3>
+<div class="outline-text-3" id="text-orgce17fab">
+</div><div id="outline-container-orgeee6d69" class="outline-4">
+<h4 id="orgeee6d69">string.Template</h4>
+</div>
+</div>
+
+<div id="outline-container-org289f180" class="outline-3">
+<h3 id="org289f180">Sophisticated</h3>
+</div>
+
+<div id="outline-container-orga6a9626" class="outline-3">
+<h3 id="orga6a9626">Complex</h3>
+</div>
+
+<div id="outline-container-org99e85b5" class="outline-3">
+<h3 id="org99e85b5">Full-fledged</h3>
 </div>
 </div>
