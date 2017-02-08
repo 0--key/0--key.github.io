@@ -1,0 +1,190 @@
+---
+layout: post
+title: Cover Python programs
+tagline: " by soft&curly tests"
+permalink: /tdd/test-coverage.html
+categories: [literate programming, Python, coverage]
+tags: [TDD, testing]
+---
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbe52d64">Theory</a>
+<ul>
+<li><a href="#orga8dd3d9">Overview</a></li>
+<li><a href="#orga8d9ec8">Problem</a></li>
+<li><a href="#org4a58e80">Problem scale</a></li>
+</ul>
+</li>
+<li><a href="#org65f8a51">Pertinent solution</a></li>
+<li><a href="#orgee4f549">Tools</a></li>
+<li><a href="#org8b56f96">References</a></li>
+<li><a href="#org6874495">Code coverage</a>
+<ul>
+<li><a href="#org1f59cc5">installation</a></li>
+<li><a href="#orgf34f213">Test launch</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbe52d64" class="outline-2">
+<h2 id="orgbe52d64">Theory</h2>
+<div class="outline-text-2" id="text-orgbe52d64">
+</div><div id="outline-container-orga8dd3d9" class="outline-3">
+<h3 id="orga8dd3d9">Overview</h3>
+<div class="outline-text-3" id="text-orga8dd3d9">
+<p>
+There are several subconcepts of <i>Code coverage</i>, which is just a
+quantitative measure of finding out how much of the code has
+been executed. The concept can be deceptive, though, if one doesn't
+know exactly what those figures mean. 
+</p>
+
+<p>
+For example, all of the following are subconcepts of code coverage: 
+</p>
+
+<ul class="org-ul">
+<li>Statement coverage</li>
+<li>Line coverage</li>
+<li>Condition coverage</li>
+<li>Decision coverage</li>
+<li>Multiple condition coverage</li>
+<li>Path coverage</li>
+<li>etc.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga8d9ec8" class="outline-3">
+<h3 id="orga8d9ec8">Problem</h3>
+<div class="outline-text-3" id="text-orga8d9ec8">
+<p>
+100% line coverage doesn't guarantee anything (well, except that the
+interpreter has traversed each line, nothing more :). For example,
+consider the line 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #ff0000;">if</span> a.bar() <span style="color: #ff0000;">and</span> b.frob() <span style="color: #ff0000;">or</span> c.frob():
+<span style="color: #00ff00; background-color: #292929;"> </span>do_something()
+</pre>
+</div>
+
+<p>
+if <code>a.bar()</code> evaluates to false, <code>b.frob()</code> isn't usually executed at all
+due to ShortCircuit evaluation. b.frob() can be as broken as ever, but
+still line coverage can read 100% thus lulling developer into false sense
+of security. Condition coverage is a bit better, but it still doesn't try
+everything: what about loops? And even if a loop is executed no times at
+all and maximum amount of iterations, it still doesn't test everything.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4a58e80" class="outline-3">
+<h3 id="org4a58e80">Problem scale</h3>
+<div class="outline-text-3" id="text-org4a58e80">
+<p>
+Certainly one discovers quickly that to really test all
+execution paths, you have to test all possible paths, and
+even that leaves questions (what about if some loop is
+executed only max/2 iterations? what about all possible
+inputs?). 
+</p>
+
+<p>
+Still, even line coverage is not useless. For developer, it
+allows one to notice those parts of codes that haven't been
+even glanced at yet. In interpreted languages, those parts
+can contain even typos which usually lead to immediate
+crashes (calling a non-existing method, for example). Part
+coverage tests much, much more, but unfortunately, the
+amount of test paths rises exponentially in each decision.
+For a simple module with 20 if statements, each having 2
+possible alternatives, there are 2<sup>20</sup> ~ 1 million different
+paths of execution. Add to that a few loops and one more
+complex condition there and another elsewhere, and you
+quickly run into billions of test paths. In any real-life
+project, even 10% path coverage can be just impossible to
+achieve.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org65f8a51" class="outline-2">
+<h2 id="org65f8a51">Pertinent solution</h2>
+<div class="outline-text-2" id="text-org65f8a51">
+<p>
+Still, path coverage may be useful for testing only single
+methods which contain complex algorithms. For Python, it
+seems like we have only statement coverage so far, thanks to
+efforts of Gareth Rees and Ned Batchelder. More advanced
+tools are under development, however. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgee4f549" class="outline-2">
+<h2 id="orgee4f549">Tools</h2>
+<div class="outline-text-2" id="text-orgee4f549">
+<p>
+<a href="http://pypi.python.org/pypi/coverage">- Code coverage</a> measurement for Python by Ned Batchelder
+</p>
+<ul class="org-ul">
+<li><a href="http://darcs.idyll.org/~t/projects/figleaf/doc/">figleaf</a> by C. Titus Brown</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org8b56f96" class="outline-2">
+<h2 id="org8b56f96">References</h2>
+<div class="outline-text-2" id="text-org8b56f96">
+<ul class="org-ul">
+<li>Code Coverage <a href="http://www.bullseye.com/coverage.html">Analysis</a></li>
+<li><a href="http://pycheesecake.org/wiki/PythonTestingToolsTaxonomy#CodeCoverageTools">http://pycheesecake.org/wiki/PythonTestingToolsTaxonomy#CodeCoverageTools</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6874495" class="outline-2">
+<h2 id="org6874495">Code coverage</h2>
+<div class="outline-text-2" id="text-org6874495">
+</div><div id="outline-container-org1f59cc5" class="outline-3">
+<h3 id="org1f59cc5">installation</h3>
+<div class="outline-text-3" id="text-org1f59cc5">
+<div class="org-src-container">
+<pre class="src src-sh">pip install coverage
+pip freeze | grep coverage
+<span style="color: #ff1493;"># </span><span style="color: #ff1493;">pip install --upgrade pip</span>
+</pre>
+</div>
+
+<pre class="example">
+Requirement already satisfied: coverage in /usr/local/share/DVCS/lib/Python/venv/lib/python3.4/site-packages
+coverage==4.3.4
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf34f213" class="outline-3">
+<h3 id="orgf34f213">Test launch</h3>
+<div class="outline-text-3" id="text-orgf34f213">
+</div><div id="outline-container-orgf6e1558" class="outline-4">
+<h4 id="orgf6e1558">Single Python</h4>
+</div>
+
+<div id="outline-container-orgde8e5da" class="outline-4">
+<h4 id="orgde8e5da">Python in suite</h4>
+</div>
+
+<div id="outline-container-org7dcce0e" class="outline-4">
+<h4 id="org7dcce0e">Python in elegant suite</h4>
+</div>
+</div>
+</div>
