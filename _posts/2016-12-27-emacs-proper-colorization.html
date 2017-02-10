@@ -1,0 +1,103 @@
+---
+layout: post
+title: Emacs is beautiful
+tagline: " and colorful"
+permalink: /emacs/color-theme.html
+categories: [emacs, color-theme]
+tags: [color, theme, init, default.el]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga9f44b1">Preamble</a></li>
+<li><a href="#orgaf04a3b">Solution</a>
+<ul>
+<li><a href="#org7e478bb">Installation</a></li>
+<li><a href="#org4bfaefb">Customizing</a></li>
+</ul>
+</li>
+<li><a href="#org959dbe0">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga9f44b1" class="outline-2">
+<h2 id="orga9f44b1">Preamble</h2>
+<div class="outline-text-2" id="text-orga9f44b1">
+<p>
+No need to argue about meaning colors. It is, and lets try to use
+this feature by adjusting and revival Emacs' desktop view.
+</p>
+
+<p>
+A plethora of arbitrary colorization plugins already exists and
+<code>color-theme</code> is one an old-school and large library of colorization
+solutions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaf04a3b" class="outline-2">
+<h2 id="orgaf04a3b">Solution</h2>
+<div class="outline-text-2" id="text-orgaf04a3b">
+</div><div id="outline-container-org7e478bb" class="outline-3">
+<h3 id="org7e478bb">Installation</h3>
+<div class="outline-text-3" id="text-org7e478bb">
+<p>
+As trivial as it ever possible for Emacs package.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4bfaefb" class="outline-3">
+<h3 id="org4bfaefb">Customizing</h3>
+<div class="outline-text-3" id="text-org4bfaefb">
+<p>
+It is possible to do this by extending the <code>init.el</code> file, <i>but</i>
+it cause the color corruption in result. Hence I <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html">would suggest</a> to
+create <code>default.el</code> and put it somewhere in the <code>load-path</code>
+</p>
+
+<p>
+I'm allocate it at <code>/usr/local/share/emacs/site-lisp</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #ff1493;">;; </span><span style="color: #ff1493;">all customization processed after init.el are there</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">colorization</span>
+(<span style="color: #ff0000;">require</span> '<span style="color: #0000ff;">color-theme</span>)
+(eval-after-load <span style="color: #00ffff;">"color-theme"</span>
+  '(<span style="color: #ff0000;">progn</span>
+     (color-theme-initialize)
+     (color-theme-lawrence)
+     (color-theme-euphoria)))
+
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 1"</span>) 'color-theme-clarity)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 2"</span>) 'color-theme-ld-dark)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 3"</span>) 'color-theme-hober)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 4"</span>) 'color-theme-oswald)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 5"</span>) 'color-theme-tty-dark)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 6"</span>) 'color-theme-taming-mr-arneson)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 7"</span>) 'color-theme-euphoria)
+(global-set-key (kbd <span style="color: #00ffff;">"C-c 8"</span>) 'color-theme-lawrence)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org959dbe0" class="outline-2">
+<h2 id="org959dbe0">Conclusion</h2>
+<div class="outline-text-2" id="text-org959dbe0">
+<p>
+Now you should get a much pretty and clear view for your source code.
+Hope it would be something like this:
+</p>
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/emacs_colorful.png" alt="Emacs sample desktop:title Color matters" align="center" />
+</p>
+<p><span class="figure-number">Figure 1: </span>emacs desktop in colors</p>
+</div>
+</div>
+</div>
