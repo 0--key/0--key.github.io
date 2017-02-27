@@ -13,6 +13,7 @@ tags: [tutorial, elisp, intro]
 <ul>
 <li><a href="#org3b34798">Primitive</a>
 <ul>
+<li><a href="#org3e316b4">Brief overview</a></li>
 <li><a href="#orgf3ae923">Ouput test</a></li>
 <li><a href="#org4d365f8">Ariphmetic and notation</a></li>
 <li><a href="#org086c163">Boolean</a></li>
@@ -25,7 +26,365 @@ tags: [tutorial, elisp, intro]
 <div id="outline-container-org3b34798" class="outline-2">
 <h2 id="org3b34798">Primitive</h2>
 <div class="outline-text-2" id="text-org3b34798">
-</div><div id="outline-container-orgf3ae923" class="outline-3">
+</div><div id="outline-container-org3e316b4" class="outline-3">
+<h3 id="org3e316b4">Brief overview</h3>
+<div class="outline-text-3" id="text-org3e316b4">
+<p>
+Copied from <a href="https://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html">here</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #ff1493;">;; </span><span style="color: #ff1493;">This gives an introduction to Emacs Lisp in 15 minutes (v0.2d)</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Author: Bastien / @bzg2 / https://bzg.fr</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">First make sure you read this text by Peter Norvig:</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">http://norvig.com/21-days.html</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Then install GNU Emacs 24.3:</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Debian: apt-get install emacs (or see your distro instructions)</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">MacOSX: http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Windows: http://ftp.gnu.org/gnu/windows/emacs/emacs-24.3-bin-i386.zip</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">More general information can be found at:</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">http://www.gnu.org/software/emacs/#Obtaining</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Important warning:</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Going through this tutorial won't damage your computer unless</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">you get so angry that you throw it on the floor.  In that case,</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">I hereby decline any responsability.  Have fun!</span>
+
+<span style="color: #ff1493;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #ff1493;">;; </span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Fire up Emacs.</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Hit the `q' key to dismiss the welcome message.</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now look at the gray line at the bottom of the window:</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">"*scratch*" is the name of the editing space you are now in.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">This editing space is called a "buffer".</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">The scratch buffer is the default buffer when opening Emacs.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You are never editing files: you are editing buffers that you</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">can save to a file.</span>
+<span style="color: #ff1493;">;; </span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">"Lisp interaction" refers to a set of commands available here.</span>
+<span style="color: #ff1493;">;; </span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Emacs has a built-in set of commands available in every buffer,</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">and several subsets of commands available when you activate a</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">specific mode.  Here we use the `</span><span style="color: #ff1493;">lisp-interaction-mode</span><span style="color: #ff1493;">', which</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">comes with commands to evaluate and navigate within Elisp code.</span>
+
+<span style="color: #ff1493;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Semi-colons start comments anywhere on a line.</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Elisp programs are made of symbolic expressions ("sexps"):</span>
+(+ 2 2)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">This symbolic expression reads as "Add 2 to 2".</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Sexps are enclosed into parentheses, possibly nested:</span>
+(+ 2 (+ 1 1))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">A symbolic expression contains atoms or other symbolic</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">expressions.  In the above examples, 1 and 2 are atoms,</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(+ 2 (+ 1 1)) and (+ 1 1) are symbolic expressions.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">From `</span><span style="color: #ff1493;">lisp-interaction-mode</span><span style="color: #ff1493;">' you can evaluate sexps.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Put the cursor right after the closing parenthesis then</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">hold down the control and hit the j keys ("C-j" for short).</span>
+
+(+ 3 (+ 1 2))
+<span style="color: #ff1493;">;;           </span><span style="color: #ff1493;">^ cursor here</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`</span><span style="color: #ff1493;">C-j</span><span style="color: #ff1493;">' =&gt; 6</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`</span><span style="color: #ff1493;">C-j</span><span style="color: #ff1493;">' inserts the result of the evaluation in the buffer.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' displays the same result in Emacs bottom line,</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">called the "minibuffer".  We will generally use `C-x C-e',</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">as we don't want to clutter the buffer with useless text.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`</span><span style="color: #ff1493;">setq</span><span style="color: #ff1493;">' stores a value into a variable:</span>
+(<span style="color: #ff0000;">setq</span> my-name <span style="color: #00ffff;">"Bastien"</span>)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; "Bastien" (displayed in the mini-buffer)</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`</span><span style="color: #ff1493;">insert</span><span style="color: #ff1493;">' will insert "Hello!" where the cursor is:</span>
+(insert <span style="color: #00ffff;">"Hello!"</span>)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; "Hello!"</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">We used `</span><span style="color: #ff1493;">insert</span><span style="color: #ff1493;">' with only one argument "Hello!", but</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">we can pass more arguments -- here we use two:</span>
+
+(insert <span style="color: #00ffff;">"Hello"</span> <span style="color: #00ffff;">" world!"</span>)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; "Hello world!"</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You can use variables instead of strings:</span>
+(insert <span style="color: #00ffff;">"Hello, I am "</span> my-name)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; "Hello, I am Bastien"</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You can combine sexps into functions:</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">hello</span> () (insert <span style="color: #00ffff;">"Hello, I am "</span> my-name))
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; hello</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You can evaluate functions:</span>
+(hello)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; Hello, I am Bastien</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">The empty parentheses in the function's definition means that</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">it does not accept arguments.  But always using `</span><span style="color: #ff1493;">my-name</span><span style="color: #ff1493;">' is</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">boring, let's tell the function to accept one argument (here</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">the argument is called "name"): </span>
+
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">hello</span> (name) (insert <span style="color: #00ffff;">"Hello "</span> name))
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; hello</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now let's call the function with the string "you" as the value</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">for its unique argument:</span>
+(hello <span style="color: #00ffff;">"you"</span>)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e' =&gt; "Hello you"</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Yeah!</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Take a breath.</span>
+
+<span style="color: #ff1493;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now switch to a new buffer named "*test*" in another window:</span>
+
+(switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e'</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">=&gt; [screen has two windows and cursor is in the *test* buffer]</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Mouse over the top window and left-click to go back.  Or you can</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">use `C-x o' (i.e. hold down control-x and hit o) to go to the other</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">window interactively.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You can combine several sexps with `</span><span style="color: #ff1493;">progn</span><span style="color: #ff1493;">':</span>
+(<span style="color: #ff0000;">progn</span>
+  (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+  (hello <span style="color: #00ffff;">"you"</span>))
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`C-x C-e'</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">=&gt; [The screen has two windows and cursor is in the *test* buffer]</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now if you don't mind, I'll stop asking you to hit `C-x C-e': do it</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">for every sexp that follows.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Always go back to the *scratch* buffer with the mouse or `C-x o'.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">It's often useful to erase the buffer:</span>
+(<span style="color: #ff0000;">progn</span>
+  (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+  (erase-buffer)
+  (hello <span style="color: #00ffff;">"there"</span>))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Or to go back to the other window:</span>
+(<span style="color: #ff0000;">progn</span>
+  (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+  (erase-buffer)
+  (hello <span style="color: #00ffff;">"you"</span>)
+  (other-window 1))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You can bind a value to a local variable with `</span><span style="color: #ff1493;">let</span><span style="color: #ff1493;">':</span>
+(<span style="color: #ff0000;">let</span> ((local-name <span style="color: #00ffff;">"you"</span>))
+  (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+  (erase-buffer)
+  (hello local-name)
+  (other-window 1))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">No need to use `</span><span style="color: #ff1493;">progn</span><span style="color: #ff1493;">' in that case, since `</span><span style="color: #ff1493;">let</span><span style="color: #ff1493;">' also combines</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">several sexps.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's format a string:</span>
+(format <span style="color: #00ffff;">"Hello %s!\n"</span> <span style="color: #00ffff;">"visitor"</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">%s is a place-holder for a string, replaced by "visitor".</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">\n is the newline character.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's refine our function by using format:</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">hello</span> (name)
+  (insert (format <span style="color: #00ffff;">"Hello %s!\n"</span> name)))
+
+(hello <span style="color: #00ffff;">"you"</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's create another function which uses `</span><span style="color: #ff1493;">let</span><span style="color: #ff1493;">':</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">greeting</span> (name)
+  (<span style="color: #ff0000;">let</span> ((your-name <span style="color: #00ffff;">"Bastien"</span>))
+    (insert (format <span style="color: #00ffff;">"Hello %s!\n\nI am %s."</span>
+                    name       <span style="color: #ff1493;">; </span><span style="color: #ff1493;">the argument of the function</span>
+                    your-name  <span style="color: #ff1493;">; </span><span style="color: #ff1493;">the let-bound variable "Bastien"</span>
+                    ))))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">And evaluate it:</span>
+(greeting <span style="color: #00ffff;">"you"</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Some function are interactive:</span>
+(read-from-minibuffer <span style="color: #00ffff;">"Enter your name: "</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Evaluating this function returns what you entered at the prompt.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's make our `</span><span style="color: #ff1493;">greeting</span><span style="color: #ff1493;">' function prompt for your name:</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">greeting</span> (from-name)
+  (<span style="color: #ff0000;">let</span> ((your-name (read-from-minibuffer <span style="color: #00ffff;">"Enter your name: "</span>)))
+    (insert (format <span style="color: #00ffff;">"Hello!\n\nI am %s and you are %s."</span>
+                    from-name <span style="color: #ff1493;">; </span><span style="color: #ff1493;">the argument of the function</span>
+                    your-name <span style="color: #ff1493;">; </span><span style="color: #ff1493;">the let-bound var, entered at prompt</span>
+                    ))))
+
+(greeting <span style="color: #00ffff;">"Bastien"</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's complete it by displaying the results in the other window:</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">greeting</span> (from-name)
+  (<span style="color: #ff0000;">let</span> ((your-name (read-from-minibuffer <span style="color: #00ffff;">"Enter your name: "</span>)))
+    (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+    (erase-buffer)
+    (insert (format <span style="color: #00ffff;">"Hello %s!\n\nI am %s."</span> your-name from-name))
+    (other-window 1)))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now test it:</span>
+(greeting <span style="color: #00ffff;">"Bastien"</span>)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Take a breath.</span>
+
+<span style="color: #ff1493;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's store a list of names:</span>
+(<span style="color: #ff0000;">setq</span> list-of-names '(<span style="color: #00ffff;">"Sarah"</span> <span style="color: #00ffff;">"Chloe"</span> <span style="color: #00ffff;">"Mathilde"</span>))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Get the first element of this list with `</span><span style="color: #ff1493;">car</span><span style="color: #ff1493;">':</span>
+(car list-of-names)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Get a list of all but the first element with `</span><span style="color: #ff1493;">cdr</span><span style="color: #ff1493;">':</span>
+(cdr list-of-names)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Add an element to the beginning of a list with `</span><span style="color: #ff1493;">push</span><span style="color: #ff1493;">':</span>
+(<span style="color: #ff0000;">push</span> <span style="color: #00ffff;">"Stephanie"</span> list-of-names)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">NOTE: `</span><span style="color: #ff1493;">car</span><span style="color: #ff1493;">' and `</span><span style="color: #ff1493;">cdr</span><span style="color: #ff1493;">' don't modify the list, but `</span><span style="color: #ff1493;">push</span><span style="color: #ff1493;">' does.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">This is an important difference: some functions don't have any</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">side-effects (like `</span><span style="color: #ff1493;">car</span><span style="color: #ff1493;">') while others have (like `</span><span style="color: #ff1493;">push</span><span style="color: #ff1493;">').</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's call `</span><span style="color: #ff1493;">hello</span><span style="color: #ff1493;">' for each element in `</span><span style="color: #ff1493;">list-of-names</span><span style="color: #ff1493;">':</span>
+(mapcar 'hello list-of-names)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Refine `</span><span style="color: #ff1493;">greeting</span><span style="color: #ff1493;">' to say hello to everyone in `</span><span style="color: #ff1493;">list-of-names</span><span style="color: #ff1493;">':</span>
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">greeting</span> ()
+    (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+    (erase-buffer)
+    (mapcar 'hello list-of-names)
+    (other-window 1))
+
+(greeting)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Remember the `</span><span style="color: #ff1493;">hello</span><span style="color: #ff1493;">' function we defined above?  It takes one</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">argument, a name.  `</span><span style="color: #ff1493;">mapcar</span><span style="color: #ff1493;">' calls `</span><span style="color: #ff1493;">hello</span><span style="color: #ff1493;">', successively using each</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">element of `</span><span style="color: #ff1493;">list-of-names</span><span style="color: #ff1493;">' as the argument for `</span><span style="color: #ff1493;">hello</span><span style="color: #ff1493;">'.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Now let's arrange a bit what we have in the displayed buffer:</span>
+
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">replace-hello-by-bonjour</span> ()
+    (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+    (goto-char (point-min))
+    (<span style="color: #ff0000;">while</span> (search-forward <span style="color: #00ffff;">"Hello"</span>)
+   (replace-match <span style="color: #00ffff;">"Bonjour"</span>))
+    (other-window 1))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(goto-char (point-min)) goes to the beginning of the buffer.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(search-forward "Hello") searches for the string "Hello".</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(while x y) evaluates the y sexp(s) while x returns something.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">If x returns `</span><span style="color: #ff1493;">nil</span><span style="color: #ff1493;">' (nothing), we exit the while loop.</span>
+
+(replace-hello-by-bonjour)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You should see all occurrences of "Hello" in the *test* buffer</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">replaced by "Bonjour".</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">You should also get an error: "Search failed: Hello".</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">To avoid this error, you need to tell `</span><span style="color: #ff1493;">search-forward</span><span style="color: #ff1493;">' whether it</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">should stop searching at some point in the buffer, and whether it</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">should silently fail when nothing is found:</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(search-forward "Hello" nil t) does the trick:</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">The `</span><span style="color: #ff1493;">nil</span><span style="color: #ff1493;">' argument says: the search is not bound to a position.</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">The `t' argument says: silently fail when nothing is found.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">We use this sexp in the function below, which doesn't throw an error:</span>
+
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">hello-to-bonjour</span> ()
+    (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+    (erase-buffer)
+    <span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Say hello to names in `</span><span style="color: #ff1493;">list-of-names</span><span style="color: #ff1493;">'</span>
+    (mapcar 'hello list-of-names)
+    (goto-char (point-min))
+    <span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Replace "Hello" by "Bonjour"</span>
+    (<span style="color: #ff0000;">while</span> (search-forward <span style="color: #00ffff;">"Hello"</span> nil t)
+   (replace-match <span style="color: #00ffff;">"Bonjour"</span>))
+    (other-window 1))
+
+(hello-to-bonjour)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Let's colorize the names:</span>
+
+(<span style="color: #ff0000;">defun</span> <span style="color: #a020f0;">boldify-names</span> ()
+    (switch-to-buffer-other-window <span style="color: #00ffff;">"*test*"</span>)
+    (goto-char (point-min))
+    (<span style="color: #ff0000;">while</span> (re-search-forward <span style="color: #00ffff;">"Bonjour </span><span style="color: #00ffff; font-weight: bold;">\\</span><span style="color: #00ffff; font-weight: bold;">(</span><span style="color: #00ffff;">.+</span><span style="color: #00ffff; font-weight: bold;">\\</span><span style="color: #00ffff; font-weight: bold;">)</span><span style="color: #00ffff;">!"</span> nil t)
+   (add-text-properties (match-beginning 1)
+                           (match-end 1)
+                           (list 'face 'bold)))
+    (other-window 1))
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">This functions introduces `</span><span style="color: #ff1493;">re-search-forward</span><span style="color: #ff1493;">': instead of</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">searching for the string "Bonjour", you search for a pattern,</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">using a "regular expression" (abbreviated in the prefix "re-").</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">The regular expression is "Bonjour \\(.+\\)!" and it reads:</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">the string "Bonjour ", and</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">a group of           | this is the \\( ... \\) construct</span>
+<span style="color: #ff1493;">;;   </span><span style="color: #ff1493;">any character      | this is the .</span>
+<span style="color: #ff1493;">;;   </span><span style="color: #ff1493;">possibly repeated  | this is the +</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">and the "!" string.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Ready?  Test it!</span>
+
+(boldify-names)
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">`</span><span style="color: #ff1493;">add-text-properties</span><span style="color: #ff1493;">' adds... text properties, like a face.</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">OK, we are done.  Happy hacking!</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">If you want to know more about a variable or a function:</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">C-h v a-variable RET</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">C-h f a-function RET</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">To read the Emacs Lisp manual with Emacs:</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">C-h i m elisp RET</span>
+<span style="color: #ff1493;">;;</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">To read an online introduction to Emacs Lisp:</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">https://www.gnu.org/software/emacs/manual/html_node/eintr/index.html</span>
+
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">Thanks to these people for their feedback and suggestions:</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- Wes Hardaker</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- notbob</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- Kevin Montuori</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- Arne Babenhauserheide</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- Alan Schmitt</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- LinXitoW</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">- Aaron Meurer</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf3ae923" class="outline-3">
 <h3 id="orgf3ae923">Ouput test</h3>
 <div class="outline-text-3" id="text-orgf3ae923">
 <div class="org-src-container">
@@ -60,10 +419,10 @@ tags: [tutorial, elisp, intro]
 <h4 id="org2bd1bf3">String substitution for print</h4>
 <div class="outline-text-4" id="text-org2bd1bf3">
 <div class="org-src-container">
-<pre class="src src-elisp">(progn (print "hi: %d"))
-;; (print(progn (/ 12 4)))
-;; (format "An atom: ~S~%and a list: ~S~%and an integer: ~D~%"
-;;           nil (list 5) 6)
+<pre class="src src-elisp">(<span style="color: #ff0000;">progn</span> (print <span style="color: #00ffff;">"hi: %d"</span>))
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(print(progn (/ 12 4)))</span>
+<span style="color: #ff1493;">;; </span><span style="color: #ff1493;">(format "An atom: ~S~%and a list: ~S~%and an integer: ~D~%"</span>
+<span style="color: #ff1493;">;;           </span><span style="color: #ff1493;">nil (list 5) 6)</span>
 </pre>
 </div>
 
@@ -97,8 +456,8 @@ preceded.
 <h3 id="org086c163">Boolean</h3>
 <div class="outline-text-3" id="text-org086c163">
 <div class="org-src-container">
-<pre class="src src-elisp">(and t t t)
-(or t nil nil)
+<pre class="src src-elisp">(<span style="color: #ff0000;">and</span> t t t)
+(<span style="color: #ff0000;">or</span> t nil nil)
 </pre>
 </div>
 
