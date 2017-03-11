@@ -1,0 +1,133 @@
+---
+layout: post
+title: Python3 OOP design
+tagline: " patterns overview"
+permalink: /python3/design/patterns/overview.html
+categories: [literate programming, emacs, Python3]
+tags: [OOP, design, patterns]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7408b24">What Is a Design Pattern? </a></li>
+<li><a href="#org9f09f99">In general, a pattern has four essential elements:</a>
+<ul>
+<li><a href="#org287d0cd">The pattern name</a></li>
+<li><a href="#org6922b0d">The problem describes when to apply the pattern.</a></li>
+<li><a href="#org3f332e5">The solution</a></li>
+<li><a href="#org7cd3e35">The consequences</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7408b24" class="outline-2">
+<h2 id="org7408b24">What Is a Design Pattern? <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h2>
+<div class="outline-text-2" id="text-org7408b24">
+<p>
+Christopher Alexander says,
+</p>
+<blockquote>
+<p>
+“Each pattern describes a problem which occurs over and over again in
+our environment, and then describes the core of the solution to that
+problem, in such a way that you can use this solution a million times
+over, without ever doing it the same way twice”
+</p>
+</blockquote>
+<p>
+Even though Alexander was talking about patterns in buildings and
+towns, what he says is true about object-oriented design patterns. Our
+solutions are expressed in terms of objects and interfaces instead of
+walls and doors, but at the core of both kinds of patterns is a
+solution to a problem in a context.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f09f99" class="outline-2">
+<h2 id="org9f09f99">In general, a pattern has four essential elements:</h2>
+<div class="outline-text-2" id="text-org9f09f99">
+</div><div id="outline-container-org287d0cd" class="outline-3">
+<h3 id="org287d0cd">The pattern name</h3>
+<div class="outline-text-3" id="text-org287d0cd">
+<p>
+is a handle we can use to describe a design problem, its solutions,
+and consequences in a word or two. Naming a pattern
+immediately increases our design vocabulary. It lets us design at a
+higher level of abstraction. Having a vocabulary for patterns lets us
+talk about them with our colleagues, in our documentation, and even
+to ourselves. It makes it easier to think about designs and to
+communicate them and their trade-offs to others. Finding good names
+has been one of the hardest parts of developing our catalog.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org6922b0d" class="outline-3">
+<h3 id="org6922b0d">The problem describes when to apply the pattern.</h3>
+<div class="outline-text-3" id="text-org6922b0d">
+<p>
+It explains the problem and its context. It might describe specific
+design problems such as how to represent algorithms as objects. It
+might describe class or object structures that are symptomatic of
+an inflexible design. Sometimes the problem will include a list of
+conditions that must be met before it makes sense to apply the
+pattern.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org3f332e5" class="outline-3">
+<h3 id="org3f332e5">The solution</h3>
+<div class="outline-text-3" id="text-org3f332e5">
+<p>
+describes the elements that make up the design, their
+relationships, responsibilities, and collaborations. The solution
+doesn’t describe a particular concrete design or implementation,
+because a pattern is like a template that can be applied in many
+different situations. Instead, the pattern provides an abstract
+description of a design problem and how a general arrangement of
+elements (classes and objects in our case) solves it.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7cd3e35" class="outline-3">
+<h3 id="org7cd3e35">The consequences</h3>
+<div class="outline-text-3" id="text-org7cd3e35">
+<p>
+are the results and trade-offs of applying the pattern. Though
+consequences are often unvoiced when we describe design decisions,
+they are critical for evaluating design alternatives and for
+understanding the costs and benefits of applying the pattern.
+</p>
+
+<p>
+The consequences for software often concern space and time
+trade-offs. They may address language and implementation issues as
+well. Since reuse is often a factor in object-oriented design, the
+consequences of a pattern include its impact on a system’s
+flexibility, extensibility, or portability. Listing these
+consequences explicitly helps you understand and evaluate them.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612">https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612</a>
+</p></div></div>
+
+
+</div>
+</div>
