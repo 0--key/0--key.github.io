@@ -1,0 +1,79 @@
+---
+layout: post
+title: Python3 OOP design
+tagline: " patterns overview"
+permalink: /python3/design/patterns/creational/factory.html
+categories: [literate programming, emacs, Python3]
+tags: [OOP, design, patterns, creational, factory]
+---
+
+<p>
+<b>Code</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">+NAME: pet_factory</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;"> A pet factory abstraction</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;"> """</span>
+
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Dog</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">"""A simple dog class"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, name):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">self</span>._name = name
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">speak</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">"Woof!"</span>
+
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Cat</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">"""A simple cat class"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, name):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">self</span>._name = name
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">speak</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">"Meow!"</span>
+
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">spawn_pet</span>(pet=<span style="color: #deb887; font-style: italic;">"dog"</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">"""The factory method"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #7fffd4;">pets</span> = <span style="color: #4682b4;">dict</span>(dog=Dog(<span style="color: #deb887; font-style: italic;">"Hope"</span>), cat=Cat(<span style="color: #deb887; font-style: italic;">"Peace"</span>))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">return</span> pets[pet]
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #7fffd4;">d</span> = spawn_pet(<span style="color: #deb887; font-style: italic;">"dog"</span>)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">print</span>(d.speak())
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #7fffd4;">c</span> = spawn_pet(<span style="color: #deb887; font-style: italic;">"cat"</span>)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">print</span>(c.speak())
+</pre>
+</div>
+
+<p>
+<b>Test suite</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">+NAME: test_pet_factory</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;"> An attempt to illustrate how pet_factory works</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;"> """</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">import</span> unittest
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">from</span> pet_factory <span style="color: #87cefa;">import</span> Dog, Cat, spawn_pet
+
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">TestPetBehavior</span>(unittest.TestCase):
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">setUp</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">self</span>.D = Dog(<span style="color: #deb887; font-style: italic;">'Hound'</span>)
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">test_dog_init_name</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">self</span>.assertEqual(<span style="color: #87cefa;">self</span>.D._name, <span style="color: #deb887; font-style: italic;">'Hound'</span>)
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">test_dog_speak_ability</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #87cefa;">self</span>.assertEqual(<span style="color: #87cefa;">self</span>.D.speak(), <span style="color: #deb887; font-style: italic;">'Woof!'</span>)
+</pre>
+</div>
