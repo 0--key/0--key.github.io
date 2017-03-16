@@ -7,20 +7,63 @@ categories: [literate programming, emacs, Python3]
 tags: [OOP, design, patterns, creational, factory]
 ---
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup>
-<col  class="org-left" />
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Pattern code</th>
-<th scope="col" class="org-left">Test suite</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgded8952">Pattern overview</a>
+<ul>
+<li><a href="#org5cb317b">Common features</a></li>
+<li><a href="#org81506f6">Distinct features</a></li>
+</ul>
+</li>
+<li><a href="#org5cdcd34">Samples</a>
+<ul>
+<li><a href="#org238bbb1">Pet factory</a></li>
+<li><a href="#org33652c6">Weapon factory</a></li>
+<li><a href="#orgaf9842d">Another factory</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgded8952" class="outline-2">
+<h2 id="orgded8952">Pattern overview</h2>
+<div class="outline-text-2" id="text-orgded8952">
+</div><div id="outline-container-org5cb317b" class="outline-3">
+<h3 id="org5cb317b">Common features</h3>
+</div>
+
+<div id="outline-container-org81506f6" class="outline-3">
+<h3 id="org81506f6">Distinct features</h3>
+</div>
+</div>
+
+<div id="outline-container-org5cdcd34" class="outline-2">
+<h2 id="org5cdcd34">Samples</h2>
+<div class="outline-text-2" id="text-org5cdcd34">
+<p>
+For educational purposes it is convenient to look at the working
+sample.
+</p>
+</div>
+
+<div id="outline-container-org238bbb1" class="outline-3">
+<h3 id="org238bbb1">Pet factory</h3>
+<div class="outline-text-3" id="text-org238bbb1">
+<p>
+Creates some particular animal out from arbitrary number already
+defined pets.
+</p>
+<div class="HTML">
+<p>
+&lt;table&gt;
+&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Pattern code&lt;/th&gt;&lt;th&gt;Test suite&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;
+</p>
+
+</div>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
 <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
@@ -65,8 +108,12 @@ tags: [OOP, design, patterns, creational, factory]
 Woof!
 Meow!
 </pre>
+<div class="HTML">
+<p>
+&lt;/td&gt;&lt;td&gt;
+</p>
 
-<td class="org-left">
+</div>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
 <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
@@ -90,5 +137,99 @@ Meow!
 </pre>
 </div>
 
-</tr>
-</tbody>
+<div class="HTML">
+<p>
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org33652c6" class="outline-3">
+<h3 id="org33652c6">Weapon factory</h3>
+<div class="outline-text-3" id="text-org33652c6">
+<div class="HTML">
+<p>
+&lt;table&gt;
+&lt;tbody&gt;&lt;tr&gt;&lt;th&gt;Pattern code&lt;/th&gt;&lt;th&gt;Test suite&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">How to choose an arbitrary weapon</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #87cefa;">from</span> random <span style="color: #87cefa;">import</span> randrange
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Weapon</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">name</span> = <span style="color: #ffd700; font-weight: bold;">None</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">cost</span> = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #98fb98; font-size: 90%; font-weight: bold;">@staticmethod</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">get_weapon</span>(x):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">if</span> x == 0:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> Knife()
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">if</span> x == 1:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> Gun()
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Knife</span>(Weapon):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">name</span> = <span style="color: #deb887; font-style: italic;">'Knife'</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">cost</span> = 20.00
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Gun</span>(Weapon):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">name</span> = <span style="color: #deb887; font-style: italic;">'Gun'</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">cost</span> = 300.00
+
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">Create 5 random weapons</span>
+<span style="color: #87cefa;">for</span> _ <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">range</span>(5):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">w</span> = Weapon.get_weapon(randrange(2))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(w.name, w.cost)
+</pre>
+</div>
+
+<pre class="example">
+Knife 20.0
+Knife 20.0
+Knife 20.0
+Knife 20.0
+Knife 20.0
+</pre>
+<div class="HTML">
+<p>
+&lt;/td&gt;&lt;td&gt;
+</p>
+
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">An attempt to illustrate how sample_code works</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #87cefa;">import</span> unittest
+</pre>
+</div>
+
+<div class="HTML">
+<p>
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaf9842d" class="outline-3">
+<h3 id="orgaf9842d">Another factory</h3>
+</div>
+</div>
