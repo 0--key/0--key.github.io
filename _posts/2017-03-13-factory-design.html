@@ -13,15 +13,7 @@ tags: [OOP, design, patterns, creational, factory]
 <ul>
 <li><a href="#orgded8952">Pattern overview</a>
 <ul>
-<li><a href="#org5cb317b">Common features</a></li>
-<li><a href="#org81506f6">Distinct features</a></li>
-</ul>
-</li>
-<li><a href="#org5cdcd34">Samples</a>
-<ul>
-<li><a href="#org238bbb1">Pet factory</a></li>
-<li><a href="#org33652c6">Weapon factory</a></li>
-<li><a href="#orgaf9842d">Another factory</a></li>
+<li><a href="#org5cdcd34">Samples</a></li>
 </ul>
 </li>
 </ul>
@@ -31,33 +23,141 @@ tags: [OOP, design, patterns, creational, factory]
 <div id="outline-container-orgded8952" class="outline-2">
 <h2 id="orgded8952">Pattern overview</h2>
 <div class="outline-text-2" id="text-orgded8952">
-</div><div id="outline-container-org5cb317b" class="outline-3">
-<h3 id="org5cb317b">Common features</h3>
+<p>
+Hope <a href="https://github.com/0--key/pydepatt/tree/master/patterns/creational/factory">this page</a> could elucidate the same issue in a bit different
+manner.
+</p>
 </div>
 
-<div id="outline-container-org81506f6" class="outline-3">
-<h3 id="org81506f6">Distinct features</h3>
+<div id="outline-container-org6e81eaa" class="outline-4">
+<h4 id="org6e81eaa">Pattern Name and Classification:</h4>
+<div class="outline-text-4" id="text-org6e81eaa">
+<p>
+A descriptive and unique name that helps in identifying and
+referring to the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-org27debb6" class="outline-4">
+<h4 id="org27debb6">Intent:</h4>
+<div class="outline-text-4" id="text-org27debb6">
+<p>
+A description of the goal behind the pattern and the reason for
+using it.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc9ed680" class="outline-4">
+<h4 id="orgc9ed680">Also Known As:</h4>
+<div class="outline-text-4" id="text-orgc9ed680">
+<p>
+Other names for the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-org8b242ba" class="outline-4">
+<h4 id="org8b242ba">Motivation (Forces):</h4>
+<div class="outline-text-4" id="text-org8b242ba">
+<p>
+A scenario consisting of a problem and a context in which this
+pattern can be used.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfa9d38a" class="outline-4">
+<h4 id="orgfa9d38a">Applicability:</h4>
+<div class="outline-text-4" id="text-orgfa9d38a">
+<p>
+Situations in which this pattern is usable; the context for the
+pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgce8c3d1" class="outline-4">
+<h4 id="orgce8c3d1">Structure:</h4>
+<div class="outline-text-4" id="text-orgce8c3d1">
+<p>
+A graphical representation of the pattern. Class diagrams and
+Interaction diagrams may be used for this purpose.
+</p>
+</div>
+</div>
+<div id="outline-container-org5550f24" class="outline-4">
+<h4 id="org5550f24">Participants:</h4>
+<div class="outline-text-4" id="text-org5550f24">
+<p>
+A listing of the classes and objects used in the pattern and their
+roles in the design.
+</p>
+</div>
+</div>
+<div id="outline-container-org2d0b48c" class="outline-4">
+<h4 id="org2d0b48c">Collaboration:</h4>
+<div class="outline-text-4" id="text-org2d0b48c">
+<p>
+A description of how classes and objects used in the pattern
+interact with each other.
+</p>
+</div>
+</div>
+<div id="outline-container-org043f524" class="outline-4">
+<h4 id="org043f524">Consequences:</h4>
+<div class="outline-text-4" id="text-org043f524">
+<p>
+A description of the results, side effects, and trade offs caused
+by using the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-org224605b" class="outline-4">
+<h4 id="org224605b">Implementation:</h4>
+<div class="outline-text-4" id="text-org224605b">
+<p>
+A description of an implementation of the pattern; the solution
+part of the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb965c37" class="outline-4">
+<h4 id="orgb965c37">Known Uses:</h4>
+<div class="outline-text-4" id="text-orgb965c37">
+<p>
+Examples of real usages of the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-org63c30fa" class="outline-4">
+<h4 id="org63c30fa">Related Patterns:</h4>
+<div class="outline-text-4" id="text-org63c30fa">
+<p>
+Other patterns that have some relationship with the pattern;
+discussion of the differences between the pattern and similar
+patterns.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org5cdcd34" class="outline-2">
-<h2 id="org5cdcd34">Samples</h2>
-<div class="outline-text-2" id="text-org5cdcd34">
+
+
+<div id="outline-container-org5cdcd34" class="outline-3">
+<h3 id="org5cdcd34">Samples</h3>
+<div class="outline-text-3" id="text-org5cdcd34">
 <p>
 For educational purposes it is convenient to look at the working
 sample.
 </p>
 </div>
 
-<div id="outline-container-org238bbb1" class="outline-3">
-<h3 id="org238bbb1">Pet factory</h3>
-<div class="outline-text-3" id="text-org238bbb1">
+<div id="outline-container-org238bbb1" class="outline-4">
+<h4 id="org238bbb1">Pet factory</h4>
+<div class="outline-text-4" id="text-org238bbb1">
 <p>
 Creates some particular animal out from arbitrary number already
 defined pets.
 </p>
 
-<table><tbody><tr><th>Pattern code</th><th>Test suite</th></tr><tr><td valign="top">
+<table><tbody><tr><th>Pattern code</th>
+<th>Test suite</th></tr><tr><td valign="top">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
 <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
@@ -88,7 +188,8 @@ defined pets.
 
 <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">spawn_pet</span>(pet=<span style="color: #deb887; font-style: italic;">"dog"</span>):
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""The factory method"""</span>
-<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">pets</span> = <span style="color: #4682b4;">dict</span>(dog=Dog(<span style="color: #deb887; font-style: italic;">"Hope"</span>), cat=Cat(<span style="color: #deb887; font-style: italic;">"Peace"</span>))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">pets</span> = <span style="color: #4682b4;">dict</span>(dog=Dog(<span style="color: #deb887; font-style: italic;">"Hope"</span>),
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   cat=Cat(<span style="color: #deb887; font-style: italic;">"Peace"</span>))
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> pets[pet]
 
 <span style="color: #7fffd4;">d</span> = spawn_pet(<span style="color: #deb887; font-style: italic;">"dog"</span>)
@@ -130,10 +231,11 @@ Meow!
 </div>
 </div>
 
-<div id="outline-container-org33652c6" class="outline-3">
-<h3 id="org33652c6">Weapon factory</h3>
-<div class="outline-text-3" id="text-org33652c6">
-<table><tbody><tr><th>Pattern code</th><th>Test suite</th></tr><tr><td valign="top">
+<div id="outline-container-org33652c6" class="outline-4">
+<h4 id="org33652c6">Weapon factory</h4>
+<div class="outline-text-4" id="text-org33652c6">
+<table><tbody><tr><th>Pattern code</th>
+<th>Test suite</th></tr><tr><td valign="top">
 
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
@@ -174,9 +276,9 @@ Meow!
 </div>
 
 <pre class="example">
-Gun 300.0
 Knife 20.0
-Gun 300.0
+Knife 20.0
+Knife 20.0
 Gun 300.0
 Knife 20.0
 </pre>
@@ -197,7 +299,8 @@ Knife 20.0
 </div>
 </div>
 
-<div id="outline-container-orgaf9842d" class="outline-3">
-<h3 id="orgaf9842d">Another factory</h3>
+<div id="outline-container-org488e363" class="outline-4">
+<h4 id="org488e363">Pizza factory</h4>
+</div>
 </div>
 </div>
