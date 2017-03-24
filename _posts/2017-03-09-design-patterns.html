@@ -1,0 +1,267 @@
+---
+layout: post
+title: Python3 OOP design
+tagline: " patterns overview"
+permalink: /python3/design/patterns/introduction.html
+categories: [literate programming, emacs, Python3]
+tags: [OOP, design, patterns, intro]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org84f609f">Intro</a>
+<ul>
+<li><a href="#orgdc589dd">Foreword</a></li>
+<li><a href="#org3bb9c99">Intention</a></li>
+<li><a href="#org7560cdd">Stem principles</a></li>
+<li><a href="#org5e5eb3e">Advantages of design patterns</a></li>
+<li><a href="#org7881c04">Target audience</a></li>
+<li><a href="#org6eccc28">Contribution</a></li>
+</ul>
+</li>
+<li><a href="#orgca5c2e6">Overview</a>
+<ul>
+<li><a href="#orgec5db89">Python3 only</a></li>
+<li><a href="#org39cd858">Methodology</a></li>
+</ul>
+</li>
+<li><a href="#org7ed4356">Structure</a></li>
+<li><a href="#org211e1c3">Corollary</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org84f609f" class="outline-2">
+<h2 id="org84f609f">Intro</h2>
+<div class="outline-text-2" id="text-org84f609f">
+</div><div id="outline-container-orgdc589dd" class="outline-3">
+<h3 id="orgdc589dd">Foreword</h3>
+<div class="outline-text-3" id="text-orgdc589dd">
+<blockquote>
+<p>
+Controlling complexity is the essence of computer programming.
+</p>
+<p align="right">
+<p>
+Brian Kernighan
+</p>
+</p>
+
+<p>
+All problems in computer science can be solved by another level
+of indirection (abstraction).
+</p>
+<p align="right">
+<p>
+David Wheeler
+</p>
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org3bb9c99" class="outline-3">
+<h3 id="org3bb9c99">Intention</h3>
+<div class="outline-text-3" id="text-org3bb9c99">
+<p>
+Design patterns were first introduced by GoF (Gang of Four), where they
+mentioned them as being solutions to given problems. If you would like to
+know more, GoF refers to the four authors of the book, Design Patterns:
+Elements of Reusable Object-Oriented Software. The book's authors are Erich
+Gamma, Richard Helm, Ralph Johnson, and John Vlissides, with a foreword by
+Grady Booch. This book covers software engineering solutions to the commonly
+occurring problems in software design. There were 23 design patterns first
+identified, and the first implementation was done with respect to the Java
+program language. Design patterns are discoveries and not an invention in
+themselves.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7560cdd" class="outline-3">
+<h3 id="org7560cdd">Stem principles</h3>
+<div class="outline-text-3" id="text-org7560cdd">
+</div><div id="outline-container-org35976e8" class="outline-4">
+<h4 id="org35976e8">The open/close principle</h4>
+<div class="outline-text-4" id="text-org35976e8">
+<p>
+states that classes or objects and methods should be open for
+extension but closed for modifications.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd429fe7" class="outline-4">
+<h4 id="orgd429fe7">The inversion of control principle</h4>
+<div class="outline-text-4" id="text-orgd429fe7">
+<p>
+states that high-level modules shouldn't be dependent on low-level
+modules; they should both be dependent on abstractions. Details
+should depend on abstractions and not the other way round.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd18e23b" class="outline-4">
+<h4 id="orgd18e23b">The interface segregation principle</h4>
+<div class="outline-text-4" id="text-orgd18e23b">
+<p>
+clients should not be forced to depend on interfaces they don't
+use.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd5538f6" class="outline-4">
+<h4 id="orgd5538f6">The single responsibility principle</h4>
+<div class="outline-text-4" id="text-orgd5538f6">
+<p>
+states, a class should have only one reason to change.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3ea4e9d" class="outline-4">
+<h4 id="org3ea4e9d">The substitution principle</h4>
+<div class="outline-text-4" id="text-org3ea4e9d">
+<p>
+states that derived classes must be able to completely substitute
+the base classes.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5e5eb3e" class="outline-3">
+<h3 id="org5e5eb3e">Advantages of design patterns</h3>
+<div class="outline-text-3" id="text-org5e5eb3e">
+<ul class="org-ul">
+<li>They are reusable across multiple projects</li>
+<li>The architectural level of problems can be solved</li>
+<li>They are time-tested and well-proven, which is the experience of
+developers and architects</li>
+<li>They have reliability and dependence</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7881c04" class="outline-3">
+<h3 id="org7881c04">Target audience</h3>
+<div class="outline-text-3" id="text-org7881c04">
+<p>
+Anybody who are curious in studying and simultaneously appreciate a
+clarity.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6eccc28" class="outline-3">
+<h3 id="org6eccc28">Contribution</h3>
+<div class="outline-text-3" id="text-org6eccc28">
+<p>
+Please feel free to do any corrections, amendments or suggestions.
+<i>Keep clear, please.</i>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgca5c2e6" class="outline-2">
+<h2 id="orgca5c2e6">Overview</h2>
+<div class="outline-text-2" id="text-orgca5c2e6">
+</div><div id="outline-container-orgec5db89" class="outline-3">
+<h3 id="orgec5db89">Python3 only</h3>
+<div class="outline-text-3" id="text-orgec5db89">
+<p>
+It is a contemporary version and seems it is used to become the one
+very soon.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org39cd858" class="outline-3">
+<h3 id="org39cd858">Methodology</h3>
+<div class="outline-text-3" id="text-org39cd858">
+</div><div id="outline-container-org1489b00" class="outline-4">
+<h4 id="org1489b00">Brief survey</h4>
+</div>
+<div id="outline-container-orgab26247" class="outline-4">
+<h4 id="orgab26247">Several examples</h4>
+</div>
+<div id="outline-container-orgac21854" class="outline-4">
+<h4 id="orgac21854">Test suite</h4>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ed4356" class="outline-2">
+<h2 id="org7ed4356">Structure</h2>
+<div class="outline-text-2" id="text-org7ed4356">
+<pre class="example">
+.
+├── 2016-08-24-index.org
+├── 2016-08-24-intro.org
+├── 2016-08-25-how-to-evaluate.org
+├── 2016-08-26-disqus.org
+├── 2016-08-27-mark-up-samples.org
+├── 2016-08-27-python-and-sqlite3-interaction.org
+├── 2016-08-30-sqlite3-integrity-check.org
+├── 2016-08-31-sqlite3-data-types.org
+├── 2016-09-06-fork-git-repository.org
+├── 2016-09-06-how-to-clone-git-repo.org
+├── 2016-09-08-python-mock-object.org
+├── 2016-09-09-python-standard-library.org
+├── 2016-09-11-pytest.org
+├── 2016-09-13-python-built-in-functions.org
+├── 2016-09-15-python-classmethod-and-staticmethod.org
+├── 2016-10-13-CV.org
+├── 2016-10-13-emacs-pass-region-to-python-shell.org
+├── 2016-10-13-emacs-python-spynner-test.org
+├── 2016-10-15-javascript-inside-emacs.org
+├── 2016-11-04-heap-queue-algorithm.org
+├── 2016-11-09-time-complexity.org
+├── 2016-11-11-pdb.org
+├── 2016-11-12-toys-tasks.org
+├── 2016-11-13-emacs-package-downgrading.org
+├── 2016-11-22-multithreading.org
+├── 2016-11-30-python-oop-modeling.org
+├── 2016-12-07-emacs-elpy-compilation-default-directory.org
+├── 2016-12-13-python-unittest-niceties.org
+├── 2016-12-17-python-metaclasses.org
+├── 2016-12-22-python-code-test-coverage.org
+├── 2016-12-27-emacs-proper-colorization.org
+├── 2016-12-30-python-warnings.org
+├── 2017-01-03-elisp-intro.org
+├── 2017-01-07-org-jekyll-export.org
+├── 2017-01-11-problem-solving-approach.org
+├── 2017-01-17-string-formaitting-in-python3.org
+├── 2017-03-09-design-patterns.org
+├── 2017-03-10-oop-design-patterns-overview.org
+├── 2017-03-13-factory-design.org
+├── desktop.emacs
+├── img
+│   ├── color_test.png
+│   ├── comp.png
+│   ├── comp.png exports:both
+│   ├── gradient.png
+│   ├── second_color_test.png
+│   └── tryout.png
+├── LICENSE
+├── README.md
+├── spynner
+│   └── myscript.py
+├── tests
+│   ├── test_built-in_constants.py
+│   ├── test_built-in_functions.py
+│   ├── test_gud.py
+│   └── test_sample.py
+└── toy_tasks.py
+
+3 directories, 54 files
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org211e1c3" class="outline-2">
+<h2 id="org211e1c3">Corollary</h2>
+</div>
