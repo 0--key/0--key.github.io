@@ -1,0 +1,969 @@
+---
+layout: post
+title: Why machine learning
+tagline: " is unavoidable?"
+permalink: /machine-learning/neural-network/why.html
+categories: [machine learning, neural networks]
+tags: [definition, introduction]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org92a3f7e">What is Machine Learning?</a>
+<ul>
+<li><a href="#org74de5db">The Machine Learning Approach</a></li>
+<li><a href="#org7c92351">Some examples of tasks best solved by learning</a></li>
+<li><a href="#orgbdabca2">A standard example of machine learning</a></li>
+<li><a href="#org2fdca16">It is very hard to say what makes a 2</a></li>
+<li><a href="#org2dd51b2">Beyond MNIST: The ImageNet task</a></li>
+<li><a href="#org290cd87">Some examples from an earlier version of the net</a></li>
+<li><a href="#orgaa40dac">It can deal with a wide range of objects</a></li>
+<li><a href="#org14595ae">It makes some really cool errors</a></li>
+<li><a href="#orgbf2ca55">The Speech Recognition Task</a></li>
+<li><a href="#org812fcc5">Phone recognition on the TIMIT benchmark</a></li>
+<li><a href="#org0d184d5">Word error rates from MSR, IBM, &amp; Google</a></li>
+</ul>
+</li>
+<li><a href="#orge5bad48">What are neural networks?</a>
+<ul>
+<li><a href="#orge893fe5">Reasons to study neural computation</a></li>
+<li><a href="#org4b90c43">A typical cortical neuron</a></li>
+<li><a href="#orgae27dfa">Synapses</a></li>
+<li><a href="#orgaf2a77c">How synapses adapt</a></li>
+<li><a href="#orge9999d0">How the brain works on one slide!</a></li>
+<li><a href="#org1c97488">Modularity and the brain</a></li>
+</ul>
+</li>
+<li><a href="#org5c54bce">Some simple models of neurons</a>
+<ul>
+<li><a href="#org80167bc">Idealized neurons</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<blockquote>
+<p>
+Why do we need machine learning?
+</p>
+</blockquote>
+
+<div id="outline-container-org92a3f7e" class="outline-2">
+<h2 id="org92a3f7e">What is Machine Learning?</h2>
+<div class="outline-text-2" id="text-org92a3f7e">
+<p>
+It is very hard to write programs that solve problems like recognizing a
+three-dimensional object from a novel viewpoint in new lighting
+conditions in a cluttered scene.
+</p>
+
+<ul class="org-ul">
+<li>We don’t know what program to write because we don’t know how its
+done in our brain.</li>
+<li>Even if we had a good idea about how to do it, the program might
+be horrendously complicated.</li>
+</ul>
+
+<p>
+It is hard to write a program to compute the probability that a
+credit card transaction is fraudulent.
+</p>
+<ul class="org-ul">
+<li>There may not be any rules that are both simple and reliable. We
+need to combine a very large number of weak rules.</li>
+<li>Fraud is a moving target. The program needs to keep changing.</li>
+</ul>
+</div>
+
+<div id="outline-container-org74de5db" class="outline-3">
+<h3 id="org74de5db">The Machine Learning Approach</h3>
+<div class="outline-text-3" id="text-org74de5db">
+<p>
+Instead of writing a program by hand for each specific task, we collect
+lots of examples that specify the correct output for a given input.
+A machine learning algorithm then takes these examples and produces
+a program that does the job.
+</p>
+
+<ul class="org-ul">
+<li>The program produced by the learning algorithm may look very
+different from a typical hand-written program. It may contain
+millions of numbers.</li>
+<li>If we do it right, the program works for new cases as well as the
+ones we trained it on.</li>
+<li>If the data changes the program can change too by training on the
+new data.</li>
+</ul>
+
+<p>
+Massive amounts of computation are now cheaper than paying
+someone to write a task-specific program.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c92351" class="outline-3">
+<h3 id="org7c92351">Some examples of tasks best solved by learning</h3>
+<div class="outline-text-3" id="text-org7c92351">
+</div><div id="outline-container-orgf926c3b" class="outline-4">
+<h4 id="orgf926c3b">Recognizing patterns:</h4>
+<div class="outline-text-4" id="text-orgf926c3b">
+<ul class="org-ul">
+<li>Objects in real scenes</li>
+<li>Facial identities or facial expressions</li>
+<li>Spoken words</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga7f549b" class="outline-4">
+<h4 id="orga7f549b">Recognizing anomalies:</h4>
+<div class="outline-text-4" id="text-orga7f549b">
+<ul class="org-ul">
+<li>Unusual sequences of credit card transactions</li>
+<li>Unusual patterns of sensor readings in a nuclear power plant</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3d7642e" class="outline-4">
+<h4 id="org3d7642e">Prediction:</h4>
+<div class="outline-text-4" id="text-org3d7642e">
+<ul class="org-ul">
+<li>Future stock prices or currency exchange rates</li>
+<li>Which movies will a person like?</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdabca2" class="outline-3">
+<h3 id="orgbdabca2">A standard example of machine learning</h3>
+<div class="outline-text-3" id="text-orgbdabca2">
+<p>
+A lot of genetics is done on fruit flies.
+</p>
+
+<ul class="org-ul">
+<li>They are convenient because they breed fast.</li>
+<li>We already know a lot about them.</li>
+</ul>
+
+<p>
+The MNIST database of hand-written digits is the the machine
+learning equivalent of fruit flies.
+</p>
+
+<ul class="org-ul">
+<li>They are publicly available and we can learn them quite fast in a
+moderate-sized neural net.</li>
+<li>We know a huge amount about how well various machine learning
+methods do on MNIST.</li>
+</ul>
+
+<p>
+We will use MNIST as our standard task.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2fdca16" class="outline-3">
+<h3 id="org2fdca16">It is very hard to say what makes a 2</h3>
+</div>
+
+<div id="outline-container-org2dd51b2" class="outline-3">
+<h3 id="org2dd51b2">Beyond MNIST: The ImageNet task</h3>
+<div class="outline-text-3" id="text-org2dd51b2">
+<p>
+1000 different object classes in 1.3 million high-resolution training images
+from the web.
+</p>
+
+<ul class="org-ul">
+<li>Best system in 2010 competition got 47% error for its first choice
+and 25% error for its top 5 choices.</li>
+</ul>
+
+<p>
+Jitendra Malik (an eminent neural net sceptic) said that this competition is
+a good test of whether deep neural networks work well for object
+recognition.
+</p>
+
+<ul class="org-ul">
+<li>A very deep neural net (Krizhevsky et. al. 2012) gets less that
+40% error for its first choice and less than 20% for its top 5
+choices (see lecture 5).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org290cd87" class="outline-3">
+<h3 id="org290cd87">Some examples from an earlier version of the net</h3>
+</div>
+
+<div id="outline-container-orgaa40dac" class="outline-3">
+<h3 id="orgaa40dac">It can deal with a wide range of objects</h3>
+</div>
+
+<div id="outline-container-org14595ae" class="outline-3">
+<h3 id="org14595ae">It makes some really cool errors</h3>
+</div>
+
+<div id="outline-container-orgbf2ca55" class="outline-3">
+<h3 id="orgbf2ca55">The Speech Recognition Task</h3>
+<div class="outline-text-3" id="text-orgbf2ca55">
+<p>
+A speech recognition system has several stages:
+</p>
+
+<ul class="org-ul">
+<li><i>Pre-processing</i>: Convert the sound wave into a vector of acoustic
+coefficients. Extract a new vector about every 10 mille seconds.</li>
+<li><i>The acoustic model</i>: Use a few adjacent vectors of acoustic
+coefficients to place bets on which part of which phoneme is being
+spoken.</li>
+<li><i>Decoding</i>: Find the sequence of bets that does the best job of
+fitting the acoustic data and also fitting a model of the kinds of
+things people say.</li>
+</ul>
+
+<p>
+Deep neural networks pioneered by George Dahl and Abdel-rahman
+Mohamed are now replacing the previous machine learning method
+for the acoustic model.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org812fcc5" class="outline-3">
+<h3 id="org812fcc5">Phone recognition on the TIMIT benchmark</h3>
+<div class="outline-text-3" id="text-org812fcc5">
+<p>
+(Mohamed, Dahl, &amp; Hinton, 2012)
+183 HMM-state labels
+not pre-trained
+2000 logistic hidden units
+5 more layers of
+pre-trained weights
+2000 logistic hidden units
+2000 logistic hidden units
+15 frames of 40 filterbank outputs
+</p>
+<ul class="org-ul">
+<li>their temporal derivatives</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>After standard post-processing using a bi-phone model, a deep
+net with 8 layers gets 20.7% error rate.</li>
+<li>The best previous speaker- independent result on TIMIT was 24.4%
+and this required averaging several models.</li>
+<li>Li Deng (at MSR) realised that this result could change the way
+speech recognition was done.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0d184d5" class="outline-3">
+<h3 id="org0d184d5">Word error rates from MSR, IBM, &amp; Google</h3>
+<div class="outline-text-3" id="text-org0d184d5">
+<p>
+(Hinton et. al. IEEE Signal Processing Magazine, Nov 2012)
+</p>
+
+<p>
+The task Hours of
+training data Deep neural
+network Gaussian
+Mixture
+Model GMM with
+more data
+Switchboard
+(Microsoft
+Research) 309 18.5% 27.4% 18.6%
+(2000 hrs)
+English broadcast
+news (IBM) 50 17.5% 18.8% Google voice
+search
+(android 4.1) 5,870 12.3%
+(and falling)
+16.0%
+(&gt;&gt;5,870 hrs)
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge5bad48" class="outline-2">
+<h2 id="orge5bad48">What are neural networks?</h2>
+<div class="outline-text-2" id="text-orge5bad48">
+</div><div id="outline-container-orge893fe5" class="outline-3">
+<h3 id="orge893fe5">Reasons to study neural computation</h3>
+<div class="outline-text-3" id="text-orge893fe5">
+<p>
+To understand how the brain actually works.
+</p>
+
+<ul class="org-ul">
+<li>Its very big and very complicated and made of stuff that dies
+when you poke it around. So we need to use computer simulations.</li>
+</ul>
+<p>
+To understand a style of parallel computation inspired by neurons and their
+adaptive connections.
+</p>
+<ul class="org-ul">
+<li>Very different style from sequential computation.
+<ul class="org-ul">
+<li>Should be good for things that brains are good at (e.g. vision)</li>
+<li>Shoud be bad for things that brains are bad at (e.g. 23 x 71)</li>
+</ul></li>
+</ul>
+<p>
+To solve practical problems by using novel learning algorithms inspired by
+the brain (this course)
+</p>
+<ul class="org-ul">
+<li>Learning algorithms can be very useful even if they are not how the</li>
+</ul>
+<p>
+brain actually works.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b90c43" class="outline-3">
+<h3 id="org4b90c43">A typical cortical neuron</h3>
+<div class="outline-text-3" id="text-org4b90c43">
+<p>
+Gross physical structure:
+</p>
+<ul class="org-ul">
+<li>There is one axon that branches</li>
+<li>There is a dendritic tree that collects input from other neurons.</li>
+</ul>
+
+<p>
+Axons typically contact dendritic trees at synapses
+</p>
+
+<ul class="org-ul">
+<li>A spike of activity in the axon causes charge to be injected into
+the post-synaptic neuron.</li>
+</ul>
+
+<p>
+Spike generation:
+</p>
+<ul class="org-ul">
+<li>There is an <i>axon hillock</i> that generates outgoing spikes
+whenever enough charge has flowed in at synapses to depolarize
+the cell membrane.</li>
+</ul>
+
+<p>
+axon
+body
+axon hillock
+dendritic
+tree
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgae27dfa" class="outline-3">
+<h3 id="orgae27dfa">Synapses</h3>
+<div class="outline-text-3" id="text-orgae27dfa">
+<p>
+When a spike of activity travels along an axon and
+arrives at a synapse it causes vesicles of transmitter
+chemical to be released.
+</p>
+
+<ul class="org-ul">
+<li>There are several kinds of transmitter.</li>
+</ul>
+
+<p>
+The transmitter molecules diffuse across the synaptic
+cleft and bind to receptor molecules in the membrane of
+the post-synaptic neuron thus changing their shape.
+</p>
+
+<ul class="org-ul">
+<li>This opens up holes that allow specific ions in or out.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaf2a77c" class="outline-3">
+<h3 id="orgaf2a77c">How synapses adapt</h3>
+<div class="outline-text-3" id="text-orgaf2a77c">
+<p>
+The effectiveness of the synapse can be changed:
+</p>
+
+<ul class="org-ul">
+<li>vary the number of vesicles of transmitter.</li>
+<li>vary the number of receptor molecules.</li>
+</ul>
+
+<p>
+Synapses are slow, but they have advantages over RAM
+</p>
+
+<ul class="org-ul">
+<li>They are very small and very low-power.</li>
+<li>They adapt using locally available signals
+<ul class="org-ul">
+<li>But what rules do they use to decide how to change?</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge9999d0" class="outline-3">
+<h3 id="orge9999d0">How the brain works on one slide!</h3>
+<div class="outline-text-3" id="text-orge9999d0">
+<p>
+Each neuron receives inputs from other neurons
+</p>
+
+<ul class="org-ul">
+<li>A few neurons also connect to receptors.</li>
+<li>Cortical neurons use spikes to communicate.</li>
+</ul>
+
+<p>
+The effect of each input line on the neuron is controlled
+by a synaptic weight
+</p>
+
+<ul class="org-ul">
+<li>The weights can be positive or negative.</li>
+</ul>
+
+<p>
+The synaptic weights <i>adapt</i> so that the whole network learns to
+perform useful computations
+</p>
+
+<ul class="org-ul">
+<li>Recognizing objects, understanding language, making plans,</li>
+</ul>
+<p>
+controlling the body.
+</p>
+
+<p>
+You have about 10^11 neurons each with about 10^4 weights.
+</p>
+
+<ul class="org-ul">
+<li>A huge number of weights can affect the computation in a very
+short time. Much better bandwidth than a workstation.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1c97488" class="outline-3">
+<h3 id="org1c97488">Modularity and the brain</h3>
+<div class="outline-text-3" id="text-org1c97488">
+<p>
+Different bits of the cortex do different things.
+</p>
+
+<ul class="org-ul">
+<li>Local damage to the brain has specific effects.</li>
+<li>Specific tasks increase the blood flow to specific regions.</li>
+</ul>
+
+<p>
+But cortex looks pretty much the same all over.
+</p>
+
+<ul class="org-ul">
+<li>Early brain damage makes functions relocate.</li>
+</ul>
+
+<p>
+Cortex is made of general purpose stuff that has the ability to
+turn into special purpose hardware in response to experience.
+</p>
+
+<ul class="org-ul">
+<li>This gives rapid parallel computation plus flexibility.</li>
+<li>Conventional computers get flexibility by having stored
+sequential programs, but this requires very fast central
+processors to perform long sequential computations.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5c54bce" class="outline-2">
+<h2 id="org5c54bce">Some simple models of neurons</h2>
+<div class="outline-text-2" id="text-org5c54bce">
+</div><div id="outline-container-org80167bc" class="outline-3">
+<h3 id="org80167bc">Idealized neurons</h3>
+<div class="outline-text-3" id="text-org80167bc">
+<p>
+• 
+• 
+To model things we have to idealize them (e.g. atoms)
+</p>
+<ul class="org-ul">
+<li>Idealization removes complicated details that are not essential</li>
+</ul>
+<p>
+for understanding the main principles.
+</p>
+<ul class="org-ul">
+<li>It allows us to apply mathematics and to make analogies to</li>
+</ul>
+<p>
+other, familiar systems.
+</p>
+<ul class="org-ul">
+<li>Once we understand the basic principles, its easy to add</li>
+</ul>
+<p>
+complexity to make the model more faithful.
+It is often worth understanding models that are known to be wrong
+(but we must not forget that they are wrong!)
+</p>
+<ul class="org-ul">
+<li>E.g. neurons that communicate real values rather than discrete</li>
+</ul>
+<p>
+spikes of activity.Linear neurons
+  These are simple but computationally limited
+</p>
+<ul class="org-ul">
+<li>If we can make them learn we may get insight into more</li>
+</ul>
+<p>
+complicated neurons.
+i th input
+bias
+y = b + ∑ x i w i
+output
+i
+index over
+input connections
+weight on
+i th inputLinear neurons
+  These are simple but computationally limited
+</p>
+<ul class="org-ul">
+<li>If we can make them learn we may get insight into more</li>
+</ul>
+<p>
+complicated neurons.
+y = b + ∑ x i w i
+i
+y
+0
+0
+b + ∑ x i w i
+iBinary threshold neurons
+1
+  McCulloch-Pitts (1943): influenced Von Neumann.
+</p>
+<ul class="org-ul">
+<li>First compute a weighted sum of the inputs.</li>
+<li>Then send out a fixed size spike of activity if</li>
+</ul>
+<p>
+the weighted sum exceeds a threshold.
+</p>
+<ul class="org-ul">
+<li>McCulloch and Pitts thought that each spike</li>
+</ul>
+<p>
+is like the truth value of a proposition and
+each neuron combines truth values to
+compute the truth value of another
+proposition!
+0
+threshold
+weighted inputBinary threshold neurons
+  There are two equivalent ways to write the equations for
+a binary threshold neuron:
+z = b + ∑ x i w i
+z = ∑ x i w i
+i
+y =
+1 if
+z ≥ θ
+0 otherwise
+i
+θ = −b
+y =
+1 if
+z ≥0
+0 otherwiseRectified Linear Neurons
+(sometimes called linear threshold neurons)
+They compute a linear weighted sum of their inputs.
+The output is a non-linear function of the total input.
+z = b + ∑ x i w i
+i
+z if z &gt;0
+y =
+0 otherwise
+y
+0
+zSigmoid neurons
+  These give a real-valued
+output that is a smooth and
+bounded function of their
+total input.
+</p>
+<ul class="org-ul">
+<li>Typically they use the</li>
+</ul>
+<p>
+logistic function
+</p>
+<ul class="org-ul">
+<li>They have nice</li>
+</ul>
+<p>
+derivatives which make
+learning easy (see
+lecture 3).
+z = b + ∑ x i w i
+y =
+i
+1
+−z
+1 + e
+1
+y
+0.5
+0
+0
+zStochastic binary neurons
+  These use the same equations
+as logistic units.
+</p>
+<ul class="org-ul">
+<li>But they treat the output of</li>
+</ul>
+<p>
+the logistic as the
+probability of producing a
+spike in a short time
+window.
+  We can do a similar trick for
+rectified linear units:
+</p>
+<ul class="org-ul">
+<li>The output is treated as the</li>
+</ul>
+<p>
+Poisson rate for spikes.
+z = b + ∑ x i w i
+p(s = 1) =
+1 + e
+i
+1
+p 0.5
+0
+1
+0
+z
+−zNeural Networks for Machine Learning
+Lecture 1d
+A simple example of learning
+Geoffrey Hinton
+with
+Nitish Srivastava
+Kevin SwerskyA very simple way to recognize handwritten shapes
+  Consider a neural network with two
+layers of neurons.
+0 1 2 3 4 5 6 7 8 9
+</p>
+<ul class="org-ul">
+<li>neurons in the top layer represent</li>
+</ul>
+<p>
+known shapes.
+</p>
+<ul class="org-ul">
+<li>neurons in the bottom layer</li>
+</ul>
+<p>
+represent pixel intensities.
+  A pixel gets to vote if it has ink on it.
+</p>
+<ul class="org-ul">
+<li>Each inked pixel can vote for several</li>
+</ul>
+<p>
+different shapes.
+  The shape that gets the most votes wins.How to display the weights
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+The input
+image
+Give each output unit its own “map” of the input image and display the weight
+coming from each pixel in the location of that pixel in the map.
+Use a black or white blob with the area representing the magnitude of the weight
+and the color representing the sign.How to learn the weights
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+The image
+Show the network an image and increment the weights from active pixels
+to the correct class.
+Then decrement the weights from active pixels to whatever class the
+network guesses.1
+2
+3
+4
+5
+6
+The image
+7
+8
+9
+01
+2
+3
+4
+5
+6
+The image
+7
+8
+9
+01
+2
+3
+4
+5
+6
+The image
+7
+8
+9
+01
+2
+3
+4
+5
+6
+The image
+7
+8
+9
+01
+2
+3
+4
+5
+6
+The image
+7
+8
+9
+0The learned weights
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+The image
+The details of the learning algorithm will be explained in future lectures.Why the simple learning algorithm is insufficient
+  A two layer network with a single winner in the top layer is
+equivalent to having a rigid template for each shape.
+</p>
+<ul class="org-ul">
+<li>The winner is the template that has the biggest overlap</li>
+</ul>
+<p>
+with the ink.
+  The ways in which hand-written digits vary are much too
+complicated to be captured by simple template matches of
+whole shapes.
+</p>
+<ul class="org-ul">
+<li>To capture all the allowable variations of a digit we need</li>
+</ul>
+<p>
+to learn the features that it is composed of.Examples of handwritten digits that can be recognized
+correctly the first time they are seenNeural Networks for Machine Learning
+Lecture 1e
+Three types of learning
+Geoffrey Hinton
+with
+Nitish Srivastava
+Kevin SwerskyTypes of learning task
+  Supervised learning
+</p>
+<ul class="org-ul">
+<li>Learn to predict an output when given an input vector.</li>
+</ul>
+<p>
+Reinforcement learning
+</p>
+<ul class="org-ul">
+<li>Learn to select an action to maximize payoff.</li>
+</ul>
+<p>
+Unsupervised learning
+</p>
+<ul class="org-ul">
+<li>Discover a good internal representation of the input.Two types of supervised learning</li>
+</ul>
+<p>
+  Each training case consists of an input vector x and a target output t.
+  Regression: The target output is a real number or a whole vector of
+real numbers.
+</p>
+<ul class="org-ul">
+<li>The price of a stock in 6 months time.</li>
+<li>The temperature at noon tomorrow.</li>
+</ul>
+<p>
+Classification: The target output is a class label.
+</p>
+<ul class="org-ul">
+<li>The simplest case is a choice between 1 and 0.</li>
+<li>We can also have multiple alternative labels.How supervised learning typically works</li>
+</ul>
+<p>
+We start by choosing a model-class: y = f (x;W)
+</p>
+<ul class="org-ul">
+<li>A model-class, f, is a way of using some numerical</li>
+</ul>
+<p>
+parameters, W, to map each input vector, x, into a predicted
+output y.
+  Learning usually means adjusting the parameters to reduce the
+discrepancy between the target output, t, on each training case
+and the actual output, y, produced by the model.
+1
+2
+</p>
+<ul class="org-ul">
+<li>For regression, 2 (y − t) is often a sensible measure of the</li>
+</ul>
+<p>
+discrepancy.
+</p>
+<ul class="org-ul">
+<li>For classification there are other measures that are generally</li>
+</ul>
+<p>
+more sensible (they also work better).Reinforcement learning
+  In reinforcement learning, the output is an action or sequence of
+actions and the only supervisory signal is an occasional scalar reward.
+</p>
+<ul class="org-ul">
+<li>The goal in selecting each action is to maximize the expected sum</li>
+</ul>
+<p>
+of the future rewards.
+</p>
+<ul class="org-ul">
+<li>We usually use a discount factor for delayed rewards so that we</li>
+</ul>
+<p>
+don’t have to look too far into the future.
+  Reinforcement learning is difficult:
+</p>
+<ul class="org-ul">
+<li>The rewards are typically delayed so its hard to know where we</li>
+</ul>
+<p>
+went wrong (or right).
+</p>
+<ul class="org-ul">
+<li>A scalar reward does not supply much information.</li>
+</ul>
+<p>
+  This course cannot cover everything and reinforcement learning is one
+of the important topics we will not cover.Unsupervised learning
+  For about 40 years, unsupervised learning was largely ignored by the
+machine learning community
+</p>
+<ul class="org-ul">
+<li>Some widely used definitions of machine learning actually excluded it.</li>
+<li>Many researchers thought that clustering was the only form of</li>
+</ul>
+<p>
+unsupervised learning.
+  It is hard to say what the aim of unsupervised learning is.
+</p>
+<ul class="org-ul">
+<li>One major aim is to create an internal representation of the input that</li>
+</ul>
+<p>
+is useful for subsequent supervised or reinforcement learning.
+</p>
+<ul class="org-ul">
+<li>You can compute the distance to a surface by using the disparity</li>
+</ul>
+<p>
+between two images. But you don’t want to learn to compute
+disparities by stubbing your toe thousands of times.Other goals for unsupervised learning
+  It provides a compact, low-dimensional representation of the input.
+</p>
+<ul class="org-ul">
+<li>High-dimensional inputs typically live on or near a low-</li>
+</ul>
+<p>
+dimensional manifold (or several such manifolds).
+</p>
+<ul class="org-ul">
+<li>Principal Component Analysis is a widely used linear method</li>
+</ul>
+<p>
+for finding a low-dimensional representation.
+  It provides an economical high-dimensional representation of the
+input in terms of learned features.
+</p>
+<ul class="org-ul">
+<li>Binary features are economical.</li>
+<li>So are real-valued features that are nearly all zero.</li>
+</ul>
+<p>
+It finds sensible clusters in the input.
+</p>
+<ul class="org-ul">
+<li>This is an example of a very sparse code in which only one of</li>
+</ul>
+<p>
+the features is non-zero.
+</p>
+</div>
+</div>
+</div>
