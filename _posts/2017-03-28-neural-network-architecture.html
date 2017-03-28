@@ -11,11 +11,32 @@ tags: [architecture, overview]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#org2d59ff5">An overview of the main types of neural network architecture</a>
+<ul>
 <li><a href="#org631dfa2">Feed-forward neural networks</a></li>
 <li><a href="#org31300b4">Recurrent networks</a></li>
 <li><a href="#org6ec7188">Recurrent neural networks for modeling sequences</a></li>
 <li><a href="#org3e971f5">An example of what recurrent neural nets can now do</a></li>
 <li><a href="#orgfe167c9">Symmetrically connected networks</a></li>
+<li><a href="#org4c303a8">Symmetrically connected networks with hidden units</a></li>
+</ul>
+</li>
+<li><a href="#orge1d6cc6">Perceptrons: The first generation of neural networks</a>
+<ul>
+<li><a href="#org5600437">The standard paradigm for statistical pattern recognition</a></li>
+<li><a href="#org5905138">The history of perceptrons</a></li>
+<li><a href="#org1221b85">Binary threshold neurons (decision units)</a></li>
+<li><a href="#org37361f4">How to learn biases using the same rule as we use for learning weights</a></li>
+<li><a href="#orgfacfb7e">The perceptron convergence procedure:</a></li>
+</ul>
+</li>
+<li><a href="#orgde1f485">A geometrical view of perceptrons</a>
+<ul>
+<li><a href="#org58dc982">Warning!</a></li>
+<li><a href="#org6731899">Weight-space</a></li>
+<li><a href="#org7503e36">The cone of feasible solutions</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -24,9 +45,12 @@ tags: [architecture, overview]
 An overview of the main types of neural network architecture
 </p>
 </blockquote>
-<div id="outline-container-org631dfa2" class="outline-2">
-<h2 id="org631dfa2">Feed-forward neural networks</h2>
-<div class="outline-text-2" id="text-org631dfa2">
+<div id="outline-container-org2d59ff5" class="outline-2">
+<h2 id="org2d59ff5">An overview of the main types of neural network architecture</h2>
+<div class="outline-text-2" id="text-org2d59ff5">
+</div><div id="outline-container-org631dfa2" class="outline-3">
+<h3 id="org631dfa2">Feed-forward neural networks</h3>
+<div class="outline-text-3" id="text-org631dfa2">
 
 <div class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/en/5/54/Feed_forward_neural_net.gif" alt="Feed-forward neural network" title="Feed-forward neural network" align="right" />
@@ -73,15 +97,14 @@ function of the activities in the layer below.</li>
 </div>
 </div>
 
-
-<div id="outline-container-org31300b4" class="outline-2">
-<h2 id="org31300b4">Recurrent networks</h2>
-<div class="outline-text-2" id="text-org31300b4">
+<div id="outline-container-org31300b4" class="outline-3">
+<h3 id="org31300b4">Recurrent networks</h3>
+<div class="outline-text-3" id="text-org31300b4">
 
 <div class="figure">
-<p><img src="http://cdn.information-management.com/media/newspics/021208_jones_fig2_M.gif" alt="Max-heap" title="Max-heap sample" align="right" />
+<p><img src="http://cdn.information-management.com/media/newspics/021208_jones_fig2_M.gif" alt="Recurrent network" title="Recurrent network sample" align="right" />
 </p>
-<p><span class="figure-number">Figure 2: </span>Max-heap</p>
+<p><span class="figure-number">Figure 2: </span>Recurrent network</p>
 </div>
 
 <blockquote>
@@ -115,9 +138,9 @@ that has some of the hidden &rarr; hidden connections missing.
 </div>
 </div>
 
-<div id="outline-container-org6ec7188" class="outline-2">
-<h2 id="org6ec7188">Recurrent neural networks for modeling sequences</h2>
-<div class="outline-text-2" id="text-org6ec7188">
+<div id="outline-container-org6ec7188" class="outline-3">
+<h3 id="org6ec7188">Recurrent neural networks for modeling sequences</h3>
+<div class="outline-text-3" id="text-org6ec7188">
 <p>
 Recurrent neural networks are a very natural way to model sequential
 data:
@@ -138,16 +161,12 @@ for a long time.
 <ul class="org-ul">
 <li>But its very hard to train them to use this potential.</li>
 </ul>
-
-<p>
-time &rarr;
-</p>
 </div>
 </div>
 
-<div id="outline-container-org3e971f5" class="outline-2">
-<h2 id="org3e971f5">An example of what recurrent neural nets can now do</h2>
-<div class="outline-text-2" id="text-org3e971f5">
+<div id="outline-container-org3e971f5" class="outline-3">
+<h3 id="org3e971f5">An example of what recurrent neural nets can now do</h3>
+<div class="outline-text-3" id="text-org3e971f5">
 <p>
 (to whet your interest!)
 </p>
@@ -183,146 +202,154 @@ printer.
 </div>
 </div>
 
-<div id="outline-container-orgfe167c9" class="outline-2">
-<h2 id="orgfe167c9">Symmetrically connected networks</h2>
-<div class="outline-text-2" id="text-orgfe167c9">
+<div id="outline-container-orgfe167c9" class="outline-3">
+<h3 id="orgfe167c9">Symmetrically connected networks</h3>
+<div class="outline-text-3" id="text-orgfe167c9">
 <p>
-  These are like recurrent networks, but the connections between units
+These are like recurrent networks, but the connections between units
 are symmetrical (they have the same weight in both directions).
 </p>
+
 <ul class="org-ul">
-<li>John Hopfield (and others) realized that symmetric networks are</li>
+<li>John Hopfield (and others) realized that symmetric networks are
+much easier to analyze than recurrent networks.</li>
+<li>They are also more restricted in what they can do. because they
+obey an energy function.</li>
 </ul>
+
 <p>
-much easier to analyze than recurrent networks.
+For example, they cannot model cycles.
+Symmetrically connected nets without hidden units are called
+“Hopfield nets”.
 </p>
-<ul class="org-ul">
-<li>They are also more restricted in what they can do. because they</li>
-</ul>
+</div>
+</div>
+
+<div id="outline-container-org4c303a8" class="outline-3">
+<h3 id="org4c303a8">Symmetrically connected networks with hidden units</h3>
+<div class="outline-text-3" id="text-org4c303a8">
 <p>
-obey an energy function.
-  For example, they cannot model cycles.
-  Symmetrically connected nets without hidden units are called
-“Hopfield nets”.Symmetrically connected networks
-with hidden units
-  These are called “Boltzmann machines”.
+These are called “Boltzmann machines”.
 </p>
 <ul class="org-ul">
 <li>They are much more powerful models than Hopfield nets.</li>
 <li>They are less powerful than recurrent neural networks.</li>
 <li>They have a beautifully simple learning algorithm.</li>
 </ul>
+
 <p>
-  We will cover Boltzmann machines towards the end of the
-course.Neural Networks for Machine Learning
-Lecture 2b
-Perceptrons:
-The first generation of neural networks
-Geoffrey Hinton
-with
-Nitish Srivastava
-Kevin SwerskyThe standard paradigm for
-statistical pattern recognition
+We will cover Boltzmann machines towards the end of the
+course
 </p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge1d6cc6" class="outline-2">
+<h2 id="orge1d6cc6">Perceptrons: The first generation of neural networks</h2>
+<div class="outline-text-2" id="text-orge1d6cc6">
+</div><div id="outline-container-org5600437" class="outline-3">
+<h3 id="org5600437">The standard paradigm for statistical pattern recognition</h3>
+<div class="outline-text-3" id="text-org5600437">
+
+<div class="figure">
+<p><img src="http://www.what2web.com/wp-content/uploads/2017/01/perceptron-architecture-300x251.jpg" alt="Standard perceptron architecture" title="simplifyed image" align="right" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Standard perceptron architecture</p>
+</div>
+
 <ol class="org-ol">
-<li></li>
+<li>Convert the raw input vector into a vector of feature activations.</li>
 </ol>
 <p>
-Convert the raw input vector into a
-vector of feature activations.
-Use hand-written programs based on
-common-sense to define the features.
+Use hand-written programs based on common-sense to define the
+features.
 </p>
+
 <ol class="org-ol">
-<li>Learn how to weight each of the feature</li>
+<li>Learn how to weight each of the feature activations to get a single</li>
 </ol>
 <p>
-activations to get a single scalar
-quantity.
+scalar quantity.
 </p>
+
 <ol class="org-ol">
-<li>If this quantity is above some threshold,</li>
+<li>If this quantity is above some threshold, decide that the input</li>
 </ol>
 <p>
-decide that the input vector is a positive
-example of the target class.
-The standard Perceptron
-architecture
-decision unit
-learned weights
-feature units
-hand-coded weights
-or programs
-input unitsThe history of perceptrons
-  They were popularised by Frank Rosenblatt in the early 1960’s.
+vector is a positive example of the target class.
 </p>
+</div>
+</div>
+
+<div id="outline-container-org5905138" class="outline-3">
+<h3 id="org5905138">The history of perceptrons</h3>
+<div class="outline-text-3" id="text-org5905138">
+<p>
+They were popularised by Frank Rosenblatt in the early 1960’s.
+</p>
+
 <ul class="org-ul">
 <li>They appeared to have a very powerful learning algorithm.</li>
 <li>Lots of grand claims were made for what they could learn to do.</li>
 </ul>
+
 <p>
-  In 1969, Minsky and Papert published a book called “Perceptrons” that
-analysed what they could do and showed their limitations.
+In 1969, Minsky and Papert published a book called “Perceptrons”
+that analysed what they could do and showed their limitations.
 </p>
+
 <ul class="org-ul">
-<li>Many people thought these limitations applied to all neural network</li>
+<li>Many people thought these limitations applied to all neural network
+models.</li>
 </ul>
+
 <p>
-models.
-  The perceptron learning procedure is still widely used today for tasks
-with enormous feature vectors that contain many millions of features.Binary threshold neurons (decision units)
-  McCulloch-Pitts (1943)
+The perceptron learning procedure is still widely used today for tasks
+with enormous feature vectors that contain many millions of features.
 </p>
-<ul class="org-ul">
-<li>First compute a weighted sum of the inputs from other neurons</li>
-</ul>
+</div>
+</div>
+
+<div id="outline-container-org1221b85" class="outline-3">
+<h3 id="org1221b85">Binary threshold neurons (decision units)</h3>
+<div class="outline-text-3" id="text-org1221b85">
 <p>
-(plus a bias).
+McCulloch-Pitts (1943)
 </p>
+
 <ul class="org-ul">
+<li>First compute a weighted sum of the inputs from other neurons
+(plus a bias).</li>
 <li>Then output a 1 if the weighted sum exceeds zero.</li>
 </ul>
-<p>
-z = b + ∑ x i w i
-i
-1
-1 if
-z ≥ 0
-y =
-0 otherwise
-y
-0
-0
-zHow to learn biases using the same rule
-as we use for learning weights
-  A threshold is equivalent to having a
-negative bias.
-  We can avoid having to figure out a
-separate learning rule for the bias by
-using a trick:
+</div>
+</div>
+
+<div id="outline-container-org37361f4" class="outline-3">
+<h3 id="org37361f4">How to learn biases using the same rule as we use for learning weights</h3>
+<div class="outline-text-3" id="text-org37361f4">
+<p title="Binary Threshold Neuron – Training Biases" align="right">
+<img src="http://www.what2web.com/wp-content/uploads/2017/01/binary-threshold-neuron-bias-training-300x255.jpg" title="Binary Threshold Neuron – Training Biases" align="right" />
+A threshold is equivalent to having a negative bias. We can avoid
+having to figure out a separate learning rule for the bias by using
+a trick:
 </p>
+
 <ul class="org-ul">
-<li>A bias is exactly equivalent to a</li>
+<li>A bias is exactly equivalent to a weight on an extra input line
+that always has an activity of 1.</li>
+<li>We can now learn a bias as if it were a weight.</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-orgfacfb7e" class="outline-3">
+<h3 id="orgfacfb7e">The perceptron convergence procedure:</h3>
+<div class="outline-text-3" id="text-orgfacfb7e">
 <p>
-weight on an extra input line that
-always has an activity of 1.
-</p>
-<ul class="org-ul">
-<li>We can now learn a bias as if it</li>
-</ul>
-<p>
-were a weight.
-b
-1
-w 1
-x 1
-w 2
-x 2The perceptron convergence procedure:
 Training binary output neurons as classifiers
-• 
-• 
-• 
 Add an extra component with value 1 to each input vector. The “bias” weight
 on this component is minus the threshold. Now we can forget the threshold.
 Pick training cases using any policy that ensures that every training case will
@@ -330,110 +357,103 @@ keep getting picked.
 </p>
 <ul class="org-ul">
 <li>If the output unit is correct, leave its weights alone.</li>
-<li>If the output unit incorrectly outputs a zero, add the input vector to the</li>
+<li>If the output unit incorrectly outputs a zero, add the input
+vector to the weight vector.</li>
+<li>If the output unit incorrectly outputs a 1, subtract the input
+vector from the weight vector.</li>
 </ul>
 <p>
-weight vector.
+This is guaranteed to find a set of weights that gets the right
+answer for all the training cases if any such set exists.Neural
 </p>
-<ul class="org-ul">
-<li>If the output unit incorrectly outputs a 1, subtract the input vector from the</li>
-</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgde1f485" class="outline-2">
+<h2 id="orgde1f485">A geometrical view of perceptrons</h2>
+<div class="outline-text-2" id="text-orgde1f485">
+</div><div id="outline-container-org58dc982" class="outline-3">
+<h3 id="org58dc982">Warning!</h3>
+<div class="outline-text-3" id="text-org58dc982">
 <p>
-weight vector.
-This is guaranteed to find a set of weights that gets the right answer for all the
-training cases if any such set exists.Neural Networks for Machine Learning
-Lecture 2c
-A geometrical view of perceptrons
-Geoffrey Hinton
-with
-Nitish Srivastava
-Kevin SwerskyWarning!
-  For non-mathematicians, this is going to be tougher than the previous
+For non-mathematicians, this is going to be tougher than the previous
 material.
 </p>
+
 <ul class="org-ul">
 <li>You may have to spend a long time studying the next two parts.</li>
 </ul>
+
 <p>
-  If you are not used to thinking about hyper-planes in high-dimensional
+If you are not used to thinking about hyper-planes in high-dimensional
 spaces, now is the time to learn.
-  To deal with hyper-planes in a 14-dimensional space, visualize a 3-D
+To deal with hyper-planes in a 14-dimensional space, visualize a 3-D
 space and say “fourteen” to yourself very loudly. Everyone does it.
-  But remember that going from 13-D to 14-D creates as much
-extra complexity as going from 2-D to 3-D.Weight-space
-  This space has one dimension per weight.
-  A point in the space represents a particular setting of all the weights.
-  Assuming that we have eliminated the threshold, each training case
+</p>
+
+<ul class="org-ul">
+<li>But remember that going from 13-D to 14-D creates as much extra
+complexity as going from 2-D to 3-D.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6731899" class="outline-3">
+<h3 id="org6731899">Weight-space</h3>
+<div class="outline-text-3" id="text-org6731899">
+
+<div class="figure">
+<p><img src="https://i.stack.imgur.com/nzHSl.jpg" alt="neural network" title="Neural network representation" align="right" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Weight space</p>
+</div>
+
+<p>
+This space has one dimension per weight.
+</p>
+
+<p>
+A point in the space represents a particular setting of all the weights.
+</p>
+
+<p>
+Assuming that we have eliminated the threshold, each training case
 can be represented as a hyperplane through the origin.
 </p>
+
 <ul class="org-ul">
-<li>The weights must lie on one side of this hyper-plane to get the</li>
+<li>The weights must lie on one side of this hyper-plane to get the
+answer correct .Weight space</li>
 </ul>
 <p>
-answer correct .Weight space
-  Each training case defines a plane
-(shown as a black line)
+Each training case defines a plane (shown as a black line)
 </p>
 <ul class="org-ul">
-<li>The plane goes through the origin</li>
+<li>The plane goes through the origin and is perpendicular to the
+input vector.</li>
+<li>On one side of the plane the output is wrong because the scalar
+product of the weight vector with the input vector has the wrong
+sign.</li>
 </ul>
+
 <p>
-and is perpendicular to the input
-vector.
+Each training case defines a plane (shown as a black line)
 </p>
 <ul class="org-ul">
-<li>On one side of the plane the</li>
+<li>The plane goes through the origin and is perpendicular to the
+input vector.</li>
+<li>On one side of the plane the output is wrong because the scalar
+product of the weight vector with the input vector has the wrong
+sign</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org7503e36" class="outline-3">
+<h3 id="org7503e36">The cone of feasible solutions</h3>
+<div class="outline-text-3" id="text-org7503e36">
 <p>
-output is wrong because the
-scalar product of the weight
-vector with the input vector has
-the wrong sign.
-an input
-vector with
-correct
-answer=1
-good
-weight
-vector
-right side
-wrong sid
-bad
-weight
-vector
-e
-o
-the
-originWeight space
-  Each training case defines a plane
-(shown as a black line)
-</p>
-<ul class="org-ul">
-<li>The plane goes through the origin</li>
-</ul>
-<p>
-and is perpendicular to the input
-vector.
-</p>
-<ul class="org-ul">
-<li>On one side of the plane the</li>
-</ul>
-<p>
-output is wrong because the
-scalar product of the weight
-vector with the input vector has
-the wrong sign .
-bad
-weights
-good
-weights
-o
-the
-origin
-an input
-vector with
-correct
-answer=0The cone of feasible solutions
   To get all training cases right we need
 to find a point on the right side of all the
 planes.
@@ -686,5 +706,6 @@ This is hard.
 <p>
 should do.
 </p>
+</div>
 </div>
 </div>
