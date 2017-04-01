@@ -79,8 +79,18 @@ or dependent objects without specifying their concrete classes.
 A scenario consisting of a problem and a context in which this
 pattern can be used.
 </p>
+
+<p>
+In normal usage, the client software creates a concrete
+implementation of the abstract factory and then uses the generic
+interface of the factory to create the concrete objects that are
+part of the theme. The client does not know (or care) which
+concrete objects it gets from each of these internal factories,
+since it uses only the generic interfaces of their products.
+</p>
 </div>
 </div>
+
 <div id="outline-container-org340d090" class="outline-3">
 <h3 id="org340d090">Applicability</h3>
 <div class="outline-text-3" id="text-org340d090">
@@ -182,10 +192,67 @@ defined pets.
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
 <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
 <span style="color: #deb887; font-style: italic;">"""</span>
-<span style="color: #deb887; font-style: italic;">A pet factory abstraction</span>
+<span style="color: #deb887; font-style: italic;">A pet shop abstraction</span>
 <span style="color: #deb887; font-style: italic;">"""</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Dog</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""One of the objects to be returned"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">speak</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">"Woof!"</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__str__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">"Dog"</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">DogFactory</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Concrete Factory"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">get_pet</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Returns a Dog object"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> Dog()
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">get_food</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Returns a Dog Food object"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">"Dog Food!"</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">PetStore</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">""" PetStore houses our Abstract Factory """</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, pet_factory=<span style="color: #ffd700; font-weight: bold;">None</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">""" pet_factory is our Abstract Factory """</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>._pet_factory = pet_factory
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">show_pet</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">""" Utility method to display the details of the objects retured by the DogFactory """</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">pet</span> = <span style="color: #87cefa;">self</span>._pet_factory.get_pet()
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">pet_food</span> = <span style="color: #87cefa;">self</span>._pet_factory.get_food()
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"Our pet is '{}'!"</span>.<span style="color: #4682b4;">format</span>(pet))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"Our pet says hello by '{}'"</span>.<span style="color: #4682b4;">format</span>(pet.speak()))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">"Its food is '{}'!"</span>.<span style="color: #4682b4;">format</span>(pet_food))
+
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">Create a Concrete Factory</span>
+<span style="color: #7fffd4;">factory</span> = DogFactory()
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">Create a pet store housing our Abstract Factory</span>
+<span style="color: #7fffd4;">shop</span> = PetStore(factory)
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">Invoke the utility method to show the details of our pet</span>
+shop.show_pet()
 </pre>
 </div>
+
+<pre class="example">
+Our pet is 'Dog'!
+Our pet says hello by 'Woof!'
+Its food is 'Dog Food!'!
+</pre>
 
 </td><td valign="top">
 
@@ -193,7 +260,7 @@ defined pets.
 <pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
 <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
 <span style="color: #deb887; font-style: italic;">"""</span>
-<span style="color: #deb887; font-style: italic;">An attempt to illustrate how pet_factory works</span>
+<span style="color: #deb887; font-style: italic;">An attempt to illustrate how pet shop works</span>
 <span style="color: #deb887; font-style: italic;">"""</span>
 <span style="color: #87cefa;">import</span> unittest
 
@@ -202,6 +269,9 @@ defined pets.
 
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">setUp</span>(<span style="color: #87cefa;">self</span>):
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">test_primitive_TravisCI</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.assertTrue(3 + 1 == 4)
 
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">tearDown</span>(<span style="color: #87cefa;">self</span>):
 <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
