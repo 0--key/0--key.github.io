@@ -37,6 +37,20 @@ tags: [architecture, overview]
 <li><a href="#org7503e36">The cone of feasible solutions</a></li>
 </ul>
 </li>
+<li><a href="#orgefc13a4">Why the learning works</a>
+<ul>
+<li><a href="#org0b3356a">Why the learning procedure works (first attempt)</a></li>
+<li><a href="#org1dacd0b">Why the learning procedure works</a></li>
+<li><a href="#org85a8675">Informal sketch of proof of convergence</a></li>
+</ul>
+</li>
+<li><a href="#orga353e61">What perceptrons can’t do</a>
+<ul>
+<li><a href="#orgf786a4c">The limitations of Perceptrons</a></li>
+<li><a href="#orgd5d0107">What binary threshold neurons cannot do</a></li>
+<li><a href="#orga413a20">A geometric view of what binary threshold neurons cannot do</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -45,6 +59,7 @@ tags: [architecture, overview]
 An overview of the main types of neural network architecture
 </p>
 </blockquote>
+
 <div id="outline-container-org2d59ff5" class="outline-2">
 <h2 id="org2d59ff5">An overview of the main types of neural network architecture</h2>
 <div class="outline-text-2" id="text-org2d59ff5">
@@ -370,6 +385,7 @@ answer for all the training cases if any such set exists.Neural
 </div>
 </div>
 
+
 <div id="outline-container-orgde1f485" class="outline-2">
 <h2 id="orgde1f485">A geometrical view of perceptrons</h2>
 <div class="outline-text-2" id="text-orgde1f485">
@@ -454,155 +470,172 @@ sign</li>
 <h3 id="org7503e36">The cone of feasible solutions</h3>
 <div class="outline-text-3" id="text-org7503e36">
 <p>
-  To get all training cases right we need
-to find a point on the right side of all the
-planes.
+To get all training cases right we need to find a point on the
+right side of all the planes.
 </p>
+
 <ul class="org-ul">
 <li>There may not be any such point!</li>
 </ul>
+
 <p>
-  If there are any weight vectors that get
-the right answer for all cases, they lie in
-a hyper-cone with its apex at the origin.
+If there are any weight vectors that get the right answer for all
+cases, they lie in a hyper-cone with its apex at the origin.
 </p>
+
 <ul class="org-ul">
-<li>So the average of two good weight</li>
+<li>So the average of two good weight vectors is a good weight
+vector.</li>
 </ul>
+
 <p>
-vectors is a good weight vector.
-  The problem is convex.
-good
-weights
-an input
-vector with
-correct
-answer=1
-right
-wrong
-an input
-vector with
-correct
-answer=0
-bad
-weights
-o
-the originNeural Networks for Machine Learning
-Lecture 2d
-Why the learning works
-Geoffrey Hinton
-with
-Nitish Srivastava
-Kevin SwerskyWhy the learning procedure works (first attempt)
-2
-2
-d
+The problem is convex.
 </p>
-<ul class="org-ul">
-<li></li>
-</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgefc13a4" class="outline-2">
+<h2 id="orgefc13a4">Why the learning works</h2>
+<div class="outline-text-2" id="text-orgefc13a4">
+</div><div id="outline-container-org0b3356a" class="outline-3">
+<h3 id="org0b3356a">Why the learning procedure works (first attempt)</h3>
+<div class="outline-text-3" id="text-org0b3356a">
 <p>
-d
-  Consider the squared distance a
-b between any feasible
+Consider the squared distance d_a^2 + d_b^2 between any feasible
 weight vector and the current weight vector.
 </p>
+
 <ul class="org-ul">
-<li>Hopeful claim: Every time the perceptron makes a mistake, the</li>
+<li><i>Hopeful claim</i>: Every time the perceptron makes a mistake, the</li>
 </ul>
 <p>
 learning algorithm moves the current weight vector closer to all
 feasible weight vectors.
-d b 2
-Problem case: The weight
-vector may not get closer to
-this feasible vector!
-d a 2
-feasible
-right
-g
-wron
-currentWhy the learning procedure works
-  So consider “generously feasible” weight vectors that lie within the
-feasible region by a margin at least as great as the length of the input
-vector that defines each constraint plane.
 </p>
-<ul class="org-ul">
-<li>Every time the perceptron makes a mistake, the squared distance</li>
-</ul>
+
 <p>
+Problem case: The weight vector may not get closer to this feasible
+vector!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1dacd0b" class="outline-3">
+<h3 id="org1dacd0b">Why the learning procedure works</h3>
+<div class="outline-text-3" id="text-org1dacd0b">
+<p>
+So consider “generously feasible” weight vectors that lie within
+the feasible region by a margin at least as great as the length of
+the input vector that defines each constraint plane.
+</p>
+
+<ul class="org-ul">
+<li>Every time the perceptron makes a mistake, the squared distance
 to all of these generously feasible weight vectors is always
-decreased by at least the squared length of the update vector.
-right
-g
-wronInformal sketch of proof of convergence
-  Each time the perceptron makes a mistake, the current weight
-vector moves to decrease its squared distance from every weight
-vector in the “generously feasible” region.
-  The squared distance decreases by at least the squared length of
+decreased by at least the squared length of the update vector.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org85a8675" class="outline-3">
+<h3 id="org85a8675">Informal sketch of proof of convergence</h3>
+<div class="outline-text-3" id="text-org85a8675">
+<p>
+Each time the perceptron makes a mistake, the current weight vector
+moves to decrease its squared distance from every weight vector in
+the “generously feasible” region.
+</p>
+
+<p>
+The squared distance decreases by at least the squared length of
 the input vector.
-  So after a finite number of mistakes, the weight vector must lie in the
-feasible region if this region exists.Neural Networks for Machine Learning
-Lecture 2e
-What perceptrons can’t do
-Geoffrey Hinton
-with
-Nitish Srivastava
-Kevin SwerskyThe limitations of Perceptrons
-  If you are allowed to choose the features by hand and if you use
+</p>
+
+<p>
+So after a finite number of mistakes, the weight vector must lie in
+the feasible region if this region exists.Neural Networks for
+Machine Learning
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga353e61" class="outline-2">
+<h2 id="orga353e61">What perceptrons can’t do</h2>
+<div class="outline-text-2" id="text-orga353e61">
+</div><div id="outline-container-orgf786a4c" class="outline-3">
+<h3 id="orgf786a4c">The limitations of Perceptrons</h3>
+<div class="outline-text-3" id="text-orgf786a4c">
+<p>
+If you are allowed to choose the features by hand and if you use
 enough features, you can do almost anything.
 </p>
 <ul class="org-ul">
-<li>For binary input vectors, we can have a separate feature unit for</li>
+<li>For binary input vectors, we can have a separate feature unit for
+each of the exponentially many binary vectors and so we can make
+any possible discrimination on binary input vectors.
+<ul class="org-ul">
+<li>This type of table look-up won’t generalize.</li>
+</ul></li>
 </ul>
 <p>
-each of the exponentially many binary vectors and so we can
-make any possible discrimination on binary input vectors.
-  This type of table look-up won’t generalize.
-  But once the hand-coded features have been determined, there are
-very strong limitations on what a perceptron can learn.What binary threshold neurons cannot do
-  A binary threshold output unit cannot even tell if two single bit features are
-the same!
-Positive cases (same):
-(1,1) à 1;
-(0,0) à 1
-Negative cases (different): (1,0) à 0;
-(0,1) à 0
-  The four input-output pairs give four inequalities that are impossible to
+But once the hand-coded features have been determined, there are
+very strong limitations on what a perceptron can learn.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd5d0107" class="outline-3">
+<h3 id="orgd5d0107">What binary threshold neurons cannot do</h3>
+<div class="outline-text-3" id="text-orgd5d0107">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/perceptron_representation.png" alt="Perceptron schema" width="30%" title="Graphical representation" align="right" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Binary threshold neurons</p>
+</div>
+
+<p>
+A binary threshold output unit cannot even tell if two single bit
+features are the same!
+</p>
+
+<p>
+Positive cases (same): (1,1) &rarr; 1; (0,0) &rarr; 1
+Negative cases (different): (1,0) &rarr; 0; (0,1) &rarr; 0
+The four input-output pairs give four inequalities that are impossible to
 satisfy:
-w 1 + w 2 ≥ θ ,
-w 1 &lt; θ ,
+w_1 + w_2 ≥ θ ,
+w_1 &lt; θ ,
 0 ≥ θ
-w 2 &lt; θ
-− θ
-1
-w 1
-x 1
-w 2
-x 2A geometric view of what binary threshold neurons cannot do
-  Imagine “data-space” in which the
-axes correspond to components of an
-input vector.
+w_2 &lt; θ
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga413a20" class="outline-3">
+<h3 id="orga413a20">A geometric view of what binary threshold neurons cannot do</h3>
+<div class="outline-text-3" id="text-orga413a20">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/perceptron_limitation.png" alt="Perceptron limitation" width="40%" title="Geometric view" align="right" />
+</p>
+<p><span class="figure-number">Figure 6: </span>Binary threshold neurons limits</p>
+</div>
+
+<p>
+Imagine “data-space” in which the axes correspond to components of
+an input vector.
 </p>
 <ul class="org-ul">
-<li>Each input vector is a point in this</li>
+<li>Each input vector is a point in this space.</li>
+<li>A weight vector defines a plane in data-space.</li>
+<li>The weight plane is perpendicular to the weight vector and misses
+the origin by a distance equal to the threshold.</li>
 </ul>
 <p>
-space.
-</p>
-<ul class="org-ul">
-<li>A weight vector defines a plane in</li>
-</ul>
-<p>
-data-space.
-</p>
-<ul class="org-ul">
-<li>The weight plane is perpendicular</li>
-</ul>
-<p>
-to the weight vector and misses
-the origin by a distance equal to
-the threshold.
 1,1
 0,1
 weigh
