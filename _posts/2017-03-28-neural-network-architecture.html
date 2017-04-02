@@ -503,7 +503,7 @@ The problem is convex.
 <h3 id="org0b3356a">Why the learning procedure works (first attempt)</h3>
 <div class="outline-text-3" id="text-org0b3356a">
 <p>
-Consider the squared distance d_a^2 + d_b^2 between any feasible
+Consider the squared distance d<sub>a</sub><sup>2</sup> + d<sub>b</sub><sup>2</sup> between any feasible
 weight vector and the current weight vector.
 </p>
 
@@ -602,15 +602,18 @@ A binary threshold output unit cannot even tell if two single bit
 features are the same!
 </p>
 
+<ul class="org-ul">
+<li>Positive cases (same): (1,1) &rarr; 1; (0,0) &rarr; 1</li>
+<li>Negative cases (different): (1,0) &rarr; 0; (0,1) &rarr; 0</li>
+</ul>
+
 <p>
-Positive cases (same): (1,1) &rarr; 1; (0,0) &rarr; 1
-Negative cases (different): (1,0) &rarr; 0; (0,1) &rarr; 0
 The four input-output pairs give four inequalities that are impossible to
 satisfy:
-w_1 + w_2 ≥ θ ,
-w_1 &lt; θ ,
+w<sub>1</sub> + w<sub>2</sub> ≥ θ ,
+w<sub>1</sub> &lt; θ ,
 0 ≥ θ
-w_2 &lt; θ
+w<sub>2</sub> &lt; θ
 </p>
 </div>
 </div>
@@ -635,17 +638,8 @@ an input vector.
 <li>The weight plane is perpendicular to the weight vector and misses
 the origin by a distance equal to the threshold.</li>
 </ul>
+
 <p>
-1,1
-0,1
-weigh
-0,0
-t plane
-outpu
-t
-outpu =1
-t =0
-1,0
 The positive and negative cases
 cannot be separated by a planeDiscriminating simple patterns
 under translation with wrap-around
