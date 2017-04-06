@@ -1,0 +1,210 @@
+---
+layout: post
+title: Python3 OOP design
+tagline: " patterns overview"
+permalink: /python3/design/patterns/creational/builder.html
+categories: [literate programming, emacs, Python3]
+tags: [OOP, design, patterns, creational, builder]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3c897bb">Pattern overview</a>
+<ul>
+<li><a href="#org9e1b519">Pattern Name and Classification</a></li>
+<li><a href="#orgbc16349">Intent</a></li>
+<li><a href="#org00ee8c7">Also Known As</a></li>
+<li><a href="#orga3e8e38">Motivation (Forces)</a></li>
+<li><a href="#org1834a44">Applicability</a></li>
+<li><a href="#orgb9f284d">Structure</a></li>
+<li><a href="#orgd54cb81">Participants</a></li>
+<li><a href="#org014c99b">Collaboration</a></li>
+<li><a href="#orge539e51">Implementation</a></li>
+<li><a href="#orgc572d16">Consequences</a></li>
+<li><a href="#orgcae63e2">Known Uses</a></li>
+<li><a href="#orgbec9a3f">Related Patterns</a></li>
+</ul>
+</li>
+<li><a href="#org8c04694">Samples</a>
+<ul>
+<li><a href="#org530326d">SkyLark builder</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Hope <a href="http://0--key.github.io/python3/design/patterns/creational/builder.html">this page</a> could elucidate this pattern in a bit explicit
+manner.
+</p>
+
+<div id="outline-container-org3c897bb" class="outline-2">
+<h2 id="org3c897bb">Pattern overview</h2>
+<div class="outline-text-2" id="text-org3c897bb">
+</div><div id="outline-container-org9e1b519" class="outline-3">
+<h3 id="org9e1b519">Pattern Name and Classification</h3>
+<div class="outline-text-3" id="text-org9e1b519">
+<p>
+A descriptive and unique name that helps in identifying and
+referring to the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbc16349" class="outline-3">
+<h3 id="orgbc16349">Intent</h3>
+<div class="outline-text-3" id="text-orgbc16349">
+<p>
+A description of the goal behind the pattern and the reason for
+using it.
+</p>
+</div>
+</div>
+<div id="outline-container-org00ee8c7" class="outline-3">
+<h3 id="org00ee8c7">Also Known As</h3>
+<div class="outline-text-3" id="text-org00ee8c7">
+<p>
+Other names for the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orga3e8e38" class="outline-3">
+<h3 id="orga3e8e38">Motivation (Forces)</h3>
+<div class="outline-text-3" id="text-orga3e8e38">
+<p>
+A scenario consisting of a problem and a context in which this
+pattern can be used.
+</p>
+</div>
+</div>
+<div id="outline-container-org1834a44" class="outline-3">
+<h3 id="org1834a44">Applicability</h3>
+<div class="outline-text-3" id="text-org1834a44">
+<p>
+Situations in which this pattern is usable; the context for the
+pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9f284d" class="outline-3">
+<h3 id="orgb9f284d">Structure</h3>
+<div class="outline-text-3" id="text-orgb9f284d">
+<p>
+A graphical representation of the pattern. Class diagrams and
+Interaction diagrams may be used for this purpose.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd54cb81" class="outline-3">
+<h3 id="orgd54cb81">Participants</h3>
+<div class="outline-text-3" id="text-orgd54cb81">
+<p>
+A listing of the classes and objects used in the pattern and their
+roles in the design.
+</p>
+</div>
+</div>
+<div id="outline-container-org014c99b" class="outline-3">
+<h3 id="org014c99b">Collaboration</h3>
+<div class="outline-text-3" id="text-org014c99b">
+<p>
+A description of how classes and objects used in the pattern
+interact with each other.
+</p>
+</div>
+</div>
+<div id="outline-container-orge539e51" class="outline-3">
+<h3 id="orge539e51">Implementation</h3>
+<div class="outline-text-3" id="text-orge539e51">
+<p>
+A description of an implementation of the pattern; the solution
+part of the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc572d16" class="outline-3">
+<h3 id="orgc572d16">Consequences</h3>
+<div class="outline-text-3" id="text-orgc572d16">
+<p>
+A description of the results, side effects, and trade offs caused
+by using the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcae63e2" class="outline-3">
+<h3 id="orgcae63e2">Known Uses</h3>
+<div class="outline-text-3" id="text-orgcae63e2">
+<p>
+Examples of real usages of the pattern.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbec9a3f" class="outline-3">
+<h3 id="orgbec9a3f">Related Patterns</h3>
+<div class="outline-text-3" id="text-orgbec9a3f">
+<p>
+Other patterns that have some relationship with the pattern;
+discussion of the differences between the pattern and similar
+patterns.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org8c04694" class="outline-2">
+<h2 id="org8c04694">Samples</h2>
+<div class="outline-text-2" id="text-org8c04694">
+<p>
+For educational purposes it would be priceless to look at the
+working code sample. Exactly to achieve a stunning clarity it might
+be helpful to compose a <i>test suite</i> for testing the pattern
+features and dispose it nearby the pattern source code.
+</p>
+</div>
+
+<div id="outline-container-org530326d" class="outline-3">
+<h3 id="org530326d">SkyLark builder</h3>
+<div class="outline-text-3" id="text-org530326d">
+<p>
+Composes some particular model on demand.
+</p>
+
+<table><tbody><tr><th>Pattern code</th>
+<th>Test suite</th></tr><tr><td valign="top">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">A SkyLark builder</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+</pre>
+</div>
+
+</td><td valign="top">
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">An attempt to illustrate how it works</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #87cefa;">import</span> unittest
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">TestSimpleBehavior</span>(unittest.TestCase):
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">setUp</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">tearDown</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+</pre>
+</div>
+
+</td></tr></tbody></table>
+</div>
+</div>
+</div>
