@@ -30,6 +30,7 @@ tags: [OOP, design, patterns, creational, builder]
 <li><a href="#org8c04694">Samples</a>
 <ul>
 <li><a href="#org530326d">SkyLark builder</a></li>
+<li><a href="#orgdb38141">A premises builder</a></li>
 </ul>
 </li>
 </ul>
@@ -55,12 +56,16 @@ referring to the pattern.
 <div id="outline-container-orgbc16349" class="outline-3">
 <h3 id="orgbc16349">Intent</h3>
 <div class="outline-text-3" id="text-orgbc16349">
+<blockquote>
 <p>
-A description of the goal behind the pattern and the reason for
-using it.
+Separate the construction of a complex object from its
+representation so that the same construction process can create
+different representations.
 </p>
+</blockquote>
 </div>
 </div>
+
 <div id="outline-container-org00ee8c7" class="outline-3">
 <h3 id="org00ee8c7">Also Known As</h3>
 <div class="outline-text-3" id="text-org00ee8c7">
@@ -99,21 +104,70 @@ Interaction diagrams may be used for this purpose.
 <div id="outline-container-orgd54cb81" class="outline-3">
 <h3 id="orgd54cb81">Participants</h3>
 <div class="outline-text-3" id="text-orgd54cb81">
+</div><div id="outline-container-orgf2cb49f" class="outline-4">
+<h4 id="orgf2cb49f">Builder</h4>
+<div class="outline-text-4" id="text-orgf2cb49f">
 <p>
-A listing of the classes and objects used in the pattern and their
-roles in the design.
+specifies an abstract interface for creating parts of a Product
+object.
 </p>
 </div>
 </div>
+
+
+<div id="outline-container-org7c2145b" class="outline-4">
+<h4 id="org7c2145b">ConcreteBuilder</h4>
+<div class="outline-text-4" id="text-org7c2145b">
+<ul class="org-ul">
+<li>constructs and assembles parts of the product by implementing
+the Builder interface.</li>
+<li>defines and keeps track of the representation it creates.</li>
+<li>provides an interface for retrieving the product.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org24d2f6e" class="outline-4">
+<h4 id="org24d2f6e">Director</h4>
+<div class="outline-text-4" id="text-org24d2f6e">
+<p>
+constructs an object using the Builder interface.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgae6b6dd" class="outline-4">
+<h4 id="orgae6b6dd">Product</h4>
+<div class="outline-text-4" id="text-orgae6b6dd">
+<ul class="org-ul">
+<li>represents the complex object under construction.
+ConcreteBuilder builds the product's internal representation and
+defines the process by which it's assembled.</li>
+<li>includes classes that define the constituent parts, including
+interfaces for assembling the parts into the final result.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
 <div id="outline-container-org014c99b" class="outline-3">
 <h3 id="org014c99b">Collaboration</h3>
 <div class="outline-text-3" id="text-org014c99b">
-<p>
-A description of how classes and objects used in the pattern
-interact with each other.
-</p>
+<ul class="org-ul">
+<li>The client creates the Director object and configures it with the
+desired Builder object.</li>
+<li>Director notifies the builder whenever a part of the product
+should be built.</li>
+<li>Builder handles requests from the director and adds parts to the
+product.</li>
+<li>The client retrieves the product from the builder.</li>
+</ul>
 </div>
 </div>
+
 <div id="outline-container-orge539e51" class="outline-3">
 <h3 id="orge539e51">Implementation</h3>
 <div class="outline-text-3" id="text-orge539e51">
@@ -160,7 +214,7 @@ patterns.
 <p>
 For educational purposes it would be priceless to look at the
 working code sample. Exactly to achieve a stunning clarity it might
-be helpful to compose a <i>test suite</i> for testing the pattern
+be reasonable to compose a <i>test suite</i> for testing the pattern
 features and dispose it nearby the pattern source code.
 </p>
 </div>
@@ -180,8 +234,173 @@ Composes some particular model on demand.
 <span style="color: #deb887; font-style: italic;">"""</span>
 <span style="color: #deb887; font-style: italic;">A SkyLark builder</span>
 <span style="color: #deb887; font-style: italic;">"""</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Car</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Product"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.model = <span style="color: #ffd700; font-weight: bold;">None</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.tires = <span style="color: #ffd700; font-weight: bold;">None</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.engine = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__str__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">'{} | {} | {}'</span>.<span style="color: #4682b4;">format</span>(
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.model, <span style="color: #87cefa;">self</span>.tires,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.engine)
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Director</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Director"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, builder):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>._builder = builder
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">construct_car</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">get_car</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Builder</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Abstract Builder"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.car = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">create_new_car</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.car = Car()
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">SkyLarkBuilder</span>(Builder):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Concrete Builder --&gt; provides </span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   parts and tools to work on the </span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   parts"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">add_model</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.car.model = <span style="color: #deb887; font-style: italic;">"Skylark"</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">add_tires</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.car.tires = <span style="color: #deb887; font-style: italic;">"Regular tires"</span>
 </pre>
 </div>
+
+</td><td valign="top">
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">An attempt to illustrate how it works</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #87cefa;">import</span> unittest
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">TestSimpleBehavior</span>(unittest.TestCase):
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">setUp</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">tearDown</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+</pre>
+</div>
+
+</td></tr></tbody></table>
+</div>
+</div>
+
+<div id="outline-container-orgdb38141" class="outline-3">
+<h3 id="orgdb38141">A premises builder</h3>
+<div class="outline-text-3" id="text-orgdb38141">
+<table><tbody><tr><th>Pattern code</th>
+<th>Test suite</th></tr><tr><td valign="top">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">A dwelling builder</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Director</span>(<span style="color: #4682b4;">object</span>):
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.builder = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">construct_building</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.builder.new_building()
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.builder.build_floor()
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.builder.build_size()
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">get_building</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #87cefa;">self</span>.builder.building
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Builder</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   Abstract Builder</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   """</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">new_building</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building = Building()
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_floor</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">raise</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">NotImplementedError</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_size</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">raise</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">NotImplementedError</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">BuilderHouse</span>(Builder):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Concrete Builder"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_floor</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building.floor = <span style="color: #deb887; font-style: italic;">'One'</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_size</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building.size = <span style="color: #deb887; font-style: italic;">'Big'</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">BuilderFlat</span>(Builder):
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_floor</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building.floor = <span style="color: #deb887; font-style: italic;">'More than One'</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">build_size</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.building.size = <span style="color: #deb887; font-style: italic;">'Small'</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Building</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Product"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.floor = <span style="color: #ffd700; font-weight: bold;">None</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.size = <span style="color: #ffd700; font-weight: bold;">None</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__repr__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> <span style="color: #deb887; font-style: italic;">'Floor: {0.floor} | Size: {0.size}'</span>.<span style="color: #4682b4;">format</span>(<span style="color: #87cefa;">self</span>)
+
+<span style="color: #7fffd4;">director</span> = Director()
+<span style="color: #7fffd4;">director.builder</span> = BuilderHouse()
+director.construct_building()
+<span style="color: #7fffd4;">building</span> = director.get_building()
+<span style="color: #87cefa;">print</span>(building)
+<span style="color: #7fffd4;">director.builder</span> = BuilderFlat()
+director.construct_building()
+<span style="color: #7fffd4;">building</span> = director.get_building()
+<span style="color: #87cefa;">print</span>(building)
+</pre>
+</div>
+
+<pre class="example">
+Floor: One | Size: Big
+Floor: More than One | Size: Small
+</pre>
 
 </td><td valign="top">
 
