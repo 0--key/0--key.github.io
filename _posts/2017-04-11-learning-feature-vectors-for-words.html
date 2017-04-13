@@ -1,0 +1,755 @@
+---
+layout: post
+title: Learning feature vector
+tagline: " for words"
+permalink: /machine-learning/neural-network/feature-vector-for-words.html
+categories: [machine learning, neural networks]
+tags: [feature vector,]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga2c0c15">Learning to predict the next word</a>
+<ul>
+<li><a href="#org64f853c">A simple example of relational information</a></li>
+<li><a href="#orgd87c999">Another way to express the same information</a></li>
+<li><a href="#org7c61a57">A relational learning task</a></li>
+<li><a href="#orge9e5367">The structure of the neural net</a></li>
+<li><a href="#orgf452c8e">What the network learns</a></li>
+<li><a href="#orgb54e7fa">Another way to see that it works</a></li>
+<li><a href="#orgd1e8228">A large-scale example</a></li>
+</ul>
+</li>
+<li><a href="#org93523d4">A brief diversion into cognitive science</a>
+<ul>
+<li><a href="#org7c35b58">What the family trees example tells us about concepts</a></li>
+<li><a href="#org077faa0">Both sides are wrong</a></li>
+<li><a href="#orgc3f6329">Localist and distributed representations of concepts</a></li>
+</ul>
+</li>
+<li><a href="#org9c2f211">Another diversion: The softmax output function</a>
+<ul>
+<li><a href="#org2ff9cad">Problems with squared error</a></li>
+<li><a href="#orga390ab6">Softmax</a></li>
+<li><a href="#orgbc74906">Cross-entropy: the right cost function to use with softmax</a></li>
+</ul>
+</li>
+<li><a href="#org8abeefa">Neuro-probabilistic language models</a>
+<ul>
+<li><a href="#org64a64ce">A basic problem in speech recognition</a></li>
+<li><a href="#org705c26e">The standard “trigram” method</a></li>
+<li><a href="#orgac39613">Information that the trigram model fails to use</a></li>
+<li><a href="#orgf4504b6">Bengio’s neural net for predicting the next word</a></li>
+<li><a href="#org09bf5fa">A problem with having 100,000 output words</a></li>
+</ul>
+</li>
+<li><a href="#org51e34ef">Ways to deal with the large number</a>
+<ul>
+<li><a href="#org1b30a7c">A serial architecture</a></li>
+<li><a href="#org98e9d9d">Learning in the serial architecture</a></li>
+<li><a href="#org9c43376">Learning to predict the next word by predicting a</a></li>
+<li><a href="#orgc5ea66b">A picture of the learning</a></li>
+<li><a href="#orgdcd4b06">A convenient decomposition</a></li>
+<li><a href="#org3da09ee">A simpler way to learn feature vectors for words</a></li>
+<li><a href="#orgfd86caa">Displaying the learned feature vectors in a 2-D map</a></li>
+<li><a href="#org83abf12">Part of a 2-D map of the 2500 most common words</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-orga2c0c15" class="outline-2">
+<h2 id="orga2c0c15">Learning to predict the next word</h2>
+<div class="outline-text-2" id="text-orga2c0c15">
+</div><div id="outline-container-org64f853c" class="outline-3">
+<h3 id="org64f853c">A simple example of relational information</h3>
+<div class="outline-text-3" id="text-org64f853c">
+<p>
+Christopher = Penelope Margaret = Arthur Andrew = Christine
+Victoria = James Colin Charlotte Roberto = Maria Gina = Emilio
+Alfonso Jennifer = Charles Pierro = Francesca Lucia = Marco Sophia
+Angela = Tomaso
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd87c999" class="outline-3">
+<h3 id="orgd87c999">Another way to express the same information</h3>
+<div class="outline-text-3" id="text-orgd87c999">
+<p>
+• Make a set of propositions using the 12 relationships:
+</p>
+
+<p>
+– son, daughter, nephew, niece, father, mother, uncle, aunt
+</p>
+
+<p>
+– brother, sister, husband, wife
+</p>
+
+<p>
+• (colin has-father james)
+</p>
+
+<p>
+• (colin has-mother victoria)
+</p>
+
+<p>
+• (james has-wife victoria) this follows from the two above
+</p>
+
+<p>
+• (charlotte has-brother colin)
+</p>
+
+<p>
+• (victoria has-brother arthur)
+</p>
+
+<p>
+• (charlotte has-uncle arthur) this follows from the above
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c61a57" class="outline-3">
+<h3 id="org7c61a57">A relational learning task</h3>
+<div class="outline-text-3" id="text-org7c61a57">
+<p>
+• Given a large set of triples that come from some family trees,
+figure out the regularities.
+</p>
+
+<p>
+– The obvious way to express the regularities is as symbolic rules
+(x has-mother y) &amp; (y has-husband z) =&gt; (x has-father z)
+</p>
+
+<p>
+• Finding the symbolic rules involves a difficult search through a
+very large discrete space of possibilities.
+</p>
+
+<p>
+• Can a neural network capture the same knowledge by searching
+through a continuous space of weights?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge9e5367" class="outline-3">
+<h3 id="orge9e5367">The structure of the neural net</h3>
+<div class="outline-text-3" id="text-orge9e5367">
+<p>
+local encoding of person 2 output distributed encoding of person 2
+units that learn to predict features of the output from features of
+the inputs distributed encoding of person 1 local encoding of
+person 1 distributed encoding of relationship inputs local encoding
+of relationshipChristopher = Penelope Margaret = Arthur Andrew =
+Christine Victoria = James Colin Charlotte Jennifer = Charles
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf452c8e" class="outline-3">
+<h3 id="orgf452c8e">What the network learns</h3>
+<div class="outline-text-3" id="text-orgf452c8e">
+<p>
+• The six hidden units in the bottleneck connected to the input
+representation of person 1 learn to represent features of people
+that are useful for predicting the answer.
+</p>
+
+<p>
+– Nationality, generation, branch of the family tree.
+</p>
+
+<p>
+• These features are only useful if the other bottlenecks use
+similar representations and the central layer learns how features
+predict other features. For example: Input person is of generation
+3 and relationship requires answer to be one generation up implies
+Output person is of generation 2
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb54e7fa" class="outline-3">
+<h3 id="orgb54e7fa">Another way to see that it works</h3>
+<div class="outline-text-3" id="text-orgb54e7fa">
+<p>
+• Train the network on all but 4 of the triples that can be made
+using the 12 relationships
+</p>
+
+<p>
+– It needs to sweep through the training set many times adjusting
+the weights slightly each time.
+</p>
+
+<p>
+• Then test it on the 4 held-out cases.
+</p>
+
+<p>
+– It gets about 3/4 correct.
+</p>
+
+<p>
+– This is good for a 24-way choice.
+</p>
+
+<p>
+– On much bigger datasets we can train on a much smaller fraction
+of the data.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1e8228" class="outline-3">
+<h3 id="orgd1e8228">A large-scale example</h3>
+<div class="outline-text-3" id="text-orgd1e8228">
+<p>
+• Suppose we have a database of millions of relational facts of the
+form (A R B).
+</p>
+
+<p>
+– We could train a net to discover feature vector representations
+of the terms that allow the third term to be predicted from the
+first two.
+</p>
+
+<p>
+– Then we could use the trained net to find very unlikely triples.
+These are good candidates for errors in the database.
+</p>
+
+<p>
+• Instead of predicting the third term, we could use all three
+terms as input and predict the probability that the fact is
+correct.
+</p>
+
+<p>
+– To train such a net we need a good source of false facts.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org93523d4" class="outline-2">
+<h2 id="org93523d4">A brief diversion into cognitive science</h2>
+<div class="outline-text-2" id="text-org93523d4">
+</div><div id="outline-container-org7c35b58" class="outline-3">
+<h3 id="org7c35b58">What the family trees example tells us about concepts</h3>
+<div class="outline-text-3" id="text-org7c35b58">
+<p>
+• There has been a long debate in cognitive science between two
+rival theories of what it means to have a concept: The feature
+theory : A concept is a set of semantic features.
+</p>
+
+<p>
+– This is good for explaining similarities between concepts.
+</p>
+
+<p>
+– Its convenient: a concept is a vector of feature activities. The
+structuralist theory: The meaning of a concept lies in its
+relationships to other concepts.
+</p>
+
+<p>
+– So conceptual knowledge is best expressed as a relational graph.
+</p>
+
+<p>
+– Minsky used the limitations of perceptrons as evidence against
+feature vectors and in favor of relational graph representations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org077faa0" class="outline-3">
+<h3 id="org077faa0">Both sides are wrong</h3>
+<div class="outline-text-3" id="text-org077faa0">
+<p>
+• These two theories need not be rivals. A neural net can use
+vectors of semantic features to implement a relational graph.
+</p>
+
+<p>
+– In the neural network that learns family trees, no explicit
+inference is required to arrive at the intuitively obvious
+consequences of the facts that have been explicitly learned.
+</p>
+
+<p>
+– The net can “intuit” the answer in a forward pass.
+</p>
+
+<p>
+• We may use explicit rules for conscious, deliberate reasoning,
+but we do a lot of commonsense, analogical reasoning by just
+“seeing” the answer with no conscious intervening steps.
+</p>
+
+<p>
+– Even when we are using explicit rules, we need to just see which
+rules to apply.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc3f6329" class="outline-3">
+<h3 id="orgc3f6329">Localist and distributed representations of concepts</h3>
+<div class="outline-text-3" id="text-orgc3f6329">
+<p>
+• The obvious way to implement a relational graph in a neural net
+is to treat a neuron as a node in the graph and a connection as a
+binary relationship. But this “localist” method will not work:
+</p>
+
+<p>
+– We need many different types of relationship and the connections
+in a neural net do not have discrete labels.
+</p>
+
+<p>
+– We need ternary relationships as well as binary ones. e.g. A is
+between B and C.
+</p>
+
+<p>
+• The right way to implement relational knowledge in a neural net
+is still an open issue.
+</p>
+
+<p>
+– But many neurons are probably used for each concept and each
+neuron is probably involved in many concepts. This is called a
+“distributed representation”.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9c2f211" class="outline-2">
+<h2 id="org9c2f211">Another diversion: The softmax output function</h2>
+<div class="outline-text-2" id="text-org9c2f211">
+</div><div id="outline-container-org2ff9cad" class="outline-3">
+<h3 id="org2ff9cad">Problems with squared error</h3>
+<div class="outline-text-3" id="text-org2ff9cad">
+<p>
+• The squared error measure has some drawbacks:
+</p>
+
+<p>
+– If the desired output is 1 and the actual output is 0.00000001
+there is almost no gradient for a logistic unit to fix up the
+error.
+</p>
+
+<p>
+– If we are trying to assign probabilities to mutually exclusive
+class labels, we know that the outputs should sum to 1, but we are
+depriving the network of this knowledge.
+</p>
+
+<p>
+• Is there a different cost function that works better?
+</p>
+
+<p>
+– Yes: Force the outputs to represent a probability distribution
+across discrete alternatives.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga390ab6" class="outline-3">
+<h3 id="orga390ab6">Softmax</h3>
+<div class="outline-text-3" id="text-orga390ab6">
+<p>
+The output units in a softmax group use a non-local non-linearity:
+y i z i softmax group this is called the “logit” y i = e z i ∑ e z
+j j∈group ∂y i = y i ( 1 − y i ) ∂z i
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbc74906" class="outline-3">
+<h3 id="orgbc74906">Cross-entropy: the right cost function to use with softmax</h3>
+<div class="outline-text-3" id="text-orgbc74906">
+<p>
+• The right cost function is the negative log probability of the
+right answer.
+</p>
+
+<p>
+• C has a very big gradient when the target value is 1 and the
+output is almost zero.
+</p>
+
+<p>
+– A value of 0.000001 is much better than 0.000000001
+</p>
+
+<p>
+– The steepness of dC/dy exactly balances the flatness of dy/dz C =
+− ∑ t j log y j j target value ∂C ∂C ∂y j = ∑ = y i − t i ∂z i ∂y j
+∂z i j
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8abeefa" class="outline-2">
+<h2 id="org8abeefa">Neuro-probabilistic language models</h2>
+<div class="outline-text-2" id="text-org8abeefa">
+</div><div id="outline-container-org64a64ce" class="outline-3">
+<h3 id="org64a64ce">A basic problem in speech recognition</h3>
+<div class="outline-text-3" id="text-org64a64ce">
+<p>
+• We cannot identify phonemes perfectly in noisy speech
+</p>
+
+<p>
+– The acoustic input is often ambiguous: there are several
+different words that fit the acoustic signal equally well.
+</p>
+
+<p>
+• People use their understanding of the meaning of the utterance to
+hear the right words.
+</p>
+
+<p>
+– We do this unconsciously when we wreck a nice beach.
+</p>
+
+<p>
+– We are very good at it.
+</p>
+
+<p>
+• This means speech recognizers have to know which words are likely
+to come next and which are not.
+</p>
+
+<p>
+– Fortunately, words can be predicted quite well without full
+understanding.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org705c26e" class="outline-3">
+<h3 id="org705c26e">The standard “trigram” method</h3>
+<div class="outline-text-3" id="text-org705c26e">
+<p>
+•
+</p>
+
+<p>
+• Take a huge amount of text and count the frequencies of all
+triples of words. Use these frequencies to make bets on the
+relative probabilities of words given the previous two words:
+</p>
+
+<p>
+\(\frac{p(w_3 = c | w_2 =  b, w_1 = a)}{p(w_3 = d | w_2 =  b, w_1 = a)} = \frac{count(abc)}{count(abd)}\)
+</p>
+
+<p>
+• Until very recently this was the state-of-the-art.
+</p>
+
+<p>
+– We cannot use a much bigger context because there are too many
+possibilities to store and the counts would mostly be zero.
+</p>
+
+<p>
+– We have to “back-off” to digrams when the count for a trigram is
+too small.
+</p>
+
+<p>
+• The probability is not zero just because the count is zero!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgac39613" class="outline-3">
+<h3 id="orgac39613">Information that the trigram model fails to use</h3>
+<div class="outline-text-3" id="text-orgac39613">
+<p>
+• Suppose we have seen the sentence “the cat got squashed in the
+garden on friday”
+</p>
+
+<p>
+• This should help us predict words in the sentence “the dog got
+flattened in the yard on monday”
+</p>
+
+<p>
+• A trigram model does not understand the similarities between
+</p>
+
+<p>
+– cat/dog squashed/flattened garden/yard friday/monday
+</p>
+
+<p>
+• To overcome this limitation, we need to use the semantic and
+syntactic features of previous words to predict the features of the
+next word.
+</p>
+
+<p>
+– Using a feature representation also allows a context that
+contains many more previous words (e.g. 10).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf4504b6" class="outline-3">
+<h3 id="orgf4504b6">Bengio’s neural net for predicting the next word</h3>
+<div class="outline-text-3" id="text-orgf4504b6">
+<p>
+“ softmax” units (one per possible next word) skip-layer
+connections units that learn to predict the output word from
+features of the input words learned distributed encoding of word
+t-2 table look-up index of word at t-2 learned distributed encoding
+of word t-1 table look-up index of word at t-1
+</p>
+</div>
+</div>
+
+<div id="outline-container-org09bf5fa" class="outline-3">
+<h3 id="org09bf5fa">A problem with having 100,000 output words</h3>
+<div class="outline-text-3" id="text-org09bf5fa">
+<p>
+• Each unit in the last hidden layer has 100,000 outgoing weights.
+</p>
+
+<p>
+– So we cannot afford to have many hidden units.
+</p>
+
+<p>
+• Unless we have a huge number of training cases.
+</p>
+
+<p>
+– We could make the last hidden layer small, but then its hard to
+get the 100,000 probabilities right.
+</p>
+
+<p>
+• The small probabilities are often relevant.
+</p>
+
+<p>
+• Is there a better way to deal with such a large number of
+outputs?Neural Networks for Machine Learning Lecture 4e
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org51e34ef" class="outline-2">
+<h2 id="org51e34ef">Ways to deal with the large number</h2>
+<div class="outline-text-2" id="text-org51e34ef">
+<p>
+of possible outputs in neuro-probabilistic language models Geoffrey
+</p>
+
+<p>
+Hinton with Nitish Srivastava Kevin Swersky
+of possible outputs in neuro-probabilistic language models 
+</p>
+</div>
+
+
+<div id="outline-container-org1b30a7c" class="outline-3">
+<h3 id="org1b30a7c">A serial architecture</h3>
+<div class="outline-text-3" id="text-org1b30a7c">
+<p>
+Try all candidate next words one at a time. logit score for the
+candidate word This allows the learned feature vector
+representation to be used for the candidate word. hidden units that
+discover good or bad combinations of features learned distributed
+encoding of word t-2 table look-up index of word at t-2 learned
+distributed encoding of word t-1 table look-up index of word at t-1
+learned distributed encoding of candidate table look-up index of
+candidate
+</p>
+</div>
+</div>
+
+<div id="outline-container-org98e9d9d" class="outline-3">
+<h3 id="org98e9d9d">Learning in the serial architecture</h3>
+<div class="outline-text-3" id="text-org98e9d9d">
+<p>
+• After computing the logit score for each candidate word, use all
+of the logits in a softmax to get word probabilities.
+</p>
+
+<p>
+• The difference between the word probabilities and their target
+probabilities gives cross-entropy error derivatives.
+</p>
+
+<p>
+– The derivatives try to raise the score of the correct candidate
+and lower the scores of its high-scoring rivals.
+</p>
+
+<p>
+• We can save a lot of time if we only use a small set of
+candidates suggested by some other kind of predictor.
+</p>
+
+<p>
+– For example, we could use the neural net to revise the
+probabilities of the words that the trigram model thinks are
+likely.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9c43376" class="outline-3">
+<h3 id="org9c43376">Learning to predict the next word by predicting a</h3>
+<div class="outline-text-3" id="text-org9c43376">
+<p>
+path through a tree (Minih and Hinton, 2009)
+</p>
+
+<p>
+• Arrange all the words in a binary tree with words as the leaves.
+</p>
+
+<p>
+• Use the previous context to generate a “prediction vector”, v.
+</p>
+
+<p>
+– Compare v with a learned vector, u, at each node of the tree.
+</p>
+
+<p>
+– Apply the logistic function to the scalar product of u and v to
+predict the probabilities of taking the two branches of the tree. T
+1− σ (v u i ) 1− σ (v T u j ) u l u j u i σ (v T u i ) u k σ (v T u
+j ) u m u n
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc5ea66b" class="outline-3">
+<h3 id="orgc5ea66b">A picture of the learning</h3>
+<div class="outline-text-3" id="text-orgc5ea66b">
+<p>
+prediction vector, v learned distributed encoding of word t-2
+learned distributed encoding of word t-1 table look-up index of
+word at t-2 index of word at t-1 T 1− σ (v u i ) 1− σ (v T u j ) u
+l u j u i σ (v T u i ) u k σ (v T u j ) u m w(t) u n
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdcd4b06" class="outline-3">
+<h3 id="orgdcd4b06">A convenient decomposition</h3>
+<div class="outline-text-3" id="text-orgdcd4b06">
+<p>
+• Maximizing the log probability of picking the target word is
+equivalent to maximizing the sum of the log probabilities of taking
+all the branches on the path that leads to the target word.
+</p>
+
+<p>
+– So during learning, we only need to consider the nodes on the
+correct path. This is an exponential win: log(N) instead of N.
+</p>
+
+<p>
+– For each of these nodes, we know the correct branch and we know
+the current probability of taking it so we can get derivatives for
+learning both the prediction vector v and that node vector u.
+</p>
+
+<p>
+• Unfortunately, it is still slow at test time.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3da09ee" class="outline-3">
+<h3 id="org3da09ee">A simpler way to learn feature vectors for words</h3>
+<div class="outline-text-3" id="text-org3da09ee">
+<p>
+(Collobert and Weston, 2008) Learn to judge if a word fits the 5
+word context on either side of it. right or random? Train on ~600
+million examples. Use for many different NLP tasks. units that
+learn to predict the output from features of the input words word
+code word code word code word code word at t-2 word at t-1 word at
+t or random word word at t+1 word code word at t+2
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfd86caa" class="outline-3">
+<h3 id="orgfd86caa">Displaying the learned feature vectors in a 2-D map</h3>
+<div class="outline-text-3" id="text-orgfd86caa">
+<p>
+• We can get an idea of the quality of the learned feature vectors
+by displaying them in a 2-D map.
+</p>
+
+<p>
+– Display very similar vectors very close to each other.
+</p>
+
+<p>
+– Use a multi-scale method called “t-sne” that also displays
+similar clusters near each other.
+</p>
+
+<p>
+• The learned feature vectors capture lots of subtle semantic
+distinctions, just by looking at strings of words.
+</p>
+
+<p>
+– No extra supervision is required.
+</p>
+
+<p>
+– The information is all in the contexts that the word is used in.
+</p>
+
+<p>
+– Consider “She scrommed him with the frying pan.”
+</p>
+</div>
+</div>
+
+<div id="outline-container-org83abf12" class="outline-3">
+<h3 id="org83abf12">Part of a 2-D map of the 2500 most common words</h3>
+</div>
+</div>
