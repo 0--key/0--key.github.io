@@ -1,0 +1,98 @@
+---
+layout: post
+title: Perceptron
+tagline: " written in Python OOP"
+permalink: /machine-learning/neural-network/perceptron/oop-concept.html
+categories: [machine learning, neural networks]
+tags: [perceptron, oop]
+---
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">!/usr/bin/env python</span>
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">-*- coding: utf-8 -*-</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #deb887; font-style: italic;">Single layer neural network</span>
+<span style="color: #deb887; font-style: italic;">"""</span>
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Inlet</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Input signal into dendron"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">modulate</span>(<span style="color: #87cefa;">self</span>, signal):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.signal = signal
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Dendron</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Convey signal to neuron"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, perceptron, inlet, weight=0.1):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.perceptron = perceptron
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.weight = weight
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.inlet = inlet
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">Perceptron</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Processing module itself"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, df=<span style="color: #87cefa;">lambda</span> x: x):  <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">sigmoidal</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.df = df
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.dendrons = []
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.output = 0
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">calculate_output</span>(<span style="color: #87cefa;">self</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> dendron <span style="color: #87cefa;">in</span> <span style="color: #87cefa;">self</span>.dendrons:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.output += <span style="color: #87cefa;">self</span>.df(
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   dendron.weight *
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   dendron.inlet.signal)
+
+
+<span style="color: #87cefa;">class</span> <span style="color: #98fb98; font-size: 90%; font-weight: bold;">NeuralNetwork</span>(<span style="color: #4682b4;">object</span>):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Ties all classes above together"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">__init__</span>(<span style="color: #87cefa;">self</span>, swing):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Creates network with swing inlets and equal number of</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   </span><span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   perceptrons connected eachone inlet with all perseptrons"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.network_swing = swing
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.inlets = []
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.perceptrons = []
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.dendrons = []
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">range</span>(swing):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.inlets.append(Inlet())
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.perceptrons.append(Perceptron())
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> j <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">range</span>(swing):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.dendrons.append(
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   Dendron(<span style="color: #87cefa;">self</span>.perceptrons[-1],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.inlets[-1]))
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.perceptrons[-1].dendrons.append(<span style="color: #87cefa;">self</span>.dendrons[-1])
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">eval_input</span>(<span style="color: #87cefa;">self</span>, input_array):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">range</span>(<span style="color: #87cefa;">self</span>.network_swing):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.inlets[i].modulate(input_array[i])
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> <span style="color: #87cefa;">self</span>.perceptrons:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   i.calculate_output()
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">update_weights</span>(<span style="color: #87cefa;">self</span>, weights_array):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">range</span>(<span style="color: #87cefa;">self</span>.network_swing ** 2):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">self</span>.dendrons[i]<span style="color: #7fffd4;">.weight</span> = weights_array[i]
+
+<span style="color: #7fffd4;">NN</span> = NeuralNetwork(2)
+NN.update_weights([0.1, 0.2, 0.3, 0.4])
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> NN.dendrons:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(i.weight)
+NN.eval_input([1, 1])
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> NN.perceptrons:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(i.output)
+</pre>
+</div>
+
+<pre class="example">
+0.1
+0.2
+0.3
+0.4
+0.30000000000000004
+0.7
+</pre>
