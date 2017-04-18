@@ -6,24 +6,26 @@ permalink: /algorithms/time-complexity.html
 categories: [algorithms, literate programming]
 tags: [computation, complexity, analysis]
 ---
+
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">Definition</a></li>
-<li><a href="#orgheadline2">Samples</a></li>
+<li><a href="#org6940ead">Definition</a></li>
+<li><a href="#org686a81a">Samples</a></li>
+<li><a href="#orgbabedd4">Timing technique</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Definition</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-org6940ead" class="outline-2">
+<h2 id="org6940ead">Definition</h2>
+<div class="outline-text-2" id="text-org6940ead">
 
 <div class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comparison_computational_complexity.svg/250px-Comparison_computational_complexity.svg.png" alt="Time Complexity" title="Time Complexity proportion" align="right" />
 </p>
-<p><span class="figure-number">Figure 1:</span> Graphs of number of operations, N vs input size, n for common complexities, assuming a coefficient of 1</p>
+<p><span class="figure-number">Figure 1: </span>Graphs of number of operations, N vs input size, n for common complexities, assuming a coefficient of 1</p>
 </div>
 <blockquote>
 <p>
@@ -63,9 +65,9 @@ running time is called its time complexity in computer science.
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2">Samples</h2>
-<div class="outline-text-2" id="text-orgheadline2">
+<div id="outline-container-org686a81a" class="outline-2">
+<h2 id="org686a81a">Samples</h2>
+<div class="outline-text-2" id="text-org686a81a">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -132,5 +134,41 @@ logarithmic.
 <p>
 The full <a href="https://en.wikipedia.org/wiki/Time_complexity#Table_of_common_time_complexities">list of common time complexities</a>  
 </p>
+</div>
+</div>
+
+<div id="outline-container-orgbabedd4" class="outline-2">
+<h2 id="orgbabedd4">Timing technique</h2>
+<div class="outline-text-2" id="text-orgbabedd4">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> timeit
+
+<span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">merge_dicts</span>(*dict_args):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   Given any number of dicts, shallow copy and merge into a new dict,</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   precedence goes to key value pairs in latter dicts.</span>
+<span style="color: #f5deb3; background-color: #0a0a0a; font-style: italic;"> </span><span style="color: #deb887; font-style: italic;">   """</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">result</span> = {}
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> dictionary <span style="color: #87cefa;">in</span> dict_args:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   result.update(dictionary)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> result
+
+<span style="color: #7fffd4;">x</span> = {<span style="color: #deb887; font-style: italic;">'a'</span>: 1, <span style="color: #deb887; font-style: italic;">'b'</span>: 2}
+<span style="color: #7fffd4;">y</span> = {<span style="color: #deb887; font-style: italic;">'b'</span>: 3, <span style="color: #deb887; font-style: italic;">'c'</span>: 4}
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">min</span>(timeit.repeat(<span style="color: #87cefa;">lambda</span>: merge_dicts(x, y), number=100)))
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">min</span>(timeit.repeat(<span style="color: #87cefa;">lambda</span>: merge_dicts(x, y))))
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">min(timeit.repeat(lambda: {**x, **y})) ==&gt; for Python 3.5</span>
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">dictionary item overwrite caveat illustration</span>
+<span style="color: #7fffd4;">z</span> = {<span style="color: #deb887; font-style: italic;">'c'</span>: 1}
+<span style="color: #87cefa;">assert</span>(merge_dicts(x, y, z)[<span style="color: #deb887; font-style: italic;">'c'</span>] == 1)
+</pre>
+</div>
+
+<pre class="example">
+0.00024804499980746186
+2.233158576999813
+</pre>
 </div>
 </div>
