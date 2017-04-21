@@ -21,6 +21,7 @@ tags: [architecture, overview, recurrent network]
 Modeling sequences: A brief overview
 </p>
 </blockquote>
+
 <div id="outline-container-org3b9f9f6" class="outline-2">
 <h2 id="org3b9f9f6">Getting targets when modeling sequences</h2>
 <div class="outline-text-2" id="text-org3b9f9f6">
@@ -30,19 +31,22 @@ an input sequence into an output sequence that lives in a different
 domain.
 </p>
 
-<p>
-–  E. g. turn a sequence of sound pressures into a sequence of word identities.
-When there is no separate target sequence, we can get a teaching signal by trying
-to predict the next term in the input sequence.
-–  The target output sequence is the input sequence with an advance of 1 step.
-–  This seems much more natural than trying to predict one pixel in an image
-from the other pixels, or one patch of an image from the rest of the image.
-–  For temporal sequences there is a natural order for the predictions.
-Predicting the next term in a sequence blurs the distinction between supervised
-and unsupervised learning.
-–  It uses methods designed for supervised learning, but it doesn’t require a
-separate teaching signal.Memoryless models for sequences
-</p>
+<ul class="org-ul">
+<li>E. g. turn a sequence of sound pressures into a sequence of word
+identities. When there is no separate target sequence, we can get
+a teaching signal by trying to predict the next term in the input
+sequence.</li>
+<li>The target output sequence is the input sequence with an advance
+of 1 step.</li>
+<li>This seems much more natural than trying to predict one pixel in
+an image from the other pixels, or one patch of an image from the
+rest of the image.</li>
+<li>For temporal sequences there is a natural order for the
+predictions. Predicting the next term in a sequence blurs the
+distinction between supervised and unsupervised learning.</li>
+<li>It uses methods designed for supervised learning, but it doesn’t
+require a separate teaching signal.Memoryless models for sequences</li>
+</ul>
 
 <p>
 •  Autoregressive models
@@ -75,82 +79,141 @@ this hidden state its own internal dynamics, we get a much more
 interesting kind of model.
 </p>
 
+<ul class="org-ul">
+<li>It can store information in its hidden state for a long time.</li>
+<li>If the dynamics is noisy and the way it generates outputs from its
+hidden state is noisy, we can never know its exact hidden state.</li>
+<li>The best we can do is to infer a probability distribution over the
+space of hidden state vectors.</li>
+</ul>
 <p>
-–  It can store information in its hidden state for a long time.
-–  If the dynamics is noisy and the way it generates outputs from its
-hidden state is noisy, we can never know its exact hidden state.
-–  The best we can do is to infer a probability distribution over the
-space of hidden state vectors.
 •  This inference is only tractable for two types of hidden state model.
-–  The next three slides are mainly intended for people who already
+</p>
+
+<ul class="org-ul">
+<li>The next three slides are mainly intended for people who already
 know about these two types of hidden state model. They show how
-RNNs differ.
-–  Do not worry if you cannot follow the details.Linear Dynamical Systems (engineers love them!)
-time à
-•  These are generative models. They have a real-
-valued hidden state that cannot be observed
-directly.
-–  The hidden state has linear dynamics with
-Gaussian noise and produces the
-observations using a linear model with
-Gaussian noise.
-–  There may also be driving inputs.
-•  To predict the next output (so that we can shoot
-down the missile) we need to infer the hidden
-state.
-–  A linearly transformed Gaussian is a
-Gaussian. So the distribution over the hiddenHidden Markov Models (computer scientists love them!)
-time à
-•  Hidden Markov Models have a discrete one-
-of-N hidden state. Transitions between states
-are stochastic and controlled by a transition
-matrix. The outputs produced by a state are
-stochastic.
-–  We cannot be sure which state produced
-a given output. So the state is “hidden”.
-–  It is easy to represent a probability
-distribution across N states with N
-numbers.
-•  To predict the next output we need to infer the
-probability distribution over hidden states.
-–  HMMs have efficient algorithms forA fundamental limitation of HMMs
-•  Consider what happens when a hidden Markov model generates
-data.
-–  At each time step it must select one of its hidden states. So with
+RNNs differ.</li>
+<li>Do not worry if you cannot follow the details.Linear Dynamical
+Systems (engineers love them!) time à</li>
+</ul>
+
+<p>
+• These are generative models. They have a real-valued hidden state
+  that cannot be observed directly.
+</p>
+
+<ul class="org-ul">
+<li>The hidden state has linear dynamics with Gaussian noise and
+produces the observations using a linear model with Gaussian
+noise.</li>
+<li>There may also be driving inputs.</li>
+</ul>
+
+<p>
+• To predict the next output (so that we can shoot down the missile)
+   we need to infer the hidden state.
+</p>
+
+<ul class="org-ul">
+<li>A linearly transformed Gaussian is a Gaussian. So the distribution
+over the hiddenHidden Markov Models (computer scientists love
+them!) time à</li>
+</ul>
+
+<p>
+• Hidden Markov Models have a discrete one- of-N hidden state.
+Transitions between states are stochastic and controlled by a
+transition matrix. The outputs produced by a state are stochastic.
+</p>
+
+<ul class="org-ul">
+<li>We cannot be sure which state produced a given output. So the
+state is “hidden”.</li>
+
+<li>It is easy to represent a probability distribution across N states
+with N numbers.</li>
+</ul>
+
+<p>
+• To predict the next output we need to infer the probability
+distribution over hidden states.
+</p>
+
+<ul class="org-ul">
+<li>HMMs have efficient algorithms forA fundamental limitation of HMMs</li>
+</ul>
+
+<p>
+•  Consider what happens when a hidden Markov model generates data.
+</p>
+
+<ul class="org-ul">
+<li>At each time step it must select one of its hidden states. So with
 N hidden states it can only remember log(N) bits about what it
-generated so far.
-•  Consider the information that the first half of an utterance contains
-about the second half:
-–  The syntax needs to fit (e.g. number and tense agreement).
-–  The semantics needs to fit. The intonation needs to fit.
-–  The accent, rate, volume, and vocal tract characteristics must all
-fit.
-•  All these aspects combined could be 100 bits of information that the
-first half of an utterance needs to convey to the second half. 2^100Recurrent neural networks
-time à
-•  RNNs are very powerful, because they
-combine two properties:
-–  Distributed hidden state that allows
-them to store a lot of information
-about the past efficiently.
-–  Non-linear dynamics that allows
-them to update their hidden state in
-complicated ways.
-•  With enough neurons and time, RNNs
-can compute anything that can be
-computed by your computer.Do generative models need to be stochastic?
+generated so far.</li>
+</ul>
+
+<p>
+• Consider the information that the first half of an utterance
+contains about the second half:
+</p>
+
+<ul class="org-ul">
+<li>The syntax needs to fit (e.g. number and tense agreement).</li>
+<li>The semantics needs to fit. The intonation needs to fit.</li>
+<li>The accent, rate, volume, and vocal tract characteristics must all
+fit.</li>
+</ul>
+
+<p>
+• All these aspects combined could be 100 bits of information that
+the first half of an utterance needs to convey to the second half.
+2<sup>100</sup>Recurrent neural networks time à
+</p>
+
+<p>
+• RNNs are very powerful, because they combine two properties:
+</p>
+<ul class="org-ul">
+<li>Distributed hidden state that allows them to store a lot of
+information about the past efficiently.</li>
+<li>Non-linear dynamics that allows them to update their hidden state
+in complicated ways.</li>
+</ul>
+
+<p>
+• With enough neurons and time, RNNs can compute anything that can
+be computed by your computer.Do generative models need to be
+stochastic?
+</p>
+
+<p>
 •  Linear dynamical systems and
 hidden Markov models are
 stochastic models.
-–  But the posterior probability
+</p>
+
+<ul class="org-ul">
+<li>But the posterior probability</li>
+</ul>
+<p>
 distribution over their
 hidden states given the
 observed data so far is a
 deterministic function of the
 data.
+</p>
+
+<p>
 •  Recurrent neural networks are
 deterministic.
-–  So think of the hidden state
+</p>
+
+<ul class="org-ul">
+<li>So think of the hidden state</li>
+</ul>
+<p>
 of an RNN as the
 equivalent of the
 deterministic probability
@@ -158,20 +221,37 @@ distribution over hidden
 states in a linear dynamical
 system or hidden Markov
 model.Recurrent neural networks
+</p>
+
+<p>
 •  What kinds of behaviour can RNNs exhibit?
-–  They can oscillate. Good for motor control?
-–  They can settle to point attractors. Good for retrieving memories?
-–  They can behave chaotically. Bad for information processing?
-–  RNNs could potentially learn to implement lots of small programs
+</p>
+
+<ul class="org-ul">
+<li>They can oscillate. Good for motor control?</li>
+<li>They can settle to point attractors. Good for retrieving memories?</li>
+<li>They can behave chaotically. Bad for information processing?</li>
+<li>RNNs could potentially learn to implement lots of small programs</li>
+</ul>
+<p>
 that each capture a nugget of knowledge and run in parallel,
 interacting to produce very complicated effects.
+</p>
+
+<p>
 •  But the computational power of RNNs makes them very hard to train.
-–  For many years we could not exploit the computational power of
+</p>
+
+<ul class="org-ul">
+<li>For many years we could not exploit the computational power of</li>
+</ul>
+<p>
 RNNs despite some heroic efforts (e.g. Tony Robinson’s speech
 recognizer).Neural Networks for Machine Learning
 </p>
 </div>
 </div>
+
 <div id="outline-container-orgf5ba516" class="outline-2">
 <h2 id="orgf5ba516">Training RNNs with backpropagation</h2>
 <div class="outline-text-2" id="text-orgf5ba516">
@@ -211,7 +291,11 @@ weights.
 usual, and then modify the
 gradients so that they satisfy the
 constraints.
-–  So if the weights started off
+</p>
+<ul class="org-ul">
+<li>So if the weights started off</li>
+</ul>
+<p>
 satisfying the constraints,
 they will continue to satisfy
 them.
@@ -236,32 +320,64 @@ for w 1 and w 2Backpropagation through time
 net with shared weights and then train the feed-forward net
 with weight constraints.
 •  We can also think of this training algorithm in the time domain:
-–  The forward pass builds up a stack of the activities of all
+</p>
+<ul class="org-ul">
+<li>The forward pass builds up a stack of the activities of all</li>
+</ul>
+<p>
 the units at each time step.
-–  The backward pass peels activities off the stack to
+</p>
+<ul class="org-ul">
+<li>The backward pass peels activities off the stack to</li>
+</ul>
+<p>
 compute the error derivatives at each time step.
-–  After the backward pass we add together the derivatives at
+</p>
+<ul class="org-ul">
+<li>After the backward pass we add together the derivatives at</li>
+</ul>
+<p>
 all the different times for each weight.An irritating extra issue
 •  We need to specify the initial activity state of all the hidden and output
 units.
 •  We could just fix these initial states to have some default value like 0.5.
 •  But it is better to treat the initial states as learned parameters.
 •  We learn them in the same way as we learn the weights.
-–  Start off with an initial random guess for the initial states.
-–  At the end of each training sequence, backpropagate through time
+</p>
+<ul class="org-ul">
+<li>Start off with an initial random guess for the initial states.</li>
+<li>At the end of each training sequence, backpropagate through time</li>
+</ul>
+<p>
 all the way to the initial states to get the gradient of the error function
 with respect to each initial state.
-–  Adjust the initial states by following the negative gradient.Providing input to recurrent networks
+</p>
+<ul class="org-ul">
+<li>Adjust the initial states by following the negative gradient.Providing input to recurrent networks</li>
+</ul>
+<p>
 w 1
 w 2
 w 3 w 4
 •  We can specify inputs in several
 ways:
-–  Specify the initial states of all
+</p>
+<ul class="org-ul">
+<li>Specify the initial states of all</li>
+</ul>
+<p>
 the units.
-–  Specify the initial states of a
+</p>
+<ul class="org-ul">
+<li>Specify the initial states of a</li>
+</ul>
+<p>
 subset of the units.
-–  Specify the states of the same
+</p>
+<ul class="org-ul">
+<li>Specify the states of the same</li>
+</ul>
+<p>
 subset of the units at every time
 step.
 •  This is the natural way to
@@ -273,15 +389,27 @@ w 2 w 3 w 4
 timeTeaching signals for recurrent networks
 •  We can specify targets in several
 ways:
-–  Specify desired final activities of
+</p>
+<ul class="org-ul">
+<li>Specify desired final activities of</li>
+</ul>
+<p>
 all the units
-–  Specify desired activities of all
+</p>
+<ul class="org-ul">
+<li>Specify desired activities of all</li>
+</ul>
+<p>
 units for the last few steps
 •  Good for learning attractors
 •  It is easy to add in extra error
 derivatives as we
 backpropagate.
-–  Specify the desired activity of a
+</p>
+<ul class="org-ul">
+<li>Specify the desired activity of a</li>
+</ul>
+<p>
 subset of the units.
 •  The other units are input or
 hidden units.
@@ -302,10 +430,18 @@ Abdel-rahman MohamedA good toy problem for a recurrent network
 binary addition, but there are obvious
 regularities that it cannot capture
 efficiently.
-–  We must decide in advance the
+</p>
+<ul class="org-ul">
+<li>We must decide in advance the</li>
+</ul>
+<p>
 maximum number of digits in each
 number.
-–  The processing applied to the
+</p>
+<ul class="org-ul">
+<li>The processing applied to the</li>
+</ul>
+<p>
 beginning of a long number does not
 generalize to the end of the long
 number because
@@ -365,10 +501,18 @@ time step.
 step is the output for the column
 that was provided as input two time
 steps ago.
-–  It takes one time step to update
+</p>
+<ul class="org-ul">
+<li>It takes one time step to update</li>
+</ul>
+<p>
 the hidden units based on the
 two input digits.
-–  It takes another time step for the
+</p>
+<ul class="org-ul">
+<li>It takes another time step for the</li>
+</ul>
+<p>
 hidden units to cause the
 output.
 0 0 1 1 0 1 0 0
@@ -378,7 +522,11 @@ timeThe connectivity of the network
 •  The 3 hidden units are fully
 interconnected in both
 directions.
-–  This allows a hidden
+</p>
+<ul class="org-ul">
+<li>This allows a hidden</li>
+</ul>
+<p>
 activity pattern at one
 time step to vote for the
 hidden activity pattern at
@@ -398,21 +546,33 @@ nodes in the finite state
 possible binary activity vectors
 automaton.
 (but only N^2 weights)
-–  Do not confuse units in a
-–  This is important when the
+</p>
+<ul class="org-ul">
+<li>Do not confuse units in a</li>
+<li>This is important when the</li>
+</ul>
+<p>
 neural network with nodes in a
 input stream has two separate
 finite state automaton. Nodes
 things going on at once.
 are like activity vectors.
-–  A finite state automaton
-–  The automaton is restricted to
+</p>
+<ul class="org-ul">
+<li>A finite state automaton</li>
+<li>The automaton is restricted to</li>
+</ul>
+<p>
 needs to square its number of
 be in exactly one state at each
 states.
 time. The hidden units are
 restricted to have exactly one
-–  An RNN needs to double its
+</p>
+<ul class="org-ul">
+<li>An RNN needs to double its</li>
+</ul>
+<p>
 vector of activity at each time.
 number of units.Neural Networks for Machine Learning
 Lecture 7d
@@ -430,7 +590,11 @@ activity vectors from exploding.
 •  The backward pass, is completely linear. If
 you double the error derivatives at the final
 layer, all the error derivatives will double.
-–  The forward pass determines the slope
+</p>
+<ul class="org-ul">
+<li>The forward pass determines the slope</li>
+</ul>
+<p>
 of the linear function used for
 backpropagating through each neuron.The problem of exploding or vanishing gradients
 • 
@@ -438,9 +602,17 @@ backpropagating through each neuron.The problem of exploding or vanishing gradie
 What happens to the magnitude of the
 gradients as we backpropagate
 through many layers?
-–  If the weights are small, the
+</p>
+<ul class="org-ul">
+<li>If the weights are small, the</li>
+</ul>
+<p>
 gradients shrink exponentially.
-–  If the weights are big the gradients
+</p>
+<ul class="org-ul">
+<li>If the weights are big the gradients</li>
+</ul>
+<p>
 grow exponentially.
 Typical feed-forward neural nets can
 cope with these exponential effects
@@ -451,13 +623,21 @@ layers.
 In an RNN trained on long sequences
 (e.g. 100 time steps) the gradients
 can easily explode or vanish.
-–  We can avoid this by initializing
+</p>
+<ul class="org-ul">
+<li>We can avoid this by initializing</li>
+</ul>
+<p>
 the weights very carefully.
 Even with good initial weights, its very
 hard to detect that the current target
 output depends on an input from
 many time-steps ago.
-–  So RNNs have difficulty dealing
+</p>
+<ul class="org-ul">
+<li>So RNNs have difficulty dealing</li>
+</ul>
+<p>
 with long-range dependencies.Why the back-propagated gradient blows up
 •  If we start a trajectory within an attractor, small changes in where we
 start make no difference to where we end up.
@@ -475,7 +655,11 @@ problem by using a fancy
 optimizer that can detect
 directions with a tiny gradient but
 even smaller curvature.
-–  The HF optimizer ( Martens &amp;
+</p>
+<ul class="org-ul">
+<li>The HF optimizer ( Martens &amp;</li>
+</ul>
+<p>
 Sutskever, 2011) is good at
 this.
 • 
@@ -487,7 +671,11 @@ carefully so that the hidden state has a
 huge reservoir of weakly coupled
 oscillators which can be selectively driven
 by the input.
-–  ESNs only need to learn the
+</p>
+<ul class="org-ul">
+<li>ESNs only need to learn the</li>
+</ul>
+<p>
 hiddenàoutput connections.
 Good initialization with momentum
 Initialize like in Echo State Networks, but
@@ -518,13 +706,29 @@ the cell by turning on its “read”
 gate.  To preserve information for a long time in
 the activities of an RNN, we use a circuit
 that implements an analog memory cell.
-–  A linear unit that has a self-link with a
+</p>
+<ul class="org-ul">
+<li>A linear unit that has a self-link with a</li>
+</ul>
+<p>
 weight of 1 will maintain its state.
-–  Information is stored in the cell by
+</p>
+<ul class="org-ul">
+<li>Information is stored in the cell by</li>
+</ul>
+<p>
 activating its write gate.
-–  Information is retrieved by activating
+</p>
+<ul class="org-ul">
+<li>Information is retrieved by activating</li>
+</ul>
+<p>
 the read gate.
-–  We can backpropagate through this
+</p>
+<ul class="org-ul">
+<li>We can backpropagate through this</li>
+</ul>
+<p>
 circuit because logistics are have nice
 derivatives.
 keep
@@ -576,21 +780,39 @@ characters.
 showed that RNNs with LSTM
 are currently the best systems
 for reading cursive writing.
-–  They used a sequence of
+</p>
+<ul class="org-ul">
+<li>They used a sequence of</li>
+</ul>
+<p>
 small images as input
 rather than pen
 coordinates.A demonstration of online handwriting recognition by an
 RNN with Long Short Term Memory (from Alex Graves)
 •  The movie that follows shows several different things:
 •  Row 1: This shows when the characters are recognized.
-–  It never revises its output so difficult decisions are more delayed.
+</p>
+<ul class="org-ul">
+<li>It never revises its output so difficult decisions are more delayed.</li>
+</ul>
+<p>
 •  Row 2: This shows the states of a subset of the memory cells.
-–  Notice how they get reset when it recognizes a character.
+</p>
+<ul class="org-ul">
+<li>Notice how they get reset when it recognizes a character.</li>
+</ul>
+<p>
 •  Row 3: This shows the writing. The net sees the x and y coordinates.
-–  Optical input actually works a bit better than pen coordinates.
+</p>
+<ul class="org-ul">
+<li>Optical input actually works a bit better than pen coordinates.</li>
+</ul>
+<p>
 •  Row 4: This shows the gradient backpropagated all the way to the x and
 y inputs from the currently most active character.
-–  This lets you see which bits of the data are influencing the decision.
 </p>
+<ul class="org-ul">
+<li>This lets you see which bits of the data are influencing the decision.</li>
+</ul>
 </div>
 </div>
