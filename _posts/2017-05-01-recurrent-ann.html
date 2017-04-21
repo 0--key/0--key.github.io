@@ -1,0 +1,596 @@
+---
+layout: post
+title: Recurrent neural networks
+tagline: " brief overview"
+permalink: /machine-learning/neural-network/recurrent_networks.html
+categories: [machine learning, neural networks]
+tags: [architecture, overview, recurrent network]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3b9f9f6">Getting targets when modeling sequences</a></li>
+<li><a href="#orgf5ba516">Training RNNs with backpropagation</a></li>
+</ul>
+</div>
+</div>
+<blockquote>
+<p>
+Modeling sequences: A brief overview
+</p>
+</blockquote>
+<div id="outline-container-org3b9f9f6" class="outline-2">
+<h2 id="org3b9f9f6">Getting targets when modeling sequences</h2>
+<div class="outline-text-2" id="text-org3b9f9f6">
+<p>
+When applying machine learning to sequences, we often want to turn
+an input sequence into an output sequence that lives in a different
+domain.
+</p>
+
+<p>
+–  E. g. turn a sequence of sound pressures into a sequence of word identities.
+When there is no separate target sequence, we can get a teaching signal by trying
+to predict the next term in the input sequence.
+–  The target output sequence is the input sequence with an advance of 1 step.
+–  This seems much more natural than trying to predict one pixel in an image
+from the other pixels, or one patch of an image from the rest of the image.
+–  For temporal sequences there is a natural order for the predictions.
+Predicting the next term in a sequence blurs the distinction between supervised
+and unsupervised learning.
+–  It uses methods designed for supervised learning, but it doesn’t require a
+separate teaching signal.Memoryless models for sequences
+</p>
+
+<p>
+•  Autoregressive models
+w t −1
+w t −2
+Predict the next term in a
+sequence from a fixed number of
+input(t-2)
+input(t-1)
+previous terms using “delay taps”.
+</p>
+
+<p>
+•  Feed-forward neural nets
+These generalize autoregressive
+models by using one or more
+layers of non-linear hidden units.
+e.g. Bengio’s first language
+model.
+input(t)
+hidden
+input(t-2)
+input(t-1)
+input(t)Beyond memoryless models
+</p>
+
+<p>
+• If we give our generative model some hidden state, and if we give
+this hidden state its own internal dynamics, we get a much more
+interesting kind of model.
+</p>
+
+<p>
+–  It can store information in its hidden state for a long time.
+–  If the dynamics is noisy and the way it generates outputs from its
+hidden state is noisy, we can never know its exact hidden state.
+–  The best we can do is to infer a probability distribution over the
+space of hidden state vectors.
+•  This inference is only tractable for two types of hidden state model.
+–  The next three slides are mainly intended for people who already
+know about these two types of hidden state model. They show how
+RNNs differ.
+–  Do not worry if you cannot follow the details.Linear Dynamical Systems (engineers love them!)
+time à
+•  These are generative models. They have a real-
+valued hidden state that cannot be observed
+directly.
+–  The hidden state has linear dynamics with
+Gaussian noise and produces the
+observations using a linear model with
+Gaussian noise.
+–  There may also be driving inputs.
+•  To predict the next output (so that we can shoot
+down the missile) we need to infer the hidden
+state.
+–  A linearly transformed Gaussian is a
+Gaussian. So the distribution over the hiddenHidden Markov Models (computer scientists love them!)
+time à
+•  Hidden Markov Models have a discrete one-
+of-N hidden state. Transitions between states
+are stochastic and controlled by a transition
+matrix. The outputs produced by a state are
+stochastic.
+–  We cannot be sure which state produced
+a given output. So the state is “hidden”.
+–  It is easy to represent a probability
+distribution across N states with N
+numbers.
+•  To predict the next output we need to infer the
+probability distribution over hidden states.
+–  HMMs have efficient algorithms forA fundamental limitation of HMMs
+•  Consider what happens when a hidden Markov model generates
+data.
+–  At each time step it must select one of its hidden states. So with
+N hidden states it can only remember log(N) bits about what it
+generated so far.
+•  Consider the information that the first half of an utterance contains
+about the second half:
+–  The syntax needs to fit (e.g. number and tense agreement).
+–  The semantics needs to fit. The intonation needs to fit.
+–  The accent, rate, volume, and vocal tract characteristics must all
+fit.
+•  All these aspects combined could be 100 bits of information that the
+first half of an utterance needs to convey to the second half. 2^100Recurrent neural networks
+time à
+•  RNNs are very powerful, because they
+combine two properties:
+–  Distributed hidden state that allows
+them to store a lot of information
+about the past efficiently.
+–  Non-linear dynamics that allows
+them to update their hidden state in
+complicated ways.
+•  With enough neurons and time, RNNs
+can compute anything that can be
+computed by your computer.Do generative models need to be stochastic?
+•  Linear dynamical systems and
+hidden Markov models are
+stochastic models.
+–  But the posterior probability
+distribution over their
+hidden states given the
+observed data so far is a
+deterministic function of the
+data.
+•  Recurrent neural networks are
+deterministic.
+–  So think of the hidden state
+of an RNN as the
+equivalent of the
+deterministic probability
+distribution over hidden
+states in a linear dynamical
+system or hidden Markov
+model.Recurrent neural networks
+•  What kinds of behaviour can RNNs exhibit?
+–  They can oscillate. Good for motor control?
+–  They can settle to point attractors. Good for retrieving memories?
+–  They can behave chaotically. Bad for information processing?
+–  RNNs could potentially learn to implement lots of small programs
+that each capture a nugget of knowledge and run in parallel,
+interacting to produce very complicated effects.
+•  But the computational power of RNNs makes them very hard to train.
+–  For many years we could not exploit the computational power of
+RNNs despite some heroic efforts (e.g. Tony Robinson’s speech
+recognizer).Neural Networks for Machine Learning
+</p>
+</div>
+</div>
+<div id="outline-container-orgf5ba516" class="outline-2">
+<h2 id="orgf5ba516">Training RNNs with backpropagation</h2>
+<div class="outline-text-2" id="text-orgf5ba516">
+<p>
+Geoffrey Hinton
+Nitish Srivastava,
+Kevin Swersky
+Tijmen Tieleman
+Abdel-rahman MohamedThe equivalence between feedforward nets and recurrent
+nets
+w 1
+w 3
+w 2
+time=3
+w 4
+time=2
+Assume that there is a time
+delay of 1 in using each
+connection.
+The recurrent net is just a
+layered net that keeps
+reusing the same weights.
+time=1
+time=0
+w 1
+w 2 w 3 w 4
+w 1
+w 2 w 3 w 4
+w 1
+w 2 w 3 w 4Reminder: Backpropagation with weight
+constraints
+•  It is easy to modify the backprop
+algorithm to incorporate linear
+constraints between the
+weights.
+•  We compute the gradients as
+usual, and then modify the
+gradients so that they satisfy the
+constraints.
+–  So if the weights started off
+satisfying the constraints,
+they will continue to satisfy
+them.
+To constrain : w 1 = w 2
+we need : Δ w 1 = Δ w 2
+compute :
+use
+∂ E
+∂ w 1
+∂ E ∂ E
+</p>
+<ul class="org-ul">
+<li></li>
+</ul>
+<p>
+∂ w 1 ∂ w 2
+and
+∂ E
+∂ w 2
+for w 1 and w 2Backpropagation through time
+•  We can think of the recurrent net as a layered, feed-forward
+net with shared weights and then train the feed-forward net
+with weight constraints.
+•  We can also think of this training algorithm in the time domain:
+–  The forward pass builds up a stack of the activities of all
+the units at each time step.
+–  The backward pass peels activities off the stack to
+compute the error derivatives at each time step.
+–  After the backward pass we add together the derivatives at
+all the different times for each weight.An irritating extra issue
+•  We need to specify the initial activity state of all the hidden and output
+units.
+•  We could just fix these initial states to have some default value like 0.5.
+•  But it is better to treat the initial states as learned parameters.
+•  We learn them in the same way as we learn the weights.
+–  Start off with an initial random guess for the initial states.
+–  At the end of each training sequence, backpropagate through time
+all the way to the initial states to get the gradient of the error function
+with respect to each initial state.
+–  Adjust the initial states by following the negative gradient.Providing input to recurrent networks
+w 1
+w 2
+w 3 w 4
+•  We can specify inputs in several
+ways:
+–  Specify the initial states of all
+the units.
+–  Specify the initial states of a
+subset of the units.
+–  Specify the states of the same
+subset of the units at every time
+step.
+•  This is the natural way to
+model most sequential data.
+w 1
+w 2 w 3 w 4
+w 1
+w 2 w 3 w 4
+timeTeaching signals for recurrent networks
+•  We can specify targets in several
+ways:
+–  Specify desired final activities of
+all the units
+–  Specify desired activities of all
+units for the last few steps
+•  Good for learning attractors
+•  It is easy to add in extra error
+derivatives as we
+backpropagate.
+–  Specify the desired activity of a
+subset of the units.
+•  The other units are input or
+hidden units.
+w 1
+w 2 w 3 w 4
+w 1
+w 2 w 3 w 4
+w 1
+w 2 w 3 w 4Neural Networks for Machine Learning
+Lecture 7c
+A toy example of training an RNN
+Geoffrey Hinton
+Nitish Srivastava,
+Kevin Swersky
+Tijmen Tieleman
+Abdel-rahman MohamedA good toy problem for a recurrent network
+•  We can train a feedforward net to do
+binary addition, but there are obvious
+regularities that it cannot capture
+efficiently.
+–  We must decide in advance the
+maximum number of digits in each
+number.
+–  The processing applied to the
+beginning of a long number does not
+generalize to the end of the long
+number because
+it uses different
+weights.
+•  As a result, feedforward nets do not
+generalize well on the binary addition
+task.
+11001100
+hidden units
+00100110
+10100110The algorithm for binary addition
+1
+0
+0
+1
+1 0
+0 1
+0
+0
+0
+0
+no carry
+print 1
+0
+0
+no carry
+print 0
+0
+0
+1
+1
+1
+1
+1
+1
+carry
+print 1
+1
+1
+carry
+print 0
+1 0
+0 1
+0
+1
+1
+0
+This is a finite state automaton. It decides what transition to make by looking at the next
+column. It prints after making the transition. It moves from right to left over the two input
+numbers.A recurrent net for binary addition
+•  The network has two input units
+and one output unit.
+•  It is given two input digits at each
+time step.
+•  The desired output at each time
+step is the output for the column
+that was provided as input two time
+steps ago.
+–  It takes one time step to update
+the hidden units based on the
+two input digits.
+–  It takes another time step for the
+hidden units to cause the
+output.
+0 0 1 1 0 1 0 0
+0 1 0 0 1 1 0 1
+1 0 0 0 0 0 0 1
+timeThe connectivity of the network
+•  The 3 hidden units are fully
+interconnected in both
+directions.
+–  This allows a hidden
+activity pattern at one
+time step to vote for the
+hidden activity pattern at
+the next time step.
+•  The input units have
+feedforward connections that
+allow then to vote for the
+next hidden activity pattern.
+3 fully interconnected hidden unitsWhat the network learns
+•  It learns four distinct patterns of •  A recurrent network can emulate
+a finite state automaton, but it is
+activity for the 3 hidden units.
+exponentially more powerful. With
+These patterns correspond to the
+N hidden neurons it has 2^N
+nodes in the finite state
+possible binary activity vectors
+automaton.
+(but only N^2 weights)
+–  Do not confuse units in a
+–  This is important when the
+neural network with nodes in a
+input stream has two separate
+finite state automaton. Nodes
+things going on at once.
+are like activity vectors.
+–  A finite state automaton
+–  The automaton is restricted to
+needs to square its number of
+be in exactly one state at each
+states.
+time. The hidden units are
+restricted to have exactly one
+–  An RNN needs to double its
+vector of activity at each time.
+number of units.Neural Networks for Machine Learning
+Lecture 7d
+Why it is difficult to train an RNN
+Geoffrey Hinton
+Nitish Srivastava,
+Kevin Swersky
+Tijmen Tieleman
+Abdel-rahman MohamedThe backward pass is linear
+•  There is a big difference between the
+forward and backward passes.
+•  In the forward pass we use squashing
+functions (like the logistic) to prevent the
+activity vectors from exploding.
+•  The backward pass, is completely linear. If
+you double the error derivatives at the final
+layer, all the error derivatives will double.
+–  The forward pass determines the slope
+of the linear function used for
+backpropagating through each neuron.The problem of exploding or vanishing gradients
+• 
+• 
+What happens to the magnitude of the
+gradients as we backpropagate
+through many layers?
+–  If the weights are small, the
+gradients shrink exponentially.
+–  If the weights are big the gradients
+grow exponentially.
+Typical feed-forward neural nets can
+cope with these exponential effects
+because they only have a few hidden
+layers.
+• 
+• 
+In an RNN trained on long sequences
+(e.g. 100 time steps) the gradients
+can easily explode or vanish.
+–  We can avoid this by initializing
+the weights very carefully.
+Even with good initial weights, its very
+hard to detect that the current target
+output depends on an input from
+many time-steps ago.
+–  So RNNs have difficulty dealing
+with long-range dependencies.Why the back-propagated gradient blows up
+•  If we start a trajectory within an attractor, small changes in where we
+start make no difference to where we end up.
+•  But if we start almost exactly on the boundary, tiny changes can make a
+huge difference.Four effective ways to learn an RNN
+• 
+• 
+Long Short Term Memory
+Make the RNN out of little
+modules that are designed to
+remember values for a long time.
+Hessian Free Optimization: Deal
+with the vanishing gradients
+problem by using a fancy
+optimizer that can detect
+directions with a tiny gradient but
+even smaller curvature.
+–  The HF optimizer ( Martens &amp;
+Sutskever, 2011) is good at
+this.
+• 
+• 
+Echo State Networks: Initialize the
+inputàhidden and hiddenàhidden and
+outputàhidden connections very
+carefully so that the hidden state has a
+huge reservoir of weakly coupled
+oscillators which can be selectively driven
+by the input.
+–  ESNs only need to learn the
+hiddenàoutput connections.
+Good initialization with momentum
+Initialize like in Echo State Networks, but
+then learn all of the connections using
+momentum.Neural Networks for Machine Learning
+Lecture 7e
+Long term short term memory
+Geoffrey Hinton
+Nitish Srivastava,
+Kevin Swersky
+Tijmen Tieleman
+Abdel-rahman MohamedLong Short Term Memory (LSTM)
+•  Hochreiter &amp; Schmidhuber
+(1997) solved the problem of
+getting an RNN to remember
+things for a long time (like
+hundreds of time steps).
+•  They designed a memory cell
+using logistic and linear units
+with multiplicative interactions.
+•  Information gets into the cell
+whenever its “write” gate is on.
+•  The information stays in the
+cell so long as its “keep” gate
+is on.
+•  Information can be read from
+the cell by turning on its “read”
+gate.  To preserve information for a long time in
+the activities of an RNN, we use a circuit
+that implements an analog memory cell.
+–  A linear unit that has a self-link with a
+weight of 1 will maintain its state.
+–  Information is stored in the cell by
+activating its write gate.
+–  Information is retrieved by activating
+the read gate.
+–  We can backpropagate through this
+circuit because logistics are have nice
+derivatives.
+keep
+gate
+1.73
+write
+gate
+input from
+rest of RNN
+read
+gate
+output to
+rest of RNNBackpropagation through a memory cell
+keep
+0
+keep
+1
+keep
+1
+1.7
+1.7
+read
+0
+write
+1
+1.7
+keep
+0
+1.7
+read
+0
+write
+0
+time à
+read
+1
+write
+0
+1.7Reading cursive handwriting
+•  This is a natural task for an
+RNN.
+•  The input is a sequence of
+(x,y,p) coordinates of the tip of
+the pen, where p indicates
+whether the pen is up or down.
+•  The output is a sequence of
+characters.
+•  Graves &amp; Schmidhuber (2009)
+showed that RNNs with LSTM
+are currently the best systems
+for reading cursive writing.
+–  They used a sequence of
+small images as input
+rather than pen
+coordinates.A demonstration of online handwriting recognition by an
+RNN with Long Short Term Memory (from Alex Graves)
+•  The movie that follows shows several different things:
+•  Row 1: This shows when the characters are recognized.
+–  It never revises its output so difficult decisions are more delayed.
+•  Row 2: This shows the states of a subset of the memory cells.
+–  Notice how they get reset when it recognizes a character.
+•  Row 3: This shows the writing. The net sees the x and y coordinates.
+–  Optical input actually works a bit better than pen coordinates.
+•  Row 4: This shows the gradient backpropagated all the way to the x and
+y inputs from the currently most active character.
+–  This lets you see which bits of the data are influencing the decision.
+</p>
+</div>
+</div>
