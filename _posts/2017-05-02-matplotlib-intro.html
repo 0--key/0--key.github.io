@@ -43,29 +43,31 @@ tags: [matplotlib]
 
 
 <div class="org-src-container">
-<pre class="src src-python">(nen, pen, wi, wg) = read_dataset(<span style="color: #deb887; font-style: italic;">'dataset1.mat'</span>)
+<pre class="src src-python">(nen, pen, wi, wg) = read_dataset(<span style="color: #deb887; font-style: italic;">'data/dataset1.mat'</span>)
 <span style="color: #87cefa;">print</span>(nen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, pen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wi, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wg)
 <span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(nen))
 </pre>
 </div>
 
 <pre class="example">
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-  File "&lt;stdin&gt;", line 3, in read_dataset
-  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 135, in loadmat
-    MR = mat_reader_factory(file_name, appendmat, **kwargs)
-  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 58, in mat_reader_factory
-    byte_stream = _open_file(file_name, appendmat)
-  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 23, in _open_file
-    return open(file_like, 'rb')
-FileNotFoundError: [Errno 2] No such file or directory: 'dataset1.mat'
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-NameError: name 'nen' is not defined
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-NameError: name 'nen' is not defined
+[[-0.80857143  0.8372093 ]
+ [ 0.35714286  0.85049834]
+ [-0.75142857 -0.73089701]
+ [-0.3         0.12624585]] 
+
+ [[ 0.87142857  0.62458472]
+ [-0.02       -0.92358804]
+ [ 0.36285714 -0.31893688]
+ [ 0.88857143 -0.87043189]] 
+
+ [[-0.62170147]
+ [ 0.76091527]
+ [ 0.77187205]] 
+
+ [[ 4.3496526 ]
+ [-2.60997235]
+ [-0.69414749]]
+&lt;class 'numpy.ndarray'&gt;
 </pre>
 </div>
 </div>
@@ -138,7 +140,7 @@ plt
 </div>
 
 <p>
-<a href="&lt;matplotlib.collections.PathCollection object at 0x7f4ad552e710&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;">&lt;matplotlib.collections.PathCollection object at 0x7f4ad552e710&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;</a>
+<a href="&lt;matplotlib.collections.PathCollection object at 0x7f4ad4efa0b8&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;">&lt;matplotlib.collections.PathCollection object at 0x7f4ad4efa0b8&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;</a>
 </p>
 </div>
 </div>
