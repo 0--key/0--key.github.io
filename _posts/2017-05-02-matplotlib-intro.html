@@ -1,0 +1,146 @@
+---
+layout: post
+title: MatPlotLib
+tagline: " is innate Python"
+permalink: /data-visualization/matplotlib/intro.html
+categories: [data vizsualization]
+tags: [matplotlib]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgdc45833">GNU Octave meets Python</a>
+<ul>
+<li><a href="#org6424e19">Data importing</a></li>
+<li><a href="#org54a45f5">Data visualization</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdc45833" class="outline-2">
+<h2 id="orgdc45833">GNU Octave meets Python</h2>
+<div class="outline-text-2" id="text-orgdc45833">
+</div><div id="outline-container-org6424e19" class="outline-3">
+<h3 id="org6424e19">Data importing</h3>
+<div class="outline-text-3" id="text-org6424e19">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> numpy <span style="color: #87cefa;">as</span> np
+<span style="color: #87cefa;">import</span> scipy.io
+
+
+<span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">read_dataset</span>(filename):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Reads data from .mat binary file."""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">data</span> = scipy.io.loadmat(filename)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> [data[k] <span style="color: #87cefa;">for</span> k <span style="color: #87cefa;">in</span> (<span style="color: #deb887; font-style: italic;">'neg_examples_nobias'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">'pos_examples_nobias'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">'w_init'</span>, <span style="color: #deb887; font-style: italic;">'w_gen_feas'</span>)]
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python">(nen, pen, wi, wg) = read_dataset(<span style="color: #deb887; font-style: italic;">'dataset1.mat'</span>)
+<span style="color: #87cefa;">print</span>(nen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, pen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wi, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wg)
+<span style="color: #87cefa;">print</span>(<span style="color: #4682b4;">type</span>(nen))
+</pre>
+</div>
+
+<pre class="example">
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "&lt;stdin&gt;", line 3, in read_dataset
+  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 135, in loadmat
+    MR = mat_reader_factory(file_name, appendmat, **kwargs)
+  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 58, in mat_reader_factory
+    byte_stream = _open_file(file_name, appendmat)
+  File "/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/scipy/io/matlab/mio.py", line 23, in _open_file
+    return open(file_like, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: 'dataset1.mat'
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+NameError: name 'nen' is not defined
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+NameError: name 'nen' is not defined
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org54a45f5" class="outline-3">
+<h3 id="org54a45f5">Data visualization</h3>
+<div class="outline-text-3" id="text-org54a45f5">
+</div><div id="outline-container-org275f3bd" class="outline-4">
+<h4 id="org275f3bd">Simple</h4>
+<div class="outline-text-4" id="text-org275f3bd">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+plt.plot([1,2,3,4], [1,4,9,16], <span style="color: #deb887; font-style: italic;">'ro'</span>)
+plt.axis([0, 6, 0, 20])
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/first_test.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/first_test.png" alt="first_test.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org313cf42" class="outline-4">
+<h4 id="org313cf42">Colorization</h4>
+<div class="outline-text-4" id="text-org313cf42">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7fffd4;">ax</span> = plt.gca()
+ax.set_axis_bgcolor(<span style="color: #deb887; font-style: italic;">'black'</span>)
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">ax.set_axis_bgcolor((1, 0, 0))</span>
+plt.plot([1,2,3,4], [1,4,9,16], <span style="color: #deb887; font-style: italic;">'b^'</span>)
+plt.axis([0, 6, 0, 20])
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/second_test.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/second_test.png" alt="second_test.png" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+<span style="color: #7fffd4;">f</span> = plt.figure(figsize=(15,10))
+f.clf()
+
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> nen:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">xs</span> = 3
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">ys</span> = 4
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">print(type(xs), xs, ys)</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   plt.scatter(xs, ys, c=<span style="color: #deb887; font-style: italic;">'red'</span>)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'test_nen.png'</span>)
+</pre>
+</div>
+
+<p>
+<a href=" &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; ... ... ... ... ...   File "&lt;stdin&gt;", line 6 plt.savefig('test_nen.png') ^ SyntaxError: invalid syntax"> &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; ... ... ... ... ...   File "&lt;stdin&gt;", line 6 plt.savefig('test_nen.png') ^ SyntaxError: invalid syntax</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">plt.scatter([2, 2.5, 3], [4, 4.5, 5], c=<span style="color: #deb887; font-style: italic;">'blue'</span>)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'test_single.png'</span>)
+plt
+</pre>
+</div>
+
+<p>
+<a href="&lt;matplotlib.collections.PathCollection object at 0x7f4ad552e710&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;">&lt;matplotlib.collections.PathCollection object at 0x7f4ad552e710&gt; &lt;module 'matplotlib.pyplot' from '/usr/local/share/DVCS/venv3/lib/python3.4/site-packages/matplotlib/pyplot.py'&gt;</a>
+</p>
+</div>
+</div>
+</div>
+</div>
