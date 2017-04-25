@@ -19,13 +19,19 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#org9115be0">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#org90835cf">Recurrent neural networks</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#org9cf0f5d">Recurrent neural networks</a></li>
 <li><a href="#orgcc5c6a8">Transcript</a></li>
 </ul>
 </li>
-<li><a href="#orgf5ba516">Training RNNs with backpropagation</a></li>
+<li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
+<ul>
+<li><a href="#orgea0056b">The equvalence between feedforward nets and recurrent nets</a></li>
+<li><a href="#org3319c5a">Reminder: Backpropagation with weight</a></li>
+<li><a href="#orgdebe092">Transcript</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -218,9 +224,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-org9115be0" class="outline-3">
-<h3 id="org9115be0">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org9115be0">
+<div id="outline-container-org90835cf" class="outline-3">
+<h3 id="org90835cf">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org90835cf">
 <p>
 time &rarr;
 </p>
@@ -268,9 +274,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org90835cf" class="outline-3">
-<h3 id="org90835cf">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org90835cf">
+<div id="outline-container-org9cf0f5d" class="outline-3">
+<h3 id="org9cf0f5d">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org9cf0f5d">
 <p>
 •  What kinds of behaviour can RNNs exhibit?
 </p>
@@ -537,36 +543,42 @@ that outperformed Tony Robinson's
 </div>
 </div>
 
+
 <div id="outline-container-orgf5ba516" class="outline-2">
 <h2 id="orgf5ba516">Training RNNs with backpropagation</h2>
 <div class="outline-text-2" id="text-orgf5ba516">
+</div><div id="outline-container-orgea0056b" class="outline-3">
+<h3 id="orgea0056b">The equvalence between feedforward nets and recurrent nets</h3>
+<div class="outline-text-3" id="text-orgea0056b">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/rnn_gen_view.png" alt="RNN" width="40%" title="RNN" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Recurrent Neural Network</p>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/rnn_flat_repr.png" alt="RNN representation" title="RNN" align="right" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Recurrent Neural Network in Flat Repr</p>
+</div>
+
 <p>
-Geoffrey Hinton
-Nitish Srivastava,
-Kevin Swersky
-Tijmen Tieleman
-Abdel-rahman MohamedThe equivalence between feedforward nets and recurrent
-nets
-w 1
-w 3
-w 2
-time=3
-w 4
-time=2
 Assume that there is a time
 delay of 1 in using each
 connection.
 The recurrent net is just a
 layered net that keeps
 reusing the same weights.
-time=1
-time=0
-w 1
-w 2 w 3 w 4
-w 1
-w 2 w 3 w 4
-w 1
-w 2 w 3 w 4Reminder: Backpropagation with weight
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3319c5a" class="outline-3">
+<h3 id="org3319c5a">Reminder: Backpropagation with weight</h3>
+<div class="outline-text-3" id="text-org3319c5a">
+<p>
 constraints
 •  It is easy to modify the backprop
 algorithm to incorporate linear
