@@ -19,17 +19,17 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#org90835cf">Recurrent neural networks</a></li>
+<li><a href="#org6e51616">Recurrent neural networks</a></li>
 <li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
-<li><a href="#org9cf0f5d">Recurrent neural networks</a></li>
-<li><a href="#orgcc5c6a8">Transcript</a></li>
+<li><a href="#org5df410f">Recurrent neural networks</a></li>
+<li><a href="#org183393d">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
 <ul>
 <li><a href="#orgea0056b">The equvalence between feedforward nets and recurrent nets</a></li>
-<li><a href="#org3319c5a">Reminder: Backpropagation with weight</a></li>
-<li><a href="#orgdebe092">Transcript</a></li>
+<li><a href="#org48f5d01">Reminder: Backpropagation with weight constraints</a></li>
+<li><a href="#orgfb2a00a">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -71,7 +71,7 @@ require a separate teaching signal.</li>
 <h3 id="org87f108f">Memoryless models for sequences</h3>
 <div class="outline-text-3" id="text-org87f108f">
 <p>
-•  Autoregressive models
+Autoregressive models
 w t −1
 w t −2
 Predict the next term in a
@@ -82,7 +82,7 @@ previous terms using “delay taps”.
 </p>
 
 <p>
-•  Feed-forward neural nets
+Feed-forward neural nets
 These generalize autoregressive
 models by using one or more
 layers of non-linear hidden units.
@@ -114,7 +114,7 @@ hidden state is noisy, we can never know its exact hidden state.</li>
 space of hidden state vectors.</li>
 </ul>
 <p>
-•  This inference is only tractable for two types of hidden state model.
+This inference is only tractable for two types of hidden state model.
 </p>
 
 <ul class="org-ul">
@@ -195,7 +195,7 @@ distribution over hidden states.
 <h3 id="org5fa5140">A fundamental limitation of HMMs</h3>
 <div class="outline-text-3" id="text-org5fa5140">
 <p>
-•  Consider what happens when a hidden Markov model generates data.
+Consider what happens when a hidden Markov model generates data.
 </p>
 
 <ul class="org-ul">
@@ -224,9 +224,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-org90835cf" class="outline-3">
-<h3 id="org90835cf">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org90835cf">
+<div id="outline-container-org6e51616" class="outline-3">
+<h3 id="org6e51616">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org6e51616">
 <p>
 time &rarr;
 </p>
@@ -263,7 +263,7 @@ of the data.</li>
 </ul>
 
 <p>
-•  Recurrent neural networks are deterministic.
+Recurrent neural networks are deterministic.
 </p>
 
 <ul class="org-ul">
@@ -274,11 +274,11 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org9cf0f5d" class="outline-3">
-<h3 id="org9cf0f5d">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org9cf0f5d">
+<div id="outline-container-org5df410f" class="outline-3">
+<h3 id="org5df410f">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org5df410f">
 <p>
-•  What kinds of behaviour can RNNs exhibit?
+What kinds of behaviour can RNNs exhibit?
 </p>
 
 <ul class="org-ul">
@@ -291,7 +291,7 @@ interacting to produce very complicated effects.</li>
 </ul>
 
 <p>
-•  But the computational power of RNNs makes them very hard to train.
+But the computational power of RNNs makes them very hard to train.
 </p>
 
 <ul class="org-ul">
@@ -303,10 +303,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-orgcc5c6a8" class="outline-3">
-<h3 id="orgcc5c6a8">Transcript</h3>
-<div class="outline-text-3" id="text-orgcc5c6a8">
-<blockquote>
+<div id="outline-container-org183393d" class="outline-3">
+<h3 id="org183393d">Transcript</h3>
+<div class="outline-text-3" id="text-org183393d">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -593,11 +592,9 @@ parallel computer built out of transputers. And it was only
 recently that people managed to produce recurrent neural networks
 that outperformed Tony Robinson's
 </p>
-</blockquote>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-orgf5ba516" class="outline-2">
 <h2 id="orgf5ba516">Training RNNs with backpropagation</h2>
@@ -620,39 +617,34 @@ that outperformed Tony Robinson's
 </div>
 
 <p>
-Assume that there is a time
-delay of 1 in using each
-connection.
-The recurrent net is just a
-layered net that keeps
-reusing the same weights.
+Assume that there is a time delay of 1 in using each connection.
+The recurrent net is just a layered net that keeps reusing the same
+weights.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3319c5a" class="outline-3">
-<h3 id="org3319c5a">Reminder: Backpropagation with weight</h3>
-<div class="outline-text-3" id="text-org3319c5a">
+<div id="outline-container-org48f5d01" class="outline-3">
+<h3 id="org48f5d01">Reminder: Backpropagation with weight constraints</h3>
+<div class="outline-text-3" id="text-org48f5d01">
 <p>
-constraints
-•  It is easy to modify the backprop
-algorithm to incorporate linear
-constraints between the
-weights.
-•  We compute the gradients as
-usual, and then modify the
-gradients so that they satisfy the
-constraints.
+It is easy to modify the backprop algorithm to incorporate linear
+constraints between the weights.
 </p>
-<ul class="org-ul">
-<li>So if the weights started off</li>
-</ul>
+
 <p>
-satisfying the constraints,
-they will continue to satisfy
-them.
-To constrain : w 1 = w 2
-we need : Δ w 1 = Δ w 2
+We compute the gradients as usual, and then modify the gradients so
+that they satisfy the constraints.
+</p>
+
+<ul class="org-ul">
+<li>So if the weights started off satisfying the constraints, they
+will continue to satisfy them.</li>
+</ul>
+
+<p>
+To constrain : w<sub>1</sub> = w<sub>2</sub>
+we need : &delta;w<sub>1</sub> = &delta;w<sub>2</sub>
 compute :
 use
 ∂ E
@@ -668,10 +660,10 @@ and
 ∂ E
 ∂ w 2
 for w 1 and w 2Backpropagation through time
-•  We can think of the recurrent net as a layered, feed-forward
+We can think of the recurrent net as a layered, feed-forward
 net with shared weights and then train the feed-forward net
 with weight constraints.
-•  We can also think of this training algorithm in the time domain:
+We can also think of this training algorithm in the time domain:
 </p>
 <ul class="org-ul">
 <li>The forward pass builds up a stack of the activities of all</li>
@@ -690,11 +682,11 @@ compute the error derivatives at each time step.
 </ul>
 <p>
 all the different times for each weight.An irritating extra issue
-•  We need to specify the initial activity state of all the hidden and output
+We need to specify the initial activity state of all the hidden and output
 units.
-•  We could just fix these initial states to have some default value like 0.5.
-•  But it is better to treat the initial states as learned parameters.
-•  We learn them in the same way as we learn the weights.
+We could just fix these initial states to have some default value like 0.5.
+But it is better to treat the initial states as learned parameters.
+We learn them in the same way as we learn the weights.
 </p>
 <ul class="org-ul">
 <li>Start off with an initial random guess for the initial states.</li>
@@ -711,7 +703,7 @@ with respect to each initial state.
 w 1
 w 2
 w 3 w 4
-•  We can specify inputs in several
+We can specify inputs in several
 ways:
 </p>
 <ul class="org-ul">
@@ -732,14 +724,14 @@ subset of the units.
 <p>
 subset of the units at every time
 step.
-•  This is the natural way to
+This is the natural way to
 model most sequential data.
 w 1
 w 2 w 3 w 4
 w 1
 w 2 w 3 w 4
 timeTeaching signals for recurrent networks
-•  We can specify targets in several
+We can specify targets in several
 ways:
 </p>
 <ul class="org-ul">
@@ -753,8 +745,8 @@ all the units
 </ul>
 <p>
 units for the last few steps
-•  Good for learning attractors
-•  It is easy to add in extra error
+Good for learning attractors
+It is easy to add in extra error
 derivatives as we
 backpropagate.
 </p>
@@ -763,7 +755,7 @@ backpropagate.
 </ul>
 <p>
 subset of the units.
-•  The other units are input or
+The other units are input or
 hidden units.
 w 1
 w 2 w 3 w 4
@@ -778,7 +770,7 @@ Nitish Srivastava,
 Kevin Swersky
 Tijmen Tieleman
 Abdel-rahman MohamedA good toy problem for a recurrent network
-•  We can train a feedforward net to do
+We can train a feedforward net to do
 binary addition, but there are obvious
 regularities that it cannot capture
 efficiently.
@@ -799,7 +791,7 @@ generalize to the end of the long
 number because
 it uses different
 weights.
-•  As a result, feedforward nets do not
+As a result, feedforward nets do not
 generalize well on the binary addition
 task.
 11001100
@@ -845,11 +837,11 @@ print 0
 This is a finite state automaton. It decides what transition to make by looking at the next
 column. It prints after making the transition. It moves from right to left over the two input
 numbers.A recurrent net for binary addition
-•  The network has two input units
+The network has two input units
 and one output unit.
-•  It is given two input digits at each
+It is given two input digits at each
 time step.
-•  The desired output at each time
+The desired output at each time
 step is the output for the column
 that was provided as input two time
 steps ago.
@@ -871,7 +863,7 @@ output.
 0 1 0 0 1 1 0 1
 1 0 0 0 0 0 0 1
 timeThe connectivity of the network
-•  The 3 hidden units are fully
+The 3 hidden units are fully
 interconnected in both
 directions.
 </p>
@@ -883,12 +875,12 @@ activity pattern at one
 time step to vote for the
 hidden activity pattern at
 the next time step.
-•  The input units have
+The input units have
 feedforward connections that
 allow then to vote for the
 next hidden activity pattern.
 3 fully interconnected hidden unitsWhat the network learns
-•  It learns four distinct patterns of •  A recurrent network can emulate
+It learns four distinct patterns of A recurrent network can emulate
 a finite state automaton, but it is
 activity for the 3 hidden units.
 exponentially more powerful. With
@@ -934,12 +926,12 @@ Nitish Srivastava,
 Kevin Swersky
 Tijmen Tieleman
 Abdel-rahman MohamedThe backward pass is linear
-•  There is a big difference between the
+There is a big difference between the
 forward and backward passes.
-•  In the forward pass we use squashing
+In the forward pass we use squashing
 functions (like the logistic) to prevent the
 activity vectors from exploding.
-•  The backward pass, is completely linear. If
+The backward pass, is completely linear. If
 you double the error derivatives at the final
 layer, all the error derivatives will double.
 </p>
@@ -991,9 +983,9 @@ many time-steps ago.
 </ul>
 <p>
 with long-range dependencies.Why the back-propagated gradient blows up
-•  If we start a trajectory within an attractor, small changes in where we
+If we start a trajectory within an attractor, small changes in where we
 start make no difference to where we end up.
-•  But if we start almost exactly on the boundary, tiny changes can make a
+But if we start almost exactly on the boundary, tiny changes can make a
 huge difference.Four effective ways to learn an RNN
 • 
 • 
@@ -1040,20 +1032,20 @@ Nitish Srivastava,
 Kevin Swersky
 Tijmen Tieleman
 Abdel-rahman MohamedLong Short Term Memory (LSTM)
-•  Hochreiter &amp; Schmidhuber
+Hochreiter &amp; Schmidhuber
 (1997) solved the problem of
 getting an RNN to remember
 things for a long time (like
 hundreds of time steps).
-•  They designed a memory cell
+They designed a memory cell
 using logistic and linear units
 with multiplicative interactions.
-•  Information gets into the cell
+Information gets into the cell
 whenever its “write” gate is on.
-•  The information stays in the
+The information stays in the
 cell so long as its “keep” gate
 is on.
-•  Information can be read from
+Information can be read from
 the cell by turning on its “read”
 gate.  To preserve information for a long time in
 the activities of an RNN, we use a circuit
@@ -1120,15 +1112,15 @@ read
 write
 0
 1.7Reading cursive handwriting
-•  This is a natural task for an
+This is a natural task for an
 RNN.
-•  The input is a sequence of
+The input is a sequence of
 (x,y,p) coordinates of the tip of
 the pen, where p indicates
 whether the pen is up or down.
-•  The output is a sequence of
+The output is a sequence of
 characters.
-•  Graves &amp; Schmidhuber (2009)
+Graves &amp; Schmidhuber (2009)
 showed that RNNs with LSTM
 are currently the best systems
 for reading cursive writing.
@@ -1141,26 +1133,26 @@ small images as input
 rather than pen
 coordinates.A demonstration of online handwriting recognition by an
 RNN with Long Short Term Memory (from Alex Graves)
-•  The movie that follows shows several different things:
-•  Row 1: This shows when the characters are recognized.
+The movie that follows shows several different things:
+Row 1: This shows when the characters are recognized.
 </p>
 <ul class="org-ul">
 <li>It never revises its output so difficult decisions are more delayed.</li>
 </ul>
 <p>
-•  Row 2: This shows the states of a subset of the memory cells.
+Row 2: This shows the states of a subset of the memory cells.
 </p>
 <ul class="org-ul">
 <li>Notice how they get reset when it recognizes a character.</li>
 </ul>
 <p>
-•  Row 3: This shows the writing. The net sees the x and y coordinates.
+Row 3: This shows the writing. The net sees the x and y coordinates.
 </p>
 <ul class="org-ul">
 <li>Optical input actually works a bit better than pen coordinates.</li>
 </ul>
 <p>
-•  Row 4: This shows the gradient backpropagated all the way to the x and
+Row 4: This shows the gradient backpropagated all the way to the x and
 y inputs from the currently most active character.
 </p>
 <ul class="org-ul">
@@ -1170,9 +1162,9 @@ y inputs from the currently most active character.
 </div>
 
 
-<div id="outline-container-orgdebe092" class="outline-3">
-<h3 id="orgdebe092">Transcript</h3>
-<div class="outline-text-3" id="text-orgdebe092">
+<div id="outline-container-orgfb2a00a" class="outline-3">
+<h3 id="orgfb2a00a">Transcript</h3>
+<div class="outline-text-3" id="text-orgfb2a00a">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
