@@ -19,17 +19,19 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#orgf508f1b">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#org5af5617">Recurrent neural networks</a></li>
-<li><a href="#org7e246e9">Transcript</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#orgcdeac02">Recurrent neural networks</a></li>
+<li><a href="#org70a84df">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
 <ul>
 <li><a href="#orgea0056b">The equvalence between feedforward nets and recurrent nets</a></li>
 <li><a href="#org48f5d01">Reminder: Backpropagation with weight constraints</a></li>
-<li><a href="#org70a84df">Transcript</a></li>
+<li><a href="#org565b5ea">Backpropagation through time</a></li>
+<li><a href="#org04f240b">An irritating extra issue</a></li>
+<li><a href="#org8b8cb3f">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -224,9 +226,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-orgf508f1b" class="outline-3">
-<h3 id="orgf508f1b">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-orgf508f1b">
+<div id="outline-container-org5af5617" class="outline-3">
+<h3 id="org5af5617">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org5af5617">
 <p>
 time &rarr;
 </p>
@@ -274,9 +276,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org5af5617" class="outline-3">
-<h3 id="org5af5617">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org5af5617">
+<div id="outline-container-orgcdeac02" class="outline-3">
+<h3 id="orgcdeac02">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgcdeac02">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -303,9 +305,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-org7e246e9" class="outline-3">
-<h3 id="org7e246e9">Transcript</h3>
-<div class="outline-text-3" id="text-org7e246e9">
+<div id="outline-container-org70a84df" class="outline-3">
+<h3 id="org70a84df">Transcript</h3>
+<div class="outline-text-3" id="text-org70a84df">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -659,16 +661,33 @@ for w<sub>1</sub> and w<sub>2</sub>
 </div>
 </div>
 
+<div id="outline-container-org565b5ea" class="outline-3">
+<h3 id="org565b5ea">Backpropagation through time</h3>
+<div class="outline-text-3" id="text-org565b5ea">
 <p>
-compute the error derivatives at each time step.
+We can think of the recurrent net as a layered, feed-forward
+net with shared weights and then train the feed-forward net
+with weight constraints.
+We can also think of this training algorithm in the time domain:
 </p>
+
 <ul class="org-ul">
-<li>After the backward pass we add together the derivatives at</li>
+<li>The forward pass builds up a stack of the activities of all the
+units at each time step.</li>
+<li>The backward pass peels activities off the stack to compute the
+error derivatives at each time step.</li>
+<li>After the backward pass we add together the derivatives at all
+the different times for each weight.</li>
 </ul>
+</div>
+</div>
+
+
+<div id="outline-container-org04f240b" class="outline-3">
+<h3 id="org04f240b">An irritating extra issue</h3>
+<div class="outline-text-3" id="text-org04f240b">
 <p>
-all the different times for each weight.An irritating extra issue
-We need to specify the initial activity state of all the hidden and output
-units.
+We need to specify the initial activity state of all the hidden and output units.
 We could just fix these initial states to have some default value like 0.5.
 But it is better to treat the initial states as learned parameters.
 We learn them in the same way as we learn the weights.
@@ -1147,9 +1166,9 @@ y inputs from the currently most active character.
 </div>
 
 
-<div id="outline-container-org70a84df" class="outline-3">
-<h3 id="org70a84df">Transcript</h3>
-<div class="outline-text-3" id="text-org70a84df">
+<div id="outline-container-org8b8cb3f" class="outline-3">
+<h3 id="org8b8cb3f">Transcript</h3>
+<div class="outline-text-3" id="text-org8b8cb3f">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
