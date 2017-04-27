@@ -646,34 +646,19 @@ will continue to satisfy them.</li>
 To constrain : w<sub>1</sub> = w<sub>2</sub>
 we need : &Delta;w<sub>1</sub> = &Delta;w<sub>2</sub>
 compute :
-use
-&part;E
-∂ w 1
-∂ E ∂ E
 </p>
-<ul class="org-ul">
-<li></li>
-</ul>
+
 <p>
-∂ w 1 ∂ w 2
-and
-∂ E
-∂ w 2
-for w 1 and w 2Backpropagation through time
-We can think of the recurrent net as a layered, feed-forward
-net with shared weights and then train the feed-forward net
-with weight constraints.
-We can also think of this training algorithm in the time domain:
+$\frac{&part;E}{&part;w<sub>1</sub>} and \frac{&part;E}{&part;w<sub>2</sub>}
 </p>
-<ul class="org-ul">
-<li>The forward pass builds up a stack of the activities of all</li>
-</ul>
+
 <p>
-the units at each time step.
+use $\frac{&part;E}{&part;w<sub>1</sub>} + \frac{&part;E}{&part;w<sub>2</sub>}
+for w<sub>1</sub> and w<sub>2</sub>
 </p>
-<ul class="org-ul">
-<li>The backward pass peels activities off the stack to</li>
-</ul>
+</div>
+</div>
+
 <p>
 compute the error derivatives at each time step.
 </p>
