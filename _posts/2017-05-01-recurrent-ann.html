@@ -19,17 +19,17 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#org8a61820">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#orgf508f1b">Recurrent neural networks</a></li>
-<li><a href="#org51699c7">Transcript</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#org5af5617">Recurrent neural networks</a></li>
+<li><a href="#org7e246e9">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
 <ul>
 <li><a href="#orgea0056b">The equvalence between feedforward nets and recurrent nets</a></li>
 <li><a href="#org48f5d01">Reminder: Backpropagation with weight constraints</a></li>
-<li><a href="#org7e246e9">Transcript</a></li>
+<li><a href="#org70a84df">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -224,9 +224,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-org8a61820" class="outline-3">
-<h3 id="org8a61820">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org8a61820">
+<div id="outline-container-orgf508f1b" class="outline-3">
+<h3 id="orgf508f1b">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgf508f1b">
 <p>
 time &rarr;
 </p>
@@ -274,9 +274,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf508f1b" class="outline-3">
-<h3 id="orgf508f1b">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-orgf508f1b">
+<div id="outline-container-org5af5617" class="outline-3">
+<h3 id="org5af5617">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org5af5617">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -303,9 +303,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-org51699c7" class="outline-3">
-<h3 id="org51699c7">Transcript</h3>
-<div class="outline-text-3" id="text-org51699c7">
+<div id="outline-container-org7e246e9" class="outline-3">
+<h3 id="org7e246e9">Transcript</h3>
+<div class="outline-text-3" id="text-org7e246e9">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -644,10 +644,10 @@ will continue to satisfy them.</li>
 
 <p>
 To constrain : w<sub>1</sub> = w<sub>2</sub>
-we need : &delta;w<sub>1</sub> = &delta;w<sub>2</sub>
+we need : &Delta;w<sub>1</sub> = &Delta;w<sub>2</sub>
 compute :
 use
-∂ E
+&part;E
 ∂ w 1
 ∂ E ∂ E
 </p>
@@ -1162,9 +1162,9 @@ y inputs from the currently most active character.
 </div>
 
 
-<div id="outline-container-org7e246e9" class="outline-3">
-<h3 id="org7e246e9">Transcript</h3>
-<div class="outline-text-3" id="text-org7e246e9">
+<div id="outline-container-org70a84df" class="outline-3">
+<h3 id="org70a84df">Transcript</h3>
+<div class="outline-text-3" id="text-org70a84df">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
