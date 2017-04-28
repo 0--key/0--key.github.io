@@ -19,10 +19,10 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#orgcdeac02">Recurrent neural networks</a></li>
+<li><a href="#orgd3ceabb">Recurrent neural networks</a></li>
 <li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
-<li><a href="#org7f089f4">Recurrent neural networks</a></li>
-<li><a href="#org8b8cb3f">Transcript</a></li>
+<li><a href="#org6ce89b5">Recurrent neural networks</a></li>
+<li><a href="#org5e2757f">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
@@ -31,7 +31,7 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org48f5d01">Reminder: Backpropagation with weight constraints</a></li>
 <li><a href="#org565b5ea">Backpropagation through time</a></li>
 <li><a href="#org04f240b">An irritating extra issue</a></li>
-<li><a href="#orgc2c229a">Transcript</a></li>
+<li><a href="#orgc5cd672">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -226,9 +226,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-orgcdeac02" class="outline-3">
-<h3 id="orgcdeac02">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-orgcdeac02">
+<div id="outline-container-orgd3ceabb" class="outline-3">
+<h3 id="orgd3ceabb">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgd3ceabb">
 <p>
 time &rarr;
 </p>
@@ -276,9 +276,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org7f089f4" class="outline-3">
-<h3 id="org7f089f4">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org7f089f4">
+<div id="outline-container-org6ce89b5" class="outline-3">
+<h3 id="org6ce89b5">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org6ce89b5">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -305,9 +305,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-org8b8cb3f" class="outline-3">
-<h3 id="org8b8cb3f">Transcript</h3>
-<div class="outline-text-3" id="text-org8b8cb3f">
+<div id="outline-container-org5e2757f" class="outline-3">
+<h3 id="org5e2757f">Transcript</h3>
+<div class="outline-text-3" id="text-org5e2757f">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -651,7 +651,9 @@ compute :
 </p>
 
 <p>
+$\displaystyle\frac{&part;E}{&part;w<sub>1</sub>} and \frac{&part;E}{&part;w<sub>2</sub>}
 use
+$\displaystyle\frac{&part;E}{&part;w<sub>1</sub>} + \frac{&part;E}{&part;w<sub>2</sub>} for w<sub>1</sub> and w<sub>2</sub>
 </p>
 </div>
 </div>
@@ -1161,9 +1163,9 @@ y inputs from the currently most active character.
 </div>
 
 
-<div id="outline-container-orgc2c229a" class="outline-3">
-<h3 id="orgc2c229a">Transcript</h3>
-<div class="outline-text-3" id="text-orgc2c229a">
+<div id="outline-container-orgc5cd672" class="outline-3">
+<h3 id="orgc5cd672">Transcript</h3>
+<div class="outline-text-3" id="text-orgc5cd672">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
