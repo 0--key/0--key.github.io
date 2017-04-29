@@ -112,7 +112,40 @@ plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/second_te
 <p><img src="http://0--key.github.io/assets/img/plt/second_test.png" alt="second_test.png" />
 </p>
 </div>
+</div>
+</div>
 
+<div id="outline-container-org51617d1" class="outline-4">
+<h4 id="org51617d1">Full-fledged dark theme</h4>
+<div class="outline-text-4" id="text-org51617d1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> numpy <span style="color: #87cefa;">as</span> np
+<span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+
+<span style="color: #7fffd4;">fig</span>, <span style="color: #7fffd4;">ax</span> = plt.subplots()
+
+<span style="color: #7fffd4;">L</span> = 6
+<span style="color: #7fffd4;">x</span> = np.linspace(0, L)
+<span style="color: #7fffd4;">ncolors</span> = <span style="color: #4682b4;">len</span>(plt.rcParams[<span style="color: #deb887; font-style: italic;">'axes.prop_cycle'</span>])
+<span style="color: #7fffd4;">shift</span> = np.linspace(0, L, ncolors, endpoint=<span style="color: #ffd700; font-weight: bold;">False</span>)
+<span style="color: #87cefa;">for</span> s <span style="color: #87cefa;">in</span> shift:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   ax.plot(x, np.sin(x + s), <span style="color: #deb887; font-style: italic;">'o-'</span>)
+ax.set_xlabel(<span style="color: #deb887; font-style: italic;">'x-axis'</span>)
+ax.set_ylabel(<span style="color: #deb887; font-style: italic;">'y-axis'</span>)
+ax.set_title(<span style="color: #deb887; font-style: italic;">"'dark_background' style sheet"</span>)
+
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/dark_test.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/dark_test.png" alt="dark_test.png" />
+</p>
+</div>
 
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
