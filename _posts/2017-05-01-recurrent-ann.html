@@ -19,10 +19,10 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#orgc948fed">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#org3e6fd84">Recurrent neural networks</a></li>
-<li><a href="#org3553b0b">Transcript</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#org7685381">Recurrent neural networks</a></li>
+<li><a href="#org5ba48de">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
@@ -31,7 +31,23 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org48f5d01">Reminder: Backpropagation with weight constraints</a></li>
 <li><a href="#org565b5ea">Backpropagation through time</a></li>
 <li><a href="#org04f240b">An irritating extra issue</a></li>
-<li><a href="#org5ba48de">Transcript</a></li>
+<li><a href="#org9693ba7">Providing input to recurrent networks</a></li>
+<li><a href="#orgf78f9fc">Teaching signals for recurrent networks</a></li>
+</ul>
+</li>
+<li><a href="#org4e3265e">A toy example of training an RNN</a>
+<ul>
+<li><a href="#org252a6cd">A good toy problem for a recurrent network</a></li>
+<li><a href="#org7d6a32c">The algorithm for binary addition</a></li>
+<li><a href="#org84bed67">A recurrent net for binary addition</a></li>
+<li><a href="#orgd183e9f">The connectivity of the network</a></li>
+<li><a href="#org08892f3">What the network learns</a></li>
+<li><a href="#org1cdbfb5">Transcript</a></li>
+</ul>
+</li>
+<li><a href="#orgf3cc997">Why it is difficult to train an RNN</a>
+<ul>
+<li><a href="#orgbd74dbf">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -226,9 +242,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-orgc948fed" class="outline-3">
-<h3 id="orgc948fed">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-orgc948fed">
+<div id="outline-container-org3e6fd84" class="outline-3">
+<h3 id="org3e6fd84">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org3e6fd84">
 <p>
 time &rarr;
 </p>
@@ -276,9 +292,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org3e6fd84" class="outline-3">
-<h3 id="org3e6fd84">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org3e6fd84">
+<div id="outline-container-org7685381" class="outline-3">
+<h3 id="org7685381">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org7685381">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -305,9 +321,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-org3553b0b" class="outline-3">
-<h3 id="org3553b0b">Transcript</h3>
-<div class="outline-text-3" id="text-org3553b0b">
+<div id="outline-container-org5ba48de" class="outline-3">
+<h3 id="org5ba48de">Transcript</h3>
+<div class="outline-text-3" id="text-org5ba48de">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -699,230 +715,296 @@ all the way to the initial states to get the gradient of the error function
 with respect to each initial state.
 </p>
 <ul class="org-ul">
-<li>Adjust the initial states by following the negative gradient.Providing input to recurrent networks</li>
+<li>Adjust the initial states by following the negative gradient.</li>
 </ul>
+</div>
+</div>
+
+
+<div id="outline-container-org9693ba7" class="outline-3">
+<h3 id="org9693ba7">Providing input to recurrent networks</h3>
+<div class="outline-text-3" id="text-org9693ba7">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/rnn_input.png" alt="RNN input" width="40%" title="RNN input" align="right" />
+</p>
+<p><span class="figure-number">Figure 3: </span>RNN input</p>
+</div>
+
 <p>
-w 1
-w 2
-w 3 w 4
 We can specify inputs in several
 ways:
 </p>
+
 <ul class="org-ul">
-<li>Specify the initial states of all</li>
+<li>Specify the initial states of all the units.</li>
+<li>Specify the initial states of a subset of the units.</li>
+<li>Specify the states of the same subset of the units at every time
+step.</li>
 </ul>
 <p>
-the units.
+This is the natural way to model most sequential data.
 </p>
-<ul class="org-ul">
-<li>Specify the initial states of a</li>
-</ul>
-<p>
-subset of the units.
+</div>
+</div>
+
+<div id="outline-container-orgf78f9fc" class="outline-3">
+<h3 id="orgf78f9fc">Teaching signals for recurrent networks</h3>
+<div class="outline-text-3" id="text-orgf78f9fc">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/rnn_signals.png" alt="teaching signals" width="40%" title="Teaching signals" align="right" />
 </p>
-<ul class="org-ul">
-<li>Specify the states of the same</li>
-</ul>
+<p><span class="figure-number">Figure 4: </span>Teaching signals</p>
+</div>
+
 <p>
-subset of the units at every time
-step.
-This is the natural way to
-model most sequential data.
-w 1
-w 2 w 3 w 4
-w 1
-w 2 w 3 w 4
-timeTeaching signals for recurrent networks
-We can specify targets in several
-ways:
+We can specify targets in several ways:
 </p>
+
 <ul class="org-ul">
-<li>Specify desired final activities of</li>
+<li>Specify desired final activities of all the units</li>
+<li>Specify desired activities of all units for the last few steps
+<ul class="org-ul">
+<li>Good for learning attractors</li>
+<li>It is easy to add in extra error derivatives as we
+backpropagate.</li>
+</ul></li>
+<li>Specify the desired activity of a subset of the units.
+<ul class="org-ul">
+<li>The other units are input or hidden units.</li>
+</ul></li>
 </ul>
-<p>
-all the units
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4e3265e" class="outline-2">
+<h2 id="org4e3265e">A toy example of training an RNN</h2>
+<div class="outline-text-2" id="text-org4e3265e">
+</div><div id="outline-container-org252a6cd" class="outline-3">
+<h3 id="org252a6cd">A good toy problem for a recurrent network</h3>
+<div class="outline-text-3" id="text-org252a6cd">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/toy_problem.png" alt="Binary addition" width="40%" title="Addition with RNN" align="right" />
 </p>
-<ul class="org-ul">
-<li>Specify desired activities of all</li>
-</ul>
+<p><span class="figure-number">Figure 5: </span>Binary addition</p>
+</div>
+
 <p>
-units for the last few steps
-Good for learning attractors
-It is easy to add in extra error
-derivatives as we
-backpropagate.
+We can train a feedforward net to do binary addition, but there are
+obvious regularities that it cannot capture efficiently.
 </p>
+
 <ul class="org-ul">
-<li>Specify the desired activity of a</li>
+<li>We must decide in advance the maximum number of digits in each
+number.</li>
+<li>The processing applied to the beginning of a long number does not
+generalize to the end of the long number because it uses
+different weights.</li>
 </ul>
+
 <p>
-subset of the units.
-The other units are input or
-hidden units.
-w 1
-w 2 w 3 w 4
-w 1
-w 2 w 3 w 4
-w 1
-w 2 w 3 w 4Neural Networks for Machine Learning
-Lecture 7c
-A toy example of training an RNN
-Geoffrey Hinton
-Nitish Srivastava,
-Kevin Swersky
-Tijmen Tieleman
-Abdel-rahman MohamedA good toy problem for a recurrent network
-We can train a feedforward net to do
-binary addition, but there are obvious
-regularities that it cannot capture
-efficiently.
+As a result, feedforward nets do not generalize well on the binary
+addition task.
 </p>
-<ul class="org-ul">
-<li>We must decide in advance the</li>
-</ul>
-<p>
-maximum number of digits in each
-number.
+</div>
+</div>
+
+<div id="outline-container-org7d6a32c" class="outline-3">
+<h3 id="org7d6a32c">The algorithm for binary addition</h3>
+<div class="outline-text-3" id="text-org7d6a32c">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/toy_add_alg.png" alt="How it works" title="BA algorithm" />
 </p>
-<ul class="org-ul">
-<li>The processing applied to the</li>
-</ul>
+<p><span class="figure-number">Figure 6: </span>Binary addition algorithm</p>
+</div>
+
 <p>
-beginning of a long number does not
-generalize to the end of the long
-number because
-it uses different
-weights.
-As a result, feedforward nets do not
-generalize well on the binary addition
-task.
-11001100
+This is a finite state automaton. It decides what transition to make
+by looking at the next column. It prints after making the
+transition. It moves from right to left over the two input numbers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org84bed67" class="outline-3">
+<h3 id="org84bed67">A recurrent net for binary addition</h3>
+<div class="outline-text-3" id="text-org84bed67">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/toy_add_col.png" alt="Addition" width="40%" title="Column view" align="right" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Addition in column</p>
+</div>
+
+<p>
+The network has two input units and one output unit.
+</p>
+
+<p>
+It is given two input digits at each time step.
+</p>
+
+<p>
+The desired output at each time step is the output for the column
+that was provided as input two time steps ago.
+</p>
+
+<ul class="org-ul">
+<li>It takes one time step to update the hidden units based on the
+two input digits.</li>
+<li>It takes another time step for the hidden units to cause the
+output.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd183e9f" class="outline-3">
+<h3 id="orgd183e9f">The connectivity of the network</h3>
+<div class="outline-text-3" id="text-orgd183e9f">
+<p>
+The 3 hidden units are fully interconnected in both directions.
+</p>
+
+<ul class="org-ul">
+<li>This allows a hidden activity pattern at one time step to vote
+for the hidden activity pattern at the next time step.</li>
+</ul>
+
+<p>
+The input units have feedforward connections that allow then to
+vote for the next hidden activity pattern. 3 fully interconnected
 hidden units
-00100110
-10100110The algorithm for binary addition
-1
-0
-0
-1
-1 0
-0 1
-0
-0
-0
-0
-no carry
-print 1
-0
-0
-no carry
-print 0
-0
-0
-1
-1
-1
-1
-1
-1
-carry
-print 1
-1
-1
-carry
-print 0
-1 0
-0 1
-0
-1
-1
-0
-This is a finite state automaton. It decides what transition to make by looking at the next
-column. It prints after making the transition. It moves from right to left over the two input
-numbers.A recurrent net for binary addition
-The network has two input units
-and one output unit.
-It is given two input digits at each
-time step.
-The desired output at each time
-step is the output for the column
-that was provided as input two time
-steps ago.
 </p>
-<ul class="org-ul">
-<li>It takes one time step to update</li>
-</ul>
+</div>
+</div>
+
+<div id="outline-container-org08892f3" class="outline-3">
+<h3 id="org08892f3">What the network learns</h3>
+<div class="outline-text-3" id="text-org08892f3">
 <p>
-the hidden units based on the
-two input digits.
-</p>
-<ul class="org-ul">
-<li>It takes another time step for the</li>
-</ul>
-<p>
-hidden units to cause the
-output.
-0 0 1 1 0 1 0 0
-0 1 0 0 1 1 0 1
-1 0 0 0 0 0 0 1
-timeThe connectivity of the network
-The 3 hidden units are fully
-interconnected in both
-directions.
-</p>
-<ul class="org-ul">
-<li>This allows a hidden</li>
-</ul>
-<p>
-activity pattern at one
-time step to vote for the
-hidden activity pattern at
-the next time step.
-The input units have
-feedforward connections that
-allow then to vote for the
-next hidden activity pattern.
-3 fully interconnected hidden unitsWhat the network learns
-It learns four distinct patterns of A recurrent network can emulate
-a finite state automaton, but it is
-activity for the 3 hidden units.
-exponentially more powerful. With
-These patterns correspond to the
-N hidden neurons it has 2^N
-nodes in the finite state
-possible binary activity vectors
+It learns four distinct patterns of activity for the 3 hidden
+units. These <i>patterns</i> correspond to the nodes in the finite state
 automaton.
-(but only N^2 weights)
 </p>
+
 <ul class="org-ul">
-<li>Do not confuse units in a</li>
-<li>This is important when the</li>
+<li>Do not confuse units in a neural network with nodes in a finite
+state automaton. Nodes are like activity vectors.</li>
+<li>The automaton is restricted to be in exactly one <i>state</i> at each
+time. The hidden units are restricted to have exactly one <i>vector</i>
+of activity at each time.</li>
 </ul>
+
 <p>
-neural network with nodes in a
-input stream has two separate
-finite state automaton. Nodes
-things going on at once.
-are like activity vectors.
+A recurrent network can emulate a finite state automaton, but it is
+exponentially more powerful. With N hidden neurons it has 2<sup>N</sup>
+possible binary activity vectors (but only N<sup>2</sup> weights)
 </p>
+
 <ul class="org-ul">
-<li>A finite state automaton</li>
-<li>The automaton is restricted to</li>
+<li>This is important when the input stream has two separate things
+going on at once.</li>
+<li>A finite state automaton needs to square its number of states.</li>
+<li>An RNN needs to double its number of <i>units</i>.</li>
 </ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1cdbfb5" class="outline-3">
+<h3 id="org1cdbfb5">Transcript</h3>
+<div class="outline-text-3" id="text-org1cdbfb5">
 <p>
-needs to square its number of
-be in exactly one state at each
-states.
-time. The hidden units are
-restricted to have exactly one
+In this video, I'm going to describe how a recurrent neural network
+solves a toy problem. It's a problem that's chosen to demonstrate
+what it is you can do with recurrent neural networks that you
+cannot do conveniently with feet forward neural networks. The
+problem is adding up two binary numbers. Off to the recurrent
+neural network, has learned to solve the problem. It's interesting
+to look at its hidden states, and see how they relate to the hidden
+states in a finite state automaton that's solving the same problem.
+So consider the problem of adding up two binary numbers. We could
+train a feed-forward neural network to do that. And the diagram on
+the right shows a network that gets some inputs and produces some
+outputs. But there's problems with using a feed-forward neural
+network. We have to decide in advance what the maximum number of
+digits is both for both of the input numbers and for the output
+number. And more importantly, the processing that we apply to the
+different bits of the input numbers, doesn't generalize. That is,
+when we learn how to add up the last two digits and deal with the
+carries, that knowledges in some weights. And as we go to a
+different part of a long binary number, the knowledge will have to
+be in different weights. So we won't get automatic generalization.
+As a result, although you can train a neuron feedfoward neural
+network, and it will eventually learn to do binary addition on
+fixed-length numbers, it's not an elegant way to solve the problem.
+This is a picture of the algorithm for binary addition. The states
+shown here are like the states in a hidden Markov model, except
+they're not really hidden. The system is in one state at a time.
+When it enters a state it performs an action. So it either prints a
+one or prints a zero and when it's in a state it gets some input,
+which is the two numbers in the next column. And that input causes
+it to go into a new state. So if you look on the top right, It's in
+the carry station and it's just printed a one. If it sees a one,
+one, it goes back in to the same stage and print another one. If
+however it sees a one, zero or zero, one, It goes into the carry
+state but prints a zero. If it sees a zero, zero, it goes into the
+no carry state, and prints a one. And so on. So a recurring neuro
+net for binary edition needs to have two input units and one output
+unit. It's given two input digits at each time stamp. And it also
+has to produce an output at each time step. And the output is the
+output for the column that it took in two time steps ago. The
+reason we need a delay of two time steps, is that it takes one time
+step to update the hidden units based on the inputs, and another
+time step to produce the output from the hidden state. So the net
+looks like this. I only gave it three hidden units. That's
+sufficient to do the job. It would learn faster with more hidden
+units, but it can do it with three. The three hidden units are
+fully interconnected and they have connections in both directions
+that don't necessarily have the same weight. In fact in general
+they don't have the same weight. The connections between hidden
+units allow the pattern of one time step to insensate the pattern
+of the next time step. The input units have feed forward
+connections to the hidden units and that's how it sees the two
+digits in a column. And similarly, the hidden units have feed
+forward connections to the output unit and that's how it produces
+its output. It's interesting to look at what the recurring neural
+network learns. It learns four distinct patterns of activity in its
+three hidden units. And these patterns correspond to the nodes in
+the finite state automaton for binary addition. We must confuse the
+units in a neural network, with the nodes in a final state
+automaton. The nodes in the finite state automaton correspond to
+the activity vectors of the recurrent neural network. The automaton
+is restricted to being exactly one state at each time. And
+similarly, the hidden units are restricted to have exactly one
+activity vector at each time in the recurrent neural network. So a
+recurrent neural network can emulate a finite state automaton but
+it's exponentially more powerful in its representation. With any
+hidden neurons, it has 2n to the N possible binary activity
+vectors. Of course it only has n squared weights so it can't
+necessarily make full use of all that representational power. But
+if the bottleneck is in the representation a recurrent neural
+network can do much better than a finite state automaton. This is
+important when the input stream has two separate things going on at
+once. A finite state automaton needs to square its number of states
+in order to deal with the fact that there's two things going on at
+once. A recurrent neural network only needs to double its number of
+hidden units. By doubling the number of units, it does of course
+square the number of binary vector states that it has.
 </p>
-<ul class="org-ul">
-<li>An RNN needs to double its</li>
-</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf3cc997" class="outline-2">
+<h2 id="orgf3cc997">Why it is difficult to train an RNN</h2>
+<div class="outline-text-2" id="text-orgf3cc997">
 <p>
-vector of activity at each time.
-number of units.Neural Networks for Machine Learning
-Lecture 7d
-Why it is difficult to train an RNN
 Geoffrey Hinton
 Nitish Srivastava,
 Kevin Swersky
@@ -1161,12 +1243,11 @@ y inputs from the currently most active character.
 <li>This lets you see which bits of the data are influencing the decision.</li>
 </ul>
 </div>
-</div>
 
 
-<div id="outline-container-org5ba48de" class="outline-3">
-<h3 id="org5ba48de">Transcript</h3>
-<div class="outline-text-3" id="text-org5ba48de">
+<div id="outline-container-orgbd74dbf" class="outline-3">
+<h3 id="orgbd74dbf">Transcript</h3>
+<div class="outline-text-3" id="text-orgbd74dbf">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
