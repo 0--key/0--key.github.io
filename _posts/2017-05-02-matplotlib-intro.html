@@ -148,5 +148,66 @@ plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/dark_test
 </div>
 </div>
 </div>
+
+<div id="outline-container-org716d376" class="outline-4">
+<h4 id="org716d376">Scattering</h4>
+<div class="outline-text-4" id="text-org716d376">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+
+<span style="color: #7fffd4;">x</span> = [1, 2, 3, 4, 5]
+<span style="color: #7fffd4;">y</span> = [6, 7, 8, 9, 11]
+
+plt.scatter(x, y, color=<span style="color: #deb887; font-style: italic;">'y'</span>)
+
+plt.xlabel(<span style="color: #deb887; font-style: italic;">'x'</span>)
+plt.ylabel(<span style="color: #deb887; font-style: italic;">'y'</span>)
+plt.title(<span style="color: #deb887; font-style: italic;">'Simple scattering'</span>)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/simple_scatter.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/simple_scatter.png" alt="simple_scatter.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org44962da" class="outline-4">
+<h4 id="org44962da">All together</h4>
+<div class="outline-text-4" id="text-org44962da">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+<span style="color: #7fffd4;">data_neg</span> = [[-0.80857143, 0.8372093],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [ 0.35714286, 0.85049834],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [-0.75142857, -0.73089701],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [-0.3, 0.12624585]]
+
+<span style="color: #7fffd4;">data_pos</span> = [[0.87142857, 0.62458472],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [-0.02, -0.92358804],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [0.36285714, -0.31893688],
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   [ 0.88857143, -0.87043189]]
+
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_neg:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   plt.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'y'</span>)
+
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_pos:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   plt.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'r'</span>)
+
+
+plt.xlabel(<span style="color: #deb887; font-style: italic;">'x'</span>)
+plt.ylabel(<span style="color: #deb887; font-style: italic;">'y'</span>)
+plt.title(<span style="color: #deb887; font-style: italic;">'Data scattering'</span>)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/data_scatter.png'</span>)
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
