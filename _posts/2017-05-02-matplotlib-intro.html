@@ -209,5 +209,34 @@ plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/data_scat
 </div>
 </div>
 </div>
+
+<div id="outline-container-org1597c9c" class="outline-4">
+<h4 id="org1597c9c">Sigmoidal function</h4>
+<div class="outline-text-4" id="text-org1597c9c">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> numpy <span style="color: #87cefa;">as</span> np
+<span style="color: #87cefa;">from</span> math <span style="color: #87cefa;">import</span> exp
+<span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+
+<span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">custom_function</span>(x):  <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">sigmoid(x):</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> x * x  <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">1. / (1 + exp(-x))</span>
+
+
+<span style="color: #7fffd4;">x</span> = np.array(<span style="color: #4682b4;">range</span>(-10, 11))
+<span style="color: #7fffd4;">y</span> = custom_function(x)  <span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">sigmoid(x)</span>
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+plt.plot(x, y)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/sigmoidal_f.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/sigmoidal_f.png" alt="sigmoidal_f.png" />
+</p>
+</div>
+</div>
+</div>
 </div>
 </div>
