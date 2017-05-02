@@ -19,10 +19,10 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#org3e6fd84">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#org7685381">Recurrent neural networks</a></li>
-<li><a href="#org5ba48de">Transcript</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#orgc069291">Recurrent neural networks</a></li>
+<li><a href="#orgbd74dbf">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
@@ -33,6 +33,7 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org04f240b">An irritating extra issue</a></li>
 <li><a href="#org9693ba7">Providing input to recurrent networks</a></li>
 <li><a href="#orgf78f9fc">Teaching signals for recurrent networks</a></li>
+<li><a href="#org8218056">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#org4e3265e">A toy example of training an RNN</a>
@@ -42,12 +43,12 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org84bed67">A recurrent net for binary addition</a></li>
 <li><a href="#orgd183e9f">The connectivity of the network</a></li>
 <li><a href="#org08892f3">What the network learns</a></li>
-<li><a href="#org1cdbfb5">Transcript</a></li>
+<li><a href="#org2bdbb92">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf3cc997">Why it is difficult to train an RNN</a>
 <ul>
-<li><a href="#orgbd74dbf">Transcript</a></li>
+<li><a href="#orgda4208e">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -242,9 +243,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-org3e6fd84" class="outline-3">
-<h3 id="org3e6fd84">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org3e6fd84">
+<div id="outline-container-org7685381" class="outline-3">
+<h3 id="org7685381">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-org7685381">
 <p>
 time &rarr;
 </p>
@@ -292,9 +293,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-org7685381" class="outline-3">
-<h3 id="org7685381">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org7685381">
+<div id="outline-container-orgc069291" class="outline-3">
+<h3 id="orgc069291">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgc069291">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -321,9 +322,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-org5ba48de" class="outline-3">
-<h3 id="org5ba48de">Transcript</h3>
-<div class="outline-text-3" id="text-org5ba48de">
+<div id="outline-container-orgbd74dbf" class="outline-3">
+<h3 id="orgbd74dbf">Transcript</h3>
+<div class="outline-text-3" id="text-orgbd74dbf">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -488,127 +489,172 @@ the reality we're observing. A different kind of hidden state model
 that uses discrete distributions rather than Gaussian
 distributions, is a hidden Markov model. And because it's based on
 discrete mathematics, computer scientists love these ones. In a
-hidden Markov model, the hidden state consists of a one of N.
-Choice. So there a number of things called states. And the system
+hidden Markov model, the hidden state consists of a one of N
+choice. So there a number of things called states. And the system
 is always in exactly one of those states. The transitions between
 states are probabilistic. They're controlled by a transition matrix
 which is simply a bunch of probabilities that say, if you're in
 state one at time one, What's the probability of you going to state
-three at time two? The output model is also stochastic. So, the
-state that the system is in doesn't completely determine what
-output it produces. There's some variation in the output that each
-state can produce. Because of that, we can't be sure which state
-produced a given output. In a sense, the states are hidden behind
-this probabilistic veil, and that's why they're called hidden.
-Historically the reason hidden units in a neural network are called
-hidden, is because I like this term. It sounded mysterious, so I
-stole it from neural networks. It is easy to represent the
-probability distribution across n states with n numbers. So, the
-nice thing about a hidden Markov model, is we can represent the
-probability distribution across its discreet states. So, even
-though we don't know what it, what state it's in for sure, we can
-easily represent the probability distribution. And to predict the
-next output from a hidden Markov model, we need to infer what
-hidden state it's probably in. And so we need to get our hands on
-that probability distribution. It turns out there's an easy method
-based on dynamic programming that allows us to take the
-observations we've made and from those compute the probability
-distribution across the hidden states. Once we have that
-distribution, there is a nice elegant learning algorithm hidden
-Markov models, and that's what made them so appropriate for speech.
-And in the 1970s, they took over speech recognition. There's a
-fundamental limitation of HMMs. It's easiest to understand this
-limitation, if we consider what happens when a hidden Markov model
-generates data. At each time step when it's generating, it selects
-one of its hidden states. So if it's got n hidden states, the
-temporal information stored in the hidden state is at most logn) n
-bits. So that's all it knows about what it's done so far. So now
-let's consider how much information a hidden Markov model can
-convey to the second half of an utterance it produces from the
-first half. So imagine it's already produced the first half of an
-utterance. And now it's going to have to produce the second half.
-And remember, its memory of what it said for the first half is in
-which of the n states it's in. So its memory only has log n bits of
-information in it. To produce the second half that's compatible
-with the first half, we must make the syntax fit. So for example,
-the number intend must agree. It also needs to make the semantics
-fit. It can't have the second half of the sentence be about
-something totally different from the first half. Also the
+three at time two? The output model is also stochastic.
+</p>
+
+<p>
+So, the state that the system is in doesn't completely determine
+what output it produces. There's some variation in the output that
+each state can produce. Because of that, we can't be sure which
+state produced a given output. In a sense, the states are hidden
+behind this probabilistic veil, and that's why they're called
+hidden. Historically the reason hidden units in a neural network
+are called hidden, is because I like this term. It sounded
+mysterious, so I stole it from neural networks.
+</p>
+
+<p>
+It is easy to represent the probability distribution across n
+states with n numbers. So, the nice thing about a hidden Markov
+model, is we can represent the probability distribution across its
+discreet states. So, even though we don't know what it, what state
+it's in for sure, we can easily represent the probability
+distribution. And to predict the next output from a hidden Markov
+model, we need to infer what hidden state it's probably in. And so
+we need to get our hands on that probability distribution. It turns
+out there's an easy method based on dynamic programming that allows
+us to take the observations we've made and from those compute the
+probability distribution across the hidden states.
+</p>
+
+<p>
+Once we have that distribution, there is a nice elegant learning
+algorithm hidden Markov models, and that's what made them so
+appropriate for speech. And in the 1970s, they took over speech
+recognition. There's a fundamental limitation of HMMs. It's easiest
+to understand this limitation, if we consider what happens when a
+hidden Markov model generates data. At each time step when it's
+generating, it selects one of its hidden states. So if it's got <b>N</b>
+hidden states, the temporal information stored in the hidden state
+is at most log(N) n bits.
+</p>
+
+<p>
+So that's all it knows about what it's done so far. So now let's
+consider how much information a hidden Markov model can convey to
+the second half of an utterance it produces from the first half. So
+imagine it's already produced the first half of an utterance. And
+now it's going to have to produce the second half. And remember,
+its memory of what it said for the first half is in which of the n
+states it's in. So its memory only has log(N) bits of information in
+it. To produce the second half that's compatible with the first
+half, we must make the syntax fit.
+</p>
+
+<p>
+So for example, the number intend must agree. It also needs to make
+the semantics fit. It can't have the second half of the sentence be
+about something totally different from the first half. Also the
 intonation needs to fit so it would look very silly if the,
 intonation contour completely changed halfway through the sentence.
 There's a lot of other things that also have to fit. The accent of
 the speaker, The rate they're speaking at, How loudly they're
-speaking. And the vocal tract characteristics of the speaker. All
-of those things must fit between the second half of the sentence
-and the first half. And so if you wanted a hidden Markov model to
-actually generate a sentence, the hidden state has to be able to
-convey all that information from the first half to the second half.
-Now the problem is that all of those aspects could easily come to a
-hundred bits of information. So the first half of the sentence
-needs to convey a hundred bits of information to the second half
-and that means that the hidden Markov model needs two to the
-hundreds states and that's just too many. So that brings us to
-recurrence your own networks. They have a much more efficient way
-of remembering information. They're very powerful because they
-combine two properties that have distributed hidden state. That
-means, several different units can be active at once. So they can
-remember several different things at once. They don't just have one
-active unit. They're also nonlinear. You see, a linear dynamical
-system has a whole hidden state vector. So it's got more than one
-value at a time, but those values are constrained to act in a
-linear way so as to make inference easy, and in a recurrent neural
-network we allow the dynamics to be much more complicated. With
-enough neurons and enough time, a recurring neuron network can
+speaking. And the vocal tract characteristics of the speaker.
+</p>
+
+<p>
+All of those things must fit between the second half of the
+sentence and the first half. And so if you wanted a hidden Markov
+model to actually generate a sentence, the hidden state has to be
+able to convey all that information from the first half to the
+second half. Now the problem is that all of those aspects could
+easily come to a hundred bits of information. So the first half of
+the sentence needs to convey a hundred bits of information to the
+second half and that means that the hidden Markov model needs two
+to the hundreds states and that's just too many.
+</p>
+
+<p>
+So that brings us to recurrence your own networks. They have a much
+more efficient way of remembering information. They're very
+powerful because they combine two properties that have distributed
+hidden state. That means, several different units can be active at
+once. So they can remember several different things at once. They
+don't just have one active unit. They're also nonlinear. You see, a
+linear dynamical system has a whole hidden state vector. So it's
+got more than one value at a time, but those values are constrained
+to act in a linear way so as to make inference easy, and in a
+recurrent neural network we allow the dynamics to be much more
+complicated.
+</p>
+
+<p>
+With enough neurons and enough time, a recurring neuron network can
 compute anything that can be computed by your computer. It's a very
-powerful device. So linear dynamical systems and hidden mark off
+powerful device. So linear dynamical systems and hidden Markov
 models are both stochastic models. That is the dynamics and the
 production of observations from the underlying state both involve
-intrinsic noise. And the question is do models need to be like
-that. Well one thing to notice is that the posterior probability
-distribution over hidden states in either a limited anomical system
-or hidden markoff model is a deterministic function of the data
-that you've seen so far. That is the inference algorithm for these
-systems ends up with a probability distribution, and that
-probability distribution is just a bunch of numbers, and those
-numbers are a deterministic version of the data so far. In a
-recurrent neural network, you get a bunch of numbers that are a
-deterministic function of the data so far. And it might be a good
+intrinsic noise.
+</p>
+
+<p>
+And the question is do models need to be like that. Well one thing
+to notice is that the posterior probability distribution over
+hidden states in either a limited anomical system or hidden Markov
+model is a deterministic function of the data that you've seen so
+far. That is the inference algorithm for these systems ends up with
+a probability distribution, and that probability distribution is
+just a bunch of numbers, and those numbers are a deterministic
+version of the data so far.
+</p>
+
+<p>
+In a recurrent neural network, you get a bunch of numbers that are
+a deterministic function of the data so far. And it might be a good
 idea to think of those numbers that constitute the hidden state of
 a recurrent neural network. They're very like the probability
-distribution for these simple stocastic models. So what kinds of
-behavior can recur at your own networks exhibit? Well, they can
-oscillate. That's obviously good for things like motion control,
-where when you're walking, for example, you want to know regular
-oscillation, which is your stride. They can settle to point
+distribution for these simple stochastic models.
+</p>
+
+<p>
+So what kinds of behavior can recurrent networks exhibit? Well,
+they can oscillate. That's obviously good for things like motion
+control, where when you're walking, for example, you want to know
+regular oscillation, which is your stride. They can settle to point
 attractors. That might be good for retrieving memories. And later
 on in the course we'll look at Hopfield nets where they use the
-settling to point attractors to store memories. So the idea is you
-have a sort of rough idea of what you're trying to retrieve. You
-then let the system settle down to a stable point and those stable
-points correspond to the things you know about. And so by settling
-to that stable point you retrieve a memory. They can also behave
-chaotically if you set the weights in the appropriate regime.
-Often, chaotic behavior is bad for information processing, because
-in information processing, you want to be able to behave reliably.
-You want to achieve something. There are some circumstances where
-it's a good idea. If you're up against a much smarter adversary,
-you probably can't outwit them, so it might be a good idea just to
-behave randomly. And one way to get the appearance of randomness is
-to behave chaotically. One nice thing about R and N's, which, a
-long time ago, I thought was gonna make them very powerful, is that
-an R and N could learn to implement lots of little programs, using
-different subsets of its hidden state. And each of these little
-programs could capture a nugget of knowledge. And all of these
-things could run in parallel, and interact with each other in
-complicated ways. Unfortunately the computational power of
-recurrent neural networks makes them very hard to train. For many
-years, we couldn't exploit the computational power of recurrent
-neural networks. It was some heroic efforts. For example, Tony
-Robinson managed to make quite a good speech recognizer using
-recurrent nets. He had to do a lot of work implementing them on a
-parallel computer built out of transputers. And it was only
-recently that people managed to produce recurrent neural networks
-that outperformed Tony Robinson's
+settling to point attractors to store memories.
+</p>
+
+<p>
+So the idea is you have a sort of rough idea of what you're trying
+to retrieve. You then let the system settle down to a stable point
+and those stable points correspond to the things you know about.
+And so by settling to that stable point you retrieve a memory. They
+can also behave chaotically if you set the weights in the
+appropriate regime. Often, chaotic behavior is bad for information
+processing, because in information processing, you want to be able
+to behave reliably if you want to achieve something.
+</p>
+
+<p>
+There are some circumstances where it's a good idea. If you're up
+against a much smarter adversary, you probably can't outwit them,
+so it might be a good idea just to behave randomly. And one way to
+get the appearance of randomness is to behave chaotically. One nice
+thing about RNN's, which, a long time ago, I thought was gonna
+make them very powerful, is that an RNN could learn to
+implement lots of little programs, using different subsets of its
+hidden state. And each of these little programs could capture a
+nugget of knowledge. And all of these things could run in parallel,
+and interact with each other in complicated ways.
+</p>
+
+<p>
+Unfortunately the computational power of recurrent neural networks
+makes them very hard to train. For many years, we couldn't exploit
+the computational power of recurrent neural networks. It was some
+heroic efforts. For example, Tony Robinson managed to make quite a
+good speech recognizer using recurrent nets. He had to do a lot of
+work implementing them on a parallel computer built out of
+transputers. And it was only recently that people managed to
+produce recurrent neural networks that outperformed Tony Robinson's
 </p>
 </div>
 </div>
@@ -777,8 +823,105 @@ backpropagate.</li>
 </ul>
 </div>
 </div>
-</div>
 
+
+<div id="outline-container-org8218056" class="outline-3">
+<h3 id="org8218056">Transcript</h3>
+<div class="outline-text-3" id="text-org8218056">
+<p>
+In this video, I'm going to talk about the back propagation through
+time algorithm. It's the standard way to train or recurrence your
+own network.
+</p>
+
+<p>
+The algorithm is really quite simple once you have seen the
+equivalents between a recurrent neural network and a feed forward
+neural network that has one layer for each time step. I'll also
+talk about ways of providing input, and desired outputs, to
+recurrent neural networks. So the diagram shows a simple recurrent
+net with three interconnected neurons. We're going to assume
+there's a time delay of one in using each of those connections and
+that the network runs in discrete time, so the clock that has
+integer ticks. The key to understanding how to train a recurrent
+network is to see that a recurrent network is really just the same
+as a feed forward network, where you've expanded the recurrent
+network in time. So the recurrent network starts off in some
+initial state. Shown at the bottom there, times zero. And then uses
+the way some of these connections to get a new state, shown at time
+one. You then uses the same weights again to get another new state,
+and it uses the same weights again to get another new state and so
+on. So it's really just a lead feed forward network, where the
+weight is a constraint to be the same at every layer. Now backprop
+is good at learning when there are weight constraints. We saw this
+for convolutional nets and just to remind you, we can actually
+incorporate any linear constraint quite easily in backprop. So we
+compute the gradients as usual, as if the weights were not
+constrained. And then we modify the gradients, so that we maintain
+the constraints. So if we want W1 to equal W2, we start off with an
+equal and then we need to make sure that the changing W1 is equal
+to the changing W2. And we do that by simply taking the derivative
+of the area with respect to W1, the derivative with respect to W2,
+and adding or averaging them, and then applying the same quantity
+for updating both W1 and W2. So if the weights started off
+satisfying the constraints they'll continue to satisfy the
+constraints. The backpropagation through time algorithm is just the
+name for what happens when you think of a recurrent net as a lead
+feet forward net with shared weights, and you train it with
+backpropagation. So, we can think of that algorithm in the time
+domain. The forward pass builds up a stack of activities at each
+time slice. And the backward pass peels activities off that stack
+and computes error derivatives each time step backwards. That's why
+it's called back propagation through time. After the backward pass
+we can add together the derivatives at all the different time step
+for each particular weight. And then change all the copies of that
+weight by the same amount which is proportional to the sum or
+average of all those derivatives. There is an irritating extra
+issue. If we don't specify the initial state of the all the units,
+for example, if some of them are hidden or output units, then we
+have to start them off in some particular state. We could just fix
+those initial states to have some default value like 0.5, but that
+might make the system work not quite as well as it would otherwise
+work if it had some more sensible initial value. So we can actually
+learn the initial states. We treat them like parameters rather than
+activities and we learn them the same way as learned the weights.
+We start off with an initial random guess for the initial states.
+That is the initial states of all the units that aren't input units
+And then at the end of each training sequence we back propagate
+through time all the way back to the initial states. And that gives
+us the gradient of the error function with respects to the initial
+state. We then just, adjust the initial states by following, that
+gradient. We go downhill in the gradient, and that gives us new
+initial states that are slightly different. There's many ways in
+which we can provide the input to a recurrent neural net. We could,
+for example, specify the initial state of all the units. That's the
+most natural thing to do when we think of a recurrent net, like a
+feed forward net with constrained weights. We could specify the
+initial state of just a subset of the units or we can specify the
+states at every time stamp of the subset of the units and that's
+probably the most natural way to input sequential data. Similarly,
+there's many way we can specify targets for a recurrent network.
+When we think of it as feed forward network with constrained
+weights, the natural thing to do is to specify the desired final
+states for all of the units. If we're trying to train it to settle
+to some attractor, we might want to specify the desired states not
+just for the final time steps but for several time steps. That will
+cause it to actually settle down there, rather than passing through
+some state and going off somewhere else. So by specifying several
+states of the end, we can force it to learn attractors and it's
+quite easy as we back propagate to add in derivatives that we get
+from each time stamp. So the back propegation starts at the top,
+with the derivatives for the final time stamp. And then as we go
+back through the line before the top we add in the derivatives for
+that man, and so on. So it's really very little extra effort to
+have derivatives at many different layers. Or we could specify the
+design activity of a subset of units which we might think of as
+output units. And that's a very natural way to train a recurrent
+neural network that is meant to be providing a continuous output.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-org4e3265e" class="outline-2">
 <h2 id="org4e3265e">A toy example of training an RNN</h2>
@@ -916,18 +1059,21 @@ going on at once.</li>
 </div>
 
 
-<div id="outline-container-org1cdbfb5" class="outline-3">
-<h3 id="org1cdbfb5">Transcript</h3>
-<div class="outline-text-3" id="text-org1cdbfb5">
+<div id="outline-container-org2bdbb92" class="outline-3">
+<h3 id="org2bdbb92">Transcript</h3>
+<div class="outline-text-3" id="text-org2bdbb92">
 <p>
 In this video, I'm going to describe how a recurrent neural network
 solves a toy problem. It's a problem that's chosen to demonstrate
 what it is you can do with recurrent neural networks that you
-cannot do conveniently with feet forward neural networks. The
+cannot do conveniently with feed-forward neural networks. The
 problem is adding up two binary numbers. Off to the recurrent
 neural network, has learned to solve the problem. It's interesting
 to look at its hidden states, and see how they relate to the hidden
 states in a finite state automaton that's solving the same problem.
+</p>
+
+<p>
 So consider the problem of adding up two binary numbers. We could
 train a feed-forward neural network to do that. And the diagram on
 the right shows a network that gets some inputs and produces some
@@ -935,11 +1081,18 @@ outputs. But there's problems with using a feed-forward neural
 network. We have to decide in advance what the maximum number of
 digits is both for both of the input numbers and for the output
 number. And more importantly, the processing that we apply to the
-different bits of the input numbers, doesn't generalize. That is,
-when we learn how to add up the last two digits and deal with the
-carries, that knowledges in some weights. And as we go to a
-different part of a long binary number, the knowledge will have to
-be in different weights. So we won't get automatic generalization.
+different bits of the input numbers, doesn't generalize.
+</p>
+
+<p>
+That is, when we learn how to add up the last two digits and deal
+with the carries, that knowledges in some weights. And as we go to
+a different part of a long binary number, the knowledge will have
+to be in different weights. So we won't get automatic
+generalization.
+</p>
+
+<p>
 As a result, although you can train a neuron feedfoward neural
 network, and it will eventually learn to do binary addition on
 fixed-length numbers, it's not an elegant way to solve the problem.
@@ -954,45 +1107,62 @@ the carry station and it's just printed a one. If it sees a one,
 one, it goes back in to the same stage and print another one. If
 however it sees a one, zero or zero, one, It goes into the carry
 state but prints a zero. If it sees a zero, zero, it goes into the
-no carry state, and prints a one. And so on. So a recurring neuro
-net for binary edition needs to have two input units and one output
-unit. It's given two input digits at each time stamp. And it also
-has to produce an output at each time step. And the output is the
-output for the column that it took in two time steps ago. The
-reason we need a delay of two time steps, is that it takes one time
-step to update the hidden units based on the inputs, and another
-time step to produce the output from the hidden state. So the net
-looks like this. I only gave it three hidden units. That's
-sufficient to do the job. It would learn faster with more hidden
-units, but it can do it with three. The three hidden units are
-fully interconnected and they have connections in both directions
-that don't necessarily have the same weight. In fact in general
-they don't have the same weight. The connections between hidden
-units allow the pattern of one time step to insensate the pattern
-of the next time step. The input units have feed forward
+no carry state, and prints a one. And so on.
+</p>
+
+<p>
+So a recurring neuro-net for binary edition needs to have two input
+units and one output unit. It's given two input digits at each time
+stamp. And it also has to produce an output at each time step. And
+the output is the output for the column that it took in two time
+steps ago. The reason we need a delay of two time steps, is that it
+takes one time step to update the hidden units based on the inputs,
+and another time step to produce the output from the hidden state.
+So the net looks like this. I only gave it three hidden units.
+</p>
+
+<p>
+That's sufficient to do the job. It would learn faster with more
+hidden units, but it can do it with three. The three hidden units
+are fully interconnected and they have connections in both
+directions that don't necessarily have the same weight. In fact in
+general they don't have the same weight. The connections between
+hidden units allow the pattern of one time step to insensate the
+pattern of the next time step. The input units have feed forward
 connections to the hidden units and that's how it sees the two
-digits in a column. And similarly, the hidden units have feed
-forward connections to the output unit and that's how it produces
-its output. It's interesting to look at what the recurring neural
-network learns. It learns four distinct patterns of activity in its
-three hidden units. And these patterns correspond to the nodes in
-the finite state automaton for binary addition. We must confuse the
-units in a neural network, with the nodes in a final state
-automaton. The nodes in the finite state automaton correspond to
-the activity vectors of the recurrent neural network. The automaton
-is restricted to being exactly one state at each time. And
-similarly, the hidden units are restricted to have exactly one
-activity vector at each time in the recurrent neural network. So a
-recurrent neural network can emulate a finite state automaton but
-it's exponentially more powerful in its representation. With any
-hidden neurons, it has 2n to the N possible binary activity
-vectors. Of course it only has n squared weights so it can't
-necessarily make full use of all that representational power. But
-if the bottleneck is in the representation a recurrent neural
-network can do much better than a finite state automaton. This is
-important when the input stream has two separate things going on at
-once. A finite state automaton needs to square its number of states
-in order to deal with the fact that there's two things going on at
+digits in a column.
+</p>
+
+<p>
+And similarly, the hidden units have feed forward connections to
+the output unit and that's how it produces its output. It's
+interesting to look at what the recurring neural network learns. It
+learns four distinct patterns of activity in its three hidden
+units. And these patterns correspond to the nodes in the finite
+state automaton for binary addition.
+</p>
+
+<p>
+We must confuse the units in a neural network, with the nodes in a
+final state automaton. The nodes in the finite state automaton
+correspond to the activity vectors of the recurrent neural network.
+The automaton is restricted to being exactly one state at each
+time. And similarly, the hidden units are restricted to have
+exactly one activity vector at each time in the recurrent neural
+network. So a recurrent neural network can emulate a finite state
+automaton but it's exponentially more powerful in its
+representation. With any hidden neurons, it has 2<sup>N</sup> to the N
+possible binary activity vectors.
+</p>
+
+<p>
+Of course it only has n squared weights so it can't necessarily
+make full use of all that representational power. But if the
+bottleneck is in the representation a recurrent neural network can
+do much better than a finite state automaton. This is important
+when the input stream has two separate things going on at once. A
+finite state automaton needs to square its number of states in
+order to deal with the fact that there's two things going on at
 once. A recurrent neural network only needs to double its number of
 hidden units. By doubling the number of units, it does of course
 square the number of binary vector states that it has.
@@ -1245,9 +1415,9 @@ y inputs from the currently most active character.
 </div>
 
 
-<div id="outline-container-orgbd74dbf" class="outline-3">
-<h3 id="orgbd74dbf">Transcript</h3>
-<div class="outline-text-3" id="text-orgbd74dbf">
+<div id="outline-container-orgda4208e" class="outline-3">
+<h3 id="orgda4208e">Transcript</h3>
+<div class="outline-text-3" id="text-orgda4208e">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
