@@ -48,21 +48,29 @@ manner.
 <h3 id="org9e1b519">Pattern Name and Classification</h3>
 <div class="outline-text-3" id="text-org9e1b519">
 <p>
-A descriptive and unique name that helps in identifying and
-referring to the pattern.
+The builder pattern is an object creation software design pattern.
+Unlike the abstract factory pattern and the factory method pattern
+whose intention is to enable polymorphism, the intention of the
+builder pattern is to find a solution to the telescoping
+constructor anti-pattern. The telescoping constructor anti-pattern
+occurs when the increase of object constructor parameter
+combination leads to an exponential list of constructors. Instead
+of using numerous constructors, the builder pattern uses another
+object, a <i>builder</i>, that receives each initialization parameter
+step by step and then returns the resulting constructed object at
+once.
 </p>
 </div>
 </div>
+
 <div id="outline-container-orgbc16349" class="outline-3">
 <h3 id="orgbc16349">Intent</h3>
 <div class="outline-text-3" id="text-orgbc16349">
-<blockquote>
 <p>
 Separate the construction of a complex object from its
 representation so that the same construction process can create
 different representations.
 </p>
-</blockquote>
 </div>
 </div>
 
@@ -74,24 +82,31 @@ Other names for the pattern.
 </p>
 </div>
 </div>
+
 <div id="outline-container-orga3e8e38" class="outline-3">
 <h3 id="orga3e8e38">Motivation (Forces)</h3>
 <div class="outline-text-3" id="text-orga3e8e38">
 <p>
-A scenario consisting of a problem and a context in which this
-pattern can be used.
+The main premise for design is an excessive number of constructors.
 </p>
 </div>
 </div>
+
 <div id="outline-container-org1834a44" class="outline-3">
 <h3 id="org1834a44">Applicability</h3>
 <div class="outline-text-3" id="text-org1834a44">
 <p>
-Situations in which this pattern is usable; the context for the
-pattern.
+<code>Builder</code> often builds a <code>Composite</code>. Often, designs start out
+using <code>Factory Method</code> (less complicated, more customizable,
+subclasses proliferate) and evolve toward <code>Abstract Factory</code>,
+<code>Prototype</code>, or <code>Builder</code> (more flexible, more complex) as the
+designer discovers where more flexibility is needed. Sometimes
+creational patterns are complementary: <code>Builder</code> can use one of the
+other patterns to implement which components are built.
 </p>
 </div>
 </div>
+
 <div id="outline-container-orgb9f284d" class="outline-3">
 <h3 id="orgb9f284d">Structure</h3>
 <div class="outline-text-3" id="text-orgb9f284d">
