@@ -19,10 +19,10 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org6529830">Linear Dynamical Systems(engineers love them!)</a></li>
 <li><a href="#org63f1845">Hidden Markov Models (computer scientists love them!)</a></li>
 <li><a href="#org5fa5140">A fundamental limitation of HMMs</a></li>
-<li><a href="#org7685381">Recurrent neural networks</a></li>
-<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
 <li><a href="#orgc069291">Recurrent neural networks</a></li>
-<li><a href="#orgbd74dbf">Transcript</a></li>
+<li><a href="#org432b994">Do generative models need to be stochastic?</a></li>
+<li><a href="#orgd575d7a">Recurrent neural networks</a></li>
+<li><a href="#orgda4208e">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf5ba516">Training RNNs with backpropagation</a>
@@ -33,7 +33,7 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org04f240b">An irritating extra issue</a></li>
 <li><a href="#org9693ba7">Providing input to recurrent networks</a></li>
 <li><a href="#orgf78f9fc">Teaching signals for recurrent networks</a></li>
-<li><a href="#org8218056">Transcript</a></li>
+<li><a href="#org4a4ec0c">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#org4e3265e">A toy example of training an RNN</a>
@@ -43,12 +43,17 @@ tags: [architecture, overview, recurrent network]
 <li><a href="#org84bed67">A recurrent net for binary addition</a></li>
 <li><a href="#orgd183e9f">The connectivity of the network</a></li>
 <li><a href="#org08892f3">What the network learns</a></li>
-<li><a href="#org2bdbb92">Transcript</a></li>
+<li><a href="#orgb9bef0a">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgf3cc997">Why it is difficult to train an RNN</a>
 <ul>
-<li><a href="#orgda4208e">Transcript</a></li>
+<li><a href="#org354fc34">The backward pass is linear</a></li>
+<li><a href="#orgc75d338">The problem of exploding or vanishing gradients</a></li>
+<li><a href="#org647ed80">Why the back-propagated gradient blows up</a></li>
+<li><a href="#org4ca3e4a">Four effective ways to learn an RNN</a></li>
+<li><a href="#orgb9a851f">Transcript</a></li>
+<li><a href="#orgca0c494">Transcript</a></li>
 </ul>
 </li>
 </ul>
@@ -243,9 +248,9 @@ the first half of an utterance needs to convey to the second half.
 </div>
 </div>
 
-<div id="outline-container-org7685381" class="outline-3">
-<h3 id="org7685381">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-org7685381">
+<div id="outline-container-orgc069291" class="outline-3">
+<h3 id="orgc069291">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgc069291">
 <p>
 time &rarr;
 </p>
@@ -293,9 +298,9 @@ linear dynamical system or hidden Markov model.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc069291" class="outline-3">
-<h3 id="orgc069291">Recurrent neural networks</h3>
-<div class="outline-text-3" id="text-orgc069291">
+<div id="outline-container-orgd575d7a" class="outline-3">
+<h3 id="orgd575d7a">Recurrent neural networks</h3>
+<div class="outline-text-3" id="text-orgd575d7a">
 <p>
 What kinds of behaviour can RNNs exhibit?
 </p>
@@ -322,9 +327,9 @@ recognizer).</li>
 </div>
 
 
-<div id="outline-container-orgbd74dbf" class="outline-3">
-<h3 id="orgbd74dbf">Transcript</h3>
-<div class="outline-text-3" id="text-orgbd74dbf">
+<div id="outline-container-orgda4208e" class="outline-3">
+<h3 id="orgda4208e">Transcript</h3>
+<div class="outline-text-3" id="text-orgda4208e">
 <p>
 In this video, I am going to give an overview of various types of
 models that have been used for sequences. I'll start with the
@@ -825,9 +830,9 @@ backpropagate.</li>
 </div>
 
 
-<div id="outline-container-org8218056" class="outline-3">
-<h3 id="org8218056">Transcript</h3>
-<div class="outline-text-3" id="text-org8218056">
+<div id="outline-container-org4a4ec0c" class="outline-3">
+<h3 id="org4a4ec0c">Transcript</h3>
+<div class="outline-text-3" id="text-org4a4ec0c">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
@@ -1059,9 +1064,9 @@ going on at once.</li>
 </div>
 
 
-<div id="outline-container-org2bdbb92" class="outline-3">
-<h3 id="org2bdbb92">Transcript</h3>
-<div class="outline-text-3" id="text-org2bdbb92">
+<div id="outline-container-orgb9bef0a" class="outline-3">
+<h3 id="orgb9bef0a">Transcript</h3>
+<div class="outline-text-3" id="text-orgb9bef0a">
 <p>
 In this video, I'm going to describe how a recurrent neural network
 solves a toy problem. It's a problem that's chosen to demonstrate
@@ -1174,136 +1179,307 @@ square the number of binary vector states that it has.
 <div id="outline-container-orgf3cc997" class="outline-2">
 <h2 id="orgf3cc997">Why it is difficult to train an RNN</h2>
 <div class="outline-text-2" id="text-orgf3cc997">
-<p>
-Geoffrey Hinton
-Nitish Srivastava,
-Kevin Swersky
-Tijmen Tieleman
-Abdel-rahman MohamedThe backward pass is linear
-There is a big difference between the
-forward and backward passes.
-In the forward pass we use squashing
-functions (like the logistic) to prevent the
-activity vectors from exploding.
-The backward pass, is completely linear. If
-you double the error derivatives at the final
-layer, all the error derivatives will double.
+</div><div id="outline-container-org354fc34" class="outline-3">
+<h3 id="org354fc34">The backward pass is linear</h3>
+<div class="outline-text-3" id="text-org354fc34">
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/neural_networks/rnn_back_pass.png" alt="Backward pass" width="40%" title="Functional schema" align="right" />
 </p>
-<ul class="org-ul">
-<li>The forward pass determines the slope</li>
-</ul>
+<p><span class="figure-number">Figure 8: </span>RNN backward pass</p>
+</div>
+
 <p>
-of the linear function used for
-backpropagating through each neuron.The problem of exploding or vanishing gradients
-• 
-• 
-What happens to the magnitude of the
-gradients as we backpropagate
+There is a big difference between the forward and backward passes.
+In the forward pass we use squashing functions (like the logistic)
+to prevent the activity vectors from exploding. The backward pass,
+is completely <i>linear</i>. If you double the error derivatives at the
+final layer, all the error derivatives will double.
+</p>
+
+<ul class="org-ul">
+<li>The forward pass determines the slope of the linear function used
+for back-propagating through each neuron.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc75d338" class="outline-3">
+<h3 id="orgc75d338">The problem of exploding or vanishing gradients</h3>
+<div class="outline-text-3" id="text-orgc75d338">
+<p>
+What happens to the magnitude of the gradients as we back-propagate
 through many layers?
 </p>
+
 <ul class="org-ul">
-<li>If the weights are small, the</li>
+<li>If the weights are small, the gradients shrink exponentially.</li>
+<li>If the weights are big the gradients grow exponentially.</li>
 </ul>
+
 <p>
-gradients shrink exponentially.
+Typical feed-forward neural nets can cope with these exponential
+effects because they only have a few hidden layers.
 </p>
-<ul class="org-ul">
-<li>If the weights are big the gradients</li>
-</ul>
+
+
 <p>
-grow exponentially.
-Typical feed-forward neural nets can
-cope with these exponential effects
-because they only have a few hidden
-layers.
-• 
-• 
-In an RNN trained on long sequences
-(e.g. 100 time steps) the gradients
-can easily explode or vanish.
+In an RNN trained on long sequences (e.g. 100 time steps) the
+gradients can easily explode or vanish.
 </p>
+
 <ul class="org-ul">
-<li>We can avoid this by initializing</li>
+<li>We can avoid this by initializing the weights very carefully.</li>
 </ul>
+
 <p>
-the weights very carefully.
-Even with good initial weights, its very
-hard to detect that the current target
-output depends on an input from
-many time-steps ago.
+Even with good initial weights, its very hard to detect that the
+current target output depends on an input from many time-steps ago.
 </p>
+
 <ul class="org-ul">
-<li>So RNNs have difficulty dealing</li>
+<li>So RNNs have difficulty dealing with long-range dependencies.</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org647ed80" class="outline-3">
+<h3 id="org647ed80">Why the back-propagated gradient blows up</h3>
+<div class="outline-text-3" id="text-org647ed80">
 <p>
-with long-range dependencies.Why the back-propagated gradient blows up
 If we start a trajectory within an attractor, small changes in where we
 start make no difference to where we end up.
 But if we start almost exactly on the boundary, tiny changes can make a
-huge difference.Four effective ways to learn an RNN
-• 
-• 
-Long Short Term Memory
-Make the RNN out of little
-modules that are designed to
-remember values for a long time.
-Hessian Free Optimization: Deal
-with the vanishing gradients
-problem by using a fancy
-optimizer that can detect
-directions with a tiny gradient but
-even smaller curvature.
+huge difference.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ca3e4a" class="outline-3">
+<h3 id="org4ca3e4a">Four effective ways to learn an RNN</h3>
+<div class="outline-text-3" id="text-org4ca3e4a">
+</div><div id="outline-container-orgda93025" class="outline-4">
+<h4 id="orgda93025">Long Short Term Memory</h4>
+<div class="outline-text-4" id="text-orgda93025">
+<p>
+Make the RNN out of little modules that are designed to remember
+values for a long time.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge22efb0" class="outline-4">
+<h4 id="orge22efb0">Hessian Free Optimization:</h4>
+<div class="outline-text-4" id="text-orge22efb0">
+<p>
+Deal with the vanishing gradients problem by using a fancy
+optimizer that can detect directions with a tiny gradient but even
+smaller curvature.
 </p>
 <ul class="org-ul">
-<li>The HF optimizer ( Martens &amp;</li>
+<li>The HF optimizer ( Martens &amp; Sutskever, 2011) is good at this.</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org85ae8f6" class="outline-4">
+<h4 id="org85ae8f6">Echo State Networks:</h4>
+<div class="outline-text-4" id="text-org85ae8f6">
 <p>
-Sutskever, 2011) is good at
-this.
-• 
-• 
-Echo State Networks: Initialize the
-inputàhidden and hiddenàhidden and
-outputàhidden connections very
-carefully so that the hidden state has a
-huge reservoir of weakly coupled
-oscillators which can be selectively driven
-by the input.
+Initialize the input &rarr; hidden and hidden &rarr; hidden and output
+&rarr; hidden connections very carefully so that the hidden state has
+a huge reservoir of weakly coupled oscillators which can be
+selectively driven by the input.
 </p>
 <ul class="org-ul">
-<li>ESNs only need to learn the</li>
+<li>ESNs only need to learn the hidden &rarr; output connections.</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org24763a3" class="outline-4">
+<h4 id="org24763a3">Good initialization with momentum</h4>
+<div class="outline-text-4" id="text-org24763a3">
 <p>
-hiddenàoutput connections.
-Good initialization with momentum
 Initialize like in Echo State Networks, but
 then learn all of the connections using
-momentum.Neural Networks for Machine Learning
-Lecture 7e
-Long term short term memory
-Geoffrey Hinton
-Nitish Srivastava,
-Kevin Swersky
-Tijmen Tieleman
-Abdel-rahman MohamedLong Short Term Memory (LSTM)
-Hochreiter &amp; Schmidhuber
-(1997) solved the problem of
-getting an RNN to remember
-things for a long time (like
-hundreds of time steps).
-They designed a memory cell
-using logistic and linear units
-with multiplicative interactions.
-Information gets into the cell
-whenever its “write” gate is on.
-The information stays in the
-cell so long as its “keep” gate
-is on.
-Information can be read from
-the cell by turning on its “read”
-gate.  To preserve information for a long time in
-the activities of an RNN, we use a circuit
-that implements an analog memory cell.
+momentum.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb9a851f" class="outline-3">
+<h3 id="orgb9a851f">Transcript</h3>
+<div class="outline-text-3" id="text-orgb9a851f">
+<p>
+In this video, I'm going to talk about the exploding and vanishing
+gradients problem, which is what makes it difficult to train
+recurrent neural networks.
+</p>
+
+<p>
+For many years, researchers in RNN networks thought they would
+never be able to train these networks to model dependencies over
+long time periods. But at the end of this video, I can describe
+four different ways in which that can now be done.
+</p>
+
+<p>
+To understand why it's so difficult to train recurrent neural
+networks, we have to understand a very important difference between
+the forward and backward passes in a recurrent neural net. In the
+forward pass, we used squashing functions, like the logistic, to
+prevent the activity vectors from exploding. So, if you look at the
+picture on the right, each neuron is using a logistic unit shown by
+that blue curve and it can't output any value greater than one or
+less than zero, So that stops explosions.
+</p>
+
+<p>
+The backward pass, however, is completely linear. Most people find
+this very surprising. If you double the error derivatives is it the
+final layers of this net, all the error derivatives will double
+when you back propagate. So, if you look at the red dots that I put
+on the blue curves, We'll suppose those are the activity levels of
+the neurons on the forward pass.
+</p>
+
+<p>
+And so, when you back propagate, you're using the gradients of the
+blue curves at those red dots. So the red lines are meant to throw
+the tangents to the blue curves at the red dots. And, once you
+finish the forward pass, the slope of that tangent is fixed. You
+now back propagate and the back propagation is like going forwards
+though a linear system in which the slope of the non-linearity has
+been fixed.
+</p>
+
+<p>
+Of course, each time you back propagate, the slopes will be
+different because they were determined by the forward pass. But
+during the back propagation, it's a linear system and so it suffers
+from a problem of linear systems, which is when you iterate, they
+tend to either explode or die. So when we backpropagate through
+many layers if the weights are small the gradients will shrink and
+become exponentially small.
+</p>
+
+<p>
+And that means that when you backpropagate through time gradients
+that are many steps earlier than the targets arrive will be tiny.
+Similarly, if the weights are big, the gradients will explode. And
+that means when you back propagate through time, the gradients will
+get huge and wipe out all your knowledge. In a feed-forward neural
+net, unless it's very deep, these problems aren't nearly as bad
+because we typically only have a few hidden layers. But as soon as
+we have a recurrent neural network trained on a long sequence, for
+example 100 time steps, then if the gradients are growing as we
+back propagate, we'll get whatever that growth rate is to the power
+of 100 and if they're dying, we'll get whatever that decay is to
+the power of 100 and, so, they'll either explode or vanish.
+</p>
+
+<p>
+We might be able to initialize the weights very carefully to avoid
+this and more recent work, shows that indeed careful initialization
+of the weights does make things work much better. But even with
+good initial weights, it's hard to detect the dependency of the
+current output or an input from many time-steps ago. So it's hard
+to make the output depend on things that happened a long time ago.
+</p>
+
+<p>
+RNN's have difficulty dealing with long-range dependencies. Here's
+an example of exploding and dying gradients for a system that's
+trying to learn attractors. So suppose we try and train a recurrent
+neural network, So that whatever state we started in, it ends up in
+one of these two attractor states. So we're going a learn blue
+basin of attraction and a pink basin of attraction. And if we start
+anywhere within the blue basin of attraction, we will end up at the
+same point.
+</p>
+
+<p>
+What that means is that, small differences in our initial state
+make no difference to where we end up. So the derivative of the
+final state with respect to changes in the initial state, is zero.
+That's vanishing gradients. When we back propagate through the
+dynamics of this system we will discover there's no gradients from
+where you start, and the same with the pink basin of attraction.
+</p>
+
+<p>
+If however, we start very close to the boundary between the two
+attractors. Then, a tiny difference in where we start, that's the
+other side of the watershed, makes the huge difference to where we
+end up, that's the explosion gradient problem.
+</p>
+
+<p>
+And so whenever your trying to use a recurrent neural network to
+learn attractors like this, you're bound to get vanishing or
+exploding gradients. It turns out, there's at least four effective
+ways to learn a recurrent neural network. The first is a method
+called long short term memory and I'll talk about that more in this
+lecture.
+</p>
+
+<p>
+The idea is we actually change the architecture of the neural
+network to make it good at remembering things. The second method is
+to use a much better optimizer that can deal with very small
+gradients. I'll talk about that in the next lecture. The real
+problem in optimization is to detect small gradients that have an
+even smaller curvature. Heissan-free Optimization, tailored to your
+own apps is good at doing that.
+</p>
+
+<p>
+The third method really kind of evades the problem. What we do is
+we carefully initialize the input to hidden weights and we very
+carefully initialize the hidden to hidden weights, and also
+feedback weights from the outputs to the hidden units. And the idea
+of this careful initialization is to make sure that the hidden
+state has a huge reservoir of weakly coupled oscillators. So if you
+hit it with an input sequence, it will reverberate for a long time
+and those reverberations are remembering what happened in the input
+sequence.
+</p>
+
+<p>
+You then try and couple those reverberations to the output you want
+and so the only thing that learns in an Echo State Network is the
+connections between the hidden units and the outputs. And if the
+output units are linear, that's very easy to train. So this hasn't
+really learned the recurrent. It's used a fixed random recurrent
+bit, but a carefully chosen one and then just learned the hidden
+tripod connections.
+</p>
+
+<p>
+And the final method is to use momentum, but to use momentum with
+the kind of initialization that was being used for Echo State
+Networks and that makes them work even better. So it was very
+clever to find out how to initialize these recurrent networks so
+they'll have interesting dynamics, but they work even better if you
+now modify that dynamic slightly in that direction that will help
+with the task at hand.
+</p>
+
+<p>
+Neural Networks for Machine Learning Lecture 7e Long term short term
+    memory Geoffrey Hinton Nitish Srivastava, Kevin Swersky Tijmen
+    Tieleman Abdel-rahman MohamedLong Short Term Memory (LSTM)
+    Hochreiter &amp; Schmidhuber (1997) solved the problem of getting an
+    RNN to remember things for a long time (like hundreds of time
+    steps). They designed a memory cell using logistic and linear
+    units with multiplicative interactions. Information gets into the
+    cell whenever its “write” gate is on. The information stays in the
+    cell so long as its “keep” gate is on. Information can be read
+    from the cell by turning on its “read” gate. To preserve
+    information for a long time in the activities of an RNN, we use a
+    circuit that implements an analog memory cell.
 </p>
 <ul class="org-ul">
 <li>A linear unit that has a self-link with a</li>
@@ -1327,68 +1503,26 @@ the read gate.
 <li>We can backpropagate through this</li>
 </ul>
 <p>
-circuit because logistics are have nice
-derivatives.
-keep
-gate
-1.73
-write
-gate
-input from
-rest of RNN
-read
-gate
-output to
-rest of RNNBackpropagation through a memory cell
-keep
-0
-keep
-1
-keep
-1
-1.7
-1.7
-read
-0
-write
-1
-1.7
-keep
-0
-1.7
-read
-0
-write
-0
-time à
-read
-1
-write
-0
-1.7Reading cursive handwriting
-This is a natural task for an
-RNN.
-The input is a sequence of
-(x,y,p) coordinates of the tip of
-the pen, where p indicates
-whether the pen is up or down.
-The output is a sequence of
-characters.
-Graves &amp; Schmidhuber (2009)
-showed that RNNs with LSTM
-are currently the best systems
-for reading cursive writing.
+circuit because logistics are have nice derivatives. keep gate
+1.73 write gate input from rest of RNN read gate output to rest of
+RNNBackpropagation through a memory cell keep 0 keep 1 keep 1 1.7
+1.7 read 0 write 1 1.7 keep 0 1.7 read 0 write 0 time à read 1
+write 0 1.7Reading cursive handwriting This is a natural task for
+an RNN. The input is a sequence of (x,y,p) coordinates of the tip
+of the pen, where p indicates whether the pen is up or down. The
+output is a sequence of characters. Graves &amp; Schmidhuber (2009)
+showed that RNNs with LSTM are currently the best systems for
+reading cursive writing.
 </p>
 <ul class="org-ul">
 <li>They used a sequence of</li>
 </ul>
 <p>
-small images as input
-rather than pen
-coordinates.A demonstration of online handwriting recognition by an
-RNN with Long Short Term Memory (from Alex Graves)
-The movie that follows shows several different things:
-Row 1: This shows when the characters are recognized.
+small images as input rather than pen coordinates.A demonstration
+of online handwriting recognition by an RNN with Long Short Term
+Memory (from Alex Graves) The movie that follows shows several
+different things: Row 1: This shows when the characters are
+recognized.
 </p>
 <ul class="org-ul">
 <li>It never revises its output so difficult decisions are more delayed.</li>
@@ -1400,24 +1534,26 @@ Row 2: This shows the states of a subset of the memory cells.
 <li>Notice how they get reset when it recognizes a character.</li>
 </ul>
 <p>
-Row 3: This shows the writing. The net sees the x and y coordinates.
+Row 3: This shows the writing. The net sees the x and y
+coordinates.
 </p>
 <ul class="org-ul">
 <li>Optical input actually works a bit better than pen coordinates.</li>
 </ul>
 <p>
-Row 4: This shows the gradient backpropagated all the way to the x and
-y inputs from the currently most active character.
+Row 4: This shows the gradient backpropagated all the way to the x
+and y inputs from the currently most active character.
 </p>
 <ul class="org-ul">
 <li>This lets you see which bits of the data are influencing the decision.</li>
 </ul>
 </div>
+</div>
 
 
-<div id="outline-container-orgda4208e" class="outline-3">
-<h3 id="orgda4208e">Transcript</h3>
-<div class="outline-text-3" id="text-orgda4208e">
+<div id="outline-container-orgca0c494" class="outline-3">
+<h3 id="orgca0c494">Transcript</h3>
+<div class="outline-text-3" id="text-orgca0c494">
 <p>
 In this video, I'm going to talk about the back propagation through
 time algorithm. It's the standard way to train or recurrence your
