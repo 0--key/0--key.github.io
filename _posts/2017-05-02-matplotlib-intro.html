@@ -14,7 +14,15 @@ tags: [matplotlib]
 <li><a href="#orgdc45833">GNU Octave meets Python</a>
 <ul>
 <li><a href="#org6424e19">Data importing</a></li>
+<li><a href="#orgc5c72a2">NdArray manipulations</a></li>
 <li><a href="#org54a45f5">Data visualization</a></li>
+</ul>
+</li>
+<li><a href="#org52d562d">Four datasets on one picture</a>
+<ul>
+<li><a href="#org6c1eba0">Iterate the dataset</a></li>
+<li><a href="#org8595633">Scatter NumPy array</a></li>
+<li><a href="#org6190d85">Scatter several datasets on one image</a></li>
 </ul>
 </li>
 </ul>
@@ -50,6 +58,7 @@ tags: [matplotlib]
 </div>
 
 <pre class="example">
+
 [[-0.80857143  0.8372093 ]
  [ 0.35714286  0.85049834]
  [-0.75142857 -0.73089701]
@@ -69,6 +78,56 @@ tags: [matplotlib]
  [-0.69414749]]
 &lt;class 'numpy.ndarray'&gt;
 </pre>
+</div>
+</div>
+
+<div id="outline-container-orgc5c72a2" class="outline-3">
+<h3 id="orgc5c72a2">NdArray manipulations</h3>
+<div class="outline-text-3" id="text-orgc5c72a2">
+</div><div id="outline-container-orge498bb6" class="outline-4">
+<h4 id="orge498bb6">Directly</h4>
+<div class="outline-text-4" id="text-orge498bb6">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> nen:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(i[0], i[1], <span style="color: #4682b4;">type</span>(i[1]), <span style="color: #deb887; font-style: italic;">'\n'</span>)
+</pre>
+</div>
+
+<pre class="example">
+
+... -0.808571428571 0.837209302326 &lt;class 'numpy.float64'&gt; 
+
+0.357142857143 0.85049833887 &lt;class 'numpy.float64'&gt; 
+
+-0.751428571429 -0.730897009967 &lt;class 'numpy.float64'&gt; 
+
+-0.3 0.126245847176 &lt;class 'numpy.float64'&gt;
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc0d426a" class="outline-4">
+<h4 id="orgc0d426a">Converted</h4>
+<div class="outline-text-4" id="text-orgc0d426a">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> nen.tolist():
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(i[0], i[1], <span style="color: #4682b4;">type</span>(i[1]), <span style="color: #deb887; font-style: italic;">'\n'</span>)
+</pre>
+</div>
+
+<pre class="example">
+
+... -0.8085714285714286 0.8372093023255818 &lt;class 'float'&gt; 
+
+0.3571428571428572 0.8504983388704321 &lt;class 'float'&gt; 
+
+-0.7514285714285714 -0.7308970099667773 &lt;class 'float'&gt; 
+
+-0.2999999999999999 0.1262458471760799 &lt;class 'float'&gt;
+
+</pre>
+</div>
 </div>
 </div>
 
@@ -242,6 +301,236 @@ plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/sigmoidal
 <p><img src="http://0--key.github.io/assets/img/plt/parabola.png" alt="parabola.png" />
 </p>
 </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org52d562d" class="outline-2">
+<h2 id="org52d562d">Four datasets on one picture</h2>
+<div class="outline-text-2" id="text-org52d562d">
+</div><div id="outline-container-org6c1eba0" class="outline-3">
+<h3 id="org6c1eba0">Iterate the dataset</h3>
+<div class="outline-text-3" id="text-org6c1eba0">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #7fffd4;">datasets</span> = [<span style="color: #deb887; font-style: italic;">'data/dataset1.mat'</span>, <span style="color: #deb887; font-style: italic;">'data/dataset2.mat'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">'data/dataset3.mat'</span>, <span style="color: #deb887; font-style: italic;">'data/dataset4.mat'</span>]
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> datasets:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   (nen, pen, wi, wg) = read_dataset(i)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(nen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, pen, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wi, <span style="color: #deb887; font-style: italic;">'\n\n'</span>, wg)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(<span style="color: #deb887; font-style: italic;">'\n\n\n'</span>)
+</pre>
+</div>
+
+<pre class="example">
+
+&gt;&gt;&gt; ... ... ... ... [[-0.80857143  0.8372093 ]
+ [ 0.35714286  0.85049834]
+ [-0.75142857 -0.73089701]
+ [-0.3         0.12624585]] 
+
+ [[ 0.87142857  0.62458472]
+ [-0.02       -0.92358804]
+ [ 0.36285714 -0.31893688]
+ [ 0.88857143 -0.87043189]] 
+
+ [[-0.62170147]
+ [ 0.76091527]
+ [ 0.77187205]] 
+
+ [[ 4.3496526 ]
+ [-2.60997235]
+ [-0.69414749]]
+
+
+
+
+[[-0.80857143  0.8372093 ]
+ [ 0.35714286  0.85049834]
+ [-0.75142857 -0.73089701]
+ [-0.3         0.12624585]
+ [ 0.64285714 -0.5448505 ]] 
+
+ [[ 0.87142857  0.62458472]
+ [-0.02       -0.92358804]
+ [ 0.36285714 -0.31893688]
+ [ 0.88857143 -0.87043189]
+ [-0.52857143  0.51162791]] 
+
+ [[ 1.84689887]
+ [-0.58324929]
+ [-0.54178883]] 
+
+ []
+
+
+
+
+[[-0.79142857  0.07973422]
+ [-0.55714286  0.41196013]
+ [-0.22571429  0.69767442]
+ [ 0.16285714  0.83056478]
+ [ 0.46        0.65780731]
+ [ 0.73428571  0.33887043]
+ [ 0.82571429 -0.01328904]] 
+
+ [[-0.76285714 -0.19269103]
+ [-0.60285714 -0.48504983]
+ [-0.38571429 -0.69767442]
+ [-0.19142857 -0.35880399]
+ [ 0.28285714 -0.43189369]
+ [ 0.40857143 -0.69767442]
+ [ 0.75142857 -0.23255814]] 
+
+ [[ 0.90368034]
+ [-0.49087549]
+ [ 0.94855295]] 
+
+ [[ -0.67272864]
+ [-11.48921717]
+ [ -0.89411095]]
+
+
+
+
+[[-0.86571429 -0.39202658]
+ [-0.78571429 -0.17275748]
+ [-0.55714286  0.24584718]
+ [-0.28857143  0.52491694]
+ [-0.12857143  0.52491694]
+ [ 0.08285714  0.33222591]
+ [ 0.18        0.10631229]
+ [ 0.25428571 -0.16611296]
+ [ 0.32857143 -0.35215947]] 
+
+ [[-0.08857143  0.23255814]
+ [ 0.00857143 -0.06644518]
+ [ 0.12857143 -0.3255814 ]
+ [ 0.28857143 -0.52491694]
+ [ 0.59714286 -0.46511628]
+ [ 0.71714286 -0.1461794 ]
+ [ 0.86        0.15946844]
+ [ 0.94571429  0.44518272]] 
+
+ [[-0.03182596]
+ [-0.25511273]
+ [-0.00710252]] 
+
+ []
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8595633" class="outline-3">
+<h3 id="org8595633">Scatter NumPy array</h3>
+<div class="outline-text-3" id="text-org8595633">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+(data_neg, data_pos, wi, wg) = read_dataset(<span style="color: #deb887; font-style: italic;">'data/dataset1.mat'</span>)
+
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_neg:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   plt.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'y'</span>)
+
+<span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_pos:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   plt.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'r'</span>)
+
+
+plt.xlabel(<span style="color: #deb887; font-style: italic;">'x'</span>)
+plt.ylabel(<span style="color: #deb887; font-style: italic;">'y'</span>)
+plt.title(<span style="color: #deb887; font-style: italic;">'NumPy scattering'</span>)
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/ndarray_scatter.png'</span>)
+</pre>
+</div>
+<p>
+&gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0906978&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0923be0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e092f860&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0942f28&gt;
+&#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0942e48&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e08c7f28&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0ae16a0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0923ac8&gt;
+&gt;&gt;&gt; &lt;matplotlib.text.Text object at 0x7f13e0b3b978&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0b5da90&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0afe860&gt;]]
+&gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e09069e8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e097a3c8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0923da0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0929550&gt;
+&#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e09290f0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0923c18&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e092fe10&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e092ff28&gt;
+&gt;&gt;&gt; &lt;matplotlib.text.Text object at 0x7f13e0b3b978&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0b5da90&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0afe860&gt;]]
+&gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0ac67b8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e09560b8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0adb0f0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0968f28&gt;
+&#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0968e48&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e096ef28&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e094dbe0&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0956a58&gt;
+&gt;&gt;&gt; &lt;matplotlib.text.Text object at 0x7f13e0b3b978&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0b5da90&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0afe860&gt;]]
+&#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &#x2026; &#x2026; &#x2026; &#x2026; &gt;&gt;&gt; &gt;&gt;&gt; &#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0b20b70&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0b30748&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0b30eb8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0b30dd8&gt;
+&#x2026; &#x2026; &lt;matplotlib.collections.PathCollection object at 0x7f13e0abeeb8&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0abe710&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0b68240&gt;
+&lt;matplotlib.collections.PathCollection object at 0x7f13e0abedd8&gt;
+&gt;&gt;&gt; &lt;matplotlib.text.Text object at 0x7f13e0b3b978&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0b5da90&gt;
+&lt;matplotlib.text.Text object at 0x7f13e0afe860&gt;]]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6190d85" class="outline-3">
+<h3 id="org6190d85">Scatter several datasets on one image</h3>
+<div class="outline-text-3" id="text-org6190d85">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">import</span> scipy.io
+<span style="color: #87cefa;">import</span> matplotlib.pyplot <span style="color: #87cefa;">as</span> plt
+
+
+<span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">read_dataset</span>(filename):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Reads data from .mat binary file."""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">data</span> = scipy.io.loadmat(filename)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> [data[k] <span style="color: #87cefa;">for</span> k <span style="color: #87cefa;">in</span> (<span style="color: #deb887; font-style: italic;">'neg_examples_nobias'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">'pos_examples_nobias'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span> <span style="color: #deb887; font-style: italic;">'w_init'</span>, <span style="color: #deb887; font-style: italic;">'w_gen_feas'</span>)]
+
+
+<span style="color: #7fffd4;">datasets</span> = [<span style="color: #deb887; font-style: italic;">'data/dataset1.mat'</span>, <span style="color: #deb887; font-style: italic;">'data/dataset2.mat'</span>,
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">'data/dataset3.mat'</span>, <span style="color: #deb887; font-style: italic;">'data/dataset4.mat'</span>]
+
+plt.style.use(<span style="color: #deb887; font-style: italic;">'dark_background'</span>)
+<span style="color: #7fffd4;">fig</span> = plt.figure()
+
+<span style="color: #87cefa;">for</span> i, data <span style="color: #87cefa;">in</span> <span style="color: #4682b4;">enumerate</span>(datasets):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   (data_neg, data_pos, wi, wg) = read_dataset(data)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">s1</span> = fig.add_subplot(2, 2, i+1)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_neg:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   s1.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'y'</span>)
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">for</span> i <span style="color: #87cefa;">in</span> data_pos:
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   s1.scatter(i[0], i[1], color=<span style="color: #deb887; font-style: italic;">'r'</span>)
+
+plt.savefig(<span style="color: #deb887; font-style: italic;">'img/plt/four_datasets.png'</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/plt/four_datasets.png" alt="four_datasets.png" />
+</p>
 </div>
 </div>
 </div>
