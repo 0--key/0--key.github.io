@@ -20,7 +20,7 @@ tags: [architecture, overview]
 <li><a href="#orgf40a8d8">Some text generated one character at a time</a></li>
 <li><a href="#orgfe167c9">Symmetrically connected networks</a></li>
 <li><a href="#org4c303a8">Symmetrically connected networks with hidden units</a></li>
-<li><a href="#org956b525">Transcript</a></li>
+<li><a href="#org44206b2">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orge1d6cc6">Perceptrons: The first generation of neural networks</a>
@@ -30,7 +30,7 @@ tags: [architecture, overview]
 <li><a href="#org1221b85">Binary threshold neurons (decision units)</a></li>
 <li><a href="#org37361f4">How to learn biases using the same rule as we use for learning weights</a></li>
 <li><a href="#orgfacfb7e">The perceptron convergence procedure:</a></li>
-<li><a href="#org048596b">Transcript</a></li>
+<li><a href="#org9d02480">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgde1f485">A geometrical view of perceptrons</a>
@@ -38,6 +38,7 @@ tags: [architecture, overview]
 <li><a href="#org58dc982">Warning!</a></li>
 <li><a href="#org6731899">Weight-space</a></li>
 <li><a href="#org7503e36">The cone of feasible solutions</a></li>
+<li><a href="#org1922715">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgefc13a4">Why the learning works</a>
@@ -284,9 +285,9 @@ course
 </div>
 </div>
 
-<div id="outline-container-org956b525" class="outline-3">
-<h3 id="org956b525">Transcript</h3>
-<div class="outline-text-3" id="text-org956b525">
+<div id="outline-container-org44206b2" class="outline-3">
+<h3 id="org44206b2">Transcript</h3>
+<div class="outline-text-3" id="text-org44206b2">
 <p>
 In this video I'm going to describe various kinds of architectures
 for neural networks. What I mean by an architecture, is the way in
@@ -586,9 +587,9 @@ answer for all the training cases if any such set exists.Neural
 </div>
 </div>
 
-<div id="outline-container-org048596b" class="outline-3">
-<h3 id="org048596b">Transcript</h3>
-<div class="outline-text-3" id="text-org048596b">
+<div id="outline-container-org9d02480" class="outline-3">
+<h3 id="org9d02480">Transcript</h3>
+<div class="outline-text-3" id="text-org9d02480">
 <p>
 In this video, I'm gonna talk about perceptrons. These were
 investigated in the early 1960's, and initially they looked very
@@ -805,7 +806,7 @@ complexity as going from 2-D to 3-D.</li>
 <div class="figure">
 <p><img src="https://i.stack.imgur.com/nzHSl.jpg" alt="neural network" width="50%" height="50%" title="Neural network representation" align="right" />
 </p>
-<p><span class="figure-number">Figure 5: </span>Weight space</p>
+<p><span class="figure-number">Figure 6: </span>Weight space</p>
 </div>
 
 <p>
@@ -876,8 +877,141 @@ The problem is convex.
 </p>
 </div>
 </div>
-</div>
 
+<div id="outline-container-org1922715" class="outline-3">
+<h3 id="org1922715">Transcript</h3>
+<div class="outline-text-3" id="text-org1922715">
+<p>
+In this figure, we're going to get a geometrical understanding of
+what happens when a perceptron learns. To do this, we have to think
+in terms of a weight space. It's a high dimensional space in which
+each point corresponds to a particular setting for all the weights.
+</p>
+
+<p>
+In this phase, we can represent the training cases as planes and
+learning consists of trying to get the weight vector on the right
+side of all the training planes. For non-mathematicians, this may
+be tougher than previous material. You may have to spend quite a
+long time studying the next two parts. In particular, if you're not
+used to thinking about hyperplanes and high dimensional spaces,
+you're going to have to learn that. To deal with hyperplanes in a
+14-dimensional space, for example, what you do is you visualize a
+3-dimensional space and you say, fourteen to yourself very loudly.
+Everybody does it. But remember, that when you go from
+13-dimensional space to a 14-dimensional space, your creating as
+much extra complexity as when you go from a 2D space to a 3D space.
+14-dimensional space is very big and very complicated.
+</p>
+
+<p>
+So, we are going to start off by thinking about weight space. This
+is the space that has one dimension for each weight in the
+perceptron. A point in the space represents a particular setting of
+all the weights. Assuming we've eliminated the threshold, we can
+represent every training case as a hyperplane through the origin in
+weight space. So, points in the space correspond to weight vectors
+and training cases correspond to planes. And, for a particular
+training case, the weights must lie on one side of that hyperplane,
+in order to get the answer correct for that training case.
+</p>
+
+<p>
+So, let's look at a picture of it so we can understand what's going
+on. Here's a picture of white space. The training case, we're going
+to think of one training case for now, it defines a plane, which in
+this 2D picture is just the black line. The plane goes through the
+origin and it's perpendicular to the input vector for that training
+case, which here is shown as a blue vector. We're going to consider
+a training case in which the correct answer is one. And for that
+kind of training case, the weight vector needs to be on the correct
+side of the hyperplane in order to get the answer right. It needs
+to be on the same side of the hyperplane as the direction in which
+the training vector points.
+</p>
+
+<p>
+For any weight vector like the green one, that's on that side of
+the hyperplane, the angle with the input vector will be less than
+90 degrees. So, the scalar product of the input vector with a
+weight vector will be positive. And since we already got rid of the
+threshold, that means the perceptron will give an output of what?
+It'll say yes, and so we'll get the right answer.
+</p>
+
+<p>
+Conversely, if we have a weight vector like the red one, that's on
+the wrong side of the plane, the angle with the input vector will
+be more than 90 degrees, so the scalar product of the weight vector
+and the input vector will be negative, and we'll get a scalar
+product that is less than zero so the perceptron will say, no or
+zero, and in this case, we'll get the wrong answer.
+</p>
+
+<p>
+So, to summarize, on one side of the plane, all the weight vectors
+will get the right answer. And on the other side of the plane, all
+the possible weight vectors will get the wrong answer.
+</p>
+
+<p>
+Now, let's look at a different training case, in which the correct
+answers are zero. So here, we have the weight space again. We've
+chosen a different input vector, of this input factor, the right
+answer is zero. So again, the input case corresponds to a plane
+shown by the black line. And in this case, any weight vectors will
+make an angle of less than 90 degrees with the input factor, will
+give us a positive scalar product, [unknown] perceptron to say yes
+or one, and it will get the answer wrong conversely.
+</p>
+
+<p>
+And the input vector on the other side of the plain, will have an
+angle of greater than 90 degrees. And they will correctly give the
+answer of zero. So, as before, the plane goes through the origin,
+it's perpendicular to the input vector, and on one side of the
+plane, all the weight vectors are bad, and on the other side,
+they're all good.
+</p>
+
+<p>
+Now, let's put those two training cases together in one picture
+weight space. Our picture of weight space is getting a little bit
+crowded. I've moved the input vector over so we don't have all the
+vectors in quite the same place. And now, you can see that there's
+a cone of possible weight vectors. And any weight vectors inside
+that cone, will get the right answer for both training cases.
+</p>
+
+<p>
+Of course, there doesn't have to be any cone like that. It could be
+there are no weight vectors that get the right answers for all of
+the training cases. But if there are any, they'll lie in a cone.
+</p>
+
+
+<p>
+So, what the learning algorithm needs to do is consider the
+training cases one at a time and move the weight vector around in
+such a way that it eventually lies in this cone. One thing to
+notice is that if you get a good weight factor, that is something
+that works for all the training cases, it'll lie on the cone.
+</p>
+
+<p>
+And if you had another one, it'll lie on the cone. And so, if you
+take the average of those two weight vectors, that will also lie on
+the cone. That means the problem is convex. The average of two
+solutions is itself a solution.
+</p>
+
+<p>
+And in general in machine learning if you can get a convex learning
+problem, that makes life easy.
+</p>
+</div>
+</div>
+</div>
 
 <div id="outline-container-orgefc13a4" class="outline-2">
 <h2 id="orgefc13a4">Why the learning works</h2>
@@ -909,7 +1043,7 @@ vector!
 <h3 id="org1dacd0b">Why the learning procedure works</h3>
 <div class="outline-text-3" id="text-org1dacd0b">
 <p>
-So consider “generously feasible” weight vectors that lie within
+So consider <i>generously feasible</i> weight vectors that lie within
 the feasible region by a margin at least as great as the length of
 the input vector that defines each constraint plane.
 </p>
@@ -977,7 +1111,7 @@ very strong limitations on what a perceptron can learn.
 <div class="figure">
 <p><img src="http://0--key.github.io/assets/img/neural_networks/perceptron_representation.png" alt="Perceptron schema" width="30%" title="Graphical representation" align="right" />
 </p>
-<p><span class="figure-number">Figure 6: </span>Binary threshold neurons</p>
+<p><span class="figure-number">Figure 7: </span>Binary threshold neurons</p>
 </div>
 
 <p>
@@ -1008,7 +1142,7 @@ w<sub>2</sub> &lt; θ
 <div class="figure">
 <p><img src="http://0--key.github.io/assets/img/neural_networks/perceptron_limitation.png" alt="Perceptron limitation" width="40%" title="Geometric view" align="right" />
 </p>
-<p><span class="figure-number">Figure 7: </span>Binary threshold neurons limits</p>
+<p><span class="figure-number">Figure 8: </span>Binary threshold neurons limits</p>
 </div>
 
 <p>
@@ -1031,7 +1165,7 @@ the origin by a distance equal to the threshold.</li>
 <div class="figure">
 <p><img src="http://0--key.github.io/assets/img/neural_networks/simple_patterns.png" alt="Perceptron limitation" width="30%" title="Sketch view" align="right" />
 </p>
-<p><span class="figure-number">Figure 8: </span>Simple patterns discrimination</p>
+<p><span class="figure-number">Figure 9: </span>Simple patterns discrimination</p>
 </div>
 
 <p>
