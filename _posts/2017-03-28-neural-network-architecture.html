@@ -20,7 +20,7 @@ tags: [architecture, overview]
 <li><a href="#orgf40a8d8">Some text generated one character at a time</a></li>
 <li><a href="#orgfe167c9">Symmetrically connected networks</a></li>
 <li><a href="#org4c303a8">Symmetrically connected networks with hidden units</a></li>
-<li><a href="#org44206b2">Transcript</a></li>
+<li><a href="#org1922715">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orge1d6cc6">Perceptrons: The first generation of neural networks</a>
@@ -30,7 +30,7 @@ tags: [architecture, overview]
 <li><a href="#org1221b85">Binary threshold neurons (decision units)</a></li>
 <li><a href="#org37361f4">How to learn biases using the same rule as we use for learning weights</a></li>
 <li><a href="#orgfacfb7e">The perceptron convergence procedure:</a></li>
-<li><a href="#org9d02480">Transcript</a></li>
+<li><a href="#org5ff840e">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgde1f485">A geometrical view of perceptrons</a>
@@ -38,7 +38,7 @@ tags: [architecture, overview]
 <li><a href="#org58dc982">Warning!</a></li>
 <li><a href="#org6731899">Weight-space</a></li>
 <li><a href="#org7503e36">The cone of feasible solutions</a></li>
-<li><a href="#org1922715">Transcript</a></li>
+<li><a href="#orgbea7a7e">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orgefc13a4">Why the learning works</a>
@@ -46,6 +46,7 @@ tags: [architecture, overview]
 <li><a href="#org0b3356a">Why the learning procedure works (first attempt)</a></li>
 <li><a href="#org1dacd0b">Why the learning procedure works</a></li>
 <li><a href="#org85a8675">Informal sketch of proof of convergence</a></li>
+<li><a href="#org049ca79">Transcript</a></li>
 </ul>
 </li>
 <li><a href="#orga353e61">What perceptrons can’t do</a>
@@ -285,9 +286,9 @@ course
 </div>
 </div>
 
-<div id="outline-container-org44206b2" class="outline-3">
-<h3 id="org44206b2">Transcript</h3>
-<div class="outline-text-3" id="text-org44206b2">
+<div id="outline-container-org1922715" class="outline-3">
+<h3 id="org1922715">Transcript</h3>
+<div class="outline-text-3" id="text-org1922715">
 <p>
 In this video I'm going to describe various kinds of architectures
 for neural networks. What I mean by an architecture, is the way in
@@ -587,9 +588,9 @@ answer for all the training cases if any such set exists.Neural
 </div>
 </div>
 
-<div id="outline-container-org9d02480" class="outline-3">
-<h3 id="org9d02480">Transcript</h3>
-<div class="outline-text-3" id="text-org9d02480">
+<div id="outline-container-org5ff840e" class="outline-3">
+<h3 id="org5ff840e">Transcript</h3>
+<div class="outline-text-3" id="text-org5ff840e">
 <p>
 In this video, I'm gonna talk about perceptrons. These were
 investigated in the early 1960's, and initially they looked very
@@ -878,9 +879,9 @@ The problem is convex.
 </div>
 </div>
 
-<div id="outline-container-org1922715" class="outline-3">
-<h3 id="org1922715">Transcript</h3>
-<div class="outline-text-3" id="text-org1922715">
+<div id="outline-container-orgbea7a7e" class="outline-3">
+<h3 id="orgbea7a7e">Transcript</h3>
+<div class="outline-text-3" id="text-orgbea7a7e">
 <p>
 In this figure, we're going to get a geometrical understanding of
 what happens when a perceptron learns. To do this, we have to think
@@ -1074,6 +1075,115 @@ the input vector.
 So after a finite number of mistakes, the weight vector must lie in
 the feasible region if this region exists.Neural Networks for
 Machine Learning
+</p>
+</div>
+</div>
+
+<div id="outline-container-org049ca79" class="outline-3">
+<h3 id="org049ca79">Transcript</h3>
+<div class="outline-text-3" id="text-org049ca79">
+<p>
+In this video, we're going to, look at a proof that the perceptron
+learning procedure will eventually get the weights into the cone of
+feasible solutions. I don't want you to get the wrong idea about
+the course from this video. In general, it's gonna be about
+engineering, not about proofs of things.
+</p>
+
+<p>
+There'll be very few proofs in the course. But we get to understand
+quite a lot more about perceptrons when we try and prove that they
+will eventually get the right answer. So we going to use our
+geometric understanding of what's happening in weight space as
+subset from learns, to get a proof that the perceptron will
+eventually find a weight vector if it gets the right answer for all
+of the training cases, if any such vector exists.
+</p>
+
+<p>
+And our proof is gonna assume that there is a vector that gets the
+right answer for all training cases. We'll call that a <i>feasible
+vector</i>. An example of a feasible vector is shown by the green dot
+in the diagram. So we start with the wait vector that's getting
+some of the training cases wrong, and in the diagram we've shown a
+training case that is getting wrong. And what we want to show. This
+is the idea for the proof. Is that, every time he gets a training
+case wrong, it will update the current weight vector. In a way that
+makes it closer to every feasible weight factor.
+</p>
+
+<p>
+So we can represent the squared distance of the current weight
+vector from a feasible weight factor, as the sum of a squared
+distance along the line of the input vector that defines the
+training case, and another squared difference orthogonal to that
+line. The orthogonal squared distance won't change, and the squared
+distance along the line of the input vector will get smaller.
+</p>
+
+<p>
+So our hopeful claim is that, every time the perceptron makes a
+mistake, our current weight vector is going to get closer to all
+feasible weight vectors.
+</p>
+
+<p>
+Now this is almost right, but there's an unfortunate problem. If
+you look at the feasible weight vector in gold, it's just on the
+right side of the plane that defines one of the training cases. And
+the current weight vector is just on the wrong side, and the input
+vector is quite big.
+</p>
+
+<p>
+So when we add the input vector to the count weight vector, we
+actually get further away from that gold feasible weight vector. So
+our hopeful claim doesn't work, but we can fix it up so that it
+does. So what we're gonna do is we're gonna define a generously
+feasible weight vector. That's a weight vector that not only gets
+every training case right, but it gets it right by at least a
+certain margin. Where the margin is as big as the input vector for
+that training case.
+</p>
+
+<p>
+So we take the cone of feasible solutions, and inside that we have
+another <i>cone of generously feasible solutions</i>. Which get
+everything right by at least the size of the input vector. And now,
+our proof will work. Now we can make the claim, that every time the
+perceptron makes a mistake, the squared distance to all of the
+generously feasible weight vectors would be decreased by at least
+the squared length of the input vector, which is the update we
+make.
+</p>
+
+<p>
+So given that, we can get an informal sketch of a proof of
+convergence. I'm not gonna try and make this formal. I'm more
+interested in the engineering than the mathematics. If your
+mathematician I'm sure you can make it formal yourself. So, every
+time the perceptron makes a mistake, the current weight vector
+moves and it decreases its squared distance from every generously
+feasible weight vector, by at least the squared length of the
+current input vector.
+</p>
+
+<p>
+And so the squared distance to all the generously feasible weight
+vectors decreases by at least that squared length and assuming that
+none of the input vectors are infinitesimally small. That means
+that after a finite number of mistakes the weight vector must lie
+in the feasible region if this region exists.
+</p>
+
+<p>
+Notice it doesn't have to lie in the generously feasible region,
+but it has to get into the feasible region to make, to stop it
+making mistakes. And that's it. That's our informal sketch of a
+proof that the perceptron convergence procedure works. But notice,
+it all depends on the assumption that there is a generously
+feasible weight vector. And if there is no such vector, the whole
+proof falls apart.
 </p>
 </div>
 </div>
