@@ -1,0 +1,279 @@
+---
+layout: post
+title: NLTK
+tagline: " gentle dissection"
+permalink: /natural-language-processing/nltk/intro.html
+categories: [nltk, intro]
+tags: [nlp]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge0b6803">NLTK source code tree</a>
+<ul>
+<li><a href="#orged71303">Uppermost</a></li>
+<li><a href="#orgf6ae144">In depth <code>nltk</code></a></li>
+<li><a href="#org3b9f173">In depth <code>tools</code></a></li>
+<li><a href="#orgeeb7c32">In depth <code>web</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge0b6803" class="outline-2">
+<h2 id="orge0b6803">NLTK source code tree</h2>
+<div class="outline-text-2" id="text-orge0b6803">
+</div><div id="outline-container-orged71303" class="outline-3">
+<h3 id="orged71303">Uppermost</h3>
+<div class="outline-text-3" id="text-orged71303">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+tree -L 1
+</pre>
+</div>
+
+<pre class="example">
+.
+├── AUTHORS.md
+├── ChangeLog
+├── CONTRIBUTING.md
+├── INSTALL.txt
+├── jenkins-job-config.xml
+├── jenkins.sh
+├── LICENSE.txt
+├── Makefile
+├── MANIFEST.in
+├── nltk
+├── pip-req.txt
+├── README.md
+├── RELEASE-HOWTO.txt
+├── requirements-test.txt
+├── setup.cfg
+├── setup.py
+├── tools
+├── tox.ini
+└── web
+
+3 directories, 16 files
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf6ae144" class="outline-3">
+<h3 id="orgf6ae144">In depth <code>nltk</code></h3>
+<div class="outline-text-3" id="text-orgf6ae144">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+tree nltk -L 1
+</pre>
+</div>
+
+<pre class="example">
+nltk
+├── app
+├── book.py
+├── ccg
+├── chat
+├── chunk
+├── classify
+├── cluster
+├── collections.py
+├── collocations.py
+├── compat.py
+├── corpus
+├── data.py
+├── decorators.py
+├── downloader.py
+├── draw
+├── featstruct.py
+├── grammar.py
+├── help.py
+├── inference
+├── __init__.py
+├── internals.py
+├── jsontags.py
+├── lazyimport.py
+├── metrics
+├── misc
+├── parse
+├── probability.py
+├── sem
+├── sentiment
+├── stem
+├── tag
+├── tbl
+├── test
+├── text.py
+├── tgrep.py
+├── tokenize
+├── toolbox.py
+├── translate
+├── treeprettyprinter.py
+├── tree.py
+├── treetransforms.py
+├── twitter
+├── util.py
+├── VERSION
+└── wsd.py
+
+21 directories, 24 files
+</pre>
+</div>
+
+<div id="outline-container-org6e6af39" class="outline-4">
+<h4 id="org6e6af39"><code>test</code></h4>
+<div class="outline-text-4" id="text-org6e6af39">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+tree nltk/test -L 1
+</pre>
+</div>
+
+<pre class="example">
+nltk/test
+├── all.py
+├── bleu.doctest
+├── bnc.doctest
+├── ccg.doctest
+├── ccg_semantics.doctest
+├── chat80.doctest
+├── childes.doctest
+├── childes_fixt.py
+├── chunk.doctest
+├── classify.doctest
+├── classify_fixt.py
+├── collocations.doctest
+├── compat.doctest
+├── compat_fixt.py
+├── corpus.doctest
+├── corpus_fixt.py
+├── crubadan.doctest
+├── data.doctest
+├── dependency.doctest
+├── discourse.doctest
+├── discourse_fixt.py
+├── doctest_nose_plugin.py
+├── drt.doctest
+├── featgram.doctest
+├── featstruct.doctest
+├── floresta.txt
+├── framenet.doctest
+├── FX8.xml
+├── generate.doctest
+├── gensim.doctest
+├── gensim_fixt.py
+├── gluesemantics.doctest
+├── gluesemantics_malt.doctest
+├── gluesemantics_malt_fixt.py
+├── grammar.doctest
+├── grammartestsuites.doctest
+├── images
+├── index.doctest
+├── inference.doctest
+├── inference_fixt.py
+├── __init__.py
+├── internals.doctest
+├── japanese.doctest
+├── logic.doctest
+├── Makefile
+├── metrics.doctest
+├── misc.doctest
+├── nonmonotonic.doctest
+├── nonmonotonic_fixt.py
+├── onto1.fol
+├── paice.doctest
+├── parse.doctest
+├── portuguese.doctest_latin1
+├── portuguese_en.doctest
+├── portuguese_en_fixt.py
+├── probability.doctest
+├── probability_fixt.py
+├── propbank.doctest
+├── relextract.doctest
+├── resolution.doctest
+├── runtests.py
+├── segmentation_fixt.py
+├── sem3.cfg
+├── semantics.doctest
+├── semantics_fixt.py
+├── sentiment.doctest
+├── sentiwordnet.doctest
+├── simple.doctest
+├── stem.doctest
+├── tag.doctest
+├── tokenize.doctest
+├── toolbox.doctest
+├── toy.cfg
+├── translate.doctest
+├── translate_fixt.py
+├── tree.doctest
+├── treeprettyprinter.doctest
+├── treetransforms.doctest
+├── twitter.ipynb
+├── unit
+├── util.doctest
+├── wordnet.doctest
+├── wordnet_fixt.py
+├── wordnet_lch.doctest
+└── wsd.doctest
+
+2 directories, 83 files
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3b9f173" class="outline-3">
+<h3 id="org3b9f173">In depth <code>tools</code></h3>
+<div class="outline-text-3" id="text-org3b9f173">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+tree tools -L 1
+</pre>
+</div>
+
+<pre class="example">
+tools
+├── find_deprecated.py
+├── global_replace.py
+├── nltk_term_index.py
+├── nltk_term_index.stoplist
+├── run_doctests.py
+└── svnmime.py
+
+0 directories, 6 files
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgeeb7c32" class="outline-3">
+<h3 id="orgeeb7c32">In depth <code>web</code></h3>
+<div class="outline-text-3" id="text-orgeeb7c32">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+tree web -L 1
+</pre>
+</div>
+
+<pre class="example">
+web
+├── api
+├── conf.py
+├── contribute.rst
+├── data.rst
+├── dev
+├── images
+├── index.rst
+├── install.rst
+├── Makefile
+└── news.rst
+
+3 directories, 7 files
+</pre>
+</div>
+</div>
+</div>
