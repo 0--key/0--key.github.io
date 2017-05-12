@@ -19,6 +19,11 @@ tags: [nlp]
 <li><a href="#orgeeb7c32">In depth <code>web</code></a></li>
 </ul>
 </li>
+<li><a href="#org2ace7e9">NLTK in depth</a>
+<ul>
+<li><a href="#org9e98451"><code>app</code></a></li>
+</ul>
+</li>
 <li><a href="#org6be2e8d">Meet Jenkins on Debian</a>
 <ul>
 <li><a href="#org7b9479a">Download <code>.deb</code></a></li>
@@ -286,6 +291,91 @@ web
 </div>
 </div>
 </div>
+
+<div id="outline-container-org2ace7e9" class="outline-2">
+<h2 id="org2ace7e9">NLTK in depth</h2>
+<div class="outline-text-2" id="text-org2ace7e9">
+</div><div id="outline-container-org9e98451" class="outline-3">
+<h3 id="org9e98451"><code>app</code></h3>
+<div class="outline-text-3" id="text-org9e98451">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> ../nltk/
+cat nltk/app/__init__.py
+tree nltk/app -L 1
+</pre>
+</div>
+
+<pre class="example">
+# Natural Language Toolkit: Applications package
+#
+# Copyright (C) 2001-2017 NLTK Project
+# Author: Edward Loper &lt;edloper@gmail.com&gt;
+#         Steven Bird &lt;stevenbird1@gmail.com&gt;
+# URL: &lt;http://nltk.org/&gt;
+# For license information, see LICENSE.TXT
+
+"""
+Interactive NLTK Applications:
+
+chartparser:  Chart Parser
+chunkparser:  Regular-Expression Chunk Parser
+collocations: Find collocations in text
+concordance:  Part-of-speech concordancer
+nemo:         Finding (and Replacing) Nemo regular expression tool
+rdparser:     Recursive Descent Parser
+srparser:     Shift-Reduce Parser
+wordnet:      WordNet Browser
+"""
+
+
+# Import Tkinter-based modules if Tkinter is installed
+try:
+    from six.moves import tkinter
+except ImportError:
+    import warnings
+    warnings.warn("nltk.app package not loaded "
+                  "(please install Tkinter library).")
+else:
+    from nltk.app.chartparser_app import app as chartparser
+    from nltk.app.chunkparser_app import app as chunkparser
+    from nltk.app.collocations_app import app as collocations
+    from nltk.app.concordance_app import app as concordance
+    from nltk.app.nemo_app import app as nemo
+    from nltk.app.rdparser_app import app as rdparser
+    from nltk.app.srparser_app import app as srparser
+    from nltk.app.wordnet_app import app as wordnet
+
+    try:
+        from matplotlib import pylab
+    except ImportError:
+        import warnings
+        warnings.warn("nltk.app.wordfreq not loaded "
+                      "(requires the matplotlib library).")
+    else:
+        from nltk.app.wordfreq_app import app as wordfreq
+
+# skip doctests from this package
+def setup_module(module):
+    from nose import SkipTest
+    raise SkipTest("nltk.app examples are not doctests")
+nltk/app
+├── chartparser_app.py
+├── chunkparser_app.py
+├── collocations_app.py
+├── concordance_app.py
+├── __init__.py
+├── nemo_app.py
+├── rdparser_app.py
+├── srparser_app.py
+├── wordfreq_app.py
+└── wordnet_app.py
+
+0 directories, 10 files
+</pre>
+</div>
+</div>
+</div>
+
 <div id="outline-container-org6be2e8d" class="outline-2">
 <h2 id="org6be2e8d">Meet Jenkins on Debian</h2>
 <div class="outline-text-2" id="text-org6be2e8d">
