@@ -19,6 +19,15 @@ tags: [nlp]
 <li><a href="#orgeeb7c32">In depth <code>web</code></a></li>
 </ul>
 </li>
+<li><a href="#org6be2e8d">Meet Jenkins on Debian</a>
+<ul>
+<li><a href="#org7b9479a">Download <code>.deb</code></a></li>
+<li><a href="#org897edf1">Install <code>.deb</code></a></li>
+<li><a href="#org4be2579">Download <code>.war</code></a></li>
+<li><a href="#org7c0071b">Launch <code>.war</code></a></li>
+<li><a href="#orgd35e330">Open Jenkins</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -274,6 +283,62 @@ web
 
 3 directories, 7 files
 </pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6be2e8d" class="outline-2">
+<h2 id="org6be2e8d">Meet Jenkins on Debian</h2>
+<div class="outline-text-2" id="text-org6be2e8d">
+</div><div id="outline-container-org7b9479a" class="outline-3">
+<h3 id="org7b9479a">Download <code>.deb</code></h3>
+<div class="outline-text-3" id="text-org7b9479a">
+<p>
+<a href="https://pkg.jenkins.io/debian/">from</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org897edf1" class="outline-3">
+<h3 id="org897edf1">Install <code>.deb</code></h3>
+<div class="outline-text-3" id="text-org897edf1">
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install daemon
+sudo dpkg -i ~/Downloads/jenkins&lt;TAB&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4be2579" class="outline-3">
+<h3 id="org4be2579">Download <code>.war</code></h3>
+<div class="outline-text-3" id="text-org4be2579">
+<p>
+<a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war">from</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c0071b" class="outline-3">
+<h3 id="org7c0071b">Launch <code>.war</code></h3>
+<div class="outline-text-3" id="text-org7c0071b">
+<p>
+in terminal:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">java -jar jenkins.war
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd35e330" class="outline-3">
+<h3 id="orgd35e330">Open Jenkins</h3>
+<div class="outline-text-3" id="text-orgd35e330">
+<p>
+in a new <a href="http://localhost:8080/">tab</a>
+</p>
 </div>
 </div>
 </div>
