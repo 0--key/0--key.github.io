@@ -1,0 +1,109 @@
+---
+layout: post
+title: Bayes's theorem
+tagline: " in examples"
+permalink: /bayes/overview.html
+categories: [math]
+tags: [Bayes, theorem]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgc70d1bb">Definition</a></li>
+<li><a href="#org93354cd">Explanation</a></li>
+<li><a href="#org977ba3e">Examples</a>
+<ul>
+<li><a href="#org5077f04">Brest cancer detection</a></li>
+<li><a href="#orgf425fee">Explanation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc70d1bb" class="outline-2">
+<h2 id="orgc70d1bb">Definition</h2>
+<div class="outline-text-2" id="text-orgc70d1bb">
+<p>
+Bayes' theorem is a formula that describes how to update the
+probabilities of hypotheses when given evidence. It follows simply
+from the axioms of conditional probability, but can be used to
+powerfully reason about a wide range of problems involving belief
+updates.
+</p>
+
+<p>
+Given a hypothesis <b>H</b> and evidence <b>E</b>, Bayes' theorem states that
+the relationship between the probability of the hypothesis <b>P(H)</b>
+before getting the evidence and the probability <b>P(H|E)</b> of the
+hypothesis after getting the evidence is:
+</p>
+
+<p>
+\(P(H|E) = \frac{P(E|H)}{P(E)}P(H)\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93354cd" class="outline-2">
+<h2 id="org93354cd">Explanation</h2>
+</div>
+
+<div id="outline-container-org977ba3e" class="outline-2">
+<h2 id="org977ba3e">Examples</h2>
+<div class="outline-text-2" id="text-org977ba3e">
+</div><div id="outline-container-org5077f04" class="outline-3">
+<h3 id="org5077f04">Brest cancer detection</h3>
+<div class="outline-text-3" id="text-org5077f04">
+<p>
+1% of women at age forty who participate in routine screening have
+breast cancer. 80% of women with breast cancer will get positive
+mammographies. 9.6% of women without breast cancer will also get
+positive mammographies. A woman in this age group had a positive
+mammography in a routine screening. What is the probability that
+she actually has breast cancer?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf425fee" class="outline-3">
+<h3 id="orgf425fee">Explanation</h3>
+<div class="outline-text-3" id="text-orgf425fee">
+<p>
+The correct answer is 7.8%, obtained as follows: Out of 10,000
+women, 100 have breast cancer; 80 of those 100 have positive
+mammographies. From the same 10,000 women, 9,900 will not have
+breast cancer and of those 9,900 women, 950 will also get positive
+mammographies. This makes the total number of women with positive
+mammographies 950+80 or 1,030. Of those 1,030 women with positive
+mammographies, 80 will have cancer. Expressed as a proportion, this
+is 80/1,030 or 0.07767 or 7.8%.
+</p>
+
+<p>
+To put it another way, before the mammography screening, the 10,000
+women can be divided into two groups:
+</p>
+
+<ul class="org-ul">
+<li>Group 1: 100 women with breast cancer.</li>
+<li>Group 2: 9,900 women without breast cancer.</li>
+</ul>
+
+<p>
+Summing these two groups gives a total of 10,000 patients,
+confirming that none have been lost in the math. After the
+mammography, the women can be divided into four groups:
+</p>
+
+<ul class="org-ul">
+<li>Group A: 80 women with breast cancer, and a positive mammography.</li>
+<li>Group B: 20 women with breast cancer, and a negative mammography.</li>
+<li>Group C: 950 women without breast cancer, and a positive mammography.</li>
+<li>Group D: 8,950 women without breast cancer, and a negative mammography.</li>
+</ul>
+</div>
+</div>
+</div>
