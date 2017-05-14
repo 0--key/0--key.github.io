@@ -1,0 +1,48 @@
+---
+layout: post
+title: Python decorates
+tagline: " its functions and classes"
+permalink: /python/decorators-dissection.html
+categories: [literate programming]
+tags: [python, decorator]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org57bab88">Syncactic shugar</a></li>
+<li><a href="#org98e647d">Primitive example</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org57bab88" class="outline-2">
+<h2 id="org57bab88">Syncactic shugar</h2>
+<div class="outline-text-2" id="text-org57bab88">
+<blockquote>
+<p>
+  
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org98e647d" class="outline-2">
+<h2 id="org98e647d">Primitive example</h2>
+<div class="outline-text-2" id="text-org98e647d">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">decorator</span>(any_function_as_an_argument):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Do nothing, just returning an input function"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> any_function_as_an_argument
+
+
+<span style="color: #98fb98; font-size: 90%; font-weight: bold;">@decorator</span>
+<span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">sample_function</span>(a, b):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> a + b
+
+<span style="color: #87cefa;">assert</span>(sample_function(2, 3) == 5)
+</pre>
+</div>
+</div>
+</div>
