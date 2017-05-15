@@ -1,0 +1,174 @@
+---
+layout: post
+title: Containerize 
+tagline: " all tedious stuff"
+permalink: /docker/biref-intro.html
+categories: [literate programming]
+tags: [docker, intro]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3c47139">Concept description</a></li>
+<li><a href="#orga695a2a">Istallation</a></li>
+<li><a href="#org8b9fdde">Check-up</a>
+<ul>
+<li><a href="#org49069c0">Version</a></li>
+<li><a href="#org780a756">Help</a></li>
+<li><a href="#org23e03bc">Images</a></li>
+<li><a href="#org97dfc3d">Test execution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3c47139" class="outline-2">
+<h2 id="org3c47139">Concept description</h2>
+</div>
+
+<div id="outline-container-orga695a2a" class="outline-2">
+<h2 id="orga695a2a">Istallation</h2>
+</div>
+
+<div id="outline-container-org8b9fdde" class="outline-2">
+<h2 id="org8b9fdde">Check-up</h2>
+<div class="outline-text-2" id="text-org8b9fdde">
+</div><div id="outline-container-org49069c0" class="outline-3">
+<h3 id="org49069c0">Version</h3>
+<div class="outline-text-3" id="text-org49069c0">
+<div class="org-src-container">
+<pre class="src src-sh">docker --version
+</pre>
+</div>
+
+<pre class="example">
+Docker version 17.03.1-ce, build c6d412e
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org780a756" class="outline-3">
+<h3 id="org780a756">Help</h3>
+<div class="outline-text-3" id="text-org780a756">
+<div class="org-src-container">
+<pre class="src src-sh">docker --help
+</pre>
+</div>
+
+<pre class="example">
+
+Usage:	docker COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default "/home/antony/.docker")
+  -D, --debug              Enable debug mode
+      --help               Print usage
+  -H, --host list          Daemon socket(s) to connect to (default [])
+  -l, --log-level string   Set the logging level ("debug", "info", "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/home/antony/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/home/antony/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/home/antony/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  container   Manage containers
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  volume      Manage volumes
+
+Commands:
+  attach      Attach to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org23e03bc" class="outline-3">
+<h3 id="org23e03bc">Images</h3>
+<div class="outline-text-3" id="text-org23e03bc">
+<div class="org-src-container">
+<pre class="src src-sh">docker images
+</pre>
+</div>
+
+<pre class="example">
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+busybox             latest              8f0abf721946        7 days ago          1.11 MB
+debian              latest              4793a1262e10        5 months ago        123 MB
+hello-world         latest              d0967c81d126        5 months ago        1.84 kB
+docker/whalesay     latest              6b362a9f73eb        2 years ago         247 MB
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org97dfc3d" class="outline-3">
+<h3 id="org97dfc3d">Test execution</h3>
+<div class="outline-text-3" id="text-org97dfc3d">
+<div class="org-src-container">
+<pre class="src src-sh">docker run busybox echo <span style="color: #deb887; font-style: italic;">"I'm a busybox!"</span>
+</pre>
+</div>
+
+<pre class="example">
+I'm a busybox!
+
+</pre>
+</div>
+</div>
+</div>
