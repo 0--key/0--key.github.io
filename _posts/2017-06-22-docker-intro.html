@@ -12,13 +12,22 @@ tags: [docker, intro]
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#org3c47139">Concept description</a></li>
-<li><a href="#orga695a2a">Istallation</a></li>
+<li><a href="#org7b1add9">Installation</a></li>
 <li><a href="#org8b9fdde">Check-up</a>
 <ul>
 <li><a href="#org49069c0">Version</a></li>
 <li><a href="#org780a756">Help</a></li>
 <li><a href="#org23e03bc">Images</a></li>
 <li><a href="#org97dfc3d">Test execution</a></li>
+</ul>
+</li>
+<li><a href="#org823ce89">Simple local webapp</a>
+<ul>
+<li><a href="#org7076067">Nginx launching</a></li>
+<li><a href="#org8d9b3ef">Processes</a></li>
+<li><a href="#org53438a5">Instance close-up</a></li>
+<li><a href="#org88b262f">Ping the container</a></li>
+<li><a href="#orgd1fc1a1">Container halt</a></li>
 </ul>
 </li>
 </ul>
@@ -29,8 +38,8 @@ tags: [docker, intro]
 <h2 id="org3c47139">Concept description</h2>
 </div>
 
-<div id="outline-container-orga695a2a" class="outline-2">
-<h2 id="orga695a2a">Istallation</h2>
+<div id="outline-container-org7b1add9" class="outline-2">
+<h2 id="org7b1add9">Installation</h2>
 </div>
 
 <div id="outline-container-org8b9fdde" class="outline-2">
@@ -169,6 +178,291 @@ docker/whalesay     latest              6b362a9f73eb        2 years ago         
 I'm a busybox!
 
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org823ce89" class="outline-2">
+<h2 id="org823ce89">Simple local webapp</h2>
+<div class="outline-text-2" id="text-org823ce89">
+</div><div id="outline-container-org7076067" class="outline-3">
+<h3 id="org7076067">Nginx launching</h3>
+<div class="outline-text-3" id="text-org7076067">
+<div class="org-src-container">
+<pre class="src src-sh">docker run -p 8000:80 nginx
+</pre>
+</div>
+
+<p>
+And ensure in a <a href="http://localhost:8000">browser</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d9b3ef" class="outline-3">
+<h3 id="org8d9b3ef">Processes</h3>
+<div class="outline-text-3" id="text-org8d9b3ef">
+<p>
+Now when you're got nginx logs in a terminal tab, lets open a new
+one and type into it:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker ps
+</pre>
+</div>
+
+<pre class="example">
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+f546a68edb8d        nginx               "nginx -g 'daemon ..."   17 minutes ago      Up 17 minutes       0.0.0.0:8000-&gt;80/tcp   compassionate_stallman
+
+</pre>
+
+<p>
+Notice that container identificator begins from <code>f546</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org53438a5" class="outline-3">
+<h3 id="org53438a5">Instance close-up</h3>
+<div class="outline-text-3" id="text-org53438a5">
+<p>
+Use the container ID for its meticulous inspection:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">docker inspect f546
+</pre>
+</div>
+
+<pre class="example">
+[
+    {
+        "Id": "f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339",
+        "Created": "2017-06-24T06:41:55.894731265Z",
+        "Path": "nginx",
+        "Args": [
+            "-g",
+            "daemon off;"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5872,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2017-06-24T06:41:56.457862595Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:958a7ae9e56979be256796dabd5845c704f784cd422734184999cf91f24c2547",
+        "ResolvConfPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/hostname",
+        "HostsPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/hosts",
+        "LogPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339-json.log",
+        "Name": "/compassionate_stallman",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": null,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Name": "aufs",
+            "Data": null
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "f546a68edb8d",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.13.1-1~stretch",
+                "NJS_VERSION=1.13.1.0.1.10-1~stretch"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "ArgsEscaped": true,
+            "Image": "nginx",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {},
+            "StopSignal": "SIGTERM"
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "2a56aa540231508a5ae0447c0be9f1d1bd50c641b02627971958ce7391c8a416",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "80/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "8000"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/2a56aa540231",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "95ecd07b285893afb44dcbf05c2d4612520af5fa4fe7f0ab6db51fc635d0d3b0",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "7bc9f6c5809afb954741056586c3406bc468be3da03b8c8b7af5a39da48f62a8",
+                    "EndpointID": "95ecd07b285893afb44dcbf05c2d4612520af5fa4fe7f0ab6db51fc635d0d3b0",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02"
+                }
+            }
+        }
+    }
+]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org88b262f" class="outline-3">
+<h3 id="org88b262f">Ping the container</h3>
+<div class="outline-text-3" id="text-org88b262f">
+<p>
+Now, when we know <code>container ip</code> it is possible to ping it:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ping -c 5 172.17.0.2
+</pre>
+</div>
+
+<pre class="example">
+PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
+64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.111 ms
+64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.166 ms
+64 bytes from 172.17.0.2: icmp_seq=3 ttl=64 time=0.199 ms
+64 bytes from 172.17.0.2: icmp_seq=4 ttl=64 time=0.180 ms
+64 bytes from 172.17.0.2: icmp_seq=5 ttl=64 time=0.168 ms
+
+--- 172.17.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 3998ms
+rtt min/avg/max/mdev = 0.111/0.164/0.199/0.033 ms
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd1fc1a1" class="outline-3">
+<h3 id="orgd1fc1a1">Container halt</h3>
+<div class="outline-text-3" id="text-orgd1fc1a1">
+<p>
+By typing <code>C-c C-c</code>
+</p>
 </div>
 </div>
 </div>
