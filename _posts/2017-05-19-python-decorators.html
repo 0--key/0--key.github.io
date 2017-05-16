@@ -11,9 +11,68 @@ tags: [python, decorator]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#org68818fe">Prelude</a></li>
+<li><a href="#org289b88b">Simple function</a></li>
+<li><a href="#orga44be6c">Nested function</a></li>
 <li><a href="#org57bab88">Syncactic shugar</a></li>
 <li><a href="#org98e647d">Primitive example</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org68818fe" class="outline-2">
+<h2 id="org68818fe">Prelude</h2>
+<div class="outline-text-2" id="text-org68818fe">
+<p>
+It's undoubtly a tough task and a final point in Python functions
+scrutiny. But persistence and attention to details should eliminate
+most of headache.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org289b88b" class="outline-2">
+<h2 id="org289b88b">Simple function</h2>
+<div class="outline-text-2" id="text-org289b88b">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">primitive_function</span>(arg_1, arg_2):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Multiply arguments and return result"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">return</span> arg_1 * arg_2
+
+<span style="color: #87cefa;">assert</span>(primitive_function(2, 2) == 4)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga44be6c" class="outline-2">
+<h2 id="orga44be6c">Nested function</h2>
+<div class="outline-text-2" id="text-orga44be6c">
+<p>
+But what if we put the arbitrary function inside?
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">parent_function</span>(arg_1, arg_2):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Evaluates all nested functions"""</span>
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">first_nested_function</span>(*args):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Converts positional argument"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">args[0] += 1</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">print</span>(args)
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">def</span> <span style="color: #87cefa; font-size: 90%; font-weight: bold;">second_nested_function</span>(**kwargs):
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #deb887; font-style: italic;">"""Converts named argument"""</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #7fffd4;">kwargs</span>[<span style="color: #deb887; font-style: italic;">'b'</span>] += 1
+
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   first_nested_function()
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">second_nested_function()</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #cdc0b0; font-style: italic;">#</span><span style="color: #cdc0b0; font-style: italic;">return args[0] + kwargs['b']</span>
+<span style="color: #f5deb3; background-color: #0a0a0a;"> </span>   <span style="color: #87cefa;">pass</span>
+
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">assert(parent_function(4, b=7) == 13)</span>
+</pre>
+</div>
 </div>
 </div>
 
@@ -44,5 +103,10 @@ tags: [python, decorator]
 <span style="color: #87cefa;">assert</span>(sample_function(2, 3) == 5)
 </pre>
 </div>
+
+<pre class="example">
+None
+
+</pre>
 </div>
 </div>
