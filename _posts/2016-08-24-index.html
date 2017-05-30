@@ -1,72 +1,122 @@
----
+<div class="HTML">
+<p>
+&#x2014;
 layout: page
 title: Intro
-tagline: 'Cook it gently._/\/\/^\/\/\/-<8<'
+tagline: 'Cook it gently._/\/\/^\/\/\/-&lt;8&lt;'
 permalink: /index.html
-categories: [emacs, literate programming, data science]
-tags: [sotfware development, emacs, Python, learning]
----
+categories: [Emacs, Data Science]
+tags: [concept, overview]
+&#x2014;
+</p>
+
+</div>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">Short intro</a>
+<li><a href="#org818c1c1">Short intro</a>
 <ul>
-<li><a href="#orgheadline2">Brief prelude</a></li>
-<li><a href="#orgheadline3">General description</a></li>
-<li><a href="#orgheadline4">Preamble</a></li>
-<li><a href="#orgheadline5">Prerequisites</a></li>
+<li><a href="#org03ddf37">What is Literate Programming?</a></li>
+<li><a href="#org39833f7">What is programming challenge?</a></li>
+<li><a href="#org00ac460">Brief prelude</a></li>
+<li><a href="#org319a6aa">General description</a></li>
+<li><a href="#orgcd2da11">Preamble</a></li>
+<li><a href="#org64997b6">Prerequisites</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">Toolset overview</a>
+<li><a href="#org6c4803e">Toolset overview</a>
 <ul>
-<li><a href="#orgheadline7">Emacs</a></li>
-<li><a href="#orgheadline8">Python</a></li>
-<li><a href="#orgheadline9">SQLite3</a></li>
-<li><a href="#orgheadline10">Postgres</a></li>
-<li><a href="#orgheadline11">Git</a></li>
+<li><a href="#org01331a1">Emacs</a></li>
+<li><a href="#org7663ebb">Python</a></li>
+<li><a href="#org4d08376">SQLite3</a></li>
+<li><a href="#orge6ed432">Postgres</a></li>
+<li><a href="#orgf0a8c85">Git</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline12">Methodology</a></li>
-<li><a href="#orgheadline13">Topics</a></li>
-<li><a href="#orgheadline14">Feedback</a></li>
-<li><a href="#orgheadline15">Conclusion</a></li>
+<li><a href="#orgd296356">Methodology</a></li>
+<li><a href="#org075ed2f">Topics</a></li>
+<li><a href="#org64358e6">Feedback</a></li>
+<li><a href="#org082d77b">Conclusion</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Short intro</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-org818c1c1" class="outline-2">
+<h2 id="org818c1c1">Short intro</h2>
+<div class="outline-text-2" id="text-org818c1c1">
+</div><div id="outline-container-org03ddf37" class="outline-3">
+<h3 id="org03ddf37">What is Literate Programming?</h3>
+<div class="outline-text-3" id="text-org03ddf37">
 <blockquote>
 <p>
-Believe i t or not, any course in computer programming covers <i>all</i> the tools strictly 
-necessary to solve any problem that can be solved with a computer. A very famous 
-computer scientist named Alan Turing conjectured, and it is now widely accepted, 
-that any problem solvable with computers requires only the basic statements that all 
-computer programming languages include: decision statements (e.g. , if), looping 
-statements (e.g. , for and while) and the ability to store and retrieve data. Since 
-you already know about these, you may wonder what else there is to learn. That's 
-a good question.
+Let us change our traditional attitude to the construction of
+programs: Instead of imagining that our main task is to instruct a
+computer what to do, let us concentrate rather on explaining to
+human beings what we want a computer to do.
 </p>
 
 <p>
-If you think of computer programming as a process similar to constructing a building, 
-right now you have the knowledge equivalent to how to use a few tools such as a 
-hammer, screwdriver, saw, and drill. Those might be all the tools necessary to build 
-a house, but that does not mean you can build yourself a habitable home, let alone 
-one that meets modern building codes. That's not to say that you can't do some 
-useful things. You are probably capable of building benches or birdhouses, you're 
-just not yet ready for the challenges that come with a larger project. 
-In programming, just as in house construction, tackling bigger projects requires 
-additional knowledge, techniques, and skills.
+The practitioner of literate programming can be regarded as an
+essayist, whose main concern is with exposition and excellence of
+style. Such an author, with thesaurus in hand, chooses the names of
+variables carefully and explains what each variable means. He or
+she strives for a program that is comprehensible because its
+concepts have been introduced in an order that is best for human
+understanding, using a mixture of formal and informal methods that
+reinforce each other.
 </p>
+
 <p align="right">
-<a href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/1590282337">
-Data Structures and Algorithms Using Python and C++</a>
+<p>
+– Donald Knuth
+</p>
 </p>
 </blockquote>
-<hr  />
+
+<hr />
+</div>
+</div>
+<div id="outline-container-org39833f7" class="outline-3">
+<h3 id="org39833f7">What is programming challenge?</h3>
+<div class="outline-text-3" id="text-org39833f7">
+<blockquote>
+<p>
+Believe it or not, any course in computer programming covers <i>all</i>
+the tools strictly necessary to solve any problem that can be solved
+with a computer. A very famous computer scientist named Alan Turing
+conjectured, and it is now widely accepted, that any problem
+solvable with computers requires only the basic statements that all
+computer programming languages include: decision statements (e.g. ,
+if), looping statements (e.g. , for and while) and the ability to
+store and retrieve data. Since you already know about these, you may
+wonder what else there is to learn. That's a good question.
+</p>
+
+<p>
+If you think of computer programming as a process similar to
+constructing a building, right now you have the knowledge equivalent
+to how to use a few tools such as a hammer, screwdriver, saw, and
+drill. Those might be all the tools necessary to build a house, but
+that does not mean you can build yourself a habitable home, let
+alone one that meets modern building codes. That's not to say that
+you can't do some useful things. You are probably capable of
+building benches or birdhouses, you're just not yet ready for the
+challenges that come with a larger project. In programming, just as
+in house construction, tackling bigger projects requires additional
+knowledge, techniques, and skills.
+</p>
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;
+&lt;a href="<a href="https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/1590282337">https://www.amazon.com/Data-Structures-Algorithms-Using-Python/dp/1590282337</a>"&gt;
+Data Structures and Algorithms Using Python and C++&lt;/a&gt;
+&lt;/p&gt;
+</p>
+
+</div>
+</blockquote>
+<hr />
 <blockquote>
 <p>
 As the TDD approach became a standard option in software development
@@ -104,13 +154,19 @@ should be a very <i>comprehensive method to learn programming by
 active reading</i>.
 </p>
 
-<p align="right">Anton S. Kosinov</p>
+<div class="HTML">
+<p>
+&lt;p align="right"&gt;Anton S. Kosinov&lt;/p&gt;
+</p>
+
+</div>
 </blockquote>
 </div>
+</div>
 
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Brief prelude</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-org00ac460" class="outline-3">
+<h3 id="org00ac460">Brief prelude</h3>
+<div class="outline-text-3" id="text-org00ac460">
 <blockquote>
 <p>
 Any science is an experience which forged and enveloped in some
@@ -134,9 +190,9 @@ prevent any data corruption and lost.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">General description</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-org319a6aa" class="outline-3">
+<h3 id="org319a6aa">General description</h3>
+<div class="outline-text-3" id="text-org319a6aa">
 <p>
 There are infinite number of wrong approaches and the best path to
 achieve some skill is to learn it by doing. For example it's
@@ -149,9 +205,9 @@ same way. All they was scholars and learn all life long.
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4">Preamble</h3>
-<div class="outline-text-3" id="text-orgheadline4">
+<div id="outline-container-orgcd2da11" class="outline-3">
+<h3 id="orgcd2da11">Preamble</h3>
+<div class="outline-text-3" id="text-orgcd2da11">
 <blockquote>
 <p>
 Of cause learning by doing is an uttermost level of human creativity.
@@ -162,9 +218,9 @@ way further, and a plethora of noways there.
 </blockquote>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16">Short description</h4>
-<div class="outline-text-4" id="text-orgheadline16">
+<div id="outline-container-org58fbce2" class="outline-4">
+<h4 id="org58fbce2">Short description</h4>
+<div class="outline-text-4" id="text-org58fbce2">
 <blockquote>
 <p>
 Python 3.4.1 under the detailed scrutiny by unittest module.   
@@ -173,9 +229,9 @@ Python 3.4.1 under the detailed scrutiny by unittest module.
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17">Description</h4>
-<div class="outline-text-4" id="text-orgheadline17">
+<div id="outline-container-org76c66ae" class="outline-4">
+<h4 id="org76c66ae">Description</h4>
+<div class="outline-text-4" id="text-org76c66ae">
 <blockquote>
 <p>
 Literate programming book for wide range of learners by reading
@@ -188,98 +244,98 @@ idioms are available to test on Emacs frame.
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5">Prerequisites</h3>
-<div class="outline-text-3" id="text-orgheadline5">
-</div><div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18">Ubuntu 14/16.04</h4>
+<div id="outline-container-org64997b6" class="outline-3">
+<h3 id="org64997b6">Prerequisites</h3>
+<div class="outline-text-3" id="text-org64997b6">
+</div><div id="outline-container-orgb564d65" class="outline-4">
+<h4 id="orgb564d65">Ubuntu 14/16.04</h4>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-4">
-<h4 id="orgheadline19">Python3</h4>
+<div id="outline-container-orgbdeada9" class="outline-4">
+<h4 id="orgbdeada9">Python3</h4>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-4">
-<h4 id="orgheadline20">Emacs 24.4</h4>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Toolset overview</h2>
-<div class="outline-text-2" id="text-orgheadline6">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Emacs</h3>
-<div class="outline-text-3" id="text-orgheadline7">
-</div><div id="outline-container-orgheadline21" class="outline-4">
-<h4 id="orgheadline21">Tips</h4>
-</div>
-
-<div id="outline-container-orgheadline22" class="outline-4">
-<h4 id="orgheadline22">Literate Programming</h4>
-</div>
-
-<div id="outline-container-orgheadline23" class="outline-4">
-<h4 id="orgheadline23">elisp</h4>
-</div>
-</div>
-
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Python</h3>
-<div class="outline-text-3" id="text-orgheadline8">
-</div><div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24">stdlib</h4>
-</div>
-
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25">how-to</h4>
-</div>
-</div>
-
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">SQLite3</h3>
-<div class="outline-text-3" id="text-orgheadline9">
-</div><div id="outline-container-orgheadline26" class="outline-4">
-<h4 id="orgheadline26">Innate shell</h4>
-</div>
-
-<div id="outline-container-orgheadline27" class="outline-4">
-<h4 id="orgheadline27"><a href="http://0--key.github.io/sqlite3/data_types.html">Data types</a></h4>
-</div>
-
-<div id="outline-container-orgheadline28" class="outline-4">
-<h4 id="orgheadline28"><a href="http://0--key.github.io/python/stdlib/sqlite3/interaction.html">Python interaction</a></h4>
-</div>
-</div>
-
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10">Postgres</h3>
-<div class="outline-text-3" id="text-orgheadline10">
-</div><div id="outline-container-orgheadline29" class="outline-4">
-<h4 id="orgheadline29">Innate shell</h4>
-</div>
-
-<div id="outline-container-orgheadline30" class="outline-4">
-<h4 id="orgheadline30">Data types</h4>
-</div>
-
-<div id="outline-container-orgheadline31" class="outline-4">
-<h4 id="orgheadline31">Python interaction</h4>
-</div>
-</div>
-
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11">Git</h3>
-<div class="outline-text-3" id="text-orgheadline11">
-</div><div id="outline-container-orgheadline32" class="outline-4">
-<h4 id="orgheadline32">Tips</h4>
+<div id="outline-container-orgac76080" class="outline-4">
+<h4 id="orgac76080">Emacs 24.4</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12">Methodology</h2>
-<div class="outline-text-2" id="text-orgheadline12">
+<div id="outline-container-org6c4803e" class="outline-2">
+<h2 id="org6c4803e">Toolset overview</h2>
+<div class="outline-text-2" id="text-org6c4803e">
+</div><div id="outline-container-org01331a1" class="outline-3">
+<h3 id="org01331a1">Emacs</h3>
+<div class="outline-text-3" id="text-org01331a1">
+</div><div id="outline-container-orgc4baaf3" class="outline-4">
+<h4 id="orgc4baaf3">Tips</h4>
+</div>
+
+<div id="outline-container-org534d7ab" class="outline-4">
+<h4 id="org534d7ab">Literate Programming</h4>
+</div>
+
+<div id="outline-container-org880ae40" class="outline-4">
+<h4 id="org880ae40">elisp</h4>
+</div>
+</div>
+
+<div id="outline-container-org7663ebb" class="outline-3">
+<h3 id="org7663ebb">Python</h3>
+<div class="outline-text-3" id="text-org7663ebb">
+</div><div id="outline-container-orgff9c697" class="outline-4">
+<h4 id="orgff9c697">stdlib</h4>
+</div>
+
+<div id="outline-container-org65a32f2" class="outline-4">
+<h4 id="org65a32f2">how-to</h4>
+</div>
+</div>
+
+<div id="outline-container-org4d08376" class="outline-3">
+<h3 id="org4d08376">SQLite3</h3>
+<div class="outline-text-3" id="text-org4d08376">
+</div><div id="outline-container-orgeb0001e" class="outline-4">
+<h4 id="orgeb0001e">Innate shell</h4>
+</div>
+
+<div id="outline-container-orgd35d186" class="outline-4">
+<h4 id="orgd35d186"><a href="http://0--key.github.io/sqlite3/data_types.html">Data types</a></h4>
+</div>
+
+<div id="outline-container-org385bca0" class="outline-4">
+<h4 id="org385bca0"><a href="http://0--key.github.io/python/stdlib/sqlite3/interaction.html">Python interaction</a></h4>
+</div>
+</div>
+
+<div id="outline-container-orge6ed432" class="outline-3">
+<h3 id="orge6ed432">Postgres</h3>
+<div class="outline-text-3" id="text-orge6ed432">
+</div><div id="outline-container-org5c4f8f0" class="outline-4">
+<h4 id="org5c4f8f0">Innate shell</h4>
+</div>
+
+<div id="outline-container-org54c9044" class="outline-4">
+<h4 id="org54c9044">Data types</h4>
+</div>
+
+<div id="outline-container-org3bbde8d" class="outline-4">
+<h4 id="org3bbde8d">Python interaction</h4>
+</div>
+</div>
+
+<div id="outline-container-orgf0a8c85" class="outline-3">
+<h3 id="orgf0a8c85">Git</h3>
+<div class="outline-text-3" id="text-orgf0a8c85">
+</div><div id="outline-container-orga55cae7" class="outline-4">
+<h4 id="orga55cae7">Tips</h4>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd296356" class="outline-2">
+<h2 id="orgd296356">Methodology</h2>
+<div class="outline-text-2" id="text-orgd296356">
 <blockquote>
 <p>
 In my humble opinion the best way to learn programming language lies
@@ -294,14 +350,14 @@ in their seeds.
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13">Topics</h2>
+<div id="outline-container-org075ed2f" class="outline-2">
+<h2 id="org075ed2f">Topics</h2>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14">Feedback</h2>
+<div id="outline-container-org64358e6" class="outline-2">
+<h2 id="org64358e6">Feedback</h2>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15">Conclusion</h2>
+<div id="outline-container-org082d77b" class="outline-2">
+<h2 id="org082d77b">Conclusion</h2>
 </div>
