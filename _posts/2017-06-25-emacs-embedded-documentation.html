@@ -1,0 +1,265 @@
+---
+layout: post
+title: Arbitrary documentation
+tagline: " inside Emacs buffer"
+permalink: /emacs/embedded-documentation.html
+categories: [literate programming, emacs]
+tags: [documentation, tex]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org2fcbeb3">Initial premises</a></li>
+<li><a href="#org5833e5a">A wheel has long been invented</a></li>
+<li><a href="#org9cf44ee">Directory</a></li>
+<li><a href="#org24425f3">Software</a></li>
+<li><a href="#orgc93b8b4">Info paths</a>
+<ul>
+<li><a href="#org261bb0d">Default</a></li>
+<li><a href="#org2bc3fa7">Joined</a></li>
+<li><a href="#orgfe16cb3">Additional</a></li>
+</ul>
+</li>
+<li><a href="#org06d327e">Technology</a>
+<ul>
+<li><a href="#org0abeb22">Put</a></li>
+<li><a href="#orgdd72bd6">Extend</a></li>
+<li><a href="#org8d78c40">Evaluate</a></li>
+</ul>
+</li>
+<li><a href="#org16163d7">Check-up</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2fcbeb3" class="outline-2">
+<h2 id="org2fcbeb3">Initial premises</h2>
+<div class="outline-text-2" id="text-org2fcbeb3">
+<p>
+With no doubt <code>Emacs</code> is an incredibly pertinent tool for software
+development. It contains all necessary functions out of the box,
+easily customizible by its <code>open source</code> nature and in charge to
+expel the lion's share of headache during casual programmer's tasks.
+</p>
+
+<p>
+But during development process it is extremely useful to take in
+hands all sorts of documentation:
+</p>
+<ul class="org-ul">
+<li>about Emacs itself;</li>
+<li>about the particular programming language;</li>
+<li>about some useful framework;</li>
+<li>etc.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5833e5a" class="outline-2">
+<h2 id="org5833e5a">A wheel has long been invented</h2>
+<div class="outline-text-2" id="text-org5833e5a">
+<p>
+The most admirable feature of <i>old</i> <code>open source</code> products is their
+contemporary state. Each one have a large history of improvements,
+thus, nowadays most of the obvious questions have been successfully
+resolved earlier. All that remains to do is just to study
+documentation and utilize the maximum of useful features.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9cf44ee" class="outline-2">
+<h2 id="org9cf44ee">Directory</h2>
+<div class="outline-text-2" id="text-org9cf44ee">
+<p>
+It's sensible to allocate all existing documentation in a share
+directory and that is:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ls -la /usr/share/info/
+</pre>
+</div>
+
+<pre class="example">
+total 1084
+drwxr-xr-x   5 root root   4096 Jul 16 18:40 .
+drwxr-xr-x 297 root root  12288 Jul 11 17:16 ..
+-rw-r--r--   1 root root 218669 Feb 22 14:23 coreutils.info.gz
+-rw-r--r--   1 root root  61097 Jan 10  2017 diffutils.info.gz
+-rw-r--r--   1 root root  12250 Jul 16 18:44 dir
+-rw-r--r--   1 root root    781 Jul 16 17:52 dir.old
+drwxr-xr-x   2 root root   4096 Jul 16 18:04 emacs-25
+-rw-r--r--   1 root root  92043 Feb 18 17:37 find.info.gz
+-rw-r--r--   1 root root  23649 Feb 18 17:37 find-maint.info.gz
+-rw-r--r--   1 root root  14730 Feb 14 02:29 gnupg-card-architecture.png
+-rw-r--r--   1 root root  90906 Feb 14 02:29 gnupg.info-1.gz
+-rw-r--r--   1 root root  57247 Feb 14 02:29 gnupg.info-2.gz
+-rw-r--r--   1 root root   2761 Feb 14 02:29 gnupg.info.gz
+-rw-r--r--   1 root root  36868 Feb 14 02:29 gnupg-module-overview.png
+-rw-r--r--   1 root root  28572 Jan 23 20:18 grep.info.gz
+-rw-r--r--   1 root root  30648 Feb 11 17:09 grub-dev.info.gz
+-rw-r--r--   1 root root  87920 Feb 11 17:09 grub.info.gz
+-rw-r--r--   1 root root  14828 Mar 14  2016 gzip.info.gz
+-rw-r--r--   1 root root  16206 Jan 11  2017 nano.info.gz
+drwxr-xr-x   2 root root   4096 Jul 16 18:42 python3.4
+-rw-r--r--   1 root root  24906 May 15 23:00 rluserman.info.gz
+drwxr-xr-x   2 root root   4096 Jul 16 18:27 scrapy
+-rw-r--r--   1 root root  52265 Feb  4 17:16 sed.info.gz
+-rw-r--r--   1 root root   2407 Mar  6 00:13 spd-say.info.gz
+-rw-r--r--   1 root root  58177 Mar  6 00:13 speech-dispatcher.info.gz
+-rw-r--r--   1 root root  32815 Mar  6 00:13 ssip.info.gz
+-rw-r--r--   1 root root   5323 Jul 21  2015 time.info.gz
+-rw-r--r--   1 root root  69925 Mar 18 16:12 wget.info.gz
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org24425f3" class="outline-2">
+<h2 id="org24425f3">Software</h2>
+<div class="outline-text-2" id="text-org24425f3">
+<p>
+<code>UNIX</code> innate utility <code>install-info</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">install-info --version
+</pre>
+</div>
+
+<pre class="example">
+install-info (GNU texinfo) 6.3
+
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc93b8b4" class="outline-2">
+<h2 id="orgc93b8b4">Info paths</h2>
+<div class="outline-text-2" id="text-orgc93b8b4">
+<p>
+There are several lists which define them:
+</p>
+</div>
+
+<div id="outline-container-org261bb0d" class="outline-3">
+<h3 id="org261bb0d">Default</h3>
+<div class="outline-text-3" id="text-org261bb0d">
+<p>
+It's Emacs innate:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(print Info-default-directory-list)
+</pre>
+</div>
+
+<pre class="example">
+
+("/usr/share/info/emacs-25" "/usr/share/info/" "/usr/share/info/")
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2bc3fa7" class="outline-3">
+<h3 id="org2bc3fa7">Joined</h3>
+<div class="outline-text-3" id="text-org2bc3fa7">
+<p>
+The innate <code>info-list</code> concatenated with installed packages
+documentation:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(print Info-directory-list)
+</pre>
+</div>
+
+<pre class="example">
+
+("/home/alioth/.emacs.d/elpa/ivy-20170703.2350" "/home/alioth/.emacs.d/elpa/magit-20170710.2201" "/home/alioth/.emacs.d/elpa/magit-popup-20170709.510" "/home/alioth/.emacs.d/elpa/org-20170710" "/home/alioth/.emacs.d/elpa/with-editor-20170707.1401" "/usr/share/info/emacs-25" "/usr/share/info/" "/usr/share/info/")
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfe16cb3" class="outline-3">
+<h3 id="orgfe16cb3">Additional</h3>
+<div class="outline-text-3" id="text-orgfe16cb3">
+<p>
+It's purpose to extend the default ones by adding custom
+documentation folders:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(print Info-additional-directory-list)
+</pre>
+</div>
+
+<pre class="example">
+
+("/usr/share/info/scrapy/" "/usr/share/info/python3.4/")
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org06d327e" class="outline-2">
+<h2 id="org06d327e">Technology</h2>
+<div class="outline-text-2" id="text-org06d327e">
+</div><div id="outline-container-org0abeb22" class="outline-3">
+<h3 id="org0abeb22">Put</h3>
+<div class="outline-text-3" id="text-org0abeb22">
+<p>
+your documentation on a right place
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo mkdir /usr/share/info/python3.4
+sudo scp -r antony@192.168.0.107:/usr/share/info/python3.4.2/* ./python3.4
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd72bd6" class="outline-3">
+<h3 id="orgdd72bd6">Extend</h3>
+<div class="outline-text-3" id="text-orgdd72bd6">
+<p>
+additional info-path <code>C-h v Info-additional-directory-list</code>, insert
+particular directory, move to <code>Apply and Save</code>, press <b>RETURN</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8d78c40" class="outline-3">
+<h3 id="org8d78c40">Evaluate</h3>
+<div class="outline-text-3" id="text-org8d78c40">
+<p>
+<code>install-info</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo install-info python3.4/python.info dir
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org16163d7" class="outline-2">
+<h2 id="org16163d7">Check-up</h2>
+<div class="outline-text-2" id="text-org16163d7">
+<p>
+After all these manipulations desired <code>info</code> should appear at Emacs
+<code>*info*</code> buffer.
+</p>
+
+<ul class="org-ul">
+<li><code>C-h i</code></li>
+<li><code>C-s python</code></li>
+</ul>
+</div>
+</div>
