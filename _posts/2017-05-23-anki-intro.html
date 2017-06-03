@@ -14,10 +14,7 @@ tags: [anki, intro, installation]
 <li><a href="#orge4535ea">Prelude</a></li>
 <li><a href="#orge881383">Installation</a>
 <ul>
-<li><a href="#orgd2c8236">Download the <code>.deb</code> package</a></li>
 <li><a href="#orgd78e911">Install <code>Anki's</code> dependencies</a></li>
-<li><a href="#org7dd31a7">Install it into <code>Debian9</code></a></li>
-<li><a href="#orgca92b13">Unfortunately</a></li>
 <li><a href="#org8dedc44">Install from sources</a></li>
 <li><a href="#org974cd74">Uninstall</a></li>
 </ul>
@@ -59,20 +56,21 @@ Doesn't sound challenging?
 <h2 id="orge881383">Installation</h2>
 <div class="outline-text-2" id="text-orge881383">
 <p>
-There are <a href="https://apps.ankiweb.net/">several options to install</a> <code>Anki</code> and I'm pay an attention on a
-<code>.deb</code> one:
+There are <a href="https://apps.ankiweb.net/">several options to install</a> <code>Anki</code> and I'm pay an attention
+on suggestions there:
 </p>
-</div>
 
-<div id="outline-container-orgd2c8236" class="outline-3">
-<h3 id="orgd2c8236">Download the <code>.deb</code> package</h3>
-<div class="outline-text-3" id="text-orgd2c8236">
-<div class="org-src-container">
-<pre class="src src-sh">cd ~/Downloads
-wget https://apps.ankiweb.net/downloads/current/anki_2.0.45_all.deb
-</pre>
-</div>
-</div>
+<blockquote>
+<p>
+We recommend the compiled version for most users running a Linux
+distribution released in 2012 or later
+</p>
+</blockquote>
+
+<p>
+about manual installation and get rid out of scope <code>.deb</code> version
+installation (it not works on <code>Debian9</code>)
+</p>
 </div>
 
 <div id="outline-container-orgd78e911" class="outline-3">
@@ -100,36 +98,6 @@ Now it is time for installation itself:
 </div>
 </div>
 
-<div id="outline-container-org7dd31a7" class="outline-3">
-<h3 id="org7dd31a7">Install it into <code>Debian9</code></h3>
-<div class="outline-text-3" id="text-org7dd31a7">
-<div class="org-src-container">
-<pre class="src src-sh">cd ~/Downloads
-# ls -la
-sudo dpkg -i anki_2.0.45_all.deb
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgca92b13" class="outline-3">
-<h3 id="orgca92b13">Unfortunately</h3>
-<div class="outline-text-3" id="text-orgca92b13">
-<p>
-it is impossible to launch this application:
-</p>
-
-<pre class="example">
-File "/usr/share/anki/aqt/qt.py", line 22, in &lt;module&gt;
-from PyQt4.QtWebKit import QWebPage, QWebView, QWebSettings
-No module named QtWebKit
-</pre>
-
-<p>
-and I'll build <code>.deb</code> package out from app's sources.
-</p>
-</div>
-</div>
 
 <div id="outline-container-org8dedc44" class="outline-3">
 <h3 id="org8dedc44">Install from sources</h3>
@@ -174,7 +142,7 @@ README
 <h3 id="org974cd74">Uninstall</h3>
 <div class="outline-text-3" id="text-org974cd74">
 <p>
-Later it would be possible to uninstall just by:
+Later it would be possible to uninstall it just by:
 </p>
 <div class="org-src-container">
 <pre class="src src-sh">sudo make uninstall
