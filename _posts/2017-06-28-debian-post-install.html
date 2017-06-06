@@ -13,9 +13,18 @@ tags: [post-installation, arrangement, automation]
 <ul>
 <li><a href="#orgf4a7450">Goal definition</a></li>
 <li><a href="#org243a6e3">Software installation</a></li>
-<li><a href="#orga4dc404">FileTree extension</a></li>
-<li><a href="#org4846e15">Software development environment configuring</a></li>
+<li><a href="#orga4dc404">FileTree extension</a>
+<ul>
+<li><a href="#org87fca00">Check the existing folders</a></li>
+<li><a href="#orgeef2e58">Check-up user groups</a></li>
+<li><a href="#org7e50ad8">Add user to group <code>staff</code></a></li>
+<li><a href="#orgb7dfa04"><b>Re-login</b></a></li>
+<li><a href="#org2b51480">And check groups now:</a></li>
 <li><a href="#org852c579">Testing</a></li>
+</ul>
+</li>
+<li><a href="#org4846e15">Software development environment configuring</a></li>
+<li><a href="#org4da35da">Testing</a></li>
 </ul>
 </div>
 </div>
@@ -24,7 +33,7 @@ tags: [post-installation, arrangement, automation]
 <h2 id="orgf4a7450">Goal definition</h2>
 <div class="outline-text-2" id="text-orgf4a7450">
 <p>
-When you're dive into depth of software development with <code>Debian</code> as
+When you're dived in depth of software development with <code>Debian</code> as
 a main operational system sometimes it might emerge the urge to
 install it on a new host. As the current environment is homely and
 handy to use the aim is <code>just</code> to replicate it.
@@ -34,6 +43,12 @@ handy to use the aim is <code>just</code> to replicate it.
 
 <div id="outline-container-org243a6e3" class="outline-2">
 <h2 id="org243a6e3">Software installation</h2>
+<div class="outline-text-2" id="text-org243a6e3">
+<div class="org-src-container">
+<pre class="src src-sh">apt-get install -y htop emacs25 gkrellm openssh-server virtualenv
+</pre>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orga4dc404" class="outline-2">
@@ -43,7 +58,11 @@ handy to use the aim is <code>just</code> to replicate it.
 On my point of view the most convenient place to put some shared
 data on your <code>Debian 9</code> host is <code>/usr/local/share/</code>
 </p>
+</div>
 
+<div id="outline-container-org87fca00" class="outline-3">
+<h3 id="org87fca00">Check the existing folders</h3>
+<div class="outline-text-3" id="text-org87fca00">
 <div class="org-src-container">
 <pre class="src src-sh">ls -la /usr/local/share/
 </pre>
@@ -66,10 +85,91 @@ drwxrwsr-x  6 root   staff  4096 Jul 10 15:22 xml
 </div>
 </div>
 
+<div id="outline-container-orgeef2e58" class="outline-3">
+<h3 id="orgeef2e58">Check-up user groups</h3>
+<div class="outline-text-3" id="text-orgeef2e58">
+<div class="org-src-container">
+<pre class="src src-sh">groups | grep staff
+echo "---"
+groups alioth | grep staff
+</pre>
+</div>
+
+<pre class="example">
+---
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7e50ad8" class="outline-3">
+<h3 id="org7e50ad8">Add user to group <code>staff</code></h3>
+<div class="outline-text-3" id="text-org7e50ad8">
+<pre class="example">
+# usermod -aG staff alioth
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb7dfa04" class="outline-3">
+<h3 id="orgb7dfa04"><b>Re-login</b></h3>
+<div class="outline-text-3" id="text-orgb7dfa04">
+<p>
+To up-to-date group permissions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b51480" class="outline-3">
+<h3 id="org2b51480">And check groups now:</h3>
+<div class="outline-text-3" id="text-org2b51480">
+<div class="org-src-container">
+<pre class="src src-sh">groups | grep staff
+echo "==="
+groups alioth | grep staff
+</pre>
+</div>
+
+<pre class="example">
+alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth scanner
+===
+alioth : alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth scanner
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org852c579" class="outline-3">
+<h3 id="org852c579">Testing</h3>
+<div class="outline-text-3" id="text-org852c579">
+<p>
+Is it possible to touch file in <code>/usr/local/share/</code> right now?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd /usr/local/share/
+touch test.file.txt
+ls -la | grep test
+rm test.file.txt
+echo "++++"
+ls -la | grep test
+</pre>
+</div>
+
+<pre class="example">
+-rw-r--r--  1 alioth staff     0 Aug  2 18:39 test.file.txt
+++++
+
+</pre>
+</div>
+</div>
+</div>
+
+
 <div id="outline-container-org4846e15" class="outline-2">
 <h2 id="org4846e15">Software development environment configuring</h2>
 </div>
 
-<div id="outline-container-org852c579" class="outline-2">
-<h2 id="org852c579">Testing</h2>
+<div id="outline-container-org4da35da" class="outline-2">
+<h2 id="org4da35da">Testing</h2>
 </div>
