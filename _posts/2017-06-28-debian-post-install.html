@@ -11,83 +11,340 @@ tags: [post-installation, arrangement, automation]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf4a7450">Goal definition</a></li>
-<li><a href="#org243a6e3">Software installation</a></li>
-<li><a href="#orga4dc404">FileTree extension</a>
+<li><a href="#org43276c4">Goal definition</a></li>
+<li><a href="#org44a355d">Test launch</a></li>
+<li><a href="#orga3cac41">Kernel modules</a>
 <ul>
-<li><a href="#org87fca00">Check the existing folders</a></li>
-<li><a href="#orgeef2e58">Check-up user groups</a></li>
-<li><a href="#org7e50ad8">Add user to group <code>staff</code></a></li>
-<li><a href="#orgb7dfa04"><b>Re-login</b></a></li>
-<li><a href="#org2b51480">And check groups now:</a></li>
-<li><a href="#org852c579">Testing</a></li>
+<li><a href="#orgdcc0ab3">Deviation detection</a></li>
+<li><a href="#orgd94feca">Causation</a></li>
+<li><a href="#org5024dd8">Blacklisting as healing</a></li>
 </ul>
 </li>
-<li><a href="#org4846e15">Software development environment configuring</a></li>
-<li><a href="#org4da35da">Testing</a></li>
+<li><a href="#orge87fa6a">HDD health check-up</a></li>
+<li><a href="#org38d409d">Software installation</a></li>
+<li><a href="#org2dfd7b9">FileTree extension</a>
+<ul>
+<li><a href="#org697b08a">Check the existing folders</a></li>
+<li><a href="#orgf3980e4">Conclusion</a></li>
+<li><a href="#org12f4aa2">Check-up user groups</a></li>
+<li><a href="#org69c313f">Additional folders</a></li>
+<li><a href="#org481e01b">Git</a></li>
+</ul>
+</li>
+<li><a href="#org2a522c9">Software development environment configuring</a>
+<ul>
+<li><a href="#org9323451">Cloning repositories</a></li>
+<li><a href="#org8937b61">Emacs' settings linkage</a></li>
+<li><a href="#org4d9ef89">Emacs' packages sync</a></li>
+<li><a href="#orgcfe3323">Info generation</a></li>
+<li><a href="#orge65486a">Virtual Environment</a></li>
+</ul>
+</li>
+<li><a href="#orgc302cda">Testing</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf4a7450" class="outline-2">
-<h2 id="orgf4a7450">Goal definition</h2>
-<div class="outline-text-2" id="text-orgf4a7450">
+<div id="outline-container-org43276c4" class="outline-2">
+<h2 id="org43276c4">Goal definition</h2>
+<div class="outline-text-2" id="text-org43276c4">
 <p>
 When you're dived in depth of software development with <code>Debian</code> as
 a main operational system sometimes it might emerge the urge to
 install it on a new host. As the current environment is homely and
-handy to use the aim is <code>just</code> to replicate it.
+handy to use thus the aim is <code>just to replicate</code> it.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org243a6e3" class="outline-2">
-<h2 id="org243a6e3">Software installation</h2>
-<div class="outline-text-2" id="text-org243a6e3">
+
+<div id="outline-container-org44a355d" class="outline-2">
+<h2 id="org44a355d">Test launch</h2>
+<div class="outline-text-2" id="text-org44a355d">
+<p>
+First operation after successful installation is a test launch with
+</p>
+
+<pre class="example">
+# dmesg -w
+</pre>
+
+<p>
+as an insurance procedure. As you might guess this is a <code>debug
+  messages</code> output which allows to detect all kind of deviation at the
+early stages.
+</p>
+
+<p>
+And, as you might expect, if something goes wrong it should be
+written in to logs:
+</p>
+
+<pre class="example">
+# ls -la /var/log/
+total 70024
+drwxr-xr-x  7 root              root           4096 Aug  5 00:05 .
+drwxr-xr-x 11 root              root           4096 Jul 10 15:27 ..
+-rw-r--r--  1 root              root              0 Aug  1 07:16 alternatives.log
+drwxr-xr-x  2 root              root           4096 Aug  3 13:31 apt
+-rw-r-----  1 root              adm        14083418 Aug  5 11:33 auth.log
+-rw-r--r--  1 root              root          50838 Jun 20 04:14 bootstrap.log
+-rw-rw----  1 root              utmp       21596928 Aug  5 11:33 btmp
+-rw-r-----  1 root              adm          251415 Aug  5 11:14 daemon.log
+-rw-r-----  1 root              adm           41298 Aug  5 09:51 debug
+-rw-r--r--  1 root              root          52316 Aug  3 13:32 dpkg.log
+-rw-r--r--  1 root              root          24072 Jul 11 17:56 faillog
+-rw-r--r--  1 root              root           7249 Jun 20 04:30 fontconfig.log
+drwx--x--x  2 root              Debian-gdm     4096 Jun  6 21:17 gdm3
+drwxr-xr-x  3 root              root           4096 Jul 10 15:31 installer
+-rw-r-----  1 root              adm          304134 Aug  5 11:16 kern.log
+-rw-rw-r--  1 root              utmp         292876 Aug  5 11:14 lastlog
+-rw-r-----  1 root              adm         2358943 Aug  5 11:16 messages
+drwx------  2 speech-dispatcher root           4096 Mar  6 00:13 speech-dispatcher
+-rw-r-----  1 root              adm           65851 Aug  5 11:17 syslog
+drwxr-x---  2 root              adm            4096 Aug  1 07:16 unattended-upgrades
+-rw-r-----  1 root              adm         2103293 Aug  5 10:07 user.log
+-rw-rw-r--  1 root              utmp          18048 Aug  5 11:14 wtmp
+-rw-r--r--  1 root              root            279 Jul 31 07:41 wvdialconf.log
+</pre>
+
+<p>
+Thus it would easy to catch a bug by tracing it through <code>Debian 9</code> logs.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orga3cac41" class="outline-2">
+<h2 id="orga3cac41">Kernel modules</h2>
+<div class="outline-text-2" id="text-orga3cac41">
+</div><div id="outline-container-orgdcc0ab3" class="outline-3">
+<h3 id="orgdcc0ab3">Deviation detection</h3>
+<div class="outline-text-3" id="text-orgdcc0ab3">
+<p>
+In several (mostly rare) cases <code>Linux kernel</code> can't work correctly
+with your hardware and point on this by messages (<code>dmesg</code> and
+<code>/var/log/</code> also). The general concept is:
+</p>
+
+<blockquote>
+<p>
+If something goes wrong it must do it loudly!
+</p>
+</blockquote>
+
+<p>
+thus, in incorrect work case <code>kernel</code> fills the log with the <code>ERROR</code>
+messages and it should easily detected by user.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd94feca" class="outline-3">
+<h3 id="orgd94feca">Causation</h3>
+</div>
+
+<div id="outline-container-org5024dd8" class="outline-3">
+<h3 id="org5024dd8">Blacklisting as healing</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orge87fa6a" class="outline-2">
+<h2 id="orge87fa6a">HDD health check-up</h2>
+<div class="outline-text-2" id="text-orge87fa6a">
+<p>
+<b>For notebook's HDD with ferromagnetic disks only</b>
+<b>Not suitable for SSD</b>
+</p>
+
+<p>
+The main issue with it is a <code>number of load cycles</code>. It is a <a href="https://superuser.com/questions/840851/how-much-load-cycle-count-can-my-hard-drive-hypotethically-sustain">count</a>
+of times when magnetic heads hided into the stress-safe position.
+This event is enough noisy usually, but to ensure that your drive
+works properly:
+</p>
+
+<ul class="org-ul">
+<li><p>
+Install:
+</p>
+<pre class="example">
+# apt-get install smartmontools
+</pre></li>
+<li><p>
+Overview your <code>/dev/sdx</code>:
+</p>
+<pre class="example">
+# smartctl -i /dev/sda
+# smartctl -A /dev/sda
+</pre></li>
+<li><p>
+Check-up number:
+</p>
+<pre class="example">
+# smartctl -A /dev/sda | grep Load
+</pre></li>
+</ul>
+
+
+<p>
+In case when this number grows dramatically fast, follow this link,
+please, to fix this issue.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org38d409d" class="outline-2">
+<h2 id="org38d409d">Software installation</h2>
+<div class="outline-text-2" id="text-org38d409d">
 <div class="org-src-container">
-<pre class="src src-sh">apt-get install -y htop emacs25 gkrellm openssh-server virtualenv
+<pre class="src src-sh">apt-get install -y htop emacs25 emacs25-common-non-dfsg gkrellm \
+openssh-server virtualenv sqlite3 mariadb-client mariadb-server git \
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga4dc404" class="outline-2">
-<h2 id="orga4dc404">FileTree extension</h2>
-<div class="outline-text-2" id="text-orga4dc404">
+
+<div id="outline-container-org2dfd7b9" class="outline-2">
+<h2 id="org2dfd7b9">FileTree extension</h2>
+<div class="outline-text-2" id="text-org2dfd7b9">
+<p>
+A <code>tree</code> utility is an extremely handy tool in file-system
+dissection.
+</p>
+
+<pre class="example">
+# apt-get install tree
+</pre>
+</div>
+
+<div id="outline-container-org697b08a" class="outline-3">
+<h3 id="org697b08a">Check the existing folders</h3>
+<div class="outline-text-3" id="text-org697b08a">
+<p>
+As I'm expect to store my data locally and I'm a <code>user</code> in generic
+sense of this word, lets check-up <code>/usr/local/</code> directory as a
+potential storage for my data.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">tree -L 1 /usr/local/
+</pre>
+</div>
+
+<pre class="example">
+/usr/local/
+├── bin
+├── etc
+├── games
+├── include
+├── lib
+├── man -&gt; share/man
+├── sbin
+├── share
+└── src
+
+9 directories, 0 files
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">tree -L 2 /usr/local/lib/
+</pre>
+</div>
+
+<pre class="example">
+/usr/local/lib/
+├── python2.7
+│   ├── dist-packages
+│   └── site-packages
+└── python3.5
+    └── dist-packages
+
+5 directories, 0 files
+
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">tree -L 2 /usr/local/share/
+</pre>
+</div>
+
+<pre class="example">
+/usr/local/share/
+├── anki
+│   ├── anki.xml
+│   ├── bin
+│   ├── Makefile
+│   └── README
+├── applications
+│   ├── anki.desktop
+│   └── mimeinfo.cache
+├── ca-certificates
+├── emacs
+│   ├── 25.1
+│   └── site-lisp
+├── fonts
+├── man
+│   └── man1
+├── pixmaps
+│   ├── anki.png
+│   └── anki.xpm
+├── sgml
+│   ├── declaration
+│   ├── dtd
+│   ├── entities
+│   ├── misc
+│   └── stylesheet
+└── xml
+    ├── declaration
+    ├── entities
+    ├── misc
+    └── schema
+
+22 directories, 5 files
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf3980e4" class="outline-3">
+<h3 id="orgf3980e4">Conclusion</h3>
+<div class="outline-text-3" id="text-orgf3980e4">
+<p>
+Seems like the best place to put any data on <code>UNIX</code> host is
+<code>/usr/local/</code> that have <code>lib</code> and <code>share</code> folders which are the
+pertinent place for shared data and some library-like one.
+</p>
+
 <p>
 On my point of view the most convenient place to put some shared
 data on your <code>Debian 9</code> host is <code>/usr/local/share/</code>
 </p>
 </div>
-
-<div id="outline-container-org87fca00" class="outline-3">
-<h3 id="org87fca00">Check the existing folders</h3>
-<div class="outline-text-3" id="text-org87fca00">
-<div class="org-src-container">
-<pre class="src src-sh">ls -la /usr/local/share/
-</pre>
 </div>
 
-<pre class="example">
-total 52
-drwxrwsr-x 13 root   staff  4096 Jul 21 12:04 .
-drwxrwsr-x 10 root   staff  4096 Jul 10 15:22 ..
-drwxr-sr-x  3 root   staff  4096 Jul 21 12:04 anki
-drwxr-sr-x  2 root   staff  4096 Aug  2 06:31 applications
-drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 ca-certificates
-drwxrwsr-x  4 root   staff  4096 Jul 10 17:23 emacs
-drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 fonts
-drwxrwsr-x  3 root   staff  4096 Jul 21 12:04 man
-drwxr-sr-x  2 root   staff  4096 Jul 21 12:04 pixmaps
-drwxrwsr-x  7 root   staff  4096 Jul 10 15:22 sgml
-drwxrwsr-x  6 root   staff  4096 Jul 10 15:22 xml
-</pre>
-</div>
-</div>
+<div id="outline-container-org12f4aa2" class="outline-3">
+<h3 id="org12f4aa2">Check-up user groups</h3>
+<div class="outline-text-3" id="text-org12f4aa2">
+<p>
+By default convention the user don't allowed to write into
+<code>/usr/local/</code>, <a href="https://wiki.debian.org/SystemGroups">but</a> staff group is a special case:
+</p>
 
-<div id="outline-container-orgeef2e58" class="outline-3">
-<h3 id="orgeef2e58">Check-up user groups</h3>
-<div class="outline-text-3" id="text-orgeef2e58">
+<blockquote>
+<p>
+staff: Allows users to add local modifications to the system
+(/usr/local) without needing root privileges&#x2026;
+</p>
+</blockquote>
+
+<p>
+Initially it is an empty group, there are no users in it:
+</p>
+
 <div class="org-src-container">
 <pre class="src src-sh">groups | grep staff
 echo "---"
@@ -100,29 +357,36 @@ groups alioth | grep staff
 
 </pre>
 </div>
-</div>
 
-<div id="outline-container-org7e50ad8" class="outline-3">
-<h3 id="org7e50ad8">Add user to group <code>staff</code></h3>
-<div class="outline-text-3" id="text-org7e50ad8">
+<div id="outline-container-org29980b9" class="outline-4">
+<h4 id="org29980b9">Add user to group <code>staff</code></h4>
+<div class="outline-text-4" id="text-org29980b9">
 <pre class="example">
 # usermod -aG staff alioth
+</pre>
+
+<p>
+<b>or</b> equivalent:
+</p>
+
+<pre class="example">
+# adduser alioth staff
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgb7dfa04" class="outline-3">
-<h3 id="orgb7dfa04"><b>Re-login</b></h3>
-<div class="outline-text-3" id="text-orgb7dfa04">
+<div id="outline-container-org4c18139" class="outline-4">
+<h4 id="org4c18139"><b>Re-login</b></h4>
+<div class="outline-text-4" id="text-org4c18139">
 <p>
 To up-to-date group permissions.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2b51480" class="outline-3">
-<h3 id="org2b51480">And check groups now:</h3>
-<div class="outline-text-3" id="text-org2b51480">
+<div id="outline-container-orge28aed7" class="outline-4">
+<h4 id="orge28aed7">And check groups now:</h4>
+<div class="outline-text-4" id="text-orge28aed7">
 <div class="org-src-container">
 <pre class="src src-sh">groups | grep staff
 echo "==="
@@ -139,9 +403,9 @@ alioth : alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth
 </div>
 </div>
 
-<div id="outline-container-org852c579" class="outline-3">
-<h3 id="org852c579">Testing</h3>
-<div class="outline-text-3" id="text-org852c579">
+<div id="outline-container-orgc33fbbd" class="outline-4">
+<h4 id="orgc33fbbd">Testing</h4>
+<div class="outline-text-4" id="text-orgc33fbbd">
 <p>
 Is it possible to touch file in <code>/usr/local/share/</code> right now?
 </p>
@@ -165,11 +429,170 @@ ls -la | grep test
 </div>
 </div>
 
+<div id="outline-container-org69c313f" class="outline-3">
+<h3 id="org69c313f">Additional folders</h3>
+<div class="outline-text-3" id="text-org69c313f">
+<p>
+Now, when you're added into <code>staff</code> group it would be possible to
+execute all necessary commands as a current user. Let's create
+several additional folders for books, courses and repositories:
+</p>
 
-<div id="outline-container-org4846e15" class="outline-2">
-<h2 id="org4846e15">Software development environment configuring</h2>
+<div class="org-src-container">
+<pre class="src src-sh">cd /usr/local/share/
+ls -la
+# mkdir books courses DVCS
+</pre>
 </div>
 
-<div id="outline-container-org4da35da" class="outline-2">
-<h2 id="org4da35da">Testing</h2>
+<pre class="example">
+total 52
+drwxrwsr-x 13 root   staff  4096 Aug  2 18:39 .
+drwxrwsr-x 10 root   staff  4096 Jul 10 15:22 ..
+drwxr-sr-x  3 root   staff  4096 Jul 21 12:04 anki
+drwxr-sr-x  2 root   staff  4096 Aug  2 06:31 applications
+drwxr-sr-x  2 alioth alioth 4096 Jul 10 18:20 books
+drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 ca-certificates
+drwxr-sr-x  7 alioth alioth 4096 Jul 26 18:31 DVCS
+drwxrwsr-x  4 root   staff  4096 Jul 10 17:23 emacs
+drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 fonts
+drwxrwsr-x  3 root   staff  4096 Jul 21 12:04 man
+drwxr-sr-x  2 root   staff  4096 Jul 21 12:04 pixmaps
+drwxrwsr-x  7 root   staff  4096 Jul 10 15:22 sgml
+drwxrwsr-x  6 root   staff  4096 Jul 10 15:22 xml
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org481e01b" class="outline-3">
+<h3 id="org481e01b">Git</h3>
+<div class="outline-text-3" id="text-org481e01b">
+</div><div id="outline-container-org45a51cd" class="outline-4">
+<h4 id="org45a51cd">Settings</h4>
+<div class="outline-text-4" id="text-org45a51cd">
+<div class="org-src-container">
+<pre class="src src-sh">mkdir /usr/local/git/
+git config --global user.email "a.s.kosinov@gmail.com"
+git config --global user.name "Anton S. Kosinov"
+git config --global credential.helper 'cache --timeout=3600'
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2a522c9" class="outline-2">
+<h2 id="org2a522c9">Software development environment configuring</h2>
+<div class="outline-text-2" id="text-org2a522c9">
+</div><div id="outline-container-org9323451" class="outline-3">
+<h3 id="org9323451">Cloning repositories</h3>
+<div class="outline-text-3" id="text-org9323451">
+<div class="org-src-container">
+<pre class="src src-sh">cd /usr/local/git/
+git clone https://github.com/0--key/lib.git
+git clone https://github.com/0--key/org-pub.git
+git clone https://github.com/0--key/0--key.github.io.git
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8937b61" class="outline-3">
+<h3 id="org8937b61">Emacs' settings linkage</h3>
+<div class="outline-text-3" id="text-org8937b61">
+<div class="org-src-container">
+<pre class="src src-sh">ln -s -T /usr/local/git/lib/Emacs/default.lenovo.el \
+/usr/local/share/emacs/site-lisp/default.el
+ln -s -T /usr/local/git/lib/Emacs/init_generic.el \
+~/.emacs.d/init.el
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4d9ef89" class="outline-3">
+<h3 id="org4d9ef89">Emacs' packages sync</h3>
+<div class="outline-text-3" id="text-org4d9ef89">
+<p>
+It's a trivial task, thus there is a simple and native solution.
+</p>
+
+<ul class="org-ul">
+<li>Find out <code>custom-set-variables</code> section in your <code>init.el</code></li>
+<li>Evaluate it by <code>M-x eval-region</code></li>
+<li>Now look on <code>package-selected-packages</code> variable</li>
+<li><code>C-h v package-selected-packages</code></li>
+<li>Ensure <code>package-selected-packages</code> is fulfilled (not nil)</li>
+<li><code>package-install-selected-packages</code></li>
+<li>DONE</li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgb24ff89" class="outline-4">
+<h4 id="orgb24ff89">Redundant files deletion</h4>
+<div class="outline-text-4" id="text-orgb24ff89">
+<p>
+To force <code>Org</code> work properly after installation you should delete
+all *.elc files out from its source folder. E.g.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">rm ~/.emacs.d/elpa//org-20170731/*.elc
+</pre>
+</div>
+
+<p>
+<b>and</b> restart <code>Emacs</code> by <code>C-x C-c</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(save-buffers-kill-terminal)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcfe3323" class="outline-3">
+<h3 id="orgcfe3323">Info generation</h3>
+<div class="outline-text-3" id="text-orgcfe3323">
+<p>
+It's easy:
+</p>
+
+<pre class="example">
+# apt-get install install-info
+</pre>
+
+<p>
+Now just type <code>C-h i</code> and enjoy!
+</p>
+</div>
+
+<div id="outline-container-orgd097b51" class="outline-4">
+<h4 id="orgd097b51">Note</h4>
+<div class="outline-text-4" id="text-orgd097b51">
+<p>
+<i>emacs25-common-non-dfsg contains all necessary info files and
+should be installed preliminary</i>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge65486a" class="outline-3">
+<h3 id="orge65486a">Virtual Environment</h3>
+<div class="outline-text-3" id="text-orge65486a">
+<p>
+Is a cool feature to use in daily work.  
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc302cda" class="outline-2">
+<h2 id="orgc302cda">Testing</h2>
 </div>
