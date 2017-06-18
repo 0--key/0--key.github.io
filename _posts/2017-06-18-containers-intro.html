@@ -1,0 +1,162 @@
+---
+layout: post
+title: Containers
+tagline: " brief intro"
+permalink: /docker/containers_overview.html
+categories: [CI, CD]
+tags: [docker, container]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga3cd582">What is a Container?</a></li>
+<li><a href="#org3fe5b9e">Why Use Containers - The Issue</a></li>
+<li><a href="#orge779ecb">How Containers Solve Problems?</a></li>
+<li><a href="#org38839d7">Benefits of Containers</a>
+<ul>
+<li><a href="#orgadeb8ef">Reduce complexity</a></li>
+<li><a href="#orga6e496f">All dependencies</a></li>
+<li><a href="#org78ae6e4">Interface is crucially simplified</a></li>
+<li><a href="#orga49e0d9">Sandard way &trade;</a></li>
+<li><a href="#org2e918ad">Breaking applications up this way</a></li>
+<li><a href="#org103c464">This flexibility offers more advantages</a></li>
+<li><a href="#org14c2dac">Also, this the use of <i>clustering</i>, <i>scheduling</i>, and <i>orchestration</i></a></li>
+<li><a href="#org1e81490">These tools can <i>manage groups of containers</i></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga3cd582" class="outline-2">
+<h2 id="orga3cd582">What is a Container?</h2>
+<div class="outline-text-2" id="text-orga3cd582">
+<p>
+Containers are a solution to the problem of how to get software to
+run reliably when moved from one computing environment to another.
+</p>
+
+<p>
+This could be from a developer's laptop to a test environment, from
+a staging environment into production and perhaps from a physical
+machine in a data center to a virtual machine in a private or public
+cloud.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3fe5b9e" class="outline-2">
+<h2 id="org3fe5b9e">Why Use Containers - The Issue</h2>
+<div class="outline-text-2" id="text-org3fe5b9e">
+<p>
+Problems arise when the supportiing software environment is not identical.
+</p>
+
+<p>
+<b>Example</b>: You're going to test using Python 2.7, and then it's
+going to run on Python 3 in production and something weird will
+happen. Or you'll rely on the behavior of a certaing version of an
+SSL llibrary and another one will be installed.
+</p>
+
+<p>
+The network topology might be different, or the security polices and
+storage might be different but the software has to run on it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge779ecb" class="outline-2">
+<h2 id="orge779ecb">How Containers Solve Problems?</h2>
+<div class="outline-text-2" id="text-orge779ecb">
+<p>
+A container consists of an entire runtime environment: an
+application, plus all its dependencies, libraries and other
+binaries, and configuration files needed to run it, bundled into one
+package.
+</p>
+
+<p>
+By containerizing the application platform and its dependecies,
+differeces in OS distributions and underlying infrastructure are
+abstracted away.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org38839d7" class="outline-2">
+<h2 id="org38839d7">Benefits of Containers</h2>
+<div class="outline-text-2" id="text-org38839d7">
+</div><div id="outline-container-orgadeb8ef" class="outline-3">
+<h3 id="orgadeb8ef">Reduce complexity</h3>
+<div class="outline-text-3" id="text-orgadeb8ef">
+<p>
+through container abstraction
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga6e496f" class="outline-3">
+<h3 id="orga6e496f">All dependencies</h3>
+<div class="outline-text-3" id="text-orga6e496f">
+<p>
+are preliminary satisfied
+</p>
+</div>
+</div>
+
+<div id="outline-container-org78ae6e4" class="outline-3">
+<h3 id="org78ae6e4">Interface is crucially simplified</h3>
+</div>
+
+<div id="outline-container-orga49e0d9" class="outline-3">
+<h3 id="orga49e0d9">Sandard way &trade;</h3>
+<div class="outline-text-3" id="text-orga49e0d9">
+<p>
+to divide applications into distributed objects or containers
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2e918ad" class="outline-3">
+<h3 id="org2e918ad">Breaking applications up this way</h3>
+<div class="outline-text-3" id="text-org2e918ad">
+<p>
+offers the ability to place them on different physical and virtual
+machines, in the cloud or not.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org103c464" class="outline-3">
+<h3 id="org103c464">This flexibility offers more advantages</h3>
+<div class="outline-text-3" id="text-org103c464">
+<p>
+around workload management and provides the ability make
+fault-tolerant sustems.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org14c2dac" class="outline-3">
+<h3 id="org14c2dac">Also, this the use of <i>clustering</i>, <i>scheduling</i>, and <i>orchestration</i></h3>
+<div class="outline-text-3" id="text-org14c2dac">
+<p>
+technology, developers can ensure that applications that exist
+inside of containers can scale and are resilient.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e81490" class="outline-3">
+<h3 id="org1e81490">These tools can <i>manage groups of containers</i></h3>
+<div class="outline-text-3" id="text-org1e81490">
+<p>
+using well-defined container management layer that provides these
+capabilities.
+</p>
+</div>
+</div>
+</div>
