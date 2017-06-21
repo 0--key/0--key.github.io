@@ -13,7 +13,28 @@ tags: [docker, container, intro]
 <ul>
 <li><a href="#orgac429b6">Provides an additional layer of abstraction</a></li>
 <li><a href="#orgf88350a">Isolates an application's view</a></li>
-<li><a href="#org7be3d38">Incentive</a></li>
+<li><a href="#org7be3d38">Incentive</a>
+<ul>
+<li><a href="#org6bc0887">Deployment and Delivery Challenges</a></li>
+</ul>
+</li>
+<li><a href="#org6e2ece2">The Twelve-Factor App</a>
+<ul>
+<li><a href="#org1975933">Requirements declaration points</a></li>
+<li><a href="#org15f736e">Codebase</a></li>
+<li><a href="#org34edbdf">Dependencies</a></li>
+<li><a href="#org573436f">Config</a></li>
+<li><a href="#org486f428">Build, release, run</a></li>
+<li><a href="#org700f954">Processes</a></li>
+<li><a href="#orga3ed700">Port binding</a></li>
+<li><a href="#org204cb91">Concurrency</a></li>
+<li><a href="#orgd5a718d">Disposability</a></li>
+<li><a href="#org7a276cb">Dev/prod parity</a></li>
+<li><a href="#orgc0fedda">Logs</a></li>
+<li><a href="#org708acdc">Admin processes</a></li>
+</ul>
+</li>
+<li><a href="#orgff234d6">The Ultimate Goal</a></li>
 </ul>
 </div>
 </div>
@@ -57,5 +78,162 @@ network.
 Shipping code to the server is too hard
 </p>
 </blockquote>
+</div>
+
+<div id="outline-container-org6bc0887" class="outline-3">
+<h3 id="org6bc0887">Deployment and Delivery Challenges</h3>
+<div class="outline-text-3" id="text-org6bc0887">
+<ul class="org-ul">
+<li>Lots of small changes</li>
+<li>Heterogeneous platforms and languages</li>
+<li>Environments (Development, Production)</li>
+<li>Zero downtime</li>
+<li>Rollback</li>
+<li>Monitoring</li>
+<li>Infrastructure as Code</li>
+<li>Continuous Delivery</li>
+<li>Infrastructure and Application Metrics</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6e2ece2" class="outline-2">
+<h2 id="org6e2ece2">The Twelve-Factor App</h2>
+<div class="outline-text-2" id="text-org6e2ece2">
+<p>
+is a methodology for building software-as-a-service apps that fit
+into these:
+</p>
+</div>
+
+<div id="outline-container-org1975933" class="outline-3">
+<h3 id="org1975933">Requirements declaration points</h3>
+<div class="outline-text-3" id="text-org1975933">
+<ul class="org-ul">
+<li>Use declarative formats for setup automation, to minimize time and
+cost for new developers joining the project</li>
+<li>Have a clean contract with the underlying operating system,
+offering maximum portability between execution environments</li>
+<li>Are suitable for development on modern cloud platforms, obviating
+the need for servers and system administration</li>
+<li>Minimize divergence between development and production, enabling
+continuous deployment for maximum agility</li>
+<li>And can scale up without significant changes to tooling,
+architecture, or development practices</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org15f736e" class="outline-3">
+<h3 id="org15f736e">Codebase</h3>
+<div class="outline-text-3" id="text-org15f736e">
+<p>
+One codebase tracked in revision control, many deploys
+</p>
+</div>
+</div>
+
+<div id="outline-container-org34edbdf" class="outline-3">
+<h3 id="org34edbdf">Dependencies</h3>
+<div class="outline-text-3" id="text-org34edbdf">
+<p>
+Explicitly declare and isolate dependencies
+</p>
+</div>
+</div>
+
+<div id="outline-container-org573436f" class="outline-3">
+<h3 id="org573436f">Config</h3>
+<div class="outline-text-3" id="text-org573436f">
+<p>
+Store config in the environment
+</p>
+</div>
+</div>
+
+<div id="outline-container-org486f428" class="outline-3">
+<h3 id="org486f428">Build, release, run</h3>
+<div class="outline-text-3" id="text-org486f428">
+<p>
+Strictly separate build and run stages
+</p>
+</div>
+</div>
+
+<div id="outline-container-org700f954" class="outline-3">
+<h3 id="org700f954">Processes</h3>
+<div class="outline-text-3" id="text-org700f954">
+<p>
+Execute the app as one or more stateless processes
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga3ed700" class="outline-3">
+<h3 id="orga3ed700">Port binding</h3>
+<div class="outline-text-3" id="text-orga3ed700">
+<p>
+Export services via port binding
+</p>
+</div>
+</div>
+
+<div id="outline-container-org204cb91" class="outline-3">
+<h3 id="org204cb91">Concurrency</h3>
+<div class="outline-text-3" id="text-org204cb91">
+<p>
+Scale out via the process model
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd5a718d" class="outline-3">
+<h3 id="orgd5a718d">Disposability</h3>
+<div class="outline-text-3" id="text-orgd5a718d">
+<p>
+Maximize robustness with fast start-up and graceful shutdown
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7a276cb" class="outline-3">
+<h3 id="org7a276cb">Dev/prod parity</h3>
+<div class="outline-text-3" id="text-org7a276cb">
+<p>
+Keep development, staging and production as similar as possible
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc0fedda" class="outline-3">
+<h3 id="orgc0fedda">Logs</h3>
+<div class="outline-text-3" id="text-orgc0fedda">
+<p>
+Treat logs as event streams
+</p>
+</div>
+</div>
+
+<div id="outline-container-org708acdc" class="outline-3">
+<h3 id="org708acdc">Admin processes</h3>
+<div class="outline-text-3" id="text-org708acdc">
+<p>
+Run admin/management tasks as one-off processes
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgff234d6" class="outline-2">
+<h2 id="orgff234d6">The Ultimate Goal</h2>
+<div class="outline-text-2" id="text-orgff234d6">
+<p>
+A single deployable file, which is under version control, verified
+by checksum and simply runs without any additional dependencies.
+</p>
 </div>
 </div>
