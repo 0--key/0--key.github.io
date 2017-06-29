@@ -1,0 +1,75 @@
+---
+layout: post
+title: Debian 9 post-installation
+tagline: " arrangement automation"
+permalink: /debian/post-installation.html
+categories: [Debian, DevEnv]
+tags: [post-installation, arrangement, automation]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf4a7450">Goal definition</a></li>
+<li><a href="#org243a6e3">Software installation</a></li>
+<li><a href="#orga4dc404">FileTree extension</a></li>
+<li><a href="#org4846e15">Software development environment configuring</a></li>
+<li><a href="#org852c579">Testing</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf4a7450" class="outline-2">
+<h2 id="orgf4a7450">Goal definition</h2>
+<div class="outline-text-2" id="text-orgf4a7450">
+<p>
+When you're dive into depth of software development with <code>Debian</code> as
+a main operational system sometimes it might emerge the urge to
+install it on a new host. As the current environment is homely and
+handy to use the aim is <code>just</code> to replicate it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org243a6e3" class="outline-2">
+<h2 id="org243a6e3">Software installation</h2>
+</div>
+
+<div id="outline-container-orga4dc404" class="outline-2">
+<h2 id="orga4dc404">FileTree extension</h2>
+<div class="outline-text-2" id="text-orga4dc404">
+<p>
+On my point of view the most convenient place to put some shared
+data on your <code>Debian 9</code> host is <code>/usr/local/share/</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls -la /usr/local/share/
+</pre>
+</div>
+
+<pre class="example">
+total 52
+drwxrwsr-x 13 root   staff  4096 Jul 21 12:04 .
+drwxrwsr-x 10 root   staff  4096 Jul 10 15:22 ..
+drwxr-sr-x  3 root   staff  4096 Jul 21 12:04 anki
+drwxr-sr-x  2 root   staff  4096 Aug  2 06:31 applications
+drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 ca-certificates
+drwxrwsr-x  4 root   staff  4096 Jul 10 17:23 emacs
+drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 fonts
+drwxrwsr-x  3 root   staff  4096 Jul 21 12:04 man
+drwxr-sr-x  2 root   staff  4096 Jul 21 12:04 pixmaps
+drwxrwsr-x  7 root   staff  4096 Jul 10 15:22 sgml
+drwxrwsr-x  6 root   staff  4096 Jul 10 15:22 xml
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4846e15" class="outline-2">
+<h2 id="org4846e15">Software development environment configuring</h2>
+</div>
+
+<div id="outline-container-org852c579" class="outline-2">
+<h2 id="org852c579">Testing</h2>
+</div>
