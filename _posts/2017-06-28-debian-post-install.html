@@ -21,7 +21,14 @@ tags: [post-installation, arrangement, automation]
 </ul>
 </li>
 <li><a href="#orge87fa6a">HDD health check-up</a></li>
-<li><a href="#org38d409d">Software installation</a></li>
+<li><a href="#org38d409d">Software installation</a>
+<ul>
+<li><a href="#org90d6844">General purpose</a></li>
+<li><a href="#org16b906c">Docker</a></li>
+<li><a href="#org7fe3c97">Jenkins</a></li>
+<li><a href="#org91aa351">VirtualBox</a></li>
+</ul>
+</li>
 <li><a href="#org2dfd7b9">FileTree extension</a>
 <ul>
 <li><a href="#org697b08a">Check the existing folders</a></li>
@@ -40,7 +47,7 @@ tags: [post-installation, arrangement, automation]
 <li><a href="#orge65486a">Virtual Environment</a></li>
 </ul>
 </li>
-<li><a href="#orgc302cda">Testing</a></li>
+<li><a href="#orgc33fbbd">Testing</a></li>
 </ul>
 </div>
 </div>
@@ -199,10 +206,103 @@ please, to fix this issue.
 <div id="outline-container-org38d409d" class="outline-2">
 <h2 id="org38d409d">Software installation</h2>
 <div class="outline-text-2" id="text-org38d409d">
+</div><div id="outline-container-org90d6844" class="outline-3">
+<h3 id="org90d6844">General purpose</h3>
+<div class="outline-text-3" id="text-org90d6844">
 <div class="org-src-container">
 <pre class="src src-sh">apt-get install -y htop emacs25 emacs25-common-non-dfsg gkrellm \
 openssh-server virtualenv sqlite3 mariadb-client mariadb-server git \
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org16b906c" class="outline-3">
+<h3 id="org16b906c">Docker</h3>
+<div class="outline-text-3" id="text-org16b906c">
+<p>
+Initial source is an official <code>Docker</code> <a href="https://docs.docker.com/engine/installation/linux/docker-ce/debian/">site</a>
+</p>
+
+<pre class="example">
+# apt-get remove docker docker-engine docker.io
+# apt-get update
+# apt-get install apt-transport-https /
+  ca-certificates curl gnupg2 software-properties-common
+# curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+# apt-key fingerprint 0EBFCD88
+# add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/debian \
+			 $(lsb_release -cs) \
+			 stable"
+# apt-get update
+# apt-get install docker-ce
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh">docker --version
+</pre>
+</div>
+
+<pre class="example">
+Docker version 17.06.0-ce, build 02c1d87
+
+</pre>
+
+<p>
+Post-installation <a href="https://docs.docker.com/engine/installation/linux/linux-postinstall/">procedures</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7fe3c97" class="outline-3">
+<h3 id="org7fe3c97">Jenkins</h3>
+<div class="outline-text-3" id="text-org7fe3c97">
+<p>
+Jenkins is an open source continuous integration tool written in
+Java and released under the MIT License. It is a server-based system
+running in a servlet container such as Apache Tomcat.
+</p>
+
+<p>
+<b>LTS  version</b>
+</p>
+
+<pre class="example">
+# wget -q -O - http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key | apt-key add -
+# echo "deb http://pkg.jenkins-ci.org/debian-stable binary/" | tee -a /etc/apt/sources.list
+
+# apt-get update
+# apt-get install jenkins -y
+</pre>
+
+<p>
+After that it would be feasible to login to <code>Jenkins</code> at
+<code>localhost:8080</code> For secure necessity you'll be owe to enter
+password allocated in file with <code>root</code> access only.
+</p>
+
+<pre class="example">
+# nano /var/lib/jenkins/secrets/initialAdminPassword
+</pre>
+
+<p>
+<a href="http://blog.programster.org/debian-8-install-jenkins/">Source</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org91aa351" class="outline-3">
+<h3 id="org91aa351">VirtualBox</h3>
+<div class="outline-text-3" id="text-org91aa351">
+<div class="org-src-container">
+<pre class="src src-sh">touch /etc/apt/sources.list.d/virtualbox.list
+echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" | tee -a /etc/apt/sources.list.d/virtualbox.list
+curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+apt-key add oracle_vbox_2016.asc
+apt-get update
+apt-get install virtualbox-5.1
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -403,9 +503,9 @@ alioth : alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth
 </div>
 </div>
 
-<div id="outline-container-orgc33fbbd" class="outline-4">
-<h4 id="orgc33fbbd">Testing</h4>
-<div class="outline-text-4" id="text-orgc33fbbd">
+<div id="outline-container-org8e0d591" class="outline-4">
+<h4 id="org8e0d591">Testing</h4>
+<div class="outline-text-4" id="text-org8e0d591">
 <p>
 Is it possible to touch file in <code>/usr/local/share/</code> right now?
 </p>
@@ -479,9 +579,12 @@ git config --global credential.helper 'cache --timeout=3600'
 </div>
 </div>
 </div>
-</div>
-</div>
 
+<div id="outline-container-org9da2f86" class="outline-4">
+<h4 id="org9da2f86">Persistent connection</h4>
+</div>
+</div>
+</div>
 
 <div id="outline-container-org2a522c9" class="outline-2">
 <h2 id="org2a522c9">Software development environment configuring</h2>
@@ -516,13 +619,26 @@ ln -s -T /usr/local/git/lib/Emacs/init_generic.el \
 <h3 id="org4d9ef89">Emacs' packages sync</h3>
 <div class="outline-text-3" id="text-org4d9ef89">
 <p>
-It's a trivial task, thus there is a simple and native solution.
+It's a routine task, thus there is a simple and native solution.
 </p>
 
 <ul class="org-ul">
 <li>Find out <code>custom-set-variables</code> section in your <code>init.el</code></li>
 <li>Evaluate it by <code>M-x eval-region</code></li>
-<li>Now look on <code>package-selected-packages</code> variable</li>
+<li><p>
+Now look on <code>package-selected-packages</code> variable
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(print package-selected-packages)
+</pre>
+</div>
+
+<pre class="example">
+
+(org bookmark+ color-theme elfeed elpy google-translate howdoi key-chord magit marshal org-bullets org-pomodoro pcache travis voca-builder ereader docker)
+
+</pre></li>
+
 <li><code>C-h v package-selected-packages</code></li>
 <li>Ensure <code>package-selected-packages</code> is fulfilled (not nil)</li>
 <li><code>package-install-selected-packages</code></li>
@@ -593,6 +709,6 @@ Is a cool feature to use in daily work.
 </div>
 </div>
 
-<div id="outline-container-orgc302cda" class="outline-2">
-<h2 id="orgc302cda">Testing</h2>
+<div id="outline-container-orgc33fbbd" class="outline-2">
+<h2 id="orgc33fbbd">Testing</h2>
 </div>
