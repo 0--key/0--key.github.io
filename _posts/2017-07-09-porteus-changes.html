@@ -1,0 +1,138 @@
+---
+layout: post
+title: Porteus
+tagline: " be free anywhere"
+permalink: /porteus/load-to-ram-config.html
+categories: [Porteus, DevEnv]
+tags: [live USB, load to RAM, configuration]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3c2b0d2">Intro</a>
+<ul>
+<li><a href="#orgd7a8bc2">Distinct features</a></li>
+<li><a href="#orgad34c90">Comparison with other live-USB distributions</a></li>
+<li><a href="#org6943f8e">Conclusion</a></li>
+</ul>
+</li>
+<li><a href="#orgcac7573">Steps</a>
+<ul>
+<li><a href="#orge281248">Set all stuff on the places</a></li>
+<li><a href="#org6748aa0">Open <code>root</code> terminal session</a></li>
+<li><a href="#org8468a78">Mount partition with <code>Porteus</code></a></li>
+<li><a href="#org350c31a">Generate:</a></li>
+<li><a href="#org30d08ac">Edit config:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3c2b0d2" class="outline-2">
+<h2 id="org3c2b0d2">Intro</h2>
+<div class="outline-text-2" id="text-org3c2b0d2">
+</div>
+<div id="outline-container-orgd7a8bc2" class="outline-3">
+<h3 id="orgd7a8bc2">Distinct features</h3>
+<div class="outline-text-3" id="text-orgd7a8bc2">
+<p>
+As you might expect there are few considerable incentives to use
+<code>Porteus</code> as your <code>DevEnv</code>:
+</p>
+
+<ul class="org-ul">
+<li>It is portable;</li>
+<li>It might be launched on any host;</li>
+<li>It is a lightweight version of <code>Linux</code>;</li>
+<li>It might be loaded directly into RAM (!)</li>
+</ul>
+
+
+<p>
+Of course it is not a <i>silver bullet</i>, but sometimes it is useful to
+utilize its peculiar advantages.
+</p>
+
+<p>
+This article might shed a light on a much <i>attractive</i> <code>Porteus'</code>
+feature: its capability to load into RAM of your PC when all data
+on your HDD stay detached. It might be defined as completely
+<span class="underline">non-intrusive installation</span> of <b>UNIX</b> OS.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgad34c90" class="outline-3">
+<h3 id="orgad34c90">Comparison with other live-USB distributions</h3>
+<div class="outline-text-3" id="text-orgad34c90">
+<p>
+There is an abundance of similar by main features live-USB Linux
+distributions, but the <b>Load to RAM</b> is a killer one:
+</p>
+
+<ul class="org-ul">
+<li>OS allocates in RAM, thus:
+<ul class="org-ul">
+<li>it allows to do all what you want to do on incredible speed;</li>
+<li>it prevents USB-stick damage by writing incremental changes;</li>
+<li>it grants you permission to modify it manually.</li>
+</ul></li>
+</ul>
+
+<p>
+As an opposite experience I have had <code>Ubuntu</code> USB-stick which was
+similar by functionality and it was completely ruined after ~70
+PC's boot-ing. Seems like <i>incremental changes writing</i> demolished
+it. And in addition it is unavoidable there.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6943f8e" class="outline-3">
+<h3 id="org6943f8e">Conclusion</h3>
+<div class="outline-text-3" id="text-org6943f8e">
+<p>
+Suppose it is enough to ensure you to make your own <code>Porteus</code>
+live-USB and take a challenge of total portability.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcac7573" class="outline-2">
+<h2 id="orgcac7573">Steps</h2>
+<div class="outline-text-2" id="text-orgcac7573">
+</div>
+<div id="outline-container-orge281248" class="outline-3">
+<h3 id="orge281248">Set all stuff on the places</h3>
+</div>
+
+<div id="outline-container-org6748aa0" class="outline-3">
+<h3 id="org6748aa0">Open <code>root</code> terminal session</h3>
+</div>
+
+<div id="outline-container-org8468a78" class="outline-3">
+<h3 id="org8468a78">Mount partition with <code>Porteus</code></h3>
+</div>
+
+<div id="outline-container-org350c31a" class="outline-3">
+<h3 id="org350c31a">Generate:</h3>
+<div class="outline-text-3" id="text-org350c31a">
+<pre class="example">
+# save-changes /mnt/sdc1/porteus/optional/extension_001.xzm
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org30d08ac" class="outline-3">
+<h3 id="org30d08ac">Edit config:</h3>
+<div class="outline-text-3" id="text-org30d08ac">
+<pre class="example">
+# nano /mnt/sdc1/boot/syslinux/porteus.cfg
+</pre>
+</div>
+</div>
+</div>
