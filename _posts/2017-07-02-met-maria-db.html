@@ -1,0 +1,202 @@
+---
+layout: post
+title: Maria DB
+tagline: " at the first glance"
+permalink: /maria-db/init-configuration.html
+categories: [MariaDB, Debian9, literate programming]
+tags: [post-installation, configuration]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orged83216">Overview</a></li>
+<li><a href="#org9ccf55a">Installation</a></li>
+<li><a href="#orgf8331f6">Initial steps</a>
+<ul>
+<li><a href="#org057a21c">Connect to MariaDB server</a></li>
+<li><a href="#org834bf59">Test DB creation</a></li>
+<li><a href="#org62f4208">Dumb DB user creation</a></li>
+<li><a href="#orgc4bd03d">Test user priviledges granting</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orged83216" class="outline-2">
+<h2 id="orged83216">Overview</h2>
+<div class="outline-text-2" id="text-orged83216">
+<p>
+<b>What is MariaDB</b>
+</p>
+
+<ul class="org-ul">
+<li>A <i>branch</i> of MySQL
+<ul class="org-ul">
+<li>MariaDB is a backward compatible, drop-in replacement for the
+MySQL Database Server</li>
+</ul></li>
+<li>Open Source
+<ul class="org-ul">
+<li>The source code for MariaDB is publicly available from Launchpad</li>
+<li>All code in MariaDB is open source</li>
+<li>Open bugs database</li>
+</ul></li>
+</ul>
+
+
+<p>
+<b>Thus, just open-source kind of MySQL</b>  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9ccf55a" class="outline-2">
+<h2 id="org9ccf55a">Installation</h2>
+<div class="outline-text-2" id="text-org9ccf55a">
+<p>
+MariaDB included into official <code>Debian</code> repository, hence its
+installation as usual is a string as <code>root</code>:
+</p>
+<pre class="example">
+~# apt-get install mariadb-server mariadb-client
+</pre>
+
+<p>
+Installation success check is possible for ordinary user also:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">mariadb --version
+</pre>
+</div>
+
+<pre class="example">
+mariadb  Ver 15.1 Distrib 10.1.23-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf8331f6" class="outline-2">
+<h2 id="orgf8331f6">Initial steps</h2>
+<div class="outline-text-2" id="text-orgf8331f6">
+<p>
+In the most cases <code>MariaDB</code> treatments are <i>identical</i> with <code>MySQL</code>,
+thus there are several steps how to permit ordinary <code>UNIX user</code> to
+interact with SQL server on localhost.
+</p>
+
+<p>
+It should to been noticed here that in accordion with <code>Debian</code>
+security policy by defauld <i>only root</i> is preliminary granted to
+resolve any DB administration issues. Thus all initial operations
+below should be executed <i>as root</i>, e.g. in separate terminal window
+after than you're switched user to root by <b>su root</b>.
+</p>
+</div>
+
+<div id="outline-container-org057a21c" class="outline-3">
+<h3 id="org057a21c">Connect to MariaDB server</h3>
+<div class="outline-text-3" id="text-org057a21c">
+<pre class="example">
+~# mariadb
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.23-MariaDB-9+deb9u1 Debian 9.0
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]&gt;   
+</pre>
+
+<p>
+The last string <i>MariaDB [(none)]&gt;</i> welcomed you to input any
+command by typing and I might suggest to type <i>help</i> and overview
+its response.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org834bf59" class="outline-3">
+<h3 id="org834bf59">Test DB creation</h3>
+<div class="outline-text-3" id="text-org834bf59">
+<p>
+But our aim is to compose environment that allows an ordinary user
+to play with relational algebra equations in <code>MariaDB</code>. First of
+all we're need to create a dumb DB. Check up the existing ones:
+</p>
+
+<pre class="example">
+MariaDB [(none)]&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.06 sec)
+</pre>
+
+<p>
+These tables serve managerial role and you should aware to modify
+them. Lets create a particular DB as illustration of DB creation
+and for our educational and test purposes.
+</p>
+<pre class="example">
+MariaDB [(none)]&gt; create database fujitsu_db;
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [(none)]&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| fujitsu_db         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org62f4208" class="outline-3">
+<h3 id="org62f4208">Dumb DB user creation</h3>
+<div class="outline-text-3" id="text-org62f4208">
+<p>
+Now, when an educational DB successfully created we restricted by
+security policy organize interaction with it from
+<i>non-administrative user</i>. It's a trivial secure trick which
+effectively resolve a huge amount of secure problem. The general
+concept implies user's access control: each user has a definitely
+limited access to some particular data, and only <code>root</code> has an
+unlimited access to all available data.
+</p>
+
+<pre class="example">
+MariaDB [(none)]&gt; CREATE USER 'alioth'@'localhost' IDENTIFIED BY 'mypass';
+Query OK, 0 rows affected (0.62 sec)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc4bd03d" class="outline-3">
+<h3 id="orgc4bd03d">Test user priviledges granting</h3>
+<div class="outline-text-3" id="text-orgc4bd03d">
+<p>
+After when we're created a test DB and an <code>dumb</code> user it's time to
+tie these objects together.
+</p>
+
+<pre class="example">
+MariaDB [(none)]&gt; GRANT ALL ON fujitsu_db.* TO 'alioth'@'localhost';
+Query OK, 0 rows affected (0.09 sec)
+</pre>
+</div>
+</div>
+</div>
