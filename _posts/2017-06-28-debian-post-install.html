@@ -26,7 +26,7 @@ tags: [post-installation, arrangement, automation]
 <li><a href="#org50887d7">General purpose</a></li>
 <li><a href="#org6354212">Docker</a></li>
 <li><a href="#org93d223e">Jenkins</a></li>
-<li><a href="#orgd35d8e7">VirtualBox</a></li>
+<li><a href="#orgd2c17d5">VirtualBox</a></li>
 <li><a href="#org118b884">Skype</a></li>
 <li><a href="#org2815a0f">HangOuts</a></li>
 </ul>
@@ -42,16 +42,18 @@ tags: [post-installation, arrangement, automation]
 </li>
 <li><a href="#orgae6ebce">Software development environment configuring</a>
 <ul>
+<li><a href="#org2209692">Version control systems</a></li>
 <li><a href="#orgb55b8d6">Cloning repositories</a></li>
 <li><a href="#orge7a9766">Emacs' settings linkage</a></li>
 <li><a href="#org5df739d">Emacs' packages sync</a></li>
 <li><a href="#org8a5fc96">Info generation</a></li>
 <li><a href="#org1bd4b43">Virtual Environment</a></li>
+<li><a href="#org87d081d">Python packages installation</a></li>
 </ul>
 </li>
 <li><a href="#org647d865">Grammar</a></li>
-<li><a href="#org6fa0071">Testing</a></li>
-<li><a href="#orgd2c17d5">VirtualBox</a>
+<li><a href="#org538f62c">Testing</a></li>
+<li><a href="#org22e8f81">VirtualBox</a>
 <ul>
 <li><a href="#org9ee007c">Installation</a></li>
 <li><a href="#orgeb18057">USB access</a></li>
@@ -324,9 +326,9 @@ password allocated in file with <code>root</code> access only.
 </div>
 </div>
 
-<div id="outline-container-orgd35d8e7" class="outline-3">
-<h3 id="orgd35d8e7">VirtualBox</h3>
-<div class="outline-text-3" id="text-orgd35d8e7">
+<div id="outline-container-orgd2c17d5" class="outline-3">
+<h3 id="orgd2c17d5">VirtualBox</h3>
+<div class="outline-text-3" id="text-orgd2c17d5">
 <div class="org-src-container">
 <pre class="src src-sh">touch /etc/apt/sources.list.d/virtualbox.list
 <span style="color: #4682b4;">echo</span> <span style="color: #deb887; font-style: italic;">"deb http://download.virtualbox.org/virtualbox/debian stretch contrib"</span> | tee -a /etc/apt/sources.list.d/virtualbox.list
@@ -570,9 +572,9 @@ alioth : alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth
 </div>
 </div>
 
-<div id="outline-container-org538f62c" class="outline-4">
-<h4 id="org538f62c">Testing</h4>
-<div class="outline-text-4" id="text-org538f62c">
+<div id="outline-container-org31659a3" class="outline-4">
+<h4 id="org31659a3">Testing</h4>
+<div class="outline-text-4" id="text-org31659a3">
 <p>
 Is it possible to touch file in <code>/usr/local/share/</code> right now?
 </p>
@@ -674,6 +676,27 @@ git config --global credential.helper <span style="color: #deb887; font-style: i
 
 <div id="outline-container-org6831580" class="outline-4">
 <h4 id="org6831580">Persistent connection</h4>
+<div class="outline-text-4" id="text-org6831580">
+<p>
+In case when you would use your <code>Debian</code> as <code>ssh</code> host, which by
+default settings just drop out all <i>suspended</i> connections. In
+intention to prevent this, just add these stirngs at the bottom of
+<code>/etc/ssh/sshd_config</code>:
+</p>
+
+<pre class="example">
+ClientAliveInterval 120
+ClientAliveCountMax 720
+</pre>
+
+<p>
+and reboot the daemon:
+</p>
+
+<pre class="example">
+# service sshd restart
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -681,11 +704,15 @@ git config --global credential.helper <span style="color: #deb887; font-style: i
 <div id="outline-container-orgae6ebce" class="outline-2">
 <h2 id="orgae6ebce">Software development environment configuring</h2>
 <div class="outline-text-2" id="text-orgae6ebce">
+</div>
+<div id="outline-container-org2209692" class="outline-3">
+<h3 id="org2209692">Version control systems</h3>
+<div class="outline-text-3" id="text-org2209692">
 <p>
 Any contemporary software development inevitably tied with <i>version
-control systems</i> there <code>Git</code> and <code>Mercurial</code> play the lead role.
-Thus it would be a wise decision to emulate these VCS locally on
-your HD:
+control systems</i> there <code>Git</code> and <code>Mercurial</code> deserve to be noticed.
+Thus it would be a wise decision to provide <code>folder separation</code> for
+these VCS locally on your HD:
 </p>
 
 <div class="org-src-container">
@@ -697,6 +724,22 @@ your HD:
 After that it might be easily cloned some particular content there.
 And let call this schema <code>folder per VCS</code>
 </p>
+
+<p>
+<i>User separation</i> might avert any mess when there are several
+users. Respectively it might be accomplishing in our case by:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir /usr/local/git/0--key/ /usr/local/git/annelida/
+</pre>
+</div>
+
+<p>
+Now, when you're prepared place where to allocate your forks or
+clones - it's very time to clone it there.
+</p>
+</div>
 </div>
 
 <div id="outline-container-orgb55b8d6" class="outline-3">
@@ -715,6 +758,26 @@ git clone https://github.com/0--key/org-pub.git
 git clone https://github.com/0--key/0--key.github.io.git
 </pre>
 </div>
+
+<p>
+as a result you should get something around this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">tree -L 2 /usr/local/git/
+</pre>
+</div>
+
+<pre class="example">
+/usr/local/git/
+├── 0--key
+│   ├── 0--key.github.io
+│   ├── lib
+│   ├── nltk
+│   ├── org-pub
+    └── talk-python-transcripts
+
+</pre>
 </div>
 </div>
 
@@ -823,8 +886,149 @@ should be installed preliminary</i>
 <h3 id="org1bd4b43">Virtual Environment</h3>
 <div class="outline-text-3" id="text-org1bd4b43">
 <p>
-Is a cool feature to use in daily work.  
+Is a cool feature to use in daily work <i>for each developer</i>. Thus it
+is necessary to assign a <span class="underline">semantically</span> pertinent path to allocate
+all theirs <code>venvs</code> in some particular folder:
 </p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir -p /usr/local/share/DVCS/alioth
+mkdir -p /usr/local/share/DVCS/vikky
+</pre>
+</div>
+
+<p>
+E.g. two our users would place the individual version of <code>venvs</code> in
+separate folders.
+</p>
+
+<p>
+Suppose you're alerady installed <code>virtualenv</code> on your system. Thus:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">python --version
+virtualenv -p /usr/bin/python3 /usr/local/share/DVCS/alioth/venv3
+</pre>
+</div>
+
+<pre class="example">
+Python 2.7.13
+Already using interpreter /usr/bin/python3
+Using base prefix '/usr'
+New python executable in /usr/local/share/DVCS/alioth/venv3/bin/python3
+Also creating executable in /usr/local/share/DVCS/alioth/venv3/bin/python
+Installing setuptools, pkg_resources, pip, wheel...done.
+
+</pre>
+
+<p>
+Try to overview your venv:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">tree -L 1 /usr/local/share/DVCS/alioth/venv3/
+</pre>
+</div>
+
+<pre class="example">
+/usr/local/share/DVCS/alioth/venv3/
+├── bin
+├── lib
+└── share
+
+3 directories, 0 files
+
+</pre>
+
+
+<p>
+Seems like all jobe is done and let's activate our <code>venv</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(pyvenv-activate <span style="color: #deb887; font-style: italic;">"/usr/local/share/DVCS/alioth/venv3/"</span>)
+</pre>
+</div>
+
+<p>
+Check-up results:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">python --version
+</pre>
+</div>
+
+<pre class="example">
+Python 3.5.3
+
+</pre>
+
+<p>
+And let's return into innate state:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(pyvenv-deactivate)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">python --version
+</pre>
+</div>
+
+<pre class="example">
+Python 2.7.13
+
+</pre>
+</div>
+
+<div id="outline-container-org82cfcde" class="outline-4">
+<h4 id="org82cfcde">Tip</h4>
+<div class="outline-text-4" id="text-org82cfcde">
+<p>
+It is cool feature to switch <i>virtual environment</i> inside Emacs.
+Just try to utilize <code>pyvenv</code>:
+</p>
+
+<div class="org-center">
+<p>
+M-x pyvenv[TAB]
+</p>
+</div>
+
+<blockquote>
+<p>
+Possible completions are:
+pyvenv-activate 	pyvenv-deactivate 	pyvenv-menu
+pyvenv-mode 	pyvenv-restart-python 	pyvenv-tracking-mode
+pyvenv-workon
+</p>
+</blockquote>
+
+<p>
+Please, choose any command with no interruption on Emacs'
+work-flow.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org87d081d" class="outline-3">
+<h3 id="org87d081d">Python packages installation</h3>
+<div class="outline-text-3" id="text-org87d081d">
+<p>
+It is a good idea to utilize the isolated <code>DevEnv</code> for <code>Python</code> and
+it demands to install several handy packages into each <code>DevEnv</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip install jedi yapf flake8 autopep8
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -854,13 +1058,13 @@ ls: cannot access '/usr/local/java/': No such file or directory
 </div>
 </div>
 
-<div id="outline-container-org6fa0071" class="outline-2">
-<h2 id="org6fa0071">Testing</h2>
+<div id="outline-container-org538f62c" class="outline-2">
+<h2 id="org538f62c">Testing</h2>
 </div>
 
-<div id="outline-container-orgd2c17d5" class="outline-2">
-<h2 id="orgd2c17d5">VirtualBox</h2>
-<div class="outline-text-2" id="text-orgd2c17d5">
+<div id="outline-container-org22e8f81" class="outline-2">
+<h2 id="org22e8f81">VirtualBox</h2>
+<div class="outline-text-2" id="text-org22e8f81">
 </div>
 <div id="outline-container-org9ee007c" class="outline-3">
 <h3 id="org9ee007c">Installation</h3>
