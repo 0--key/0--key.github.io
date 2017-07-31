@@ -1,0 +1,337 @@
+---
+layout: post
+title: A cramped elephant
+tagline: " at the first glance"
+permalink: /postgres/first-steps.html
+categories: [Postgres, Debian9, literate programming]
+tags: [post-installation, configuration]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8d79e77">Intro</a></li>
+<li><a href="#orgc98a7a9">Installation</a></li>
+<li><a href="#org02a678d">First Steps</a>
+<ul>
+<li><a href="#orgdd1f810">Init DB and customary user</a></li>
+<li><a href="#orge221296">Emacs re-configuring</a></li>
+<li><a href="#orgd634367">Interactive mode</a></li>
+</ul>
+</li>
+<li><a href="#org5523aa1">Postgres Testing as a Literate Programming</a>
+<ul>
+<li><a href="#org2c17d9f">Table creation</a></li>
+<li><a href="#org9085381">Check existing tables</a></li>
+<li><a href="#org91c9370">Populating tables with data</a></li>
+<li><a href="#org44a2b0c">Retrieving data</a></li>
+<li><a href="#org616b2b6">Tables deletion</a></li>
+<li><a href="#orgcc57981">Check existing tables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8d79e77" class="outline-2">
+<h2 id="org8d79e77">Intro</h2>
+<div class="outline-text-2" id="text-org8d79e77">
+<p>
+From the <i>official documentation</i>:
+</p>
+
+<blockquote>
+<p>
+PostgreSQL is an object-relational database management system
+(ORDBMS) based on POSTGRES, Version 4.2, developed at the University
+of California at Berkeley Computer Science Department. POSTGRES
+pioneered many concepts that only became available in some
+commercial database systems much later.
+</p>
+</blockquote>
+
+<p>
+Where <i>object-relational database management system</i>:
+</p>
+
+<blockquote>
+<p>
+An object-relational database (ORD), or object-relational database
+management system (ORDBMS), is a database management system (DBMS)
+similar to a relational database, but with an object-oriented
+database model: objects, classes and inheritance are directly
+supported in database schemas and in the query language. In
+addition, just as with pure relational systems, it supports
+extension of the data model with custom data-types and methods.
+</p>
+</blockquote>
+
+<p>
+And several penetratingly accurate remarks from Jayadevan Maymala:
+</p>
+
+<blockquote>
+<p>
+PostgreSQL is an incredibly flexible and dependable open source
+relational database. Harnessing its power will make your
+applications more reliable and extensible without increasing costs.
+Using PostgreSQL's advanced features will save you work and increase
+performance, once you've discovered how to set it up.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgc98a7a9" class="outline-2">
+<h2 id="orgc98a7a9">Installation</h2>
+<div class="outline-text-2" id="text-orgc98a7a9">
+<p>
+<code>Debian</code> has a straightforward policy in OS administration: all
+secure or <i>unsecure</i> operations are prohibited for ordinary user and
+allowed for <code>root</code> only. Thus all <code>Postgres</code> post-installation (it's
+a pun, but it is :) procedures should be accomplished as <code>root</code>.
+</p>
+
+<pre class="example">
+# apt-get install postgresql-doc postgresql postgresql-client
+# apt-get install pgadmin3 pgadmin3-data
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org02a678d" class="outline-2">
+<h2 id="org02a678d">First Steps</h2>
+<div class="outline-text-2" id="text-org02a678d">
+</div><div id="outline-container-orgdd1f810" class="outline-3">
+<h3 id="orgdd1f810">Init DB and customary user</h3>
+<div class="outline-text-3" id="text-orgdd1f810">
+<p>
+Exactly for <i>security purpose</i> we'll allow any OS user to connect
+with <code>Postgres</code> server locally without <code>password</code>. We trust our
+logged users :)
+First of all log-in as <b>root</b> and:
+</p>
+
+<pre class="example">
+~# su - postgres
+~$ psql
+postgres=# \du //check-up already existing users
+  			      List of roles
+Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+// create a new one:
+postgres=# CREATE USER &lt;user_name&gt; CREATEDB;
+postgres=# \du
+  			      List of roles
+Role name  |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+&lt;user_name&gt;| Create DB                                                  | {}
+postgres   | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+</pre>
+
+<p>
+Now <code>Postgres</code> knows about &lt;user_name&gt;. It's time to log-in as a
+&lt;user_name&gt;, and create DB with &lt;user_name&gt;:
+</p>
+
+<pre class="example">
+~$ createdb
+</pre>
+
+<p>
+After these preparations it would feasible to connect to <code>Postgres</code>
+server from localhost for log-in users without a specific password:
+</p>
+
+<pre class="example">
+~$ psql
+psql (9.6.4)
+Type "help" for help.
+user_name=&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge221296" class="outline-3">
+<h3 id="orge221296">Emacs re-configuring</h3>
+<div class="outline-text-3" id="text-orge221296">
+<p>
+Now, when you're able to connect your <code>Postgres</code> client with
+<i>server</i> it is time to tune in your <code>Emacs</code> on SQL verse. There are
+several comprehensive tutorials below:
+</p>
+
+<ul class="org-ul">
+<li>Brief intro <a href="https://www.emacswiki.org/emacs/SqlMode">into SQLmode</a>;</li>
+<li>Must-read <a href="http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html">sample for Org-mode</a> in scientific research;</li>
+<li>SQL in Babel <a href="http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-sql.html">introduction</a></li>
+</ul>
+
+<p>
+After then you're red these articles it might be not difficult to:
+</p>
+
+<ol class="org-ol">
+<li>Activate <code>SQL mode</code> in your <code>init.el</code>;</li>
+<li>Restart <code>Emacs</code></li>
+</ol>
+
+
+<p>
+After these manipulations feel free to open an embed <code>SQL mode</code>
+documentation: <code>M-s sql-help</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd634367" class="outline-3">
+<h3 id="orgd634367">Interactive mode</h3>
+<div class="outline-text-3" id="text-orgd634367">
+<p>
+It's seems <i>a standard way</i> to do the business with <code>Postgres</code>
+inside <code>Emacs</code>.
+</p>
+
+<p>
+Just type <code>M-x sql-postgres</code> and <i>three times</i> &lt;RETURN&gt; as an
+agreement to <i>default</i> connection options.
+</p>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/SQL/Postgres_in_Emacs.png" alt="Nice and dice" title="Postgres in Emacs" align="left" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Postgres client's interactive window</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5523aa1" class="outline-2">
+<h2 id="org5523aa1">Postgres Testing as a Literate Programming</h2>
+<div class="outline-text-2" id="text-org5523aa1">
+</div><div id="outline-container-org2c17d9f" class="outline-3">
+<h3 id="org2c17d9f">Table creation</h3>
+<div class="outline-text-3" id="text-org2c17d9f">
+<div class="org-src-container">
+<pre class="src src-sql">CREATE TABLE weather (
+    city            varchar(80),
+    temp_lo         int,           -- low temperature
+    temp_hi         int,           -- high temperature
+    prcp            real,          -- precipitation
+    date            date
+);
+
+CREATE TABLE cities (
+    name            varchar(80),
+    location        point
+);
+</pre>
+</div>
+
+<pre class="example">
+CREATE TABLE
+CREATE TABLE
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9085381" class="outline-3">
+<h3 id="org9085381">Check existing tables</h3>
+<div class="outline-text-3" id="text-org9085381">
+<div class="org-src-container">
+<pre class="src src-sql">\d
+</pre>
+</div>
+
+<pre class="example">
+List of relations
+Schema	Name	Type	Owner
+public	cities	table	alioth
+public	weather	table	alioth
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org91c9370" class="outline-3">
+<h3 id="org91c9370">Populating tables with data</h3>
+<div class="outline-text-3" id="text-org91c9370">
+<div class="org-src-container">
+<pre class="src src-sql">-- Direct and blind approach
+INSERT INTO weather VALUES
+('San Francisco', 46, 50, 0.25, '1994-11-27');
+INSERT INTO cities VALUES ('San Francisco', '(-194.0, 53.0)');
+-- Direct and straightforward method
+INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
+ VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
+ INSERT INTO weather (date, city, temp_hi, temp_lo)
+ VALUES ('1994-11-29', 'Hayward', 54, 37);
+</pre>
+</div>
+
+<pre class="example">
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org44a2b0c" class="outline-3">
+<h3 id="org44a2b0c">Retrieving data</h3>
+<div class="outline-text-3" id="text-org44a2b0c">
+<div class="org-src-container">
+<pre class="src src-sql">SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
+</pre>
+</div>
+
+<pre class="example">
+city	temp_lo	temp_hi	prcp	date
+San Francisco	46	50	0.25	1994-11-27
+San Francisco	43	57	0	1994-11-29
+Hayward	37	54		1994-11-29
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org616b2b6" class="outline-3">
+<h3 id="org616b2b6">Tables deletion</h3>
+<div class="outline-text-3" id="text-org616b2b6">
+<div class="org-src-container">
+<pre class="src src-sql">DROP TABLE weather;
+DROP TABLE cities;
+</pre>
+</div>
+
+<pre class="example">
+DROP TABLE
+DROP TABLE
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcc57981" class="outline-3">
+<h3 id="orgcc57981">Check existing tables</h3>
+<div class="outline-text-3" id="text-orgcc57981">
+<div class="org-src-container">
+<pre class="src src-sql">\d
+</pre>
+</div>
+
+<pre class="example">
+No relations found.
+
+</pre>
+</div>
+</div>
+</div>
