@@ -11,23 +11,28 @@ tags: [post-installation, configuration]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orged83216">Overview</a></li>
-<li><a href="#org9ccf55a">Installation</a></li>
-<li><a href="#orgf8331f6">Initial steps</a>
+<li><a href="#org3701e05">Overview</a></li>
+<li><a href="#org096335a">Installation</a></li>
+<li><a href="#org56c090e">Initial steps</a>
 <ul>
-<li><a href="#org057a21c">Connect to MariaDB server</a></li>
-<li><a href="#org834bf59">Test DB creation</a></li>
-<li><a href="#org62f4208">Dumb DB user creation</a></li>
-<li><a href="#orgc4bd03d">Test user priviledges granting</a></li>
+<li><a href="#orgcb76173">Connect to MariaDB server</a></li>
+<li><a href="#orgc9e6e05">Test DB creation</a></li>
+<li><a href="#orgad070be">Dumb DB user creation</a></li>
+<li><a href="#org776c983">Test user priviledges granting</a></li>
+</ul>
+</li>
+<li><a href="#org68b219b">Emacs meets MariaDB</a>
+<ul>
+<li><a href="#orge9631b2">Interactive mode</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orged83216" class="outline-2">
-<h2 id="orged83216">Overview</h2>
-<div class="outline-text-2" id="text-orged83216">
+<div id="outline-container-org3701e05" class="outline-2">
+<h2 id="org3701e05">Overview</h2>
+<div class="outline-text-2" id="text-org3701e05">
 <p>
 <b>What is MariaDB</b>
 </p>
@@ -53,9 +58,9 @@ MySQL Database Server</li>
 </div>
 </div>
 
-<div id="outline-container-org9ccf55a" class="outline-2">
-<h2 id="org9ccf55a">Installation</h2>
-<div class="outline-text-2" id="text-org9ccf55a">
+<div id="outline-container-org096335a" class="outline-2">
+<h2 id="org096335a">Installation</h2>
+<div class="outline-text-2" id="text-org096335a">
 <p>
 MariaDB included into official <code>Debian</code> repository, hence its
 installation as usual is a string as <code>root</code>:
@@ -79,9 +84,9 @@ mariadb  Ver 15.1 Distrib 10.1.23-MariaDB, for debian-linux-gnu (x86_64) using r
 </div>
 </div>
 
-<div id="outline-container-orgf8331f6" class="outline-2">
-<h2 id="orgf8331f6">Initial steps</h2>
-<div class="outline-text-2" id="text-orgf8331f6">
+<div id="outline-container-org56c090e" class="outline-2">
+<h2 id="org56c090e">Initial steps</h2>
+<div class="outline-text-2" id="text-org56c090e">
 <p>
 In the most cases <code>MariaDB</code> treatments are <i>identical</i> with <code>MySQL</code>,
 thus there are several steps how to permit ordinary <code>UNIX user</code> to
@@ -97,9 +102,9 @@ after than you're switched user to root by <b>su root</b>.
 </p>
 </div>
 
-<div id="outline-container-org057a21c" class="outline-3">
-<h3 id="org057a21c">Connect to MariaDB server</h3>
-<div class="outline-text-3" id="text-org057a21c">
+<div id="outline-container-orgcb76173" class="outline-3">
+<h3 id="orgcb76173">Connect to MariaDB server</h3>
+<div class="outline-text-3" id="text-orgcb76173">
 <pre class="example">
 ~# mariadb
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -121,9 +126,9 @@ its response.
 </div>
 </div>
 
-<div id="outline-container-org834bf59" class="outline-3">
-<h3 id="org834bf59">Test DB creation</h3>
-<div class="outline-text-3" id="text-org834bf59">
+<div id="outline-container-orgc9e6e05" class="outline-3">
+<h3 id="orgc9e6e05">Test DB creation</h3>
+<div class="outline-text-3" id="text-orgc9e6e05">
 <p>
 But our aim is to compose environment that allows an ordinary user
 to play with relational algebra equations in <code>MariaDB</code>. First of
@@ -165,9 +170,9 @@ MariaDB [(none)]&gt; show databases;
 </div>
 </div>
 
-<div id="outline-container-org62f4208" class="outline-3">
-<h3 id="org62f4208">Dumb DB user creation</h3>
-<div class="outline-text-3" id="text-org62f4208">
+<div id="outline-container-orgad070be" class="outline-3">
+<h3 id="orgad070be">Dumb DB user creation</h3>
+<div class="outline-text-3" id="text-orgad070be">
 <p>
 Now, when an educational DB successfully created we restricted by
 security policy organize interaction with it from
@@ -185,9 +190,9 @@ Query OK, 0 rows affected (0.62 sec)
 </div>
 </div>
 
-<div id="outline-container-orgc4bd03d" class="outline-3">
-<h3 id="orgc4bd03d">Test user priviledges granting</h3>
-<div class="outline-text-3" id="text-orgc4bd03d">
+<div id="outline-container-org776c983" class="outline-3">
+<h3 id="org776c983">Test user priviledges granting</h3>
+<div class="outline-text-3" id="text-org776c983">
 <p>
 After when we're created a test DB and an <code>dumb</code> user it's time to
 tie these objects together.
@@ -197,6 +202,38 @@ tie these objects together.
 MariaDB [(none)]&gt; GRANT ALL ON fujitsu_db.* TO 'alioth'@'localhost';
 Query OK, 0 rows affected (0.09 sec)
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org68b219b" class="outline-2">
+<h2 id="org68b219b">Emacs meets MariaDB</h2>
+<div class="outline-text-2" id="text-org68b219b">
+</div><div id="outline-container-orge9631b2" class="outline-3">
+<h3 id="orge9631b2">Interactive mode</h3>
+<div class="outline-text-3" id="text-orge9631b2">
+<p>
+Now, when we are freely capable to connect <code>MariaDB</code> client with
+server it's very moment to embed all this features into Emacs IDE.
+</p>
+
+<p>
+Firstly it is worth to be noticed a <code>Emacs'</code> standard approach to
+<code>SQL</code>: <code>M-x sql-mysql</code> after than you're add <code>SQL</code> support in your
+<code>init.el</code> and re-launch <code>Emacs</code>.
+</p>
+
+<p>
+As a result you'll would get this window for treat your <code>MariaDB</code>
+interactively:
+</p>
+
+
+<div class="figure">
+<p><img src="http://0--key.github.io/assets/img/SQL/MariaDB_in_Emacs.png" alt="Nice and dice" title="MariaDB in Emacs" align="left" />
+</p>
+<p><span class="figure-number">Figure 1: </span>MariaDB client's interactive window</p>
+</div>
 </div>
 </div>
 </div>
