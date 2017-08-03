@@ -11,50 +11,59 @@ tags: [post-installation, arrangement, automation]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org43276c4">Goal definition</a></li>
-<li><a href="#org44a355d">Test launch</a></li>
-<li><a href="#orga3cac41">Kernel modules</a>
+<li><a href="#orgf483bbe">Goal definition</a></li>
+<li><a href="#orge92a47a">Test launch</a></li>
+<li><a href="#org738c8c6">Kernel modules</a>
 <ul>
-<li><a href="#orgdcc0ab3">Deviation detection</a></li>
-<li><a href="#orgd94feca">Causation</a></li>
-<li><a href="#org5024dd8">Blacklisting as healing</a></li>
+<li><a href="#orgcf9a5f3">Deviation detection</a></li>
+<li><a href="#org6c25ab5">Causation</a></li>
+<li><a href="#org1f4a7b0">Blacklisting as a cure</a></li>
 </ul>
 </li>
-<li><a href="#orge87fa6a">HDD health check-up</a></li>
-<li><a href="#org38d409d">Software installation</a>
+<li><a href="#org9ee4508">HDD health check-up</a></li>
+<li><a href="#orgbcd9f71">Software installation</a>
 <ul>
-<li><a href="#org90d6844">General purpose</a></li>
-<li><a href="#org16b906c">Docker</a></li>
-<li><a href="#org7fe3c97">Jenkins</a></li>
-<li><a href="#org91aa351">VirtualBox</a></li>
+<li><a href="#org50887d7">General purpose</a></li>
+<li><a href="#org6354212">Docker</a></li>
+<li><a href="#org93d223e">Jenkins</a></li>
+<li><a href="#orgd35d8e7">VirtualBox</a></li>
+<li><a href="#org118b884">Skype</a></li>
+<li><a href="#org2815a0f">HangOuts</a></li>
 </ul>
 </li>
-<li><a href="#org2dfd7b9">FileTree extension</a>
+<li><a href="#orgd43f677">FileTree extension</a>
 <ul>
-<li><a href="#org697b08a">Check the existing folders</a></li>
-<li><a href="#orgf3980e4">Conclusion</a></li>
-<li><a href="#org12f4aa2">Check-up user groups</a></li>
-<li><a href="#org69c313f">Additional folders</a></li>
-<li><a href="#org481e01b">Git</a></li>
+<li><a href="#orgc7e3c57">Check the existing folders</a></li>
+<li><a href="#org6ce55a6">Conclusion</a></li>
+<li><a href="#org09db729">Check-up user groups</a></li>
+<li><a href="#orgab85600">Additional folders</a></li>
+<li><a href="#org5c6e07f">Git</a></li>
 </ul>
 </li>
-<li><a href="#org2a522c9">Software development environment configuring</a>
+<li><a href="#orgae6ebce">Software development environment configuring</a>
 <ul>
-<li><a href="#org9323451">Cloning repositories</a></li>
-<li><a href="#org8937b61">Emacs' settings linkage</a></li>
-<li><a href="#org4d9ef89">Emacs' packages sync</a></li>
-<li><a href="#orgcfe3323">Info generation</a></li>
-<li><a href="#orge65486a">Virtual Environment</a></li>
+<li><a href="#orgb55b8d6">Cloning repositories</a></li>
+<li><a href="#orge7a9766">Emacs' settings linkage</a></li>
+<li><a href="#org5df739d">Emacs' packages sync</a></li>
+<li><a href="#org8a5fc96">Info generation</a></li>
+<li><a href="#org1bd4b43">Virtual Environment</a></li>
 </ul>
 </li>
-<li><a href="#orgc33fbbd">Testing</a></li>
+<li><a href="#org647d865">Grammar</a></li>
+<li><a href="#org6fa0071">Testing</a></li>
+<li><a href="#orgd2c17d5">VirtualBox</a>
+<ul>
+<li><a href="#org9ee007c">Installation</a></li>
+<li><a href="#orgeb18057">USB access</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org43276c4" class="outline-2">
-<h2 id="org43276c4">Goal definition</h2>
-<div class="outline-text-2" id="text-org43276c4">
+<div id="outline-container-orgf483bbe" class="outline-2">
+<h2 id="orgf483bbe">Goal definition</h2>
+<div class="outline-text-2" id="text-orgf483bbe">
 <p>
 When you're dived in depth of software development with <code>Debian</code> as
 a main operational system sometimes it might emerge the urge to
@@ -65,9 +74,9 @@ handy to use thus the aim is <code>just to replicate</code> it.
 </div>
 
 
-<div id="outline-container-org44a355d" class="outline-2">
-<h2 id="org44a355d">Test launch</h2>
-<div class="outline-text-2" id="text-org44a355d">
+<div id="outline-container-orge92a47a" class="outline-2">
+<h2 id="orge92a47a">Test launch</h2>
+<div class="outline-text-2" id="text-orge92a47a">
 <p>
 First operation after successful installation is a test launch with
 </p>
@@ -122,12 +131,13 @@ Thus it would easy to catch a bug by tracing it through <code>Debian 9</code> lo
 </div>
 
 
-<div id="outline-container-orga3cac41" class="outline-2">
-<h2 id="orga3cac41">Kernel modules</h2>
-<div class="outline-text-2" id="text-orga3cac41">
-</div><div id="outline-container-orgdcc0ab3" class="outline-3">
-<h3 id="orgdcc0ab3">Deviation detection</h3>
-<div class="outline-text-3" id="text-orgdcc0ab3">
+<div id="outline-container-org738c8c6" class="outline-2">
+<h2 id="org738c8c6">Kernel modules</h2>
+<div class="outline-text-2" id="text-org738c8c6">
+</div>
+<div id="outline-container-orgcf9a5f3" class="outline-3">
+<h3 id="orgcf9a5f3">Deviation detection</h3>
+<div class="outline-text-3" id="text-orgcf9a5f3">
 <p>
 In several (mostly rare) cases <code>Linux kernel</code> can't work correctly
 with your hardware and point on this by messages (<code>dmesg</code> and
@@ -147,19 +157,40 @@ messages and it should easily detected by user.
 </div>
 </div>
 
-<div id="outline-container-orgd94feca" class="outline-3">
-<h3 id="orgd94feca">Causation</h3>
+<div id="outline-container-org6c25ab5" class="outline-3">
+<h3 id="org6c25ab5">Causation</h3>
+<div class="outline-text-3" id="text-org6c25ab5">
+<p>
+It's easy, as a day: hardware incompatibility - sometimes arbitrary
+piece of your PC might be equipped by <code>proprietary</code> hardware (e.g.
+Wi-Fi card from Atheros, or Bluetooth adapter from unknown
+manufacturer). That's it - it just deny to serve as expected by the
+<i>Kernel</i>. All you might need a set of <i>proprietary drivers</i> on your
+device.
+</p>
+</div>
 </div>
 
-<div id="outline-container-org5024dd8" class="outline-3">
-<h3 id="org5024dd8">Blacklisting as healing</h3>
+<div id="outline-container-org1f4a7b0" class="outline-3">
+<h3 id="org1f4a7b0">Blacklisting as a cure</h3>
+<div class="outline-text-3" id="text-org1f4a7b0">
+<p>
+In flip side: when you're got a tons of <code>Error</code> messages and device
+is stubborn as a mule, it is <i>unavoidable</i>.
+</p>
+
+<p>
+There are a lot of approaches how to blacklist, and the <i>stem idea</i>
+is to expel erroneous modules out from usage by the <i>Kernel</i>.
+</p>
+</div>
 </div>
 </div>
 
 
-<div id="outline-container-orge87fa6a" class="outline-2">
-<h2 id="orge87fa6a">HDD health check-up</h2>
-<div class="outline-text-2" id="text-orge87fa6a">
+<div id="outline-container-org9ee4508" class="outline-2">
+<h2 id="org9ee4508">HDD health check-up</h2>
+<div class="outline-text-2" id="text-org9ee4508">
 <p>
 <b>For notebook's HDD with ferromagnetic disks only</b>
 <b>Not suitable for SSD</b>
@@ -203,23 +234,25 @@ please, to fix this issue.
 </div>
 
 
-<div id="outline-container-org38d409d" class="outline-2">
-<h2 id="org38d409d">Software installation</h2>
-<div class="outline-text-2" id="text-org38d409d">
-</div><div id="outline-container-org90d6844" class="outline-3">
-<h3 id="org90d6844">General purpose</h3>
-<div class="outline-text-3" id="text-org90d6844">
+<div id="outline-container-orgbcd9f71" class="outline-2">
+<h2 id="orgbcd9f71">Software installation</h2>
+<div class="outline-text-2" id="text-orgbcd9f71">
+</div>
+<div id="outline-container-org50887d7" class="outline-3">
+<h3 id="org50887d7">General purpose</h3>
+<div class="outline-text-3" id="text-org50887d7">
 <div class="org-src-container">
-<pre class="src src-sh">apt-get install -y htop emacs25 emacs25-common-non-dfsg gkrellm \
-openssh-server virtualenv sqlite3 mariadb-client mariadb-server git \
+<pre class="src src-sh">apt-get install -y htop emacs25 emacs25-common-non-dfsg gkrellm <span style="color: #deb887; font-style: italic;">\</span>
+openssh-server virtualenv sqlite3 mariadb-client mariadb-server git <span style="color: #deb887; font-style: italic;">\</span>
+postgresql-doc postgresql postgresql-client pgadmin3 pgadmin3-data
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org16b906c" class="outline-3">
-<h3 id="org16b906c">Docker</h3>
-<div class="outline-text-3" id="text-org16b906c">
+<div id="outline-container-org6354212" class="outline-3">
+<h3 id="org6354212">Docker</h3>
+<div class="outline-text-3" id="text-org6354212">
 <p>
 Initial source is an official <code>Docker</code> <a href="https://docs.docker.com/engine/installation/linux/docker-ce/debian/">site</a>
 </p>
@@ -254,9 +287,9 @@ Post-installation <a href="https://docs.docker.com/engine/installation/linux/lin
 </div>
 </div>
 
-<div id="outline-container-org7fe3c97" class="outline-3">
-<h3 id="org7fe3c97">Jenkins</h3>
-<div class="outline-text-3" id="text-org7fe3c97">
+<div id="outline-container-org93d223e" class="outline-3">
+<h3 id="org93d223e">Jenkins</h3>
+<div class="outline-text-3" id="text-org93d223e">
 <p>
 Jenkins is an open source continuous integration tool written in
 Java and released under the MIT License. It is a server-based system
@@ -291,12 +324,12 @@ password allocated in file with <code>root</code> access only.
 </div>
 </div>
 
-<div id="outline-container-org91aa351" class="outline-3">
-<h3 id="org91aa351">VirtualBox</h3>
-<div class="outline-text-3" id="text-org91aa351">
+<div id="outline-container-orgd35d8e7" class="outline-3">
+<h3 id="orgd35d8e7">VirtualBox</h3>
+<div class="outline-text-3" id="text-orgd35d8e7">
 <div class="org-src-container">
 <pre class="src src-sh">touch /etc/apt/sources.list.d/virtualbox.list
-echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" | tee -a /etc/apt/sources.list.d/virtualbox.list
+<span style="color: #4682b4;">echo</span> <span style="color: #deb887; font-style: italic;">"deb http://download.virtualbox.org/virtualbox/debian stretch contrib"</span> | tee -a /etc/apt/sources.list.d/virtualbox.list
 curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
 apt-key add oracle_vbox_2016.asc
 apt-get update
@@ -305,12 +338,45 @@ apt-get install virtualbox-5.1
 </div>
 </div>
 </div>
+
+<div id="outline-container-org118b884" class="outline-3">
+<h3 id="org118b884">Skype</h3>
+<div class="outline-text-3" id="text-org118b884">
+<p>
+Easy peasy.
+</p>
+
+<p>
+<a href="https://wiki.debian.org/skype">Source</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2815a0f" class="outline-3">
+<h3 id="org2815a0f">HangOuts</h3>
+<div class="outline-text-3" id="text-org2815a0f">
+<p>
+Unfortunately it is impossible to install it as a single app, but
+<i>only as Google Chrome plugin</i>. To do so:
+</p>
+
+<pre class="example">
+# wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# dpkg -i google-chrome-stable_current_amd64.deb
+</pre>
+
+<p>
+After that you should download and install
+<code>google-talkplugin_current_amd64.deb</code>
+</p>
+</div>
+</div>
 </div>
 
 
-<div id="outline-container-org2dfd7b9" class="outline-2">
-<h2 id="org2dfd7b9">FileTree extension</h2>
-<div class="outline-text-2" id="text-org2dfd7b9">
+<div id="outline-container-orgd43f677" class="outline-2">
+<h2 id="orgd43f677">FileTree extension</h2>
+<div class="outline-text-2" id="text-orgd43f677">
 <p>
 A <code>tree</code> utility is an extremely handy tool in file-system
 dissection.
@@ -321,9 +387,9 @@ dissection.
 </pre>
 </div>
 
-<div id="outline-container-org697b08a" class="outline-3">
-<h3 id="org697b08a">Check the existing folders</h3>
-<div class="outline-text-3" id="text-org697b08a">
+<div id="outline-container-orgc7e3c57" class="outline-3">
+<h3 id="orgc7e3c57">Check the existing folders</h3>
+<div class="outline-text-3" id="text-orgc7e3c57">
 <p>
 As I'm expect to store my data locally and I'm a <code>user</code> in generic
 sense of this word, lets check-up <code>/usr/local/</code> directory as a
@@ -410,9 +476,9 @@ potential storage for my data.
 </div>
 </div>
 
-<div id="outline-container-orgf3980e4" class="outline-3">
-<h3 id="orgf3980e4">Conclusion</h3>
-<div class="outline-text-3" id="text-orgf3980e4">
+<div id="outline-container-org6ce55a6" class="outline-3">
+<h3 id="org6ce55a6">Conclusion</h3>
+<div class="outline-text-3" id="text-org6ce55a6">
 <p>
 Seems like the best place to put any data on <code>UNIX</code> host is
 <code>/usr/local/</code> that have <code>lib</code> and <code>share</code> folders which are the
@@ -426,9 +492,10 @@ data on your <code>Debian 9</code> host is <code>/usr/local/share/</code>
 </div>
 </div>
 
-<div id="outline-container-org12f4aa2" class="outline-3">
-<h3 id="org12f4aa2">Check-up user groups</h3>
-<div class="outline-text-3" id="text-org12f4aa2">
+
+<div id="outline-container-org09db729" class="outline-3">
+<h3 id="org09db729">Check-up user groups</h3>
+<div class="outline-text-3" id="text-org09db729">
 <p>
 By default convention the user don't allowed to write into
 <code>/usr/local/</code>, <a href="https://wiki.debian.org/SystemGroups">but</a> staff group is a special case:
@@ -447,7 +514,7 @@ Initially it is an empty group, there are no users in it:
 
 <div class="org-src-container">
 <pre class="src src-sh">groups | grep staff
-echo "---"
+<span style="color: #4682b4;">echo</span> <span style="color: #deb887; font-style: italic;">"---"</span>
 groups alioth | grep staff
 </pre>
 </div>
@@ -458,9 +525,9 @@ groups alioth | grep staff
 </pre>
 </div>
 
-<div id="outline-container-org29980b9" class="outline-4">
-<h4 id="org29980b9">Add user to group <code>staff</code></h4>
-<div class="outline-text-4" id="text-org29980b9">
+<div id="outline-container-org2693165" class="outline-4">
+<h4 id="org2693165">Add user to group <code>staff</code></h4>
+<div class="outline-text-4" id="text-org2693165">
 <pre class="example">
 # usermod -aG staff alioth
 </pre>
@@ -475,21 +542,21 @@ groups alioth | grep staff
 </div>
 </div>
 
-<div id="outline-container-org4c18139" class="outline-4">
-<h4 id="org4c18139"><b>Re-login</b></h4>
-<div class="outline-text-4" id="text-org4c18139">
+<div id="outline-container-orgddc7444" class="outline-4">
+<h4 id="orgddc7444"><b>Re-login</b></h4>
+<div class="outline-text-4" id="text-orgddc7444">
 <p>
 To up-to-date group permissions.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orge28aed7" class="outline-4">
-<h4 id="orge28aed7">And check groups now:</h4>
-<div class="outline-text-4" id="text-orge28aed7">
+<div id="outline-container-org7d75fff" class="outline-4">
+<h4 id="org7d75fff">And check groups now:</h4>
+<div class="outline-text-4" id="text-org7d75fff">
 <div class="org-src-container">
 <pre class="src src-sh">groups | grep staff
-echo "==="
+<span style="color: #4682b4;">echo</span> <span style="color: #deb887; font-style: italic;">"==="</span>
 groups alioth | grep staff
 </pre>
 </div>
@@ -503,19 +570,19 @@ alioth : alioth cdrom floppy sudo audio dip video plugdev staff netdev bluetooth
 </div>
 </div>
 
-<div id="outline-container-org8e0d591" class="outline-4">
-<h4 id="org8e0d591">Testing</h4>
-<div class="outline-text-4" id="text-org8e0d591">
+<div id="outline-container-org538f62c" class="outline-4">
+<h4 id="org538f62c">Testing</h4>
+<div class="outline-text-4" id="text-org538f62c">
 <p>
 Is it possible to touch file in <code>/usr/local/share/</code> right now?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">cd /usr/local/share/
+<pre class="src src-sh"><span style="color: #4682b4;">cd</span> /usr/local/share/
 touch test.file.txt
 ls -la | grep test
 rm test.file.txt
-echo "++++"
+<span style="color: #4682b4;">echo</span> <span style="color: #deb887; font-style: italic;">"++++"</span>
 ls -la | grep test
 </pre>
 </div>
@@ -529,71 +596,120 @@ ls -la | grep test
 </div>
 </div>
 
-<div id="outline-container-org69c313f" class="outline-3">
-<h3 id="org69c313f">Additional folders</h3>
-<div class="outline-text-3" id="text-org69c313f">
+<div id="outline-container-orgab85600" class="outline-3">
+<h3 id="orgab85600">Additional folders</h3>
+<div class="outline-text-3" id="text-orgab85600">
 <p>
 Now, when you're added into <code>staff</code> group it would be possible to
-execute all necessary commands as a current user. Let's create
-several additional folders for books, courses and repositories:
+execute any secure command from current user. Let's create in
+<code>/usr/local/</code> several additional folders for books, courses and
+repositories:
 </p>
+</div>
 
+<div id="outline-container-orgea28a28" class="outline-4">
+<h4 id="orgea28a28">Target directory overview</h4>
+<div class="outline-text-4" id="text-orgea28a28">
 <div class="org-src-container">
-<pre class="src src-sh">cd /usr/local/share/
-ls -la
-# mkdir books courses DVCS
+<pre class="src src-sh">ls -la /usr/local/
+ls -la /usr/local/lib/
+ls -la /usr/local/share/
+<span style="color: #cdc0b0; font-style: italic;"># </span><span style="color: #cdc0b0; font-style: italic;">mkdir books courses</span>
 </pre>
 </div>
 
 <pre class="example">
-total 52
-drwxrwsr-x 13 root   staff  4096 Aug  2 18:39 .
-drwxrwsr-x 10 root   staff  4096 Jul 10 15:22 ..
-drwxr-sr-x  3 root   staff  4096 Jul 21 12:04 anki
-drwxr-sr-x  2 root   staff  4096 Aug  2 06:31 applications
-drwxr-sr-x  2 alioth alioth 4096 Jul 10 18:20 books
-drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 ca-certificates
-drwxr-sr-x  7 alioth alioth 4096 Jul 26 18:31 DVCS
-drwxrwsr-x  4 root   staff  4096 Jul 10 17:23 emacs
-drwxrwsr-x  2 root   staff  4096 Jun 20 04:18 fonts
-drwxrwsr-x  3 root   staff  4096 Jul 21 12:04 man
-drwxr-sr-x  2 root   staff  4096 Jul 21 12:04 pixmaps
-drwxrwsr-x  7 root   staff  4096 Jul 10 15:22 sgml
-drwxrwsr-x  6 root   staff  4096 Jul 10 15:22 xml
+total 44
+drwxrwsr-x 11 root   staff 4096 Aug 25 09:39 .
+drwxr-xr-x 11 root   root  4096 Aug 15 03:54 ..
+drwxrwsr-x  2 root   staff 4096 Aug  2 19:24 bin
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:13 etc
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:13 games
+drwxr-sr-x  5 alioth staff 4096 Aug  5 16:37 git
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:13 include
+drwxrwsr-x  4 root   staff 4096 Jul 31 20:19 lib
+lrwxrwxrwx  1 root   staff    9 Jul 31 20:19 man -&gt; share/man
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:13 sbin
+drwxrwsr-x 12 root   staff 4096 Aug  3 19:22 share
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:13 src
+total 16
+drwxrwsr-x  4 root staff 4096 Jul 31 20:19 .
+drwxrwsr-x 11 root staff 4096 Aug 25 09:39 ..
+drwxrwsr-x  4 root staff 4096 Jul 31 20:19 python2.7
+drwxrwsr-x  3 root staff 4096 Jul 31 20:19 python3.5
+total 48
+drwxrwsr-x 12 root   staff 4096 Aug  3 19:22 .
+drwxrwsr-x 11 root   staff 4096 Aug 25 09:39 ..
+drwxr-sr-x  3 root   staff 4096 Aug  2 19:24 anki
+drwxr-sr-x  2 root   staff 4096 Aug 17 16:09 applications
+drwxr-sr-x  4 alioth staff 4096 Aug  3 19:24 arch
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:20 ca-certificates
+drwxrwsr-x  4 root   staff 4096 Aug  2 19:23 emacs
+drwxrwsr-x  2 root   staff 4096 Jul 23 06:20 fonts
+drwxrwsr-x  3 root   staff 4096 Aug  2 19:24 man
+drwxr-sr-x  2 root   staff 4096 Aug  2 19:24 pixmaps
+drwxrwsr-x  7 root   staff 4096 Jul 31 20:19 sgml
+drwxrwsr-x  6 root   staff 4096 Jul 31 20:19 xml
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org481e01b" class="outline-3">
-<h3 id="org481e01b">Git</h3>
-<div class="outline-text-3" id="text-org481e01b">
-</div><div id="outline-container-org45a51cd" class="outline-4">
-<h4 id="org45a51cd">Settings</h4>
-<div class="outline-text-4" id="text-org45a51cd">
+<div id="outline-container-org5c6e07f" class="outline-3">
+<h3 id="org5c6e07f">Git</h3>
+<div class="outline-text-3" id="text-org5c6e07f">
+</div>
+<div id="outline-container-org1eb1738" class="outline-4">
+<h4 id="org1eb1738">Settings</h4>
+<div class="outline-text-4" id="text-org1eb1738">
 <div class="org-src-container">
 <pre class="src src-sh">mkdir /usr/local/git/
-git config --global user.email "a.s.kosinov@gmail.com"
-git config --global user.name "Anton S. Kosinov"
-git config --global credential.helper 'cache --timeout=3600'
+git config --global user.email <span style="color: #deb887; font-style: italic;">"a.s.kosinov@gmail.com"</span>
+git config --global user.name <span style="color: #deb887; font-style: italic;">"Anton S. Kosinov"</span>
+git config --global credential.helper <span style="color: #deb887; font-style: italic;">'cache --timeout=3600'</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9da2f86" class="outline-4">
-<h4 id="org9da2f86">Persistent connection</h4>
+<div id="outline-container-org6831580" class="outline-4">
+<h4 id="org6831580">Persistent connection</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2a522c9" class="outline-2">
-<h2 id="org2a522c9">Software development environment configuring</h2>
-<div class="outline-text-2" id="text-org2a522c9">
-</div><div id="outline-container-org9323451" class="outline-3">
-<h3 id="org9323451">Cloning repositories</h3>
-<div class="outline-text-3" id="text-org9323451">
+<div id="outline-container-orgae6ebce" class="outline-2">
+<h2 id="orgae6ebce">Software development environment configuring</h2>
+<div class="outline-text-2" id="text-orgae6ebce">
+<p>
+Any contemporary software development inevitably tied with <i>version
+control systems</i> there <code>Git</code> and <code>Mercurial</code> play the lead role.
+Thus it would be a wise decision to emulate these VCS locally on
+your HD:
+</p>
+
 <div class="org-src-container">
-<pre class="src src-sh">cd /usr/local/git/
+<pre class="src src-sh">mkdir /usr/local/git/ /usr/local/hg/
+</pre>
+</div>
+
+<p>
+After that it might be easily cloned some particular content there.
+And let call this schema <code>folder per VCS</code>
+</p>
+</div>
+
+<div id="outline-container-orgb55b8d6" class="outline-3">
+<h3 id="orgb55b8d6">Cloning repositories</h3>
+<div class="outline-text-3" id="text-orgb55b8d6">
+<p>
+Exactly for clarity purpose it would be useful to utilize
+<code>folder per user</code> schema, with inner repositories allocation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir /usr/local/git/0--key/
+<span style="color: #4682b4;">cd</span> /usr/local/git/0--key/
 git clone https://github.com/0--key/lib.git
 git clone https://github.com/0--key/org-pub.git
 git clone https://github.com/0--key/0--key.github.io.git
@@ -602,22 +718,26 @@ git clone https://github.com/0--key/0--key.github.io.git
 </div>
 </div>
 
-<div id="outline-container-org8937b61" class="outline-3">
-<h3 id="org8937b61">Emacs' settings linkage</h3>
-<div class="outline-text-3" id="text-org8937b61">
+<div id="outline-container-orge7a9766" class="outline-3">
+<h3 id="orge7a9766">Emacs' settings linkage</h3>
+<div class="outline-text-3" id="text-orge7a9766">
+<p>
+As I'm prefer to store my Emacs' settings in the <code>Git</code> cloud.
+</p>
+
 <div class="org-src-container">
-<pre class="src src-sh">ln -s -T /usr/local/git/lib/Emacs/default.lenovo.el \
+<pre class="src src-sh">ln -s -T /usr/local/git/0--key/lib/Emacs/default.lenovo.el <span style="color: #deb887; font-style: italic;">\</span>
 /usr/local/share/emacs/site-lisp/default.el
-ln -s -T /usr/local/git/lib/Emacs/init_generic.el \
+ln -s -T /usr/local/git/0--key/lib/Emacs/init_generic.el <span style="color: #deb887; font-style: italic;">\</span>
 ~/.emacs.d/init.el
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org4d9ef89" class="outline-3">
-<h3 id="org4d9ef89">Emacs' packages sync</h3>
-<div class="outline-text-3" id="text-org4d9ef89">
+<div id="outline-container-org5df739d" class="outline-3">
+<h3 id="org5df739d">Emacs' packages sync</h3>
+<div class="outline-text-3" id="text-org5df739d">
 <p>
 It's a routine task, thus there is a simple and native solution.
 </p>
@@ -647,9 +767,9 @@ Now look on <code>package-selected-packages</code> variable
 </div>
 
 
-<div id="outline-container-orgb24ff89" class="outline-4">
-<h4 id="orgb24ff89">Redundant files deletion</h4>
-<div class="outline-text-4" id="text-orgb24ff89">
+<div id="outline-container-org3c75bf5" class="outline-4">
+<h4 id="org3c75bf5">Redundant files deletion</h4>
+<div class="outline-text-4" id="text-org3c75bf5">
 <p>
 To force <code>Org</code> work properly after installation you should delete
 all *.elc files out from its source folder. E.g.
@@ -672,9 +792,9 @@ all *.elc files out from its source folder. E.g.
 </div>
 </div>
 
-<div id="outline-container-orgcfe3323" class="outline-3">
-<h3 id="orgcfe3323">Info generation</h3>
-<div class="outline-text-3" id="text-orgcfe3323">
+<div id="outline-container-org8a5fc96" class="outline-3">
+<h3 id="org8a5fc96">Info generation</h3>
+<div class="outline-text-3" id="text-org8a5fc96">
 <p>
 It's easy:
 </p>
@@ -688,9 +808,9 @@ Now just type <code>C-h i</code> and enjoy!
 </p>
 </div>
 
-<div id="outline-container-orgd097b51" class="outline-4">
-<h4 id="orgd097b51">Note</h4>
-<div class="outline-text-4" id="text-orgd097b51">
+<div id="outline-container-org190bde3" class="outline-4">
+<h4 id="org190bde3">Note</h4>
+<div class="outline-text-4" id="text-org190bde3">
 <p>
 <i>emacs25-common-non-dfsg contains all necessary info files and
 should be installed preliminary</i>
@@ -699,9 +819,9 @@ should be installed preliminary</i>
 </div>
 </div>
 
-<div id="outline-container-orge65486a" class="outline-3">
-<h3 id="orge65486a">Virtual Environment</h3>
-<div class="outline-text-3" id="text-orge65486a">
+<div id="outline-container-org1bd4b43" class="outline-3">
+<h3 id="org1bd4b43">Virtual Environment</h3>
+<div class="outline-text-3" id="text-org1bd4b43">
 <p>
 Is a cool feature to use in daily work.  
 </p>
@@ -709,6 +829,52 @@ Is a cool feature to use in daily work.
 </div>
 </div>
 
-<div id="outline-container-orgc33fbbd" class="outline-2">
-<h2 id="orgc33fbbd">Testing</h2>
+<div id="outline-container-org647d865" class="outline-2">
+<h2 id="org647d865">Grammar</h2>
+<div class="outline-text-2" id="text-org647d865">
+<p>
+The main target is in creation of grammatically correct textes, even
+though <i>Emacs</i> has an advanced grammar-checker, lets extend it
+ability by external plug-in.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">java -version
+ls -la /usr/local/java/
+</pre>
+</div>
+
+<pre class="example">
+openjdk version "1.8.0_151"
+OpenJDK Runtime Environment (build 1.8.0_151-8u151-b12-1~deb9u1-b12)
+OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+ls: cannot access '/usr/local/java/': No such file or directory
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6fa0071" class="outline-2">
+<h2 id="org6fa0071">Testing</h2>
+</div>
+
+<div id="outline-container-orgd2c17d5" class="outline-2">
+<h2 id="orgd2c17d5">VirtualBox</h2>
+<div class="outline-text-2" id="text-orgd2c17d5">
+</div>
+<div id="outline-container-org9ee007c" class="outline-3">
+<h3 id="org9ee007c">Installation</h3>
+</div>
+<div id="outline-container-orgeb18057" class="outline-3">
+<h3 id="orgeb18057">USB access</h3>
+<div class="outline-text-3" id="text-orgeb18057">
+<pre class="example">
+# usermod -aG vboxusers alioth
+</pre>
+
+<p>
+After this you <b>must to re-login</b> to savor these changes.
+</p>
+</div>
+</div>
 </div>
