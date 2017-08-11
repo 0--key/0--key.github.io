@@ -27,6 +27,7 @@ tags: [live USB, load to RAM, configuration]
 <li><a href="#org30d08ac">Edit config:</a></li>
 </ul>
 </li>
+<li><a href="#orga112d0b">Test</a></li>
 </ul>
 </div>
 </div>
@@ -121,9 +122,18 @@ live-USB and take a challenge of total portability.
 <div id="outline-container-org350c31a" class="outline-3">
 <h3 id="org350c31a">Generate:</h3>
 <div class="outline-text-3" id="text-org350c31a">
+<p>
+<code>Porteus</code> saves incremental changes in <code>.xzm</code> format.
+</p>
+
 <pre class="example">
 # save-changes /mnt/sdc1/porteus/optional/extension_001.xzm
 </pre>
+
+<p>
+Where <code>/mnt/sdc1/porteus/optional/</code> is a path to your <code>Porteus</code>
+Live-USB, and <code>extension_001.xzm</code> is a filename itself.
+</p>
 </div>
 </div>
 
@@ -132,6 +142,21 @@ live-USB and take a challenge of total portability.
 <div class="outline-text-3" id="text-org30d08ac">
 <pre class="example">
 # nano /mnt/sdc1/boot/syslinux/porteus.cfg
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga112d0b" class="outline-2">
+<h2 id="orga112d0b">Test</h2>
+<div class="outline-text-2" id="text-orga112d0b">
+<p>
+Try to configure &lt;CapsLock&gt; as an additional &lt;Ctrl&gt;:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/usr/bin/setxkbmap -option <span style="color: #deb887; font-style: italic;">"ctrl:nocaps"</span>
+/usr/bin/setxkbmap -option <span style="color: #deb887; font-style: italic;">"caps:ctrl_modifier"</span>
 </pre>
 </div>
 </div>
