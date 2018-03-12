@@ -1,0 +1,425 @@
+---
+layout: post
+title: Workspace's organization from blank list
+tagline: " arrangement automation"
+permalink: /debian/workspace _org.html
+categories: [Debian, DevEnv]
+tags: [post-installation, arrangement, automation]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org0a1e7fc">Startup UNIX user's files</a>
+<ul>
+<li><a href="#org842d5d2">.profile</a></li>
+<li><a href="#org66a7bce">.bashrc</a></li>
+<li><a href="#org7efdaf9">.bash_logout</a></li>
+<li><a href="#orgf67d87c">.emacs.d directory</a></li>
+</ul>
+</li>
+<li><a href="#org794150f">GitHub repository cloning</a></li>
+<li><a href="#org4ff148e">Symbolic link for Emacs configuration file creation</a></li>
+<li><a href="#org270c49f">Emacs configuration</a>
+<ul>
+<li><a href="#orgcd62140">Org-bullet</a></li>
+<li><a href="#org536c040">Voca-builder</a></li>
+<li><a href="#org075416c">Key-chord</a></li>
+<li><a href="#orgf9a7f11">Google-translate</a></li>
+<li><a href="#org1453cc5">Magit</a></li>
+<li><a href="#orgaa8db5d">Elfeed</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0a1e7fc" class="outline-2">
+<h2 id="org0a1e7fc">Startup UNIX user's files</h2>
+<div class="outline-text-2" id="text-org0a1e7fc">
+<p>
+Three files in your home directory (.profile, .bashrc, .bash_logout)
+have a special meaning to bash, providing a way for you to set up
+your account environment automatically when you log in and when you
+invoke another bash shell, and allowing you to perform commands when
+you log out. These files may already exist in your home directory,
+depending on how your system administrator has set up your account.
+If they don't exist, your account is using only the default system
+file /etc/profile.
+</p>
+</div>
+
+<div id="outline-container-org842d5d2" class="outline-3">
+<h3 id="org842d5d2">.profile</h3>
+<div class="outline-text-3" id="text-org842d5d2">
+<p>
+When a UNIX user tries to login to his account, the operating
+system executes a lot of system files to set up the user account
+before returning the prompt to the user.
+</p>
+
+<p>
+In addition to the system settings, the user might wish to have
+some specific settings for his own account. To achieve this in
+UNIX, at the end of the login process, the operating system
+executes a file at the user level, if present. This file is called
+profile file.
+The specific settings which an unix user usually does is:
+</p>
+<ul class="org-ul">
+<li>Setting of any environment variable;</li>
+<li>Setting of any alias.(Though it is always recommended to keep
+the aliases in a separate file);</li>
+<li>Setting of PATH variable or any other path variables.</li>
+</ul>
+<p>
+A typical .profile file will look as shown below:
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">cat $HOME/.profile
+</pre>
+</div>
+
+<pre class="example">
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+export GTK2_RC_FILES=/home/alioth/.gtkrc-2.0
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org66a7bce" class="outline-3">
+<h3 id="org66a7bce">.bashrc</h3>
+<div class="outline-text-3" id="text-org66a7bce">
+<p>
+The .bashrc file is a script that is executed whenever a new
+terminal session is started in interactive mode. The .bashrc file
+itself contains a series of configurations for the terminal
+session. This includes setting up or enabling: colouring,
+completion, the shell history, command aliases and more.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat $HOME/.bashrc
+</pre>
+</div>
+
+<pre class="example">
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] &amp;&amp; eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] &amp;&amp; [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors &amp;&amp; eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+#alias ll='ls -l'
+#alias la='ls -A'
+#alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+export TERM=xterm-256color
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7efdaf9" class="outline-3">
+<h3 id="org7efdaf9">.bash_logout</h3>
+<div class="outline-text-3" id="text-org7efdaf9">
+<p>
+The file .bash_logout is read and executed every time a login shell
+exits. It is provided to round out the capabilities for customizing
+your environment. If you wanted to execute some commands that
+remove temporary files from your account or record how much time
+you have spent logged in to the system then you would place the
+commands in .bash_logout. This file doesn't have to exist in your
+account if it isn't there when you log out, then no extra commands
+are executed.
+</p>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgf67d87c" class="outline-3">
+<h3 id="orgf67d87c">.emacs.d directory</h3>
+<div class="outline-text-3" id="text-orgf67d87c">
+<p>
+After Emacs session was started at first you can see .emacs.d
+directory in your home directory.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org794150f" class="outline-2">
+<h2 id="org794150f">GitHub repository cloning</h2>
+<div class="outline-text-2" id="text-org794150f">
+<div class="org-src-container">
+<pre class="src src-sh">mkdir DVCS
+<span style="color: #ff00ff;">cd</span> DVCS
+git clone https://github.com/annelida/stuff.git
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4ff148e" class="outline-2">
+<h2 id="org4ff148e">Symbolic link for Emacs configuration file creation</h2>
+<div class="outline-text-2" id="text-org4ff148e">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #ff00ff;">cd</span> .emacs.d/
+ln -s /home/vikky/DVCS/stuff/Emacs/init_fijitsu.el -T init.el
+cat init.el
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org270c49f" class="outline-2">
+<h2 id="org270c49f">Emacs configuration</h2>
+<div class="outline-text-2" id="text-org270c49f">
+</div>
+<div id="outline-container-orgcd62140" class="outline-3">
+<h3 id="orgcd62140">Org-bullet</h3>
+<div class="outline-text-3" id="text-orgcd62140">
+<p>
+M-x package-install [RET] org-bullet [RET]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org536c040" class="outline-3">
+<h3 id="org536c040">Voca-builder</h3>
+<div class="outline-text-3" id="text-org536c040">
+<p>
+M-x package-install [RET] voca-builder [RET]
+</p>
+
+<p>
+in init.el file next string was added:
+</p>
+
+<p>
+(require 'voca-builder)
+(setq voca-builder/voca-file "<i>home/vikky/DVCS/stuff/vocabulary.org")
+(setq voca-builder/export-file "~</i>.voca-builder-temp.org")
+(setq voca-builder/current-tag "Study")
+</p>
+</div>
+</div>
+
+<div id="outline-container-org075416c" class="outline-3">
+<h3 id="org075416c">Key-chord</h3>
+<div class="outline-text-3" id="text-org075416c">
+<p>
+M-x package-install [RET] key-chord [RET]
+</p>
+
+<p>
+in init.el file next string was added:
+</p>
+
+<p>
+(require 'key-chord)
+(key-chord-mode 1)
+(key-chord-define-global "QQ"     'voca-builder/search-popup)
+(key-chord-define-global "FF"     'other-frame)
+(key-chord-define org-mode-map "DD"     'org-drill)
+(key-chord-define org-mode-map "AA"     'org-drill-again)
+(key-chord-define org-mode-map "RR"     'org-drill-resume)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf9a7f11" class="outline-3">
+<h3 id="orgf9a7f11">Google-translate</h3>
+<div class="outline-text-3" id="text-orgf9a7f11">
+<p>
+M-x package-install [RET] google-translate [RET]
+</p>
+
+<p>
+in init.el file next string was added:
+</p>
+
+<p>
+(require 'google-translate)
+(require 'google-translate-default-ui)
+(global-set-key "\C-ct" 'google-translate-at-point)
+(global-set-key "\C-cT" 'google-translate-query-translate)
+(setq google-translate-default-source-language ' "en")
+(setq google-translate-default-target-language ' "ru")
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1453cc5" class="outline-3">
+<h3 id="org1453cc5">Magit</h3>
+<div class="outline-text-3" id="text-org1453cc5">
+<p>
+M-x package-install [RET] magit [RET]
+</p>
+
+<p>
+To display information about the current Git repository,
+set global key:
+</p>
+
+<p>
+(global-set-key (kbd "C-x g") 'magit-status)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaa8db5d" class="outline-3">
+<h3 id="orgaa8db5d">Elfeed</h3>
+<div class="outline-text-3" id="text-orgaa8db5d">
+<p>
+M-x package-install [RET] elfeed [RET]
+</p>
+
+<p>
+My feed's settings in init.el:
+</p>
+
+<p>
+(setq elfeed-feeds
+   '("<a href="http://nullprogram.com/feed/">http://nullprogram.com/feed/</a>"
+     "<a href="http://planet.emacsen.org/atom.xml">http://planet.emacsen.org/atom.xml</a>"
+     "<a href="http://emacsrocks.com/atom.xml">http://emacsrocks.com/atom.xml</a>"
+     "<a href="http://0--key.github.io/rss.xml">http://0--key.github.io/rss.xml</a>"
+     "<a href="http://www.quora.com/rss">http://www.quora.com/rss</a>"))
+((global-set-key (kbd "C-x w") 'elfeed)
+</p>
+</div>
+</div>
+</div>
