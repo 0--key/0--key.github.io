@@ -11,37 +11,38 @@ tags: [docker, container, intro]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgac429b6">Provides an additional layer of abstraction</a></li>
-<li><a href="#orgf88350a">Isolates an application's view</a></li>
-<li><a href="#org7be3d38">Incentive</a>
+<li><a href="#org526e93a">Provides an additional layer of abstraction</a></li>
+<li><a href="#org0a5cb71">Isolates an application's view</a></li>
+<li><a href="#orgba336ad">Incentive</a>
 <ul>
-<li><a href="#org6bc0887">Deployment and Delivery Challenges</a></li>
+<li><a href="#orgccbfd7f">Deployment and Delivery Challenges</a></li>
+<li><a href="#orgb0775d9">Microservices as a Remedy</a></li>
 </ul>
 </li>
-<li><a href="#org6e2ece2">The Twelve-Factor App</a>
+<li><a href="#org4f3038a">The Twelve-Factor App</a>
 <ul>
-<li><a href="#org1975933">Requirements declaration points</a></li>
-<li><a href="#org15f736e">Codebase</a></li>
-<li><a href="#org34edbdf">Dependencies</a></li>
-<li><a href="#org573436f">Config</a></li>
-<li><a href="#org486f428">Build, release, run</a></li>
-<li><a href="#org700f954">Processes</a></li>
-<li><a href="#orga3ed700">Port binding</a></li>
-<li><a href="#org204cb91">Concurrency</a></li>
-<li><a href="#orgd5a718d">Disposability</a></li>
-<li><a href="#org7a276cb">Dev/prod parity</a></li>
-<li><a href="#orgc0fedda">Logs</a></li>
-<li><a href="#org708acdc">Admin processes</a></li>
+<li><a href="#org4fab777">Requirements declaration points</a></li>
+<li><a href="#org06f8997">Codebase</a></li>
+<li><a href="#orga8b4a9f">Dependencies</a></li>
+<li><a href="#orgbb97188">Config</a></li>
+<li><a href="#org25438d0">Build, release, run</a></li>
+<li><a href="#orgf2d4922">Processes</a></li>
+<li><a href="#org7899acf">Port binding</a></li>
+<li><a href="#org73ad43e">Concurrency</a></li>
+<li><a href="#org7fa737d">Disposability</a></li>
+<li><a href="#orgdf211ef">Dev/prod parity</a></li>
+<li><a href="#orgcffcbd1">Logs</a></li>
+<li><a href="#org33e4abe">Admin processes</a></li>
 </ul>
 </li>
-<li><a href="#orgff234d6">The Ultimate Goal</a></li>
+<li><a href="#org9613f50">The Ultimate Goal</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgac429b6" class="outline-2">
-<h2 id="orgac429b6">Provides an additional layer of abstraction</h2>
-<div class="outline-text-2" id="text-orgac429b6">
+<div id="outline-container-org526e93a" class="outline-2">
+<h2 id="org526e93a">Provides an additional layer of abstraction</h2>
+<div class="outline-text-2" id="text-org526e93a">
 <p>
 and automation of operating-system-level virtualization on Windows
 and Linux.
@@ -57,9 +58,9 @@ and Linux.
 </div>
 
 
-<div id="outline-container-orgf88350a" class="outline-2">
-<h2 id="orgf88350a">Isolates an application's view</h2>
-<div class="outline-text-2" id="text-orgf88350a">
+<div id="outline-container-org0a5cb71" class="outline-2">
+<h2 id="org0a5cb71">Isolates an application's view</h2>
+<div class="outline-text-2" id="text-org0a5cb71">
 <p>
 of the operating environment, including process trees, network, user
 IDs and mounted file systems, while the kernel's cgroups provide
@@ -70,9 +71,9 @@ network.
 </div>
 
 
-<div id="outline-container-org7be3d38" class="outline-2">
-<h2 id="org7be3d38">Incentive</h2>
-<div class="outline-text-2" id="text-org7be3d38">
+<div id="outline-container-orgba336ad" class="outline-2">
+<h2 id="orgba336ad">Incentive</h2>
+<div class="outline-text-2" id="text-orgba336ad">
 <blockquote>
 <p>
 Shipping code to the server is too hard
@@ -80,9 +81,9 @@ Shipping code to the server is too hard
 </blockquote>
 </div>
 
-<div id="outline-container-org6bc0887" class="outline-3">
-<h3 id="org6bc0887">Deployment and Delivery Challenges</h3>
-<div class="outline-text-3" id="text-org6bc0887">
+<div id="outline-container-orgccbfd7f" class="outline-3">
+<h3 id="orgccbfd7f">Deployment and Delivery Challenges</h3>
+<div class="outline-text-3" id="text-orgccbfd7f">
 <ul class="org-ul">
 <li>Lots of small changes</li>
 <li>Heterogeneous platforms and languages</li>
@@ -96,21 +97,62 @@ Shipping code to the server is too hard
 </ul>
 </div>
 </div>
+
+
+<div id="outline-container-orgb0775d9" class="outline-3">
+<h3 id="orgb0775d9">Microservices as a Remedy</h3>
+<div class="outline-text-3" id="text-orgb0775d9">
+<blockquote>
+<p>
+One of the biggest use cases and strongest drivers behind the
+uptake of containers are <i>microservices</i>.
+</p>
+
+<p>
+Microservices are a way of developing and composing software
+systems such that they are built out of small, independent
+components that interact with one another over the network. This is
+in contrast to the traditional <i>monolithic</i> way of developing
+software, where there is a single large program, typically written
+in C++ or Java. When it comes to scaling a monolith, commonly the
+only choice is to <i>scale up</i>, where extra demand is handled by using
+a larger machine with more RAM and CPU power. Conversely,
+microservices are designed to <i>scale out</i>, where extra demand is
+handled by provisioning multiple machines the load can be spread
+over. In a microservice architecture, it’s possible to only scale
+the resources required for a particular service, focusing on the
+bottlenecks in the system. In a monolith, it’s scale everything or
+nothing, resulting in wasted resources.
+</p>
+
+<p>
+In terms of complexity, microservices are a double-edged sword.
+Each individual microservice should be easy to understand and modify.
+However, in a system composed of dozens or hundreds of such
+services, the overall complexity increases due to the interaction
+between individual components. The lightweight nature and speed of
+containers mean they are particularly well suited for running a
+microservice architecture. Compared to VMs, containers are vastly
+smaller and quicker to deploy, allowing microservice architectures to
+use the minimum of resources and react quickly to changes in demand.
+</p>
+</blockquote>
+</div>
+</div>
 </div>
 
-
-<div id="outline-container-org6e2ece2" class="outline-2">
-<h2 id="org6e2ece2">The Twelve-Factor App</h2>
-<div class="outline-text-2" id="text-org6e2ece2">
+<div id="outline-container-org4f3038a" class="outline-2">
+<h2 id="org4f3038a">The Twelve-Factor App</h2>
+<div class="outline-text-2" id="text-org4f3038a">
 <p>
 is a methodology for building software-as-a-service apps that fit
 into these:
 </p>
 </div>
 
-<div id="outline-container-org1975933" class="outline-3">
-<h3 id="org1975933">Requirements declaration points</h3>
-<div class="outline-text-3" id="text-org1975933">
+<div id="outline-container-org4fab777" class="outline-3">
+<h3 id="org4fab777">Requirements declaration points</h3>
+<div class="outline-text-3" id="text-org4fab777">
 <ul class="org-ul">
 <li>Use declarative formats for setup automation, to minimize time and
 cost for new developers joining the project</li>
@@ -127,99 +169,99 @@ architecture, or development practices</li>
 </div>
 
 
-<div id="outline-container-org15f736e" class="outline-3">
-<h3 id="org15f736e">Codebase</h3>
-<div class="outline-text-3" id="text-org15f736e">
+<div id="outline-container-org06f8997" class="outline-3">
+<h3 id="org06f8997">Codebase</h3>
+<div class="outline-text-3" id="text-org06f8997">
 <p>
 One codebase tracked in revision control, many deploys
 </p>
 </div>
 </div>
 
-<div id="outline-container-org34edbdf" class="outline-3">
-<h3 id="org34edbdf">Dependencies</h3>
-<div class="outline-text-3" id="text-org34edbdf">
+<div id="outline-container-orga8b4a9f" class="outline-3">
+<h3 id="orga8b4a9f">Dependencies</h3>
+<div class="outline-text-3" id="text-orga8b4a9f">
 <p>
 Explicitly declare and isolate dependencies
 </p>
 </div>
 </div>
 
-<div id="outline-container-org573436f" class="outline-3">
-<h3 id="org573436f">Config</h3>
-<div class="outline-text-3" id="text-org573436f">
+<div id="outline-container-orgbb97188" class="outline-3">
+<h3 id="orgbb97188">Config</h3>
+<div class="outline-text-3" id="text-orgbb97188">
 <p>
 Store config in the environment
 </p>
 </div>
 </div>
 
-<div id="outline-container-org486f428" class="outline-3">
-<h3 id="org486f428">Build, release, run</h3>
-<div class="outline-text-3" id="text-org486f428">
+<div id="outline-container-org25438d0" class="outline-3">
+<h3 id="org25438d0">Build, release, run</h3>
+<div class="outline-text-3" id="text-org25438d0">
 <p>
 Strictly separate build and run stages
 </p>
 </div>
 </div>
 
-<div id="outline-container-org700f954" class="outline-3">
-<h3 id="org700f954">Processes</h3>
-<div class="outline-text-3" id="text-org700f954">
+<div id="outline-container-orgf2d4922" class="outline-3">
+<h3 id="orgf2d4922">Processes</h3>
+<div class="outline-text-3" id="text-orgf2d4922">
 <p>
 Execute the app as one or more stateless processes
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga3ed700" class="outline-3">
-<h3 id="orga3ed700">Port binding</h3>
-<div class="outline-text-3" id="text-orga3ed700">
+<div id="outline-container-org7899acf" class="outline-3">
+<h3 id="org7899acf">Port binding</h3>
+<div class="outline-text-3" id="text-org7899acf">
 <p>
 Export services via port binding
 </p>
 </div>
 </div>
 
-<div id="outline-container-org204cb91" class="outline-3">
-<h3 id="org204cb91">Concurrency</h3>
-<div class="outline-text-3" id="text-org204cb91">
+<div id="outline-container-org73ad43e" class="outline-3">
+<h3 id="org73ad43e">Concurrency</h3>
+<div class="outline-text-3" id="text-org73ad43e">
 <p>
 Scale out via the process model
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgd5a718d" class="outline-3">
-<h3 id="orgd5a718d">Disposability</h3>
-<div class="outline-text-3" id="text-orgd5a718d">
+<div id="outline-container-org7fa737d" class="outline-3">
+<h3 id="org7fa737d">Disposability</h3>
+<div class="outline-text-3" id="text-org7fa737d">
 <p>
 Maximize robustness with fast start-up and graceful shutdown
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7a276cb" class="outline-3">
-<h3 id="org7a276cb">Dev/prod parity</h3>
-<div class="outline-text-3" id="text-org7a276cb">
+<div id="outline-container-orgdf211ef" class="outline-3">
+<h3 id="orgdf211ef">Dev/prod parity</h3>
+<div class="outline-text-3" id="text-orgdf211ef">
 <p>
 Keep development, staging and production as similar as possible
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc0fedda" class="outline-3">
-<h3 id="orgc0fedda">Logs</h3>
-<div class="outline-text-3" id="text-orgc0fedda">
+<div id="outline-container-orgcffcbd1" class="outline-3">
+<h3 id="orgcffcbd1">Logs</h3>
+<div class="outline-text-3" id="text-orgcffcbd1">
 <p>
 Treat logs as event streams
 </p>
 </div>
 </div>
 
-<div id="outline-container-org708acdc" class="outline-3">
-<h3 id="org708acdc">Admin processes</h3>
-<div class="outline-text-3" id="text-org708acdc">
+<div id="outline-container-org33e4abe" class="outline-3">
+<h3 id="org33e4abe">Admin processes</h3>
+<div class="outline-text-3" id="text-org33e4abe">
 <p>
 Run admin/management tasks as one-off processes
 </p>
@@ -228,9 +270,9 @@ Run admin/management tasks as one-off processes
 </div>
 
 
-<div id="outline-container-orgff234d6" class="outline-2">
-<h2 id="orgff234d6">The Ultimate Goal</h2>
-<div class="outline-text-2" id="text-orgff234d6">
+<div id="outline-container-org9613f50" class="outline-2">
+<h2 id="org9613f50">The Ultimate Goal</h2>
+<div class="outline-text-2" id="text-org9613f50">
 <p>
 A single deployable file, which is under version control, verified
 by checksum and simply runs without any additional dependencies.
