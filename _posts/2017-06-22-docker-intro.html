@@ -11,58 +11,50 @@ tags: [docker, intro]
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3c47139">Concept description</a></li>
-<li><a href="#org7b1add9">Installation</a></li>
-<li><a href="#org8b9fdde">Check-up</a>
+<li><a href="#org679c643">Concept description</a></li>
+<li><a href="#org1f89e4e">Installation</a></li>
+<li><a href="#orgd780a9e">Check-up</a>
 <ul>
-<li><a href="#org49069c0">Version</a></li>
-<li><a href="#org780a756">Help</a></li>
-<li><a href="#org23e03bc">Images</a></li>
-<li><a href="#org97dfc3d">Test execution</a></li>
-</ul>
-</li>
-<li><a href="#org823ce89">Simple local webapp</a>
-<ul>
-<li><a href="#org7076067">Nginx launching</a></li>
-<li><a href="#org8d9b3ef">Processes</a></li>
-<li><a href="#org53438a5">Instance close-up</a></li>
-<li><a href="#org88b262f">Ping the container</a></li>
-<li><a href="#orgd1fc1a1">Container halt</a></li>
+<li><a href="#org6afde62">Version</a></li>
+<li><a href="#org33aa71f">Help</a></li>
+<li><a href="#orgd2d6f23">Images</a></li>
+<li><a href="#org56661f3">Test execution</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3c47139" class="outline-2">
-<h2 id="org3c47139">Concept description</h2>
+<div id="outline-container-org679c643" class="outline-2">
+<h2 id="org679c643">Concept description</h2>
 </div>
 
-<div id="outline-container-org7b1add9" class="outline-2">
-<h2 id="org7b1add9">Installation</h2>
+<div id="outline-container-org1f89e4e" class="outline-2">
+<h2 id="org1f89e4e">Installation</h2>
 </div>
 
-<div id="outline-container-org8b9fdde" class="outline-2">
-<h2 id="org8b9fdde">Check-up</h2>
-<div class="outline-text-2" id="text-org8b9fdde">
-</div><div id="outline-container-org49069c0" class="outline-3">
-<h3 id="org49069c0">Version</h3>
-<div class="outline-text-3" id="text-org49069c0">
+<div id="outline-container-orgd780a9e" class="outline-2">
+<h2 id="orgd780a9e">Check-up</h2>
+<div class="outline-text-2" id="text-orgd780a9e">
+</div>
+<div id="outline-container-org6afde62" class="outline-3">
+<h3 id="org6afde62">Version</h3>
+<div class="outline-text-3" id="text-org6afde62">
 <div class="org-src-container">
 <pre class="src src-sh">docker --version
 </pre>
 </div>
 
 <pre class="example">
-Docker version 17.03.1-ce, build c6d412e
+Docker version 17.12.0-ce, build c97c6d6
 
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org780a756" class="outline-3">
-<h3 id="org780a756">Help</h3>
-<div class="outline-text-3" id="text-org780a756">
+<div id="outline-container-org33aa71f" class="outline-3">
+<h3 id="org33aa71f">Help</h3>
+<div class="outline-text-3" id="text-org33aa71f">
 <div class="org-src-container">
 <pre class="src src-sh">docker --help
 </pre>
@@ -147,9 +139,9 @@ Run 'docker COMMAND --help' for more information on a command.
 </div>
 </div>
 
-<div id="outline-container-org23e03bc" class="outline-3">
-<h3 id="org23e03bc">Images</h3>
-<div class="outline-text-3" id="text-org23e03bc">
+<div id="outline-container-orgd2d6f23" class="outline-3">
+<h3 id="orgd2d6f23">Images</h3>
+<div class="outline-text-3" id="text-orgd2d6f23">
 <div class="org-src-container">
 <pre class="src src-sh">docker images
 </pre>
@@ -157,312 +149,43 @@ Run 'docker COMMAND --help' for more information on a command.
 
 <pre class="example">
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-busybox             latest              8f0abf721946        7 days ago          1.11 MB
-debian              latest              4793a1262e10        5 months ago        123 MB
-hello-world         latest              d0967c81d126        5 months ago        1.84 kB
-docker/whalesay     latest              6b362a9f73eb        2 years ago         247 MB
+hello-world         latest              1815c82652c0        10 months ago       1.84kB
 
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org97dfc3d" class="outline-3">
-<h3 id="org97dfc3d">Test execution</h3>
-<div class="outline-text-3" id="text-org97dfc3d">
+<div id="outline-container-org56661f3" class="outline-3">
+<h3 id="org56661f3">Test execution</h3>
+<div class="outline-text-3" id="text-org56661f3">
 <div class="org-src-container">
-<pre class="src src-sh">docker run busybox echo <span style="color: #deb887; font-style: italic;">"I'm a busybox!"</span>
+<pre class="src src-sh">docker run hello-world
 </pre>
 </div>
 
 <pre class="example">
-I'm a busybox!
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://cloud.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
 
 </pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org823ce89" class="outline-2">
-<h2 id="org823ce89">Simple local webapp</h2>
-<div class="outline-text-2" id="text-org823ce89">
-</div><div id="outline-container-org7076067" class="outline-3">
-<h3 id="org7076067">Nginx launching</h3>
-<div class="outline-text-3" id="text-org7076067">
-<div class="org-src-container">
-<pre class="src src-sh">docker run -p 8000:80 nginx
-</pre>
-</div>
-
-<p>
-And ensure in a <a href="http://localhost:8000">browser</a>
-</p>
-</div>
-</div>
-
-<div id="outline-container-org8d9b3ef" class="outline-3">
-<h3 id="org8d9b3ef">Processes</h3>
-<div class="outline-text-3" id="text-org8d9b3ef">
-<p>
-Now when you're got nginx logs in a terminal tab, lets open a new
-one and type into it:
-</p>
-<div class="org-src-container">
-<pre class="src src-sh">docker ps
-</pre>
-</div>
-
-<pre class="example">
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
-f546a68edb8d        nginx               "nginx -g 'daemon ..."   17 minutes ago      Up 17 minutes       0.0.0.0:8000-&gt;80/tcp   compassionate_stallman
-
-</pre>
-
-<p>
-Notice that container identificator begins from <code>f546</code>
-</p>
-</div>
-</div>
-
-<div id="outline-container-org53438a5" class="outline-3">
-<h3 id="org53438a5">Instance close-up</h3>
-<div class="outline-text-3" id="text-org53438a5">
-<p>
-Use the container ID for its meticulous inspection:
-</p>
-<div class="org-src-container">
-<pre class="src src-sh">docker inspect f546
-</pre>
-</div>
-
-<pre class="example">
-[
-    {
-        "Id": "f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339",
-        "Created": "2017-06-24T06:41:55.894731265Z",
-        "Path": "nginx",
-        "Args": [
-            "-g",
-            "daemon off;"
-        ],
-        "State": {
-            "Status": "running",
-            "Running": true,
-            "Paused": false,
-            "Restarting": false,
-            "OOMKilled": false,
-            "Dead": false,
-            "Pid": 5872,
-            "ExitCode": 0,
-            "Error": "",
-            "StartedAt": "2017-06-24T06:41:56.457862595Z",
-            "FinishedAt": "0001-01-01T00:00:00Z"
-        },
-        "Image": "sha256:958a7ae9e56979be256796dabd5845c704f784cd422734184999cf91f24c2547",
-        "ResolvConfPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/resolv.conf",
-        "HostnamePath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/hostname",
-        "HostsPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/hosts",
-        "LogPath": "/var/lib/docker/containers/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339/f546a68edb8d6e240d52c1ea630d2b0474b0e5350fde3364cef4b0454d934339-json.log",
-        "Name": "/compassionate_stallman",
-        "RestartCount": 0,
-        "Driver": "aufs",
-        "MountLabel": "",
-        "ProcessLabel": "",
-        "AppArmorProfile": "",
-        "ExecIDs": null,
-        "HostConfig": {
-            "Binds": null,
-            "ContainerIDFile": "",
-            "LogConfig": {
-                "Type": "json-file",
-                "Config": {}
-            },
-            "NetworkMode": "default",
-            "PortBindings": {
-                "80/tcp": [
-                    {
-                        "HostIp": "",
-                        "HostPort": "8000"
-                    }
-                ]
-            },
-            "RestartPolicy": {
-                "Name": "no",
-                "MaximumRetryCount": 0
-            },
-            "AutoRemove": false,
-            "VolumeDriver": "",
-            "VolumesFrom": null,
-            "CapAdd": null,
-            "CapDrop": null,
-            "Dns": [],
-            "DnsOptions": [],
-            "DnsSearch": [],
-            "ExtraHosts": null,
-            "GroupAdd": null,
-            "IpcMode": "",
-            "Cgroup": "",
-            "Links": null,
-            "OomScoreAdj": 0,
-            "PidMode": "",
-            "Privileged": false,
-            "PublishAllPorts": false,
-            "ReadonlyRootfs": false,
-            "SecurityOpt": null,
-            "UTSMode": "",
-            "UsernsMode": "",
-            "ShmSize": 67108864,
-            "Runtime": "runc",
-            "ConsoleSize": [
-                0,
-                0
-            ],
-            "Isolation": "",
-            "CpuShares": 0,
-            "Memory": 0,
-            "NanoCpus": 0,
-            "CgroupParent": "",
-            "BlkioWeight": 0,
-            "BlkioWeightDevice": null,
-            "BlkioDeviceReadBps": null,
-            "BlkioDeviceWriteBps": null,
-            "BlkioDeviceReadIOps": null,
-            "BlkioDeviceWriteIOps": null,
-            "CpuPeriod": 0,
-            "CpuQuota": 0,
-            "CpuRealtimePeriod": 0,
-            "CpuRealtimeRuntime": 0,
-            "CpusetCpus": "",
-            "CpusetMems": "",
-            "Devices": [],
-            "DiskQuota": 0,
-            "KernelMemory": 0,
-            "MemoryReservation": 0,
-            "MemorySwap": 0,
-            "MemorySwappiness": -1,
-            "OomKillDisable": null,
-            "PidsLimit": 0,
-            "Ulimits": null,
-            "CpuCount": 0,
-            "CpuPercent": 0,
-            "IOMaximumIOps": 0,
-            "IOMaximumBandwidth": 0
-        },
-        "GraphDriver": {
-            "Name": "aufs",
-            "Data": null
-        },
-        "Mounts": [],
-        "Config": {
-            "Hostname": "f546a68edb8d",
-            "Domainname": "",
-            "User": "",
-            "AttachStdin": false,
-            "AttachStdout": true,
-            "AttachStderr": true,
-            "ExposedPorts": {
-                "80/tcp": {}
-            },
-            "Tty": false,
-            "OpenStdin": false,
-            "StdinOnce": false,
-            "Env": [
-                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-                "NGINX_VERSION=1.13.1-1~stretch",
-                "NJS_VERSION=1.13.1.0.1.10-1~stretch"
-            ],
-            "Cmd": [
-                "nginx",
-                "-g",
-                "daemon off;"
-            ],
-            "ArgsEscaped": true,
-            "Image": "nginx",
-            "Volumes": null,
-            "WorkingDir": "",
-            "Entrypoint": null,
-            "OnBuild": null,
-            "Labels": {},
-            "StopSignal": "SIGTERM"
-        },
-        "NetworkSettings": {
-            "Bridge": "",
-            "SandboxID": "2a56aa540231508a5ae0447c0be9f1d1bd50c641b02627971958ce7391c8a416",
-            "HairpinMode": false,
-            "LinkLocalIPv6Address": "",
-            "LinkLocalIPv6PrefixLen": 0,
-            "Ports": {
-                "80/tcp": [
-                    {
-                        "HostIp": "0.0.0.0",
-                        "HostPort": "8000"
-                    }
-                ]
-            },
-            "SandboxKey": "/var/run/docker/netns/2a56aa540231",
-            "SecondaryIPAddresses": null,
-            "SecondaryIPv6Addresses": null,
-            "EndpointID": "95ecd07b285893afb44dcbf05c2d4612520af5fa4fe7f0ab6db51fc635d0d3b0",
-            "Gateway": "172.17.0.1",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "IPAddress": "172.17.0.2",
-            "IPPrefixLen": 16,
-            "IPv6Gateway": "",
-            "MacAddress": "02:42:ac:11:00:02",
-            "Networks": {
-                "bridge": {
-                    "IPAMConfig": null,
-                    "Links": null,
-                    "Aliases": null,
-                    "NetworkID": "7bc9f6c5809afb954741056586c3406bc468be3da03b8c8b7af5a39da48f62a8",
-                    "EndpointID": "95ecd07b285893afb44dcbf05c2d4612520af5fa4fe7f0ab6db51fc635d0d3b0",
-                    "Gateway": "172.17.0.1",
-                    "IPAddress": "172.17.0.2",
-                    "IPPrefixLen": 16,
-                    "IPv6Gateway": "",
-                    "GlobalIPv6Address": "",
-                    "GlobalIPv6PrefixLen": 0,
-                    "MacAddress": "02:42:ac:11:00:02"
-                }
-            }
-        }
-    }
-]
-</pre>
-</div>
-</div>
-
-<div id="outline-container-org88b262f" class="outline-3">
-<h3 id="org88b262f">Ping the container</h3>
-<div class="outline-text-3" id="text-org88b262f">
-<p>
-Now, when we know <code>container ip</code> it is possible to ping it:
-</p>
-<div class="org-src-container">
-<pre class="src src-sh">ping -c 5 172.17.0.2
-</pre>
-</div>
-
-<pre class="example">
-PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
-64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.111 ms
-64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.166 ms
-64 bytes from 172.17.0.2: icmp_seq=3 ttl=64 time=0.199 ms
-64 bytes from 172.17.0.2: icmp_seq=4 ttl=64 time=0.180 ms
-64 bytes from 172.17.0.2: icmp_seq=5 ttl=64 time=0.168 ms
-
---- 172.17.0.2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 3998ms
-rtt min/avg/max/mdev = 0.111/0.164/0.199/0.033 ms
-</pre>
-</div>
-</div>
-<div id="outline-container-orgd1fc1a1" class="outline-3">
-<h3 id="orgd1fc1a1">Container halt</h3>
-<div class="outline-text-3" id="text-orgd1fc1a1">
-<p>
-By typing <code>C-c C-c</code>
-</p>
 </div>
 </div>
 </div>
