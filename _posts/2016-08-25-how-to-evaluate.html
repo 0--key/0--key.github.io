@@ -1,32 +1,37 @@
----
+<div class="HTML" id="org5b7dfb7">
+<p>
+&#x2014;
 layout: post
 title: Bake code inside emacs
 tagline: " Ensure yourself"
 permalink: /emacs/how-to-evaluate-code-inside-emacs.html
 categories: [emacs, literate programming, practice]
 tags: [emacs, org-mode, babel]
----
+&#x2014;
+</p>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4">Prerequisites</h2>
-<div class="outline-text-2" id="text-orgheadline4">
-</div><div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1">Emacs</h3>
-<div class="outline-text-3" id="text-orgheadline1">
+</div>
+
+<div id="outline-container-orgd07b9c3" class="outline-2">
+<h2 id="orgd07b9c3">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgd07b9c3">
+</div>
+<div id="outline-container-org4abb114" class="outline-3">
+<h3 id="org4abb114">Emacs</h3>
+<div class="outline-text-3" id="text-org4abb114">
 <p>
 Type in your terminal:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">emacs --version
 </pre>
 </div>
 
 <pre class="example">
-GNU Emacs 24.5.1
-Copyright (C) 2015 Free Software Foundation, Inc.
+GNU Emacs 27.1
+Copyright (C) 2020 Free Software Foundation, Inc.
 GNU Emacs comes with ABSOLUTELY NO WARRANTY.
-You may redistribute copies of Emacs
+You may redistribute copies of GNU Emacs
 under the terms of the GNU General Public License.
 For more information about these matters, see the file named COPYING.
 </pre>
@@ -34,48 +39,46 @@ For more information about these matters, see the file named COPYING.
 </div>
 
 
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Org-mode</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-org87d5046" class="outline-3">
+<h3 id="org87d5046">Org-mode</h3>
+<div class="outline-text-3" id="text-org87d5046">
 <p>
 Type <code>M-x org-version</code>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-elisp">org-version
 </pre>
 </div>
 
 <pre class="example">
-8.3.5   
+9.4.4
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Language support</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-orgee7ca37" class="outline-3">
+<h3 id="orgee7ca37">Language support</h3>
+<div class="outline-text-3" id="text-orgee7ca37">
 <p>
 Check source code support languages accessible in babel. Evaluate
 this statement in emacs:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-elisp">(print org-babel-load-languages)
 </pre>
 </div>
 
 <pre class="example">
-((python . t) (emacs-lisp . t) (shell . t) (js . t) (ditaa . t) (plantuml . t))
+((python . t) (emacs-lisp . t) (shell . t) (sqlite . t) (sql . t) (octave . t))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5">Settings</h2>
+<div id="outline-container-org0a43a83" class="outline-2">
+<h2 id="org0a43a83">Settings</h2>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6">Evaluation</h2>
+<div id="outline-container-orgcbbacac" class="outline-2">
+<h2 id="orgcbbacac">Evaluation</h2>
 </div>
