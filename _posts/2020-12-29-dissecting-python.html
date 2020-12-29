@@ -1,0 +1,271 @@
+---
+layout: post
+title: Dissecting Python
+tagline: " inside out"
+permalink: /python/books/disecting_python.html
+categories: [Python Dissection]
+tags: [book, template]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge681669">Intro</a></li>
+<li><a href="#org5c8afe9">Quotes</a></li>
+<li><a href="#org2f82502">General observations:</a>
+<ul>
+<li><a href="#org7a99d8e">Debugging is a major task</a></li>
+<li><a href="#orgdaed20a">Cognitive dissonance and size of manuals</a></li>
+<li><a href="#org9e7dc29">An average age of readers</a></li>
+<li><a href="#orga6389b3">Testing as an innate tool to learn for humans;</a></li>
+<li><a href="#org1039a33">Einstellung effect in writing book about programming;</a></li>
+<li><a href="#orgfe6ba38">Reading as a tourture</a></li>
+</ul>
+</li>
+<li><a href="#orgf4f0315">Several acid notations</a></li>
+<li><a href="#orgc651ef0">Predicatives</a>
+<ul>
+<li><a href="#org4f2d574">Why Python</a></li>
+<li><a href="#org1e6af31">Why pure Python</a></li>
+</ul>
+</li>
+<li><a href="#orga6affac">Deduction</a></li>
+<li><a href="#org538b754">Testing as a tool of ology</a>
+<ul>
+<li><a href="#org8326069">A dumb testing set (test the test itself)</a></li>
+<li><a href="#org976ee90">Testing Python innate constants</a></li>
+</ul>
+</li>
+<li><a href="#org140a9c5">Innate datatypes testing</a></li>
+<li><a href="#org63f3453">Enter the Function</a></li>
+<li><a href="#org20fd727">Enter the Object</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge681669" class="outline-2">
+<h2 id="orge681669">Intro</h2>
+<div class="outline-text-2" id="text-orge681669">
+<p>
+Even if any book can't be pretentious, this one doesn't. It is
+exactly the essense out of learning how to program machines to
+execute yours and only yours orders in a most effective way of
+studying: by sequentially, from the elementary ones to most complex,
+testing its features.
+</p>
+
+
+<p>
+The main paradigm of writing are clarity and density, so I take an
+attempt to unvail the TOC, wich is intentionally composed in a
+self-disclosure manner:
+</p>
+
+
+<p>
+TOC:
+</p>
+<ul class="org-ul">
+<li>Intro</li>
+<li>Quotes</li>
+<li>General observations</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5c8afe9" class="outline-2">
+<h2 id="org5c8afe9">Quotes</h2>
+<div class="outline-text-2" id="text-org5c8afe9">
+<blockquote>
+<p>
+Programs must be written for people to read, and only incidentally
+  for machines to execute."
+</p>
+<p align="right">
+<ul class="org-ul">
+<li>Abelson &amp; Sussman, SICP, preface to the first edition</li>
+</ul>
+</p>
+</blockquote>
+
+<hr />
+<blockquote>
+<p>
+"Short words are best and the old words when short are best of
+  all."
+</p>
+<p align="right">
+<ul class="org-ul">
+<li>Winston Churchill</li>
+</ul>
+</p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+<p>
+“The glass is neither half empty nor half full. It’s simply larger
+  than it needs to be.”
+</p>
+<p align="right">
+<ul class="org-ul">
+<li>Grace Hopper</li>
+</ul>
+</p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+<p>
+“Manage things. Lead people.”
+</p>
+<p align="right">
+<ul class="org-ul">
+<li>Grace Hopper</li>
+</ul>
+</p>
+</blockquote>
+
+<hr />
+</div>
+</div>
+
+
+<div id="outline-container-org2f82502" class="outline-2">
+<h2 id="org2f82502">General observations:</h2>
+<div class="outline-text-2" id="text-org2f82502">
+</div>
+<div id="outline-container-org7a99d8e" class="outline-3">
+<h3 id="org7a99d8e">Debugging is a major task</h3>
+<div class="outline-text-3" id="text-org7a99d8e">
+<p>
+for a typical programmer and often it consumes up to 90% of their
+efforts to develop and maintain software nowadays;
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgdaed20a" class="outline-3">
+<h3 id="orgdaed20a">Cognitive dissonance and size of manuals</h3>
+<div class="outline-text-3" id="text-orgdaed20a">
+<p>
+There are tons of material and most of it represents <code>programming
+   language</code> in an imperative style.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9e7dc29" class="outline-3">
+<h3 id="org9e7dc29">An average age of readers</h3>
+</div>
+
+
+<div id="outline-container-orga6389b3" class="outline-3">
+<h3 id="orga6389b3">Testing as an innate tool to learn for humans;</h3>
+<div class="outline-text-3" id="text-orga6389b3">
+<ul class="org-ul">
+<li>Testing in CS is a comparatively young concept;</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1039a33" class="outline-3">
+<h3 id="org1039a33">Einstellung effect in writing book about programming;</h3>
+</div>
+
+
+<div id="outline-container-orgfe6ba38" class="outline-3">
+<h3 id="orgfe6ba38">Reading as a tourture</h3>
+<div class="outline-text-3" id="text-orgfe6ba38">
+<p>
+Avoidance of source code reading (escapism);
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgf4f0315" class="outline-2">
+<h2 id="orgf4f0315">Several acid notations</h2>
+</div>
+
+
+<div id="outline-container-orgc651ef0" class="outline-2">
+<h2 id="orgc651ef0">Predicatives</h2>
+<div class="outline-text-2" id="text-orgc651ef0">
+</div>
+<div id="outline-container-org4f2d574" class="outline-3">
+<h3 id="org4f2d574">Why Python</h3>
+</div>
+
+<div id="outline-container-org1e6af31" class="outline-3">
+<h3 id="org1e6af31">Why pure Python</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orga6affac" class="outline-2">
+<h2 id="orga6affac">Deduction</h2>
+<div class="outline-text-2" id="text-orga6affac">
+<ul class="org-ul">
+<li>Conversion a boring manual into a fiction book;</li>
+<li>Black (Pandorra) Box approach;</li>
+<li>Programming languages genealogy:
+<ul class="org-ul">
+<li>Atavisms:
+<ul class="org-ul">
+<li>72 char per string;</li>
+</ul></li>
+</ul></li>
+<li>Codex as a phenomena disclosure;</li>
+<li>Related material allocation on two pages at once;</li>
+<li>Pomodoro technique realization;</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org538b754" class="outline-2">
+<h2 id="org538b754">Testing as a tool of ology</h2>
+<div class="outline-text-2" id="text-org538b754">
+</div>
+<div id="outline-container-org8326069" class="outline-3">
+<h3 id="org8326069">A dumb testing set (test the test itself)</h3>
+</div>
+
+
+<div id="outline-container-org976ee90" class="outline-3">
+<h3 id="org976ee90">Testing Python innate constants</h3>
+<div class="outline-text-3" id="text-org976ee90">
+</div>
+<div id="outline-container-org81a7946" class="outline-4">
+<h4 id="org81a7946">Boolean operations</h4>
+</div>
+
+<div id="outline-container-orga892d67" class="outline-4">
+<h4 id="orga892d67">Arithmetics</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org140a9c5" class="outline-2">
+<h2 id="org140a9c5">Innate datatypes testing</h2>
+</div>
+
+
+<div id="outline-container-org63f3453" class="outline-2">
+<h2 id="org63f3453">Enter the Function</h2>
+</div>
+
+
+<div id="outline-container-org20fd727" class="outline-2">
+<h2 id="org20fd727">Enter the Object</h2>
+</div>
