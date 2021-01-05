@@ -49,10 +49,10 @@ tags: [book, template]
 <h2 id="org5715a29">Harsh overture</h2>
 <div class="outline-text-2" id="text-org5715a29">
 
-<div id="orge6604a6" class="figure">
-<p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" />
+<div id="org834125a" class="figure">
+<p><img src="http://0--key.github.io/assets/img/color_test.png" alt="four figures image" title="Color test" align="right" />
 </p>
-<p><span class="figure-number">Figure 1: </span>Test failure</p>
+<p><span class="figure-number">Figure 1: </span>An image with color samples</p>
 </div>
 
 <p>
@@ -335,18 +335,20 @@ misterious.
 <li>Related material allocation on two pages at once;</li>
 <li>Pomodoro technique realization;</li>
 </ul>
+
+<p>
+<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
 </div>
 </div>
-
-
 <div id="outline-container-org45186c4" class="outline-2">
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="orgef6d9d2" class="figure">
+<div id="org3b1be8e" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
-<p><span class="figure-number">Figure 2: </span>An infant conducting test</p>
+<p><span class="figure-number">Figure 2: </span>An image with color samples</p>
 </div>
 
 <p>
@@ -370,10 +372,6 @@ compatibility of humans and testing approach for study.
 <h3 id="org976ee90">Testing Python innate constants</h3>
 <div class="outline-text-3" id="text-org976ee90">
 </div>
-<div id="outline-container-org1e570ec" class="outline-4">
-<h4 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h4>
-</div>
-
 <div id="outline-container-org81a7946" class="outline-4">
 <h4 id="org81a7946">Boolean operations</h4>
 </div>
@@ -397,4 +395,14 @@ compatibility of humans and testing approach for study.
 
 <div id="outline-container-org20fd727" class="outline-2">
 <h2 id="org20fd727">Enter the Object</h2>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">denoting a point in a network or diagram at which lines or
+pathways intersect or branch.</p></div></div>
+
+
+</div>
 </div>
