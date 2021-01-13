@@ -90,7 +90,7 @@ unnecessary procedure.
 <h2 id="org5715a29">Harsh overture</h2>
 <div class="outline-text-2" id="text-org5715a29">
 
-<div id="org1531b37" class="figure">
+<div id="org5c54feb" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Test failure</p>
@@ -385,7 +385,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="org5411cc4" class="figure">
+<div id="orgca4fcf1" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 2: </span>An infant conducting test</p>
@@ -406,6 +406,44 @@ compatibility of humans and testing approach for study.
 
 <div id="outline-container-org8326069" class="outline-2">
 <h2 id="org8326069">A dumb testing set (test the test itself)</h2>
+<div class="outline-text-2" id="text-org8326069">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00ffff;">"""</span>
+<span style="color: #00ffff;">Lets discover built-in constants True, False, None and already</span>
+<span style="color: #00ffff;">existing testing methods one by one</span>
+
+<span style="color: #00ffff;">| Method                    | Checks that          |</span>
+<span style="color: #00ffff;">|---------------------------+----------------------+</span>
+<span style="color: #00ffff;">| assertEqual(a, b)         | a == b               |</span>
+<span style="color: #00ffff;">| assertNotEqual(a, b)      | a != b               |</span>
+<span style="color: #00ffff;">| assertTrue(x)             | bool(x) is True      |</span>
+<span style="color: #00ffff;">| assertFalse(x)            | bool(x) is False     |</span>
+<span style="color: #00ffff;">| assertIs(a, b)            | a is b               |</span>
+<span style="color: #00ffff;">| assertIsNot(a, b)         | a is not b           |</span>
+<span style="color: #00ffff;">| assertIsNone(x)           | x is None            |</span>
+<span style="color: #00ffff;">| assertIsNotNone(x)        | x is not None        |</span>
+<span style="color: #00ffff;">| assertIn(a, b)            | a in b               |</span>
+<span style="color: #00ffff;">| assertNotIn(a, b)         | a not in b           |</span>
+<span style="color: #00ffff;">| assertIsInstance(a, b)    | isinstance(a, b)     |</span>
+<span style="color: #00ffff;">| assertNotIsInstance(a, b) | not isinstance(a, b) |</span>
+
+<span style="color: #00ffff;">"""</span>
+<span style="color: #00ffff;">import</span> unittest
+
+
+<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestTrue</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_true</span>(<span style="color: #00ffff;">self</span>):
+        <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)
+
+
+<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestFalse</span>(unittest.TestCase):
+
+<span style="color: #00ff00; background-color: #292929;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_false</span>(<span style="color: #00ffff;">self</span>):
+        <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)
+</pre>
+</div>
+</div>
 </div>
 
 <div id="outline-container-org976ee90" class="outline-2">
