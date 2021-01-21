@@ -12,8 +12,8 @@ tags: [book, template]
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgb473861">Dedication</a></li>
-<li><a href="#orgf1b33c8">Relevant quotes</a></li>
 <li><a href="#org03a196a">Preface</a></li>
+<li><a href="#orgf1b33c8">Relevant quotes</a></li>
 <li><a href="#org5715a29">Harsh overture</a></li>
 <li><a href="#org2f82502">General observations:</a>
 <ul>
@@ -46,8 +46,42 @@ tags: [book, template]
 <div id="outline-container-orgb473861" class="outline-2">
 <h2 id="orgb473861">Dedication</h2>
 <div class="outline-text-2" id="text-orgb473861">
+<blockquote>
 <p>
 For my tiny family
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-org03a196a" class="outline-2">
+<h2 id="org03a196a">Preface</h2>
+<div class="outline-text-2" id="text-org03a196a">
+<p>
+This book is about programming machines to do precisely what humans
+ordered them. Like a thousand of other books already written about
+the same subject. The core discrepancy is the <i>style</i> of this book:
+it is <b>not</b> yet another user manual or user journal generously
+spiced by comments and notes.
+</p>
+
+<p>
+It is a book in a wide sense of this word: it has an objective, the
+subjects and the plot. The principal objective in this book is
+Python and its usage by humans, the subjects are students, teachers,
+books, programmers, software engineers, other professionals related
+to programming. And the plot is a <b>misleading</b>, its history, the
+current state of things with focus on software industry followed by
+obvious deduction and a bit straightforward, but effective approach
+to get rid this phenomenon off once and forever.
+</p>
+
+<p>
+The main intention of this book is to take to the reader chance to
+be fun at the reading, to alleviate the headache and other pain
+during <i>studying programming by excluding cramming</i> as a redundant
+and unnecessary procedure.
 </p>
 </div>
 </div>
@@ -109,44 +143,11 @@ for machines to execute."
 </div>
 
 
-<div id="outline-container-org03a196a" class="outline-2">
-<h2 id="org03a196a">Preface</h2>
-<div class="outline-text-2" id="text-org03a196a">
-<p>
-This book is about programming machines to do precisely what humans
-ordered them. Like a thousand of other books already written about
-the same subject. The core discrepancy is the <i>style</i> of this book:
-it is <b>not</b> yet another user manual or user journal generously
-spiced by comments and notes.
-</p>
-
-<p>
-It is a book in a wide sense of this word: it has an objective, the
-subjects and the plot. The principal objective in this book is
-Python and its usage by humans, the subjects are students, teachers,
-books, programmers, software engineers, other professionals related
-to programming. And the plot is a <b>misleading</b>, its history, the
-current state of things with focus on programming, obvious
-deductions out there and the straightforward approach to eradicate
-this phenomena once and forever.
-</p>
-
-<p>
-The main intention of this book is to take to the reader chance to
-be fun among reading, to allow them to be pleased in time they're
-reading this book, to alleviate the headache and other pain during
-<i>studying programming by excluding cramming</i> as a redundant and
-unnecessary procedure.
-</p>
-</div>
-</div>
-
-
 <div id="outline-container-org5715a29" class="outline-2">
 <h2 id="org5715a29">Harsh overture</h2>
 <div class="outline-text-2" id="text-org5715a29">
 
-<div id="orgf79a408" class="figure">
+<div id="orgc76fc1b" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Test failure</p>
@@ -385,7 +386,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="org088ff6c" class="figure">
+<div id="orgb23ad1a" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 2: </span>An infant conducting test</p>
@@ -410,6 +411,29 @@ compatibility of humans and testing approach for study.
 <p>
 The bedrock of testing a programming language.
 </p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgf4ab726"><span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">-*- coding: utf-8 -*-</span>
+<span style="color: #cd5555;">"""A module-level docstring</span>
+
+<span style="color: #cd5555;">Notice the comment above the docstring specifying the encoding.</span>
+<span style="color: #cd5555;">Docstrings do appear in the bytecode, so you can access this through</span>
+<span style="color: #cd5555;">the ``__doc__`` attribute. This is also what you'll see if you call</span>
+<span style="color: #cd5555;">help() on a module or any other Python object.</span>
+
+<span style="color: #cd5555;">It might be unnecessary in our case, when we write a simplified</span>
+<span style="color: #cd5555;">version of programs. If the aim is a paragon of clarity it should</span>
+<span style="color: #cd5555;">contain all required attributes of clarity and further support.</span>
+
+<span style="color: #cd5555;">You might notice that /coding definition/ on the first string, the</span>
+<span style="color: #cd5555;">second string begins with tripled double quotes and a sentence there.</span>
+<span style="color: #cd5555;">They are the obligatory attributes if you have intention to do things</span>
+<span style="color: #cd5555;">as it should do.</span>
+
+<span style="color: #cd5555;">"""</span>
+</pre>
+</div>
+
 
 <div class="org-src-container">
 <pre class="src src-python" id="orgfbb9da8"><span style="color: #f5deb3;">import</span> unittest
@@ -468,7 +492,7 @@ The bedrock of testing a programming language.
 
     <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f5deb3;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- an atomic test case itself</span>
         <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">and the sample of in-line comment</span>
-        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">sel-explanatory name of the test case to focus attention</span>
+        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">self-explanatory name of the test case to focus attention</span>
         <span style="color: #f5deb3;">self</span>.assertTrue(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- straight assertion</span>
         <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">True really exists.</span>
         <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">if this test do pass with success.</span>
