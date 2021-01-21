@@ -146,7 +146,7 @@ unnecessary procedure.
 <h2 id="org5715a29">Harsh overture</h2>
 <div class="outline-text-2" id="text-org5715a29">
 
-<div id="org0e12cbc" class="figure">
+<div id="orgf79a408" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Test failure</p>
@@ -385,7 +385,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="orgdf8e48e" class="figure">
+<div id="org088ff6c" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 2: </span>An infant conducting test</p>
@@ -412,7 +412,7 @@ The bedrock of testing a programming language.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgfbb9da8"><span style="color: #f0e68c;">import</span> unittest
+<pre class="src src-python" id="orgfbb9da8"><span style="color: #f5deb3;">import</span> unittest
 
 <span style="color: #cd5555;">"""By its purpose all programming languages should allow the reader to</span>
 <span style="color: #cd5555;">understand what exactly this particular text do in a much explicit</span>
@@ -439,58 +439,114 @@ The bedrock of testing a programming language.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org4845c05"><span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestLanguageBasemet</span>(unittest.TestCase):
+<pre class="src src-python" id="org6b40639"><span style="color: #f5deb3;">class</span> <span style="color: #bdb76b; font-weight: bold;">TestLanguageBase</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- class definition</span>
+    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">begins this reserved word /class/ following by the /name of</span>
+    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">class/ and its /parent class/ in the ellipsys. On first steps it</span>
+    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">might be like a magic mantra to enter the /test suite/.</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #cd5555;">"""The first and foremost taks for testing is to ensure how testing</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   tools work. In our case lets begit from the simplest things ever -</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   lets discover built-in constants True, False, None with already</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   defining testing methods one by one.</span>
+    <span style="color: #cd5555;">"""The first and foremost taks for testing is to ensure how testing</span>
+<span style="color: #cd5555;">    tools work. In our case lets begit from the simplest things ever -</span>
+<span style="color: #cd5555;">    lets discover built-in constants True, False, None with already</span>
+<span style="color: #cd5555;">    defining testing methods one by one.</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | Method                    | Checks that          |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   |---------------------------+----------------------+</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertEqual(a, b)         | a == b               |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertNotEqual(a, b)      | a != b               |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertTrue(x)             | bool(x) is True      |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertFalse(x)            | bool(x) is False     |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIs(a, b)            | a is b               |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIsNot(a, b)         | a is not b           |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIsNone(x)           | x is None            |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIsNotNone(x)        | x is not None        |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIn(a, b)            | a in b               |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertNotIn(a, b)         | a not in b           |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertIsInstance(a, b)    | isinstance(a, b)     |</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   | assertNotIsInstance(a, b) | not isinstance(a, b) |</span>
+<span style="color: #cd5555;">    | Method                    | Checks that          |</span>
+<span style="color: #cd5555;">    |---------------------------+----------------------+</span>
+<span style="color: #cd5555;">    | assertEqual(a, b)         | a == b               |</span>
+<span style="color: #cd5555;">    | assertNotEqual(a, b)      | a != b               |</span>
+<span style="color: #cd5555;">    | assertTrue(x)             | bool(x) is True      |</span>
+<span style="color: #cd5555;">    | assertFalse(x)            | bool(x) is False     |</span>
+<span style="color: #cd5555;">    | assertIs(a, b)            | a is b               |</span>
+<span style="color: #cd5555;">    | assertIsNot(a, b)         | a is not b           |</span>
+<span style="color: #cd5555;">    | assertIsNone(x)           | x is None            |</span>
+<span style="color: #cd5555;">    | assertIsNotNone(x)        | x is not None        |</span>
+<span style="color: #cd5555;">    | assertIn(a, b)            | a in b               |</span>
+<span style="color: #cd5555;">    | assertNotIn(a, b)         | a not in b           |</span>
+<span style="color: #cd5555;">    | assertIsInstance(a, b)    | isinstance(a, b)     |</span>
+<span style="color: #cd5555;">    | assertNotIsInstance(a, b) | not isinstance(a, b) |</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   """</span>
+<span style="color: #cd5555;">    """</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- an atomic test case itself</span>
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- straight assertion</span>
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f5deb3;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- an atomic test case itself</span>
+        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">and the sample of in-line comment</span>
+        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">sel-explanatory name of the test case to focus attention</span>
+        <span style="color: #f5deb3;">self</span>.assertTrue(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- straight assertion</span>
+        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">True really exists.</span>
+        <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">if this test do pass with success.</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;">#</span>
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;">#</span>
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #f5deb3;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">No comments</span>
+        <span style="color: #f5deb3;">self</span>.assertFalse(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">False also exists</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;">#</span>
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNone(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;">#</span>
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #f5deb3;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">no comments</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNone(<span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">None also predefined by the language</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #ffa0a0;">""" Now it became obious that three built-in values are well-defined</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #ffa0a0;">   out of the box.  It is very time to compare them against each other.</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #ffa0a0;">   """</span>
+    <span style="color: #ffd700;">""" Now it became obious that three built-in constants are well-defined</span>
+<span style="color: #ffd700;">    out of the box.  It is very time to compare them against each other.</span>
+<span style="color: #ffd700;">    """</span>
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_none_fasle_true_comparison</span>(<span style="color: #f0e68c;">self</span>):
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">Naturally, niever False</span>
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">False</span>) <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">nor True are not None</span>
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">!! None is a Boolean False</span>
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_none_fasle_true_comparison</span>(<span style="color: #f5deb3;">self</span>):
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">Naturally, neiver False</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">nor True are not None</span>
+        <span style="color: #f5deb3;">self</span>.assertFalse(<span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">!! None has a Boolean False</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">True</span>, <span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">None</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">True</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+
+
+<span style="color: #ffd700;">"""</span>
+<span style="color: #ffd700;">| Method                    | Checks that          |</span>
+<span style="color: #ffd700;">|---------------------------+----------------------+</span>
+<span style="color: #ffd700;">| assertEqual(a, b)         | a == b               |</span>
+<span style="color: #ffd700;">| assertNotEqual(a, b)      | a != b               |</span>
+<span style="color: #ffd700;">| assertTrue(x)             | bool(x) is True      |</span>
+<span style="color: #ffd700;">| assertFalse(x)            | bool(x) is False     |</span>
+<span style="color: #ffd700;">| assertIs(a, b)            | a is b               |</span>
+<span style="color: #ffd700;">| assertIsNot(a, b)         | a is not b           |</span>
+<span style="color: #ffd700;">| assertIsNone(x)           | x is None            |</span>
+<span style="color: #ffd700;">| assertIsNotNone(x)        | x is not None        |</span>
+<span style="color: #ffd700;">| assertIn(a, b)            | a in b               |</span>
+<span style="color: #ffd700;">| assertNotIn(a, b)         | a not in b           |</span>
+<span style="color: #ffd700;">| assertIsInstance(a, b)    | isinstance(a, b)     |</span>
+<span style="color: #ffd700;">| assertNotIsInstance(a, b) | not isinstance(a, b) |</span>
+
+<span style="color: #ffd700;">Now we definitely check up several methods of assertion embedded into</span>
+<span style="color: #ffd700;">Python unittest module, and ensure that three fundamental constants</span>
+<span style="color: #ffd700;">are also accessible out from the box.</span>
+
+<span style="color: #ffd700;">The four methods at the bottom of the table:</span>
+
+<span style="color: #ffd700;"> - assertIn(a, b)</span>
+<span style="color: #ffd700;"> - assertNotIn(a, b)</span>
+<span style="color: #ffd700;"> - assertIsInstance(a, b)</span>
+<span style="color: #ffd700;"> - assertNotIsInstance(a, b)</span>
+
+<span style="color: #ffd700;">are unnecessary right now because their purpose is testing of</span>
+<span style="color: #ffd700;">sequencies and instances wich will be introduced a bit later.</span>
+
+<span style="color: #ffd700;">In the next chapter new and principal concepts will be introduced.</span>
+
+<span style="color: #ffd700;">"""</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgffb6e33"><span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestFalse</span>(unittest.TestCase):
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #cd5555;">"""</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   If True does exist, what about the opposite?</span>
-<span style="color: #00ff00; background-color: #333333;"> </span><span style="color: #cd5555;">   """</span>
+<pre class="src src-python" id="orge18dbd9"><span style="color: #f5deb3;">class</span> <span style="color: #bdb76b; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
 
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_false_exist</span>(<span style="color: #f0e68c;">self</span>):
-<span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #00ff00; background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">the same assertion as above</span>
+    <span style="color: #cd5555;">"""Now, when we ensure in existence of None, False and Ture constants,</span>
+<span style="color: #cd5555;">    it is very time to compare them with its own derivatives as zero</span>
+<span style="color: #cd5555;">    (0), one (1), the letter('A')</span>
+
+<span style="color: #cd5555;">    """</span>
+
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_does_zero_really_boolean_false</span>(<span style="color: #f5deb3;">self</span>):
+        <span style="color: #f5deb3;">self</span>.assertFalse(0)  <span style="color: #8db6cd;">#</span>
 </pre>
 </div>
 </div>
