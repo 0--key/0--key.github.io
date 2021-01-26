@@ -47,7 +47,9 @@ tags: [book, template]
 <li><a href="#orgbd3e75b">Testing Python built-in fundamental constants</a>
 <ul>
 <li><a href="#orgb19901c">The set of attributes required</a></li>
-<li><a href="#orgff6d6f0">Zero, One and a symbol</a></li>
+<li><a href="#orgccaf2d8">Code elaboration</a></li>
+<li><a href="#org5e88a53">Further exploration</a></li>
+<li><a href="#org9eb88b8">Zero, One and a Symbol</a></li>
 </ul>
 </li>
 <li><a href="#org140a9c5">Innate datatypes testing</a></li>
@@ -249,7 +251,7 @@ guys, moving forward.
 <h3 id="org20c0c05">Debugging is a major time-consuming task</h3>
 <div class="outline-text-3" id="text-org20c0c05">
 
-<div id="org2814fff" class="figure">
+<div id="orgdecd293" class="figure">
 <p><img src="https://i1.wp.com/semiengineering.com/wp-content/uploads/2019/02/debug1.png" alt="Typical proportion" title="The lion share of efforts" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Time and efforts for debug</p>
@@ -269,7 +271,7 @@ their efforts to develop and maintain software nowadays.
 <h3 id="orgdaed20a">Cognitive dissonance and size of manuals</h3>
 <div class="outline-text-3" id="text-orgdaed20a">
 
-<div id="org4863c2b" class="figure">
+<div id="orgffded22" class="figure">
 <p><img src="https://cdn-blog.adafruit.com/uploads/2018/12/1Capture.jpg" alt="The Art" title="They are enormous" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>The average manual for proficiency</p>
@@ -287,7 +289,7 @@ There are tons of material and most of it represents <code>programming
 <h3 id="org9e7dc29">An average age of readers</h3>
 <div class="outline-text-3" id="text-org9e7dc29">
 
-<div id="orgd279fe6" class="figure">
+<div id="orgac22202" class="figure">
 <p><img src="https://peerbits-wpengine.netdna-ssl.com/wp-content/uploads/2020/03/improve-software-development-team-main.jpg" alt="Unexperience of youth" title="They are so young" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 3: </span>The team</p>
@@ -305,7 +307,7 @@ There are tons of material and most of it represents <code>programming
 </ul>
 
 
-<div id="org1e29511" class="figure">
+<div id="org1cd35ea" class="figure">
 <p><img src="https://mk0tredebmaru2va759a.kinstacdn.com/wp-content/uploads/2018/09/best-blocks-for-toddlers.jpg" alt="Play as test" title="Conduct an experiment" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Toddlers</p>
@@ -322,7 +324,7 @@ in writing book about programming
 </p>
 
 
-<div id="org8b879f9" class="figure">
+<div id="orgafc5bbd" class="figure">
 <p><img src="https://miro.medium.com/max/3600/1*dxkkOejSHnx7FVfj5vo5jg.jpeg" alt="True thinking is a tough task" title="The large set of cognitive biases" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Brain fog</p>
@@ -346,12 +348,14 @@ Avoidance of source code reading (escapism);
 <div id="outline-container-org51e2a38" class="outline-2">
 <h2 id="org51e2a38">A harsh deduction</h2>
 <div class="outline-text-2" id="text-org51e2a38">
-
-<div id="orga3ebbe1" class="figure">
-<p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
+<p title="Unconscious testing" class="rounded float-left" alt="Animals also test">
+<img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />]]
 </p>
-<p><span class="figure-number">Figure 6: </span>Test failure</p>
-</div>
+
+<p>
+Summarize the handful of penetraiting observations above it might be
+dedused:
+</p>
 
 <p>
 The paramount goals of writing are absolute clarity and density, so
@@ -529,20 +533,20 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="org0ac492f" class="figure">
+<div id="org1793ea2" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
-<p><span class="figure-number">Figure 7: </span>An infant conducting test</p>
+<p><span class="figure-number">Figure 6: </span>An infant conducting test</p>
 </div>
 
 <p>
 If you're observed an infant behavior strictly enough you might
 notice that it is <i>a silent (they can't talk yet) testing how things
-work</i>. With brisk ingenuity baby implements the series of conscious acts
-and it should be interpreted as experiments to examine the nature of
-events. Bear in mind its inborn origin, because every child do it
-absolutely autonomous, we got conclusion about a native and natural
-compatibility of humans and testing approach for study.
+work</i>. With brisk ingenuity baby implements the series of conscious
+acts and it should be interpreted as experiments to examine the
+nature of events. Bear in mind its inborn origin, because every
+child do it absolutely autonomous, we got conclusion about a native
+and natural compatibility of humans and testing approach for study.
 </p>
 </div>
 </div>
@@ -645,11 +649,11 @@ The bedrock of testing a programming language.
 <div class="outline-text-4" id="text-org322d4be">
 <div class="org-src-container">
 <pre class="src src-python" id="org6b40639"><span style="color: #f5deb3;">class</span> <span style="color: #bdb76b; font-weight: bold;">TestLanguageBase</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- class definition</span>
-    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">begins this reserved word /class/ following by the /name of</span>
-    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">class/ and its /parent class/ in the ellipsys. On first steps it</span>
-    <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">might be like a magic mantra to enter the /test suite/.</span>
+    <span style="color: #cd5555;">"""begins this reserved word /class/ following by the /name of class/</span>
+<span style="color: #cd5555;">    and its /parent class/ in the brackets. On first steps it might be</span>
+<span style="color: #cd5555;">    like a magic mantra to enter the /test suite/.</span>
 
-    <span style="color: #cd5555;">"""The first and foremost taks for testing is to ensure how testing</span>
+<span style="color: #cd5555;">    The first and foremost taks for testing is to ensure how testing</span>
 <span style="color: #cd5555;">    tools work. In our case lets begit from the simplest things ever -</span>
 <span style="color: #cd5555;">    lets discover built-in constants True, False, None with already</span>
 <span style="color: #cd5555;">    defining testing methods one by one.</span>
@@ -742,6 +746,108 @@ The bedrock of testing a programming language.
 </div>
 </div>
 </div>
+</div>
+
+
+<div id="outline-container-orgccaf2d8" class="outline-3">
+<h3 id="orgccaf2d8">Code elaboration</h3>
+<div class="outline-text-3" id="text-orgccaf2d8">
+<div class="org-src-container">
+<pre class="src src-python" id="org8071ee6"><span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">-*- coding: utf-8 -*-</span>
+<span style="color: #cd5555;">"""Now it is the moment to distill your knowledge about writing</span>
+<span style="color: #cd5555;">=unittests= in ~Python~. Our previous work in</span>
+<span style="color: #cd5555;">=tests/test_00dumb_testing.py= spare too much place in case if you're</span>
+<span style="color: #cd5555;">grasp the core idea. Exactly:</span>
+
+<span style="color: #cd5555;">   - Module comments;</span>
+<span style="color: #cd5555;">   - Import section;</span>
+<span style="color: #cd5555;">   - Test class definition;</span>
+<span style="color: #cd5555;">   - Set of test cases</span>
+
+<span style="color: #cd5555;">are necesseties to be clear when you're in writing ~Python~ code. Lets</span>
+<span style="color: #cd5555;">create a much dense test suite out from existing one and put it in a</span>
+<span style="color: #cd5555;">new file =tests/test_01false_true_none_existence.py=</span>
+
+<span style="color: #cd5555;">"""</span>
+
+<span style="color: #f5deb3;">import</span> unittest
+
+<span style="color: #ffd700;">"""The initial Python test suite</span>
+
+<span style="color: #ffd700;">Asserts the existence True, False and None in Python</span>
+<span style="color: #ffd700;">"""</span>
+
+
+<span style="color: #f5deb3;">class</span> <span style="color: #bdb76b; font-weight: bold;">TestFundamentalConstantsExistence</span>(unittest.TestCase):
+
+    <span style="color: #cd5555;">"""Put all the existence tests together"""</span>
+
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_the_existence</span>(<span style="color: #f5deb3;">self</span>):
+        <span style="color: #f5deb3;">self</span>.assertTrue(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">&lt;-- straight assertion</span>
+        <span style="color: #f5deb3;">self</span>.assertFalse(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">False also exists</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNone(<span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">None also predefined by the language</span>
+
+
+<span style="color: #ffd700;">"""Naturally that it is more convenient to tame a dense and terse code</span>
+<span style="color: #ffd700;">blocks which are well-fitted on a single page. Thus, try to split all</span>
+<span style="color: #ffd700;">your tests into /logical/ blocks for clarity purpose."""</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org2148b9b"><span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">-*- coding: utf-8 -*-</span>
+<span style="color: #cd5555;">"""Only code to compare None, True and False"""</span>
+
+<span style="color: #f5deb3;">import</span> unittest
+
+
+<span style="color: #f5deb3;">class</span> <span style="color: #bdb76b; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
+
+    <span style="color: #f5deb3;">def</span> <span style="color: #fffacd; font-weight: bold;">test_none_fasle_true_comparison</span>(<span style="color: #f5deb3;">self</span>):
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">Naturally, neiver False</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">nor True are not None</span>
+        <span style="color: #f5deb3;">self</span>.assertFalse(<span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #cd5c5c;">!! None has a Boolean False</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">True</span>, <span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIs(<span style="color: #98fb98;">None</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">True</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertNotEqual(<span style="color: #98fb98;">False</span>, <span style="color: #98fb98;">None</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">False</span>)  <span style="color: #8db6cd;">#</span>
+        <span style="color: #f5deb3;">self</span>.assertIsNotNone(<span style="color: #98fb98;">True</span>)  <span style="color: #8db6cd;">#</span>
+
+
+<span style="color: #ffd700;">"""Seems it is much elegant than before, but less self-explanatory"""</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5e88a53" class="outline-3">
+<h3 id="org5e88a53">Further exploration</h3>
+</div>
+
+<div id="outline-container-org9eb88b8" class="outline-3">
+<h3 id="org9eb88b8">Zero, One and a Symbol</h3>
+<div class="outline-text-3" id="text-org9eb88b8">
+</div>
+<div id="outline-container-orgf49cc36" class="outline-4">
+<h4 id="orgf49cc36">Assertion and assignment</h4>
+</div>
+<div id="outline-container-org1e570ec" class="outline-4">
+<h4 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h4>
+</div>
+
+<div id="outline-container-org81a7946" class="outline-4">
+<h4 id="org81a7946">Boolean operations</h4>
+</div>
+
+<div id="outline-container-orga892d67" class="outline-4">
+<h4 id="orga892d67">Arithmetics</h4>
+</div>
 
 
 <div id="outline-container-org50d6e74" class="outline-4">
@@ -763,29 +869,8 @@ The bedrock of testing a programming language.
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-orgff6d6f0" class="outline-3">
-<h3 id="orgff6d6f0">Zero, One and a symbol</h3>
-<div class="outline-text-3" id="text-orgff6d6f0">
-</div>
-<div id="outline-container-orgf49cc36" class="outline-4">
-<h4 id="orgf49cc36">Assertion and assignment</h4>
-</div>
-<div id="outline-container-org1e570ec" class="outline-4">
-<h4 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h4>
 </div>
 
-<div id="outline-container-org81a7946" class="outline-4">
-<h4 id="org81a7946">Boolean operations</h4>
-</div>
-
-<div id="outline-container-orga892d67" class="outline-4">
-<h4 id="orga892d67">Arithmetics</h4>
-</div>
-</div>
-</div>
 
 
 <div id="outline-container-org140a9c5" class="outline-2">
