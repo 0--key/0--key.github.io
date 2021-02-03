@@ -2,7 +2,7 @@
 layout: post
 title: Dissecting Python
 tagline: " inside out"
-permalink: /python/books/disecting_python.html
+permalink: /python/books/dissecting_python.html
 categories: [Python Dissection]
 tags: [book, template]
 ---
@@ -46,7 +46,7 @@ tags: [book, template]
 <li><a href="#orge77fce1">Contribute</a></li>
 </ul>
 </li>
-<li><a href="#orgbd3e75b">Testing Python built-in fundamental constants</a>
+<li><a href="#org999782d">Testing Python primary constants</a>
 <ul>
 <li><a href="#orgb19901c">The set of attributes required</a></li>
 <li><a href="#orgccaf2d8">Code elaboration</a></li>
@@ -133,7 +133,7 @@ for machines to execute."
 <h2 id="org03a196a">Preface</h2>
 <div class="outline-text-2" id="text-org03a196a">
 
-<div id="org38c79af" class="figure">
+<div id="org31d93ac" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="A game is a test" title="Conduct an experiment together" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>An older tutor</p>
@@ -141,9 +141,9 @@ for machines to execute."
 
 <p>
 This book is about programming machines to do precisely what humans
-ordered them. It is same in intention <i>like</i> a thousand similar
-books already written about the same subject. And it is a completely
-wrong <i>first</i> impression.
+ordered them. It is same in intention <i>like</i> a slew similar books
+already written about the same subject. And it is a completely wrong
+<i>first</i> impression.
 </p>
 
 <p>
@@ -154,17 +154,17 @@ this book is Python and its usage by humans.
 
 <p>
 The subjects are students, teachers, books, programmers, software
-engineers, other professionals related to programming. And the plot
-is a misleading: its history, the current state of things with
-focus on software industry.
+engineers and developers, other professionals related to
+programming. The plot is a <i>misleading</i>: its prerequisites, its
+past and present in software industry.
 </p>
 
 <p>
 Followed by a set of plain deductions it might unlock for a literate
-reader a <code>kingdom of programming</code>. It is a <code>kingdom</code> definitely due
-to the strict set of inner rules controlled by <i>his Majesty</i>
-<b>Python3</b>. Learning these rules one by one is the only decent path
-to succeed in studying a <i>system</i>.
+reader a <code>realm of programming</code>. It is a <code>realm</code> actually due to the
+strict set of certain rules defined by <i>his Majesty</i> <b>Python3</b>.
+Learning these rules one by one is the only proper way to succeed in
+studying programming language as a <i>system</i>.
 </p>
 
 <p>
@@ -192,14 +192,14 @@ Keep tighter, please.
 <p>
 The task isn't so tough it might seem, the most rules are naturally
 entangled. There are a handful of <i>primal</i> ones. The rest are
-derivatives <i>based on</i> the primal.
+<i>derivatives</i> based on the primal.
 </p>
 
 <p>
 Undoubtedly it simplifies the lesson. All what you need is to build
 the knowledge tree-like structure in your mind. There are only a
-<i>thriple</i> primals: <code>True</code>, <code>False</code> and = None =. All other are
-knots in the large net of derivatives.
+<i>thriple</i> primals: <code>True</code>, <code>False</code> and <code>None</code>. All other are
+derivatives based on them.
 </p>
 
 <p>
@@ -289,7 +289,7 @@ guys, moving forward.
 <h3 id="org20c0c05">Debugging is a major time-consuming task</h3>
 <div class="outline-text-3" id="text-org20c0c05">
 
-<div id="org92ddd7c" class="figure">
+<div id="org3a749d2" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/debugging.jpg" alt="Typical proportion" title="The lion share of efforts" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Time and efforts for debug</p>
@@ -309,7 +309,7 @@ their efforts to develop and maintain software nowadays.
 <h3 id="orgdaed20a">Cognitive dissonance and size of manuals</h3>
 <div class="outline-text-3" id="text-orgdaed20a">
 
-<div id="orgc658268" class="figure">
+<div id="org59c1a88" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/the_volumes.jpeg" alt="The Art" title="They are enormous" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 3: </span>The average manual for proficiency</p>
@@ -356,7 +356,7 @@ There are tons of material and most of it represents <code>programming
 <h3 id="org9e7dc29">An average age of readers</h3>
 <div class="outline-text-3" id="text-org9e7dc29">
 
-<div id="org93a036c" class="figure">
+<div id="org8636f6e" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/software-development-team.jpeg" alt="Unexperience of youth" title="They are so young" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 4: </span>The team</p>
@@ -374,7 +374,7 @@ There are tons of material and most of it represents <code>programming
 </ul>
 
 
-<div id="org69d75f0" class="figure">
+<div id="org03f464b" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="Play as test" title="Conduct an experiment" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Toddlers</p>
@@ -391,7 +391,7 @@ in writing book about programming
 </p>
 
 
-<div id="orge472109" class="figure">
+<div id="orgb855a59" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/cognitive_bias.jpeg" alt="True thinking is a tough task" title="The large set of cognitive biases" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Brain fog</p>
@@ -416,7 +416,7 @@ Avoidance of source code reading (escapism);
 <h2 id="org51e2a38">A harsh deduction</h2>
 <div class="outline-text-2" id="text-org51e2a38">
 
-<div id="orga64b425" class="figure">
+<div id="orga135c1a" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Test failure</p>
@@ -603,7 +603,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="org1835e00" class="figure">
+<div id="org953cc9a" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 8: </span>An infant conducting test</p>
@@ -612,11 +612,12 @@ misterious.
 <p>
 If you're observed an infant behavior strictly enough you might
 notice that it is <i>a silent (they can't talk yet) testing how things
-work</i>. With brisk ingenuity baby implements the series of conscious
-acts and it should be interpreted as experiments to examine the
-nature of events. Bear in mind its inborn origin, because every
-child do it absolutely autonomous, we got conclusion about a native
-and natural compatibility of humans and testing approach for study.
+work</i>. A baby with brisk ingenuity implements the series of
+conscious acts and it should be interpreted as a sequence of
+experiments to examine the nature of events. Bear in mind its inborn
+origin, because every child do it absolutely autonomous, we got
+conclusion about a genuine and inborn human inclination on testing
+approach for study anything.
 </p>
 </div>
 </div>
@@ -640,13 +641,84 @@ and natural compatibility of humans and testing approach for study.
 </div>
 
 
-<div id="outline-container-orgbd3e75b" class="outline-2">
-<h2 id="orgbd3e75b">Testing Python built-in fundamental constants</h2>
-<div class="outline-text-2" id="text-orgbd3e75b">
+
+<div id="outline-container-org999782d" class="outline-2">
+<h2 id="org999782d">Testing Python primary constants</h2>
+<div class="outline-text-2" id="text-org999782d">
 <p>
-The bedrock of testing a programming language.
+Now it is time to concoct our first primitive set of tests to
+determine the existence of <i>Python primals</i> <code>True</code>, <code>False</code> and
+<code>None</code>. It is intentionally simplified to show you the threshold of
+primitivity in valid <i>Python</i> code.
 </p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00ffff;">import</span> unittest
+
+
+<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #00ffff;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #00ffff;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #00ffff;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)
+</pre>
 </div>
+
+<p>
+Yes, that's it! Try to launch this code snippet to be ensured that it
+works as expected:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b0c4de;">cd</span> tests
+python3 -m unittest test_00_primal_testing_oversimplified.py
+</pre>
+</div>
+
+<p>
+Now lets decorate our dry code with <i>inline comments</i>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #00ffff;">import</span> unittest  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- import header</span>
+
+
+<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- class definition</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- an atomic test case itself</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">and the sample of in-line comment</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">self-explanatory name of the test case to focus attention</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- straight assertion</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">If this test passed successfully than True is really exists</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">another test case</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">False also exists</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">the last primitive test case</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">None also predefined by the language</span>
+</pre>
+</div>
+
+<p>
+<b>Tip</b> It is convenient to compare these two files when you open them
+in two panels simultaneously on the screen:
+</p>
+
+
+<div id="orgb2981f1" class="figure">
+<p><img src="http://0--key.github.io/assets/img/pydes/compare.png" alt="Two-panel view" title="Compare these two files" />
+</p>
+<p><span class="figure-number">Figure 9: </span>Two-panel editor view</p>
+</div>
+</div>
+
+
+
 
 
 <div id="outline-container-orgb19901c" class="outline-3">
