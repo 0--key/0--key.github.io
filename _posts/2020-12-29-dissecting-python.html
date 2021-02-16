@@ -27,9 +27,9 @@ tags: [book, template]
 <li><a href="#orgcb469d2">A hidden complexity</a></li>
 <li><a href="#org9e7dc29">An average age of readers</a></li>
 <li><a href="#orga6389b3">Testing as an innate tool to learn for humans;</a></li>
+<li><a href="#orgc32ebb7">Unit testing in CS</a></li>
 <li><a href="#org8187c92">Einstellung effect or golden hammer</a></li>
 <li><a href="#orgfe6ba38">Reading as a tourture</a></li>
-<li><a href="#org4d2dd3c">Testing in CS is a comparatively young concept</a></li>
 </ul>
 </li>
 <li><a href="#org51e2a38">A harsh deduction</a>
@@ -40,17 +40,16 @@ tags: [book, template]
 </ul>
 </li>
 <li><a href="#org45186c4">Testing as a nodal ology tool</a></li>
+<li><a href="#org8200da5">Chapter I: Primary concepts</a>
+<ul>
 <li><a href="#org999782d">Testing Python primary constants</a></li>
 <li><a href="#org9001012">Switching on lucid Python</a></li>
-<li><a href="#orgccaf2d8">Code elaboration</a>
-<ul>
-<li><a href="#org5e88a53">Further exploration</a></li>
-<li><a href="#org9eb88b8">Zero, One and a Symbol</a></li>
+<li><a href="#orgccaf2d8">Code elaboration</a></li>
 </ul>
 </li>
-<li><a href="#org140a9c5">Innate datatypes testing</a></li>
-<li><a href="#org63f3453">Enter the Function</a></li>
-<li><a href="#org20fd727">Enter the Object</a></li>
+<li><a href="#org2d43174">Chapter II: Innate Datatypes</a></li>
+<li><a href="#orgdeea697">Chapter III: Enter the Function</a></li>
+<li><a href="#orga771135">Chapter IV: Enter the Objects</a></li>
 </ul>
 </div>
 </div>
@@ -72,6 +71,17 @@ For my tiny family
 <div class="outline-text-2" id="text-orgf1b33c8">
 <blockquote>
 <p>
+“I can calculate the motion of heavenly bodies but not the madness
+of people.”
+</p>
+
+<ul class="org-ul">
+<li><b>Isaac Newton</b></li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<p>
 Programs must be written for people to read, and only incidentally
 for machines to execute."
 </p>
@@ -80,7 +90,6 @@ for machines to execute."
 <li><b>Abelson &amp; Sussman, SICP, preface to the first edition</b></li>
 </ul>
 </blockquote>
-
 <hr />
 <blockquote>
 <p>
@@ -92,22 +101,18 @@ for machines to execute."
 <li><b>Winston Churchill</b></li>
 </ul>
 </blockquote>
-
 <hr />
-
 <blockquote>
 <p>
 “The glass is neither half empty nor half full. It’s simply larger
-  than it needs to be.”
+ than it needs to be.”
 </p>
 
 <ul class="org-ul">
 <li><b>Grace Hopper</b></li>
 </ul>
 </blockquote>
-
 <hr />
-
 <blockquote>
 <p>
 “Manage things. Lead people.”
@@ -117,7 +122,6 @@ for machines to execute."
 <li><b>Grace Hopper</b></li>
 </ul>
 </blockquote>
-
 <hr />
 </div>
 </div>
@@ -127,7 +131,7 @@ for machines to execute."
 <h2 id="org03a196a">Preface</h2>
 <div class="outline-text-2" id="text-org03a196a">
 
-<div id="org50904a2" class="figure">
+<div id="orgc9de251" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="A game is a test" title="Conduct an experiment together" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>An older tutor</p>
@@ -285,7 +289,7 @@ guys, moving forward.
 <h3 id="org20c0c05">Debugging is a major time-consuming task</h3>
 <div class="outline-text-3" id="text-org20c0c05">
 
-<div id="org4a6d808" class="figure">
+<div id="org477078d" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/debugging.jpg" alt="Typical proportion" title="The lion share of efforts" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Time and efforts for debug</p>
@@ -305,7 +309,7 @@ their efforts to develop and maintain software nowadays.
 <h3 id="orgdaed20a">Cognitive dissonance and size of manuals</h3>
 <div class="outline-text-3" id="text-orgdaed20a">
 
-<div id="orgb7042c2" class="figure">
+<div id="org9df86c5" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/the_volumes.jpeg" alt="The Art" title="They are enormous" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 3: </span>The average manual for proficiency</p>
@@ -352,7 +356,7 @@ There are tons of material and most of it represents <code>programming
 <h3 id="org9e7dc29">An average age of readers</h3>
 <div class="outline-text-3" id="text-org9e7dc29">
 
-<div id="org52aed26" class="figure">
+<div id="org303faf4" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/software-development-team.jpeg" alt="Unexperience of youth" title="They are so young" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 4: </span>The team</p>
@@ -378,7 +382,7 @@ There are tons of material and most of it represents <code>programming
 <hr />
 
 
-<div id="org6230eb1" class="figure">
+<div id="org4b4c926" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="A play as a test" title="Conduct an experiment" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Toddlers playing</p>
@@ -402,6 +406,25 @@ perseverance to deduce the meaning of this show.
 </div>
 
 
+<div id="outline-container-orgc32ebb7" class="outline-3">
+<h3 id="orgc32ebb7">Unit testing in CS</h3>
+<div class="outline-text-3" id="text-orgc32ebb7">
+<p>
+It was initially introduced by computer scientists in 80s, and
+became a wide-spread and popular concept in the industry only in
+the beginning of 21st century. Thus, it is easy to deduce that
+initially almost all modern programming languages, which was
+developed earlier this date, was happily built without any unit
+testing at all.
+</p>
+
+<p>
+Yes, it was. 
+</p>
+</div>
+</div>
+
+
 <div id="outline-container-org8187c92" class="outline-3">
 <h3 id="org8187c92">Einstellung effect or golden hammer</h3>
 <div class="outline-text-3" id="text-org8187c92">
@@ -415,33 +438,34 @@ everything as if it were a nail.”
 <li><b>Abraham Maslow</b></li>
 </ul>
 </blockquote>
-
 <hr />
 
 <p>
 or <i>cognition inertia</i> in writing book about programming. First
 books about programming were written in a plain English and it was
-ample at that time: there wasn't any programming languages, the set
-of commands only. Later, when full-fledged programming languages
-was introduced, authors predictably included wee chunks of
-programs into the text of books about programming by these
-languages. It's right. It is much more illustrative and
+ample at that time: there wasn't any programming languages, the
+large set of hexadecimal commands only. Later, when full-fledged
+programming languages was introduced, authors predictably included
+wee chunks of programs into the text of books about programming by
+these languages. It's right. It is much more illustrative and
 comprehensible for readers.
 </p>
 
 <p>
-What should be the next step in that direction?
+When later <i>unit testing</i> was introduced it deemed as a special
+concept in software development. What if I ask you: “What should be
+the next step further in that direction?”
 </p>
 
 <p>
-It should be the programs as the textbook, written in particular
+It should be the <i>programs as the textbook</i>, written in particular
 programming language, with plentiful number of tests to examplify
 concepts, ideas, approaches hidden behind the wall of mutual
 understanding between a man and machine.
 </p>
 
 
-<div id="orgcb57db3" class="figure">
+<div id="org2cfa986" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/cognitive_bias.jpeg" alt="True thinking is a tough task" title="The large set of cognitive biases" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Brain fog</p>
@@ -460,24 +484,14 @@ Actually it is a downright grueling task to do
 </p>
 </div>
 </div>
+</div>
 
-<div id="outline-container-org4d2dd3c" class="outline-3">
-<h3 id="org4d2dd3c">Testing in CS is a comparatively young concept</h3>
-<div class="outline-text-3" id="text-org4d2dd3c">
-<p>
-It was initially intoduced by computer scientists in 80s, and
-became a wide-spread and popular concept in the industry only in
-the beginning of 21 century.
-</p>
-</div>
-</div>
-</div>
 
 <div id="outline-container-org51e2a38" class="outline-2">
 <h2 id="org51e2a38">A harsh deduction</h2>
 <div class="outline-text-2" id="text-org51e2a38">
 
-<div id="org3564af7" class="figure">
+<div id="org4abb0bc" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Test failure</p>
@@ -664,7 +678,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="orgdf5e114" class="figure">
+<div id="org0349e58" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 8: </span>An infant conducting test</p>
@@ -673,20 +687,24 @@ misterious.
 <p>
 If you're observed an infant behavior strictly enough you might
 notice that it is <i>a silent (they can't talk yet) testing how things
-work</i>. A baby with brisk ingenuity implements the series of
-conscious acts and it should be interpreted as a sequence of
-experiments to examine the nature of events. Bear in mind its inborn
-origin, because every child do it absolutely autonomous, we got
-conclusion about a genuine and inborn human inclination on testing
-approach for study anything.
+work</i>. A baby with brisk ingenuity conducts the series of conscious
+acts and it should be interpreted as a sequence of experiments to
+examine the nature of events. Bear in mind its inborn origin,
+because every child do it absolutely autonomous, we got conclusion
+about a genuine and inborn human inclination on testing approach for
+study anything.
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org999782d" class="outline-2">
-<h2 id="org999782d">Testing Python primary constants</h2>
-<div class="outline-text-2" id="text-org999782d">
+<div id="outline-container-org8200da5" class="outline-2">
+<h2 id="org8200da5">Chapter I: Primary concepts</h2>
+<div class="outline-text-2" id="text-org8200da5">
+</div>
+<div id="outline-container-org999782d" class="outline-3">
+<h3 id="org999782d">Testing Python primary constants</h3>
+<div class="outline-text-3" id="text-org999782d">
 <p>
 Now it is time to concoct our first primitive set of tests to
 determine the existence of <i>Python primals</i> <code>True</code>, <code>False</code> and
@@ -752,7 +770,7 @@ in two panels simultaneously on the screen:
 </p>
 
 
-<div id="orged2de2c" class="figure">
+<div id="orgfbbf7d6" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/compare.png" alt="Two-panel view" title="Compare these two files" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Two-panel editor view</p>
@@ -781,9 +799,9 @@ knowledge in its natural order.
 </div>
 
 
-<div id="outline-container-org9001012" class="outline-2">
-<h2 id="org9001012">Switching on lucid Python</h2>
-<div class="outline-text-2" id="text-org9001012">
+<div id="outline-container-org9001012" class="outline-3">
+<h3 id="org9001012">Switching on lucid Python</h3>
+<div class="outline-text-3" id="text-org9001012">
 <p>
 Now you're ready and steady to read, compare and comprehend <b>Python</b>
 programs. Yes, there are only two of them, they are <i>intentionally</i>
@@ -822,6 +840,7 @@ Python!"
 <li><b>Tim Peters</b></li>
 </ul>
 </blockquote>
+<hr />
 
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #8db6cd;">#</span><span style="color: #ff4500;">!/usr/bin/python</span>
@@ -876,7 +895,7 @@ Python!"
 
 
 <span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- class definition</span>
-<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""The class-level for brief single-line docstring</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""The class-level for a brief single-line docstring</span>
 
 <span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   Class defininition begins this reserved word /class/ following by</span>
 <span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   the /name of class/ and its /parent class/ in the brackets. On</span>
@@ -907,9 +926,9 @@ Python!"
 </div>
 
 
-<div id="outline-container-orgccaf2d8" class="outline-2">
-<h2 id="orgccaf2d8">Code elaboration</h2>
-<div class="outline-text-2" id="text-orgccaf2d8">
+<div id="outline-container-orgccaf2d8" class="outline-3">
+<h3 id="orgccaf2d8">Code elaboration</h3>
+<div class="outline-text-3" id="text-orgccaf2d8">
 <div class="org-src-container">
 <pre class="src src-python" id="org8071ee6"><span style="color: #8db6cd;"># </span><span style="color: #ff4500;">-*- coding: utf-8 -*-</span>
 <span style="color: #cd5555;">"""Now it is the moment to distill your knowledge about writing</span>
@@ -983,33 +1002,33 @@ Python!"
 </div>
 </div>
 
-<div id="outline-container-org5e88a53" class="outline-3">
-<h3 id="org5e88a53">Further exploration</h3>
+<div id="outline-container-org5e88a53" class="outline-4">
+<h4 id="org5e88a53">Further exploration</h4>
 </div>
 
-<div id="outline-container-org9eb88b8" class="outline-3">
-<h3 id="org9eb88b8">Zero, One and a Symbol</h3>
-<div class="outline-text-3" id="text-org9eb88b8">
+<div id="outline-container-org9eb88b8" class="outline-4">
+<h4 id="org9eb88b8">Zero, One and a Symbol</h4>
+<div class="outline-text-4" id="text-org9eb88b8">
 </div>
-<div id="outline-container-orgf49cc36" class="outline-4">
-<h4 id="orgf49cc36">Assertion and assignment</h4>
+<div id="outline-container-orgf49cc36" class="outline-5">
+<h5 id="orgf49cc36">Assertion and assignment</h5>
 </div>
-<div id="outline-container-org1e570ec" class="outline-4">
-<h4 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h4>
-</div>
-
-<div id="outline-container-org81a7946" class="outline-4">
-<h4 id="org81a7946">Boolean operations</h4>
+<div id="outline-container-org1e570ec" class="outline-5">
+<h5 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h5>
 </div>
 
-<div id="outline-container-orga892d67" class="outline-4">
-<h4 id="orga892d67">Arithmetics</h4>
+<div id="outline-container-org81a7946" class="outline-5">
+<h5 id="org81a7946">Boolean operations</h5>
+</div>
+
+<div id="outline-container-orga892d67" class="outline-5">
+<h5 id="orga892d67">Arithmetics</h5>
 </div>
 
 
-<div id="outline-container-org50d6e74" class="outline-4">
-<h4 id="org50d6e74">None-False-True comparison</h4>
-<div class="outline-text-4" id="text-org50d6e74">
+<div id="outline-container-org50d6e74" class="outline-5">
+<h5 id="org50d6e74">None-False-True comparison</h5>
+<div class="outline-text-5" id="text-org50d6e74">
 <div class="org-src-container">
 <pre class="src src-python" id="orge18dbd9"><span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
 
@@ -1027,19 +1046,20 @@ Python!"
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-org140a9c5" class="outline-2">
-<h2 id="org140a9c5">Innate datatypes testing</h2>
 </div>
 
 
-<div id="outline-container-org63f3453" class="outline-2">
-<h2 id="org63f3453">Enter the Function</h2>
+
+<div id="outline-container-org2d43174" class="outline-2">
+<h2 id="org2d43174">Chapter II: Innate Datatypes</h2>
 </div>
 
 
-<div id="outline-container-org20fd727" class="outline-2">
-<h2 id="org20fd727">Enter the Object</h2>
+<div id="outline-container-orgdeea697" class="outline-2">
+<h2 id="orgdeea697">Chapter III: Enter the Function</h2>
+</div>
+
+
+<div id="outline-container-orga771135" class="outline-2">
+<h2 id="orga771135">Chapter IV: Enter the Objects</h2>
 </div>
