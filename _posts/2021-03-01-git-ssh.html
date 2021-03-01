@@ -1,0 +1,32 @@
+---
+layout: page
+title: Git secure
+tagline: " connect with a key"
+permalink: /git/ssh/secure_connect.html
+categories: [Git]
+tags: [ssh, git, connect]
+---
+
+<p>
+In the summer of 2021 Git will prohibit a <code>plain password</code>
+authentication, thus it is time to configure your host to use <code>ssh</code>
+for this purpose. The general description is <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">here</a>, but in particular
+after all preparations it is necessary to switch already pulled
+repositories on the new auth method.
+</p>
+
+
+<p>
+cd <i>usr/local/git/0&#x2013;key/0&#x2013;key.github.io</i>
+git remote -v
+git remote set-url origin git@github.com:0&#x2013;key/0&#x2013;key.github.io.git
+git remote -v
+cd <i>usr/local/git/0&#x2013;key/lib</i>
+git remote -v
+git remote set-url origin git@github.com:0&#x2013;key/lib.git
+git remote -v
+cd <i>usr/local/git/0&#x2013;key/org-pub</i>
+git remote -v
+git remote set-url origin git@github.com:0&#x2013;key/org-pub.git
+git remote -v
+</p>
