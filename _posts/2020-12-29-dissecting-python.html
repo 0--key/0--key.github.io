@@ -22,6 +22,7 @@ tags: [book, template]
 </li>
 <li><a href="#org2f82502">General observations:</a>
 <ul>
+<li><a href="#orgac03318">Machine Code vs Source Code vs Program</a></li>
 <li><a href="#org20c0c05">Debugging is a major time-consuming task</a></li>
 <li><a href="#orgdaed20a">Cognitive dissonance and size of manuals</a></li>
 <li><a href="#orgcb469d2">A hidden complexity</a></li>
@@ -44,7 +45,14 @@ tags: [book, template]
 <ul>
 <li><a href="#org999782d">Testing Python primary constants</a></li>
 <li><a href="#org9001012">Switching on lucid Python</a></li>
-<li><a href="#orgccaf2d8">Code elaboration</a></li>
+<li><a href="#org5874c08">Program text rectification</a></li>
+<li><a href="#org9295707">Primals comparison</a></li>
+<li><a href="#org27d0f36">A statement concept introduction</a></li>
+<li><a href="#org52bf9ec">Zero and One</a></li>
+<li><a href="#orgd9df71e">Boolean operators</a></li>
+<li><a href="#orgea36809">A Symbol and a String</a></li>
+<li><a href="#orgf49cc36">Assertion and assignment</a></li>
+<li><a href="#orga892d67">Arithmetics</a></li>
 </ul>
 </li>
 <li><a href="#org2d43174">Chapter II: Innate Datatypes</a></li>
@@ -57,11 +65,13 @@ tags: [book, template]
 <div id="outline-container-orgb473861" class="outline-2">
 <h2 id="orgb473861">Dedication</h2>
 <div class="outline-text-2" id="text-orgb473861">
+<hr />
 <blockquote>
 <p>
 For my tiny family
 </p>
 </blockquote>
+<hr />
 </div>
 </div>
 
@@ -131,51 +141,46 @@ for machines to execute."
 <h2 id="org03a196a">Preface</h2>
 <div class="outline-text-2" id="text-org03a196a">
 
-<div id="orgc9de251" class="figure">
+<div id="org8a53be6" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="A game is a test" title="Conduct an experiment together" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 1: </span>An older tutor</p>
 </div>
 
 <p>
-This book is about programming machines to do precisely what humans
-ordered them. It is same in intention <i>like</i> a slew similar books
-already written about the same subject. And it is a completely wrong
-<i>first</i> impression.
+This book is about programming machines to execute precisely what
+humans ordered them to do. It is the same in intention <i>like</i> a slew
+similar books already written about the same subject. And it is a
+completely wrong <i>first</i> impression.
 </p>
 
 <p>
 It is a fiction book in a wide sense of this word: it has an
 objective, the subjects and the plot. The principal objective in
-this book is Python and its usage by humans.
+this book is <b>Python</b> programming language and its usage by humans.
 </p>
 
 <p>
 The subjects are students, teachers, books, programmers, software
 engineers and developers, other professionals related to
-programming. The plot is a <i>misleading</i>: its prerequisites, its
-past and present in software industry.
+programming. The plot is a <i>misleading</i>: its natural prerequisites
+caused by human nature, its past and present in software industry.
 </p>
 
 <p>
 Followed by a set of plain deductions it might unlock for a literate
 reader a <code>realm of programming</code>. It is a <code>realm</code> actually due to the
-strict set of certain rules defined by <i>his Majesty</i> <b>Python3</b>.
-Learning these rules one by one is the only proper way to succeed in
+strict set of certain rules defined by <i>his Majesty</i> <b>Python</b>.
+Learning these rules <i>one by one</i> is the only proper way to succeed in
 studying programming language as a <i>system</i>.
 </p>
 
 <p>
-There is only one path: a bit straightforward, but narrow approach
-to get rid the <b>misleading phenomenon</b> off once and forever in our
-lives. Yes it <i>is</i> neither simple nor popular, alas. It's a natural
-treatment for learning in general, boys and girls.
-</p>
-
-<p>
-All what I might propose to you is to serve as a bit experienced and
-older guide on your way to acquire precious knowledge. And it will
-be a small nudge in the right direction. Nothing more, nothing less.
+All what I might propose to you is to serve you as a bit experienced
+and <i>elder guide</i> on your way to acquire <i>precious</i> knowledge. And it
+will be a small nudge in the right direction. All what I might
+propose to you is a fun, joy and glee on this path only. Nothing
+more, nothing less.
 </p>
 
 <p>
@@ -188,50 +193,65 @@ Keep tighter, please.
 <h3 id="org45b3458">For boring reader</h3>
 <div class="outline-text-3" id="text-org45b3458">
 <p>
-The task isn't so tough it might seem, the most rules are naturally
-entangled. There are a handful of <i>primal</i> ones. The rest are
-<i>derivatives</i> based on the primal.
+The task isn't so tough it might seem because the <i>major rules</i> are
+naturally entangled. There are only a <i>thriple</i> primals: <code>True</code>,
+<code>False</code> and <code>None</code>. The rest are <i>derivatives</i> based on the them.
 </p>
 
 <p>
-Undoubtedly it simplifies the lesson. All what you need is to build
-the knowledge tree-like structure in your mind. There are only a
-<i>thriple</i> primals: <code>True</code>, <code>False</code> and <code>None</code>. All other are
-derivatives based on them.
+Undoubtedly it prunes down the lesson. All what you need is to
+build the tree-like structure of obtained lore in your mind. Of
+course it requires from reader a lot of perseverance and diligence
+to achieve a true knack in programming, but it is definetely not a
+rocket science!
 </p>
 
 <p>
-For density this is a bottom paragraph with no data. The tap in a
-barrel.
+Naturally there are several <i>formal</i> syntactical rules, but all
+them are naive and would be learn without any effort at all.
 </p>
 </div>
 </div>
-
 
 
 <div id="outline-container-org13e6785" class="outline-3">
 <h3 id="org13e6785">Style Notes</h3>
 <div class="outline-text-3" id="text-org13e6785">
 <p>
-A killer feature of this book is its <i>style</i>: it is <b>not</b> yet
+A major killer feature of this book is its <i>style</i>: it is <b>not</b> yet
 another user manual, journal or TTY input/output spiced with
 comments. It might deem a bit strange though. What if the book will
-be written in <code>programming language</code>? Initially you will wittingly
-immerse in a full-dressed Python code, the true, valid code, I
-mean. The paramount of clarity and density. It might expected that
-soon the <code>reader</code> will being capable to gaze its incredible power
-and naked beauty from inside.
+be directly written in <code>programming language</code>? Initially you will
+wittingly immerse in a full-dressed <b>Python</b>-written program text,
+the valid program, which might be <i>successfuly executed</i> by
+machine, I mean.
 </p>
 
 <p>
-The main intention of this book is to take to the reader a chance to
-be fun at the reading. At the another hand it might be impossible to
-write a giddy novel for human readers and an absolutely precise set
-of instructions for computer at the same time. Bear it in mind <code>the
-   text</code> deliberately splitted into two main chunks by its purpose:
-<i>the comments</i> and <i>the source code</i> itself. Comments are for humans
-only, but the source code is for two sides of software industry: it is
-human-readable and machine-executable simultaneously.
+Another noticeable discrepancy is a <i>test-driven</i> approach in
+disclosing programming language features. All material being wrote
+down as a <i>chain of tests</i> from beginning to the end. Generally
+speaking the next one based on the previous and you should
+incessantly compare them one against each over, detect the
+difference and make conclusions by your own.
+</p>
+
+<p>
+In addition I strive to compose each program in a paramount clarity
+and density in expectation that instantly the <code>reader</code> will being
+capable to gaze its incredible power and <i>naked beauty</i> from
+inside.
+</p>
+
+<p>
+The main intention of this book is to take to the reader a chance
+to be fun while reading. At the another hand it might be impossible
+to write a giddy novel for human readers and an absolutely precise
+set of instructions for computer at the same time. Bear it in mind
+<code>the text</code> deliberately splitted into two main chunks by its
+purpose: <i>the comments</i> and <i>the program</i> itself. The comments are
+for humans only, the program is for two sides of software industry:
+it is human-readable and machine-executable simultaneously.
 </p>
 </div>
 </div>
@@ -285,14 +305,83 @@ guys, moving forward.
 <h2 id="org2f82502">General observations:</h2>
 <div class="outline-text-2" id="text-org2f82502">
 </div>
+<div id="outline-container-orgac03318" class="outline-3">
+<h3 id="orgac03318">Machine Code vs Source Code vs Program</h3>
+<div class="outline-text-3" id="text-orgac03318">
+<p>
+Initially at the uprise of <i>programmable</i> machines there was the
+single set of plain instructions embedded into the <i>automaton</i>.
+This set was defined by a creator of this machine once, being
+incompatible with other machines, so it was a life-long program
+solution for each particular mechanism only.
+</p>
+
+<p>
+Further technical evolution produced a new demand: it might being
+convenient if one particular mechanism obey different set of
+instructions and thus produce a various sequence of operations. In
+other words it was demand to easily reprogram machine to do
+something new.
+</p>
+
+<p>
+At programming early beginning there was a <i>machine code</i> only. It
+is a kind of machine's language by its purpose, thus casual
+programming obliged an operator with a true wit and grasp in
+translation from <i>human language</i> into <i>machine code</i>.
+</p>
+
+<p>
+The idea of <i>compiler</i> as a middleware between humans and machines
+exactly for <i>automatic translation</i> was on the tip of the tongue at
+those days, but implemented by Grace Hopper's titanic efforts and
+phenomenal persistence only in 50s. It was the basement for all
+modern <i>high-level programming</i> languages establishment. Since that
+time and forever it is possible to write program not in <i>machine
+code</i> only, but utilizing some particular <i>programming language</i>
+which by its purpose is much human-friendly.
+</p>
+
+<p>
+As you might expected what bright win of human ingenuity and
+infinite lucidity all the sudden became a natural feature in the
+industry, and it is a <i>wrong conclusion</i>: an old style of writhing
+<i>machine code</i> begot a <i>source code</i> term initiation and
+popularization. But what this <i>source code</i> ever means?
+</p>
+
+<p>
+It is a <i>code</i> by the definition and it is a <i>source</i> of <i>machine
+code</i> before compilation by the intention. These peculiar niceties
+allow to write programs as a <i>code</i>, neglecting the most
+significant feature of high-level programming language - its
+<b>readability</b>, and name this <i>pseudo-program</i> as a <i>source code</i>.
+Yes, it is wierd, and in a few cases this transference is
+convenient: it permits to type less, to comment nothing at all, to
+name variables absolutely meaningless like <code>bar</code>, <code>foo</code>, or even
+<code>a, b, c, d, e, f, g</code>!
+</p>
+
+<p>
+Yes, seems like things go wrong there: for some vital reasons all
+specialist in software industry still write only the <i>source code</i>
+and shrink to switch on <i>writing programs</i> instead. I observe like
+it goes on and on for several decades already. And seems like
+nobody capable to take a challenge to erradicate this distortion
+except me.
+</p>
+</div>
+</div>
+
+
 <div id="outline-container-org20c0c05" class="outline-3">
 <h3 id="org20c0c05">Debugging is a major time-consuming task</h3>
 <div class="outline-text-3" id="text-org20c0c05">
 
-<div id="org477078d" class="figure">
+<div id="org254d9d9" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/debugging.jpg" alt="Typical proportion" title="The lion share of efforts" class="rounded float-center" />
 </p>
-<p><span class="figure-number">Figure 2: </span>Time and efforts for debug</p>
+<p><span class="figure-number">Figure 2: </span>Time and efforts spent on debugging</p>
 </div>
 
 
@@ -309,11 +398,24 @@ their efforts to develop and maintain software nowadays.
 <h3 id="orgdaed20a">Cognitive dissonance and size of manuals</h3>
 <div class="outline-text-3" id="text-orgdaed20a">
 
-<div id="org9df86c5" class="figure">
+<div id="org0a22f41" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/the_volumes.jpeg" alt="The Art" title="They are enormous" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 3: </span>The average manual for proficiency</p>
 </div>
+
+<hr />
+<blockquote>
+<p>
+“We do not describe the world we see, we see the world we can
+describe.”
+</p>
+
+<p>
+— <b>Rene Descartes</b>
+</p>
+</blockquote>
+<hr />
 
 <p>
 At one hand we have a <i>relatively simple</i> job: to tame a machine to
@@ -356,14 +458,46 @@ There are tons of material and most of it represents <code>programming
 <h3 id="org9e7dc29">An average age of readers</h3>
 <div class="outline-text-3" id="text-org9e7dc29">
 
-<div id="org303faf4" class="figure">
+<div id="org389aaf1" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/software-development-team.jpeg" alt="Unexperience of youth" title="They are so young" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 4: </span>The team</p>
 </div>
-</div>
-</div>
 
+<hr />
+<blockquote>
+<p>
+“Youth is easily deceived because it is quick to hope.”
+</p>
+
+<p>
+— <b>Aristotle</b>
+</p>
+</blockquote>
+<hr />
+
+
+<p>
+The median age in a casual team of software developers is something
+below 30 years. Yes, this is a pledge of physical health, mental
+flexibility and, in most cases, a squad emotional stability. At the
+other hand it is too young to be experienced enough to perceive
+reality as a sum of events in the past.
+</p>
+
+<p>
+Yes, 30 years old for human being intellectually is like a new born
+toddler physically. They capable to do anything, but it requires
+time and effort to learn it up. Nowadays they're learning a modern
+programming by tutorials, manuals and books. That's right.
+</p>
+
+<p>
+But, how these learning material is written and why? Why it is so
+intimidatingly large?
+</p>
+</div>
+</div>
 
 
 <div id="outline-container-orga6389b3" class="outline-3">
@@ -382,7 +516,7 @@ There are tons of material and most of it represents <code>programming
 <hr />
 
 
-<div id="org4b4c926" class="figure">
+<div id="orged7bd83" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/experienced_tutor.jpeg" alt="A play as a test" title="Conduct an experiment" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Toddlers playing</p>
@@ -400,7 +534,16 @@ youngest one assisting him and <i>learning by testing</i>.”
 <p>
 This is a simple and straight evidence of human innate ability to
 learn. And it requires no words at all, just attention, patience and
-perseverance to deduce the meaning of this show. 
+perseverance to deduce the meaning of this show.
+</p>
+
+<p>
+Well, it is about playing cubes, right? Not at all. It is a general
+approach to learning: an experience tutor should demonstrate you
+some particular niceties by a <i>sequence of obvious and explicit
+tests</i>. All you have to do are observe them, take them into
+consideration, catch the essence out of them and put results into
+your memory.
 </p>
 </div>
 </div>
@@ -452,9 +595,10 @@ comprehensible for readers.
 </p>
 
 <p>
-When later <i>unit testing</i> was introduced it deemed as a special
-concept in software development. What if I ask you: “What should be
-the next step further in that direction?”
+When later <i>unit testing</i> was introduced it consider as an extra
+special concept in software development. What if I ask you: “What
+should be the next step to get rid of coding and switch on writing
+programs bear in mind all these observations above?”
 </p>
 
 <p>
@@ -465,7 +609,7 @@ understanding between a man and machine.
 </p>
 
 
-<div id="org2cfa986" class="figure">
+<div id="orgee9291b" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/cognitive_bias.jpeg" alt="True thinking is a tough task" title="The large set of cognitive biases" class="rounded float-center" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Brain fog</p>
@@ -480,7 +624,7 @@ understanding between a man and machine.
 <div class="outline-text-3" id="text-orgfe6ba38">
 <p>
 Avoidance of source code reading (escapism);
-Actually it is a downright grueling task to do
+Actually it is a downright grueling task to do   
 </p>
 </div>
 </div>
@@ -491,14 +635,26 @@ Actually it is a downright grueling task to do
 <h2 id="org51e2a38">A harsh deduction</h2>
 <div class="outline-text-2" id="text-org51e2a38">
 
-<div id="org4abb0bc" class="figure">
+<div id="org1c35e71" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/monkey.jpeg" alt="Animals also test" title="Unconscious testing" class="rounded float-left" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Test failure</p>
 </div>
 
+<hr />
+<blockquote>
 <p>
-Summarize the handful of penetraiting observations above it might be
+“Doubt is the origin of wisdom”
+</p>
+
+<p>
+— <b>Rene Descartes</b>
+</p>
+</blockquote>
+<hr />
+
+<p>
+Summarize a handful of penetraiting observations above it might be
 dedused:
 </p>
 
@@ -678,7 +834,7 @@ misterious.
 <h2 id="org45186c4">Testing as a nodal ology tool</h2>
 <div class="outline-text-2" id="text-org45186c4">
 
-<div id="org0349e58" class="figure">
+<div id="orgb6d350c" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/infant-building-a-tower.jpeg" alt="An infant" title="Infant building a tower" />
 </p>
 <p><span class="figure-number">Figure 8: </span>An infant conducting test</p>
@@ -709,23 +865,23 @@ study anything.
 Now it is time to concoct our first primitive set of tests to
 determine the existence of <i>Python primals</i> <code>True</code>, <code>False</code> and
 <code>None</code>. It is intentionally simplified to show you the threshold of
-primitivity in valid <i>Python</i> code.
+primitivity in valid <i>Python</i> programming.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #00ffff;">import</span> unittest
+<pre class="src src-python"><span style="color: #f0e68c;">import</span> unittest
 
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span>)
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNone(<span style="color: #ffa0a0;">None</span>)
 </pre>
 </div>
 
@@ -735,7 +891,7 @@ works as expected:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #b0c4de;">cd</span> tests
+<pre class="src src-sh"><span style="color: #8968cd;">cd</span> tests
 python3 -m unittest test_00_primal_testing_oversimplified.py
 </pre>
 </div>
@@ -745,22 +901,22 @@ Now lets embellish our dry code with <i>inline comments</i>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #00ffff;">import</span> unittest  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- import header</span>
+<pre class="src src-python"><span style="color: #f0e68c;">import</span> unittest  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- import header</span>
 
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- class definition</span>
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- class definition</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- an atomic test case itself</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">and the sample of in-line comment</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">self-explanatory name of the test case to focus attention</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- straight assertion</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">If this test passed successfully than True is really exists</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- an atomic test case itself</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">and the sample of in-line comment</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">self-explanatory name of the test case to focus attention</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- straight assertion</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">If this test passed successfully than True is really exists</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">another test case</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">False also exists</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">another test case</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">False also exists</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">the last primitive test case</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">None also predefined by the language</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">the last primitive test case</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNone(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">None also predefined by the language</span>
 </pre>
 </div>
 
@@ -770,7 +926,7 @@ in two panels simultaneously on the screen:
 </p>
 
 
-<div id="orgfbbf7d6" class="figure">
+<div id="org6cdb374" class="figure">
 <p><img src="http://0--key.github.io/assets/img/pydes/compare.png" alt="Two-panel view" title="Compare these two files" />
 </p>
 <p><span class="figure-number">Figure 9: </span>Two-panel editor view</p>
@@ -827,7 +983,21 @@ and well-known as a <a href="https://www.python.org/dev/peps/pep-0257/">docstrin
 Multi-line docstrings consist of a <i>summary line</i>, followed by a
 blank line, followed by a <i>more elaborate description</i>.
 </p>
+<hr />
+<blockquote>
+<p>
+<b>Warning, atavism!</b>
+<code>#!/usr/bin/python</code>
+<code># -*- coding: utf-8 -*-</code>
+</p>
 
+<p>
+These two topmost strings in each <b>Python</b> program are <i>optional</i>
+and in most cases <i>redundant</i>.
+</p>
+</blockquote>
+<hr />
+<hr />
 <blockquote>
 <p>
 "A universal convention supplies all of maintainability, clarity,
@@ -843,9 +1013,7 @@ Python!"
 <hr />
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8db6cd;">#</span><span style="color: #ff4500;">!/usr/bin/python</span>
-<span style="color: #8db6cd;"># </span><span style="color: #ff4500;">-*- coding: utf-8 -*-</span>
-<span style="color: #cd5555;">"""A module-level docstring brief single-line description</span>
+<pre class="src src-python"><span style="color: #cd5555;">"""A module-level docstring brief single-line description</span>
 
 <span style="color: #cd5555;">A module-level docstring multi-line description. Notice the second line</span>
 <span style="color: #cd5555;">with a straight encoding definition. </span>
@@ -856,45 +1024,40 @@ Python!"
 
 <span style="color: #cd5555;">"""</span>
 
-<span style="color: #00ffff;">import</span> unittest  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- import header</span>
+<span style="color: #f0e68c;">import</span> unittest  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- import header</span>
 
-<span style="color: #ffa07a;">"""The place below an import section reserved for multi-line comments</span>
-<span style="color: #ffa07a;">which might be utilized as preamble to your Python program. It is</span>
-<span style="color: #ffa07a;">being red only by humans, not compiled ever, and permits author to</span>
-<span style="color: #ffa07a;">write down all stuff necessary to be at the foremost place.</span>
+<span style="color: #ffa0a0;">"""The place below an import section reserved for multi-line comments</span>
+<span style="color: #ffa0a0;">which might be utilized as a preamble to your Python program. It is</span>
+<span style="color: #ffa0a0;">being red only by humans, not compiled ever, and permits author to</span>
+<span style="color: #ffa0a0;">write down all stuff necessary to be at the foremost place.</span>
 
-<span style="color: #ffa07a;">It might be unnecessary in our case, when we write a simplified</span>
-<span style="color: #ffa07a;">version of programs. But our aim is a paragon of clarity thus it</span>
-<span style="color: #ffa07a;">should contain all lucidity's attributes.</span>
+<span style="color: #ffa0a0;">It might be unnecessary in our case, when we write a simplified</span>
+<span style="color: #ffa0a0;">version of programs. But our basic aim is to serve as paragon of</span>
+<span style="color: #ffa0a0;">clarity thus it should contain all lucidity's attributes.</span>
 
-<span style="color: #ffa07a;">You might notice that /coding definition/ on the first string, the</span>
-<span style="color: #ffa07a;">second string begins with tripled double quotes and a sentence there.</span>
-<span style="color: #ffa07a;">They are the obligatory attributes if you have intention to do things</span>
-<span style="color: #ffa07a;">as it should do.</span>
+<span style="color: #ffa0a0;">By its purpose all programming languages should allow readers to</span>
+<span style="color: #ffa0a0;">perceive what exactly this particular text do in a much explicit</span>
+<span style="color: #ffa0a0;">manner. The real state of things, when programs are habitually</span>
+<span style="color: #ffa0a0;">clogged, requires from a literate reader tons of time and perceverance</span>
+<span style="color: #ffa0a0;">for litter decluttering and a core idea grasp. Noticeable that</span>
+<span style="color: #ffa0a0;">nowadays most programs demand from its reader such literacy that it</span>
+<span style="color: #ffa0a0;">made them actually indecipherable for humans and in most cases</span>
+<span style="color: #ffa0a0;">extremely knotty even to its author.</span>
 
-<span style="color: #ffa07a;">By its purpose all programming languages should allow readers to</span>
-<span style="color: #ffa07a;">perceive what exactly this particular text do in a much explicit</span>
-<span style="color: #ffa07a;">manner. The real state of things, when programs are habitually</span>
-<span style="color: #ffa07a;">clogged, requires from a literate reader tons of time and perceverance</span>
-<span style="color: #ffa07a;">for litter decluttering and a core idea grasp. Noticeable that</span>
-<span style="color: #ffa07a;">nowadays most programs demand from its reader such literacy that it</span>
-<span style="color: #ffa07a;">made them actually indecipherable for humans and in most cases</span>
-<span style="color: #ffa07a;">extremely knotty even to its author.</span>
+<span style="color: #ffa0a0;">Nevertheless, this fact usually omitted by specialists, who spent a</span>
+<span style="color: #ffa0a0;">huge amount of time reading so overcomplicated texts of programs.</span>
+<span style="color: #ffa0a0;">Through time, it became a normal if anybody can't make an idea out</span>
+<span style="color: #ffa0a0;">from program's text on the fly.</span>
 
-<span style="color: #ffa07a;">Nevertheless, this fact usually omitted by specialists, who spent a</span>
-<span style="color: #ffa07a;">huge amount of time reading so overcomplicated texts of programs.</span>
-<span style="color: #ffa07a;">Through time, it became a normal if anybody can't make an idea out</span>
-<span style="color: #ffa07a;">from program's text on the fly.</span>
+<span style="color: #ffa0a0;">&#8220;It is just lack of experience!&#8221;: they say usually. You might object</span>
+<span style="color: #ffa0a0;">by notation that several professionals can't catch the essence out</span>
+<span style="color: #ffa0a0;">from that text because it is poorly written, they answer something</span>
+<span style="color: #ffa0a0;">like: &#8220;It works well enough to be scrutinized much diligently.&#8221;</span>
 
-<span style="color: #ffa07a;">&#8220;It is just lack of experience!&#8221;: they say usually. You might object</span>
-<span style="color: #ffa07a;">by notation that several professionals can't catch the essence out</span>
-<span style="color: #ffa07a;">from that text because it is poorly written, they answer something</span>
-<span style="color: #ffa07a;">like: &#8220;It works well enough to be scrutinized much diligently.&#8221;</span>
-
-<span style="color: #ffa07a;">"""</span>
+<span style="color: #ffa0a0;">"""</span>
 
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- class definition</span>
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestLanguagePrimals</span>(unittest.TestCase):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- class definition</span>
 <span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""The class-level for a brief single-line docstring</span>
 
 <span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   Class defininition begins this reserved word /class/ following by</span>
@@ -904,150 +1067,246 @@ Python!"
 
 <span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   """</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- an atomic test case itself</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_true_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- an atomic test case itself</span>
 <span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""A single-line brief description for particular test case"""</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- straight assertion</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">If this test passed successfully than True is really exists</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- straight assertion</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">If this test passed successfully than True is really exists</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">another test case</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_false_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">another test case</span>
 <span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""A single-line brief description for particular test case"""</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">False also exists</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">False also exists</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #00ffff;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">the last primitive test case</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_does_none_ever_exist</span>(<span style="color: #f0e68c;">self</span>):  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">the last primitive test case</span>
 <span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""A single-line brief description for particular test case"""</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">None also predefined by the language</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNone(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">None also predefined by the language</span>
 
 
-<span style="color: #ffa07a;">"""This is a conclusion multi-line comment section. It is useful to</span>
-<span style="color: #ffa07a;">put all bottom-line conclusion there."""</span>
+<span style="color: #ffa0a0;">"""This is a conclusion multi-line comment section. It is useful to</span>
+<span style="color: #ffa0a0;">put all bottom-line conclusion there."""</span>
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgccaf2d8" class="outline-3">
-<h3 id="orgccaf2d8">Code elaboration</h3>
-<div class="outline-text-3" id="text-orgccaf2d8">
+<div id="outline-container-org5874c08" class="outline-3">
+<h3 id="org5874c08">Program text rectification</h3>
+<div class="outline-text-3" id="text-org5874c08">
 <div class="org-src-container">
-<pre class="src src-python" id="org8071ee6"><span style="color: #8db6cd;"># </span><span style="color: #ff4500;">-*- coding: utf-8 -*-</span>
-<span style="color: #cd5555;">"""Now it is the moment to distill your knowledge about writing</span>
-<span style="color: #cd5555;">=unittests= in ~Python~. Our previous work in</span>
-<span style="color: #cd5555;">=tests/test_00dumb_testing.py= spare too much place in case if you're</span>
-<span style="color: #cd5555;">grasp the core idea. Exactly:</span>
+<pre class="src src-python"><span style="color: #cd5555;">"""The initial test suite to check up existence of True, False and</span>
+<span style="color: #cd5555;">None</span>
 
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">  - Module comments;</span>
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">  - Import section;</span>
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">  - Test class definition;</span>
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">  - Set of test cases</span>
-
-<span style="color: #cd5555;">are necesseties to be clear when you're in writing ~Python~ code. Lets</span>
-<span style="color: #cd5555;">create a much dense test suite out from existing one and put it in a</span>
-<span style="color: #cd5555;">new file =tests/test_01false_true_none_existence.py=</span>
+<span style="color: #cd5555;">Functionally it is the same as the programs above, but compressed for</span>
+<span style="color: #cd5555;">density and lucidity. </span>
 
 <span style="color: #cd5555;">"""</span>
 
-<span style="color: #00ffff;">import</span> unittest
 
-<span style="color: #ffa07a;">"""The initial Python test suite</span>
+<span style="color: #f0e68c;">import</span> unittest
 
-<span style="color: #ffa07a;">Asserts the existence True, False and None in Python</span>
-<span style="color: #ffa07a;">"""</span>
+<span style="color: #ffa0a0;">"""Now it is the moment to distill your knowledge about writing</span>
+<span style="color: #ffa0a0;">=unittests= in ~Python~. Our previous program allocates too much space</span>
+<span style="color: #ffa0a0;">in the case if you're grasp the core idea. Exactly - what is the right</span>
+<span style="color: #ffa0a0;">place and content of:</span>
 
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - Module docstrings;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - Import section;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - Multi-line comments;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - Test class definition;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - A single test case function;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">  - Conclusion multi-line comments</span>
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestFundamentalConstantsExistence</span>(unittest.TestCase):
+<span style="color: #ffa0a0;">are necesseties to be clear when you're in writing ~Python~ code. Lets</span>
+<span style="color: #ffa0a0;">create a much dense test suite out from existing ones</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""Put all the existence tests together"""</span>
-
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_the_existence</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertTrue(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">&lt;-- straight assertion</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">False also exists</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNone(<span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">None also predefined by the language</span>
-
-
-<span style="color: #ffa07a;">"""Naturally that it is more convenient to tame a dense and terse code</span>
-<span style="color: #ffa07a;">blocks which are well-fitted on a single page. Thus, try to split all</span>
-<span style="color: #ffa07a;">your tests into /logical/ blocks for clarity purpose."""</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-python" id="org2148b9b"><span style="color: #8db6cd;"># </span><span style="color: #ff4500;">-*- coding: utf-8 -*-</span>
-<span style="color: #cd5555;">"""Only code to compare None, True and False"""</span>
-
-<span style="color: #00ffff;">import</span> unittest
+<span style="color: #ffa0a0;">"""</span>
 
 
-<span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestPrimariesExistence</span>(unittest.TestCase):
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_none_fasle_true_comparison</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNotNone(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">Naturally, neiver False</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNotNone(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">nor True are not None</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(<span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #ff4500;">!! None has a Boolean False</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIs(<span style="color: #7fffd4;">True</span>, <span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIs(<span style="color: #7fffd4;">False</span>, <span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIs(<span style="color: #7fffd4;">None</span>, <span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertNotEqual(<span style="color: #7fffd4;">False</span>, <span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertNotEqual(<span style="color: #7fffd4;">True</span>, <span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertNotEqual(<span style="color: #7fffd4;">False</span>, <span style="color: #7fffd4;">None</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNotNone(<span style="color: #7fffd4;">False</span>)  <span style="color: #8db6cd;">#</span>
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertIsNotNone(<span style="color: #7fffd4;">True</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""Allocates all the existence tests in a single function"""</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_the_existence</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- straight assertion</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">False also exists</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNone(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">None also predefined by the language</span>
 
 
-<span style="color: #ffa07a;">"""Seems it is much elegant than before, but less self-explanatory"""</span>
+<span style="color: #ffa0a0;">"""Naturally that it is more convenient to tame a dense and terse code</span>
+<span style="color: #ffa0a0;">blocks which are well-fitted on a single page. Thus, try to make up all</span>
+<span style="color: #ffa0a0;">your tests into /coherent/ blocks for clarity purpose."""</span>
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org5e88a53" class="outline-4">
-<h4 id="org5e88a53">Further exploration</h4>
-</div>
-
-<div id="outline-container-org9eb88b8" class="outline-4">
-<h4 id="org9eb88b8">Zero, One and a Symbol</h4>
-<div class="outline-text-4" id="text-org9eb88b8">
-</div>
-<div id="outline-container-orgf49cc36" class="outline-5">
-<h5 id="orgf49cc36">Assertion and assignment</h5>
-</div>
-<div id="outline-container-org1e570ec" class="outline-5">
-<h5 id="org1e570ec">True, False, None, <code>= and = comparison, !</code> and Not</h5>
-</div>
-
-<div id="outline-container-org81a7946" class="outline-5">
-<h5 id="org81a7946">Boolean operations</h5>
-</div>
-
-<div id="outline-container-orga892d67" class="outline-5">
-<h5 id="orga892d67">Arithmetics</h5>
 </div>
 
 
-<div id="outline-container-org50d6e74" class="outline-5">
-<h5 id="org50d6e74">None-False-True comparison</h5>
-<div class="outline-text-5" id="text-org50d6e74">
+<div id="outline-container-org9295707" class="outline-3">
+<h3 id="org9295707">Primals comparison</h3>
+<div class="outline-text-3" id="text-org9295707">
 <div class="org-src-container">
-<pre class="src src-python" id="orge18dbd9"><span style="color: #00ffff;">class</span> <span style="color: #98fb98; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
+<pre class="src src-python" id="org2148b9b"><span style="color: #cd5555;">"""Only code to compare None, True and False"""</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""Now, when we ensure in existence of None, False and Ture constants,</span>
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   it is very time to compare them with its own derivatives as zero</span>
-<span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   (0), one (1), the letter('A')</span>
+<span style="color: #f0e68c;">import</span> unittest
+
+<span style="color: #ffa0a0;">"""If in previous tests we were introduced by three test methods only:</span>
+
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertFalse();</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertTrue();</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertIsNone();</span>
+
+<span style="color: #ffa0a0;">Right now it is a right time to show several additional ones:</span>
+
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertIs() - identity assertion;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertIsNotNone() - not None assertion;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assertNotEqual() - non equality assertion; </span>
+<span style="color: #ffa0a0;">"""</span>
+
+
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestCompareFundamentals</span>(unittest.TestCase):
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_none_fasle_true_comparison</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">Naturally, neiver False</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">nor True are not None</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">!! None has a Boolean False</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIs(<span style="color: #ffa0a0;">True</span>, <span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIs(<span style="color: #ffa0a0;">False</span>, <span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIs(<span style="color: #ffa0a0;">None</span>, <span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertNotEqual(<span style="color: #ffa0a0;">False</span>, <span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertNotEqual(<span style="color: #ffa0a0;">True</span>, <span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertNotEqual(<span style="color: #ffa0a0;">False</span>, <span style="color: #ffa0a0;">None</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(<span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;">#</span>
+
+
+<span style="color: #ffa0a0;">"""Seems it is much elegant than before, but less self-explanatory"""</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org27d0f36" class="outline-3">
+<h3 id="org27d0f36">A statement concept introduction</h3>
+<div class="outline-text-3" id="text-org27d0f36">
+<div class="org-src-container">
+<pre class="src src-python" id="orgbe25f02"><span style="color: #cd5555;">"""Lets meet equality and non equality operators"""</span>
+
+<span style="color: #f0e68c;">import</span> unittest
+
+<span style="color: #ffa0a0;">"""Lets immerse into statement and operators in it.</span>
+
+<span style="color: #ffa0a0;">The program below is identical by its meaning to previous one, but it</span>
+<span style="color: #ffa0a0;">written in a distinct manner with intention to introduce the statement</span>
+<span style="color: #ffa0a0;">and operator concepts, which are the pillars of further studying of</span>
+<span style="color: #ffa0a0;">programming."""</span>
+
+
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestEqualityStatements</span>(unittest.TestCase):
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_equality_operator</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">equality operator is double =</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">True</span> == <span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- equality statements</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">False</span> == <span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">are inside the brackets</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">and they do evaluate when the program do launch</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(<span style="color: #ffa0a0;">None</span> == <span style="color: #ffa0a0;">None</span>)
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_non_equality_operator</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">non equality operator is !=</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">True</span> != <span style="color: #ffa0a0;">True</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- non-equality statements</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">False</span> != <span style="color: #ffa0a0;">False</span>)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">are inside the brackets</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">and they do evaluate when you're launch the program</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(<span style="color: #ffa0a0;">None</span> != <span style="color: #ffa0a0;">None</span>)
+
+
+<span style="color: #ffa0a0;">"""</span>
+<span style="color: #ffa0a0;">You might notice that in these cases we:</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- assert the ~result~ of statement evaluation;</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- disclose the magic above only two operators</span>
+<span style="color: #ffa0a0;">"""</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org52bf9ec" class="outline-3">
+<h3 id="org52bf9ec">Zero and One</h3>
+<div class="outline-text-3" id="text-org52bf9ec">
+<div class="org-src-container">
+<pre class="src src-python" id="org266abaa"><span style="color: #cd5555;">"""Initial numerical values testing.</span>
+<span style="color: #cd5555;">"""</span>
+
+<span style="color: #f0e68c;">import</span> unittest
+
+<span style="color: #ffa0a0;">"""Lets check 0 and 1 up against already known innate Python values</span>
+<span style="color: #ffa0a0;">with already known testing methods"""</span>
+
+
+<span style="color: #f0e68c;">class</span> <span style="color: #7ccd7c; font-weight: bold;">TestPrimaryNumericFeatures</span>(unittest.TestCase):
+<span style="background-color: #333333;"> </span>   <span style="color: #cd5555;">"""Zero and one are pertinent innate numeric objects to test it up</span>
 
 <span style="color: #cd5555; background-color: #333333;"> </span><span style="color: #cd5555;">   """</span>
 
-<span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #87cefa; font-weight: bold;">test_does_zero_really_boolean_false</span>(<span style="color: #00ffff;">self</span>):
-<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #00ffff;">self</span>.assertFalse(0)  <span style="color: #8db6cd;">#</span>
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_zero_main_properties</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">&lt;-- numeric zero also is Boolean False</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">and it is not None!</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertEqual(0, 0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">equality assertion by the method</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(0 == 0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">true statement assertion</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_one_main_properties</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">numeric one is also Boolean True</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertIsNotNone(1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">and it is not None!</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertEqual(1, 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">equality assertion by the method</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(1 == 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">true statement assertion</span>
+
+<span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">def</span> <span style="color: #7ccd7c; font-weight: bold;">test_compare_one_and_zero</span>(<span style="color: #f0e68c;">self</span>):
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertNotEqual(0, 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">as expected</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertFalse(0 == 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">no comments</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(0 &lt; 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">a new comparison operator 'less'</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(1 &gt; 0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">a new operator 'greater than'</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(0 &lt;= 1)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">'less than or equal' operator</span>
+<span style="background-color: #333333;"> </span>   <span style="background-color: #333333;"> </span>   <span style="color: #f0e68c;">self</span>.assertTrue(1 &gt;= 0)  <span style="color: #8db6cd;"># </span><span style="color: #8db6cd;">'greater than or equal' operator</span>
+
+
+<span style="color: #ffa0a0;">"""Check yourself up:</span>
+
+<span style="color: #ffa0a0;">Try to extend the test suite to answer questions:</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- Does 0 equal False?</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- Does True greater than False?</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- Does True equal 1?</span>
+<span style="color: #ffa0a0; background-color: #333333;"> </span><span style="color: #ffa0a0;">- etc.</span>
+<span style="color: #ffa0a0;">"""</span>
 </pre>
 </div>
 </div>
 </div>
-</div>
-</div>
+
+
+<div id="outline-container-orgd9df71e" class="outline-3">
+<h3 id="orgd9df71e">Boolean operators</h3>
 </div>
 
+
+<div id="outline-container-orgea36809" class="outline-3">
+<h3 id="orgea36809">A Symbol and a String</h3>
+</div>
+
+
+<div id="outline-container-orgf49cc36" class="outline-3">
+<h3 id="orgf49cc36">Assertion and assignment</h3>
+</div>
+
+
+
+<div id="outline-container-orga892d67" class="outline-3">
+<h3 id="orga892d67">Arithmetics</h3>
+</div>
+</div>
 
 
 <div id="outline-container-org2d43174" class="outline-2">
