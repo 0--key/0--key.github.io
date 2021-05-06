@@ -1,0 +1,155 @@
+---
+layout: post
+title: ChromeBook HP
+tagline: " as full-blown Emacs IDE"
+permalink: /python/emacs/ide/chromebook-hp-14a-0060nr.html
+categories: [Python, IDE, Emacs, Chromebook]
+tags: [tutorial, ide, chromebook]
+---
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7ce4b32">Linux activation</a></li>
+<li><a href="#org7063b2e">A minor tune-up</a></li>
+<li><a href="#orga83a772">Emacs installation</a></li>
+<li><a href="#org96820a9">Note about package management in <code>Buster</code></a></li>
+<li><a href="#org39fbc07"><code>Elpa~&amp;~Melpa</code> activation</a></li>
+<li><a href="#orgdd304b7">Neccessary packages installation</a>
+<ul>
+<li><a href="#org7dd3210">Jekyll</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7ce4b32" class="outline-2">
+<h2 id="org7ce4b32">Linux activation</h2>
+<div class="outline-text-2" id="text-org7ce4b32">
+<p>
+A straightforward <a href="https://support.google.com/chromebook/answer/9145439">manual</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-org7063b2e" class="outline-2">
+<h2 id="org7063b2e">A minor tune-up</h2>
+<div class="outline-text-2" id="text-org7063b2e">
+<p>
+It is convenient to use a <b>Dark mode</b> everywhere on your
+<code>ChromeBook</code>, so: open a new tab in your Chrome by <code>Ctrl+t</code>, and put
+this address into the <code>address bar</code>: <code>chrome://flags/</code>. Now it is
+time to find all occurences of word <code>dark</code> on this page: <code>Ctrl+f</code>
+<code>dark</code> <code>Enter</code>.
+</p>
+
+<p>
+You should enable:
+</p>
+<ul class="org-ul">
+<li><span class="underline">Dark/light mode of system UI</span></li>
+<li><span class="underline">Force Dark Mode for Web Contents</span></li>
+<li><span class="underline">WebUI dark mode</span></li>
+</ul>
+
+<p>
+Now you are in the <b>Dark Mode</b> far and wide :-))
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga83a772" class="outline-2">
+<h2 id="orga83a772">Emacs installation</h2>
+<div class="outline-text-2" id="text-orga83a772">
+<p>
+Easy-peasy:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install emacs
+</pre>
+</div>
+
+<pre class="example">
+Reading package lists...
+Building dependency tree...
+Reading state information...
+emacs is already the newest version (1:26.1+1-3.2+deb10u2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">emacs --version
+</pre>
+</div>
+
+<pre class="example">
+GNU Emacs 26.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+GNU Emacs comes with ABSOLUTELY NO WARRANTY.
+You may redistribute copies of GNU Emacs
+under the terms of the GNU General Public License.
+For more information about these matters, see the file named COPYING.
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org96820a9" class="outline-2">
+<h2 id="org96820a9">Note about package management in <code>Buster</code></h2>
+<div class="outline-text-2" id="text-org96820a9">
+<p>
+For <code>security</code> purpose several much popular <code>Elpa</code> packages are
+included in <code>Buster</code> repositories and available to install as
+trivial <code>Debian</code> packages. <b>But</b> their number is limited and if you
+wish to use a full-fledged version of <i>termonuclear</i> editor I might
+suggest not follow that path.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org39fbc07" class="outline-2">
+<h2 id="org39fbc07"><code>Elpa~&amp;~Melpa</code> activation</h2>
+<div class="outline-text-2" id="text-org39fbc07">
+<p>
+The main config for your <code>Emacs</code> is
+<code>/etc/emacs/site-stard.d/00debian.el</code>, the additional config for
+customization need to be initialized in <code>~/.emacs.d/init.el</code>
+</p>
+
+<p>
+Put these directives into the very top of <code>00debian.el</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; and MELPA
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ;; Bad request fix
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd304b7" class="outline-2">
+<h2 id="orgdd304b7">Neccessary packages installation</h2>
+<div class="outline-text-2" id="text-orgdd304b7">
+</div>
+<div id="outline-container-org7dd3210" class="outline-3">
+<h3 id="org7dd3210">Jekyll</h3>
+<div class="outline-text-3" id="text-org7dd3210">
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install jekyll
+</pre>
+</div>
+
+<pre class="example">
+Reading package lists...
+Building dependency tree...
+Reading state information...
+jekyll is already the newest version (3.8.3+dfsg-4+deb10u1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+</pre>
+</div>
+</div>
+</div>
