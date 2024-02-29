@@ -1,0 +1,578 @@
+---
+layout: page
+title: Emacs on Debian12
+tagline: " config for several users"
+permalink: /emacs/debian/public-server.html
+categories: [Emacs, Debian12]
+tags: [config, emacs-server]
+---
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge08bfa1">Intro</a></li>
+<li><a href="#orgc9344bc">System-wide settings</a></li>
+<li><a href="#org0926ebb">Elpa-*.deb packages</a></li>
+<li><a href="#org914c253">System-wide additional packages</a></li>
+<li><a href="#org61924df">System-wide <code>Emacs</code> settings</a></li>
+<li><a href="#org33d5da3">Per-user settings</a></li>
+<li><a href="#orgb21c269">Personal package management</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge08bfa1" class="outline-2">
+<h2 id="orge08bfa1">Intro</h2>
+<div class="outline-text-2" id="text-orge08bfa1">
+<p>
+In several cases it is convenient to share the power of <code>Emacs</code>
+amongst several users on the same <code>Debian12</code> host and this article
+provides a dense and terse overview how to manage this task in a
+sure&amp;fire manner.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc9344bc" class="outline-2">
+<h2 id="orgc9344bc">System-wide settings</h2>
+<div class="outline-text-2" id="text-orgc9344bc">
+<p>
+The file which executes by each instance of <code>Emacs</code> allocated at
+<code>/etc/emacs/site-start.d/00debian.el</code> So it is reasonable to put all
+<i>common settings</i> into it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0926ebb" class="outline-2">
+<h2 id="org0926ebb">Elpa-*.deb packages</h2>
+<div class="outline-text-2" id="text-org0926ebb">
+<p>
+They are native for <code>Debian</code> and it might be secure to use them
+instead the third-part <code>ELPA/MELPA</code>. Of course all they are
+system-wide, and it is easy to include it in the user's config by
+<code>(require 'package-name)</code> operator.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">apt-cache search elpa 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="orgca77ab2">
+elpa-a - functions for dealing with associative structures
+elpa-ace-link - selecting a link to jump to
+elpa-ace-popup-menu - replace GUI popup menu with something more efficient
+elpa-ace-window - selecting a window to switch to
+elpa-acl2 - Computational Logic for Applicative Common Lisp: emacs interface
+elpa-adaptive-wrap - smart line-wrapping with wrap-prefix
+elpa-agda2-mode - dependently typed functional programming language — emacs mode
+elpa-aggressive-indent - Emacs minor mode that reindents code after every change
+elpa-apache-mode - Emacs major mode for editing Apache configuration files
+elpa-apiwrap - api-wrapping macros
+elpa-assess - test support functions for Emacs
+elpa-atomic-chrome - edit a web-browser text entry area with Emacs
+elpa-ats2-mode - ATS version 2 programming language emacs mode
+auto-complete-el - transitional package for elpa-auto-complete
+elpa-auto-complete - intelligent auto-completion extension for GNU Emacs
+elpa-auto-dictionary - automatic dictionary switcher for Emacs spell checking
+autodep8 - DEP-8 test control file generator
+elpa-avy - jump to things in Emacs tree-style
+elpa-avy-menu - library providing avy-powered popup menu
+elpa-bar-cursor - switch Emacs block cursor to a bar
+elpa-beacon - highlight the cursor whenever the window scrolls
+elpa-beginend - redefine M-&lt; and M-&gt; for some modes to get to meaningful locations
+elpa-bm - visual bookmarks for GNU Emacs
+elpa-bongo - buffer-oriented media player for GNU Emacs
+elpa-boxquote - quote text in Emacs with a semi-box
+elpa-browse-kill-ring - interactively insert items from kill-ring
+elpa-bui - Emacs Buffer interface library
+c-sig - Transition package, c-sig to elpa-c-sig
+elpa-c-sig - signature tool for GNU Emacs
+elpa-caml - emacs mode for editing OCaml programs
+ocaml-mode - transitional package to elpa-caml
+elpa-ps-ccrypt - Emacs addon for working with files encrypted with ccrypt
+elpa-char-menu - create your own menu for fast insertion of arbitrary symbols
+elpa-circe - client for IRC in Emacs
+elpa-citar - Act on bibliographic references from Emacs
+elpa-closql - Store EIEIO objects using EmacSQL
+elpa-clues-theme - cream/brown/orange color theme for Emacs
+migemo-el - transitional dummy package: elpa-migemo
+elpa-color-theme-modern - deftheme reimplementation of classic Emacs color-themes
+elpa-company - Modular in-buffer completion framework for Emacs
+elpa-compat - COMPATibility Library for Emacs
+cl-consfigurator - Lisp declarative configuration management system
+elpa-consult - Useful commands based on completing-read for Emacs
+elpa-crdt - collaborative editing environment for Emacs
+elpa-csv-mode - Emacs major mode for editing comma, char, and tab separated values
+elpa-dap-mode - DAP UI controls implemented using treemacs.
+darcsum - Transition package, darcsum to elpa-darcsum
+elpa-darcsum - pcl-cvs like interface for managing darcs patches
+elpa-dash - modern list manipulation library for Emacs
+debian-el - Transition package, debian-el to elpa-debian-el
+elpa-debian-el - Emacs helpers specific to Debian users
+elpa-debpaste - paste.debian.net client for Emacs
+elpa-deft - Emacs mode to browse, filter, and edit plain text notes
+devscripts-el - Transition package, devscripts-el to elpa-devscripts
+elpa-devscripts - Emacs wrappers for the commands in devscripts
+dh-elpa - Debian helper tools for packaging emacs lisp extensions
+dh-elpa-helper - helper package for emacs lisp extensions
+dh-make-elpa - helper for creating Debian packages from ELPA packages
+elpa-diff-hl - highlight uncommitted changes using VC
+elpa-diffview - view diffs in side-by-side format
+elpa-diminish - hiding or abbreviation of the mode line displays of minor-modes
+elpa-dimmer - visually highlight the selected buffer
+elpa-dired-du - dired with recursive directory sizes
+elpa-dired-quick-sort - persistent quick sorting of dired buffers in various ways
+elpa-dired-rsync - support for rsync from Emacs dired buffers
+elpa-discover-my-major - discover key bindings and their meaning for the current Emacs major mode
+elpa-dockerfile-mode - Major mode for editing Docker's Dockerfiles
+dpkg-dev-el - Transition package, dpkg-dev-el to elpa-dpkg-dev-el
+elpa-dpkg-dev-el - Emacs helpers specific to Debian development
+elpa-dumb-jump - jump to definition for multiple languages without configuration
+elpa-ebib - BibTeX database manager for Emacs
+elpa-ediprolog - Emacs Does Interactive Prolog
+elpa-editorconfig - coding style indenter for all editors - Emacsen plugin
+elpa-eglot - Emacs client for Language Server Protocol servers
+elpa-el-mock - tiny mock and stub framework for Emacs Lisp
+elpa-el-x - Emacs Lisp extensions
+elpa-elfeed - Emacs Atom/RSS feed reader
+elpa-bug-hunter - automatically debug and bisect your init.el or .emacs file
+elpa-elisp-refs - find callers of elisp functions or macros
+elpa-elm-mode - Major Emacs mode for editing Elm source code
+libelpa-dev - Eigenvalue SoLvers for Petaflop-Applications (Development version)
+libelpa19 - Eigenvalue SoLvers for Petaflop-Applications
+elpa-darkroom - remove visual distractions and focus on writing
+elpa-ligature - display typographical ligatures in major modes
+elpa-migemo - Japanese incremental search with Romaji on Emacsen
+elpa-rust-mode - Major Emacs mode for editing Rust source code
+elpa-snakemake - Run Snakemake workflows from Emacs
+elpa-snakemake-mode - provides syntax highlighting for snakekmake files in emacs
+elpa-subed - Emacs mode for editing subtitles while playing the corresponding video
+elpa-transient - Emacs key and popup interface for complex keybindings
+elpa-transient-doc - Emacs key and popup interface for complex keybindings - Docs
+elpa-undo-tree - Emacs minor mode for handling undo history as tree
+elpa-elpher - friendly gopher and gemini client
+elpa-elscreen - Screen for Emacsen
+elscreen - Transition package, elscreen to elpa-elscreen
+elpa-anzu - show number of matches in mode-line while searching
+elpa-async - simple library for asynchronous processing in Emacs
+elpa-bash-completion - add programmable bash completion to Emacs shell-mode
+elpa-bind-map - bind personal keymaps in multiple locations
+elpa-buttercup - behaviour-driven testing for Emacs Lisp packages
+elpa-cmake-mode - Emacs major mode for editing CMake sources
+elpa-ctable - table component for Emacs Lisp
+elpa-emacs-dashboard - extensible emacs startup screen showing you what's most important
+elpa-db - database interface for Emacs Lisp
+elpa-debase - D-Bus convenience layer for Emacs
+elpa-concurrent - higher level library for concurrent tasks
+elpa-deferred - simple asynchronous functions for Emacs Lisp
+elpa-ednc - Emacs Desktop Notification Center
+elpa-discomfort - UDisks2 UI for Emacs, to mount &amp; unmount disks
+elpa-doom-themes - opinionated pack of modern Emacs color-themes
+elpa-epc - RPC stack for Emacs Lisp
+elpa-vc-fossil - Emacs VC backend for the Fossil Version Control system
+elpa-git-messenger - pop up last commit information of current line
+elpa-git-modes - major modes for editing Git configuration files
+elpa-gitattributes-mode - major mode for editing Git configuration files (gitattributes)
+elpa-gitconfig-mode - major mode for editing Git configuration files (gitconfig and gitmodules)
+elpa-gitignore-mode - major mode for editing Git configuration files (gitignore)
+emacs-goodies-el - Miscellaneous add-ons for Emacs
+elpa-haskell-tab-indent - tab-based indentation for haskell-mode
+elpa-helm-ag - Silver Searcher integration with Emacs Helm
+elpa-highlight-indentation - highlight the indentation level in Emacs buffers
+elpa-htmlize - convert buffer text and decorations to HTML
+elpa-counsel - collection of Ivy-enhanced versions of common Emacs commands
+elpa-ivy - generic completion mechanism for Emacs
+elpa-ivy-hydra - additional key bindings for Emacs Ivy
+elpa-swiper - alternative to Emacs' isearch--with an overview
+elpa-jabber - Jabber client for Emacsen
+elpa-kv - key/value data structure functions for Emacs Lisp
+elpa-vterm - fully-fledged terminal emulator inside GNU Emacs based on libvterm - elisp
+elpa-lintian - Examine Lintian packaging hints in Emacs
+elpa-lsp-haskell - Haskell support for lsp-mode
+elpa-lsp-ui - UI modules for lsp-mode
+elpa-memoize - memoization functions
+elpa-neotree - directory tree sidebar for Emacs that is like NERDTree for Vim
+elpa-noflet - Emacs Lisp noflet macro for dynamic, local advice
+elpa-openwith - seamlessly open files in external programs with Emacs
+elpa-orgalist - Manage Org-like lists in non-Org Emacs buffers
+elpa-pass - major mode for password-store
+elpa-pdf-tools - Display and interact with pdf in Emacs
+elpa-pdf-tools-server - server for Emacs's pdf-tools
+elpa-pg - Emacs Lisp interface for PostgreSQL
+elpa-pod-mode - Emacs major mode for editing .pod files
+elpa-posframe - Emacs library to Pop a frame at point
+elpa-powerline - Emacs version of the Vim powerline
+elpa-python-environment - virtualenv API for Emacs Lisp
+elpa-request - Compatibility layer for URL request in Emacs
+elpa-session - use variables, registers and buffer places across sessions
+elpa-smeargle - highlight region by last updated time
+elpa-svg-lib - SVG tags, progress bars &amp; icons for Emacs
+elpa-tablist - tablist adds maks and filters to tabulated-list-mode
+elpa-uuid - UUID/GUID library for Emacs Lisp
+elpa-simple-httpd - pure elisp HTTP server
+elpa-websocket - Emacs WebSocket client and server
+elpa-wgrep - edit multiple Emacs buffers using a master grep pattern buffer
+elpa-wgrep-ack - edit multiple Emacs buffers using a master ack pattern buffer
+elpa-wgrep-ag - edit multiple Emacs buffers using a master ag pattern buffer
+elpa-wgrep-helm - edit multiple Emacs buffers with a helm-grep-mode buffer
+elpa-which-key - display available keybindings in popup
+elpa-world-time-mode - Emacs mode to compare timezones throughout the day
+elpa-emacsql - high level SQL database frontend for Emacs (abstractions)
+elpa-emacsql-mysql - high level SQL database frontend for Emacs (MySQL backend)
+elpa-emacsql-psql - high level SQL database frontend for Emacs (PostgreSQL backend)
+elpa-emacsql-sqlite - high level SQL database frontend for Emacs (SQLite backend)
+elpa-emacsql-sqlite3 - Yet another EmacSQL backend for SQLite
+elpa-embark - Emacs Mini-Buffer Actions Rooted in Keymaps
+elpa-ement - Matrix client for Emacs
+elpa-engine-mode - define and query search engines from within Emacs
+elpa-epl - Emacs Package Library
+elpa-eproject - assign files to Emacs projects, programmatically
+elpa-ert-async - asynchronous tests for the Emacs ERT testing framework
+elpa-ert-expectations - very simple unit test framework for Emacs Lisp
+elpa-esh-help - add some help functions and support for Eshell
+elpa-eshell-bookmark - integrate bookmarks with Eshell
+elpa-eshell-git-prompt - Eshell prompt themes for Git users
+elpa-eshell-prompt-extras - display extra information in your Eshell prompt
+elpa-eshell-up - quickly go to a specific parent directory in eshell
+elpa-eshell-z - cd to frequent directory in eshell
+elpa-ess - Emacs mode for statistical programming and data analysis
+elpa-esup - Emacs StartUp Profiler
+elpa-esxml - XML, ESXML and SXML library for Emacs Lisp
+elpa-evil - extensible vi layer for Emacs
+elpa-evil-paredit - emacs extension, integrating evil and paredit
+elpa-exec-path-from-shell - get environment variables such as $PATH from the shell
+elpa-expand-region - Increase selected region in Emacs by semantic units
+expand-region-el - Transition package, expand-region-el to elpa-expand-region
+elpa-exwm - full-featured tiling X window manager for Emacs
+elpa-exwm-mff - mouse-follows-focus for EXWM
+elpa-eyebrowse - simple-minded way of managing window configs in Emacs
+elpa-f - modern API for working with files and directories in Emacs Lisp
+elpa-faceup - Regression test system for font-lock
+elpa-fill-column-indicator - graphically indicate the fill column
+elpa-find-file-in-project - quick access to project files in Emacs
+elpa-flx - sorting algorithm for fuzzy matching in Emacs
+elpa-flx-ido - allows Emacs Ido to use the flx sorting algorithm
+elpa-flycheck - modern on-the-fly syntax checking for Emacs
+elpa-flycheck-package - flycheck checker for Elisp package authors
+elpa-folding - folding-editor minor mode for Emacs
+fortran-language-server - Fortran Language Server for the Language Server Protocol
+elpa-fountain-mode - Emacs major mode for screenwriting in Fountain markup
+elpa-fricas - General purpose computer algebra system: emacs support
+elpa-fsm - state machine library
+elpa-geiser - enhanced Scheme interaction mode for Emacs
+geiser - Transition Package, geiser to elpa-geiser
+elpa-ggtags - improved Emacs interface to GNU GLOBAL
+elpa-ghub - minuscule client for the Github API
+elpa-ghub+ - thick GitHub API client built on ghub
+elpa-git-annex - Emacs integration for git-annex
+elpa-git-auto-commit-mode - Emacs Minor mode to automatically commit and push with git
+elpa-git-timemachine - walk through git revisions of a file
+elpa-gitlab-ci-mode - Emacs mode for editing GitLab CI files
+elpa-gnuplot-mode - Gnuplot mode for Emacs
+gnuplot-mode - Transition Package, gnuplot-mode to elpa-gnuplot-mode
+elpa-go-mode - Emacs mode for editing Go code
+golang-mode - Emacs mode for editing Go code -- transitional package
+elpa-golden-ratio - automatic resizing of Emacs windows to the golden ratio
+elpa-goo - generic object-orientator (Emacs support)
+elpa-goto-chg - navigate the point to the most recent edit in the buffer
+elpa-graphql - GraphQL utilities
+elpa-graphviz-dot-mode - Emacs mode for the dot-language used by graphviz.
+elpa-haskell-mode - major mode for editing Haskell in Emacs
+elpa-helm - Emacs incremental completion and selection narrowing framework
+elpa-helm-core - Emacs Helm library files
+elpa-helm-org - Emacs Helm for Org-mode headlines and keywords completion
+elpa-helm-projectile - Helm integration for Projectile
+elpa-helpful - better *help* buffer
+elpa-highlight-numbers - highlight numbers in source code
+elpa-hl-todo - highlight TODO and similar keywords in comments and strings
+howm - Note-taking tool on Emacs
+elpa-ht - hash table library for Emacs
+elpa-hungry-delete - enable hungry deletion in all modes
+elpa-hydra - make Emacs bindings that stick around
+elpa-lv - other echo area
+elpa-ibuffer-projectile - group buffers in ibuffer list by Projectile project
+elpa-ibuffer-vc - group ibuffer list by VC project and show VC status
+elpa-ido-completing-read+ - completing-read-function using ido
+elpa-ido-vertical-mode - make ido-mode display vertically
+elpa-iedit - edit multiple regions in the same way simultaneously
+elpa-imenu-list - show the current Emacs buffer's imenu entries in a separate window
+elpa-inform-mode - Emacs major mode for editing Inform 6 source
+inform-mode - transitional dummy package
+elpa-initsplit - code to split customizations into different files
+elpa-irony - Emacs C/C++ minor mode powered by libclang
+elpa-jinja2-mode - Emacs major mode for editing jinja2 code
+elpa-js2-mode - Emacs mode for editing Javascript programs
+elpa-key-chord - map pairs of simultaneously pressed keys to commands
+elpa-kotlin-mode - Emacs major mode for kotlin
+elpa-lbdb - Little Brother's DataBase Emacs extensions
+elpa-ledger - command-line double-entry accounting program (emacs interface)
+elpa-let-alist - let-bind values of an assoc-list by their names in Emacs Lisp
+elpa-linum-relative - display relative line number in Emacs
+elpa-load-relative - relative file load (within a multi-file Emacs package)
+elpa-loop - friendly imperative loop structures for Emacs Lisp
+elpa-lsp-java - Java LSP support for emacs
+elpa-lsp-mode - Emacs client/library for the Language Server Protocol
+elpa-lsp-treemacs - treemacs integration for Emacs LSP
+elpa-lua-mode - Emacs major-mode for editing Lua programs
+elpa-m-buffer - list-oriented, functional buffer manipulation
+elpa-macaulay2 - Software system for algebraic geometry research (Emacs package)
+elpa-git-commit - Major mode for editing git commit message
+elpa-magit - Emacs interface for Git
+elpa-magit-section - Collapsible sections like in Magit
+elpa-magit-annex - git-annex subcommands for magit
+elpa-magit-forge - Work with Git forges from the comfort of Magit
+elpa-magit-popup - Use popup like Magit
+elpa-magit-todos - show source file TODOs in Magit
+elpa-mailscripts - Emacs utilities for handling mail on Unixes
+elpa-makey - flexible context menu system
+elpa-marginalia - Marginalia in the Emacs minibuffer
+elpa-markdown-mode - mode for editing Markdown-formatted text files in GNU Emacs
+elpa-markdown-toc - Emacs TOC (table of contents) generator for markdown files
+elpa-mastodon - Emacs client for the Mastodon and Pleroma social networks
+elpa-meson-mode - Major mode for the Meson build system files
+elpa-message-templ - templates for Emacs message-mode
+elpa-minimap - sidebar showing a "mini-map" of a buffer
+elpa-mocker - mocking framework for Emacs
+elpa-modus-themes - set of accessible themes conforming with WCAG AAA accessibility standard
+elpa-monokai-theme - fruity color theme for Emacs
+elpa-move-text - move current line or region up and down
+elpa-mpv - control a mpv via its IPC interface from Emacs
+elpa-muse - author and publish projects using Wiki-like markup
+elpa-mutt-alias - Emacs package to lookup and insert expanded Mutt mail aliases
+elpa-muttrc-mode - Emacs major mode for editing muttrc
+elpa-nginx-mode - major mode for editing nginx config files
+elpa-no-littering - help keeping ~/.emacs.d clean
+elpa-nose - easy Python test running in Emacs
+elpa-notmuch - thread-based email index, search and tagging (emacs interface)
+elpa-nov - featureful EPUB (ebook) reader mode for Emacs
+elpa-ol-notmuch - Links to notmuch messages
+elpa-olivetti - Emacs minor mode to more comfortably read and write long-lined prose
+elpa-orderless - Emacs completion style that matches multiple regexps in any order
+elpa-org-appear - auto-toggle visibility of org mode elements
+elpa-org-bullets - show bullets in Org-mode as UTF-8 characters
+elpa-org-contrib - additional Emacs Lisp libraries for Org-mode
+elpa-org-d20 - Emacs minor mode for d20 tabletop roleplaying games
+elpa-org-drill - emacs org-mode contrib for self-testing using spaced repetition
+elpa-org-make-toc - Automatic tables of contents for Org files
+elpa-org - Keep notes, maintain ToDo lists, and do project planning in emacs
+org-mode - Transition Package, org-mode to elpa-org
+elpa-org-present - minimalist presentation tool for Emacs org-mode
+elpa-org-roam - non-hierarchical note-taking with Emacs Org-mode
+elpa-org-tree-slide - presentation tool for org-mode
+elpa-ox-texinfo+ - Extensions for Org's Texinfo exporter
+elpa-package-lint - linting library for Elisp package authors
+elpa-package-lint-flymake - package-lint Flymake backend
+elpa-page-break-lines - Emacs mode to display ugly ^L page breaks as tidy horizontal lines
+elpa-paredit - Emacs minor mode for structurally editing Lisp code
+elpa-paredit-everywhere - cut-down version of paredit for non-lisp buffers
+elpa-parent-mode - get major mode's parent modes
+elpa-parsebib - Emacs Lisp library for parsing .bib files
+elpa-password-store - Emacs support for the lightweight directory-based password manager
+elpa-pcre2el - Emacs mode to convert between PCRE, Emacs and rx regexp syntax
+elpa-persist - persist variables between Emacs Sessions
+elpa-perspective - tagged workspaces in Emacs
+elpa-pfuture - set of functions wrapping Emacs' process creation capabilities
+elpa-php-mode - PHP Mode for GNU Emacs
+elpa-pip-requirements - major mode for editing pip requirements files
+elpa-pkg-info - provide information about Emacs packages
+elpa-plz - HTTP library for Emacs
+elpa-pointback - restore window points when returning to buffers
+elpa-poke - Extensible editor for structured binary data (Emacs mode)
+elpa-popup - visual popup user interface library for Emacs
+elpa-pos-tip - Show tooltip at point
+elpa-project - Emacs library for operations on the current project
+elpa-projectile - project interaction library for Emacs
+elpa-protobuf-mode - Emacs addon for editing protocol buffers
+elpa-puppet-mode - Emacs major mode for Puppet manifests
+elpa-py-autopep8 - use autopep8 to beautify a Python buffer
+elpa-py-isort - use isort to sort the imports in a Python buffer
+elpa-pyim-basedict - default pinyin dict for pyim
+elpa-pyim - Chinese input method support quanpin, shuangpin, wubi, cangjie and rime
+elpa-pyvenv - Python virtual environment interface
+elpa-qml-mode - Emacs major mode for editing QT Declarative (QML) code
+elpa-queue - queue data structure for Emacs Lisp
+elpa-racket-mode - emacs support for editing and running racket code
+elpa-rainbow-delimiters - Emacs mode to colour-code delimiters according to their depth
+elpa-rainbow-identifiers - highlight identifiers according to their names
+elpa-rainbow-mode - colorize color names in buffers
+elpa-recursive-narrow - narrow-to-region that operates recursively
+elpa-redtick - tiny pomodoro timer for Emacs
+elpa-relint - Emacs Lisp regexp mistake finder
+elpa-restart-emacs - restart emacs from within emacs
+elpa-rich-minority - clean-up and beautify the list of minor-modes in Emacs' mode-line
+elpa-ac-rtags - auto-complete back-end for RTags
+elpa-company-rtags - company back-end for RTags
+elpa-flycheck-rtags - flycheck integration for RTags
+elpa-helm-rtags - helm interface for RTags
+elpa-ivy-rtags - ivy back-end for RTags
+elpa-rtags - emacs front-end for RTags
+elpa-s - string manipulation library for Emacs
+elpa-scala-mode - Emacs major mode for editing scala source code
+scala-mode-el - transitional dummy package, scala-mode-el to elpa-scala-mode
+elpa-seq - sequence manipulation functions for Emacs Lisp
+elpa-sesman - session manager for Emacs IDEs
+elpa-shut-up - Emacs Lisp macros to quieten Emacs
+elpa-ag - Emacs frontend to ag
+silversearcher-ag-el - transitional dummy package, silversearcher-ag-el to elpa-ag
+elpa-smart-mode-line - powerful and beautiful mode-line for Emacs
+elpa-smart-mode-line-powerline-theme - Smart Mode Line themes that use Emacs Powerline
+elpa-smex - M-x interface for Emacs with Ido-style fuzzy matching
+elpa-sml-mode - Emacs major mode for editing Standard ML programs
+sml-mode - Transition package, sml-mode to elpa-sml-mode
+elpa-solarized-theme - port of Solarized theme to Emacs
+elpa-spinner - spinner for the Emacs modeline for operations in progress
+elpa-srv - RFC2782 (SRV record) client for emacs
+elpa-suggest - discover Emacs Lisp functions based on examples
+elpa-super-save - auto-save buffers, based on your activity
+elpa-sxiv - run the sxiv image viewer
+elpa-system-packages - functions to manage system packages
+elpa-systemd - major mode for editing systemd units
+elpa-tabbar - Emacs minor mode that displays a tab bar at the top
+elpa-taxy - Emacs programmable taxonomical grouping for arbitrary objects
+elpa-taxy-magit-section - View Emacs Taxy structs in a Magit Section buffer
+elpa-transmission - Emacs interface to a Transmission session
+elpa-treemacs - tree layout file explorer for Emacs
+elpa-treemacs-evil - tree layout file explorer for Emacs
+elpa-treemacs-magit - tree layout file explorer for Emacs
+elpa-treemacs-projectile - tree layout file explorer for Emacs
+elpa-treepy - Generic tree traversal tools
+elpa-tuareg - emacs-mode for OCaml programs
+tuareg-mode - transitional package, tuareg-mode to elpa-tuareg
+elpa-undercover - test coverage library for Emacs Lisp
+elpa-bind-chord - key-chord binding helper for use-package-chords
+elpa-bind-key - simple way to manage personal keybindings
+elpa-use-package - configuration macro for simplifying your .emacs
+elpa-use-package-chords - key-chord keyword for use-package
+elpa-use-package-ensure-system-package - autoinstall system packages
+elpa-vala-mode - Emacs editor major mode for vala source code
+vala-mode-el - Transition Package, vala-mode-el to elpa-vala-mode
+elpa-verbiste - French and Italian conjugator - emacs extension
+verbiste-el - transitional package, verbiste-el to elpa-verbiste
+elpa-vertico - Performant and minimalistic vertical completion UI for Emacs
+elpa-vimish-fold - fold text in GNU Emacs like in Vim
+elpa-helm-virtualenvwrapper - helm-source for virtualenvwrapper.el
+elpa-virtualenvwrapper - featureful virtualenv tool for Emacs
+elpa-visual-fill-column - Emacs mode that wraps visual-line-mode buffers at fill-column
+elpa-visual-regexp - in-buffer visual feedback while using Emacs regexps
+elpa-volume - tweak your sound card volume from Emacs
+elpa-wc-mode - display a word count in the Emacs modeline
+elpa-web-mode - major emacs mode for editing web templates
+elpa-weechat - Chat via WeeChat's relay protocol in Emacs.
+elpa-with-editor - call program using Emacs as $EDITOR
+elpa-with-simulated-input - macro to simulate user input non-interactively
+elpa-writegood-mode - Emacs minor mode that provides hints for common English writing problems
+elpa-writeroom-mode - distraction-free writing for Emacs
+elpa-ws-butler - unobtrusively remove trailing whitespace in Emacs
+elpa-xcite - exciting cite utility for Emacsen
+xcite - Transition Package, xcite to elpa-xcite
+elpa-xcscope - Interactively examine a C program source in emacs
+xcscope-el - Transition Package, xcscope-el to elpa-xcscope
+elpa-xelb - pure Elisp implementation of X11 protocol
+elpa-xml-rpc - Emacs Lisp XML-RPC client
+elpa-xr - convert string regexp to rx notation
+elpa-xref - Library for cross-referencing commands in Emacs
+elpa-yaml - YAML parser and encoder for Elisp
+elpa-yaml-mode - Emacs major mode for YAML files
+elpa-yasnippet - template system for Emacs
+yasnippet - transition Package, yasnippet to elpa-yasnippet
+elpa-yasnippet-snippets - Andrea Crotti's official YASnippet snippets
+youtube-dl - download videos from YouTube and other sites (transitional package)
+yt-dlp - downloader of videos from YouTube and other sites
+elpa-zenburn-theme - low contrast color theme for Emacs
+elpa-ztree - text mode directory tree
+elpa-zzz-to-char - fancy version of `zap-to-char' command
+</pre>
+
+<p>
+By default all they are installed into
+<code>/usr/share/emacs/site-lisp/elpa</code>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org914c253" class="outline-2">
+<h2 id="org914c253">System-wide additional packages</h2>
+<div class="outline-text-2" id="text-org914c253">
+<p>
+There are a plethora packages, provided by third-parties and not
+included into the official <code>Debian</code> release. They can be allocated in
+any folder in <code>load-path</code>, for this particular case in
+<code>/usr/local/share/emacs/site-lisp</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls /usr/local/share/emacs/site-lisp 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="orgab3e9a7">
+bookmark-plus
+custom
+elpy
+ereader
+google-translate
+key-chord-0.7
+kv-0.0.5
+linkmarks
+mw-thesaurus
+nov.el
+org-bullets-0.2.4
+org-drill-2.7.0
+powerthesaurus-0.4.0
+speed-type-1.3
+voca-builder-0.2.0
+</pre>
+
+<p>
+All them are in the default <code>Emacs'</code> <code>load-path</code> and accesible for
+each user, but it's necessary to <i>add every package's folder</i> into the
+pesonal load path. It might be defined manually, folder by folder, but
+here is the hack how to add all folders to <code>load-path</code> at once:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">;; add all subdirs from the host's =site-lisp= to ~load-path~
+(let* ((my-lisp-dir "/usr/local/share/emacs/site-lisp/")
+       (default-directory my-lisp-dir)
+       (orig-load-path load-path))
+  (setq load-path (cons my-lisp-dir nil))
+  (normal-top-level-add-subdirs-to-load-path)
+  (nconc load-path orig-load-path))
+</pre>
+</div>
+
+<p>
+<b>NOTE</b> <code>load-path</code> modificates only at <code>Emacs</code> initiation, so you're
+ need to restart your favourite editor.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org61924df" class="outline-2">
+<h2 id="org61924df">System-wide <code>Emacs</code> settings</h2>
+<div class="outline-text-2" id="text-org61924df">
+<p>
+In several cases it is reasonable to put a large hunk of some
+configuration into a separate fine and include it into main user's
+config <code>~/.emacs</code> in a single string:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(load "/usr/local/share/emacs/site-lisp/custom/&lt;name_of_conf_hunk.el&gt;")
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org33d5da3" class="outline-2">
+<h2 id="org33d5da3">Per-user settings</h2>
+</div>
+
+<div id="outline-container-orgb21c269" class="outline-2">
+<h2 id="orgb21c269">Personal package management</h2>
+</div>
