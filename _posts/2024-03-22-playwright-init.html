@@ -1,0 +1,364 @@
+---
+layout: page
+title: Install PlayWright
+tagline: " onto Debian12 host"
+permalink: /python/playwright/installation.html
+categories: [Python, Debian12, PlayWright]
+tags: [installation, set-up, config]
+---
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdf6f951">Installation</a></li>
+<li><a href="#org9288c5a">Preparations:</a></li>
+<li><a href="#orge218fe7">Testing</a></li>
+<li><a href="#org3e5fd14">Conclusion</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgdf6f951" class="outline-2">
+<h2 id="orgdf6f951">Installation</h2>
+<div class="outline-text-2" id="text-orgdf6f951">
+<p>
+Check-up <code>PlayWright</code> in the list of the <i>native</i> <code>Debian</code> packages:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">apt-cache search elpa* | grep playwright 2&gt;&amp;1
+</pre>
+</div>
+
+<p>
+There is no one appropriate enough, thus, just follow <a href="https://github.com/password123456/setup-selenium-with-chrome-driver-on-ubuntu_debian">this manual</a>,
+<b>but</b> using a <i>separate virtual environment</i> beforehand:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/.local/
+ls -la 2&gt;&amp;1
+virtualenv ViPlay
+ls -la 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="org5991341">
+total 24
+drwx------  6 alioth alioth 4096 Mar 22 09:45 .
+drwxr-xr-x 23 alioth alioth 4096 Mar 22 09:56 ..
+drwx------ 29 alioth alioth 4096 Mar 22 08:57 share
+drwx------  3 alioth alioth 4096 Dec  4 18:21 state
+drwxr-xr-x  4 alioth alioth 4096 Dec 12 14:52 venv0.1
+drwxr-xr-x  4 alioth alioth 4096 Mar 22 09:45 VirtSel
+created virtual environment CPython3.11.2.final.0-64 in 138ms
+  creator CPython3Posix(dest=/home/alioth/.local/ViPlay, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/alioth/.local/share/virtualenv)
+    added seed packages: pip==23.0.1, setuptools==66.1.1, wheel==0.38.4
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+total 28
+drwx------  7 alioth alioth 4096 Mar 22 10:23 .
+drwxr-xr-x 23 alioth alioth 4096 Mar 22 09:56 ..
+drwx------ 29 alioth alioth 4096 Mar 22 08:57 share
+drwx------  3 alioth alioth 4096 Dec  4 18:21 state
+drwxr-xr-x  4 alioth alioth 4096 Dec 12 14:52 venv0.1
+drwxr-xr-x  4 alioth alioth 4096 Mar 22 10:23 ViPlay
+drwxr-xr-x  4 alioth alioth 4096 Mar 22 09:45 VirtSel
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9288c5a" class="outline-2">
+<h2 id="org9288c5a">Preparations:</h2>
+<div class="outline-text-2" id="text-org9288c5a">
+<p>
+First of all lets activate our new <code>venv</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(pyvenv-activate "~/.local/ViPlay/")
+</pre>
+</div>
+
+<p>
+Check up already installed packages:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip list 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+Package    Version
+---------- -------
+pip        23.0.1
+setuptools 66.1.1
+wheel      0.38.4
+</pre>
+
+
+<p>
+Further, following the <a href="https://playwright.dev/python/docs/intro">official documentation</a>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip install pytest-playwright 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="org3a5c0a5">
+Collecting pytest-playwright
+  Downloading pytest_playwright-0.4.4-py3-none-any.whl (10 kB)
+Collecting playwright&gt;=1.18
+  Downloading playwright-1.42.0-py3-none-manylinux1_x86_64.whl (37.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.3/37.3 MB 492.0 kB/s eta 0:00:00
+Collecting pytest&lt;9.0.0,&gt;=6.2.4
+  Downloading pytest-8.1.1-py3-none-any.whl (337 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 337.4/337.4 kB 505.6 kB/s eta 0:00:00
+Collecting pytest-base-url&lt;3.0.0,&gt;=1.0.0
+  Downloading pytest_base_url-2.1.0-py3-none-any.whl (5.3 kB)
+Collecting python-slugify&lt;9.0.0,&gt;=6.0.0
+  Downloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)
+Collecting greenlet==3.0.3
+  Downloading greenlet-3.0.3-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (620 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 620.0/620.0 kB 353.6 kB/s eta 0:00:00
+Collecting pyee==11.0.1
+  Downloading pyee-11.0.1-py3-none-any.whl (15 kB)
+Collecting typing-extensions
+  Using cached typing_extensions-4.10.0-py3-none-any.whl (33 kB)
+Collecting iniconfig
+  Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Collecting packaging
+  Using cached packaging-24.0-py3-none-any.whl (53 kB)
+Collecting pluggy&lt;2.0,&gt;=1.4
+  Downloading pluggy-1.4.0-py3-none-any.whl (20 kB)
+Collecting requests&gt;=2.9
+  Using cached requests-2.31.0-py3-none-any.whl (62 kB)
+Collecting text-unidecode&gt;=1.3
+  Downloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.2/78.2 kB 425.7 kB/s eta 0:00:00
+Collecting charset-normalizer&lt;4,&gt;=2
+  Using cached charset_normalizer-3.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (140 kB)
+Collecting idna&lt;4,&gt;=2.5
+  Using cached idna-3.6-py3-none-any.whl (61 kB)
+Collecting urllib3&lt;3,&gt;=1.21.1
+  Using cached urllib3-2.2.1-py3-none-any.whl (121 kB)
+Collecting certifi&gt;=2017.4.17
+  Using cached certifi-2024.2.2-py3-none-any.whl (163 kB)
+Installing collected packages: text-unidecode, urllib3, typing-extensions, python-slugify, pluggy, packaging, iniconfig, idna, greenlet, charset-normalizer, certifi, requests, pytest, pyee, pytest-base-url, playwright, pytest-playwright
+Successfully installed certifi-2024.2.2 charset-normalizer-3.3.2 greenlet-3.0.3 idna-3.6 iniconfig-2.0.0 packaging-24.0 playwright-1.42.0 pluggy-1.4.0 pyee-11.0.1 pytest-8.1.1 pytest-base-url-2.1.0 pytest-playwright-0.4.4 python-slugify-8.0.4 requests-2.31.0 text-unidecode-1.3 typing-extensions-4.10.0 urllib3-2.2.1
+</pre>
+
+<p>
+Obviously that the list of packages has augmented:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip list 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="orgc7d74e9">
+Package            Version
+------------------ --------
+certifi            2024.2.2
+charset-normalizer 3.3.2
+greenlet           3.0.3
+idna               3.6
+iniconfig          2.0.0
+packaging          24.0
+pip                23.0.1
+playwright         1.42.0
+pluggy             1.4.0
+pyee               11.0.1
+pytest             8.1.1
+pytest-base-url    2.1.0
+pytest-playwright  0.4.4
+python-slugify     8.0.4
+requests           2.31.0
+setuptools         66.1.1
+text-unidecode     1.3
+typing_extensions  4.10.0
+urllib3            2.2.1
+wheel              0.38.4
+</pre>
+
+<p>
+Next procedure is a time-consuming one, so I suggest to do it in
+<code>Bash</code> with <b>activated</b> virtual environment, surely. It depends, but
+sometimes requires more than 10 minutes to be done.
+</p>
+
+<blockquote>
+<p>
+(ViPlay) alioth@Dell:~/.local$ playwright install
+Downloading Chromium 123.0.6312.4 (playwright build v1105) from <a href="https://playwright.azureedge.net/builds/chromium/1105/chromium-linux.zip">https://playwright.azureedge.net/builds/chromium/1105/chromium-linux.zip</a>
+154.7 MiB [====================] 100% 0.0s
+Chromium 123.0.6312.4 (playwright build v1105) downloaded to <i>home/alioth</i>.cache/ms-playwright/chromium-1105
+Downloading FFMPEG playwright build v1009 from <a href="https://playwright.azureedge.net/builds/ffmpeg/1009/ffmpeg-linux.zip">https://playwright.azureedge.net/builds/ffmpeg/1009/ffmpeg-linux.zip</a>
+2.6 MiB [====================] 100% 0.0s
+FFMPEG playwright build v1009 downloaded to <i>home/alioth</i>.cache/ms-playwright/ffmpeg-1009
+Downloading Firefox 123.0 (playwright build v1440) from <a href="https://playwright.azureedge.net/builds/firefox/1440/firefox-debian-12.zip">https://playwright.azureedge.net/builds/firefox/1440/firefox-debian-12.zip</a>
+84.7 MiB [====================] 100% 0.0s
+Firefox 123.0 (playwright build v1440) downloaded to <i>home/alioth</i>.cache/ms-playwright/firefox-1440
+Downloading Webkit 17.4 (playwright build v1983) from <a href="https://playwright.azureedge.net/builds/webkit/1983/webkit-debian-12.zip">https://playwright.azureedge.net/builds/webkit/1983/webkit-debian-12.zip</a>
+85.7 MiB [====================] 100% 0.0s
+Webkit 17.4 (playwright build v1983) downloaded to <i>home/alioth</i>.cache/ms-playwright/webkit-1983
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-sh">playwright install
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip list 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="orgfbca7bb">
+Package            Version
+------------------ --------
+certifi            2024.2.2
+charset-normalizer 3.3.2
+greenlet           3.0.3
+idna               3.6
+iniconfig          2.0.0
+packaging          24.0
+pip                23.0.1
+playwright         1.42.0
+pluggy             1.4.0
+pyee               11.0.1
+pytest             8.1.1
+pytest-base-url    2.1.0
+pytest-playwright  0.4.4
+python-slugify     8.0.4
+requests           2.31.0
+setuptools         66.1.1
+text-unidecode     1.3
+typing_extensions  4.10.0
+urllib3            2.2.1
+wheel              0.38.4
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge218fe7" class="outline-2">
+<h2 id="orge218fe7">Testing</h2>
+<div class="outline-text-2" id="text-orge218fe7">
+<p>
+Lets create a separate folder to test up <code>PlayWright</code> in a proper way:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pwd 2&gt;&amp;1
+cd ~ 2&gt;&amp;1
+pwd 2&gt;&amp;1
+mkdir -p playwright/tests 2&gt;&amp;1
+ls playwright 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+/home/alioth/Git/0--key/org-pub
+/home/alioth
+tests
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">ls ~/playwright 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+tests
+</pre>
+
+
+<p>
+And the <code>Python</code> file with a couple of <code>pytest</code> s inside:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">import re
+from playwright.sync_api import Page, expect
+
+def test_has_title(page: Page):
+    page.goto("https://playwright.dev/")
+
+    # Expect a title "to contain" a substring.
+    expect(page).to_have_title(re.compile("Playwright"))
+
+def test_get_started_link(page: Page):
+    page.goto("https://playwright.dev/")
+
+    # Click the get started link.
+    page.get_by_role("link", name="Get started").click()
+
+    # Expects page to have a heading with the name of Installation.
+    expect(page.get_by_role("heading", name="Installation")).to_be_visible()
+</pre>
+</div>
+
+<p>
+Check up is it all on its place:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ls ~/playwright/tests 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example">
+test_example.py
+</pre>
+
+
+<p>
+Launch the <code>pytest</code> up!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/playwright/
+pwd 2&gt;&amp;1
+pytest 2&gt;&amp;1
+</pre>
+</div>
+
+<pre class="example" id="orgdb5fc5b">
+/home/alioth/playwright
+============================= test session starts ==============================
+platform linux -- Python 3.11.2, pytest-8.1.1, pluggy-1.4.0
+rootdir: /home/alioth/playwright
+plugins: base-url-2.1.0, playwright-0.4.4
+collected 2 items
+
+tests/test_example.py ..                                                 [100%]
+
+============================== 2 passed in 3.34s ===============================
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3e5fd14" class="outline-2">
+<h2 id="org3e5fd14">Conclusion</h2>
+<div class="outline-text-2" id="text-org3e5fd14">
+<blockquote>
+<p>
+Tests are run in headless mode meaning no browser UI will open up when
+running the tests. Results of the tests and test logs will be shown in
+the terminal.
+</p>
+</blockquote>
+
+<p>
+Now, the output says loud and clear that it works as expected even
+inside <code>Emacs</code> <code>Babel</code> environment.
+</p>
+</div>
+</div>
