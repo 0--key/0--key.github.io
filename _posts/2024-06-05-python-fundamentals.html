@@ -1,0 +1,114 @@
+---
+layout: page
+title: Python Peculiarities Dissection
+tagline: " test the toolbox"
+permalink: /python/fundamentals/true-false-and-none.html
+categories: [Python, Dissection, Learning by Testing, Literate Programming]
+tags: [True, False, None]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0142b39">Intro</a></li>
+<li><a href="#orgee1c2b6">Basics</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0142b39" class="outline-2">
+<h2 id="org0142b39">Intro</h2>
+</div>
+<div id="outline-container-orgee1c2b6" class="outline-2">
+<h2 id="orgee1c2b6">Basics</h2>
+<div class="outline-text-2" id="text-orgee1c2b6">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+
+<span class="org-doc">"""</span>
+
+<span class="org-doc">First and foremost let be sure about True, False and None</span>
+<span class="org-doc">existence:</span>
+
+<span class="org-doc">"""</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestTheBasement</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_does_true_ever_exist</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertTrue(<span class="org-constant">True</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_does_false_ever_exist</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">False</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_does_none_ever_exist</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertIsNone(<span class="org-constant">None</span>)
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">None</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">None is showed up!</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">None has a boolean value</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_true_and_false_are_not_none_at_all</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertIsNotNone(<span class="org-constant">True</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">Not None isn't niether</span>
+        <span class="org-keyword">self</span>.assertIsNotNone(<span class="org-constant">False</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">True nor False!</span>
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">None</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">Except the None!</span>
+
+
+<span class="org-string">"""</span>
+
+<span class="org-string">Now it is very moment to dismantle the content of ~unittest~</span>
+<span class="org-string">toolbox. A dozen of acute utensils there and you need to know which do</span>
+<span class="org-string">what. Bear in mind that you're already familiar with ~assertFalse~,</span>
+<span class="org-string">~assertTrue~, ~assertIsNotNone~ and ~assertIsNone as well.</span>
+
+<span class="org-string">"""</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestAddtionalAssertionMethods</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_the_same</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">True</span>, <span class="org-constant">True</span>)
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">False</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">None</span>, <span class="org-constant">None</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_not_the_same</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">True</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">True</span>, <span class="org-constant">None</span>)
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">None</span>, <span class="org-constant">False</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_equal</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">True</span>, <span class="org-constant">True</span>)
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">False</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">None</span>, <span class="org-constant">None</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_not_equal</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">True</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">True</span>, <span class="org-constant">None</span>)
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">None</span>, <span class="org-constant">False</span>)
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestTheLiteralTruths</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_any_non_zero_is_true</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertTrue(1)
+        <span class="org-keyword">self</span>.assertTrue(-1)
+        <span class="org-keyword">self</span>.assertTrue(<span class="org-string">"L"</span>)
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">None</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">Except the None!</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_zero_and_none_are_same_as_false</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertFalse(0)
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">None</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">and None as well!</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestPrimalsQuirks</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_true_equals_one</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertTrue(<span class="org-constant">True</span> == 1)  <span class="org-comment-delimiter"># </span><span class="org-comment">it is equal</span>
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">True</span> == -1)
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">True</span> == 2)  <span class="org-comment-delimiter"># </span><span class="org-comment">it isn't equal two!</span>
+        <span class="org-keyword">self</span>.assertFalse(<span class="org-constant">True</span> == 0)  <span class="org-comment-delimiter"># </span><span class="org-comment">True is not zero</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_any_non_zero_value_is_true</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.assertTrue(<span class="org-string">"A"</span>)
+        <span class="org-keyword">self</span>.assertTrue(32)
+</pre>
+</div>
+</div>
+</div>
