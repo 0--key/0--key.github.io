@@ -1,0 +1,95 @@
+---
+layout: page
+title: Python Peculiarities Dissection
+tagline: " test the extended toolbox"
+permalink: /python/fundamentals/advanced-testing-methods.html
+categories: [Python, Dissection, Learning by Testing, Literate Programming]
+tags: [True, False, None]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org488e330">Preface</a></li>
+<li><a href="#org694b786">Additional testing tools</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org488e330" class="outline-2">
+<h2 id="org488e330">Preface</h2>
+<div class="outline-text-2" id="text-org488e330">
+<p>
+In the previous chapter you're introduced into the set of basics
+testing methods:
+</p>
+
+<ul class="org-ul">
+<li>assertTrue;</li>
+<li>assertFalse;</li>
+<li>assertIsNone;</li>
+<li>assertIsNotNone.</li>
+</ul>
+
+
+<p>
+All they are pretty straightforward and operates under a single
+argument. Now lets dissect the additional tools for testing which get
+two arguments and detect theirs sameness and equality.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org694b786" class="outline-2">
+<h2 id="org694b786">Additional testing tools</h2>
+<div class="outline-text-2" id="text-org694b786">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+
+
+<span class="org-doc">"""</span>
+
+<span class="org-doc">Now it is very moment to dismantle the content of ~unittest~</span>
+<span class="org-doc">toolbox. A dozen of acute utensils are there and you need to know</span>
+<span class="org-doc">which do what.</span>
+
+<span class="org-doc">"""</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestAddtionalAssertionMethods</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_the_same</span>(<span class="org-keyword">self</span>):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">both arguments are same</span>
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">True</span>, <span class="org-constant">True</span>)
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">False</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertIs(<span class="org-constant">None</span>, <span class="org-constant">None</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_not_the_same</span>(<span class="org-keyword">self</span>):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">both arguments are different</span>
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">True</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">True</span>, <span class="org-constant">None</span>)
+        <span class="org-keyword">self</span>.assertIsNot(<span class="org-constant">None</span>, <span class="org-constant">False</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">despite None has Boolean False</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_equal</span>(<span class="org-keyword">self</span>):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">both arguments are equal</span>
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">True</span>, <span class="org-constant">True</span>)
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">False</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertEqual(<span class="org-constant">None</span>, <span class="org-constant">None</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_are_they_not_equal</span>(<span class="org-keyword">self</span>):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">arguments are not equal one another</span>
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">True</span>, <span class="org-constant">False</span>)
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">True</span>, <span class="org-constant">None</span>)
+        <span class="org-keyword">self</span>.assertNotEqual(<span class="org-constant">None</span>, <span class="org-constant">False</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">despite None has Boolean False</span>
+</pre>
+</div>
+
+<pre class="example">
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+</pre>
+</div>
+</div>
