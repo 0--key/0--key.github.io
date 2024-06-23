@@ -1,0 +1,151 @@
+---
+layout: page
+title: Open AI
+tagline: " assistant's features disclosure"
+permalink: /python/openai/assistants-features.html
+categories: [Python, OpenAI]
+tags: [summarizing]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb61dfb2">Intro</a></li>
+<li><a href="#org64dacd0">Prerequisites</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb61dfb2" class="outline-2">
+<h2 id="orgb61dfb2">Intro</h2>
+<div class="outline-text-2" id="text-orgb61dfb2">
+<p>
+The obvious approach to explore the <code>OpenAI</code> <code>Assistant</code> features lies
+in involving itself into this tedious, but awesome process.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org64dacd0" class="outline-2">
+<h2 id="org64dacd0">Prerequisites</h2>
+<div class="outline-text-2" id="text-org64dacd0">
+<p>
+I preliminarily created my <code>OpenAI</code> virtual <code>Assistant</code> using
+web-interface. The short description I've put in the relevant field
+is:
+</p>
+<blockquote>
+<p>
+You are a professional ChatGPT prompt engineer with deep and profound
+knowledge of OpenAI subtleties.
+</p>
+</blockquote>
+
+<p>
+After that I've assigned him to assist me in resolving the puzzling
+questions aroung <code>OpenAI</code> details in a separate thread
+(thread_ji8Vx1QLmLhJizozIutiVqay).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> openai <span class="org-keyword">import</span> OpenAI
+
+
+<span class="org-variable-name">client</span> = OpenAI()
+<span class="org-variable-name">thread_messages</span> = client.beta.threads.messages.<span class="org-builtin">list</span>(
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   thread_id=<span class="org-string">"thread_ji8Vx1QLmLhJizozIutiVqay"</span>, order=<span class="org-string">"asc"</span>)
+<span class="org-builtin">print</span>(thread_messages.data)
+</pre>
+</div>
+
+<pre class="example">
+[Message(id='msg_Ns7xQ7iLso4acOOaZzCc2tSK', assistant_id=None, attachments=[], completed_at=None, content=[TextContentBlock(text=Text(annotations=[], value='What is the purpose of usage threads in ChatGPT conversation?'), type='text')], created_at=1719083842, incomplete_at=None, incomplete_details=None, metadata={}, object='thread.message', role='user', run_id=None, status=None, thread_id='thread_ji8Vx1QLmLhJizozIutiVqay'), Message(id='msg_oM6mZ9h4LmSjc9rufXDk8JnN', assistant_id='asst_oLuLDRdsSDyMcBAvpwCGkbGS', attachments=[], completed_at=None, content=[TextContentBlock(text=Text(annotations=[], value='The concept of "usage threads" does not explicitly exist in the terminology related to ChatGPT or other OpenAI products as of my knowledge cutoff in 2023. However, if you\'re referring to conversation threads or sessions, their purpose can be elaborated on as follows:\n\n1. **Context Maintenance**: Interactions are kept within the same thread or session to maintain context throughout the conversation. This allows the model to provide more coherent and relevant responses based on prior exchanges in the thread.\n\n2. **Personalization**: By maintaining a thread, the AI can tailor its responses more closely to the ongoing discussion, potentially remembering user specifics or preferences within that session for a more personalized experience.\n\n3. **Efficiency**: Keeping the conversation within a thread can help with managing and streamlining responses, preventing the need to re-establish context repeatedly, saving time, and computational resources.\n\n4. **Feedback and Iteration**: A threaded approach allows for iterative feedback within the same session, helping users clarify or expand upon their input progressively without losing the continuity of the conversation.\n\nWould you like insights into how to best leverage conversation threads or sessions for your specific use case?'), type='text')], created_at=1719083844, incomplete_at=None, incomplete_details=None, metadata={}, object='thread.message', role='assistant', run_id='run_9g3lmpYlHlAjSiY3jzDzNk4f', status=None, thread_id='thread_ji8Vx1QLmLhJizozIutiVqay'), Message(id='msg_bqlVAp6AdJND3JUE3d5uilmJ', assistant_id=None, attachments=[], completed_at=None, content=[TextContentBlock(text=Text(annotations=[], value='Yes, I would be very pleased.'), type='text')], created_at=1719129523, incomplete_at=None, incomplete_details=None, metadata={}, object='thread.message', role='user', run_id=None, status=None, thread_id='thread_ji8Vx1QLmLhJizozIutiVqay'), Message(id='msg_PV5ex4nIJXVcbaLMHCXTXTOZ', assistant_id='asst_oLuLDRdsSDyMcBAvpwCGkbGS', attachments=[], completed_at=None, content=[TextContentBlock(text=Text(annotations=[], value="Certainly! Here are some best practices for leveraging conversation threads or sessions in ChatGPT to create effective and engaging interactions:\n\n### 1. **Consistent Context Building**\n- **Initial Context Setting**: Begin the session by providing clear and comprehensive context. This can include relevant background information, goals, and specific needs.\n  - *Example*: “I’m planning a trip to Japan and need advice on must-see places and cultural tips.”\n- **Maintain Continuity**: Reference previous messages to maintain a coherent thread.\n  - *Example*: “As mentioned earlier, I’m interested in visiting historical sites. Can you suggest some in Kyoto?”\n\n### 2. **Clarification and Follow-ups**\n- **Ask for Clarification**: If you're not clear on a response or need more information, ask specific follow-up questions.\n  - *Example*: “Can you explain what you mean by ‘culture-rich’ areas?”\n- **Iterative Refinement**: Use the thread to iteratively refine your inquiry, ensuring iterations build on each other.\n  - *Example*: “You suggested Fushimi Inari Shrine. Could you provide details on its historical significance?”\n\n### 3. **Personalization**\n- **User Preferences**: Mention preferences or constraints early on to tailor the advice or information provided.\n  - *Example*: “I prefer less crowded places and am particularly interested in nature. Are there any off-the-beaten-path spots you’d recommend?”\n- **Continuity Across Sessions**: If using a system that supports long-term memory, refer to past interactions or preferences discussed in previous sessions.\n  - *Example*: “Last time we talked about Japanese cuisine. Based on that, can you suggest some unique dining experiences in Tokyo?”\n\n### 4. **Utilize Feedback Loops**\n- **Real-time Feedback**: Provide immediate feedback on whether the response met your needs.\n  - *Example*: “That’s helpful, but could you give me more budget-friendly options?”\n- **Post-session Feedback**: Summarize the thread or session to cement understanding and provide feedback for any future interactions.\n  - *Example*: “Thanks, this covers all my questions about travel in Japan. Next time, I’d like to discuss transportation options.”\n\n### 5. **Managing Long Conversations**\n- **Break Down Complex Topics**: For extensive topics, break them down into manageable sections and handle each in its own thread.\n  - *Example*: “Let’s first discuss the cultural etiquettes in Japan. In the next session, we can cover popular tourist destinations.”\n- **Session Recaps**: Periodically summarizing the thread helps maintain clarity and alignment.\n  - *Example*: “So far, we’ve discussed temples in Kyoto. Now, let’s move on to exploring local festivals.”\n\n### 6. **Enhanced Interaction Techniques**\n- **Interactive Elements**: If the platform supports, use interactive elements like buttons or choices to guide the thread effectively.\n  - *Example*: “Would you like to hear more about (1) Historical sites, (2) Modern attractions, or (3) Natural landscapes?”\n- **Multi-modal Inputs**: Leverage platforms that support text, images, or other media for richer context.\n  - *Example*: “Here’s an itinerary I found online. Can you help enhance it based on my preferences?”\n\n### 7. **Respect Ethical Guidelines**\n- **User Privacy**: Avoid providing sensitive personal information unless absolutely necessary and ensure sessions are conducted with privacy guidelines in mind.\n- **Transparency**: Make clear distinctions when the conversation is shifting topics or when the thread is coming to an end.\n\nBy effectively leveraging conversation threads or sessions, you can ensure richer, more engaging, and more personalized interactions with ChatGPT, improving both user satisfaction and the overall utility of the dialogue."), type='text')], created_at=1719129524, incomplete_at=None, incomplete_details=None, metadata={}, object='thread.message', role='assistant', run_id='run_cB5kl1tozbCfrb7uHJ5MqfgQ', status=None, thread_id='thread_ji8Vx1QLmLhJizozIutiVqay')]
+</pre>
+
+
+<p>
+It is grand, but it is difficult to read it in such a raw state. So,
+lets extract the text values only:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">for</span> message <span class="org-keyword">in</span> thread_messages.data:
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(message.content[0].text.value, <span class="org-string">"\n\n"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-org">What is the purpose of usage threads in ChatGPT conversation?
+
+
+The concept of "usage threads" does not explicitly exist in the
+terminology related to ChatGPT or other OpenAI products as of my
+knowledge cutoff in 2023. However, if you're referring to conversation
+threads or sessions, their purpose can be elaborated on as follows:
+
+1. <span class="org-bold">**Context Maintenance**</span>: Interactions are kept within the same thread or session to maintain context throughout the conversation. This allows the model to provide more coherent and relevant responses based on prior exchanges in the thread.
+
+2. <span class="org-bold">**Personalization**</span>: By maintaining a thread, the AI can tailor its responses more closely to the ongoing discussion, potentially remembering user specifics or preferences within that session for a more personalized experience.
+
+3. <span class="org-bold">**Efficiency**</span>: Keeping the conversation within a thread can help with managing and streamlining responses, preventing the need to re-establish context repeatedly, saving time, and computational resources.
+
+4. <span class="org-bold">**Feedback and Iteration**</span>: A threaded approach allows for iterative feedback within the same session, helping users clarify or expand upon their input progressively without losing the continuity of the conversation.
+
+Would you like insights into how to best leverage conversation threads
+or sessions for your specific use case?
+
+
+Yes, I would be very pleased.
+
+
+Certainly! Here are some best practices for leveraging conversation
+threads or sessions in ChatGPT to create effective and engaging
+interactions:
+
+### 1. <span class="org-bold">**Consistent Context Building**</span>
+- <span class="org-bold">**Initial Context Setting**</span>: Begin the session by providing clear and comprehensive context. This can include relevant background information, goals, and specific needs.
+  - <span class="org-bold">*Example*</span>: &#8220;I&#8217;m planning a trip to Japan and need advice on must-see places and cultural tips.&#8221;
+- <span class="org-bold">**Maintain Continuity**</span>: Reference previous messages to maintain a coherent thread.
+  - <span class="org-bold">*Example*</span>: &#8220;As mentioned earlier, I&#8217;m interested in visiting historical sites. Can you suggest some in Kyoto?&#8221;
+
+### 2. <span class="org-bold">**Clarification and Follow-ups**</span>
+- <span class="org-bold">**Ask for Clarification**</span>: If you're not clear on a response or need more information, ask specific follow-up questions.
+  - <span class="org-bold">*Example*</span>: &#8220;Can you explain what you mean by &#8216;culture-rich&#8217; areas?&#8221;
+- <span class="org-bold">**Iterative Refinement**</span>: Use the thread to iteratively refine your inquiry, ensuring iterations build on each other.
+  - <span class="org-bold">*Example*</span>: &#8220;You suggested Fushimi Inari Shrine. Could you provide details on its historical significance?&#8221;
+
+### 3. <span class="org-bold">**Personalization**</span>
+- <span class="org-bold">**User Preferences**</span>: Mention preferences or constraints early on to tailor the advice or information provided.
+  - <span class="org-bold">*Example*</span>: &#8220;I prefer less crowded places and am particularly interested in nature. Are there any off-the-beaten-path spots you&#8217;d recommend?&#8221;
+- <span class="org-bold">**Continuity Across Sessions**</span>: If using a system that supports long-term memory, refer to past interactions or preferences discussed in previous sessions.
+  - <span class="org-bold">*Example*</span>: &#8220;Last time we talked about Japanese cuisine. Based on that, can you suggest some unique dining experiences in Tokyo?&#8221;
+
+### 4. <span class="org-bold">**Utilize Feedback Loops**</span>
+- <span class="org-bold">**Real-time Feedback**</span>: Provide immediate feedback on whether the response met your needs.
+  - <span class="org-bold">*Example*</span>: &#8220;That&#8217;s helpful, but could you give me more budget-friendly options?&#8221;
+- <span class="org-bold">**Post-session Feedback**</span>: Summarize the thread or session to cement understanding and provide feedback for any future interactions.
+  - <span class="org-bold">*Example*</span>: &#8220;Thanks, this covers all my questions about travel in Japan. Next time, I&#8217;d like to discuss transportation options.&#8221;
+
+### 5. <span class="org-bold">**Managing Long Conversations**</span>
+- <span class="org-bold">**Break Down Complex Topics**</span>: For extensive topics, break them down into manageable sections and handle each in its own thread.
+  - <span class="org-bold">*Example*</span>: &#8220;Let&#8217;s first discuss the cultural etiquettes in Japan. In the next session, we can cover popular tourist destinations.&#8221;
+- <span class="org-bold">**Session Recaps**</span>: Periodically summarizing the thread helps maintain clarity and alignment.
+  - <span class="org-bold">*Example*</span>: &#8220;So far, we&#8217;ve discussed temples in Kyoto. Now, let&#8217;s move on to exploring local festivals.&#8221;
+
+### 6. <span class="org-bold">**Enhanced Interaction Techniques**</span>
+- <span class="org-bold">**Interactive Elements**</span>: If the platform supports, use interactive elements like buttons or choices to guide the thread effectively.
+  - <span class="org-bold">*Example*</span>: &#8220;Would you like to hear more about (1) Historical sites, (2) Modern attractions, or (3) Natural landscapes?&#8221;
+- <span class="org-bold">**Multi-modal Inputs**</span>: Leverage platforms that support text, images, or other media for richer context.
+  - <span class="org-bold">*Example*</span>: &#8220;Here&#8217;s an itinerary I found online. Can you help enhance it based on my preferences?&#8221;
+
+### 7. <span class="org-bold">**Respect Ethical Guidelines**</span>
+- <span class="org-bold">**User Privacy**</span>: Avoid providing sensitive personal information unless absolutely necessary and ensure sessions are conducted with privacy guidelines in mind.
+- <span class="org-bold">**Transparency**</span>: Make clear distinctions when the conversation is shifting topics or when the thread is coming to an end.
+
+By effectively leveraging conversation threads or sessions, you can
+ensure richer, more engaging, and more personalized interactions with
+ChatGPT, improving both user satisfaction and the overall utility of
+the dialogue.
+</pre>
+</div>
+</div>
+</div>
