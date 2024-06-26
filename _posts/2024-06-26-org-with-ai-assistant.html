@@ -1,0 +1,1116 @@
+---
+layout: page
+title: AI Assistant
+tagline: " inside Org-Mode"
+permalink: /emacs/openai/assistant.html
+categories: [Python, OpenAI, Assistant]
+tags: []
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7ecd65f">Preface</a></li>
+<li><a href="#org6f91abb">Initiate a New Thread</a></li>
+<li><a href="#org1322349">Run the Thread with Assistant</a></li>
+<li><a href="#org62550eb">Retrieve the Answer from the Thread</a></li>
+<li><a href="#orgf0b81f6">Manual Testing</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7ecd65f" class="outline-2">
+<h2 id="org7ecd65f">Preface</h2>
+<div class="outline-text-2" id="text-org7ecd65f">
+<p>
+Unleash the power of AI Assistants in your <code>Org</code> buffer!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp" id="orgbdf6d4c">(princ <span class="org-string">"Hello World!"</span>)
+</pre>
+</div>
+
+<pre class="example">
+Hello World!
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6f91abb" class="outline-2">
+<h2 id="org6f91abb">Initiate a New Thread</h2>
+<div class="outline-text-2" id="text-org6f91abb">
+<div class="org-src-container">
+<pre class="src src-elisp"> (<span class="org-keyword">require</span> '<span class="org-constant">request</span>)
+ (<span class="org-keyword">require</span> '<span class="org-constant">json</span>)
+ (<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+ (<span class="org-keyword">defun</span> <span class="org-function-name">vizier-new-thread</span> ()
+   <span class="org-doc">"Create a new conversation thread in the current branch if it not exists else"</span>
+   (<span class="org-keyword">interactive</span>)
+   (<span class="org-keyword">save-excursion</span>
+     (org-back-to-heading t)
+     (<span class="org-keyword">let</span> ((thread-id (org-entry-get nil <span class="org-string">"vizier-thread-id"</span>)))
+       (<span class="org-keyword">if</span> thread-id
+           (message <span class="org-string">"You are already in conversation thread"</span>)
+         (message <span class="org-string">"You need to create a new conversation thread"</span>)))))
+
+ (<span class="org-keyword">defun</span> <span class="org-function-name">vizier-thread-init</span> (callback)
+   <span class="org-doc">"Initialize a new conversation thread with the OpenAI API and return the thread ID."</span>
+   <span class="org-comment-delimiter">;</span><span class="org-comment">(interactive)</span>
+   (<span class="org-keyword">let*</span> ((url <span class="org-string">"https://api.openai.com/v1/threads"</span>)
+          (headers `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+                     (<span class="org-string">"Authorization"</span> . ,(concat <span class="org-string">"Bearer "</span> openai-api-key))
+                     (<span class="org-string">"OpenAI-Beta"</span> . <span class="org-string">"assistants=v2"</span>)))
+          thread-id)
+     (request
+       url
+       <span class="org-builtin">:type</span> <span class="org-string">"POST"</span>
+       <span class="org-builtin">:headers</span> headers
+       <span class="org-builtin">:data</span> <span class="org-string">""</span>
+       <span class="org-builtin">:parser</span> 'json-read
+       <span class="org-builtin">:success</span> (<span class="org-keyword">cl-function</span>
+                  (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> data <span class="org-type">&amp;allow-other-keys</span>)
+                    (<span class="org-keyword">setq</span> thread-id (cdr (assoc 'id data)))
+                    (message <span class="org-string">"Thread initialized with ID: %s"</span> thread-id)  
+                    thread-id))
+       <span class="org-builtin">:error</span> (<span class="org-keyword">cl-function</span>
+               (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> error-thrown <span class="org-type">&amp;allow-other-keys</span>)
+                 (message <span class="org-string">"Error initializing thread: %S"</span> error-thrown))))
+     (<span class="org-keyword">while</span> (not thread-id)
+       (sleep-for 0.1)) <span class="org-comment-delimiter">;; </span><span class="org-comment">Wait for the request to complete</span>
+     thread-id))
+
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">It is time to concoct the query</span>
+
+
+ (<span class="org-keyword">defun</span> <span class="org-function-name">vizier-org</span> (start end)
+   <span class="org-doc">"Grasp the active region or the current header."</span>
+   (<span class="org-keyword">interactive</span> <span class="org-string">"r"</span>)
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">Check if there's an active region</span>
+   (<span class="org-keyword">let*</span> ((use-region (use-region-p))
+          (query (<span class="org-keyword">if</span> use-region
+                     (buffer-substring-no-properties start end)
+                   (<span class="org-keyword">save-excursion</span>
+                     (org-back-to-heading t)
+                     (org-element-property <span class="org-builtin">:title</span> (org-element-at-point))))))
+     <span class="org-comment-delimiter">;; </span><span class="org-comment">Print message based on context</span>
+     (<span class="org-keyword">if</span> use-region
+         (message <span class="org-string">"The active region will be the query: %s"</span> query)
+       (message <span class="org-string">"The current header will be the query: %s"</span> query))
+   (vizier-send-query query)
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">place for extension</span>
+   ))
+
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">Example usage:</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">(defun example-vizier-org ()</span>
+ <span class="org-comment-delimiter">;;   </span><span class="org-comment">"Example function to demonstrate how to grasp the active region or the current header."</span>
+ <span class="org-comment-delimiter">;;   </span><span class="org-comment">(interactive "r")</span>
+ <span class="org-comment-delimiter">;;   </span><span class="org-comment">(vizier-org (region-beginning) (region-end)))</span>
+
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">So, ~vizier-org~ might pass the query to another function</span>
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-send-query</span> (question)
+  <span class="org-doc">"Send QUESTION to a specific THREAD and return MSG-ID."</span>
+  (<span class="org-keyword">save-excursion</span>
+    (org-back-to-heading t)
+    (<span class="org-keyword">let</span> ((thread-id (org-entry-get nil <span class="org-string">"vizier-thread-id"</span>)))
+      (<span class="org-keyword">if</span> thread-id
+          (<span class="org-keyword">progn</span>
+            (message <span class="org-string">"Sending message to thread: %s with question: %s"</span> thread-id question)
+            (vizier-send-message-to-thread thread-id question))
+        (message <span class="org-string">"Thread ID is missing in the current heading."</span>)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-send-message-to-thread</span> (thread-id question)
+  <span class="org-doc">"Helper function to send QUESTION to a specific THREAD-ID and return MSG-ID."</span>
+  (<span class="org-keyword">let*</span> ((url (format <span class="org-string">"https://api.openai.com/v1/threads/%s/messages"</span> thread-id))
+         (headers `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+                    (<span class="org-string">"Authorization"</span> . ,(concat <span class="org-string">"Bearer "</span> (getenv <span class="org-string">"OPENAI_API_KEY"</span>)))
+                    (<span class="org-string">"OpenAI-Beta"</span> . <span class="org-string">"assistants=v2"</span>)))
+         (data (json-encode `((<span class="org-string">"role"</span> . <span class="org-string">"user"</span>)
+                              (<span class="org-string">"content"</span> . ,question))))
+         msg-id)
+    (request
+     url
+     <span class="org-builtin">:type</span> <span class="org-string">"POST"</span>
+     <span class="org-builtin">:headers</span> headers
+     <span class="org-builtin">:data</span> data
+     <span class="org-builtin">:parser</span> 'json-read
+     <span class="org-builtin">:success</span> (<span class="org-keyword">cl-function</span>
+               (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> data <span class="org-type">&amp;allow-other-keys</span>)
+                 (<span class="org-keyword">setq</span> msg-id (cdr (assoc 'id data)))
+                 (message <span class="org-string">"Message sent with ID: %s"</span> msg-id)
+                 msg-id))
+     <span class="org-builtin">:error</span> (<span class="org-keyword">cl-function</span>
+             (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> error-thrown <span class="org-type">&amp;allow-other-keys</span>)
+               (message <span class="org-string">"Error sending message: %S"</span> error-thrown))))
+    (<span class="org-keyword">while</span> (not msg-id)
+      (sleep-for 0.1)) <span class="org-comment-delimiter">;; </span><span class="org-comment">Wait for the request to complete</span>
+    msg-id))
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1322349" class="outline-2">
+<h2 id="org1322349">Run the Thread with Assistant</h2>
+<div class="outline-text-2" id="text-org1322349">
+<p>
+Now it is very time to evaluate the <code>question</code>. The <code>Assistant</code> was
+preliminarily created via web-interface and his <code>id</code> I've put into
+header's <code>PROPERTIES</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">request</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">json</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-org-arguments</span> (callback)
+  <span class="org-doc">"Extract the content of the current Org header and pass it to CALLBACK."</span>
+  (<span class="org-keyword">save-excursion</span>
+    (org-back-to-heading t)
+    (<span class="org-keyword">let</span> ((thread-id (org-entry-get nil <span class="org-string">"vizier-thread-id"</span>))
+          (assistant-id (org-entry-get nil <span class="org-string">"vizier-assistant-id"</span>)))
+      (<span class="org-keyword">if</span> (<span class="org-keyword">and</span> thread-id assistant-id)
+          (funcall callback thread-id assistant-id)
+        (message <span class="org-string">"Properties of Org header are incomplete."</span>)))))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-run</span> ()
+  <span class="org-doc">"Runs the current thread."</span>
+  (<span class="org-keyword">interactive</span>)
+  (vizier-org-arguments
+   (<span class="org-keyword">lambda</span> (thread-id assistant-id)
+     (vizier-thread-run thread-id assistant-id))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Put instructions for your Assistant into register q, please!</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-thread-run</span> (thread-id assistant-id)
+  <span class="org-doc">"Run a command in a specific THREAD-ID using a given ASSISTANT-ID and INSTRUCTIONS, returning the run ID."</span>
+  (<span class="org-keyword">let*</span> ((url (format <span class="org-string">"https://api.openai.com/v1/threads/%s/runs"</span> thread-id))
+         (instructions (get-register ?q))
+         (headers `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+                    (<span class="org-string">"Authorization"</span> . ,(concat <span class="org-string">"Bearer "</span> (getenv <span class="org-string">"OPENAI_API_KEY"</span>)))
+                    (<span class="org-string">"OpenAI-Beta"</span> . <span class="org-string">"assistants=v2"</span>)))
+         (data (json-encode `((<span class="org-string">"assistant_id"</span> . ,assistant-id)
+                              (<span class="org-string">"instructions"</span> . ,instructions))))
+         run-id)
+    (request
+     url
+     <span class="org-builtin">:type</span> <span class="org-string">"POST"</span>
+     <span class="org-builtin">:headers</span> headers
+     <span class="org-builtin">:data</span> data
+     <span class="org-builtin">:parser</span> 'json-read
+     <span class="org-builtin">:success</span> (<span class="org-keyword">cl-function</span>
+                (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> data <span class="org-type">&amp;allow-other-keys</span>)
+                  (<span class="org-keyword">setq</span> run-id (cdr (assoc 'id data)))
+                  (message <span class="org-string">"Run initiated with ID: %s"</span> run-id)
+                  (message <span class="org-string">"Assistant's instructions is:%s"</span> instructions)
+                  run-id))
+     <span class="org-builtin">:error</span> (<span class="org-keyword">cl-function</span>
+             (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> error-thrown <span class="org-type">&amp;allow-other-keys</span>)
+               (message <span class="org-string">"Error initiating run: %S"</span> error-thrown))))
+    (<span class="org-keyword">while</span> (not run-id)
+      (sleep-for 0.1)) <span class="org-comment-delimiter">;; </span><span class="org-comment">Wait for the request to complete</span>
+    run-id))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org62550eb" class="outline-2">
+<h2 id="org62550eb">Retrieve the Answer from the Thread</h2>
+<div class="outline-text-2" id="text-org62550eb">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">request</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">json</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier-answer</span> (<span class="org-type">&amp;optional</span> query-limit)
+  <span class="org-doc">"Retrieve the last message for a specific THREAD-ID from OpenAI API and insert its content in the Org buffer.</span>
+<span class="org-doc">If QUERY-LIMIT is provided, set the number of messages to retrieve."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let*</span> ((thread-id (org-entry-get nil <span class="org-string">"vizier-thread-id"</span>))
+         (limit (<span class="org-keyword">or</span> query-limit 1))
+         (url (format <span class="org-string">"https://api.openai.com/v1/threads/%s/messages?limit=%d"</span> thread-id limit))
+         (headers `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+                    (<span class="org-string">"Authorization"</span> . ,(concat <span class="org-string">"Bearer "</span> (getenv <span class="org-string">"OPENAI_API_KEY"</span>)))
+                    (<span class="org-string">"OpenAI-Beta"</span> . <span class="org-string">"assistants=v2"</span>)))
+         last-message-content)
+    (request
+     url
+     <span class="org-builtin">:type</span> <span class="org-string">"GET"</span>
+     <span class="org-builtin">:headers</span> headers
+     <span class="org-builtin">:parser</span> 'json-read
+     <span class="org-builtin">:success</span> (<span class="org-keyword">cl-function</span>
+               (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> data <span class="org-type">&amp;allow-other-keys</span>)
+                 (<span class="org-keyword">let</span> ((messages (cdr (assoc 'data data))))
+                   (<span class="org-keyword">when</span> (<span class="org-keyword">and</span> messages (arrayp messages))
+                     (<span class="org-keyword">let</span> ((last-message (aref messages (1- (length messages)))))
+                       (<span class="org-keyword">setq</span> last-message-content
+                             (mapconcat (<span class="org-keyword">lambda</span> (item)
+                                          (alist-get 'value (alist-get 'text item)))
+                                        (alist-get 'content last-message)
+                                        <span class="org-string">"\n"</span>))
+                       <span class="org-comment-delimiter">;; </span><span class="org-comment">Insert after the current paragraph</span>
+                       (<span class="org-keyword">save-excursion</span>
+                         (org-back-to-heading t)
+                         (<span class="org-keyword">while</span> (not (eobp))
+                           (org-forward-paragraph))
+                         (insert (format <span class="org-string">"\n#+begin_src markdown\n%s\n#+end_src\n"</span>
+                                         last-message-content))
+                         (end-of-buffer)
+                         (previous-line 2)
+                         (org-fill-paragraph)))))))
+     <span class="org-builtin">:error</span> (<span class="org-keyword">cl-function</span>
+             (<span class="org-keyword">lambda</span> (<span class="org-type">&amp;key</span> error-thrown <span class="org-type">&amp;allow-other-keys</span>)
+               (message <span class="org-string">"Error retrieving messages: %S"</span> error-thrown))))
+    (<span class="org-keyword">while</span> (not last-message-content)
+      (sleep-for 0.1)) <span class="org-comment-delimiter">;; </span><span class="org-comment">Wait for the request to complete</span>
+    last-message-content))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">vizier</span> ()
+  <span class="org-doc">"Sequentially execute vizier-org, vizier-run, and vizier-answer.</span>
+<span class="org-doc">  Pause for one second between vizier-run and vizier-answer."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((start (<span class="org-keyword">if</span> (use-region-p) (region-beginning) (point-min)))
+        (end (<span class="org-keyword">if</span> (use-region-p) (region-end) (point-max))))
+    (vizier-org start end)
+    (vizier-run)
+    (sleep-for 1)
+    (vizier-answer)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf0b81f6" class="outline-2">
+<h2 id="orgf0b81f6">Manual Testing</h2>
+<div class="outline-text-2" id="text-orgf0b81f6">
+<p>
+So it is the first answer in the current thread:
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Hi Tony! It seems like you'd like help with something specific, but
+your request is a bit unclear. If you're referring to an action in a
+software program, document, or coding environment, could you please
+provide more details? For instance, are you trying to edit a document,
+navigate a software interface, or adjust a section of code? Let me
+know how I can assist you further!
+</pre>
+</div>
+<p>
+Now it is the moment to compose the question:
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Can you write Elisp function <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">get-properties-from-file-header</span><span class="org-markdown-markup">`</span> which
+retrieve properties from the header of Org file?
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-markdown">Certainly, Tony! Below is an Emacs Lisp (Elisp) function named
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">get-properties-from-file-header</span><span class="org-markdown-markup">`</span> which retrieves properties from the
+header of an Org file. This function reads the metadata properties
+from the header section of an Org file and returns them as an
+association list.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun get-properties-from-file-header (file-path)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Retrieve properties from the header of an Org file specified by FILE-PATH.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">Returns an association list of properties."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (with-temp-buffer</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (insert-file-contents file-path)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((properties '())</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (org-header-regexp "#\\+\\([A-Z_]+\\):\\s-*\\(.*\\)"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (goto-char (point-min))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (while (re-search-forward org-header-regexp nil t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((property (upcase (match-string 1)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (value (match-string 2)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (push (cons property value) properties)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (nreverse properties))))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; (get-properties-from-file-header "/path/to/your/org-file.org")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">with-temp-buffer</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Creates a temporary buffer to work with.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">insert-file-contents</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Reads the contents of the Org file
+   specified by <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">file-path</span><span class="org-markdown-markup">`</span> into the buffer.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">org-header-regexp</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: A regular expression to match Org file
+   header properties. It captures lines that look like <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span>
+<span class="org-markdown-inline-code">   value</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">goto-char</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"> and </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">re-search-forward</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: This combination searches
+   through the buffer for matches to the regular expression.
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">match-string</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Retrieves the matched property name and value
+   from the regular expression.
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">push</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"> and </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">nreverse</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Pushes each matched property onto the
+   <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">properties</span><span class="org-markdown-markup">`</span> list, and then reverses the list to maintain the
+   original order.
+
+You can replace <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">"/path/to/your/org-file.org"</span><span class="org-markdown-markup">`</span> in the example usage
+with the actual path to test the function. This function should help
+you extract the header properties of any Org file as an association
+list.
+
+Let me know if you need further customization or additional features,
+Tony!
+</pre>
+</div>
+<p>
+Refactor this function for the current buffer with `org` file in it,
+please.
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Sure, Tony! Below is the refactored function
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">get-properties-from-current-buffer</span><span class="org-markdown-markup">`</span>. This variation of the function
+works directly on the current buffer, assuming it contains an Org
+file.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun get-properties-from-current-buffer ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Retrieve properties from the header of the current buffer (assuming it's an Org file).</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  Returns an association list of properties."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((properties '())</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (org-header-regexp "^#\\+\\([A-Z_]+\\):\\s-*\\(.*\\)"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (goto-char (point-min))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (while (re-search-forward org-header-regexp nil t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((property (upcase (match-string 1)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (value (match-string 2)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (push (cons property value) properties)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (nreverse properties))))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; M-x get-properties-from-current-buffer</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">interactive</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Makes the function callable via <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">save-excursion</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Saves the point and buffer state, ensuring it
+   returns to the original location after execution.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">goto-char</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">re-search-forward</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">match-string</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">push</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"> and</span>
+<span class="org-markdown-bold">   </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">nreverse</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: These function calls work in the same way as
+   described previously, but now they operate on the current buffer
+   directly.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Usage in Emacs:</span>
+
+<span class="org-markdown-list">1.</span> Open an Org file in Emacs.
+<span class="org-markdown-list">2.</span> Run the function by typing <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span>
+<span class="org-markdown-inline-code">   get-properties-from-current-buffer</span><span class="org-markdown-markup">`</span>.
+
+This function will then retrieve the properties from the header of the
+Org file in the current buffer and return them as an association list.
+
+Let me know if you need further customization or any other assistance,
+Tony!
+</pre>
+</div>
+<p>
+Refactor function, please. I want to retriveve `org-properties` from
+the currently opened `org` file. They usually begin with `#+PROPERTY:`
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Got it, Tony! I'll refactor the function to specifically look for
+lines beginning with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> and retrieve these properties from
+the current buffer. The function will then return the properties as an
+association list.
+
+Here's the refactored function:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun get-org-properties-from-current-buffer ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Retrieve properties from the header of the current Org buffer.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">These properties begin with `#+PROPERTY:`. Returns an association list of properties."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((properties '())</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (org-property-regexp "^#\\+PROPERTY:\\s-*\\([A-Z_]+\\):\\s-*\\(.*\\)"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (goto-char (point-min))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (while (re-search-forward org-property-regexp nil t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((property (upcase (match-string 1)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (value (match-string 2)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (push (cons property value) properties)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (nreverse properties))))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; M-x get-org-properties-from-current-buffer</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">interactive</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Allows the function to be called interactively
+   via <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">org-property-regexp}</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: The regular expression specifically
+   matches lines that start with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span>, followed by the
+   property name and value.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">save-excursion</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Preserves the point and buffer state,
+   ensuring it returns to the original location after execution.
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">goto-char</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">re-search-forward</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">match-string</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">push</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, and</span>
+<span class="org-markdown-bold">   </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">nreverse</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: These function calls process the current buffer
+   content to extract the properties that match the regular
+   expression.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Usage in Emacs:</span>
+
+<span class="org-markdown-list">1.</span> Open an Org file in Emacs.
+<span class="org-markdown-list">2.</span> Run the function by typing <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span>
+<span class="org-markdown-inline-code">   get-org-properties-from-current-buffer</span><span class="org-markdown-markup">`</span>.
+
+This function will then search for <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> lines in the current
+buffer, extract the associated properties, and return them as an
+association list.
+
+Let me know if you have any further modifications or additional
+features you'd like, Tony!
+</pre>
+</div>
+<p>
+Looks good, but not enough!
+It is so, because instruction for the <code>Assistant</code> is:
+</p>
+<pre class="example" id="orgd683c84">
+Please address the user as Tony.
+</pre>
+<p>
+Put the instructions for our <code>Assistant</code> into the register <code>q</code>:
+</p>
+<pre class="example" id="org1eafa59">
+You are an experienced Emacs user proficient in Elisp programming language.
+</pre>
+
+<p>
+The next question is the same:
+</p>
+<pre class="example" id="orgc84775a">
+Can you write Elisp function `get-properties-from-file-header` which retrieve properties from the header of Org file?
+</pre>
+<div class="org-src-container">
+<pre class="src src-markdown">Certainly, Tony! Here&#8217;s an improved version of the function
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">get-properties-from-file-header</span><span class="org-markdown-markup">`</span> that retrieves properties from the
+header of an Org file. This function reads the Org file from a
+specified path and extracts <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> lines from the header
+section, returning them as an association list.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun get-properties-from-file-header (file-path)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Retrieve properties from the header of an Org file specified by FILE-PATH.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">Returns an association list of properties where each property is represented</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">as a cons cell (name . value)."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (with-temp-buffer</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (insert-file-contents file-path)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((properties '())</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (org-property-regexp "^#\\+PROPERTY:\\s-*\\([A-Z_]+\\):\\s-*\\(.*\\)")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (header-end nil))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (goto-char (point-min))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      ;; Find the end of the properties header, typically before the first non-header content</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (setq header-end (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">             (re-search-forward "^\\* " nil t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">             (point)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      ;; Extract properties within the header section</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (while (re-search-forward org-property-regexp header-end t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((property (upcase (match-string 1)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (value (match-string 2)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (push (cons property value) properties)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (nreverse properties))))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; (get-properties-from-file-header "/path/to/your/org-file.org")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">with-temp-buffer</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Creates a temporary buffer to load the
+   contents of the Org file.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">insert-file-contents</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Loads the contents of the Org file
+   specified by <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">file-path</span><span class="org-markdown-markup">`</span> into the temporary buffer.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">org-property-regexp</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Regular expression to match the
+   <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> lines in the Org file.
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">header-end</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: This variable marks the end of the header
+   section. This is usually identified as the first headline in the
+   Org file (e.g., lines starting with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">* </span><span class="org-markdown-markup">`</span>).
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">goto-char</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">re-search-forward</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">match-string</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">push</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, and</span>
+<span class="org-markdown-bold">   </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">nreverse</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: These functions operate within the header section to
+   find and extract properties, then reverse the resulting list to
+   maintain the original order.
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">header-end</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"> calculation</span><span class="org-markdown-markup">**</span>: The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">save-excursion</span><span class="org-markdown-markup">`</span> function ensures
+   we find the end of the header without moving the point permanently.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Usage Example</span>
+
+To utilize this function, provide the path to your Org file:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(get-properties-from-file-header "/path/to/your/org-file.org")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+This function will return an association list of the properties found
+in the header of the specified Org file.
+
+Let me know if you need more adjustments or further help, Tony!
+</pre>
+</div>
+<p>
+Modify by additional question:
+</p>
+<pre class="example" id="org8837f2d">
+I mean script for _current_ buffer.
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Got it. Below is an updated function for retrieving properties from
+the header of the currently opened Org file in the current buffer.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun get-properties-from-current-buffer ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Retrieve properties from the header of the current Org buffer.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">These properties are denoted by `#+PROPERTY:`. Returns an association list of properties."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((properties '())</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (org-property-regexp "^#\\+PROPERTY:\\s-*\\(.*\\)\\s-*:\\s-*\\(.*\\)")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (header-end nil))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (goto-char (point-min))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      ;; Find the end of the properties header, ideally just before the first headline</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (setq header-end (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">             (or (re-search-forward "^\\* " nil t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                 (point-max))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      ;; Extract properties within the header section</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (while (re-search-forward org-property-regexp header-end t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (let ((property (match-string 1))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (value (match-string 2)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (push (cons (upcase property) value) properties)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (nreverse properties))))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Call this function interactively with M-x get-properties-from-current-buffer</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; or evaluate it in your Lisp environment to retrieve the properties.</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">interactive</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Allows the function to be called interactively
+   using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">org-property-regexp</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: A regular expression to match lines that
+   start with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> followed by the property name and value.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">save-excursion</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Preserves the point and buffer states,
+   ensuring that it returns to the original location after execution.
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">goto-char (point-min)</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Moves the point to the beginning of
+   the buffer to start searching from the top.
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">header-end</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Identifies the end of the header section,
+   typically just before the first headline (lines starting with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">*</span>
+<span class="org-markdown-inline-code">   </span><span class="org-markdown-markup">`</span>). If no headlines are found, it defaults to the end of the
+   buffer.
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">re-search-forward</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">match-string</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">push</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, and </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">nreverse</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>:
+   These functions operate within the header section to find and
+   extract properties using the regular expression, then reverse the
+   resulting list to maintain the original order.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">How to Use:</span>
+
+<span class="org-markdown-list">1.</span> Open an Org file in Emacs.
+<span class="org-markdown-list">2.</span> Run the function by typing <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span>
+<span class="org-markdown-inline-code">   get-properties-from-current-buffer</span><span class="org-markdown-markup">`</span>.
+
+The function will search the header section of the current buffer for
+lines starting with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">#+PROPERTY:</span><span class="org-markdown-markup">`</span> and return the properties as an
+association list.
+
+Let me know if you need further modifications or additional features,
+Tony!
+</pre>
+</div>
+
+<p>
+So can you explain Elisp's main concepts, please?
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">So can you explain Elisp's main concepts, please?
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Certainly, Tony! Emacs Lisp (Elisp) is a dialect of the Lisp
+programming language used primarily for extending and customizing the
+Emacs text editor. Let's go through some of the main concepts of
+Elisp:
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">1. S-expressions (Symbolic Expressions)</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Evaluation</span><span class="org-markdown-markup">**</span>: Elisp code is written in the form of S-expressions (often abbreviated as s-exprs). These consist of a function and its arguments, both enclosed in parentheses.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (+ 1 2)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Evaluates to 3</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">2. Functions</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Defining Functions</span><span class="org-markdown-markup">**</span>: You can define functions using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">defun</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (defun greet (name)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    "Greet a person with NAME."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "Hello, %s!" name))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Usage: (greet "Tony") -&gt; "Hello, Tony!"</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">3. Variables</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Setting Variables</span><span class="org-markdown-markup">**</span>: Variables in Elisp can be defined and set using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">setq</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (setq my-variable 42)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (setq another-variable "Hello, Emacs!")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Local Variables</span><span class="org-markdown-markup">**</span>: You can create local variables using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">let</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((x 10)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (y 20))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (+ x y))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Returns 30</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">4. Lists</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Creating Lists</span><span class="org-markdown-markup">**</span>: Lists are one of the central data structures in Lisp.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (setq my-list '(1 2 3 4 5))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (car my-list)  ;; Returns 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (cdr my-list)  ;; Returns (2 3 4 5)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (nth 2 my-list)  ;; Returns 3</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">5. Control Structures</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Conditionals</span><span class="org-markdown-markup">**</span>: Elisp supports standard conditional structures like <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">if</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">cond</span><span class="org-markdown-markup">`</span>, and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">when</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (if (&gt; 3 2)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (message "3 is greater than 2")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "2 is greater or equal to 3"))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">  (cond ((= x 1) (message "x is 1"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    ((= x 2) (message "x is 2"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (t (message "x is something else")))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">  (when (&gt; 3 2)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "This always runs because 3 is greater than 2"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">6. Buffers and Windows</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Current Buffer</span><span class="org-markdown-markup">**</span>: Manipulating content within buffers is a key feature of Elisp.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (with-current-buffer "example-buffer"</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (insert "Hello, Emacs Lisp!"))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">7. Hooks</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Customization Hooks</span><span class="org-markdown-markup">**</span>: Hooks are variables that hold lists of functions to be called at specific times.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (add-hook 'before-save-hook 'delete-trailing-whitespace)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Deletes trailing whitespace before saving any file</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">8. Macros</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Creating Macros</span><span class="org-markdown-markup">**</span>: Macros operate on S-expressions and return transformed S-expressions.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (defmacro unless (condition &amp;rest body)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    `(if (not ,condition)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">     (progn ,@body)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Usage: (unless (&gt; 2 3) (message "2 is not greater than 3."))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">9. Interactive Functions</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Interactive Commands</span><span class="org-markdown-markup">**</span>: You can make functions interactive so they can be called with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (defun my-command ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    "A simple interactive command."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "My command has been called!"))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Now you can call this with M-x my-command</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">10. Packaging and Libraries</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Using External Libraries</span><span class="org-markdown-markup">**</span>: You can load and manage packages using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">require</span><span class="org-markdown-markup">`</span> and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">use-package</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (require 'org)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (use-package magit</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    :ensure t</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    :config</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (global-set-key (kbd "C-x g") 'magit-status))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Detailed Example: Buffer Manipulation</span>
+
+Here's a practical example using some of these concepts to illustrate
+how to interact with a buffer:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun insert-current-time ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Insert the current date and time at point."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (insert (format-time-string "%Y-%m-%d %H:%M:%S")))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun buffer-info ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Display information about the current buffer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Buffer name: %s\nSize: %d"</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">       (buffer-name) </span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">       (buffer-size)))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun add-to-buffer-end (text)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Add TEXT to the end of the current buffer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive "sEnter text to add: ")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (goto-char (point-max))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (insert "\n" text)))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Now you can call these with M-x insert-current-time, M-x buffer-info, etc.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Summary</span>
+By understanding these main concepts, you'll be well-equipped to write
+and understand Emacs Lisp code. Elisp is both a powerful and flexible
+language, especially tailored for extending the Emacs editing
+environment. If you have any specific questions or need further
+clarification on any topics, feel free to ask!
+</pre>
+</div>
+
+<p>
+So what you would think about a software developer, who don't use Emacs?
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">As a long-time Emacs user and someone passionate about the
+capabilities of Emacs and Emacs Lisp, I certainly recognize the unique
+and powerful features that Emacs offers. However, evaluating a
+software developer's effectiveness or expertise based solely on their
+choice of tools is neither fair nor productive. Here are some thoughts
+on this broader topic:
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">1. Tool Diversity</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Individual Preferences</span><span class="org-markdown-markup">**</span>: Developers have different preferences
+  based on their experiences, comfort levels, and specific needs. Some
+  may prefer Emacs, while others might find other editors such as Vim,
+  Visual Studio Code, Sublime Text, or even IDEs like IntelliJ IDEA or
+  Eclipse better suited to their workflow.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Project Requirements</span><span class="org-markdown-markup">**</span>: Certain projects or development
+  environments might dictate the choice of tools. For example, working
+  with large Java projects might necessitate using a robust IDE like
+  IntelliJ IDEA or Eclipse.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Team and Collaboration</span><span class="org-markdown-markup">**</span>: In some team environments, standardizing
+  on specific tools can enhance collaboration and productivity. A
+  developer might use a particular editor because it aligns with their
+  team's workflow and practices.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">2. Learning Curve and Productivity</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Ease of Learning</span><span class="org-markdown-markup">**</span>: Emacs, while powerful, also has a steep
+  learning curve. Developers might choose other tools that allow them
+  to become productive more quickly.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Customization</span><span class="org-markdown-markup">**</span>: Not all developers need or want the deep
+  customization that Emacs provides. Many find the default
+  configurations of other editors meet their needs without extensive
+  tweaking.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Community and Ecosystem</span><span class="org-markdown-markup">**</span>: Some editors or IDEs might have more
+  vibrant ecosystems or plugins that cater to specific areas of
+  software development, making them more attractive for certain tasks.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">3. Productivity and Efficiency</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Effectiveness Over Tools</span><span class="org-markdown-markup">**</span>: A developer's productivity is
+  determined more by how effectively they can solve problems, write
+  clean and maintainable code, and work within their team, rather than
+  the specific tool they use.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Adaptability</span><span class="org-markdown-markup">**</span>: A good developer is typically adaptable and can
+  become proficient with various tools as needed.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">4. Innovation and Personal Growth</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Continuous Learning</span><span class="org-markdown-markup">**</span>: The software development field is always
+  evolving, and so too do the tools and editors. A developer who keeps
+  learning and adapts to new tools and best practices is what truly
+  matters.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Community Contributions</span><span class="org-markdown-markup">**</span>: Developers contribute to and benefit
+  from different communities. For instance, someone who's an active
+  contributor to a VS Code extension may provide just as much value as
+  someone who contributes to Emacs packages.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">5. Respect and Inclusivity</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Respect for Choices</span><span class="org-markdown-markup">**</span>: Tools and editors are personal choices, and
+  it's important to respect the diversity in these choices. Mocking or
+  undervaluing someone because of the tools they use is
+  counterproductive.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Inclusivity</span><span class="org-markdown-markup">**</span>: Encouraging and supporting a wide range of tools
+  and practices fosters a more inclusive and innovative development
+  community.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Conclusion</span>
+In summary, while Emacs is an exceptional tool beloved by many,
+including myself, being a successful and effective software developer
+is about much more than just the editor one uses. It's about
+problem-solving, collaboration, continuous learning, and
+adaptability. Therefore, a developer who does not use Emacs can be
+just as proficient and valuable as one who does. The focus should
+always be on the quality of the work and the value they bring to their
+projects and teams.
+
+If you have any more questions or need insights on specific topics
+related to Emacs, Elisp, or software development in general, feel free
+to ask!
+</pre>
+</div>
+<p>
+Write Elisp function `vizier` that sequentially executes three
+interactive functions: `vizier-org`, `visier-run` and `vizier-answer`
+with pause between the last two in one second.
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Certainly, Tony! Below is an Emacs Lisp function named <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> that
+sequentially executes three interactive functions: <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span>,
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span>, and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span>. It also includes a one-second pause
+between the execution of <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span> and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span> using
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">sleep-for</span><span class="org-markdown-markup">`</span>.
+
+Here's how you could write this function:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Sequentially execute vizier-org, vizier-run, and vizier-answer.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">Pause for one second between vizier-run and vizier-answer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (vizier-org)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (vizier-run)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (sleep-for 1)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (vizier-answer))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example dummy implementations of the interactive functions (for testing)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-org ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-org."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Executing vizier-org..."))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-run ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-run."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Executing vizier-run..."))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-answer ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-answer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Executing vizier-answer..."))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; M-x vizier</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation:</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">interactive</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Marks <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> as an interactive function that
+   can be called with <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">vizier-org</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">vizier-run</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold">, </span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">vizier-answer</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Sequentially calls
+   these existing interactive functions.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-bold"><span class="org-markdown-inline-code">sleep-for</span></span><span class="org-markdown-bold"><span class="org-markdown-markup">`</span></span><span class="org-markdown-markup">**</span>: Pauses the execution for one second between
+   <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span> and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span>.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Testing the Function:</span>
+
+If you already have implementations for <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span>,
+and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span>, you can skip the dummy implementations provided
+above. Otherwise, you can use these dummy implementations to test the
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> function and replace them with your actual interactive
+functions later.
+
+To use the function:
+<span class="org-markdown-list">1.</span> Evaluate the function definitions in your Emacs environment.
+<span class="org-markdown-list">2.</span> Call the function by typing <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x vizier</span><span class="org-markdown-markup">`</span>.
+
+This will execute <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span>, then <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span>, pause for one
+second, and finally execute <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span>.
+
+If you have any specific requirements or additional features you'd
+like to add, feel free to ask!
+</pre>
+</div>
+<p>
+The `vizier-org` function:
+```
+       (defun vizier-org (start end)
+         "Grasp the active region or the current header."
+         ;;(interactive "r")
+         ;; Check if there's an active region
+         (let* ((use-region (use-region-p))
+                (query (if use-region
+                           (buffer-substring-no-properties start end)
+                         (save-excursion
+                           (org-back-to-heading t)
+                           (org-element-property :title (org-element-at-point))))))
+           ;; Print message based on context
+           (if use-region
+               (message "The active region will be the query: %s" query)
+             (message "The current header will be the query: %s" query))
+         (vizier-send-query query)
+         ;; place for extension
+         ))
+```
+visier, as you're suggested above:
+```
+  (defun vizier ()
+    "Sequentially execute vizier-org, vizier-run, and vizier-answer.
+  Pause for one second between vizier-run and vizier-answer."
+    (interactive)
+    (vizier-org)
+    (vizier-run)
+    (sleep-for 1)
+    (vizier-answer))
+```
+</p>
+
+<p>
+If I try `M-x vizier` it throws the error:
+```
+vizier: Wrong number of arguments: (lambda (start end) "Grasp the
+active region or the current header." (let* ((use-region
+(use-region-p)) (query (if use-region (buffer-substring-no-properties
+start end) (save-excursion (org-back-to-heading t)
+(org-element-property :title (org-element-at-point)))))) (if
+use-region (message "The active region will be the query: %s" query)
+(message "The current header will be the query: %s" query))
+(vizier-send-query query))), 0
+```
+</p>
+
+<p>
+What is wrong?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown">The error you&#8217;re seeing is related to the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> function
+needing specific arguments, which it isn't receiving when called from
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span>. Your <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> function is designed to take two arguments
+(<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">start</span><span class="org-markdown-markup">`</span> and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">end</span><span class="org-markdown-markup">`</span>), likely for use with an active region, but
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> attempts to call it without these arguments.
+
+To resolve this issue, you need to:
+<span class="org-markdown-list">1.</span> Ensure <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> can handle both being calling normally from
+   <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> and interactively from <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x vizier-org</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">2.</span> Modify <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> to correctly call <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> with the appropriate
+   arguments.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Step 1: Ensure </span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-inline-code">vizier-org</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span><span class="org-markdown-header-face-3"> can handle calls properly</span>
+
+First, let's make sure <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> works both interactively and from
+within the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> function. This can be done by making <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span>
+interactively handle an active region or fallback to the current
+heading when called without <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">start</span><span class="org-markdown-markup">`</span> and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">end</span><span class="org-markdown-markup">`</span>.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-org (start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Grasp the active region or the current header."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive "r")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Check if there's an active region, or if start and end are provided</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let* ((use-region (if (use-region-p) t (not (and (null start) (null end)))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">     (query (if use-region</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (buffer-substring-no-properties start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (org-back-to-heading t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (org-element-property :title (org-element-at-point))))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    ;; Print message based on context</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (if use-region</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "The active region will be the query: %s" query)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (message "The current header will be the query: %s" query))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-send-query query)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Step 2: Modify </span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-inline-code">vizier</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span><span class="org-markdown-header-face-3"> to correctly call </span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-inline-code">vizier-org</span></span><span class="org-markdown-header-face-3"><span class="org-markdown-markup">`</span></span>
+
+Now let's adjust <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier</span><span class="org-markdown-markup">`</span> so it calls <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> with the
+appropriate arguments. Since <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span> is meant to handle regions,
+we'll look for an active region or default to the whole buffer when
+there's no region.
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Sequentially execute vizier-org, vizier-run, and vizier-answer.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">Pause for one second between vizier-run and vizier-answer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((start (if (use-region-p) (region-beginning) (point-min)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (end (if (use-region-p) (region-end) (point-max))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-org start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-run)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (sleep-for 1)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-answer)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Dummy Functions for Completion</span>
+
+If you haven't defined <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-send-query</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span>, and
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span>, you might want to add dummy implementations for
+testing. Assuming they are defined, it should work correctly.
+
+Here&#8217;s a recap of the complete solution:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">elisp</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-org (start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Grasp the active region or the current header."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive "r")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  ;; Check if there's an active region or if start and end are provided</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let* ((use-region (if (use-region-p) t (not (and (null start) (null end)))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">     (query (if use-region</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (buffer-substring-no-properties start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">          (save-excursion</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (org-back-to-heading t)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            (org-element-property :title (org-element-at-point))))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    ;; Print message based on context</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (if use-region</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (message "The active region will be the query: %s" query)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">      (message "The current header will be the query: %s" query))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-send-query query)))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Sequentially execute vizier-org, vizier-run, and vizier-answer.</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">Pause for one second between vizier-run and vizier-answer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (let ((start (if (use-region-p) (region-beginning) (point-min)))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (end (if (use-region-p) (region-end) (point-max))))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-org start end)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-run)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (sleep-for 1)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    (vizier-answer)))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Example Dummy Implementations for testing</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-send-query (query)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-send-query."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Sending query: %s" query))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-run ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-run."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Executing vizier-run..."))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">(defun vizier-answer ()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  "Dummy implementation of vizier-answer."</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (interactive)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">  (message "Executing vizier-answer..."))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">;; Usage:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">;; M-x vizier</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+Now, calling <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">M-x vizier</span><span class="org-markdown-markup">`</span> should sequentially execute <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-org</span><span class="org-markdown-markup">`</span>,
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-run</span><span class="org-markdown-markup">`</span>, and <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">vizier-answer</span><span class="org-markdown-markup">`</span> with a one-second pause between the
+last two functions.
+</pre>
+</div>
+<p>
+Just say Hi!
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown">Hi Tony! How can I assist you further today?
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Hi! &#128588; How can I help you today?
+</pre>
+</div>
+</div>
+</div>
