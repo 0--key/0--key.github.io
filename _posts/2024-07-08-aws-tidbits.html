@@ -1,0 +1,308 @@
+---
+layout: page
+title: Amazon Web Service
+tagline: " micro-instance initiation"
+permalink: /aws/micro-instance-initiation.html
+categories: [AWS]
+tags: [micro-instance, t2, initiation]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6d61bd8">I want to use a free AWS EC2 micro-instance with the Debian distribution of Linux. Is this possible?</a></li>
+<li><a href="#org27003ae">What is the difference between "t2.micro" and "t3.micro" instances?</a></li>
+<li><a href="#orge07bd9d">When I create my subnet my default IPv4 VPC CIDR block is 172.31.0.0/16. What I have to specify as IPv4 subnet CIDR block?</a></li>
+<li><a href="#orgd7af85d">I successfully connected to my Debian AWS instance, and try to install additional package `emacs`:</a></li>
+<li><a href="#org74e7b19">What if I want to install `Emacs` without `X` support?</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6d61bd8" class="outline-2">
+<h2 id="org6d61bd8">I want to use a free AWS EC2 micro-instance with the Debian distribution of Linux. Is this possible?</h2>
+<div class="outline-text-2" id="text-org6d61bd8">
+<div class="org-src-container">
+<pre class="src src-markdown">Yes, it is possible to use a free AWS EC2 micro-instance with a Debian
+distribution of Linux. Here are the steps to set it up:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Sign in to AWS Management Console</span><span class="org-markdown-markup">**</span>: Navigate to <span class="org-markdown-markup">[</span><span class="org-markdown-link">AWS Management</span>
+<span class="org-markdown-link">   Console</span><span class="org-markdown-markup">](</span><span class="org-markdown-url">https://aws.amazon.com/console/</span><span class="org-markdown-markup">)</span>.
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Launch an instance</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Go to the EC2 Dashboard and click on "Launch Instance".
+   <span class="org-markdown-list">-</span> Choose a "Quick Start" AMI. You can search for "Debian" in the
+     search bar.
+
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Select the "Free tier eligible" instance type</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Choose "t2.micro" or "t3.micro" (both are free tier-eligible).
+
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Configure Instance Details</span><span class="org-markdown-markup">**</span>: You can leave the default settings
+   or adjust them according to your needs.
+
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Add Storage</span><span class="org-markdown-markup">**</span>: The default storage settings are usually
+   sufficient for a micro-instance, but you can adjust them if needed.
+
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Add Tags</span><span class="org-markdown-markup">**</span>: Optionally, add tags to help you identify the
+   instance.
+
+<span class="org-markdown-list">7.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Configure Security Group</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Add rules to allow SSH (port 22) so you can connect to your
+     instance.
+   <span class="org-markdown-list">-</span> Add any other rules required for your application.
+
+<span class="org-markdown-list">8.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Review and Launch</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Review your settings and click "Launch".
+   <span class="org-markdown-list">-</span> Select or create a new key pair to connect to your instance
+     securely and click "Launch Instances".
+
+<span class="org-markdown-list">9.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Connect to your instance</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Once the instance is running, select it and click on "Connect".
+   <span class="org-markdown-list">-</span> Follow the provided instructions to SSH into your Debian instance
+     using the key pair you downloaded.
+
+This will give you a Debian-based micro-instance running on AWS,
+within the free tier limits.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org27003ae" class="outline-2">
+<h2 id="org27003ae">What is the difference between "t2.micro" and "t3.micro" instances?</h2>
+<div class="outline-text-2" id="text-org27003ae">
+<div class="org-src-container">
+<pre class="src src-markdown">The primary differences between "t2.micro" and "t3.micro" instances on
+AWS are related to performance characteristics, pricing, and
+underlying technology. Here's a concise comparison:
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Performance</span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T2 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Baseline Performance:</span><span class="org-markdown-markup">**</span> T2 instances provide a baseline level of
+    CPU performance with the ability to burst above the baseline for a
+    short time.
+  <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">CPU Credits:</span><span class="org-markdown-markup">**</span> They accumulate CPU credits when idle and consume
+    credits while bursting. If the credits are exhausted, the instance
+    will be throttled.
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T3 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Enhanced Baseline:</span><span class="org-markdown-markup">**</span> T3 instances generally offer better
+    baseline performance compared to T2.
+  <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">CPU Credits:</span><span class="org-markdown-markup">**</span> Similar to T2 in that they use CPU credits, but
+    T3 instances have the additional advantage of <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Unlimited Mode</span><span class="org-markdown-markup">**</span>
+    by default, where they can sustain high CPU performance without
+    being throttled, and you pay for any extra usage beyond the
+    baseline.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Pricing</span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T2 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> Often slightly cheaper than T3 instances.
+  <span class="org-markdown-list">-</span> Typically used for consistent, low-CPU-bound workloads.
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T3 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> Slightly more expensive but more cost-efficient for variable
+    workloads due to their improved baseline performance and CPU
+    credit management.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Technology</span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T2 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> Earlier generation, generally based on Intel processors (older
+    versions).
+  <span class="org-markdown-list">-</span> EBS-optimized option available but might lower IOPS compared to
+    T3.
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T3 Instances</span><span class="org-markdown-markup">**</span>:
+  <span class="org-markdown-list">-</span> Newer generation, often based on AWS Nitro System, which provides
+    better network performance and flexibility.
+  <span class="org-markdown-list">-</span> Generally more efficient and capable compared to T2.
+  <span class="org-markdown-list">-</span> Support for both Intel and AMD processors.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Summary</span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T2.micro</span><span class="org-markdown-markup">**</span>: Suitable for consistent workloads with occasional
+  bursts, slightly cheaper.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">T3.micro</span><span class="org-markdown-markup">**</span>: Better for variable workloads with frequent bursting
+  needs, more efficient use of CPU credits, and enhanced networking
+  capabilities.
+
+Choosing between the two depends on your specific use case regarding
+performance requirements and cost considerations.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge07bd9d" class="outline-2">
+<h2 id="orge07bd9d">When I create my subnet my default IPv4 VPC CIDR block is 172.31.0.0/16. What I have to specify as IPv4 subnet CIDR block?</h2>
+<div class="outline-text-2" id="text-orge07bd9d">
+<div class="org-src-container">
+<pre class="src src-markdown">When you create a subnet within a VPC with the default IPv4 CIDR block
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/16</span><span class="org-markdown-markup">`</span>, you need to specify a smaller CIDR block for the
+subnet that falls within the range of the VPC's CIDR block. Here&#8217;s how
+you can determine and specify an appropriate CIDR block for your
+subnet:
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Example Subnet CIDR Blocks</span>
+
+For a default VPC CIDR block of <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/16</span><span class="org-markdown-markup">`</span>, here are some
+examples of valid subnet CIDR blocks that adhere to common subnetting
+practices:
+
+<span class="org-markdown-header-delimiter">#### </span><span class="org-markdown-header-face-4">/24 subnet (256 IP addresses)</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/24</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.1.0/24</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.2.0/24</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> ...
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.255.0/24</span><span class="org-markdown-markup">`</span>
+
+<span class="org-markdown-header-delimiter">#### </span><span class="org-markdown-header-face-4">/20 subnet (4096 IP addresses)</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/20</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.16.0/20</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.32.0/20</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> ...
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.240.0/20</span><span class="org-markdown-markup">`</span>
+
+<span class="org-markdown-header-delimiter">#### </span><span class="org-markdown-header-face-4">/28 subnet (16 IP addresses)</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/28</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.16/28</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.32/28</span><span class="org-markdown-markup">`</span>
+<span class="org-markdown-list">-</span> ...
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.255.240/28</span><span class="org-markdown-markup">`</span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Steps to Create a Subnet</span>
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Navigate to the VPC Dashboard</span><span class="org-markdown-markup">**</span>: In the AWS Management Console,
+   go to the VPC Dashboard.
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Select the VPC</span><span class="org-markdown-markup">**</span>: Choose the VPC with the CIDR block
+   <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.0.0/16</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Create Subnet</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Click on "Create Subnet".
+   <span class="org-markdown-list">-</span> Select the VPC you want to create the subnet in.
+   <span class="org-markdown-list">-</span> Specify the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">Subnet Name</span><span class="org-markdown-markup">`</span> for easy identification.
+   <span class="org-markdown-list">-</span> Choose the Availability Zone where you want the subnet to
+     reside. You can also select "No Preference".
+   <span class="org-markdown-list">-</span> Enter the IPv4 CIDR block for the subnet. For example:
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">172.31.1.0/24</span><span class="org-markdown-markup">`</span> for a /24 subnet providing 256 addresses
+     <span class="org-markdown-list">-</span> Or use a smaller or larger subnet mask based on your
+       requirements, such as /20 for more addresses or /28 for fewer.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Important Points to Consider:</span>
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Address Size</span><span class="org-markdown-markup">**</span>: Smaller subnet masks like /20 provide more IP
+  addresses but fewer subnets, whereas larger subnet masks like /28
+  provide fewer IP addresses but more subnets.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Overlapping</span><span class="org-markdown-markup">**</span>: Ensure that the subnet CIDR block does not overlap
+  with another subnet in the same VPC.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Size Allocation</span><span class="org-markdown-markup">**</span>: Think about future scaling&#8212;it's often a good
+  idea to leave some space for additional subnets later.
+
+By following these practices, you can effectively manage and allocate
+IP addresses within your VPC.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd7af85d" class="outline-2">
+<h2 id="orgd7af85d">I successfully connected to my Debian AWS instance, and try to install additional package `emacs`:</h2>
+<div class="outline-text-2" id="text-orgd7af85d">
+<p>
+```
+sudo apt install emacs
+Reading package lists&#x2026; Done
+Building dependency tree&#x2026; Done
+Reading state information&#x2026; Done
+E: Unable to locate package emacs
+```
+Seems like it is necessary to configure the software repositories first. Am I right? 
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-markdown">Yes, you are correct. If you are unable to locate the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs</span><span class="org-markdown-markup">`</span> package,
+it's often because the package repositories are not properly
+configured. Here are the steps to configure your repositories and
+install <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs</span><span class="org-markdown-markup">`</span> on your Debian AWS instance:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Update Package Lists</span><span class="org-markdown-markup">**</span>: First, update the package lists to ensure they are up to date.
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo apt update</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Check Sources List</span><span class="org-markdown-markup">**</span>: Ensure that the sources list file has the necessary repositories. The sources list file is usually located at <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">/etc/apt/sources.list</span><span class="org-markdown-markup">`</span>. You can check its contents with:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   cat /etc/apt/sources.list</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Edit Sources List</span><span class="org-markdown-markup">**</span>: If necessary, edit the sources list file to include the official Debian repositories. Use a text editor like nano or vim:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo nano /etc/apt/sources.list</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+   Make sure it includes lines similar to the following (replace <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">buster</span><span class="org-markdown-markup">`</span> with your Debian version if different):
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   deb http://deb.debian.org/debian buster main</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   deb http://deb.debian.org/debian buster-updates main</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   deb http://deb.debian.org/debian buster-backports main</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   deb http://security.debian.org/debian-security buster/updates main</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Update Package Lists Again</span><span class="org-markdown-markup">**</span>: After saving any changes to the sources list, run the following command again to update the package lists:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo apt update</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Install Emacs</span><span class="org-markdown-markup">**</span>: Now, try to install <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs</span><span class="org-markdown-markup">`</span> again:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo apt install emacs</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Example:</span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">sudo apt update</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">sudo apt install emacs</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+These steps should configure the repositories correctly and allow you
+to install <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs</span><span class="org-markdown-markup">`</span> on your Debian AWS instance.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org74e7b19" class="outline-2">
+<h2 id="org74e7b19">What if I want to install `Emacs` without `X` support?</h2>
+<div class="outline-text-2" id="text-org74e7b19">
+<div class="org-src-container">
+<pre class="src src-markdown">If you want to install <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">Emacs</span><span class="org-markdown-markup">`</span> without X support (i.e., the text-only
+version of Emacs that runs in the terminal), you should install the
+package <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs-nox</span><span class="org-markdown-markup">`</span>. This version of Emacs is designed to run without
+any graphical user interface.
+
+Here&#8217;s how you can do it:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Update Package Lists</span><span class="org-markdown-markup">**</span>: Always a good practice to update the package lists to ensure you get the latest information.
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo apt update</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Install Emacs without X Support</span><span class="org-markdown-markup">**</span>:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   sudo apt install emacs-nox</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+This will install the Emacs text editor without any X dependencies,
+allowing you to run it entirely within the terminal.
+
+<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Example:</span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">sudo apt update</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">sudo apt install emacs-nox</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+By installing <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">emacs-nox</span><span class="org-markdown-markup">`</span>, you'll be able to use Emacs in a terminal
+environment without the overhead of graphical components.
+</pre>
+</div>
+</div>
+</div>

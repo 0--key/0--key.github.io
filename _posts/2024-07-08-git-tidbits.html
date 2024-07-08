@@ -1,0 +1,98 @@
+---
+layout: page
+title: Git Tidbits
+tagline: " as Q/A"
+permalink: /git/tidbits.html
+categories: [Git]
+tags: [tidbits]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgebb3da6">Intro</a></li>
+<li><a href="#org2672a3e">How to make my own private repository on some particular folder?</a></li>
+<li><a href="#orgff4a960">Is a private repository on GitHub free?</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgebb3da6" class="outline-2">
+<h2 id="orgebb3da6">Intro</h2>
+</div>
+
+<div id="outline-container-org2672a3e" class="outline-2">
+<h2 id="org2672a3e">How to make my own private repository on some particular folder?</h2>
+<div class="outline-text-2" id="text-org2672a3e">
+<div class="org-src-container">
+<pre class="src src-markdown">To create a private Git repository in a specific folder, follow these
+steps:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Navigate to the folder</span><span class="org-markdown-markup">**</span>:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   cd /path/to/your/folder</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Initialize the Git repository</span><span class="org-markdown-markup">**</span>:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   git init</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Add your files to the repository</span><span class="org-markdown-markup">**</span>:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   git add .</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Commit the files</span><span class="org-markdown-markup">**</span>:
+<span class="org-markdown-code">   </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">   git commit -m "Initial commit"</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">   ```</span></span>
+
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Host your private repository</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> If you want to host it locally, you're done. To share it,
+     consider setting up a SSH server.
+   <span class="org-markdown-list">-</span> If you want to host it remotely (e.g., GitHub, GitLab):
+     <span class="org-markdown-list">-</span> Create a new private repository on the hosting site.
+     <span class="org-markdown-list">-</span> Add the remote repository URL:
+<span class="org-markdown-code">       </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">       git remote add origin &lt;remote_repository_URL&gt;</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">       ```</span></span>
+     <span class="org-markdown-list">-</span> Push your local repository to the remote one:
+<span class="org-markdown-code">       </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">sh</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">       git push -u origin master</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">       ```</span></span>
+
+Note that on popular hosting services like GitHub, GitLab, and
+Bitbucket, you can create private repositories directly through their
+web interfaces.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff4a960" class="outline-2">
+<h2 id="orgff4a960">Is a private repository on GitHub free?</h2>
+<div class="outline-text-2" id="text-orgff4a960">
+<div class="org-src-container">
+<pre class="src src-markdown">Yes, GitHub offers free private repositories with certain
+limitations. Here are some key points:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Free Plan</span><span class="org-markdown-markup">**</span>:
+    <span class="org-markdown-list">-</span> Unlimited private repositories.
+    <span class="org-markdown-list">-</span> Unlimited collaborators.
+    <span class="org-markdown-list">-</span> Limited to 2,000 Actions minutes per month (for CI/CD).
+    <span class="org-markdown-list">-</span> Some knowledge of usage and resource limits.
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Paid Plans</span><span class="org-markdown-markup">**</span>:
+    <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">GitHub Pro and Team</span><span class="org-markdown-markup">**</span>: Offer additional features such as more
+      Actions minutes, advanced security features, and more.
+    <span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">GitHub Enterprise</span><span class="org-markdown-markup">**</span>: Suitable for large organizations with
+      enhanced administrative and security features.
+
+For most individual and small team use cases, the free plan is
+sufficient for using private repositories. You can find detailed and
+up-to-date information on GitHub's pricing page.
+</pre>
+</div>
+</div>
+</div>
