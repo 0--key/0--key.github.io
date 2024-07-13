@@ -14,35 +14,42 @@ tags: [code interpreter]
 <li><a href="#orgf1cd41a">Prerequisites</a></li>
 <li><a href="#orga628bbb">A solution requiring nuanced comprehension</a>
 <ul>
-<li><a href="#orga10656d">Task description</a></li>
-<li><a href="#org1554786">Answer</a></li>
+<li><a href="#orga24c27c">Task description</a></li>
+<li><a href="#org9cc91f1">Answer</a></li>
 <li><a href="#orgc9687aa">Validation</a></li>
 <li><a href="#orgae90707">Conclusion</a></li>
 </ul>
 </li>
 <li><a href="#org9fc6590">A primitive task</a>
 <ul>
-<li><a href="#org02fcf4d">Description</a></li>
-<li><a href="#org44695cc">Answer</a></li>
+<li><a href="#org6ca01d5">Description</a></li>
+<li><a href="#orgb3fafba">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org2171b81">Raw and obscure</a>
 <ul>
-<li><a href="#org4afa31b">Description</a></li>
-<li><a href="#orge032788">Answer</a></li>
+<li><a href="#orgf3a80cf">Description</a></li>
+<li><a href="#orgee630de">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orgb0879c1">A more complex task</a>
 <ul>
-<li><a href="#org6ca01d5">Description</a></li>
-<li><a href="#org09de4be">Answer</a></li>
+<li><a href="#orga10195f">Description</a></li>
+<li><a href="#orgf1fbe22">Answer</a></li>
 <li><a href="#org4c34c48">Sum up</a></li>
 </ul>
 </li>
 <li><a href="#org611289d">Another check of Assistant's dexterity</a>
 <ul>
-<li><a href="#orga24c27c">Task description</a></li>
-<li><a href="#orgc36b62e">Answer</a></li>
+<li><a href="#org8549fa0">Task description</a></li>
+<li><a href="#orgdb574aa">Answer</a></li>
+</ul>
+</li>
+<li><a href="#org96ae1b5">Optimization</a>
+<ul>
+<li><a href="#orgfb80cec">Question</a></li>
+<li><a href="#orgd39e5b0">Answer</a></li>
+<li><a href="#org063cde3">It is the limit!</a></li>
 </ul>
 </li>
 <li><a href="#org4ea3e06">Thread-specific question</a>
@@ -51,13 +58,13 @@ tags: [code interpreter]
 <li><a href="#org4c46916">Solution</a></li>
 </ul>
 </li>
-<li><a href="#org972c234">OOP</a></li>
 <li><a href="#orgb98e709">Corollary</a>
 <ul>
-<li><a href="#orgfb80cec">Question</a></li>
-<li><a href="#org9cc91f1">Answer</a></li>
+<li><a href="#org1b53959">Question</a></li>
+<li><a href="#org8e805ce">Answer</a></li>
 </ul>
 </li>
+<li><a href="#orgbf68176">Opt</a></li>
 </ul>
 </div>
 </div>
@@ -94,9 +101,9 @@ development.
 <h2 id="orga628bbb">A solution requiring nuanced comprehension</h2>
 <div class="outline-text-2" id="text-orga628bbb">
 </div>
-<div id="outline-container-orga10656d" class="outline-3">
-<h3 id="orga10656d">Task description</h3>
-<div class="outline-text-3" id="text-orga10656d">
+<div id="outline-container-orga24c27c" class="outline-3">
+<h3 id="orga24c27c">Task description</h3>
+<div class="outline-text-3" id="text-orga24c27c">
 <p>
 Write a function <i>last_digit</i> that takes in two numbers a and b and
 returns the last decimal digit of a^b.  Note that a and b may be very
@@ -127,9 +134,9 @@ The inputs to your function will always be non-negative integers.
 </div>
 </div>
 
-<div id="outline-container-org1554786" class="outline-3">
-<h3 id="org1554786">Answer</h3>
-<div class="outline-text-3" id="text-org1554786">
+<div id="outline-container-org9cc91f1" class="outline-3">
+<h3 id="org9cc91f1">Answer</h3>
+<div class="outline-text-3" id="text-org9cc91f1">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">last_digit</span>(a, b):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> b == 0:
@@ -179,9 +186,9 @@ The inputs to your function will always be non-negative integers.
 <h2 id="org9fc6590">A primitive task</h2>
 <div class="outline-text-2" id="text-org9fc6590">
 </div>
-<div id="outline-container-org02fcf4d" class="outline-3">
-<h3 id="org02fcf4d">Description</h3>
-<div class="outline-text-3" id="text-org02fcf4d">
+<div id="outline-container-org6ca01d5" class="outline-3">
+<h3 id="org6ca01d5">Description</h3>
+<div class="outline-text-3" id="text-org6ca01d5">
 <p>
 Write a function <i>get_vowels_count</i> that returns the number (count) of
 vowels in the given string. We will consider a, e, i, o, and u as
@@ -198,9 +205,9 @@ vowels.
 </div>
 </div>
 
-<div id="outline-container-org44695cc" class="outline-3">
-<h3 id="org44695cc">Answer</h3>
-<div class="outline-text-3" id="text-org44695cc">
+<div id="outline-container-orgb3fafba" class="outline-3">
+<h3 id="orgb3fafba">Answer</h3>
+<div class="outline-text-3" id="text-orgb3fafba">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">get_vowels_count</span>(s):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> <span class="org-builtin">sum</span>(1 <span class="org-keyword">for</span> char <span class="org-keyword">in</span> s.lower() <span class="org-keyword">if</span> char <span class="org-keyword">in</span> <span class="org-string">'aeiou'</span>)
@@ -221,9 +228,9 @@ Test the <i>ability to infer</i> by submitting a poorly formatted task.
 </p>
 </div>
 
-<div id="outline-container-org4afa31b" class="outline-3">
-<h3 id="org4afa31b">Description</h3>
-<div class="outline-text-3" id="text-org4afa31b">
+<div id="outline-container-orgf3a80cf" class="outline-3">
+<h3 id="orgf3a80cf">Description</h3>
+<div class="outline-text-3" id="text-orgf3a80cf">
 <p>
 Consider a sequence u where u is defined as follows:
 </p>
@@ -267,9 +274,9 @@ Focus attention on efficiency
 </div>
 </div>
 
-<div id="outline-container-orge032788" class="outline-3">
-<h3 id="orge032788">Answer</h3>
-<div class="outline-text-3" id="text-orge032788">
+<div id="outline-container-orgee630de" class="outline-3">
+<h3 id="orgee630de">Answer</h3>
+<div class="outline-text-3" id="text-orgee630de">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> heapq <span class="org-keyword">import</span> heappop, heappush
 
@@ -298,9 +305,9 @@ Focus attention on efficiency
 <h2 id="orgb0879c1">A more complex task</h2>
 <div class="outline-text-2" id="text-orgb0879c1">
 </div>
-<div id="outline-container-org6ca01d5" class="outline-3">
-<h3 id="org6ca01d5">Description</h3>
-<div class="outline-text-3" id="text-org6ca01d5">
+<div id="outline-container-orga10195f" class="outline-3">
+<h3 id="orga10195f">Description</h3>
+<div class="outline-text-3" id="text-orga10195f">
 <p>
 For a given chemical formula represented by a string, count the number
 of atoms of each element contained in the molecule and return an object.
@@ -339,9 +346,9 @@ Index after the braces is optional.
 </div>
 </div>
 
-<div id="outline-container-org09de4be" class="outline-3">
-<h3 id="org09de4be">Answer</h3>
-<div class="outline-text-3" id="text-org09de4be">
+<div id="outline-container-orgf1fbe22" class="outline-3">
+<h3 id="orgf1fbe22">Answer</h3>
+<div class="outline-text-3" id="text-orgf1fbe22">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> re
 <span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
@@ -421,9 +428,9 @@ The assistant even wrote a set of assertions to prove the correctness of his cod
 <h2 id="org611289d">Another check of Assistant's dexterity</h2>
 <div class="outline-text-2" id="text-org611289d">
 </div>
-<div id="outline-container-orga24c27c" class="outline-3">
-<h3 id="orga24c27c">Task description</h3>
-<div class="outline-text-3" id="text-orga24c27c">
+<div id="outline-container-org8549fa0" class="outline-3">
+<h3 id="org8549fa0">Task description</h3>
+<div class="outline-text-3" id="text-org8549fa0">
 <p>
 You have to create a function that takes a positive integer number and returns the
 next bigger number formed by the same digits:
@@ -447,9 +454,9 @@ next_bigger(531)==-1
 </div>
 </div>
 
-<div id="outline-container-orgc36b62e" class="outline-3">
-<h3 id="orgc36b62e">Answer</h3>
-<div class="outline-text-3" id="text-orgc36b62e">
+<div id="outline-container-orgdb574aa" class="outline-3">
+<h3 id="orgdb574aa">Answer</h3>
+<div class="outline-text-3" id="text-orgdb574aa">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">next_bigger</span>(n):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">digits</span> = <span class="org-builtin">list</span>(<span class="org-builtin">str</span>(n))
@@ -490,119 +497,149 @@ next_bigger(531)==-1
 <pre class="example">
 Whoa!
 </pre>
+</div>
+</div>
+</div>
 
-
+<div id="outline-container-org96ae1b5" class="outline-2">
+<h2 id="org96ae1b5">Optimization</h2>
+<div class="outline-text-2" id="text-org96ae1b5">
+</div>
+<div id="outline-container-orgfb80cec" class="outline-3">
+<h3 id="orgfb80cec">Question</h3>
+<div class="outline-text-3" id="text-orgfb80cec">
 <p>
-Optimize the function `parse_molecule`:
+Optimize the function <code>parse_molecule</code>:
 </p>
 
-<p>
-```
-  import re
-  from collections import defaultdict
-</p>
 
-<p>
-def parse_molecule(formula):
-    def multiply_dict(d, n):
-	return {k: v * n for k, v in d.items()}
-</p>
-
-<p>
-def parse_section(section):
-    atoms = defaultdict(int)
-    i = 0
-    while i &lt; len(section):
-	if section[i].isalpha():
-	    j = i + 1
-	    while j &lt; len(section) and section[j].islower():
-		j += 1
-	    element = section[i:j]
-	    k = j
-	    while k &lt; len(section) and section[k].isdigit():
-		k += 1
-	    count = int(section[j:k] or 1)
-	    atoms[element] += count
-	    i = k
-	elif section[i] in '([{':
-	    stack = []
-	    brackets = {'(': ')', '[': ']', '{': '}'}
-	    close_bracket = brackets[section[i]]
-	    for j in range(i, len(section)):
-		if section[j] == section[i]:
-		    stack.append(section[i])
-		elif section[j] == close_bracket:
-		    stack.pop()
-		if not stack:
-		    break
-	    content = parse_section(section[i + 1: j])
-	    k = j + 1
-	    while k &lt; len(section) and section[k].isdigit():
-		k += 1
-	    multiplier = int(section[j + 1: k] or 1)
-	    content = multiply_dict(content, multiplier)
-	    for key, val in content.items():
-		atoms[key] += val
-	    i = k
-    return atoms
-</p>
-
-<p>
-      return parse_section(formula)
-```
-</p>
-
-<p>
-it ought to fit into this set of assertions:
-```
-  assert parse_molecule('H2O') <code>= {'H': 2, 'O': 1}
-  assert parse_molecule('Mg(OH)2') =</code> {'Mg': 1, 'O': 2, 'H': 2}
-  assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}
-```
-</p>
 <div class="org-src-container">
-<pre class="src src-markdown"><span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  import re</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  from collections import defaultdict</span></span>
+<pre class="src src-python"><span class="org-keyword">import</span> re
+<span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
 
-<span class="org-markdown-code"><span class="org-markdown-pre">  def parse_molecule(formula):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">      def multiply_dict(d, n):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          for k in d:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">              d[k] *= n</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          return d</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    </span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">      def parse_section(section):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          atoms = defaultdict(int)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          pattern = re.compile(r'([A-Z][a-z]*)(\d*)|([\(\[\{])|([\)\]\}])(\d*)')</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          stack = [defaultdict(int)]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          multipliers = [1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        </span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          for match in pattern.finditer(section):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">              element, num, open_brac, close_brac, multiplier = match.groups()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">              if element:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  count = int(num) if num else 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  stack[-1][element] += count * multipliers[-1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">              elif open_brac:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  stack.append(defaultdict(int))</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  multipliers.append(multipliers[-1])</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">              elif close_brac:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  if multiplier:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                      count = int(multiplier)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                      stack[-1] = multiply_dict(stack.pop(), count)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                  for k, v in stack.pop().items():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">                      stack[-1][k] += v * multipliers[-1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">          return stack.pop()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    </span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">      return parse_section(formula)</span></span>
+<span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {k: v * n <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> d.items()}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> 
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">parse_section</span>(section):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">atoms</span> = defaultdict(<span class="org-builtin">int</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">i</span> = 0
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; <span class="org-builtin">len</span>(section):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> section[i].isalpha():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">j</span> = i + 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> j &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[j].islower():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">j</span> += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">element</span> = section[<span class="org-variable-name">i</span>:j]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k = j
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> k &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[k].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">k</span> += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">count</span> = <span class="org-builtin">int</span>(section[<span class="org-variable-name">j</span>:k] <span class="org-keyword">or</span> 1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms[<span class="org-variable-name">element</span>] += count
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">i</span> = k
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">'([{'</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">stack</span> = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">brackets</span> = {<span class="org-string">'('</span>: <span class="org-string">')'</span>, <span class="org-string">'['</span>: <span class="org-string">']'</span>, <span class="org-string">'{'</span>: <span class="org-string">'}'</span>}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">close_bracket</span> = brackets[section[i]]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> j <span class="org-keyword">in</span> <span class="org-builtin">range</span>(i, <span class="org-builtin">len</span>(section)):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> section[j] == section[i]:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack.append(section[i])
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[j] == close_bracket:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack.pop()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> stack:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">break</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   content = parse_section(section[i + 1: j])
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k = j + 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> k &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[k].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   multiplier = <span class="org-builtin">int</span>(section[j + 1: k] <span class="org-keyword">or</span> 1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   content = multiply_dict(content, multiplier)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> key, val <span class="org-keyword">in</span> content.items():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms[key] += val
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i = k
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> atoms
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> 
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> parse_section(formula)
+</pre>
+</div>
 
-<span class="org-markdown-code"><span class="org-markdown-pre">  # Example assertions to validate the function</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
+<p>
+it must successfully pass through this set of assertions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'H2O'</span>) == {<span class="org-string">'H'</span>: 2, <span class="org-string">'O'</span>: 1}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'Mg(OH)2'</span>) == {<span class="org-string">'Mg'</span>: 1, <span class="org-string">'O'</span>: 2, <span class="org-string">'H'</span>: 2}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'K4[ON(SO3)2]2'</span>) == {<span class="org-string">'K'</span>: 4, <span class="org-string">'O'</span>: 14, <span class="org-string">'N'</span>: 2, <span class="org-string">'S'</span>: 4}
 </pre>
 </div>
 </div>
+</div>
+
+<div id="outline-container-orgd39e5b0" class="outline-3">
+<h3 id="orgd39e5b0">Answer</h3>
+<div class="outline-text-3" id="text-orgd39e5b0">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> k <span class="org-keyword">in</span> <span class="org-variable-name">d</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   d[<span class="org-variable-name">k</span>] *= n
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> d
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">parse_section</span>(section, multiplier=1):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms = {}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   multipliers = [multiplier]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   n = <span class="org-builtin">len</span>(section)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i = 0
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; n:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> section[i].isalpha():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   start = i
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].islower():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   element = section[start:i]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   start = i
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   count = <span class="org-builtin">int</span>(section[start:i]) <span class="org-keyword">if</span> start != i <span class="org-keyword">else</span> 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms[<span class="org-variable-name">element</span>] = atoms.get(element, 0) + count * multipliers[-1]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">'([{'</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack.append((atoms, multipliers.pop()))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms, multipliers[-1] = {}, 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   multipliers.append(multiplier)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">')]}'</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   start = i
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   sub_multiplier = <span class="org-builtin">int</span>(section[start:i]) <span class="org-keyword">if</span> start != i <span class="org-keyword">else</span> 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> stack:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms = multiply_dict(atoms, sub_multiplier)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   prev_atoms, prev_multiplier = stack.pop()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> atoms.items():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   prev_atoms[<span class="org-variable-name">k</span>] = prev_atoms.get(k, 0) + v * prev_multiplier
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms = prev_atoms
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   multipliers.pop()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i += 1
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> atoms
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> parse_section(formula)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example assertions to validate the function</span>
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'H2O'</span>) == {<span class="org-string">'H'</span>: 2, <span class="org-string">'O'</span>: 1}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'Mg(OH)2'</span>) == {<span class="org-string">'Mg'</span>: 1, <span class="org-string">'O'</span>: 2, <span class="org-string">'H'</span>: 2}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'K4[ON(SO3)2]2'</span>) == {<span class="org-string">'K'</span>: 4, <span class="org-string">'O'</span>: 14, <span class="org-string">'N'</span>: 2, <span class="org-string">'S'</span>: 4}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org063cde3" class="outline-3">
+<h3 id="org063cde3">It is the limit!</h3>
 </div>
 </div>
 
@@ -697,17 +734,13 @@ It is a hydrogen peroxide
 </div>
 
 
-<div id="outline-container-org972c234" class="outline-2">
-<h2 id="org972c234">OOP</h2>
-</div>
-
 <div id="outline-container-orgb98e709" class="outline-2">
 <h2 id="orgb98e709">Corollary</h2>
 <div class="outline-text-2" id="text-orgb98e709">
 </div>
-<div id="outline-container-orgfb80cec" class="outline-3">
-<h3 id="orgfb80cec">Question</h3>
-<div class="outline-text-3" id="text-orgfb80cec">
+<div id="outline-container-org1b53959" class="outline-3">
+<h3 id="org1b53959">Question</h3>
+<div class="outline-text-3" id="text-org1b53959">
 <p>
 What is your opinion about writing Python code using the OpenAI
 Assistant equipped with the code interpreter tool? I see it as a
@@ -719,9 +752,9 @@ code generation?
 </div>
 </div>
 
-<div id="outline-container-org9cc91f1" class="outline-3">
-<h3 id="org9cc91f1">Answer</h3>
-<div class="outline-text-3" id="text-org9cc91f1">
+<div id="outline-container-org8e805ce" class="outline-3">
+<h3 id="org8e805ce">Answer</h3>
+<div class="outline-text-3" id="text-org8e805ce">
 <div class="org-src-container">
 <pre class="src src-markdown">  Using an AI assistant equipped with a code interpreter tool is indeed
   a powerful feature that can greatly enhance productivity and code
@@ -734,6 +767,135 @@ code generation?
   more focused and accurate responses.
 </pre>
 </div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf68176" class="outline-2">
+<h2 id="orgbf68176">Opt</h2>
+<div class="outline-text-2" id="text-orgbf68176">
+<p>
+Optimize the function <code>parse_molecule</code>:
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> re
+<span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
+
+<span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {k: v * n <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> d.items()}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> 
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">parse_section</span>(section):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">atoms</span> = defaultdict(<span class="org-builtin">int</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">i</span> = 0
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> i &lt; <span class="org-builtin">len</span>(section):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> section[i].isalpha():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">j</span> = i + 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> j &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[j].islower():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">j</span> += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">element</span> = section[<span class="org-variable-name">i</span>:j]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k = j
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> k &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[k].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">k</span> += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">count</span> = <span class="org-builtin">int</span>(section[<span class="org-variable-name">j</span>:k] <span class="org-keyword">or</span> 1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms[<span class="org-variable-name">element</span>] += count
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">i</span> = k
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">'([{'</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">stack</span> = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">brackets</span> = {<span class="org-string">'('</span>: <span class="org-string">')'</span>, <span class="org-string">'['</span>: <span class="org-string">']'</span>, <span class="org-string">'{'</span>: <span class="org-string">'}'</span>}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">close_bracket</span> = brackets[section[i]]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> j <span class="org-keyword">in</span> <span class="org-builtin">range</span>(i, <span class="org-builtin">len</span>(section)):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> section[j] == section[i]:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack.append(section[i])
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">elif</span> section[j] == close_bracket:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   stack.pop()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> stack:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">break</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   content = parse_section(section[i + 1: j])
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k = j + 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> k &lt; <span class="org-builtin">len</span>(section) <span class="org-keyword">and</span> section[k].isdigit():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   k += 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   multiplier = <span class="org-builtin">int</span>(section[j + 1: k] <span class="org-keyword">or</span> 1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   content = multiply_dict(content, multiplier)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> key, val <span class="org-keyword">in</span> content.items():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   atoms[key] += val
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   i = k
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> atoms
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> 
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> parse_section(formula)
+</pre>
+</div>
+
+<p>
+it must successfully pass through this set of assertions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'H2O'</span>) == {<span class="org-string">'H'</span>: 2, <span class="org-string">'O'</span>: 1}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'Mg(OH)2'</span>) == {<span class="org-string">'Mg'</span>: 1, <span class="org-string">'O'</span>: 2, <span class="org-string">'H'</span>: 2}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'K4[ON(SO3)2]2'</span>) == {<span class="org-string">'K'</span>: 4, <span class="org-string">'O'</span>: 14, <span class="org-string">'N'</span>: 2, <span class="org-string">'S'</span>: 4}
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        for k in d:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            d[k] *= n</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        return d</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    </span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section, multiplier=1):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        atoms = {}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        stack = []</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers = [multiplier]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        n = len(section)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i = 0</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        </span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            if section[i].isalpha():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                while i &lt; n and section[i].islower():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                element = section[start:i]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                while i &lt; n and section[i].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                count = int(section[start:i]) if start != i else 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                atoms[element] = atoms.get(element, 0) + count * multipliers[-1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            elif section[i] in '([{':</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                stack.append((atoms, multipliers.pop()))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                atoms, multipliers[-1] = {}, 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                multipliers.append(multiplier)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            elif section[i] in ')]}':</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                while i &lt; n and section[i].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                sub_multiplier = int(section[start:i]) if start != i else 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                if stack:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    atoms = multiply_dict(atoms, sub_multiplier)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    prev_atoms, prev_multiplier = stack.pop()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    for k, v in atoms.items():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                        prev_atoms[k] = prev_atoms.get(k, 0) + v * prev_multiplier</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                    atoms = prev_atoms</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                multipliers.pop()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            else:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">                i += 1</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">        return atoms</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    </span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
 </div>
 </div>
 </div>
