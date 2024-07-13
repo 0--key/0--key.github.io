@@ -12,41 +12,57 @@ tags: [code interpreter]
 <ul>
 <li><a href="#org75f674e">Preamble</a></li>
 <li><a href="#orgf1cd41a">Prerequisites</a></li>
-<li><a href="#orgb4ab118">A solution requiring nuanced understanding</a>
+<li><a href="#orga628bbb">A solution requiring nuanced comprehension</a>
 <ul>
-<li><a href="#orgaa8a53f">Task description</a></li>
-<li><a href="#org5ae7486">Answer</a></li>
+<li><a href="#orge2fc6d1">Task description</a></li>
+<li><a href="#org9d50e96">Answer</a></li>
 <li><a href="#orgc9687aa">Validation</a></li>
 <li><a href="#orgae90707">Conclusion</a></li>
 </ul>
 </li>
 <li><a href="#orgb97d192">Primitive task</a>
 <ul>
-<li><a href="#org10c8990">Description</a></li>
-<li><a href="#org56d813d">Answer</a></li>
+<li><a href="#orgc17c2e8">Description</a></li>
+<li><a href="#org7938d9f">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org2171b81">Raw and obscure</a>
 <ul>
-<li><a href="#orgd2ea0a3">Description</a></li>
-<li><a href="#org424daa2">Answer</a></li>
+<li><a href="#orge1e8250">Description</a></li>
+<li><a href="#orge7d9f60">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org79e3fa1">A quite more complex task</a>
 <ul>
-<li><a href="#orgc17c2e8">Description</a></li>
-<li><a href="#org9a8c6db">Answer</a></li>
+<li><a href="#org02fcf4d">Description</a></li>
+<li><a href="#org45088e5">Answer</a></li>
 <li><a href="#org4c34c48">Sum up</a></li>
 </ul>
 </li>
 <li><a href="#org611289d">Another check of Assistant's dexterity</a>
 <ul>
-<li><a href="#orge2fc6d1">Task description</a></li>
-<li><a href="#org9d50e96">Answer</a></li>
+<li><a href="#orga10656d">Task description</a></li>
+<li><a href="#org058af20">Answer</a></li>
 </ul>
 </li>
-<li><a href="#orgf9a9981"># Optimization</a></li>
-<li><a href="#orge40c603">#7 Thread-specific question</a></li>
+<li><a href="#orgfed11f1">Optimization</a>
+<ul>
+<li><a href="#orga5008c5">Task</a></li>
+<li><a href="#org05d9288">Solution</a></li>
+</ul>
+</li>
+<li><a href="#org4ea3e06">Thread-specific question</a>
+<ul>
+<li><a href="#org76af055">Task</a></li>
+<li><a href="#org4c46916">Solution</a></li>
+</ul>
+</li>
+<li><a href="#orgb98e709">Corollary</a>
+<ul>
+<li><a href="#orgfb80cec">Question</a></li>
+<li><a href="#org1554786">Answer</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -67,18 +83,25 @@ English and the associated test suite requirements.
 <h2 id="orgf1cd41a">Prerequisites</h2>
 <div class="outline-text-2" id="text-orgf1cd41a">
 <p>
-<code>OpenAI Assistant</code> with <code>code_interpreter</code> as the tool.
+<code>OpenAI Assistant</code> with <code>code_interpreter</code> as the tool and
+instructions:
 </p>
+<blockquote>
+<p>
+You are an experienced Python programmer proficient in test-driven
+development.
+</p>
+</blockquote>
 </div>
 </div>
 
-<div id="outline-container-orgb4ab118" class="outline-2">
-<h2 id="orgb4ab118">A solution requiring nuanced understanding</h2>
-<div class="outline-text-2" id="text-orgb4ab118">
+<div id="outline-container-orga628bbb" class="outline-2">
+<h2 id="orga628bbb">A solution requiring nuanced comprehension</h2>
+<div class="outline-text-2" id="text-orga628bbb">
 </div>
-<div id="outline-container-orgaa8a53f" class="outline-3">
-<h3 id="orgaa8a53f">Task description</h3>
-<div class="outline-text-3" id="text-orgaa8a53f">
+<div id="outline-container-orge2fc6d1" class="outline-3">
+<h3 id="orge2fc6d1">Task description</h3>
+<div class="outline-text-3" id="text-orge2fc6d1">
 <p>
 Write a function <i>last_digit</i> that takes in two numbers a and b and
 returns the last decimal digit of a^b.  Note that a and b may be very
@@ -109,9 +132,9 @@ The inputs to your function will always be non-negative integers.
 </div>
 </div>
 
-<div id="outline-container-org5ae7486" class="outline-3">
-<h3 id="org5ae7486">Answer</h3>
-<div class="outline-text-3" id="text-org5ae7486">
+<div id="outline-container-org9d50e96" class="outline-3">
+<h3 id="org9d50e96">Answer</h3>
+<div class="outline-text-3" id="text-org9d50e96">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">last_digit</span>(a, b):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> b == 0:
@@ -161,9 +184,9 @@ The inputs to your function will always be non-negative integers.
 <h2 id="orgb97d192">Primitive task</h2>
 <div class="outline-text-2" id="text-orgb97d192">
 </div>
-<div id="outline-container-org10c8990" class="outline-3">
-<h3 id="org10c8990">Description</h3>
-<div class="outline-text-3" id="text-org10c8990">
+<div id="outline-container-orgc17c2e8" class="outline-3">
+<h3 id="orgc17c2e8">Description</h3>
+<div class="outline-text-3" id="text-orgc17c2e8">
 <p>
 Write a function <i>get_vowels_count</i> that returns the number (count) of
 vowels in the given string. We will consider a, e, i, o, and u as
@@ -180,9 +203,9 @@ vowels.
 </div>
 </div>
 
-<div id="outline-container-org56d813d" class="outline-3">
-<h3 id="org56d813d">Answer</h3>
-<div class="outline-text-3" id="text-org56d813d">
+<div id="outline-container-org7938d9f" class="outline-3">
+<h3 id="org7938d9f">Answer</h3>
+<div class="outline-text-3" id="text-org7938d9f">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">get_vowels_count</span>(s):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">sum</span>(1 <span class="org-keyword">for</span> char <span class="org-keyword">in</span> s.lower() <span class="org-keyword">if</span> char <span class="org-keyword">in</span> <span class="org-string">'aeiou'</span>)
@@ -199,13 +222,13 @@ vowels.
 <h2 id="org2171b81">Raw and obscure</h2>
 <div class="outline-text-2" id="text-org2171b81">
 <p>
-Test the ability to infer by submitting a poorly formatted task.
+Test the <i>ability to infer</i> by submitting a poorly formatted task.
 </p>
 </div>
 
-<div id="outline-container-orgd2ea0a3" class="outline-3">
-<h3 id="orgd2ea0a3">Description</h3>
-<div class="outline-text-3" id="text-orgd2ea0a3">
+<div id="outline-container-orge1e8250" class="outline-3">
+<h3 id="orge1e8250">Description</h3>
+<div class="outline-text-3" id="text-orge1e8250">
 <p>
 Consider a sequence u where u is defined as follows:
 </p>
@@ -249,9 +272,9 @@ Focus attention on efficiency
 </div>
 </div>
 
-<div id="outline-container-org424daa2" class="outline-3">
-<h3 id="org424daa2">Answer</h3>
-<div class="outline-text-3" id="text-org424daa2">
+<div id="outline-container-orge7d9f60" class="outline-3">
+<h3 id="orge7d9f60">Answer</h3>
+<div class="outline-text-3" id="text-orge7d9f60">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">from</span> heapq <span class="org-keyword">import</span> heappop, heappush
 
@@ -280,9 +303,9 @@ Focus attention on efficiency
 <h2 id="org79e3fa1">A quite more complex task</h2>
 <div class="outline-text-2" id="text-org79e3fa1">
 </div>
-<div id="outline-container-orgc17c2e8" class="outline-3">
-<h3 id="orgc17c2e8">Description</h3>
-<div class="outline-text-3" id="text-orgc17c2e8">
+<div id="outline-container-org02fcf4d" class="outline-3">
+<h3 id="org02fcf4d">Description</h3>
+<div class="outline-text-3" id="text-org02fcf4d">
 <p>
 For a given chemical formula represented by a string, count the number
 of atoms of each element contained in the molecule and return an object.
@@ -321,9 +344,9 @@ Index after the braces is optional.
 </div>
 </div>
 
-<div id="outline-container-org9a8c6db" class="outline-3">
-<h3 id="org9a8c6db">Answer</h3>
-<div class="outline-text-3" id="text-org9a8c6db">
+<div id="outline-container-org45088e5" class="outline-3">
+<h3 id="org45088e5">Answer</h3>
+<div class="outline-text-3" id="text-org45088e5">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> re
 <span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
@@ -397,9 +420,9 @@ The assistant even wrote a set of assertions to prove the correctness of his cod
 <h2 id="org611289d">Another check of Assistant's dexterity</h2>
 <div class="outline-text-2" id="text-org611289d">
 </div>
-<div id="outline-container-orge2fc6d1" class="outline-3">
-<h3 id="orge2fc6d1">Task description</h3>
-<div class="outline-text-3" id="text-orge2fc6d1">
+<div id="outline-container-orga10656d" class="outline-3">
+<h3 id="orga10656d">Task description</h3>
+<div class="outline-text-3" id="text-orga10656d">
 <p>
 You have to create a function that takes a positive integer number and returns the
 next bigger number formed by the same digits:
@@ -423,9 +446,9 @@ next_bigger(531)==-1
 </div>
 </div>
 
-<div id="outline-container-org9d50e96" class="outline-3">
-<h3 id="org9d50e96">Answer</h3>
-<div class="outline-text-3" id="text-org9d50e96">
+<div id="outline-container-org058af20" class="outline-3">
+<h3 id="org058af20">Answer</h3>
+<div class="outline-text-3" id="text-org058af20">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">next_bigger</span>(n):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">digits</span> = <span class="org-builtin">list</span>(<span class="org-builtin">str</span>(n))
@@ -463,9 +486,13 @@ next_bigger(531)==-1
 </div>
 </div>
 
-<div id="outline-container-orgf9a9981" class="outline-2">
-<h2 id="orgf9a9981"># Optimization</h2>
-<div class="outline-text-2" id="text-orgf9a9981">
+<div id="outline-container-orgfed11f1" class="outline-2">
+<h2 id="orgfed11f1">Optimization</h2>
+<div class="outline-text-2" id="text-orgfed11f1">
+</div>
+<div id="outline-container-orga5008c5" class="outline-3">
+<h3 id="orga5008c5">Task</h3>
+<div class="outline-text-3" id="text-orga5008c5">
 <p>
 Optimize the function `parse_molecule`:
 </p>
@@ -534,116 +561,172 @@ it ought to fit into this set of assertions:
   assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}
 ```
 </p>
+</div>
+</div>
+
+<div id="outline-container-org05d9288" class="outline-3">
+<h3 id="org05d9288">Solution</h3>
+<div class="outline-text-3" id="text-org05d9288">
 <div class="org-src-container">
-<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">import re</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">from collections import defaultdict</span></span>
+<pre class="src src-python"><span class="org-keyword">import</span> re
+<span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
 
-<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    for k in d:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        d[k] *= n</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return d</span></span>
+<span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
+        <span class="org-keyword">for</span> k <span class="org-keyword">in</span> <span class="org-variable-name">d</span>:
+            d[<span class="org-variable-name">k</span>] *= n
+        <span class="org-keyword">return</span> d
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    atoms = defaultdict(int)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    pattern = re.compile(r'([A-Z][a-z]*)(\d*)|([\(\[\{])|([\)\]\}])(\d*)')</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    stack = [defaultdict(int)]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    multipliers = [1]</span></span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">parse_section</span>(section):
+        <span class="org-variable-name">atoms</span> = defaultdict(<span class="org-builtin">int</span>)
+        <span class="org-variable-name">pattern</span> = re.<span class="org-builtin">compile</span>(r<span class="org-string">'([A-Z][a-z]*)(\d*)|([\(\[\{])|([\)\]\}])(\d*)'</span>)
+        <span class="org-variable-name">stack</span> = [defaultdict(<span class="org-builtin">int</span>)]
+        <span class="org-variable-name">multipliers</span> = [1]
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    for match in pattern.finditer(section):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        element, num, open_brac, close_brac, multiplier = match.groups()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        if element:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        count = int(num) if num else 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        stack[-1][element] += count * multipliers[-1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        elif open_brac:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        stack.append(defaultdict(int))</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.append(multipliers[-1])</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        elif close_brac:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        if multiplier:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            count = int(multiplier)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            stack[-1] = multiply_dict(stack.pop(), count)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        for k, v in stack.pop().items():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            stack[-1][k] += v * multipliers[-1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return stack.pop()</span></span>
+        <span class="org-keyword">for</span> match <span class="org-keyword">in</span> pattern.finditer(section):
+            <span class="org-variable-name">element</span>, <span class="org-variable-name">num</span>, <span class="org-variable-name">open_brac</span>, <span class="org-variable-name">close_brac</span>, <span class="org-variable-name">multiplier</span> = match.groups()
+            <span class="org-keyword">if</span> <span class="org-variable-name">element</span>:
+                count = <span class="org-builtin">int</span>(num) <span class="org-keyword">if</span> num <span class="org-keyword">else</span> 1
+                stack[-1][<span class="org-variable-name">element</span>] += count * multipliers[-1]
+            <span class="org-keyword">elif</span> open_brac:
+                stack.append(defaultdict(<span class="org-builtin">int</span>))
+                multipliers.append(multipliers[-1])
+            <span class="org-keyword">elif</span> <span class="org-variable-name">close_brac</span>:
+                <span class="org-keyword">if</span> multiplier:
+                    count = <span class="org-builtin">int</span>(multiplier)
+                    <span class="org-variable-name">stack</span>[-1] = multiply_dict(stack.pop(), count)
+                <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> stack.pop().items():
+                    stack[-1][<span class="org-variable-name">k</span>] += v * multipliers[-1]
+        <span class="org-keyword">return</span> stack.pop()
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> parse_section(formula)
 
-<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example assertions to validate the function</span>
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'H2O'</span>) == {<span class="org-string">'H'</span>: 2, <span class="org-string">'O'</span>: 1}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'Mg(OH)2'</span>) == {<span class="org-string">'Mg'</span>: 1, <span class="org-string">'O'</span>: 2, <span class="org-string">'H'</span>: 2}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'K4[ON(SO3)2]2'</span>) == {<span class="org-string">'K'</span>: 4, <span class="org-string">'O'</span>: 14, <span class="org-string">'N'</span>: 2, <span class="org-string">'S'</span>: 4}
 </pre>
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orge40c603" class="outline-2">
-<h2 id="orge40c603">#7 Thread-specific question</h2>
-<div class="outline-text-2" id="text-orge40c603">
+<div id="outline-container-org4ea3e06" class="outline-2">
+<h2 id="org4ea3e06">Thread-specific question</h2>
+<div class="outline-text-2" id="text-org4ea3e06">
 <p>
-Write the function `parse_molecule` not using standard library modules
-`re` and `collections`.
+To test the aptitude to make contextual (<i>conversation Thread</i> related)
+suggestions.
 </p>
+</div>
+
+<div id="outline-container-org76af055" class="outline-3">
+<h3 id="org76af055">Task</h3>
+<div class="outline-text-3" id="text-org76af055">
+<p>
+Write the function `parse_molecule` without using the standard library
+modules `re` and `collections`.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4c46916" class="outline-3">
+<h3 id="org4c46916">Solution</h3>
+<div class="outline-text-3" id="text-org4c46916">
 <div class="org-src-container">
-<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    for k in d:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        d[k] *= n</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return d</span></span>
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
+        <span class="org-keyword">for</span> k <span class="org-keyword">in</span> <span class="org-variable-name">d</span>:
+            d[<span class="org-variable-name">k</span>] *= n
+        <span class="org-keyword">return</span> d
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    atoms = {}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    stack = []</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    multipliers = [1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    n = len(section)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    i = 0</span></span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">parse_section</span>(section):
+        <span class="org-variable-name">atoms</span> = {}
+        <span class="org-variable-name">stack</span> = []
+        <span class="org-variable-name">multipliers</span> = [1]
+        <span class="org-variable-name">n</span> = <span class="org-builtin">len</span>(section)
+        <span class="org-variable-name">i</span> = 0
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    while i &lt; n:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        if section[i].isalpha():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].islower():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        element = section[start:i]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].isdigit():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        count = int(section[start:i]) if start != i else 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        atoms[element] = atoms.get(element, 0) + count * multipliers[-1]</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        elif section[i] in '([{':</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        stack.append(atoms)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        atoms = {}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.append(multipliers[-1])</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        elif section[i] in ')]}':</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].isdigit():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        multiplier = int(section[start:i]) if start != i else 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        atoms = multiply_dict(atoms, multiplier)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        if stack:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            prev_atoms = stack.pop()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            for k, v in atoms.items():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            prev_atoms[k] = prev_atoms.get(k, 0) + v</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">            atoms = prev_atoms</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.pop()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        else:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
+        <span class="org-keyword">while</span> i &lt; <span class="org-variable-name">n</span>:
+            <span class="org-keyword">if</span> section[i].isalpha():
+                start = i
+                <span class="org-variable-name">i</span> += 1
+                <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].islower():
+                    <span class="org-variable-name">i</span> += 1
+                <span class="org-variable-name">element</span> = section[<span class="org-variable-name">start</span>:i]
+                start = i
+                <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].isdigit():
+                    <span class="org-variable-name">i</span> += 1
+                <span class="org-variable-name">count</span> = <span class="org-builtin">int</span>(section[<span class="org-variable-name">start</span>:i]) <span class="org-keyword">if</span> start != i <span class="org-keyword">else</span> 1
+                <span class="org-variable-name">atoms</span>[<span class="org-variable-name">element</span>] = atoms.get(element, 0) + count * multipliers[-1]
+            <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">'([{'</span>:
+                stack.append(atoms)
+                <span class="org-variable-name">atoms</span> = {}
+                multipliers.append(multipliers[-1])
+                <span class="org-variable-name">i</span> += 1
+            <span class="org-keyword">elif</span> section[i] <span class="org-keyword">in</span> <span class="org-string">')]}'</span>:
+                <span class="org-variable-name">i</span> += 1
+                <span class="org-variable-name">start</span> = i
+                <span class="org-keyword">while</span> i &lt; n <span class="org-keyword">and</span> section[i].isdigit():
+                    <span class="org-variable-name">i</span> += 1
+                <span class="org-variable-name">multiplier</span> = <span class="org-builtin">int</span>(section[<span class="org-variable-name">start</span>:i]) <span class="org-keyword">if</span> start != i <span class="org-keyword">else</span> 1
+                <span class="org-variable-name">atoms</span> = multiply_dict(atoms, multiplier)
+                <span class="org-keyword">if</span> <span class="org-variable-name">stack</span>:
+                    prev_atoms = stack.pop()
+                    <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> atoms.items():
+                        <span class="org-variable-name">prev_atoms</span>[<span class="org-variable-name">k</span>] = prev_atoms.get(k, 0) + v
+                    <span class="org-variable-name">atoms</span> = prev_atoms
+                multipliers.pop()
+            <span class="org-keyword">else</span>:
+                i += 1
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    return atoms</span></span>
+        <span class="org-keyword">return</span> atoms
 
-<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> parse_section(formula)
 
-<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example assertions to validate the function</span>
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'H2O'</span>) == {<span class="org-string">'H'</span>: 2, <span class="org-string">'O'</span>: 1}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'Mg(OH)2'</span>) == {<span class="org-string">'Mg'</span>: 1, <span class="org-string">'O'</span>: 2, <span class="org-string">'H'</span>: 2}
+<span class="org-keyword">assert</span> parse_molecule(<span class="org-string">'K4[ON(SO3)2]2'</span>) == {<span class="org-string">'K'</span>: 4, <span class="org-string">'O'</span>: 14, <span class="org-string">'N'</span>: 2, <span class="org-string">'S'</span>: 4}
 </pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb98e709" class="outline-2">
+<h2 id="orgb98e709">Corollary</h2>
+<div class="outline-text-2" id="text-orgb98e709">
+</div>
+<div id="outline-container-orgfb80cec" class="outline-3">
+<h3 id="orgfb80cec">Question</h3>
+<div class="outline-text-3" id="text-orgfb80cec">
+<p>
+What is your opinion about writing Python code using the OpenAI
+Assistant equipped with the code interpreter tool? I see it as a
+killer feature, beyond a doubt. What are your thoughts on including
+test suites for the generated code? Is it necessary to <i>provide the
+test suites beforehand</i> to simplify and clarify the task of Python
+code generation?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1554786" class="outline-3">
+<h3 id="org1554786">Answer</h3>
+<div class="outline-text-3" id="text-org1554786">
+<div class="org-src-container">
+<pre class="src src-markdown">Using an AI assistant equipped with a code interpreter tool is indeed
+a powerful feature that can greatly enhance productivity and code
+quality by providing quick feedback and validation of the generated
+code. Including test suites for the generated code is not only
+beneficial but practically necessary for ensuring the correctness and
+robustness of the implementations. Providing the test suites
+beforehand can indeed simplify and clarify the task of Python code
+generation, as it sets clear expectations and constraints, enabling
+more focused and accurate responses.
+</pre>
+</div>
 </div>
 </div>
 </div>
