@@ -1,0 +1,554 @@
+---
+layout: page
+title: OpenAI Assistance
+tagline: " with Python code interpreter"
+permalink: /openai/python-code-interpreter.html
+categories: [OpenAI, Python, Assistant]
+tags: [code interpreter]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org75f674e">Preamble</a></li>
+<li><a href="#orgf1cd41a">Prerequisites</a></li>
+<li><a href="#orgd9646fd">Question #1 medium</a>
+<ul>
+<li><a href="#orgc9687aa">Validation</a></li>
+</ul>
+</li>
+<li><a href="#orgd0743e2">Question #2 primitive</a></li>
+<li><a href="#org3d6ed96">Question #3 with raw description</a></li>
+<li><a href="#orgc37bc27">#4 another raw description</a></li>
+<li><a href="#org6ee78f7">#5</a></li>
+<li><a href="#orgf9a9981"># Optimization</a></li>
+<li><a href="#orge40c603">#7 Thread-specific question</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org75f674e" class="outline-2">
+<h2 id="org75f674e">Preamble</h2>
+<div class="outline-text-2" id="text-org75f674e">
+<p>
+The purpose of this article is to test the dexterity of the OpenAI
+Assistant in solving programming tasks based on their descriptions in
+English and the associated test suite requirements.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf1cd41a" class="outline-2">
+<h2 id="orgf1cd41a">Prerequisites</h2>
+<div class="outline-text-2" id="text-orgf1cd41a">
+<p>
+<code>OpenAI Assistant</code> with <code>code_interpreter</code> as the tool.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd9646fd" class="outline-2">
+<h2 id="orgd9646fd">Question #1 medium</h2>
+<div class="outline-text-2" id="text-orgd9646fd">
+<p>
+Write a function `last_digit` that takes in two numbers a and b and
+returns the last decimal digit of a^b.  Note that a and b may be very
+large!
+</p>
+
+<p>
+For example, the last decimal digit of 9<sup>7</sup> is 9, since 9<sup>7</sup>
+= 4782969. The last decimal digit of (2<sup>200</sup>)<sup>(2<sup>300</sup>)</sup>, which has
+over 10<sup>92</sup> decimal digits, is 6.
+</p>
+
+<p>
+The inputs to your function will always be non-negative integers.
+</p>
+
+<p>
+`last_digit` ought to pass all this assertions:
+```
+assert(last_digit(4, 1) <code>= 4)
+assert(last_digit(4, 2) =</code> 6)
+assert(last_digit(9, 7) <code>= 9)
+assert(last_digit(10, 10 ** 10) =</code> 0)
+assert(last_digit(2 <b>* 200, 2 *</b> 300) == 6)
+```
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">def last_digit(a, b):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    if b == 0:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return pow(a, b, 10)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(4, 1) == 4)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(4, 2) == 6)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(9, 7) == 9)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(10, 10 ** 10) == 0)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(2 ** 200, 2 ** 300) == 6)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc9687aa" class="outline-3">
+<h3 id="orgc9687aa">Validation</h3>
+<div class="outline-text-3" id="text-orgc9687aa">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Just a test</span>
+<span class="org-highlight-indentation"> </span> <span class="org-builtin">print</span>(<span class="org-builtin">pow</span>(2**200, 2**300, 10))
+</pre>
+</div>
+
+<pre class="example">
+6
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd0743e2" class="outline-2">
+<h2 id="orgd0743e2">Question #2 primitive</h2>
+<div class="outline-text-2" id="text-orgd0743e2">
+<p>
+Write a function `get_vowels_count` that returns the number (count) of
+vowels in the given string. We will consider a, e, i, o, and u as
+vowels.
+</p>
+
+<p>
+`get_vowels_count` ought to pass this assertion:
+```
+assert (get_vowels_count('John the dully boy write this book') == 9)
+```
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">def get_vowels_count(s):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return sum(1 for char in s.lower() if char in 'aeiou')</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Assertion to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert (get_vowels_count('John the dully boy write this book') == 9)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d6ed96" class="outline-2">
+<h2 id="org3d6ed96">Question #3 with raw description</h2>
+<div class="outline-text-2" id="text-org3d6ed96">
+<p>
+Consider a sequence u where u is defined as follows:
+</p>
+
+<p>
+The number u(0) = 1 is the first one in u.
+For each x in u, then y = 2 * x + 1 and z = 3 * x + 1 must be in u too.
+There are no other numbers in u.
+Ex: u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, &#x2026;]
+</p>
+
+<p>
+1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15
+and 22 and so on&#x2026;
+</p>
+
+<p>
+Task:
+</p>
+
+<p>
+Given parameter n the function dbl_linear (or dblLinear&#x2026;) returns the element
+u(n) of the ordered (with &lt;) sequence u.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+dbl_linear(10) should return 22
+</p>
+
+<p>
+Note:
+</p>
+
+<p>
+Focus attention on efficiency
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">from heapq import heappop, heappush</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">def dbl_linear(n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    u = [1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    seen = {1}</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    for _ in range(n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    x = heappop(u)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    for y in [2 * x + 1, 3 * x + 1]:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if y not in seen:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        seen.add(y)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        heappush(u, y)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return heappop(u)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertion to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert(dbl_linear(10) == 22)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc37bc27" class="outline-2">
+<h2 id="orgc37bc27">#4 another raw description</h2>
+<div class="outline-text-2" id="text-orgc37bc27">
+<p>
+For a given chemical formula represented by a string, count the number
+of atoms of each element contained in the molecule and return an object.
+</p>
+
+<p>
+For example:
+</p>
+
+<p>
+water = 'H2O'
+parse_molecule(water)                 # return {H: 2, O: 1}
+</p>
+
+<p>
+magnesium_hydroxide = 'Mg(OH)2'
+parse_molecule(magnesium_hydroxide)   # return {Mg: 1, O: 2, H: 2}
+</p>
+
+<p>
+var fremy_salt = 'K4[ON(SO3)2]2'
+parse_molecule(fremySalt)             # return {K: 4, O: 14, N: 2, S: 4}
+</p>
+
+<p>
+As you can see, some formulas have brackets in them. The index outside the
+brackets tells you that you have to multiply count of each atom inside the
+bracket on this index. For example, in Fe(NO3)2 you have one iron atom,
+two nitrogen atoms and six oxygen atoms.
+</p>
+
+<p>
+Note that brackets may be round, square or curly and can also be nested.
+Index after the braces is optional.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">import re</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">from collections import defaultdict</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return {k: v * n for k, v in d.items()}</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    atoms = defaultdict(int)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    i = 0</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    while i &lt; len(section):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if section[i].isalpha():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        j = i + 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while j &lt; len(section) and section[j].islower():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            j += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        element = section[i:j]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        k = j</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while k &lt; len(section) and section[k].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            k += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        count = int(section[j:k] or 1)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        atoms[element] += count</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i = k</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        elif section[i] in '([{':</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        stack = []</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        brackets = {'(': ')', '[': ']', '{': '}'}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        close_bracket = brackets[section[i]]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        for j in range(i, len(section)):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            if section[j] == section[i]:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            stack.append(section[i])</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            elif section[j] == close_bracket:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            stack.pop()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            if not stack:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            break</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        content = parse_section(section[i + 1: j])</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        k = j + 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while k &lt; len(section) and section[k].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            k += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multiplier = int(section[j + 1: k] or 1)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        content = multiply_dict(content, multiplier)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        for key, val in content.items():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            atoms[key] += val</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i = k</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return atoms</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ee78f7" class="outline-2">
+<h2 id="org6ee78f7">#5</h2>
+<div class="outline-text-2" id="text-org6ee78f7">
+<p>
+You have to create a function that takes a positive integer number and returns the
+next bigger number formed by the same digits:
+</p>
+
+<p>
+next_bigger(12)==21
+next_bigger(513)==531
+next_bigger(2017)==2071
+</p>
+
+<p>
+If no bigger number can be composed using those digits, return -1:
+</p>
+
+<p>
+next_bigger(9)==-1
+next_bigger(111)==-1
+next_bigger(531)==-1
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">def next_bigger(n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    digits = list(str(n))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    # Find the rightmost digit that is smaller than the digit next to it</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    for i in range(len(digits) - 2, -1, -1):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    if digits[i] &lt; digits[i + 1]:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        break</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    else:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return -1</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    # Find the smallest digit on the right that is larger than digits[i]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    for j in range(len(digits) - 1, i, -1):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    if digits[j] &gt; digits[i]:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        break</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    # Swap the two digits</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    digits[i], digits[j] = digits[j], digits[i]</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    # Reverse the digits to the right of i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    digits = digits[:i + 1] + sorted(digits[i + 1:])</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return int(''.join(digits))</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(12) == 21</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(513) == 531</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(2017) == 2071</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(9) == -1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(111) == -1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert next_bigger(531) == -1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf9a9981" class="outline-2">
+<h2 id="orgf9a9981"># Optimization</h2>
+<div class="outline-text-2" id="text-orgf9a9981">
+<p>
+Optimize the function `parse_molecule`:
+</p>
+
+<p>
+```
+  import re
+  from collections import defaultdict
+</p>
+
+<p>
+def parse_molecule(formula):
+    def multiply_dict(d, n):
+	return {k: v * n for k, v in d.items()}
+</p>
+
+<p>
+def parse_section(section):
+    atoms = defaultdict(int)
+    i = 0
+    while i &lt; len(section):
+	if section[i].isalpha():
+	    j = i + 1
+	    while j &lt; len(section) and section[j].islower():
+		j += 1
+	    element = section[i:j]
+	    k = j
+	    while k &lt; len(section) and section[k].isdigit():
+		k += 1
+	    count = int(section[j:k] or 1)
+	    atoms[element] += count
+	    i = k
+	elif section[i] in '([{':
+	    stack = []
+	    brackets = {'(': ')', '[': ']', '{': '}'}
+	    close_bracket = brackets[section[i]]
+	    for j in range(i, len(section)):
+		if section[j] == section[i]:
+		    stack.append(section[i])
+		elif section[j] == close_bracket:
+		    stack.pop()
+		if not stack:
+		    break
+	    content = parse_section(section[i + 1: j])
+	    k = j + 1
+	    while k &lt; len(section) and section[k].isdigit():
+		k += 1
+	    multiplier = int(section[j + 1: k] or 1)
+	    content = multiply_dict(content, multiplier)
+	    for key, val in content.items():
+		atoms[key] += val
+	    i = k
+    return atoms
+</p>
+
+<p>
+      return parse_section(formula)
+```
+</p>
+
+<p>
+it ought to fit into this set of assertions:
+```
+  assert parse_molecule('H2O') <code>= {'H': 2, 'O': 1}
+  assert parse_molecule('Mg(OH)2') =</code> {'Mg': 1, 'O': 2, 'H': 2}
+  assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}
+```
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">import re</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">from collections import defaultdict</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    for k in d:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        d[k] *= n</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return d</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    atoms = defaultdict(int)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    pattern = re.compile(r'([A-Z][a-z]*)(\d*)|([\(\[\{])|([\)\]\}])(\d*)')</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    stack = [defaultdict(int)]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    multipliers = [1]</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    for match in pattern.finditer(section):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        element, num, open_brac, close_brac, multiplier = match.groups()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if element:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        count = int(num) if num else 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        stack[-1][element] += count * multipliers[-1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        elif open_brac:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        stack.append(defaultdict(int))</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.append(multipliers[-1])</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        elif close_brac:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if multiplier:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            count = int(multiplier)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            stack[-1] = multiply_dict(stack.pop(), count)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        for k, v in stack.pop().items():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            stack[-1][k] += v * multipliers[-1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return stack.pop()</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge40c603" class="outline-2">
+<h2 id="orge40c603">#7 Thread-specific question</h2>
+<div class="outline-text-2" id="text-orge40c603">
+<p>
+Write the function `parse_molecule` not using standard library modules
+`re` and `collections`.
+</p>
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">def parse_molecule(formula):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    def multiply_dict(d, n):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    for k in d:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        d[k] *= n</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return d</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    def parse_section(section):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    atoms = {}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    stack = []</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    multipliers = [1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    n = len(section)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    i = 0</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    while i &lt; n:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if section[i].isalpha():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].islower():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        element = section[start:i]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        count = int(section[start:i]) if start != i else 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        atoms[element] = atoms.get(element, 0) + count * multipliers[-1]</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        elif section[i] in '([{':</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        stack.append(atoms)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        atoms = {}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.append(multipliers[-1])</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        elif section[i] in ')]}':</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        start = i</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        while i &lt; n and section[i].isdigit():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            i += 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multiplier = int(section[start:i]) if start != i else 1</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        atoms = multiply_dict(atoms, multiplier)</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        if stack:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            prev_atoms = stack.pop()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            for k, v in atoms.items():</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            prev_atoms[k] = prev_atoms.get(k, 0) + v</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">            atoms = prev_atoms</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        multipliers.pop()</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        else:</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">        i += 1</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return atoms</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">    return parse_section(formula)</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre"># Example assertions to validate the function</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('H2O') == {'H': 2, 'O': 1}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('Mg(OH)2') == {'Mg': 1, 'O': 2, 'H': 2}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">assert parse_molecule('K4[ON(SO3)2]2') == {'K': 4, 'O': 14, 'N': 2, 'S': 4}</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+</pre>
+</div>
+</div>
+</div>
