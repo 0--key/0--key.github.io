@@ -14,6 +14,7 @@ tags: [code interpreter]
 <li><a href="#orgf1cd41a">Prerequisites</a></li>
 <li><a href="#orgd9646fd">Question #1 medium</a>
 <ul>
+<li><a href="#org5ae7486">Answer</a></li>
 <li><a href="#orgc9687aa">Validation</a></li>
 </ul>
 </li>
@@ -51,40 +52,19 @@ English and the associated test suite requirements.
 <div id="outline-container-orgd9646fd" class="outline-2">
 <h2 id="orgd9646fd">Question #1 medium</h2>
 <div class="outline-text-2" id="text-orgd9646fd">
-<p>
-Write a function `last_digit` that takes in two numbers a and b and
+<div class="org-src-container">
+<pre class="src src-markdown">Write a function <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">last_digit</span><span class="org-markdown-markup">`</span> that takes in two numbers a and b and
 returns the last decimal digit of a^b.  Note that a and b may be very
 large!
-</p>
 
-<p>
-For example, the last decimal digit of 9<sup>7</sup> is 9, since 9<sup>7</sup>
-= 4782969. The last decimal digit of (2<sup>200</sup>)<sup>(2<sup>300</sup>)</sup>, which has
-over 10<sup>92</sup> decimal digits, is 6.
-</p>
+For example, the last decimal digit of 9^{7} is 9, since 9^{7}
+= 4782969. The last decimal digit of (2^{200})^{(2^{300})}, which has
+over 10^{92} decimal digits, is 6.
 
-<p>
 The inputs to your function will always be non-negative integers.
-</p>
 
-<p>
-`last_digit` ought to pass all this assertions:
-```
-assert(last_digit(4, 1) <code>= 4)
-assert(last_digit(4, 2) =</code> 6)
-assert(last_digit(9, 7) <code>= 9)
-assert(last_digit(10, 10 ** 10) =</code> 0)
-assert(last_digit(2 <b>* 200, 2 *</b> 300) == 6)
-```
-</p>
-<div class="org-src-container">
-<pre class="src src-markdown"><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">def last_digit(a, b):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    if b == 0:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return 1</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return pow(a, b, 10)</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre"># Assertions to validate the function</span></span>
+<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">last_digit</span><span class="org-markdown-markup">`</span> ought to pass all this assertions:
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
 <span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(4, 1) == 4)</span></span>
 <span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(4, 2) == 6)</span></span>
 <span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(9, 7) == 9)</span></span>
@@ -92,6 +72,26 @@ assert(last_digit(2 <b>* 200, 2 *</b> 300) == 6)
 <span class="org-markdown-code"><span class="org-markdown-pre">assert(last_digit(2 ** 200, 2 ** 300) == 6)</span></span>
 <span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
 </pre>
+</div>
+</div>
+
+<div id="outline-container-org5ae7486" class="outline-3">
+<h3 id="org5ae7486">Answer</h3>
+<div class="outline-text-3" id="text-org5ae7486">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">last_digit</span>(a, b):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> b == 0:
+        <span class="org-keyword">return</span> 1
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">pow</span>(a, b, 10)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Assertions to validate the function</span>
+<span class="org-keyword">assert</span>(last_digit(4, 1) == 4)
+<span class="org-keyword">assert</span>(last_digit(4, 2) == 6)
+<span class="org-keyword">assert</span>(last_digit(9, 7) == 9)
+<span class="org-keyword">assert</span>(last_digit(10, 10 ** 10) == 0)
+<span class="org-keyword">assert</span>(last_digit(2 ** 200, 2 ** 300) == 6)
+</pre>
+</div>
 </div>
 </div>
 
