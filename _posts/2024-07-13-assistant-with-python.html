@@ -16,47 +16,47 @@ tags: [code interpreter]
 <ul>
 <li><a href="#org9fc6590">A primitive task</a>
 <ul>
-<li><a href="#org9614302">Description</a></li>
-<li><a href="#org874321e">Answer</a></li>
+<li><a href="#org7f6cd67">Description</a></li>
+<li><a href="#org6386aa8">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orga628bbb">A solution requiring nuanced comprehension</a>
 <ul>
-<li><a href="#orgf92789e">Task description</a></li>
-<li><a href="#org23e71d0">Answer</a></li>
+<li><a href="#org089e8e3">Task description</a></li>
+<li><a href="#org3d8ea0b">Answer</a></li>
 <li><a href="#orgc9687aa">Validation</a></li>
 <li><a href="#orgae90707">Conclusion</a></li>
 </ul>
 </li>
 <li><a href="#org0290dff">Raw and obscure description</a>
 <ul>
-<li><a href="#org5386b5c">Description</a></li>
-<li><a href="#orgfe2d41c">Answer</a></li>
+<li><a href="#org511a94a">Description</a></li>
+<li><a href="#org48b926f">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orgb0879c1">A more complex task</a>
 <ul>
-<li><a href="#org7f6cd67">Description</a></li>
-<li><a href="#orga75fdf7">Answer</a></li>
+<li><a href="#org5b2d985">Description</a></li>
+<li><a href="#org903e485">Answer</a></li>
 <li><a href="#org4c34c48">Sum up</a></li>
 </ul>
 </li>
 <li><a href="#org611289d">Another check of Assistant's dexterity</a>
 <ul>
-<li><a href="#org089e8e3">Task description</a></li>
-<li><a href="#org6971e54">Answer</a></li>
+<li><a href="#orga44a73e">Task description</a></li>
+<li><a href="#orge092593">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org4ea3e06">Thread-specific question</a>
 <ul>
-<li><a href="#org76af055">Task</a></li>
+<li><a href="#orgf75d568">Task</a></li>
 <li><a href="#org4c46916">Solution</a></li>
 </ul>
 </li>
 <li><a href="#org608ee3a">The Snag</a>
 <ul>
-<li><a href="#org8a77f25">Question</a></li>
-<li><a href="#org691952f">Answer</a></li>
+<li><a href="#org2129df7">Question</a></li>
+<li><a href="#org73daddc">Answer</a></li>
 <li><a href="#org063cde3">It is the limit!</a></li>
 </ul>
 </li>
@@ -72,30 +72,37 @@ tags: [code interpreter]
 </li>
 <li><a href="#org1fff6ff">Modification</a>
 <ul>
-<li><a href="#org49976ab">Task</a></li>
+<li><a href="#orgba57c6c">Task</a></li>
 <li><a href="#orgc2051e5">Resolution</a></li>
 </ul>
 </li>
 <li><a href="#orgcf543aa">Extension</a>
 <ul>
-<li><a href="#orgf75d568">Task</a></li>
-<li><a href="#org5c453b7">Answer</a></li>
+<li><a href="#org6587f03">Task</a></li>
+<li><a href="#orgbb43ac6">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orgd5efe8d">Customization</a>
 <ul>
-<li><a href="#orgc0f358d">Question</a></li>
-<li><a href="#org8c9a8b7">Answer</a></li>
+<li><a href="#org109aade">Question</a></li>
+<li><a href="#orgb2e1636">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org463b025">Clarification</a>
 <ul>
-<li><a href="#org2129df7">Question</a></li>
-<li><a href="#org6386aa8">Answer</a></li>
+<li><a href="#orgd541ed2">Question</a></li>
+<li><a href="#org6bc2c67">Answer</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a href="#org2a8c801">Corollary</a>
+<ul>
+<li><a href="#orga937b94">Question</a></li>
+<li><a href="#org9701400">Answer</a></li>
+</ul>
+</li>
+<li><a href="#orgeef7375">An Acid Note</a></li>
 </ul>
 </div>
 </div>
@@ -136,9 +143,9 @@ development.
 <h3 id="org9fc6590">A primitive task</h3>
 <div class="outline-text-3" id="text-org9fc6590">
 </div>
-<div id="outline-container-org9614302" class="outline-4">
-<h4 id="org9614302">Description</h4>
-<div class="outline-text-4" id="text-org9614302">
+<div id="outline-container-org7f6cd67" class="outline-4">
+<h4 id="org7f6cd67">Description</h4>
+<div class="outline-text-4" id="text-org7f6cd67">
 <p>
 Write a function <i>get_vowels_count</i> that returns the number (count) of
 vowels in the given string. We will consider a, e, i, o, and u as
@@ -155,9 +162,9 @@ vowels.
 </div>
 </div>
 
-<div id="outline-container-org874321e" class="outline-4">
-<h4 id="org874321e">Answer</h4>
-<div class="outline-text-4" id="text-org874321e">
+<div id="outline-container-org6386aa8" class="outline-4">
+<h4 id="org6386aa8">Answer</h4>
+<div class="outline-text-4" id="text-org6386aa8">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">get_vowels_count</span>(s):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> <span class="org-builtin">sum</span>(1 <span class="org-keyword">for</span> char <span class="org-keyword">in</span> s.lower() <span class="org-keyword">if</span> char <span class="org-keyword">in</span> <span class="org-string">'aeiou'</span>)
@@ -173,9 +180,9 @@ vowels.
 <h3 id="orga628bbb">A solution requiring nuanced comprehension</h3>
 <div class="outline-text-3" id="text-orga628bbb">
 </div>
-<div id="outline-container-orgf92789e" class="outline-4">
-<h4 id="orgf92789e">Task description</h4>
-<div class="outline-text-4" id="text-orgf92789e">
+<div id="outline-container-org089e8e3" class="outline-4">
+<h4 id="org089e8e3">Task description</h4>
+<div class="outline-text-4" id="text-org089e8e3">
 <p>
 Write a function <i>last_digit</i> that takes in two numbers a and b and
 returns the last decimal digit of a^b.  Note that a and b may be very
@@ -206,9 +213,9 @@ The inputs to your function will always be non-negative integers.
 </div>
 </div>
 
-<div id="outline-container-org23e71d0" class="outline-4">
-<h4 id="org23e71d0">Answer</h4>
-<div class="outline-text-4" id="text-org23e71d0">
+<div id="outline-container-org3d8ea0b" class="outline-4">
+<h4 id="org3d8ea0b">Answer</h4>
+<div class="outline-text-4" id="text-org3d8ea0b">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">last_digit</span>(a, b):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> b == 0:
@@ -262,9 +269,9 @@ Test the <i>ability to infer</i> by submitting a poorly formatted task.
 </p>
 </div>
 
-<div id="outline-container-org5386b5c" class="outline-4">
-<h4 id="org5386b5c">Description</h4>
-<div class="outline-text-4" id="text-org5386b5c">
+<div id="outline-container-org511a94a" class="outline-4">
+<h4 id="org511a94a">Description</h4>
+<div class="outline-text-4" id="text-org511a94a">
 <p>
 Consider a sequence u where u is defined as follows:
 </p>
@@ -308,9 +315,9 @@ Focus attention on efficiency
 </div>
 </div>
 
-<div id="outline-container-orgfe2d41c" class="outline-4">
-<h4 id="orgfe2d41c">Answer</h4>
-<div class="outline-text-4" id="text-orgfe2d41c">
+<div id="outline-container-org48b926f" class="outline-4">
+<h4 id="org48b926f">Answer</h4>
+<div class="outline-text-4" id="text-org48b926f">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> heapq <span class="org-keyword">import</span> heappop, heappush
 
@@ -339,9 +346,9 @@ Focus attention on efficiency
 <h3 id="orgb0879c1">A more complex task</h3>
 <div class="outline-text-3" id="text-orgb0879c1">
 </div>
-<div id="outline-container-org7f6cd67" class="outline-4">
-<h4 id="org7f6cd67">Description</h4>
-<div class="outline-text-4" id="text-org7f6cd67">
+<div id="outline-container-org5b2d985" class="outline-4">
+<h4 id="org5b2d985">Description</h4>
+<div class="outline-text-4" id="text-org5b2d985">
 <p>
 For a given chemical formula represented by a string, count the number
 of atoms of each element contained in the molecule and return an object.
@@ -380,9 +387,9 @@ Index after the braces is optional.
 </div>
 </div>
 
-<div id="outline-container-orga75fdf7" class="outline-4">
-<h4 id="orga75fdf7">Answer</h4>
-<div class="outline-text-4" id="text-orga75fdf7">
+<div id="outline-container-org903e485" class="outline-4">
+<h4 id="org903e485">Answer</h4>
+<div class="outline-text-4" id="text-org903e485">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> re
 <span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
@@ -462,9 +469,9 @@ The assistant even wrote a set of assertions to prove the correctness of his cod
 <h3 id="org611289d">Another check of Assistant's dexterity</h3>
 <div class="outline-text-3" id="text-org611289d">
 </div>
-<div id="outline-container-org089e8e3" class="outline-4">
-<h4 id="org089e8e3">Task description</h4>
-<div class="outline-text-4" id="text-org089e8e3">
+<div id="outline-container-orga44a73e" class="outline-4">
+<h4 id="orga44a73e">Task description</h4>
+<div class="outline-text-4" id="text-orga44a73e">
 <p>
 You have to create a function that takes a positive integer number and returns the
 next bigger number formed by the same digits:
@@ -488,9 +495,9 @@ next_bigger(531)==-1
 </div>
 </div>
 
-<div id="outline-container-org6971e54" class="outline-4">
-<h4 id="org6971e54">Answer</h4>
-<div class="outline-text-4" id="text-org6971e54">
+<div id="outline-container-orge092593" class="outline-4">
+<h4 id="orge092593">Answer</h4>
+<div class="outline-text-4" id="text-orge092593">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">next_bigger</span>(n):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">digits</span> = <span class="org-builtin">list</span>(<span class="org-builtin">str</span>(n))
@@ -544,9 +551,9 @@ suggestions.
 </p>
 </div>
 
-<div id="outline-container-org76af055" class="outline-4">
-<h4 id="org76af055">Task</h4>
-<div class="outline-text-4" id="text-org76af055">
+<div id="outline-container-orgf75d568" class="outline-4">
+<h4 id="orgf75d568">Task</h4>
+<div class="outline-text-4" id="text-orgf75d568">
 <p>
 Write the function <code>parse_molecule</code> without using the standard library
 modules <code>re</code> and <code>collections</code>.
@@ -632,9 +639,9 @@ The balance between task intricacy and ambiguity of description.
 </p>
 </div>
 
-<div id="outline-container-org8a77f25" class="outline-4">
-<h4 id="org8a77f25">Question</h4>
-<div class="outline-text-4" id="text-org8a77f25">
+<div id="outline-container-org2129df7" class="outline-4">
+<h4 id="org2129df7">Question</h4>
+<div class="outline-text-4" id="text-org2129df7">
 <p>
 Optimize the function <code>parse_molecule</code>:
 </p>
@@ -702,9 +709,9 @@ it must successfully pass through this set of assertions:
 </div>
 </div>
 
-<div id="outline-container-org691952f" class="outline-4">
-<h4 id="org691952f">Answer</h4>
-<div class="outline-text-4" id="text-org691952f">
+<div id="outline-container-org73daddc" class="outline-4">
+<h4 id="org73daddc">Answer</h4>
+<div class="outline-text-4" id="text-org73daddc">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
@@ -912,9 +919,9 @@ nodes, and converting the list to a Python list.
 <h3 id="org1fff6ff">Modification</h3>
 <div class="outline-text-3" id="text-org1fff6ff">
 </div>
-<div id="outline-container-org49976ab" class="outline-4">
-<h4 id="org49976ab">Task</h4>
-<div class="outline-text-4" id="text-org49976ab">
+<div id="outline-container-orgba57c6c" class="outline-4">
+<h4 id="orgba57c6c">Task</h4>
+<div class="outline-text-4" id="text-orgba57c6c">
 <p>
 Modify class <code>DoubleLinkedList</code> by converting method <code>to_list</code> into
 <code>__repr__</code> and the test suite accordingly with this modification. 
@@ -1043,9 +1050,9 @@ representation for comparison.
 <h3 id="orgcf543aa">Extension</h3>
 <div class="outline-text-3" id="text-orgcf543aa">
 </div>
-<div id="outline-container-orgf75d568" class="outline-4">
-<h4 id="orgf75d568">Task</h4>
-<div class="outline-text-4" id="text-orgf75d568">
+<div id="outline-container-org6587f03" class="outline-4">
+<h4 id="org6587f03">Task</h4>
+<div class="outline-text-4" id="text-org6587f03">
 <p>
 The name of class is not <code>DoublyLinkedList</code> but <code>DoubleLinkedList</code>,
 bear it in your mind, please.
@@ -1055,19 +1062,19 @@ bear it in your mind, please.
 Add the feature to prevent same nodes inclusion into the
 DoubleLinkedList. Each node must have the unique value. The attempt to
 insert the node with not unique value must throw the <code>Exception</code>:
-"Value already in list!"
+"This value is already in the list!"
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5c453b7" class="outline-4">
-<h4 id="org5c453b7">Answer</h4>
-<div class="outline-text-4" id="text-org5c453b7">
+<div id="outline-container-orgbb43ac6" class="outline-4">
+<h4 id="orgbb43ac6">Answer</h4>
+<div class="outline-text-4" id="text-orgbb43ac6">
 <p>
 Here's the updated implementation of the <code>DoubleLinkedList</code> class with
 the feature to ensure unique node values. If an attempt is made to
 insert a node with a non-unique value, an <code>Exception</code> is raised with
-the message "Value already in list!".
+the message "This value is already in the list!".
 </p>
 
 <div class="org-src-container">
@@ -1085,7 +1092,7 @@ the message "Value already in list!".
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">add_node</span>(<span class="org-keyword">self</span>, value):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> value <span class="org-keyword">in</span> <span class="org-keyword">self</span>.<span class="org-variable-name">values</span>:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"This value is already in the list!"</span>)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node = Node(value)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>.<span class="org-variable-name">head</span>:
@@ -1146,7 +1153,7 @@ the message "Value already in list!".
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(2)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-constant">False</span>, <span class="org-string">"Expected an exception for duplicate value"</span>
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">except</span> <span class="org-type">Exception</span> <span class="org-keyword">as</span> e:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">str</span>(e) == <span class="org-string">"Value already in list!"</span>, f<span class="org-string">"Expected: 'Value already in list!', Got: </span>{<span class="org-builtin">str</span>(e)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">str</span>(e) == <span class="org-string">"This value is already in the list!"</span>, f<span class="org-string">"Expected: 'This value is already in the list!', Got: </span>{<span class="org-builtin">str</span>(e)}<span class="org-string">"</span>
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test find_node</span>
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = dll.find_node(2)
@@ -1195,18 +1202,18 @@ correctly.
 <h3 id="orgd5efe8d">Customization</h3>
 <div class="outline-text-3" id="text-orgd5efe8d">
 </div>
-<div id="outline-container-orgc0f358d" class="outline-4">
-<h4 id="orgc0f358d">Question</h4>
-<div class="outline-text-4" id="text-orgc0f358d">
+<div id="outline-container-org109aade" class="outline-4">
+<h4 id="org109aade">Question</h4>
+<div class="outline-text-4" id="text-org109aade">
 <p>
 Rewrite <code>test_double_linked_list</code> in <code>unittest</code> style, please.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8c9a8b7" class="outline-4">
-<h4 id="org8c9a8b7">Answer</h4>
-<div class="outline-text-4" id="text-org8c9a8b7">
+<div id="outline-container-orgb2e1636" class="outline-4">
+<h4 id="orgb2e1636">Answer</h4>
+<div class="outline-text-4" id="text-orgb2e1636">
 <p>
 Here's the modified test suite for the <code>DoubleLinkedList</code> class using
 the <code>unittest</code> framework.
@@ -1230,7 +1237,7 @@ the <code>unittest</code> framework.
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">with</span> <span class="org-keyword">self</span>.assertRaises(<span class="org-type">Exception</span>) <span class="org-keyword">as</span> <span class="org-variable-name">context</span>:
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"This value is already in the list!"</span>)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_find_node</span>(<span class="org-keyword">self</span>):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
@@ -1260,11 +1267,19 @@ the <code>unittest</code> framework.
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([]))
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(3))
-
-<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">'__main__'</span>:
-<span class="org-highlight-indentation"> </span>   unittest.main()
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">Emacs' Babel unittest run approach</span>
 </pre>
 </div>
+
+<pre class="example">
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+</pre>
+
+
 
 <p>
 This <code>unittest</code> test suite includes the following tests:
@@ -1291,9 +1306,9 @@ To run the tests, save the code in a file and execute the file. The
 <h3 id="org463b025">Clarification</h3>
 <div class="outline-text-3" id="text-org463b025">
 </div>
-<div id="outline-container-org2129df7" class="outline-4">
-<h4 id="org2129df7">Question</h4>
-<div class="outline-text-4" id="text-org2129df7">
+<div id="outline-container-orgd541ed2" class="outline-4">
+<h4 id="orgd541ed2">Question</h4>
+<div class="outline-text-4" id="text-orgd541ed2">
 <p>
 Rewrite class <code>TestDoubleLinkedList</code>:
 </p>
@@ -1313,9 +1328,9 @@ are redundant and unnecessary repetition. Put them into <code>setUp</code> metho
 </div>
 </div>
 
-<div id="outline-container-org6386aa8" class="outline-4">
-<h4 id="org6386aa8">Answer</h4>
-<div class="outline-text-4" id="text-org6386aa8">
+<div id="outline-container-org6bc2c67" class="outline-4">
+<h4 id="org6bc2c67">Answer</h4>
+<div class="outline-text-4" id="text-org6bc2c67">
 <p>
 Sure, here's the updated test suite for the <code>DoubleLinkedList</code>, where
 the repetitive setup code has been moved into the <code>setUp</code> method.
@@ -1332,7 +1347,7 @@ the repetitive setup code has been moved into the <code>setUp</code> method.
 
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">add_node</span>(<span class="org-keyword">self</span>, value):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> value <span class="org-keyword">in</span> <span class="org-keyword">self</span>.<span class="org-variable-name">values</span>:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"This value is already in the list!"</span>)
 
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node = Node(value)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>.<span class="org-variable-name">head</span>:
@@ -1397,7 +1412,7 @@ the repetitive setup code has been moved into the <code>setUp</code> method.
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_add_duplicate_node</span>(<span class="org-keyword">self</span>):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">with</span> <span class="org-keyword">self</span>.assertRaises(<span class="org-type">Exception</span>) <span class="org-keyword">as</span> context:
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"This value is already in the list!"</span>)
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_find_node</span>(<span class="org-keyword">self</span>):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = <span class="org-keyword">self</span>.dll.find_node(2)
@@ -1420,11 +1435,19 @@ the repetitive setup code has been moved into the <code>setUp</code> method.
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([]))
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(3))
-
-<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">'__main__'</span>:
-<span class="org-highlight-indentation"> </span>   unittest.main()
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
 </pre>
 </div>
+
+<pre class="example">
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+</pre>
+
+
 
 <ul class="org-ul">
 <li>The <code>setUp</code> method now initializes the list and adds the nodes <code>1</code>,
@@ -1436,5 +1459,59 @@ same file for completeness.</li>
 </ul>
 </div>
 </div>
+</div>
+</div>
+
+
+<div id="outline-container-org2a8c801" class="outline-2">
+<h2 id="org2a8c801">Corollary</h2>
+<div class="outline-text-2" id="text-org2a8c801">
+</div>
+<div id="outline-container-orga937b94" class="outline-3">
+<h3 id="orga937b94">Question</h3>
+<div class="outline-text-3" id="text-orga937b94">
+<p>
+What is your opinion about writing Python code using the OpenAI
+Assistant equipped with the code interpreter tool? I see it as a
+<b>killer feature</b>, beyond a doubt. What are your thoughts on including
+test suites for the generated code? Is it necessary to <i>provide the
+test suites beforehand</i> to simplify and clarify the task of Python
+code generation?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9701400" class="outline-3">
+<h3 id="org9701400">Answer</h3>
+<div class="outline-text-3" id="text-org9701400">
+<div class="org-src-container">
+<pre class="src src-markdown">  Using an AI assistant equipped with a code interpreter tool is indeed
+  a powerful feature that can greatly enhance productivity and code
+  quality by providing quick feedback and validation of the generated
+  code. Including test suites for the generated code is not only
+  beneficial but practically necessary for ensuring the correctness and
+  robustness of the implementations. Providing the test suites
+  beforehand can indeed simplify and clarify the task of Python code
+  generation, as it sets clear expectations and constraints, enabling
+  more focused and accurate responses.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeef7375" class="outline-2">
+<h2 id="orgeef7375">An Acid Note</h2>
+<div class="outline-text-2" id="text-orgeef7375">
+<p>
+Despite the powerful <code>OpenAI</code> algorithms, the cornerstone of success
+in <i>augmented Python development</i> is <b>prompt clarity</b>. A vague,
+uncertain, and convoluted task description results in incorrect
+answers.
+</p>
+
+<p>
+The <b>human</b> remains the weakest link in the code development chain.
+</p>
 </div>
 </div>
