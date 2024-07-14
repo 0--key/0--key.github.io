@@ -16,35 +16,35 @@ tags: [code interpreter]
 <ul>
 <li><a href="#org9fc6590">A primitive task</a>
 <ul>
-<li><a href="#orga10195f">Description</a></li>
-<li><a href="#org8e805ce">Answer</a></li>
+<li><a href="#org9614302">Description</a></li>
+<li><a href="#org874321e">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orga628bbb">A solution requiring nuanced comprehension</a>
 <ul>
-<li><a href="#org8549fa0">Task description</a></li>
-<li><a href="#org1e06dfa">Answer</a></li>
+<li><a href="#orgf92789e">Task description</a></li>
+<li><a href="#org23e71d0">Answer</a></li>
 <li><a href="#orgc9687aa">Validation</a></li>
 <li><a href="#orgae90707">Conclusion</a></li>
 </ul>
 </li>
 <li><a href="#org0290dff">Raw and obscure description</a>
 <ul>
-<li><a href="#orga6888f7">Description</a></li>
-<li><a href="#org5833cea">Answer</a></li>
+<li><a href="#org5386b5c">Description</a></li>
+<li><a href="#orgfe2d41c">Answer</a></li>
 </ul>
 </li>
 <li><a href="#orgb0879c1">A more complex task</a>
 <ul>
-<li><a href="#org9614302">Description</a></li>
-<li><a href="#org5802748">Answer</a></li>
+<li><a href="#org7f6cd67">Description</a></li>
+<li><a href="#orga75fdf7">Answer</a></li>
 <li><a href="#org4c34c48">Sum up</a></li>
 </ul>
 </li>
 <li><a href="#org611289d">Another check of Assistant's dexterity</a>
 <ul>
-<li><a href="#orgf92789e">Task description</a></li>
-<li><a href="#org9f3f1be">Answer</a></li>
+<li><a href="#org089e8e3">Task description</a></li>
+<li><a href="#org6971e54">Answer</a></li>
 </ul>
 </li>
 <li><a href="#org4ea3e06">Thread-specific question</a>
@@ -55,8 +55,8 @@ tags: [code interpreter]
 </li>
 <li><a href="#org608ee3a">The Snag</a>
 <ul>
-<li><a href="#org1b53959">Question</a></li>
-<li><a href="#org9a2304b">Answer</a></li>
+<li><a href="#org8a77f25">Question</a></li>
+<li><a href="#org691952f">Answer</a></li>
 <li><a href="#org063cde3">It is the limit!</a></li>
 </ul>
 </li>
@@ -70,12 +70,30 @@ tags: [code interpreter]
 <li><a href="#org986cef0">Run tests</a></li>
 </ul>
 </li>
+<li><a href="#org1fff6ff">Modification</a>
+<ul>
+<li><a href="#org49976ab">Task</a></li>
+<li><a href="#orgc2051e5">Resolution</a></li>
 </ul>
 </li>
-<li><a href="#orgb98e709">Corollary</a>
+<li><a href="#orgcf543aa">Extension</a>
 <ul>
-<li><a href="#org8a77f25">Question</a></li>
-<li><a href="#org874321e">Answer</a></li>
+<li><a href="#orgf75d568">Task</a></li>
+<li><a href="#org5c453b7">Answer</a></li>
+</ul>
+</li>
+<li><a href="#orgd5efe8d">Customization</a>
+<ul>
+<li><a href="#orgc0f358d">Question</a></li>
+<li><a href="#org8c9a8b7">Answer</a></li>
+</ul>
+</li>
+<li><a href="#org463b025">Clarification</a>
+<ul>
+<li><a href="#org2129df7">Question</a></li>
+<li><a href="#org6386aa8">Answer</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -118,9 +136,9 @@ development.
 <h3 id="org9fc6590">A primitive task</h3>
 <div class="outline-text-3" id="text-org9fc6590">
 </div>
-<div id="outline-container-orga10195f" class="outline-4">
-<h4 id="orga10195f">Description</h4>
-<div class="outline-text-4" id="text-orga10195f">
+<div id="outline-container-org9614302" class="outline-4">
+<h4 id="org9614302">Description</h4>
+<div class="outline-text-4" id="text-org9614302">
 <p>
 Write a function <i>get_vowels_count</i> that returns the number (count) of
 vowels in the given string. We will consider a, e, i, o, and u as
@@ -137,9 +155,9 @@ vowels.
 </div>
 </div>
 
-<div id="outline-container-org8e805ce" class="outline-4">
-<h4 id="org8e805ce">Answer</h4>
-<div class="outline-text-4" id="text-org8e805ce">
+<div id="outline-container-org874321e" class="outline-4">
+<h4 id="org874321e">Answer</h4>
+<div class="outline-text-4" id="text-org874321e">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">get_vowels_count</span>(s):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> <span class="org-builtin">sum</span>(1 <span class="org-keyword">for</span> char <span class="org-keyword">in</span> s.lower() <span class="org-keyword">if</span> char <span class="org-keyword">in</span> <span class="org-string">'aeiou'</span>)
@@ -155,9 +173,9 @@ vowels.
 <h3 id="orga628bbb">A solution requiring nuanced comprehension</h3>
 <div class="outline-text-3" id="text-orga628bbb">
 </div>
-<div id="outline-container-org8549fa0" class="outline-4">
-<h4 id="org8549fa0">Task description</h4>
-<div class="outline-text-4" id="text-org8549fa0">
+<div id="outline-container-orgf92789e" class="outline-4">
+<h4 id="orgf92789e">Task description</h4>
+<div class="outline-text-4" id="text-orgf92789e">
 <p>
 Write a function <i>last_digit</i> that takes in two numbers a and b and
 returns the last decimal digit of a^b.  Note that a and b may be very
@@ -188,9 +206,9 @@ The inputs to your function will always be non-negative integers.
 </div>
 </div>
 
-<div id="outline-container-org1e06dfa" class="outline-4">
-<h4 id="org1e06dfa">Answer</h4>
-<div class="outline-text-4" id="text-org1e06dfa">
+<div id="outline-container-org23e71d0" class="outline-4">
+<h4 id="org23e71d0">Answer</h4>
+<div class="outline-text-4" id="text-org23e71d0">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">def</span> <span class="org-function-name">last_digit</span>(a, b):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> b == 0:
@@ -244,9 +262,9 @@ Test the <i>ability to infer</i> by submitting a poorly formatted task.
 </p>
 </div>
 
-<div id="outline-container-orga6888f7" class="outline-4">
-<h4 id="orga6888f7">Description</h4>
-<div class="outline-text-4" id="text-orga6888f7">
+<div id="outline-container-org5386b5c" class="outline-4">
+<h4 id="org5386b5c">Description</h4>
+<div class="outline-text-4" id="text-org5386b5c">
 <p>
 Consider a sequence u where u is defined as follows:
 </p>
@@ -290,9 +308,9 @@ Focus attention on efficiency
 </div>
 </div>
 
-<div id="outline-container-org5833cea" class="outline-4">
-<h4 id="org5833cea">Answer</h4>
-<div class="outline-text-4" id="text-org5833cea">
+<div id="outline-container-orgfe2d41c" class="outline-4">
+<h4 id="orgfe2d41c">Answer</h4>
+<div class="outline-text-4" id="text-orgfe2d41c">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> heapq <span class="org-keyword">import</span> heappop, heappush
 
@@ -321,9 +339,9 @@ Focus attention on efficiency
 <h3 id="orgb0879c1">A more complex task</h3>
 <div class="outline-text-3" id="text-orgb0879c1">
 </div>
-<div id="outline-container-org9614302" class="outline-4">
-<h4 id="org9614302">Description</h4>
-<div class="outline-text-4" id="text-org9614302">
+<div id="outline-container-org7f6cd67" class="outline-4">
+<h4 id="org7f6cd67">Description</h4>
+<div class="outline-text-4" id="text-org7f6cd67">
 <p>
 For a given chemical formula represented by a string, count the number
 of atoms of each element contained in the molecule and return an object.
@@ -362,9 +380,9 @@ Index after the braces is optional.
 </div>
 </div>
 
-<div id="outline-container-org5802748" class="outline-4">
-<h4 id="org5802748">Answer</h4>
-<div class="outline-text-4" id="text-org5802748">
+<div id="outline-container-orga75fdf7" class="outline-4">
+<h4 id="orga75fdf7">Answer</h4>
+<div class="outline-text-4" id="text-orga75fdf7">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> re
 <span class="org-keyword">from</span> collections <span class="org-keyword">import</span> defaultdict
@@ -444,9 +462,9 @@ The assistant even wrote a set of assertions to prove the correctness of his cod
 <h3 id="org611289d">Another check of Assistant's dexterity</h3>
 <div class="outline-text-3" id="text-org611289d">
 </div>
-<div id="outline-container-orgf92789e" class="outline-4">
-<h4 id="orgf92789e">Task description</h4>
-<div class="outline-text-4" id="text-orgf92789e">
+<div id="outline-container-org089e8e3" class="outline-4">
+<h4 id="org089e8e3">Task description</h4>
+<div class="outline-text-4" id="text-org089e8e3">
 <p>
 You have to create a function that takes a positive integer number and returns the
 next bigger number formed by the same digits:
@@ -470,9 +488,9 @@ next_bigger(531)==-1
 </div>
 </div>
 
-<div id="outline-container-org9f3f1be" class="outline-4">
-<h4 id="org9f3f1be">Answer</h4>
-<div class="outline-text-4" id="text-org9f3f1be">
+<div id="outline-container-org6971e54" class="outline-4">
+<h4 id="org6971e54">Answer</h4>
+<div class="outline-text-4" id="text-org6971e54">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">next_bigger</span>(n):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">digits</span> = <span class="org-builtin">list</span>(<span class="org-builtin">str</span>(n))
@@ -614,9 +632,9 @@ The balance between task intricacy and ambiguity of description.
 </p>
 </div>
 
-<div id="outline-container-org1b53959" class="outline-4">
-<h4 id="org1b53959">Question</h4>
-<div class="outline-text-4" id="text-org1b53959">
+<div id="outline-container-org8a77f25" class="outline-4">
+<h4 id="org8a77f25">Question</h4>
+<div class="outline-text-4" id="text-org8a77f25">
 <p>
 Optimize the function <code>parse_molecule</code>:
 </p>
@@ -684,9 +702,9 @@ it must successfully pass through this set of assertions:
 </div>
 </div>
 
-<div id="outline-container-org9a2304b" class="outline-4">
-<h4 id="org9a2304b">Answer</h4>
-<div class="outline-text-4" id="text-org9a2304b">
+<div id="outline-container-org691952f" class="outline-4">
+<h4 id="org691952f">Answer</h4>
+<div class="outline-text-4" id="text-org691952f">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">parse_molecule</span>(formula):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">multiply_dict</span>(d, n):
@@ -889,41 +907,533 @@ nodes, and converting the list to a Python list.
 </div>
 </div>
 </div>
-</div>
 
-
-<div id="outline-container-orgb98e709" class="outline-2">
-<h2 id="orgb98e709">Corollary</h2>
-<div class="outline-text-2" id="text-orgb98e709">
+<div id="outline-container-org1fff6ff" class="outline-3">
+<h3 id="org1fff6ff">Modification</h3>
+<div class="outline-text-3" id="text-org1fff6ff">
 </div>
-<div id="outline-container-org8a77f25" class="outline-3">
-<h3 id="org8a77f25">Question</h3>
-<div class="outline-text-3" id="text-org8a77f25">
+<div id="outline-container-org49976ab" class="outline-4">
+<h4 id="org49976ab">Task</h4>
+<div class="outline-text-4" id="text-org49976ab">
 <p>
-What is your opinion about writing Python code using the OpenAI
-Assistant equipped with the code interpreter tool? I see it as a
-<b>killer feature</b>, beyond a doubt. What are your thoughts on including
-test suites for the generated code? Is it necessary to <i>provide the
-test suites beforehand</i> to simplify and clarify the task of Python
-code generation?
+Modify class <code>DoubleLinkedList</code> by converting method <code>to_list</code> into
+<code>__repr__</code> and the test suite accordingly with this modification. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org874321e" class="outline-3">
-<h3 id="org874321e">Answer</h3>
-<div class="outline-text-3" id="text-org874321e">
+<div id="outline-container-orgc2051e5" class="outline-4">
+<h4 id="orgc2051e5">Resolution</h4>
+<div class="outline-text-4" id="text-orgc2051e5">
+<p>
+Here's the modified implementation of the <code>DoublyLinkedList</code> class,
+where the <code>to_list</code> method has been converted into the <code>__repr__</code>
+method. The test suite has also been updated accordingly.
+</p>
+
 <div class="org-src-container">
-<pre class="src src-markdown">  Using an AI assistant equipped with a code interpreter tool is indeed
-  a powerful feature that can greatly enhance productivity and code
-  quality by providing quick feedback and validation of the generated
-  code. Including test suites for the generated code is not only
-  beneficial but practically necessary for ensuring the correctness and
-  robustness of the implementations. Providing the test suites
-  beforehand can indeed simplify and clarify the task of Python code
-  generation, as it sets clear expectations and constraints, enabling
-  more focused and accurate responses.
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">Node</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.value = value
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-builtin">next</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">prev</span> = <span class="org-constant">None</span>
+
+<span class="org-keyword">class</span> <span class="org-type">DoubleLinkedList</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">add_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">new_node</span> = Node(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>.<span class="org-variable-name">head</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail.<span class="org-builtin">next</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node.<span class="org-variable-name">prev</span> = <span class="org-keyword">self</span>.tail
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">delete_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">current</span> = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.prev:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.prev.<span class="org-builtin">next</span> = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.<span class="org-builtin">next</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.<span class="org-builtin">next</span>.prev = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">True</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">False</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">find_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> current
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">None</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__repr__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result.append(current.value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">str</span>(result)
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Modified Test Suite for Double-Linked List</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">test_double_linked_list</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll = DoubleLinkedList()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test add_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([1, 2, 3]), f<span class="org-string">"Expected: [1, 2, 3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test find_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = dll.find_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> node <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span> <span class="org-keyword">and</span> node.value == 2, f<span class="org-string">"Expected: 2, Got: </span>{node.value <span class="org-keyword">if</span> node <span class="org-keyword">else</span> <span class="org-constant">None</span>}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = dll.find_node(4)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> node <span class="org-keyword">is</span> <span class="org-constant">None</span>, f<span class="org-string">"Expected: None, Got: </span>{node.value <span class="org-keyword">if</span> node <span class="org-keyword">else</span> <span class="org-constant">None</span>}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test delete_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(2) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 2 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([1, 3]), f<span class="org-string">"Expected: [1, 3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(2) == <span class="org-constant">False</span>, <span class="org-string">"Node with value 2 should not be found"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(1) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 1 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([3]), f<span class="org-string">"Expected: [3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(3) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 3 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([]), f<span class="org-string">"Expected: [], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(3) == <span class="org-constant">False</span>, <span class="org-string">"Node with value 3 should not be found"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Run tests</span>
+test_double_linked_list()
+<span class="org-builtin">print</span>(<span class="org-string">"All tests passed!"</span>)
 </pre>
+</div>
+
+<pre class="example">
+All tests passed!
+</pre>
+
+
+<p>
+You can run the <code>test_double_linked_list</code> function to verify that the
+double-linked list implementation works as expected. This test suite
+checks the main features such as adding nodes, deleting nodes, finding
+nodes, and uses the <code>__repr__</code> method to convert the list to a string
+representation for comparison.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcf543aa" class="outline-3">
+<h3 id="orgcf543aa">Extension</h3>
+<div class="outline-text-3" id="text-orgcf543aa">
+</div>
+<div id="outline-container-orgf75d568" class="outline-4">
+<h4 id="orgf75d568">Task</h4>
+<div class="outline-text-4" id="text-orgf75d568">
+<p>
+The name of class is not <code>DoublyLinkedList</code> but <code>DoubleLinkedList</code>,
+bear it in your mind, please.
+</p>
+
+<p>
+Add the feature to prevent same nodes inclusion into the
+DoubleLinkedList. Each node must have the unique value. The attempt to
+insert the node with not unique value must throw the <code>Exception</code>:
+"Value already in list!"
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5c453b7" class="outline-4">
+<h4 id="org5c453b7">Answer</h4>
+<div class="outline-text-4" id="text-org5c453b7">
+<p>
+Here's the updated implementation of the <code>DoubleLinkedList</code> class with
+the feature to ensure unique node values. If an attempt is made to
+insert a node with a non-unique value, an <code>Exception</code> is raised with
+the message "Value already in list!".
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">Node</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.value = value
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-builtin">next</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">prev</span> = <span class="org-constant">None</span>
+
+<span class="org-keyword">class</span> <span class="org-type">DoubleLinkedList</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">values</span> = <span class="org-builtin">set</span>()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">add_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> value <span class="org-keyword">in</span> <span class="org-keyword">self</span>.<span class="org-variable-name">values</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node = Node(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>.<span class="org-variable-name">head</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail.<span class="org-builtin">next</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node.<span class="org-variable-name">prev</span> = <span class="org-keyword">self</span>.tail
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.values.add(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">delete_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">current</span> = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.values.remove(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.prev:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.prev.<span class="org-builtin">next</span> = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.<span class="org-builtin">next</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.<span class="org-builtin">next</span>.prev = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">True</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">False</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">find_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> current
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">None</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__repr__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result.append(current.value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">str</span>(result)
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">&gt;&gt; Updated Test Suite for Double-Linked List</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">test_double_linked_list</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll = DoubleLinkedList()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test add_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([1, 2, 3]), f<span class="org-string">"Expected: [1, 2, 3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test add_node with duplicate value</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">try</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-constant">False</span>, <span class="org-string">"Expected an exception for duplicate value"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">except</span> <span class="org-type">Exception</span> <span class="org-keyword">as</span> e:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">str</span>(e) == <span class="org-string">"Value already in list!"</span>, f<span class="org-string">"Expected: 'Value already in list!', Got: </span>{<span class="org-builtin">str</span>(e)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test find_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = dll.find_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> node <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span> <span class="org-keyword">and</span> node.value == 2, f<span class="org-string">"Expected: 2, Got: </span>{node.value <span class="org-keyword">if</span> node <span class="org-keyword">else</span> <span class="org-constant">None</span>}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = dll.find_node(4)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> node <span class="org-keyword">is</span> <span class="org-constant">None</span>, f<span class="org-string">"Expected: None, Got: </span>{node.value <span class="org-keyword">if</span> node <span class="org-keyword">else</span> <span class="org-constant">None</span>}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-comment-delimiter"># </span><span class="org-comment">Test delete_node</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(2) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 2 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([1, 3]), f<span class="org-string">"Expected: [1, 3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(2) == <span class="org-constant">False</span>, <span class="org-string">"Node with value 2 should not be found"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(1) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 1 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([3]), f<span class="org-string">"Expected: [3], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(3) == <span class="org-constant">True</span>, <span class="org-string">"Node with value 3 should be found and deleted"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> <span class="org-builtin">repr</span>(dll) == <span class="org-builtin">str</span>([]), f<span class="org-string">"Expected: [], Got: </span>{<span class="org-builtin">repr</span>(dll)}<span class="org-string">"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">assert</span> dll.delete_node(3) == <span class="org-constant">False</span>, <span class="org-string">"Node with value 3 should not be found"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Run tests</span>
+test_double_linked_list()
+<span class="org-builtin">print</span>(<span class="org-string">"All tests passed!"</span>)
+</pre>
+</div>
+
+<pre class="example">
+All tests passed!
+</pre>
+
+
+<p>
+You can run the <code>test_double_linked_list</code> function to verify that the
+<code>DoubleLinkedList</code> class works as expected. The test suite checks that
+duplicate values are not allowed and that the main functionalities
+such as adding nodes, deleting nodes, and finding nodes work
+correctly.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd5efe8d" class="outline-3">
+<h3 id="orgd5efe8d">Customization</h3>
+<div class="outline-text-3" id="text-orgd5efe8d">
+</div>
+<div id="outline-container-orgc0f358d" class="outline-4">
+<h4 id="orgc0f358d">Question</h4>
+<div class="outline-text-4" id="text-orgc0f358d">
+<p>
+Rewrite <code>test_double_linked_list</code> in <code>unittest</code> style, please.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8c9a8b7" class="outline-4">
+<h4 id="org8c9a8b7">Answer</h4>
+<div class="outline-text-4" id="text-org8c9a8b7">
+<p>
+Here's the modified test suite for the <code>DoubleLinkedList</code> class using
+the <code>unittest</code> framework.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+
+<span class="org-keyword">class</span> <span class="org-type">TestDoubleLinkedList</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">setUp</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">dll</span> = DoubleLinkedList()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_add_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([1, 2, 3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_add_duplicate_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">with</span> <span class="org-keyword">self</span>.assertRaises(<span class="org-type">Exception</span>) <span class="org-keyword">as</span> <span class="org-variable-name">context</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_find_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = <span class="org-keyword">self</span>.dll.find_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertIsNotNone(node)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(node.value, 2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">node</span> = <span class="org-keyword">self</span>.dll.find_node(4)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertIsNone(node)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(2))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([1, 3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(2))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(1))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(3))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(3))
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">'__main__'</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+
+<p>
+This <code>unittest</code> test suite includes the following tests:
+</p>
+
+<ol class="org-ol">
+<li><b><b>test_add_node</b></b>: Tests adding nodes to the list.</li>
+<li><b><b>test_add_duplicate_node</b></b>: Tests that adding a duplicate node
+raises an exception.</li>
+<li><b><b>test_find_node</b></b>: Tests finding existing and non-existing nodes
+in the list.</li>
+<li><b><b>test_delete_node</b></b>: Tests deleting nodes from the list.</li>
+</ol>
+
+<p>
+To run the tests, save the code in a file and execute the file. The
+<code>unittest</code> framework will discover and run all the test methods.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org463b025" class="outline-3">
+<h3 id="org463b025">Clarification</h3>
+<div class="outline-text-3" id="text-org463b025">
+</div>
+<div id="outline-container-org2129df7" class="outline-4">
+<h4 id="org2129df7">Question</h4>
+<div class="outline-text-4" id="text-org2129df7">
+<p>
+Rewrite class <code>TestDoubleLinkedList</code>:
+</p>
+
+<p>
+The chunks like
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span>   <span class="org-keyword">self</span>.dll.add_node(3)
+</pre>
+</div>
+<p>
+are redundant and unnecessary repetition. Put them into <code>setUp</code> method.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6386aa8" class="outline-4">
+<h4 id="org6386aa8">Answer</h4>
+<div class="outline-text-4" id="text-org6386aa8">
+<p>
+Sure, here's the updated test suite for the <code>DoubleLinkedList</code>, where
+the repetitive setup code has been moved into the <code>setUp</code> method.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+
+<span class="org-keyword">class</span> <span class="org-type">DoubleLinkedList</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">values</span> = <span class="org-builtin">set</span>()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">add_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> value <span class="org-keyword">in</span> <span class="org-keyword">self</span>.<span class="org-variable-name">values</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> <span class="org-type">Exception</span>(<span class="org-string">"Value already in list!"</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node = Node(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>.<span class="org-variable-name">head</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail.<span class="org-builtin">next</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   new_node.<span class="org-variable-name">prev</span> = <span class="org-keyword">self</span>.tail
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-variable-name">tail</span> = new_node
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.values.add(value)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">delete_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">current</span> = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.values.remove(value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.prev:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.prev.<span class="org-builtin">next</span> = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.head = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.<span class="org-builtin">next</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current.<span class="org-builtin">next</span>.prev = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">else</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.tail = current.prev
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">True</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">False</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">find_node</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> current.value == value:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> current
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-constant">None</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__repr__</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = <span class="org-keyword">self</span>.head
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">while</span> current:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result.append(current.value)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   current = current.<span class="org-builtin">next</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">str</span>(result)
+
+
+<span class="org-keyword">class</span> <span class="org-type">Node</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, value):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.value = value
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.<span class="org-builtin">next</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.prev = <span class="org-constant">None</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestDoubleLinkedList</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">setUp</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll = DoubleLinkedList()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(1)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(3)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_add_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([1, 2, 3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_add_duplicate_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">with</span> <span class="org-keyword">self</span>.assertRaises(<span class="org-type">Exception</span>) <span class="org-keyword">as</span> context:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.dll.add_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">str</span>(context.exception), <span class="org-string">"Value already in list!"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_find_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = <span class="org-keyword">self</span>.dll.find_node(2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertIsNotNone(node)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(node.value, 2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   node = <span class="org-keyword">self</span>.dll.find_node(4)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertIsNone(node)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_node</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(2))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([1, 3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(2))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(1))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([3]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertTrue(<span class="org-keyword">self</span>.dll.delete_node(3))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(<span class="org-builtin">repr</span>(<span class="org-keyword">self</span>.dll), <span class="org-builtin">str</span>([]))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertFalse(<span class="org-keyword">self</span>.dll.delete_node(3))
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">'__main__'</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>The <code>setUp</code> method now initializes the list and adds the nodes <code>1</code>,
+<code>2</code>, and <code>3</code> for each test method.</li>
+<li>Each test now assumes the list has these three elements from the
+start, reducing redundancy and unnecessary repetition.</li>
+<li>The <code>DoubleLinkedList</code> and <code>Node</code> classes are now included in the
+same file for completeness.</li>
+</ul>
 </div>
 </div>
 </div>
