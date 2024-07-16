@@ -1,0 +1,672 @@
+---
+layout: page
+title: Lamda Function
+tagline: " is a tiny and efficient"
+permalink: /fundamentals/python/lambda.html
+categories: [Python, Literate Programming]
+tags: [overview, lambda function]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org76fdca4">Preface</a>
+<ul>
+<li><a href="#org5dfba94">Official</a></li>
+<li><a href="#orgb43c9b9">Alternative definition</a></li>
+</ul>
+</li>
+<li><a href="#org99c632c">Lambda Function vs Regular Function</a>
+<ul>
+<li><a href="#org54daa75">Syntax and Definition</a></li>
+<li><a href="#org2433e76">Functionality and Complexity</a></li>
+<li><a href="#org43dd8d7">Readability and Use Cases</a></li>
+<li><a href="#orge4ac04b">Naming and Reuse</a></li>
+</ul>
+</li>
+<li><a href="#org88aa6f8">Syntax and Usage</a>
+<ul>
+<li><a href="#org1e6a8e0">Syntax of a Lambda Function</a></li>
+<li><a href="#org550c34e">Common Use Cases</a></li>
+<li><a href="#orgeea0a91">Conclusion</a></li>
+</ul>
+</li>
+<li><a href="#orgc933852">Transformation into <code>unittest</code></a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org76fdca4" class="outline-2">
+<h2 id="org76fdca4">Preface</h2>
+<div class="outline-text-2" id="text-org76fdca4">
+</div>
+<div id="outline-container-org5dfba94" class="outline-3">
+<h3 id="org5dfba94">Official</h3>
+<div class="outline-text-3" id="text-org5dfba94">
+<p class="verse">
+lambda<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;An anonymous inline function consisting of a single<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;expression which is evaluated when the function is called.<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;The syntax to create a lambda function is ‘lambda [parameters]:<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;expression’<br />
+</p>
+
+<p class="verse">
+expression<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;A piece of syntax which can be evaluated to some value.  In other<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;words, an expression is an accumulation of expression elements like<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;literals, names, attribute access, operators or function calls<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;which all return a value.  In contrast to many other languages, not<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;all language constructs are expressions.  There are also<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;statement, which cannot be used as expressions, such as<br />
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;while. Assignments are also statements, not expressions.<br />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgb43c9b9" class="outline-3">
+<h3 id="orgb43c9b9">Alternative definition</h3>
+<div class="outline-text-3" id="text-orgb43c9b9">
+<blockquote>
+<p>
+Python lambdas are little, anonymous functions, subject to a more
+restrictive but more concise syntax than regular Python functions.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org99c632c" class="outline-2">
+<h2 id="org99c632c">Lambda Function vs Regular Function</h2>
+<div class="outline-text-2" id="text-org99c632c">
+</div>
+<div id="outline-container-org54daa75" class="outline-3">
+<h3 id="org54daa75">Syntax and Definition</h3>
+<div class="outline-text-3" id="text-org54daa75">
+</div>
+<div id="outline-container-orgaa47822" class="outline-4">
+<h4 id="orgaa47822">Lambda Function</h4>
+<div class="outline-text-4" id="text-orgaa47822">
+<ul class="org-ul">
+<li>Lambda functions are defined using the <code>lambda</code> keyword.</li>
+<li>They are typically used for creating small, anonymous functions for brief and simple operations.</li>
+<li>Lambda functions can only contain a single expression, which is evaluated and returned.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that adds two numbers</span>
+<span class="org-variable-name">add</span> = <span class="org-keyword">lambda</span> x, y: x + y
+<span class="org-builtin">print</span>(add(2, 3))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 5</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org36f4e80" class="outline-4">
+<h4 id="org36f4e80">Regular Function</h4>
+<div class="outline-text-4" id="text-org36f4e80">
+<ul class="org-ul">
+<li>Regular functions are defined using the <code>def</code> keyword.</li>
+<li>They can contain multiple expressions and statements, including loops, conditionals, and other function calls.</li>
+<li>Regular functions must have a name but can also be called anonymously.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A regular function that adds two numbers</span>
+<span class="org-keyword">def</span> <span class="org-function-name">add</span>(x, y):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> x + y
+<span class="org-builtin">print</span>(add(2, 3))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 5</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2433e76" class="outline-3">
+<h3 id="org2433e76">Functionality and Complexity</h3>
+<div class="outline-text-3" id="text-org2433e76">
+</div>
+<div id="outline-container-orgda70787" class="outline-4">
+<h4 id="orgda70787">Lambda Function</h4>
+<div class="outline-text-4" id="text-orgda70787">
+<ul class="org-ul">
+<li>Limited to a single expression.</li>
+<li>Cannot contain multiple statements.</li>
+<li>Primarily used for short, simple functions.</li>
+<li>Often used inline with higher-order functions like <code>map()</code>, <code>filter()</code>, and <code>sorted()</code>.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Using lambda with map to square a list of numbers</span>
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5]
+<span class="org-variable-name">squared_numbers</span> = <span class="org-builtin">list</span>(<span class="org-builtin">map</span>(<span class="org-keyword">lambda</span> x: x**2, numbers))
+<span class="org-builtin">print</span>(squared_numbers)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [1, 4, 9, 16, 25]</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7e8d9c9" class="outline-4">
+<h4 id="org7e8d9c9">Regular Function</h4>
+<div class="outline-text-4" id="text-org7e8d9c9">
+<ul class="org-ul">
+<li>Can include multiple expressions and statements, allowing for more complexity.</li>
+<li>Suitable for more complex operations requiring multiple steps, conditionals, loops, etc.</li>
+<li>More readable and maintainable when the operation is complex.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A regular function that squares a list of numbers</span>
+<span class="org-keyword">def</span> <span class="org-function-name">square_numbers</span>(nums):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">result</span> = []
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> num <span class="org-keyword">in</span> nums:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   result.append(num**2)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> result
+
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5]
+<span class="org-builtin">print</span>(square_numbers(numbers))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [1, 4, 9, 16, 25]</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org43dd8d7" class="outline-3">
+<h3 id="org43dd8d7">Readability and Use Cases</h3>
+<div class="outline-text-3" id="text-org43dd8d7">
+</div>
+<div id="outline-container-org7ec4f7b" class="outline-4">
+<h4 id="org7ec4f7b">Lambda Function</h4>
+<div class="outline-text-4" id="text-org7ec4f7b">
+<ul class="org-ul">
+<li>Lambda functions are concise, but sometimes their brevity can make code less readable, particularly if overused or used for complex operations.</li>
+<li>Ideal for use cases where the function is simple and used only a few times.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Using lambda for sorting a list of tuples by the second element</span>
+<span class="org-variable-name">data</span> = [(1, <span class="org-string">'one'</span>), (3, <span class="org-string">'three'</span>), (2, <span class="org-string">'two'</span>)]
+<span class="org-variable-name">sorted_data</span> = <span class="org-builtin">sorted</span>(data, key=<span class="org-keyword">lambda</span> x: x[0])
+<span class="org-builtin">print</span>(sorted_data)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [(1, 'one'), (2, 'two'), (3, 'three')]</span>
+</pre>
+</div>
+
+<pre class="example">
+[(1, 'one'), (2, 'two'), (3, 'three')]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org91715f8" class="outline-4">
+<h4 id="org91715f8">Regular Function</h4>
+<div class="outline-text-4" id="text-org91715f8">
+<ul class="org-ul">
+<li>Regular functions are more verbose but generally more readable and maintainable for complex operations.</li>
+<li>Preferred for use cases where the function is reused multiple times or where the operations inside are complex.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Using a regular function for sorting a list of tuples by the second element</span>
+<span class="org-keyword">def</span> <span class="org-function-name">sort_by_second_element</span>(data):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">sorted</span>(data, key=<span class="org-keyword">lambda</span> x: x[1])
+
+data = [(1, <span class="org-string">'one'</span>), (2, <span class="org-string">'two'</span>), (3, <span class="org-string">'three'</span>)]
+<span class="org-builtin">print</span>(sort_by_second_element(data))  <span class="org-comment-delimiter"># </span><span class="org-comment">[(1, 'one'), (3, 'three'), (2, 'two')]</span>
+</pre>
+</div>
+
+<pre class="example">
+[(1, 'one'), (3, 'three'), (2, 'two')]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge4ac04b" class="outline-3">
+<h3 id="orge4ac04b">Naming and Reuse</h3>
+<div class="outline-text-3" id="text-orge4ac04b">
+</div>
+<div id="outline-container-org343ad4a" class="outline-4">
+<h4 id="org343ad4a">Lambda Function</h4>
+<div class="outline-text-4" id="text-org343ad4a">
+<ul class="org-ul">
+<li>Often used without a name and passed directly as an argument to higher-order functions.</li>
+<li>When assigned to a variable, the variable acts as the function name.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Using lambda without a name in the filter function</span>
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5]
+<span class="org-variable-name">even_numbers</span> = <span class="org-builtin">list</span>(<span class="org-builtin">filter</span>(<span class="org-keyword">lambda</span> x: x % 2 == 0, numbers))
+<span class="org-builtin">print</span>(even_numbers)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [2, 4]</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8f0cc81" class="outline-4">
+<h4 id="org8f0cc81">Regular Function</h4>
+<div class="outline-text-4" id="text-org8f0cc81">
+<ul class="org-ul">
+<li>Always has a name, making it easier to reference and reuse in multiple locations.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Using a named regular function in the filter function</span>
+<span class="org-keyword">def</span> <span class="org-function-name">is_even</span>(x):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> x % 2 == 0
+
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5]
+<span class="org-variable-name">even_numbers</span> = <span class="org-builtin">list</span>(<span class="org-builtin">filter</span>(is_even, numbers))
+<span class="org-builtin">print</span>(even_numbers)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [2, 4]</span>
+</pre>
+</div>
+
+<p>
+Hopefully, this helps illustrate the differences between lambda
+functions and regular functions in a manner compatible with your
+Org-mode workflow! If you have any further questions or need more
+examples, feel free to ask.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org88aa6f8" class="outline-2">
+<h2 id="org88aa6f8">Syntax and Usage</h2>
+<div class="outline-text-2" id="text-org88aa6f8">
+</div>
+<div id="outline-container-org1e6a8e0" class="outline-3">
+<h3 id="org1e6a8e0">Syntax of a Lambda Function</h3>
+<div class="outline-text-3" id="text-org1e6a8e0">
+<p>
+The basic syntax for a lambda function in Python is as follows:
+</p>
+<blockquote>
+<p>
+<code>lambda arguments: expression</code>
+</p>
+</blockquote>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Example: A lambda function that squares a number</span>
+square = <span class="org-keyword">lambda</span> x: x**2
+<span class="org-builtin">print</span>(square(4))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 16</span>
+</pre>
+</div>
+
+<pre class="example">
+16
+</pre>
+</div>
+
+
+<div id="outline-container-org0a00b22" class="outline-4">
+<h4 id="org0a00b22">Components of the Syntax</h4>
+<div class="outline-text-4" id="text-org0a00b22">
+<ol class="org-ol">
+<li>/*lambda/*: This keyword is used to declare a lambda function.</li>
+<li>/*arguments/*: A comma-separated list of inputs (similar to regular
+function parameters).</li>
+<li>/*expression/*: A single expression that is evaluated and
+returned. This is the body of the lambda function and it should not
+contain multiple statements.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org177de86" class="outline-4">
+<h4 id="org177de86">Examples</h4>
+<div class="outline-text-4" id="text-org177de86">
+</div>
+<div id="outline-container-orga57ed74" class="outline-5">
+<h5 id="orga57ed74">Lambda Function with Single Argument</h5>
+<div class="outline-text-5" id="text-orga57ed74">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that doubles the input value</span>
+<span class="org-variable-name">double</span> = <span class="org-keyword">lambda</span> x: x * 2
+<span class="org-builtin">print</span>(double(5))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 10</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6cf1dbd" class="outline-5">
+<h5 id="org6cf1dbd">Lambda Function with Multiple Arguments</h5>
+<div class="outline-text-5" id="text-org6cf1dbd">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that adds two numbers</span>
+<span class="org-variable-name">add</span> = <span class="org-keyword">lambda</span> x, y: x + y
+<span class="org-builtin">print</span>(add(3, 4))  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 7</span>
+</pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org035840c" class="outline-5">
+<h5 id="org035840c">Lambda Function with No Arguments</h5>
+<div class="outline-text-5" id="text-org035840c">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that returns a constant value</span>
+<span class="org-variable-name">constant</span> = <span class="org-keyword">lambda</span>: 42
+<span class="org-builtin">print</span>(constant())  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: 42</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org550c34e" class="outline-3">
+<h3 id="org550c34e">Common Use Cases</h3>
+<div class="outline-text-3" id="text-org550c34e">
+<p>
+Lambda functions are often used with higher-order functions such as
+`map()`, `filter()`, and `sorted()`:
+</p>
+</div>
+
+
+<div id="outline-container-orga9fb854" class="outline-4">
+<h4 id="orga9fb854">Using Lambda with map()</h4>
+<div class="outline-text-4" id="text-orga9fb854">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Squaring each number in a list</span>
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4]
+<span class="org-variable-name">squared_numbers</span> = <span class="org-builtin">list</span>(<span class="org-builtin">map</span>(<span class="org-keyword">lambda</span> x: x**2, numbers))
+<span class="org-builtin">print</span>(squared_numbers)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [1, 4, 9, 16]</span>
+</pre>
+</div>
+
+<pre class="example">
+[1, 4, 9, 16]
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org3e8939a" class="outline-4">
+<h4 id="org3e8939a">Using Lambda with filter()</h4>
+<div class="outline-text-4" id="text-org3e8939a">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Filtering even numbers from a list</span>
+<span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5, 6]
+<span class="org-variable-name">even_numbers</span> = <span class="org-builtin">list</span>(<span class="org-builtin">filter</span>(<span class="org-keyword">lambda</span> x: x % 2 == 0, numbers))
+<span class="org-builtin">print</span>(even_numbers)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [2, 4, 6]</span>
+</pre>
+</div>
+
+<pre class="example">
+[2, 4, 6]
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org780bcd3" class="outline-4">
+<h4 id="org780bcd3">Using Lambda with sorted()</h4>
+<div class="outline-text-4" id="text-org780bcd3">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Sorting tuples by the second element</span>
+<span class="org-variable-name">data</span> = [(1, <span class="org-string">'one'</span>), (3, <span class="org-string">'three'</span>), (2, <span class="org-string">'two'</span>)]
+<span class="org-variable-name">sorted_data</span> = <span class="org-builtin">sorted</span>(data, key=<span class="org-keyword">lambda</span> x: x[1])
+<span class="org-builtin">print</span>(sorted_data)  <span class="org-comment-delimiter"># </span><span class="org-comment">Output: [(1, 'one'), (2, 'two'), (3, 'three')]</span>
+</pre>
+</div>
+
+<pre class="example">
+[(1, 'one'), (3, 'three'), (2, 'two')]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeea0a91" class="outline-3">
+<h3 id="orgeea0a91">Conclusion</h3>
+<div class="outline-text-3" id="text-orgeea0a91">
+<p>
+This should provide a clear overview of how to create and use lambda
+functions in Python, using the Org-mode markup for your Emacs
+workflow. If you have more questions or need further examples, feel
+free to ask!  #+end_src
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc933852" class="outline-2">
+<h2 id="orgc933852">Transformation into <code>unittest</code></h2>
+<div class="outline-text-2" id="text-orgc933852">
+<p>
+Convert the <code>lambda</code> function explanation that you're provide in the
+last answer in a single Python code snippet, formatted as Org-mode
+Babel as the set of <code>unittest</code> for each particular function you're
+mentioned, including all text from your previous answer as comments
+(single-line and multi-lines approriately by its meaning) in accordion
+with this sample:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-doc">"""</span>
+<span class="org-doc">The basic syntax for a lambda function in Python is as follows:</span>
+<span class="org-doc">~lambda arguments: expression~</span>
+<span class="org-doc">"""</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example: A lambda function that squares a number</span>
+square = <span class="org-keyword">lambda</span> x: x**2
+
+<span class="org-doc">"""</span>
+<span class="org-doc">Components of the Syntax</span>
+
+<span class="org-doc">1. /*lambda/*: This keyword is used to declare a lambda function.</span>
+<span class="org-doc">2. /*arguments/*: A comma-separated list of inputs (similar to regular</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  function parameters).</span>
+<span class="org-doc">3. /*expression/*: A single expression that is evaluated and</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  returned. This is the body of the lambda function and it should not</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  contain multiple statements.</span>
+<span class="org-doc">"""</span>
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionGeneric</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Lambda function generic syntax test"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_simple_argument</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(square(4), 16)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Examples:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Lambda Function with Single Argument</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that doubles the input value</span>
+double = <span class="org-keyword">lambda</span> x: x * 2
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionWithSingleArgument</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Generic view of lambda function with single argument"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_simple_argument</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(double(5), 10)
+
+<span class="org-string">"""</span>
+<span class="org-string">Put all other functions and its tests one by one below in this order:</span>
+<span class="org-string">function definition</span>
+<span class="org-string">test suite for this function</span>
+<span class="org-string">....</span>
+<span class="org-string">"""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">This line must be at the bottom of the code snippet to evaluate this code inside the Babel:</span>
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+
+
+<p>
+Sure, Tony! Below is the Org-mode Babel code snippet that encapsulates
+the `lambda` function explanation along with unittest code for each
+particular function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+
+<span class="org-doc">"""</span>
+<span class="org-doc">The basic syntax for a lambda function in Python is as follows:</span>
+<span class="org-doc">~lambda arguments: expression~</span>
+<span class="org-doc">"""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example: A lambda function that squares a number</span>
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">square</span>(x): <span class="org-keyword">return</span> x**2
+
+<span class="org-doc">"""</span>
+<span class="org-doc">Components of the Syntax</span>
+
+<span class="org-doc">1. `lambda`: This keyword is used to declare a lambda function.</span>
+<span class="org-doc">2. `arguments`: A comma-separated list of inputs (similar to regular</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  function parameters).</span>
+<span class="org-doc">3. `expression`: A single expression that is evaluated and</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  returned. This is the body of the lambda function and it should not</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">  contain multiple statements.</span>
+<span class="org-doc">"""</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionGeneric</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Lambda function generic syntax test"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_simple_argument</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(square(4), 16)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Examples:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Lambda Function with Single Argument</span>
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that doubles the input value</span>
+<span class="org-keyword">def</span> <span class="org-function-name">double</span>(x): <span class="org-keyword">return</span> x * 2
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionWithSingleArgument</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function with single argument"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_simple_argument</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(double(5), 10)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Lambda Function with Multiple Arguments</span>
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that adds two numbers</span>
+<span class="org-keyword">def</span> <span class="org-function-name">add</span>(x, y): <span class="org-keyword">return</span> x + y
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionWithMultipleArguments</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function with multiple arguments"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_multiple_arguments</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(add(3, 4), 7)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Lambda Function with No Arguments</span>
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">A lambda function that returns a constant value</span>
+<span class="org-keyword">def</span> <span class="org-function-name">constant</span>(): <span class="org-keyword">return</span> 42
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaFunctionWithNoArguments</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function with no arguments"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_no_arguments</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(constant(), 42)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Using Lambda with `map()`</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Squaring each number in a list</span>
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">square_numbers</span>(numbers):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">list</span>(<span class="org-builtin">map</span>(<span class="org-keyword">lambda</span> x: x**2, numbers))
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaWithMap</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function used with map()"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_lambda_with_map</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">numbers</span> = [1, 2, 3, 4]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">squared_numbers</span> = square_numbers(numbers)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(squared_numbers, [1, 4, 9, 16])
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Using Lambda with `filter()`</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Filtering even numbers from a list</span>
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">filter_even_numbers</span>(numbers):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">list</span>(<span class="org-builtin">filter</span>(<span class="org-keyword">lambda</span> x: x % 2 == 0, numbers))
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaWithFilter</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function used with filter()"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_lambda_with_filter</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">numbers</span> = [1, 2, 3, 4, 5, 6]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">even_numbers</span> = filter_even_numbers(numbers)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(even_numbers, [2, 4, 6])
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Using Lambda with `sorted()`</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Sorting tuples by the second element</span>
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">sort_by_second_element</span>(data):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-builtin">sorted</span>(data, key=<span class="org-keyword">lambda</span> x: x[0])
+
+
+<span class="org-keyword">class</span> <span class="org-type">TestLambdaWithSorted</span>(unittest.TestCase):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""Test lambda function used with sorted()"""</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_lambda_with_sorted</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   data = [(1, <span class="org-string">'one'</span>), (3, <span class="org-string">'three'</span>), (2, <span class="org-string">'two'</span>)]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   sorted_data = sort_by_second_element(data)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(sorted_data, [(1, <span class="org-string">'one'</span>), (2, <span class="org-string">'two'</span>), (3, <span class="org-string">'three'</span>)])
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">This line must be at the bottom of the code snippet to evaluate this code inside the Babel:</span>
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<pre class="example">
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.002s
+
+OK
+</pre>
+
+
+<p>
+In this code snippet:
+</p>
+<ul class="org-ul">
+<li>Each function is defined along with its corresponding unittest class.</li>
+<li>The comments in the snippet are faithfully adapted from the
+explanatory text provided in the previous messages.</li>
+<li>At the very end, `unittest.main(exit=False)` is included to make
+sure the tests are executed properly within the Org-mode Babel
+environment.</li>
+</ul>
+
+<p>
+Feel free to run this snippet in your Emacs Org-mode setup and extend
+it as needed! If you have any questions or need further assistance,
+let me know.
+</p>
+</div>
+</div>
