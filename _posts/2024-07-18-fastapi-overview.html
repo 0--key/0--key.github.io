@@ -18,7 +18,21 @@ tags: [overview]
 <li><a href="#org52d5833">Example FastAPI Application</a></li>
 <li><a href="#org2a374bd">Additional Clarifications</a>
 <ul>
-<li><a href="#org1e6fbe8">What is RESTful API?</a></li>
+<li><a href="#org1e6fbe8">What is RESTful API?</a>
+<ul>
+<li><a href="#orgfedbad0">Example of a RESTful API using FastAPI</a></li>
+</ul>
+</li>
+<li><a href="#orgd365e29">Babel Subtleties</a>
+<ul>
+<li><a href="#org3b251c0">Steps to Test FastAPI Application Using unittest</a></li>
+<li><a href="#org6326c58">FastAPI Application</a></li>
+<li><a href="#orgb4dbca9">Unit Tests for FastAPI Application</a></li>
+<li><a href="#org57e23ce">Launch FastAPI Application</a></li>
+<li><a href="#org7ba52f3">Run Unit Tests</a></li>
+</ul>
+</li>
+<li><a href="#org0529b15">Explanation</a></li>
 </ul>
 </li>
 </ul>
@@ -260,11 +274,11 @@ also known as URIs (Uniform Resource Identifiers).</li>
 <li>RESTful APIs use standard HTTP methods to perform operations on
 resources. The primary methods are:
 <ul class="org-ul">
-<li>`GET`: Retrieve a representation of a resource.</li>
-<li>`POST`: Create a new resource.</li>
-<li>`PUT`: Update an existing resource.</li>
-<li>`DELETE`: Delete a resource.</li>
-<li>`PATCH`: Partially update a resource.</li>
+<li><code>GET</code>: Retrieve a representation of a resource.</li>
+<li><code>POST</code>: Create a new resource.</li>
+<li><code>PUT</code>: Update an existing resource.</li>
+<li><code>DELETE</code>: Delete a resource.</li>
+<li><code>PATCH</code>: Partially update a resource.</li>
 </ul></li>
 </ul></li>
 
@@ -375,11 +389,11 @@ This example demonstrates a simple RESTful API with the following endpoints:
 </p>
 
 <ul class="org-ul">
-<li>`GET /items/`: Retrieve a list of items.</li>
-<li>`POST /items/`: Create a new item.</li>
-<li>`GET /items/{item_id}`: Retrieve a specific item by its ID.</li>
-<li>`PUT /items/{item_id}`: Update a specific item by its ID.</li>
-<li>`DELETE /items/{item_id}`: Delete a specific item by its ID.</li>
+<li><code>GET /items/</code>: Retrieve a list of items.</li>
+<li><code>POST /items/</code>: Create a new item.</li>
+<li><code>GET /items/{item_id}</code>: Retrieve a specific item by its ID.</li>
+<li><code>PUT /items/{item_id}</code>: Update a specific item by its ID.</li>
+<li><code>DELETE /items/{item_id}</code>: Delete a specific item by its ID.</li>
 </ul>
 
 <p>
@@ -387,6 +401,223 @@ The FastAPI framework makes it easy to create these endpoints, handle
 validation, and return proper responses.
 </p>
 </div>
+</div>
+</div>
+
+<div id="outline-container-orgd365e29" class="outline-4">
+<h4 id="orgd365e29">Babel Subtleties</h4>
+<div class="outline-text-4" id="text-orgd365e29">
+<blockquote>
+<p>
+I want to ask you do not use = :results output :session = further in
+Babel code snippets because I've already defined these properties in a
+file header.
+</p>
+
+<p>
+So, can you suggest how to test <code>Example of a RESTful API using
+FastAPI</code> using <code>unittest</code> module inside Emacs:
+</p>
+<ul class="org-ul">
+<li>How to launch <code>FastAPI</code> application in Emacs;</li>
+<li>How to launch <code>unittest</code> to vefiry correctness of its functioning.</li>
+</ul>
+</blockquote>
+
+
+<p>
+Sure, we can go through the steps to achieve this in Emacs using
+Org-mode, Babel, and the <code>unittest</code> module in Python. Below are the
+steps and code snippets to help you test a FastAPI application using
+<code>unittest</code> within Emacs.
+</p>
+</div>
+
+<div id="outline-container-org3b251c0" class="outline-5">
+<h5 id="org3b251c0">Steps to Test FastAPI Application Using unittest</h5>
+<div class="outline-text-5" id="text-org3b251c0">
+<ol class="org-ol">
+<li><b>Define the FastAPI Application</b>: You already have the FastAPI
+application defined. We will place this code in an Org-mode code
+block.</li>
+
+<li><b>Create Unit Tests Using unittest</b>: We will write unit tests to
+verify the correctness of the FastAPI application.</li>
+
+<li><b>Launch the FastAPI Application</b>: We will launch the FastAPI
+application in a separate Org-mode code block, which simulates
+running the server.</li>
+
+<li><b>Run the Unit Tests</b>: We will then execute the unit tests to
+ensure everything is functioning correctly.</li>
+</ol>
+
+<p>
+Here is how you can structure it in your Org-mode file:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6326c58" class="outline-5">
+<h5 id="org6326c58">FastAPI Application</h5>
+<div class="outline-text-5" id="text-org6326c58">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI, HTTPException
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> List
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">price</span>: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-variable-name">items</span> = []
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/"</span>, response_model=List[Item])
+<span class="org-keyword">async def</span> <span class="org-function-name">read_items</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items.append(item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items[item_id]
+
+<span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> items.pop(item_id)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb4dbca9" class="outline-5">
+<h5 id="orgb4dbca9">Unit Tests for FastAPI Application</h5>
+<div class="outline-text-5" id="text-orgb4dbca9">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Import the FastAPI ~app~ from the code block above</span>
+<span class="org-keyword">from</span> __main__ <span class="org-keyword">import</span> app
+
+<span class="org-variable-name">client</span> = TestClient(app)
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_create_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">response</span> = client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Test Item"</span>, <span class="org-string">"price"</span>: 10.5})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.json()[<span class="org-string">"name"</span>, <span class="org-string">"Test Item"</span>])
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_items</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertIsInstance(response.json(), <span class="org-builtin">list</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_update_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Test Item"</span>, <span class="org-string">"price"</span>: 10.5})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.put(<span class="org-string">"/items/0"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Updated Item"</span>, <span class="org-string">"price"</span>: 15.0})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.json()[<span class="org-string">"name"</span>], <span class="org-string">"Updated Item"</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Test Item"</span>, <span class="org-string">"price"</span>: 10.5})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.delete(<span class="org-string">"/items/0"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.json()[<span class="org-string">"name"</span>], <span class="org-string">"Test Item"</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_nonexistent_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/999"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 404)
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org57e23ce" class="outline-5">
+<h5 id="org57e23ce">Launch FastAPI Application</h5>
+<div class="outline-text-5" id="text-org57e23ce">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> uvicorn
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   uvicorn.run(app, host=<span class="org-string">"127.0.0.1"</span>, port=8000)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ba52f3" class="outline-5">
+<h5 id="org7ba52f3">Run Unit Tests</h5>
+<div class="outline-text-5" id="text-org7ba52f3">
+<div class="org-src-container">
+<pre class="src src-python">!pytest test_api.py
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0529b15" class="outline-4">
+<h4 id="org0529b15">Explanation</h4>
+<div class="outline-text-4" id="text-org0529b15">
+<ol class="org-ol">
+<li><b>FastAPI Application</b>: The first code block contains the FastAPI
+application code.</li>
+
+<li><b>Unit Tests</b>: The second code block contains the <code>unittest</code>
+implementation. We use <code>TestClient</code> from <code>fastapi.testclient</code> to
+simulate requests to the FastAPI application. Each method in the
+<code>TestFastAPI</code> class corresponds to a test case for different API
+operations.</li>
+
+<li><b>Launch FastAPI Application</b>: This block will launch the FastAPI
+application using <code>uvicorn</code>. It's marked with <code>:eval no</code> to prevent
+accidental execution. You can run this in a terminal.</li>
+
+<li><b>Run Unit Tests</b>: This block uses <code>pytest</code> to run the unit
+tests. You can simply execute this block to see the test results.</li>
+</ol>
+
+<p>
+To execute the above workflow in Emacs with Org-mode:
+</p>
+
+<ol class="org-ol">
+<li><b>Start FastAPI Server</b>: You can manually run the "Launch FastAPI
+Application" block in a separate terminal to start the FastAPI
+server.</li>
+
+<li><b>Execute Unit Tests</b>: Evaluate the "Run Unit Tests" block to run
+your test cases and verify the functionality of your FastAPI
+application.</li>
+</ol>
+
+<p>
+This setup will help you develop and test a RESTful API using FastAPI
+and <code>unittest</code> within Emacs efficiently.
+</p>
 </div>
 </div>
 </div>
