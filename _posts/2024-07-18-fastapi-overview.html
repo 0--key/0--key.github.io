@@ -1,0 +1,369 @@
+---
+layout: page
+title: FastAPI General Concepts
+tagline: " brief overivew"
+permalink: /python/fastapi-bief-overview.html
+categories: [FastAPI, Python]
+tags: [overview]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6ddc63c">Zero-Shot</a>
+<ul>
+<li><a href="#org0c80afc">General Definitions</a></li>
+<li><a href="#orgb9b5cf7">The Appropriate Answer Format Request</a></li>
+<li><a href="#org1a377b6">Overview of FastAPI</a></li>
+<li><a href="#org52d5833">Example FastAPI Application</a></li>
+<li><a href="#org6e8fe1b">Additional Definitions</a>
+<ul>
+<li><a href="#org1e6fbe8">What is RESTful API?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6ddc63c" class="outline-2">
+<h2 id="org6ddc63c">Zero-Shot</h2>
+<div class="outline-text-2" id="text-org6ddc63c">
+</div>
+<div id="outline-container-org0c80afc" class="outline-3">
+<h3 id="org0c80afc">General Definitions</h3>
+<div class="outline-text-3" id="text-org0c80afc">
+<blockquote>
+<p>
+From what I understand, FastAPI is a lightweight Python library
+designed for the efficient development of web servers, specializing in
+processing HTTP requests and returning data in JSON format. Am I
+right?
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Yes, you are correct! FastAPI is a modern, fast (high-performance) web
+framework for building APIs with Python 3.6+ based on standard Python
+type hints. Here are some key points about FastAPI that align with
+your understanding and expand on it:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">High Performance</span><span class="org-markdown-markup">**</span>: FastAPI is designed to be very fast and
+   efficient, leveraging the asynchronous capabilities of Python and
+   the performance of the Starlette framework and Pydantic library. It
+   can handle a large number of simultaneous connections efficiently.
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Type Hints and Data Validation</span><span class="org-markdown-markup">**</span>: FastAPI uses Python's type
+   hints to provide automatic validation, serialization, and
+   documentation of the request and response data. This makes
+   development faster and easier, while reducing the likelihood of
+   bugs.
+
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Asynchronous Support</span><span class="org-markdown-markup">**</span>: It natively supports asynchronous
+   programming, which is especially useful for I/O-bound and
+   high-latency operations like database access and web requests.
+
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Automatic Interactive Documentation</span><span class="org-markdown-markup">**</span>: FastAPI generates
+   interactive API documentation using Swagger UI and ReDoc out of the
+   box, which is incredibly useful for development and debugging.
+
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Ease of Use</span><span class="org-markdown-markup">**</span>: FastAPI is designed to be easy to use and learn,
+   without sacrificing flexibility and performance. It aims to provide
+   a good developer experience with features like dependency injection
+   and easy-to-write route handlers.
+
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">JSON Handling</span><span class="org-markdown-markup">**</span>: One of the core functionalities of FastAPI is
+   handling JSON data efficiently. It automatically converts request
+   payloads to Python objects and vice versa, making it ideal for
+   building RESTful APIs.
+
+Here's a simple example of a FastAPI application:
+
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">from fastapi import FastAPI</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">from pydantic import BaseModel</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">app = FastAPI()</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">class Item(BaseModel):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    name: str</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    description: str = None</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    price: float</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    tax: float = None</span></span>
+
+<span class="org-markdown-code"><span class="org-markdown-pre">@app.post("/items/")</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">async def create_item(item: Item):</span></span>
+<span class="org-markdown-code"><span class="org-markdown-pre">    return item</span></span>
+<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
+
+In this example:
+
+<span class="org-markdown-list">-</span> The FastAPI instance is created using <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">FastAPI()</span><span class="org-markdown-markup">`</span>.
+<span class="org-markdown-list">-</span> The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">Item</span><span class="org-markdown-markup">`</span> model is defined using Pydantic <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">BaseModel</span><span class="org-markdown-markup">`</span>, which
+  supports validation and data conversion.
+<span class="org-markdown-list">-</span> The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">create_item</span><span class="org-markdown-markup">`</span> function defines an endpoint that receives an
+  <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">Item</span><span class="org-markdown-markup">`</span>, processes it (here, it just returns the same item), and it
+  will automatically have the correct type validation and JSON
+  handling.
+
+For further reading and more detailed information, you can explore the
+official FastAPI documentation: <span class="org-markdown-markup">[</span><span class="org-markdown-link">FastAPI</span>
+<span class="org-markdown-link">Documentation</span><span class="org-markdown-markup">](</span><span class="org-markdown-url">https://fastapi.tiangolo.com/</span><span class="org-markdown-markup">)</span>. It covers comprehensive
+details with examples and best practices.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb9b5cf7" class="outline-3">
+<h3 id="orgb9b5cf7">The Appropriate Answer Format Request</h3>
+<div class="outline-text-3" id="text-orgb9b5cf7">
+<blockquote>
+<p>
+I'm use Emacs with Org-mode and Babel, so can you format your answers
+appropriately?
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Sure! If you're using Emacs with Org-mode and Babel, I can format the
+answer accordingly using Org-mode's syntax for code blocks and
+structured text.
+
+Here is the same information formatted for Org-mode with code blocks:
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1a377b6" class="outline-3">
+<h3 id="org1a377b6">Overview of FastAPI</h3>
+<div class="outline-text-3" id="text-org1a377b6">
+<p>
+FastAPI is a modern, fast (high-performance) web framework for
+building APIs with Python 3.6+ based on standard Python type hints.
+</p>
+
+<ul class="org-ul">
+<li><b>High Performance</b>: FastAPI is designed to be very fast and
+efficient, leveraging the asynchronous capabilities of Python and
+the performance of the Starlette framework and Pydantic library. It
+can handle a large number of simultaneous connections efficiently.</li>
+
+<li><b>Type Hints and Data Validation</b>: FastAPI uses Python's type hints
+to provide automatic validation, serialization, and documentation of
+the request and response data. This makes development faster and
+easier, while reducing the likelihood of bugs.</li>
+
+<li><b>Asynchronous Support</b>: It natively supports asynchronous
+programming, which is especially useful for I/O-bound and
+high-latency operations like database access and web requests.</li>
+
+<li><b>Automatic Interactive Documentation</b>: FastAPI generates
+interactive API documentation using Swagger UI and ReDoc out of the
+box, which is incredibly useful for development and debugging.</li>
+
+<li><b>Ease of Use</b>: FastAPI is designed to be easy to use and learn,
+without sacrificing flexibility and performance. It aims to provide
+a good developer experience with features like dependency injection
+and easy-to-write route handlers.</li>
+
+<li><b>JSON Handling</b>: One of the core functionalities of FastAPI is
+handling JSON data efficiently. It automatically converts request
+payloads to Python objects and vice versa, making it ideal for
+building RESTful APIs.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org52d5833" class="outline-3">
+<h3 id="org52d5833">Example FastAPI Application</h3>
+<div class="outline-text-3" id="text-org52d5833">
+<p>
+Here is a simple example of a FastAPI application:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">price</span>: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span> <span class="org-keyword">return</span> item
+</pre>
+</div>
+
+<p>
+In this example:
+</p>
+
+<ul class="org-ul">
+<li>The FastAPI instance is created using <code>FastAPI()</code>.</li>
+<li>The <code>Item</code> model is defined using Pydantic <code>BaseModel</code>, which
+supports validation and data conversion.</li>
+<li>The <code>create_item</code> function defines an endpoint that receives an
+<code>Item</code>, processes it (here, it just returns the same item), and it
+will automatically have the correct type validation and JSON
+handling.</li>
+</ul>
+
+<p>
+For further reading and more detailed information, you can explore the
+official FastAPI documentation: <a href="https://fastapi.tiangolo.com/">FastAPI Documentation</a>. It covers
+comprehensive details with examples and best practices.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-markdown">This should fit well with your Org-mode workflow in Emacs. You can
+execute the Python code block directly in Org-mode using Babel if you
+have it set up for Python.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6e8fe1b" class="outline-3">
+<h3 id="org6e8fe1b">Additional Definitions</h3>
+<div class="outline-text-3" id="text-org6e8fe1b">
+</div>
+<div id="outline-container-org1e6fbe8" class="outline-4">
+<h4 id="org1e6fbe8">What is RESTful API?</h4>
+<div class="outline-text-4" id="text-org1e6fbe8">
+<div class="org-src-container">
+<pre class="src src-markdown">
+A RESTful API (Representational State Transfer Application Programming
+Interface) is a web API that adheres to the principles of REST
+(Representational State Transfer), an architectural style defined by
+computer scientist Roy Fielding in his doctoral dissertation. RESTful
+APIs are designed to interact with resources in a stateless manner
+over HTTP. Here are the key concepts and principles of RESTful APIs:
+
+<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Resources and URIs</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Resources, which can be any type of data (e.g., users, posts,
+     products), are identified by URLs (Uniform Resource Locators),
+     also known as URIs (Uniform Resource Identifiers).
+   <span class="org-markdown-list">-</span> Each resource is represented using a unique URL.
+
+<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">HTTP Methods</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> RESTful APIs use standard HTTP methods to perform operations on
+     resources. The primary methods are:
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET</span><span class="org-markdown-markup">`</span>: Retrieve a representation of a resource.
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST</span><span class="org-markdown-markup">`</span>: Create a new resource.
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT</span><span class="org-markdown-markup">`</span>: Update an existing resource.
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE</span><span class="org-markdown-markup">`</span>: Delete a resource.
+     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PATCH</span><span class="org-markdown-markup">`</span>: Partially update a resource.
+
+<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Statelessness</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Each API call from the client to the server must contain all the
+     information needed to understand and process the request.
+   <span class="org-markdown-list">-</span> The server does not store any client context between requests,
+     making each request independent and self-contained.
+
+<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Representation</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Resources are represented in different formats such as JSON, XML,
+     or HTML, but JSON is the most common format.
+   <span class="org-markdown-list">-</span> The server provides the necessary information in response to the
+     client's request in the appropriate representation format.
+
+<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Client-Server Architecture</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> The client and server are separated, allowing both to be
+     developed and scaled independently.
+   <span class="org-markdown-list">-</span> The server handles the business logic and data storage, while the
+     client handles the user interface and user interactions.
+
+<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Cacheability</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> Responses can be marked as cacheable or non-cacheable to improve
+     performance and scalability.
+   <span class="org-markdown-list">-</span> Proper use of caching can reduce the number of requests the
+     client makes to the server.
+
+<span class="org-markdown-list">7.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Layered System</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> RESTful APIs can be designed to work with intermediaries such as
+     proxies, gateways, and load balancers to improve scalability,
+     security, and performance.
+
+<span class="org-markdown-list">8.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Uniform Interface</span><span class="org-markdown-markup">**</span>:
+   <span class="org-markdown-list">-</span> RESTful APIs have a consistent and predictable interface with
+     standardized URIs and HTTP methods, making it easier for
+     developers to understand and use the API.
+
+Here's an example of a RESTful API using FastAPI that manages a
+collection of items:
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfedbad0" class="outline-5">
+<h5 id="orgfedbad0">Example of a RESTful API using FastAPI</h5>
+<div class="outline-text-5" id="text-orgfedbad0">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI, HTTPException
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> typing <span class="org-keyword">import</span> List
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">price</span>: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">items</span> = []
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.get</span>(<span class="org-string">"/items/"</span>, response_model=List[Item])
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">read_items</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> items
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>, response_model=Item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> items.append(item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> item
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> items[item_id]
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">return</span> item
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">async def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span> <span class="org-keyword">return</span> items.pop(item_id)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span class="org-markdown-metadata-key">This example demonstrates a simple RESTful API with the following endpoints</span><span class="org-markdown-markup">:</span>
+
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET /items/</span><span class="org-markdown-markup">`</span>: Retrieve a list of items.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST /items/</span><span class="org-markdown-markup">`</span>: Create a new item.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET /items/{item_id}</span><span class="org-markdown-markup">`</span>: Retrieve a specific item by its ID.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT /items/{item_id}</span><span class="org-markdown-markup">`</span>: Update a specific item by its ID.
+<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE /items/{item_id}</span><span class="org-markdown-markup">`</span>: Delete a specific item by its ID.
+
+The FastAPI framework makes it easy to create these endpoints, handle
+validation, and return proper responses.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
