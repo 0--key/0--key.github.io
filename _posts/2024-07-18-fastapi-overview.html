@@ -16,7 +16,7 @@ tags: [overview]
 <li><a href="#orgb9b5cf7">The Appropriate Answer Format Request</a></li>
 <li><a href="#org1a377b6">Overview of FastAPI</a></li>
 <li><a href="#org52d5833">Example FastAPI Application</a></li>
-<li><a href="#org6e8fe1b">Additional Definitions</a>
+<li><a href="#org2a374bd">Additional Clarifications</a>
 <ul>
 <li><a href="#org1e6fbe8">What is RESTful API?</a></li>
 </ul>
@@ -221,84 +221,104 @@ comprehensive details with examples and best practices.
 </p>
 
 
-<div class="org-src-container">
-<pre class="src src-markdown">This should fit well with your Org-mode workflow in Emacs. You can
+
+<p>
+This should fit well with your Org-mode workflow in Emacs. You can
 execute the Python code block directly in Org-mode using Babel if you
 have it set up for Python.
-</pre>
-</div>
+</p>
 </div>
 </div>
 
-<div id="outline-container-org6e8fe1b" class="outline-3">
-<h3 id="org6e8fe1b">Additional Definitions</h3>
-<div class="outline-text-3" id="text-org6e8fe1b">
+<div id="outline-container-org2a374bd" class="outline-3">
+<h3 id="org2a374bd">Additional Clarifications</h3>
+<div class="outline-text-3" id="text-org2a374bd">
 </div>
 <div id="outline-container-org1e6fbe8" class="outline-4">
 <h4 id="org1e6fbe8">What is RESTful API?</h4>
 <div class="outline-text-4" id="text-org1e6fbe8">
-<div class="org-src-container">
-<pre class="src src-markdown">
+<p>
 A RESTful API (Representational State Transfer Application Programming
 Interface) is a web API that adheres to the principles of REST
 (Representational State Transfer), an architectural style defined by
 computer scientist Roy Fielding in his doctoral dissertation. RESTful
 APIs are designed to interact with resources in a stateless manner
 over HTTP. Here are the key concepts and principles of RESTful APIs:
+</p>
 
-<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Resources and URIs</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> Resources, which can be any type of data (e.g., users, posts,
-     products), are identified by URLs (Uniform Resource Locators),
-     also known as URIs (Uniform Resource Identifiers).
-   <span class="org-markdown-list">-</span> Each resource is represented using a unique URL.
+<ol class="org-ol">
+<li><b>Resources and URIs</b>:
+<ul class="org-ul">
+<li>Resources, which can be any type of data (e.g., users, posts,
+products), are identified by URLs (Uniform Resource Locators),
+also known as URIs (Uniform Resource Identifiers).</li>
+<li>Each resource is represented using a unique URL.</li>
+</ul></li>
 
-<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">HTTP Methods</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> RESTful APIs use standard HTTP methods to perform operations on
-     resources. The primary methods are:
-     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET</span><span class="org-markdown-markup">`</span>: Retrieve a representation of a resource.
-     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST</span><span class="org-markdown-markup">`</span>: Create a new resource.
-     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT</span><span class="org-markdown-markup">`</span>: Update an existing resource.
-     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE</span><span class="org-markdown-markup">`</span>: Delete a resource.
-     <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PATCH</span><span class="org-markdown-markup">`</span>: Partially update a resource.
+<li><b>HTTP Methods</b>:
+<ul class="org-ul">
+<li>RESTful APIs use standard HTTP methods to perform operations on
+resources. The primary methods are:
+<ul class="org-ul">
+<li>`GET`: Retrieve a representation of a resource.</li>
+<li>`POST`: Create a new resource.</li>
+<li>`PUT`: Update an existing resource.</li>
+<li>`DELETE`: Delete a resource.</li>
+<li>`PATCH`: Partially update a resource.</li>
+</ul></li>
+</ul></li>
 
-<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Statelessness</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> Each API call from the client to the server must contain all the
-     information needed to understand and process the request.
-   <span class="org-markdown-list">-</span> The server does not store any client context between requests,
-     making each request independent and self-contained.
+<li><b>Statelessness</b>:
+<ul class="org-ul">
+<li>Each API call from the client to the server must contain all the
+information needed to understand and process the request.</li>
+<li>The server does not store any client context between requests,
+making each request independent and self-contained.</li>
+</ul></li>
 
-<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Representation</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> Resources are represented in different formats such as JSON, XML,
-     or HTML, but JSON is the most common format.
-   <span class="org-markdown-list">-</span> The server provides the necessary information in response to the
-     client's request in the appropriate representation format.
+<li><b>Representation</b>:
+<ul class="org-ul">
+<li>Resources are represented in different formats such as JSON, XML,
+or HTML, but JSON is the most common format.</li>
+<li>The server provides the necessary information in response to the
+client's request in the appropriate representation format.</li>
+</ul></li>
 
-<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Client-Server Architecture</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> The client and server are separated, allowing both to be
-     developed and scaled independently.
-   <span class="org-markdown-list">-</span> The server handles the business logic and data storage, while the
-     client handles the user interface and user interactions.
+<li><b>Client-Server Architecture</b>:
+<ul class="org-ul">
+<li>The client and server are separated, allowing both to be
+developed and scaled independently.</li>
+<li>The server handles the business logic and data storage, while the
+client handles the user interface and user interactions.</li>
+</ul></li>
 
-<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Cacheability</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> Responses can be marked as cacheable or non-cacheable to improve
-     performance and scalability.
-   <span class="org-markdown-list">-</span> Proper use of caching can reduce the number of requests the
-     client makes to the server.
+<li><b>Cacheability</b>:
+<ul class="org-ul">
+<li>Responses can be marked as cacheable or non-cacheable to improve
+performance and scalability.</li>
+<li>Proper use of caching can reduce the number of requests the
+client makes to the server.</li>
+</ul></li>
 
-<span class="org-markdown-list">7.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Layered System</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> RESTful APIs can be designed to work with intermediaries such as
-     proxies, gateways, and load balancers to improve scalability,
-     security, and performance.
+<li><b>Layered System</b>:
+<ul class="org-ul">
+<li>RESTful APIs can be designed to work with intermediaries such as
+proxies, gateways, and load balancers to improve scalability,
+security, and performance.</li>
+</ul></li>
 
-<span class="org-markdown-list">8.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Uniform Interface</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> RESTful APIs have a consistent and predictable interface with
-     standardized URIs and HTTP methods, making it easier for
-     developers to understand and use the API.
+<li><b>Uniform Interface</b>:
+<ul class="org-ul">
+<li>RESTful APIs have a consistent and predictable interface with
+standardized URIs and HTTP methods, making it easier for
+developers to understand and use the API.</li>
+</ul></li>
+</ol>
 
+<p>
 Here's an example of a RESTful API using FastAPI that manages a
 collection of items:
-</pre>
-</div>
+</p>
 </div>
 
 <div id="outline-container-orgfedbad0" class="outline-5">
@@ -349,19 +369,23 @@ collection of items:
 </pre>
 </div>
 
-<div class="org-src-container">
-<pre class="src src-markdown"><span class="org-markdown-metadata-key">This example demonstrates a simple RESTful API with the following endpoints</span><span class="org-markdown-markup">:</span>
 
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET /items/</span><span class="org-markdown-markup">`</span>: Retrieve a list of items.
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST /items/</span><span class="org-markdown-markup">`</span>: Create a new item.
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET /items/{item_id}</span><span class="org-markdown-markup">`</span>: Retrieve a specific item by its ID.
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT /items/{item_id}</span><span class="org-markdown-markup">`</span>: Update a specific item by its ID.
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE /items/{item_id}</span><span class="org-markdown-markup">`</span>: Delete a specific item by its ID.
+<p>
+This example demonstrates a simple RESTful API with the following endpoints:
+</p>
 
+<ul class="org-ul">
+<li>`GET /items/`: Retrieve a list of items.</li>
+<li>`POST /items/`: Create a new item.</li>
+<li>`GET /items/{item_id}`: Retrieve a specific item by its ID.</li>
+<li>`PUT /items/{item_id}`: Update a specific item by its ID.</li>
+<li>`DELETE /items/{item_id}`: Delete a specific item by its ID.</li>
+</ul>
+
+<p>
 The FastAPI framework makes it easy to create these endpoints, handle
 validation, and return proper responses.
-</pre>
-</div>
+</p>
 </div>
 </div>
 </div>
