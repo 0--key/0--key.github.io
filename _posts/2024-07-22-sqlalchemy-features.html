@@ -1,0 +1,1056 @@
+---
+layout: page
+title: SQLAlchemy
+tagline: " features"
+permalink: /python/sqlalchemy-features.html
+categories: [SQLAlchemy, Python]
+tags: [overview, features]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6f88a09">What is the purpose of usage of object-relational mapping?</a></li>
+<li><a href="#orgd28c0a7">Purpose of ORM Usage:</a></li>
+<li><a href="#org460813b">Abstraction and Simplicity</a>
+<ul>
+<li><a href="#orga6d99a0">One-to-many relationship</a></li>
+<li><a href="#org4d2ebc7">Altering DB schema</a></li>
+</ul>
+</li>
+<li><a href="#org142bfc2">Maintainability</a></li>
+<li><a href="#org46b1344">Portability</a>
+<ul>
+<li><a href="#org57caddc">The Mechanism Unveiled</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6f88a09" class="outline-2">
+<h2 id="org6f88a09">What is the purpose of usage of object-relational mapping?</h2>
+<div class="outline-text-2" id="text-org6f88a09">
+<p>
+Object-Relational Mapping (ORM) is a programming technique used to
+convert data between incompatible type systems in object-oriented
+programming languages. In simpler terms, ORM allows developers to
+interact with a relational database using the idioms and patterns of
+their preferred programming language, transforming complex SQL queries
+and operations into more intuitive and manageable code constructs.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd28c0a7" class="outline-2">
+<h2 id="orgd28c0a7">Purpose of ORM Usage:</h2>
+<div class="outline-text-2" id="text-orgd28c0a7">
+<ol class="org-ol">
+<li><b>Abstraction and Simplicity:</b>
+<ul class="org-ul">
+<li><b>Reduces Boilerplate Code:</b> ORM frameworks abstract much of the
+repetitive SQL code that developers would otherwise need to
+write. This leads to cleaner and more readable code.</li>
+<li><b>Ease of Use:</b> By representing tables as classes and rows as
+objects, ORMs allow developers to use object-oriented principles
+to interact with database records.</li>
+</ul></li>
+
+<li><b>Maintainability:</b>
+<ul class="org-ul">
+<li><b>Centralized Schema Management:</b> With ORM, the database schema
+is often defined in the application's code. This centralizes
+schema changes and helps keep the database schema in sync with
+the application logic.</li>
+<li><b>Shorter Development Cycle:</b> ORM simplifies CRUD (Create, Read,
+Update, Delete) operations, making it easier to implement and
+maintain code, especially in large applications.</li>
+</ul></li>
+
+<li><b>Portability:</b>
+<ul class="org-ul">
+<li><b>Database-agnostic Code:</b> ORMs provide a layer of abstraction
+that allows applications to be more database-agnostic. By
+changing the ORM configuration, you can switch databases with
+minimal changes to the application code.</li>
+</ul></li>
+
+<li><b>Productivity:</b>
+<ul class="org-ul">
+<li><b>Faster Prototyping:</b> ORMs enable faster development cycles by
+allowing developers to quickly prototype applications without
+needing to write complex SQL queries.</li>
+<li><b>Declarative Relationships:</b> Defining relationships
+(one-to-one, one-to-many, many-to-many) between tables is more
+straightforward and declarative with ORM, leading to fewer errors
+and more predictable behavior.</li>
+</ul></li>
+
+<li><b>Security:</b>
+<ul class="org-ul">
+<li><b>SQL Injection Protection:</b> ORMs often include mechanisms to
+prevent SQL injection attacks by properly escaping and
+parameterizing queries, reducing the risk of introducing
+vulnerabilities.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org460813b" class="outline-2">
+<h2 id="org460813b">Abstraction and Simplicity</h2>
+<div class="outline-text-2" id="text-org460813b">
+</div>
+<div id="outline-container-orga6d99a0" class="outline-3">
+<h3 id="orga6d99a0">One-to-many relationship</h3>
+<div class="outline-text-3" id="text-orga6d99a0">
+</div>
+<div id="outline-container-orgb27babe" class="outline-4">
+<h4 id="orgb27babe">SQLAlchemy</h4>
+<div class="outline-text-4" id="text-orgb27babe">
+<p>
+Provide a complete Python code example using SQLAlchemy to implement a
+one-to-many relationship between two tables, representing 'Author' and
+'Book'. The 'Author' table should have multiple 'Book' entries
+associated with it. The code should include model definitions, the
+creation of the database, and examples of how to add and query
+relationships.
+</p>
+
+<p>
+Here is the enhanced question answered step-by-step with the code examples:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> create_engine, Column, Integer, String, ForeignKey
+<span class="org-keyword">from</span> sqlalchemy.ext.declarative <span class="org-keyword">import</span> declarative_base
+<span class="org-keyword">from</span> sqlalchemy.orm <span class="org-keyword">import</span> relationship, sessionmaker
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an engine and base</span>
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///:memory:'</span>, echo=<span class="org-constant">True</span>)
+Base = declarative_base()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define the Author model</span>
+<span class="org-keyword">class</span> <span class="org-type">Author</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'authors'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   books = relationship(<span class="org-string">"Book"</span>, back_populates=<span class="org-string">"author"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define the Book model</span>
+<span class="org-keyword">class</span> <span class="org-type">Book</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'books'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   title = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   author_id = Column(Integer, ForeignKey(<span class="org-string">'authors.id'</span>))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   author = relationship(<span class="org-string">"Author"</span>, back_populates=<span class="org-string">"books"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the tables in the database</span>
+Base.metadata.create_all(engine)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a session</span>
+Session = sessionmaker(bind=engine)
+session = Session()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an author</span>
+author = Author(name=<span class="org-string">"J.K. Rowling"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create books associated with the author</span>
+book1 = Book(title=<span class="org-string">"Harry Potter and the Philosopher's Stone"</span>, author=author)
+book2 = Book(title=<span class="org-string">"Harry Potter and the Chamber of Secrets"</span>, author=author)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add the author and books to the session and commit</span>
+session.add(author)
+session.add(book1)
+session.add(book2)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Query to demonstrate the one-to-many relationship</span>
+authors = session.query(Author).<span class="org-builtin">all</span>()
+<span class="org-keyword">for</span> author <span class="org-keyword">in</span> authors:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">print</span>(f<span class="org-string">"Author: </span>{author.name}<span class="org-string">"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">for</span> book <span class="org-keyword">in</span> author.books:
+<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(f<span class="org-string">"  - Book: </span>{book.title}<span class="org-string">"</span>)
+</pre>
+</div>
+
+<pre class="example" id="org2a65df7">
+/tmp/babel-C8lSuP/python-JUVLiZ:7: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  Base = declarative_base()
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("authors")
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("authors")
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-22 19:26:18,499 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("books")
+2024-07-22 19:26:18,500 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-22 19:26:18,500 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("books")
+2024-07-22 19:26:18,500 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-22 19:26:18,500 INFO sqlalchemy.engine.Engine 
+CREATE TABLE authors (
+	id INTEGER NOT NULL, 
+	name VARCHAR, 
+	PRIMARY KEY (id)
+)
+
+
+2024-07-22 19:26:18,500 INFO sqlalchemy.engine.Engine [no key 0.00007s] ()
+2024-07-22 19:26:18,501 INFO sqlalchemy.engine.Engine 
+CREATE TABLE books (
+	id INTEGER NOT NULL, 
+	title VARCHAR, 
+	author_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(author_id) REFERENCES authors (id)
+)
+
+
+2024-07-22 19:26:18,501 INFO sqlalchemy.engine.Engine [no key 0.00008s] ()
+2024-07-22 19:26:18,501 INFO sqlalchemy.engine.Engine COMMIT
+2024-07-22 19:26:18,506 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-22 19:26:18,507 INFO sqlalchemy.engine.Engine INSERT INTO authors (name) VALUES (?)
+2024-07-22 19:26:18,507 INFO sqlalchemy.engine.Engine [generated in 0.00015s] ('J.K. Rowling',)
+2024-07-22 19:26:18,508 INFO sqlalchemy.engine.Engine INSERT INTO books (title, author_id) VALUES (?, ?) RETURNING id
+2024-07-22 19:26:18,508 INFO sqlalchemy.engine.Engine [generated in 0.00014s (insertmanyvalues) 1/2 (ordered; batch not supported)] ("Harry Potter and the Philosopher's Stone", 1)
+2024-07-22 19:26:18,508 INFO sqlalchemy.engine.Engine INSERT INTO books (title, author_id) VALUES (?, ?) RETURNING id
+2024-07-22 19:26:18,509 INFO sqlalchemy.engine.Engine [insertmanyvalues 2/2 (ordered; batch not supported)] ('Harry Potter and the Chamber of Secrets', 1)
+2024-07-22 19:26:18,509 INFO sqlalchemy.engine.Engine COMMIT
+2024-07-22 19:26:18,510 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-22 19:26:18,510 INFO sqlalchemy.engine.Engine SELECT authors.id AS authors_id, authors.name AS authors_name 
+FROM authors
+2024-07-22 19:26:18,510 INFO sqlalchemy.engine.Engine [generated in 0.00011s] ()
+Author: J.K. Rowling
+2024-07-22 19:26:18,513 INFO sqlalchemy.engine.Engine SELECT books.id AS books_id, books.title AS books_title, books.author_id AS books_author_id 
+FROM books 
+WHERE ? = books.author_id
+2024-07-22 19:26:18,513 INFO sqlalchemy.engine.Engine [generated in 0.00014s] (1,)
+  - Book: Harry Potter and the Philosopher's Stone
+  - Book: Harry Potter and the Chamber of Secrets
+</pre>
+
+
+<p>
+<b><b>Explanation:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Model Definitions:</b></b>
+<ul class="org-ul">
+<li><b><b>Author Model:</b></b> Represents the 'authors' table with an `id`
+primary key and a `name` field. It has a relationship with the
+`Book` model specified by `books`.</li>
+<li><b><b>Book Model:</b></b> Represents the 'books' table with an `id` primary
+key, a `title` field, and a `author_id` foreign key pointing to
+`authors.id`. It has a relationship with the `Author` model
+specified by `author`.</li>
+</ul></li>
+
+<li><b><b>Relationships:</b></b>
+<ul class="org-ul">
+<li>`relationship("Book", back_populates="author")` in the `Author`
+model defines a one-to-many relationship where each author can
+have multiple books.</li>
+<li>`relationship("Author", back_populates="books")` in the `Book`
+model defines the inverse of this relationship.</li>
+</ul></li>
+
+<li><b><b>Database Creation:</b></b>
+<ul class="org-ul">
+<li>`Base.metadata.create_all(engine)` creates the 'authors' and
+'books' tables in the SQLite in-memory database.</li>
+</ul></li>
+
+<li><b><b>Data Insertion:</b></b>
+<ul class="org-ul">
+<li>An `Author` object is created.</li>
+<li>Two `Book` objects are created with the `author` attribute set to
+the previously created `Author` object.</li>
+</ul></li>
+
+<li><b><b>Session Commit:</b></b>
+<ul class="org-ul">
+<li>The `author` and books are added to the session and committed to
+the database.</li>
+</ul></li>
+
+<li><b><b>Querying:</b></b>
+<ul class="org-ul">
+<li>Queries all authors and prints their names and associated books,
+demonstrating the one-to-many relationship.</li>
+</ul></li>
+</ol>
+
+<p>
+This example provides a comprehensive way to implement and demonstrate
+a one-to-many relationship using SQLAlchemy.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org18bb267" class="outline-4">
+<h4 id="org18bb267">Pure Python</h4>
+<div class="outline-text-4" id="text-org18bb267">
+<p>
+Provide a complete Python code example using <code>sqlite3</code> standard
+library module to implement a one-to-many relationship between two
+tables, representing 'Author' and 'Book'. The 'Author' table should
+have multiple 'Book' entries associated with it. The code should
+include model definitions, the creation of the database, and examples
+of how to add and query relationships.
+</p>
+
+<p>
+Certainly! Using the `sqlite3` standard library module, you can
+implement a one-to-many relationship between two tables ('Author' and
+'Book'). Here is the complete Python code example, including table
+definitions, database creation, data insertion, and relationship
+querying.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> sqlite3
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Connect to SQLite database (or create it if it doesn't exist)</span>
+<span class="org-variable-name">conn</span> = sqlite3.connect(<span class="org-string">':memory:'</span>)
+cursor = conn.cursor()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the Author table</span>
+cursor.execute(<span class="org-string">""" CREATE TABLE Author ( id INTEGER PRIMARY KEY</span>
+<span class="org-string">AUTOINCREMENT, name TEXT NOT NULL ) """</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the Book table</span>
+cursor.execute(<span class="org-string">""" CREATE TABLE Book ( id INTEGER PRIMARY KEY</span>
+<span class="org-string">AUTOINCREMENT, title TEXT NOT NULL, author_id INTEGER, FOREIGN KEY</span>
+<span class="org-string">(author_id) REFERENCES Author (id) ) """</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Insert data into Author table</span>
+cursor.execute(<span class="org-string">"INSERT INTO Author (name) VALUES ('J.K. Rowling')"</span>)
+<span class="org-variable-name">author_id</span> = cursor.lastrowid
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Insert data into Book table</span>
+<span class="org-variable-name">books</span> = [ (<span class="org-string">"Harry Potter and the Philosopher's Stone"</span>, author_id),
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   (<span class="org-string">"Harry Potter and the Chamber of Secrets"</span>, author_id) ]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   cursor.executemany(<span class="org-string">"INSERT INTO Book (title, author_id) VALUES (?,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   ?)"</span>, books)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Commit the transaction</span>
+conn.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Query and display authors along with their books</span>
+cursor.execute(<span class="org-string">""" SELECT Author.name AS author_name, Book.title AS</span>
+<span class="org-string">book_title FROM Author JOIN Book ON Author.id = Book.author_id """</span>)
+
+results = cursor.fetchall() <span class="org-keyword">for</span> row <span class="org-keyword">in</span> results: <span class="org-builtin">print</span>(f<span class="org-string">"Author:</span>
+{row['author_name']}<span class="org-string"> - Book: </span>{row['book_title']}<span class="org-string">"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Close the connection</span>
+conn.close()
+</pre>
+</div>
+
+<p>
+<b><b>Explanation:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Database Connection:</b></b>
+<ul class="org-ul">
+<li>`conn = sqlite3.connect(':memory:')` creates a connection to an
+in-memory SQLite database. To persist the database to a file, you
+would replace `:memory:` with a filename like `'example.db'`.</li>
+</ul></li>
+
+<li><b><b>Table Creation:</b></b>
+<ul class="org-ul">
+<li>`CREATE TABLE Author` creates the `Author` table with an `id`
+primary key and a `name` column.</li>
+<li>`CREATE TABLE Book` creates the `Book` table with an `id` primary
+key, a `title` column, and a `author_id` column that references
+the `Author` table.</li>
+</ul></li>
+
+<li><b><b>Data Insertion:</b></b>
+<ul class="org-ul">
+<li>An author named "J.K. Rowling" is inserted into the `Author`
+table.</li>
+<li>The `lastrowid` attribute is used to get the ID of the last
+inserted row (the author) for use in the `Book` table.</li>
+<li>Two books associated with the inserted author are added to the
+`Book` table using `executemany`.</li>
+</ul></li>
+
+<li><b><b>Data Querying:</b></b>
+<ul class="org-ul">
+<li>A JOIN query retrieves authors and their associated books from
+the `Author` and `Book` tables, displaying the results in a
+readable format.</li>
+</ul></li>
+
+<li><b><b>Result Display:</b></b>
+<ul class="org-ul">
+<li>The results of the query are fetched and printed, showing the
+relationship between authors and their books.</li>
+</ul></li>
+
+<li><b><b>Closing the Connection:</b></b>
+<ul class="org-ul">
+<li>Finally, the connection to the database is closed with
+`conn.close()`.</li>
+</ul></li>
+</ol>
+
+<p>
+This complete example demonstrates how to implement a one-to-many
+relationship using the `sqlite3` standard library module, covering
+creation, insertion, and querying of related data.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4d2ebc7" class="outline-3">
+<h3 id="org4d2ebc7">Altering DB schema</h3>
+<div class="outline-text-3" id="text-org4d2ebc7">
+</div>
+<div id="outline-container-org3b6f56b" class="outline-4">
+<h4 id="org3b6f56b">SQLAlchemy</h4>
+<div class="outline-text-4" id="text-org3b6f56b">
+<p>
+<b>Task Description:</b>
+</p>
+
+<p>
+"Provide a complete Python code example using SQLAlchemy to alter the
+`books` table by adding two additional columns: `publisher` and
+`publication_year`. The code should include the initial table
+creation, the alteration to add new columns, and examples of
+populating and querying the updated table."
+</p>
+
+<hr />
+
+<p>
+Now let's provide a complete example including the initial table
+creation, altering the table, and example operations:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> create_engine, Column, Integer, String, ForeignKey
+<span class="org-keyword">from</span> sqlalchemy.ext.declarative <span class="org-keyword">import</span> declarative_base
+<span class="org-keyword">from</span> sqlalchemy.ext.compiler <span class="org-keyword">import</span> compiles
+<span class="org-keyword">from</span> sqlalchemy.schema <span class="org-keyword">import</span> AddColumn
+<span class="org-keyword">from</span> sqlalchemy.orm <span class="org-keyword">import</span> relationship, sessionmaker
+<span class="org-keyword">from</span> sqlalchemy.sql <span class="org-keyword">import</span> text
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an engine and base</span>
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///:memory:'</span>, echo=<span class="org-constant">True</span>)
+Base = declarative_base()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initial table definitions</span>
+<span class="org-keyword">class</span> <span class="org-type">Author</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'authors'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   books = relationship(<span class="org-string">"Book"</span>, back_populates=<span class="org-string">"author"</span>)
+
+<span class="org-keyword">class</span> <span class="org-type">Book</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'books'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   title = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   author_id = Column(Integer, ForeignKey(<span class="org-string">'authors.id'</span>))
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   author = relationship(<span class="org-string">"Author"</span>, back_populates=<span class="org-string">"books"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the initial tables in the database</span>
+Base.metadata.create_all(engine)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a session</span>
+Session = sessionmaker(bind=engine)
+session = Session()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add an author and a book</span>
+author = Author(name=<span class="org-string">"J.K. Rowling"</span>)
+book1 = Book(title=<span class="org-string">"Harry Potter and the Philosopher's Stone"</span>, author=author)
+session.add(author)
+session.add(book1)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Alter the table to add new columns</span>
+<span class="org-type">@compiles</span>(AddColumn, <span class="org-string">"sqlite"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">_compile_add_column</span>(element, compiler, **kwargs):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> <span class="org-string">"ALTER TABLE %s ADD COLUMN %s"</span> % (
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   compiler.preparer.format_table(element.table),
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   compiler.get_column_specification(element.column)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   )
+
+alter_table_statements = [
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   AddColumn(Book.__table__, Column(<span class="org-string">'publisher'</span>, String)),
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   AddColumn(Book.__table__, Column(<span class="org-string">'publication_year'</span>, Integer)),
+]
+
+<span class="org-keyword">for</span> statement <span class="org-keyword">in</span> alter_table_statements:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   engine.execute(statement)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Reflection to include the new columns in the model</span>
+Book.__table__.append_column(Column(<span class="org-string">'publisher'</span>, String))
+Book.__table__.append_column(Column(<span class="org-string">'publication_year'</span>, Integer))
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Adding new data to the altered table</span>
+book2 = Book(title=<span class="org-string">"Harry Potter and the Chamber of Secrets"</span>, author=author, publisher=<span class="org-string">"Bloomsbury"</span>, publication_year=1998)
+session.add(book2)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Querying the database to verify the structure and data</span>
+books = session.query(Book).<span class="org-builtin">all</span>()
+<span class="org-keyword">for</span> book <span class="org-keyword">in</span> books:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">print</span>(f<span class="org-string">"Title: </span>{book.title}<span class="org-string">, Publisher: </span>{book.publisher}<span class="org-string">, Publication Year: </span>{book.publication_year}<span class="org-string">"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Close the session</span>
+session.close()
+</pre>
+</div>
+
+<p>
+<b><b>Explanation:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Initial Table Creation:</b></b>
+<ul class="org-ul">
+<li>The `Author` and `Book` tables are initially defined and created in an SQLite in-memory database.</li>
+</ul></li>
+
+<li><b><b>Adding New Columns:</b></b>
+<ul class="org-ul">
+<li>The `@compiles(AddColumn, "sqlite")` decorator fixes the SQLite limitation of the SQLAlchemy's `ALTER TABLE` statement.</li>
+<li>Two new columns, `publisher` (String) and `publication_year` (Integer), are added to the `books` table.</li>
+</ul></li>
+
+<li><b><b>Reflection to Include New Columns:</b></b>
+<ul class="org-ul">
+<li>The `append_column` method is used to update the `Book` model with the newly added columns.</li>
+</ul></li>
+
+<li><b><b>Adding Data:</b></b>
+<ul class="org-ul">
+<li>A new book entry with the newly added columns is created and committed to the database.</li>
+</ul></li>
+
+<li><b><b>Querying to Verify:</b></b>
+<ul class="org-ul">
+<li>The updated table structure and data are queried and printed to verify the addition of the new columns and their values.</li>
+</ul></li>
+
+<li><b><b>Closing the Session:</b></b>
+<ul class="org-ul">
+<li>The session is closed to clean up database connections.</li>
+</ul></li>
+</ol>
+
+<p>
+This example illustrates how to alter an existing table to add new
+columns using SQLAlchemy and then handle the updated table in your
+models and data operations.  #+end_src
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea422f2" class="outline-4">
+<h4 id="orgea422f2">Pure Python</h4>
+<div class="outline-text-4" id="text-orgea422f2">
+<p>
+<b>Task Description:</b>
+</p>
+
+<p>
+Provide a complete Python code example using <code>sqlite3</code> module from
+the standard library to alter the `books` table by adding two
+additional columns: `publisher` and `publication_year`. The code
+should include the initial table creation, the alteration to add new
+columns, and examples of populating and querying the updated table.
+</p>
+
+<hr />
+
+<p>
+Certainly! Here is a complete Python code example that demonstrates
+how to use the `sqlite3` module from the standard library to implement
+the following:
+</p>
+
+<ol class="org-ol">
+<li>Initial table creation for `Author` and `Book` tables.</li>
+<li>Altering the `books` table to add two additional columns:
+`publisher` and `publication_year`.</li>
+<li>Adding new data to the updated table.</li>
+<li>Querying data from the updated table.</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> sqlite3
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Connect to SQLite database (or create it if it doesn't exist)</span>
+<span class="org-variable-name">conn</span> = sqlite3.connect(<span class="org-string">':memory:'</span>)
+cursor = conn.cursor()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Enable foreign key support</span>
+cursor.execute(<span class="org-string">"PRAGMA foreign_keys = ON"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the Author table</span>
+cursor.execute(<span class="org-string">"""</span>
+<span class="org-string">CREATE TABLE Author (</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   name TEXT NOT NULL</span>
+<span class="org-string">)</span>
+<span class="org-string">"""</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the Book table with initial columns</span>
+cursor.execute(<span class="org-string">"""</span>
+<span class="org-string">CREATE TABLE Book (</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   title TEXT NOT NULL,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   author_id INTEGER,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   FOREIGN KEY (author_id) REFERENCES Author (id)</span>
+<span class="org-string">)</span>
+<span class="org-string">"""</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Insert data into Author table</span>
+cursor.execute(<span class="org-string">"INSERT INTO Author (name) VALUES ('J.K. Rowling')"</span>)
+author_id = cursor.lastrowid
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Insert data into Book table</span>
+cursor.execute(<span class="org-string">"INSERT INTO Book (title, author_id) VALUES (?, ?)"</span>, (<span class="org-string">"Harry Potter and the Philosopher's Stone"</span>, author_id))
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Commit the transaction</span>
+conn.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Alter the table to add new columns</span>
+cursor.execute(<span class="org-string">"ALTER TABLE Book ADD COLUMN publisher TEXT"</span>)
+cursor.execute(<span class="org-string">"ALTER TABLE Book ADD COLUMN publication_year INTEGER"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Insert additional data with new columns into Book table</span>
+cursor.execute(<span class="org-string">"INSERT INTO Book (title, author_id, publisher, publication_year) VALUES (?, ?, ?, ?)"</span>, 
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  (<span class="org-string">"Harry Potter and the Chamber of Secrets"</span>, author_id, <span class="org-string">"Bloomsbury"</span>, 1998))
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Commit the transaction</span>
+conn.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Query and display books along with the new columns</span>
+cursor.execute(<span class="org-string">"""</span>
+<span class="org-string">SELECT </span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Author.name AS author_name, </span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Book.title AS book_title,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Book.publisher AS publisher,</span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Book.publication_year AS publication_year</span>
+<span class="org-string">FROM </span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Book</span>
+<span class="org-string">JOIN </span>
+<span class="org-string"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-string">   Author ON Book.author_id = Author.id</span>
+<span class="org-string">"""</span>)
+
+results = cursor.fetchall()
+<span class="org-keyword">for</span> row <span class="org-keyword">in</span> results:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">print</span>(f<span class="org-string">"Author: </span>{row[0]}<span class="org-string"> - Book: </span>{row[1]}<span class="org-string"> - Publisher: </span>{row[2]}<span class="org-string"> - Publication Year: </span>{row[3]}<span class="org-string">"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Close the connection</span>
+conn.close()
+</pre>
+</div>
+
+<p>
+<b><b>Explanation:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Database Connection:</b></b>
+<ul class="org-ul">
+<li>`conn = sqlite3.connect(':memory:')` creates a connection to an in-memory SQLite database for testing purposes. To use a persistent database, replace `:memory:` with a file name like `'example.db'`.</li>
+</ul></li>
+
+<li><b><b>Table Creation:</b></b>
+<ul class="org-ul">
+<li>The `Author` table is created with an `id` primary key and `name` field.</li>
+<li>The `Book` table is initially created with an `id` primary key, `title`, and `author_id` as a foreign key referencing `Author`.</li>
+</ul></li>
+
+<li><b><b>Data Insertion:</b></b>
+<ul class="org-ul">
+<li>An author named "J.K. Rowling" is inserted into the `Author` table.</li>
+<li>A book titled "Harry Potter and the Philosopher's Stone" is inserted into the `Book` table with the foreign key `author_id`.</li>
+</ul></li>
+
+<li><b><b>Table Alteration:</b></b>
+<ul class="org-ul">
+<li>The `ALTER TABLE` statements add two new columns: `publisher` (TEXT) and `publication_year` (INTEGER) to the `Book` table.</li>
+</ul></li>
+
+<li><b><b>Inserting Data to Updated Table:</b></b>
+<ul class="org-ul">
+<li>Another book titled "Harry Potter and the Chamber of Secrets" is inserted with values for the new columns: `publisher` and `publication_year`.</li>
+</ul></li>
+
+<li><b><b>Querying Data:</b></b>
+<ul class="org-ul">
+<li>A JOIN query fetches and displays author names, book titles, publishers, and publication years to verify the changes.</li>
+</ul></li>
+
+<li><b><b>Close Connection:</b></b>
+<ul class="org-ul">
+<li>The connection to the SQLite database is closed to release resources.</li>
+</ul></li>
+</ol>
+
+<p>
+This example shows how to manage schema evolution in SQLite using the
+`sqlite3` standard library module in Python.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org142bfc2" class="outline-2">
+<h2 id="org142bfc2">Maintainability</h2>
+<div class="outline-text-2" id="text-org142bfc2">
+<p>
+You define the maintainability of applications built with SQLAlchemy as:
+</p>
+
+<p>
+'Centralized Schema Management: With ORM, the database schema is often
+defined in the application's code. This centralizes schema changes and
+helps keep the database schema in sync with the application logic.'
+</p>
+
+<p>
+However, applications built using Python standard library modules,
+such as `sqlite3`, or third-party libraries like
+`mysql-connector-python` and `psycopg2` from pip, can also be designed
+with centralized schema management. Therefore, it is a matter of
+design rather than the usage of SQLAlchemy specifically. Could you
+explain the advantages of using SQLAlchemy?"
+</p>
+
+<hr />
+
+<p>
+<b><b>Advantages of Using SQLAlchemy:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Object-Relational Mapping (ORM):</b></b>
+<ul class="org-ul">
+<li><b><b>Ease of Use:</b></b> SQLAlchemy ORM allows you to interact with the
+database using Python objects and classes, making the code more
+intuitive and easier to manage.</li>
+<li><b><b>DRY Principle:</b></b> Reduces boilerplate code by eliminating the
+need for repetitive SQL queries.</li>
+</ul></li>
+
+<li><b><b>Declarative Syntax:</b></b>
+<ul class="org-ul">
+<li><b><b>Schema Definition:</b></b> Allows you to define the database schema
+using Python classes and SQLAlchemy's declarative base, making it
+easier to keep the schema in sync with application logic.</li>
+<li><b><b>Relationships:</b></b> Simplifies the definition of relationships
+(one-to-many, many-to-many) between tables.</li>
+</ul></li>
+
+<li><b><b>Automated Migrations:</b></b>
+<ul class="org-ul">
+<li><b><b>Alembic Integration:</b></b> SQLAlchemy integrates with Alembic for
+database migrations, allowing you to track and apply schema
+changes in a version-controlled manner.</li>
+</ul></li>
+
+<li><b><b>Comprehensive SQL Expression Language:</b></b>
+<ul class="org-ul">
+<li><b><b>Complex Queries:</b></b> The SQL Expression Language allows you to
+build complex SQL queries programmatically, giving you
+fine-grained control over SQL generated by SQLAlchemy.</li>
+<li><b><b>Abstraction:</b></b> Provides a higher level of abstraction for SQL
+queries, improving readability and maintainability.</li>
+</ul></li>
+
+<li><b><b>Database Agnosticism:</b></b>
+<ul class="org-ul">
+<li><b><b>Portability:</b></b> SQLAlchemy allows you to switch between
+different database backends (e.g., SQLite, PostgreSQL, MySQL)
+with minimal changes to the codebase.</li>
+<li><b><b>Unified API:</b></b> The same ORM and Core interfaces work across
+various SQL-based databases.</li>
+</ul></li>
+
+<li><b><b>Session Management:</b></b>
+<ul class="org-ul">
+<li><b><b>Transactions and Sessions:</b></b> SQLAlchemy’s session management
+system helps manage database transactions and sessions
+efficiently, ensuring data integrity and consistency.</li>
+<li><b><b>Contextual Transactions:</b></b> Automatically handles transactions
+or can be manually managed for complex cases.</li>
+</ul></li>
+
+<li><b><b>Eager and Lazy Loading:</b></b>
+<ul class="org-ul">
+<li><b><b>Optimized Data Loading:</b></b> SQLAlchemy offers fine-grained
+control over loading related objects, allowing for optimized data
+access patterns and minimizing unnecessary database hits.</li>
+</ul></li>
+
+<li><b><b>Advanced Features:</b></b>
+<ul class="org-ul">
+<li><b><b>Custom Types and Composite Types:</b></b> SQLAlchemy supports custom
+and composite types, allowing the definition of complex data
+structures directly in Python.</li>
+<li><b><b>Events System:</b></b> The events system allows for hooks into
+various stages of the ORM lifecycle, providing customization
+points for advanced use cases.</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-org1c3687b" class="outline-4">
+<h4 id="org1c3687b">Example Illustrations:</h4>
+<div class="outline-text-4" id="text-org1c3687b">
+</div>
+<div id="outline-container-orge0ab22f" class="outline-5">
+<h5 id="orge0ab22f">Declarative Syntax:</h5>
+<div class="outline-text-5" id="text-orge0ab22f">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> create_engine, Column, Integer, String
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> sqlalchemy.ext.declarative <span class="org-keyword">import</span> declarative_base
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">from</span> sqlalchemy.orm <span class="org-keyword">import</span> sessionmaker
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///example.db'</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">Base</span> = declarative_base()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">class</span> <span class="org-type">User</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">__tablename__</span> = <span class="org-string">'users'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> age = Column(Integer)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> Base.metadata.create_all(engine)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> Session = sessionmaker(bind=engine)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> session = Session()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> new_user = User(name=<span class="org-string">"Alice"</span>, age=30)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> session.add(new_user)
+<span class="org-highlight-indentation"> </span> session.commit()
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8968580" class="outline-5">
+<h5 id="org8968580">Automated Migrations (Alembic):</h5>
+<div class="outline-text-5" id="text-org8968580">
+<p>
+Create a migration script:
+```sh
+alembic revision &#x2013;autogenerate -m "Add email column to users"
+```
+</p>
+
+<p>
+Apply the migration:
+```sh
+alembic upgrade head
+```
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org51b5ded" class="outline-5">
+<h5 id="org51b5ded">Session Management:</h5>
+<div class="outline-text-5" id="text-org51b5ded">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-variable-name">session</span> = Session()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">try</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> new_user = User(name=<span class="org-string">"Bob"</span>, age=25)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> session.add(new_user)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> session.commit()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">except</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> session.rollback()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">raise</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span> <span class="org-keyword">finally</span>:
+<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span> session.close()
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org04a8a05" class="outline-4">
+<h4 id="org04a8a05">Conclusion</h4>
+<div class="outline-text-4" id="text-org04a8a05">
+<p>
+These advantages demonstrate how SQLAlchemy simplifies database
+interactions, improves code maintainability, and provides powerful
+abstractions and tools for various database operations. While
+centralized schema management can indeed be achieved with raw SQL
+libraries, SQLAlchemy offers a cohesive, feature-rich, and consistent
+framework that integrates seamlessly with Python's object-oriented
+capabilities.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46b1344" class="outline-2">
+<h2 id="org46b1344">Portability</h2>
+<div class="outline-text-2" id="text-org46b1344">
+</div>
+<div id="outline-container-org57caddc" class="outline-3">
+<h3 id="org57caddc">The Mechanism Unveiled</h3>
+<div class="outline-text-3" id="text-org57caddc">
+<p>
+What mechanism does SQLAlchemy use to facilitate migration from one
+RDBMS to another without data loss?
+</p>
+
+<hr />
+
+<p>
+<b>Answer:</b>
+</p>
+
+<p>
+<b>SQLAlchemy itself does not provide a built-in mechanism specifically
+designed for migrating data from one RDBMS to another</b>. However,
+SQLAlchemy’s ORM and database-agnostic architecture can be leveraged
+to facilitate RDBMS migrations by using the following steps:
+</p>
+
+<ol class="org-ol">
+<li><b><b>Schema Definition and Reflection:</b></b>
+<ul class="org-ul">
+<li>SQLAlchemy’s ORM allows for schema definitions that are compatible with multiple databases.</li>
+<li>Use SQLAlchemy's reflection capabilities to introspect and work with existing database schemas.</li>
+</ul></li>
+
+<li><b><b>ORM Abstraction:</b></b>
+<ul class="org-ul">
+<li>Define your database schema using SQLAlchemy ORM models. This ensures that the code is portable across different RDBMS backends.</li>
+<li>Using ORM models, you can interact with the database in a
+consistent manner, irrespective of the underlying database.</li>
+</ul></li>
+
+<li><b><b>Data Migration Process:</b></b>
+<ul class="org-ul">
+<li>Utilize a data export and import strategy to transfer data between databases.</li>
+<li>Read data from the source database using SQLAlchemy ORM or Core.</li>
+<li>Write data to the target database using the same ORM models or Core constructs.</li>
+</ul></li>
+
+<li><b><b>Alembic for Schema Migration:</b></b>
+<ul class="org-ul">
+<li>Although Alembic is typically used for version-controlled schema
+migrations within the same RDBMS, it can assist in defining
+schema transformations that are necessary when migrating between
+different RDBMS.</li>
+</ul></li>
+</ol>
+
+<p>
+<b><b>Example Workflow:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><p>
+<b><b>Define ORM models:</b></b>
+```org
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> create_engine, Column, Integer, String
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-keyword">from</span> sqlalchemy.ext.declarative <span class="org-keyword">import</span> declarative_base
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-keyword">from</span> sqlalchemy.orm <span class="org-keyword">import</span> sessionmaker
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-variable-name">Base</span> = declarative_base()
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-keyword">class</span> <span class="org-type">User</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-variable-name">__tablename__</span> = <span class="org-string">'users'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  age = Column(Integer)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-comment-delimiter"># </span><span class="org-comment">Define source and target engines</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  source_engine = create_engine(<span class="org-string">'postgresql://user:password@localhost/source_db'</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  target_engine = create_engine(<span class="org-string">'mysql+pymysql://user:password@localhost/target_db'</span>)
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  source_session = sessionmaker(bind=source_engine)()
+<span class="org-highlight-indentation"> </span>  target_session = sessionmaker(bind=target_engine)()
+</pre>
+</div>
+<p>
+```
+</p></li>
+
+<li><p>
+<b><b>Create the schema in the target database:</b></b>
+```org
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"> </span>  Base.metadata.create_all(target_engine)
+</pre>
+</div>
+<p>
+```
+</p></li>
+
+<li><p>
+<b><b>Migrate data from source to target:</b></b>
+```org
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-variable-name">users</span> = source_session.query(User).<span class="org-builtin">all</span>()
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  <span class="org-keyword">for</span> user <span class="org-keyword">in</span> users:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  target_session.add(User(<span class="org-builtin">id</span>=user.<span class="org-builtin">id</span>, name=user.name, age=user.age))
+<span class="org-highlight-indentation"> </span>  target_session.commit()
+</pre>
+</div>
+<p>
+```
+</p></li>
+</ol>
+
+<p>
+<b><b>Step-by-Step Explanation:</b></b>
+</p>
+
+<ol class="org-ol">
+<li><b><b>Define ORM Models:</b></b> 
+<ul class="org-ul">
+<li>Define the database schema using SQLAlchemy ORM models.</li>
+<li>Define source and target engines for different RDBMS.</li>
+</ul></li>
+
+<li><b><b>Create Schema in Target Database:</b></b>
+<ul class="org-ul">
+<li>Use `Base.metadata.create_all(target_engine)` to create the
+necessary tables in the target database based on the ORM model
+definitions.</li>
+</ul></li>
+
+<li><b><b>Migrate Data:</b></b>
+<ul class="org-ul">
+<li>Establish sessions for both source and target databases.</li>
+<li>Query data from the source database.</li>
+<li>Insert the queried data into the target database.</li>
+<li>Commit the transactions to persist the data.</li>
+</ul></li>
+</ol>
+
+<p>
+This process ensures that the migration is carried out systematically,
+leveraging SQLAlchemy’s ORM to handle cross-database communication and
+data transformation, thus minimizing the risk of data loss and
+ensuring compatibility across different RDBMS.  #+end_src
+</p>
+</div>
+</div>
+</div>
