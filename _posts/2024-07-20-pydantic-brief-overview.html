@@ -1,0 +1,355 @@
+---
+layout: page
+title: Pydantic
+tagline: " core features"
+permalink: /python/pydantic-overivew.html
+categories: [Pydantic]
+tags: [overview]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2bd4968">Preface</a></li>
+<li><a href="#orgd3f9332">Zero Shot</a>
+<ul>
+<li><a href="#org378c701">Basics of Pydantic</a></li>
+<li><a href="#org9a319fb">Data Validation and Parsing</a></li>
+<li><a href="#orgca06f0f">Model Composition</a></li>
+<li><a href="#orgfb38e2c">Data Serialization</a></li>
+<li><a href="#org6dffef1">Custom Data Types</a></li>
+<li><a href="#orgb475958">Settings Management</a></li>
+<li><a href="#orgde3b698">Integration and Use Cases</a>
+<ul>
+<li><a href="#orge2542d3">FastAPI Integration:</a></li>
+<li><a href="#org98845da">Django Integration:</a></li>
+</ul>
+</li>
+<li><a href="#org1fc7e34">Further reading and documentation</a></li>
+<li><a href="#org8f6bc61">The Essence</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org2bd4968" class="outline-2">
+<h2 id="org2bd4968">Preface</h2>
+<div class="outline-text-2" id="text-org2bd4968">
+<blockquote>
+<p>
+Pydantic is a powerful data validation and settings management library
+for Python, engineered to enhance the robustness and reliability of
+your codebase. From basic tasks, such as checking whether a variable
+is an integer, to more complex tasks, like ensuring highly-nested
+dictionary keys and values have the correct data types, Pydantic can
+handle just about any data validation scenario with minimal
+boilerplate code.
+</p>
+</blockquote>
+<p>
+In this article I try to rectify the core principles behind the
+description.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3f9332" class="outline-2">
+<h2 id="orgd3f9332">Zero Shot</h2>
+<div class="outline-text-2" id="text-orgd3f9332">
+<p>
+Can you explain what is the main features of Pydantic Python library?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Pydantic is a data validation and settings management library for
+Python, built on top of Python's type hints. It allows you to define
+data models with validation and conversion rules, leveraging Python
+type annotations. Here's a breakdown of its main features:
+
+<span class="org-markdown-markup">*</span><span class="org-markdown-italic">Table of Contents</span><span class="org-markdown-markup">*</span>
+<span class="org-markdown-list">1.</span> Basics of Pydantic
+<span class="org-markdown-list">2.</span> Data Validation and Parsing
+<span class="org-markdown-list">3.</span> Model Composition
+<span class="org-markdown-list">4.</span> Data Serialization
+<span class="org-markdown-list">5.</span> Custom Data Types
+<span class="org-markdown-list">6.</span> Settings Management
+<span class="org-markdown-list">7.</span> Integration and Use Cases
+
+<span class="org-markdown-markup">*</span><span class="org-markdown-italic">Note: Code snippets are provided in Org-mode Babel format.</span><span class="org-markdown-markup">*</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org378c701" class="outline-3">
+<h3 id="org378c701">Basics of Pydantic</h3>
+<div class="outline-text-3" id="text-org378c701">
+<p>
+Pydantic allows you to define models using Python's typing
+annotations. Fields can have default values, and default factories, or
+be required.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Optional
+<span class="org-keyword">from</span> datetime <span class="org-keyword">import</span> datetime
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel, ValidationError
+
+
+<span class="org-keyword">class</span> <span class="org-type">User</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span>: <span class="org-builtin">int</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   signup_ts: Optional[<span class="org-variable-name">datetime</span>] = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"> </span>   <span class="org-variable-name">friends</span>: <span class="org-builtin">list</span>[<span class="org-builtin">int</span>] = []
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9a319fb" class="outline-3">
+<h3 id="org9a319fb">Data Validation and Parsing</h3>
+<div class="outline-text-3" id="text-org9a319fb">
+<p>
+Pydantic automatically validates and parses input data, if correction
+is obvious it implements it on the fly, if correction is obscure and
+controversial (the data doesn't conform to the model's type
+annotations) it raising errors.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">user</span> = User(<span class="org-builtin">id</span>=<span class="org-string">'123'</span>, name=<span class="org-string">'John Doe'</span>, signup_ts=<span class="org-string">'2023-01-01T00:00:00'</span>, friends=[1, 2, <span class="org-string">'3'</span>])
+<span class="org-builtin">print</span>(user)
+</pre>
+</div>
+
+<pre class="example">
+id=123 name='John Doe' signup_ts=datetime.datetime(2023, 1, 1, 0, 0) friends=[1, 2, 3]
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">try</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   user = User(<span class="org-builtin">id</span>=<span class="org-string">'a23'</span>, name=<span class="org-string">'John Doe'</span>, signup_ts=<span class="org-string">'2023-01-01T00:00:00'</span>, friends=[1, 2, <span class="org-string">'b'</span>])
+<span class="org-keyword">except</span> ValidationError <span class="org-keyword">as</span> error_message:
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(error_message)    
+</pre>
+</div>
+
+<pre class="example">
+2 validation errors for User
+id
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='a23', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.8/v/int_parsing
+friends.2
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='b', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.8/v/int_parsing
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgca06f0f" class="outline-3">
+<h3 id="orgca06f0f">Model Composition</h3>
+<div class="outline-text-3" id="text-orgca06f0f">
+<p>
+Pydantic models can be nested, allowing for complex data structures. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">Address</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">street</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   city: <span class="org-builtin">str</span>
+
+<span class="org-keyword">class</span> <span class="org-type">User</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span>: <span class="org-builtin">int</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   address: Address
+
+address_data = {<span class="org-string">'street'</span>: <span class="org-string">'123 Main St'</span>, <span class="org-string">'city'</span>: <span class="org-string">'Anytown'</span>}
+<span class="org-variable-name">user_data</span> = {<span class="org-string">'id'</span>: 1, <span class="org-string">'name'</span>: <span class="org-string">'John Doe'</span>, <span class="org-string">'address'</span>: address_data}
+<span class="org-variable-name">user</span> = User(**user_data)  <span class="org-comment-delimiter"># </span><span class="org-comment">Automatically handles the nesting</span>
+<span class="org-builtin">print</span>(user)
+</pre>
+</div>
+
+<pre class="example">
+id=1 name='John Doe' address=Address(street='123 Main St', city='Anytown')
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfb38e2c" class="outline-3">
+<h3 id="orgfb38e2c">Data Serialization</h3>
+<div class="outline-text-3" id="text-orgfb38e2c">
+<p>
+Pydantic models can be easily serialized to and deserialized from formats like JSON.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">user_json</span> = user.json()  <span class="org-comment-delimiter"># </span><span class="org-comment">Serialize to JSON string</span>
+<span class="org-variable-name">user_dict</span> = user.<span class="org-builtin">dict</span>()  <span class="org-comment-delimiter"># </span><span class="org-comment">Serialize to dictionary</span>
+<span class="org-variable-name">user_copy</span> = User.parse_raw(user_json)  <span class="org-comment-delimiter"># </span><span class="org-comment">Deserialize from JSON string</span>
+<span class="org-builtin">print</span>(user_json)
+<span class="org-builtin">print</span>(user_dict)
+<span class="org-builtin">print</span>(user_copy)
+</pre>
+</div>
+
+<pre class="example">
+{"id":1,"name":"John Doe","address":{"street":"123 Main St","city":"Anytown"}}
+{'id': 1, 'name': 'John Doe', 'address': {'street': '123 Main St', 'city': 'Anytown'}}
+id=1 name='John Doe' address=Address(street='123 Main St', city='Anytown')
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6dffef1" class="outline-3">
+<h3 id="org6dffef1">Custom Data Types</h3>
+<div class="outline-text-3" id="text-org6dffef1">
+<p>
+Pydantic allows the creation of custom data types by extending the
+`pydantic.BaseModel` and providing custom validation logic.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> typing_extensions <span class="org-keyword">import</span> Annotated
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> Field
+<span class="org-comment-delimiter">#</span><span class="org-comment">from pydantic import ConstrainedInt &lt;-- obsolete</span>
+
+<span class="org-comment-delimiter">#</span><span class="org-comment">class PositiveInt(ConstrainedInt):</span>
+<span class="org-comment-delimiter">#    </span><span class="org-comment">gt = 0</span>
+
+<span class="org-variable-name">PositiveInt</span> = Annotated[<span class="org-builtin">int</span>, Field(ge=0)]
+
+<span class="org-keyword">class</span> <span class="org-type">User</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span>: PositiveInt
+
+user = User(<span class="org-builtin">id</span>=42)  <span class="org-comment-delimiter"># </span><span class="org-comment">Valid</span>
+<span class="org-builtin">print</span>(user)
+<span class="org-keyword">try</span>: user = User(<span class="org-builtin">id</span>=-42)  <span class="org-comment-delimiter"># </span><span class="org-comment">Raises validation error</span>
+<span class="org-keyword">except</span> ValidationError <span class="org-keyword">as</span> error_message:
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(error_message)     
+</pre>
+</div>
+
+<pre class="example">
+id=42
+1 validation error for User
+id
+  Input should be greater than or equal to 0 [type=greater_than_equal, input_value=-42, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.8/v/greater_than_equal
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb475958" class="outline-3">
+<h3 id="orgb475958">Settings Management</h3>
+<div class="outline-text-3" id="text-orgb475958">
+<p>
+Pydantic can be used for settings management by leveraging environment
+variables through `pydantic.BaseSettings`.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip list | grep pydantic
+</pre>
+</div>
+
+<pre class="example">
+
+pydantic          2.8.2
+pydantic_core     2.20.1
+</pre>
+
+
+<p>
+Install <code>pydantic_settings</code> module:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">pip install pydantic_settings
+</pre>
+</div>
+
+<pre class="example">
+Collecting pydantic_settings
+  Downloading pydantic_settings-2.3.4-py3-none-any.whl (22 kB)
+=2.7.0 in /home/alioth/.virtualenvs/FastAPI/lib/python3.11/site-packages (from pydantic_settings) (2.8.2)
+=0.21.0 in /home/alioth/.virtualenvs/FastAPI/lib/python3.11/site-packages (from pydantic_settings) (1.0.1)
+=0.4.0 in /home/alioth/.virtualenvs/FastAPI/lib/python3.11/site-packages (from pydantic&gt;=2.7.0-&gt;pydantic_settings) (0.7.0)
+=2.7.0-&gt;pydantic_settings) (2.20.1)
+=4.6.1 in /home/alioth/.virtualenvs/FastAPI/lib/python3.11/site-packages (from pydantic&gt;=2.7.0-&gt;pydantic_settings) (4.12.2)
+Installing collected packages: pydantic_settings
+Successfully installed pydantic_settings-2.3.4
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> pydantic_settings <span class="org-keyword">import</span> BaseSettings
+
+<span class="org-keyword">class</span> <span class="org-type">Settings</span>(BaseSettings):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">app_name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   admin_email: <span class="org-builtin">str</span>
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">class</span> <span class="org-type">Config</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   env_prefix = <span class="org-string">'MY_APP_'</span>  <span class="org-comment-delimiter"># </span><span class="org-comment">Environment variables should start with MY_APP_</span>
+
+<span class="org-variable-name">settings</span> = Settings(app_name=<span class="org-string">'philomath'</span>, admin_email=<span class="org-string">'tonyphilomath@gmail.com'</span>)
+<span class="org-builtin">print</span>(settings.app_name)  <span class="org-comment-delimiter"># </span><span class="org-comment">Read the value from the MY_APP_APP_NAME environment variable</span>
+</pre>
+</div>
+
+<pre class="example">
+philomath
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgde3b698" class="outline-3">
+<h3 id="orgde3b698">Integration and Use Cases</h3>
+<div class="outline-text-3" id="text-orgde3b698">
+<p>
+Pydantic integrates well with frameworks like FastAPI for creating web
+APIs, and Django for model management, among other use cases.
+</p>
+</div>
+
+<div id="outline-container-orge2542d3" class="outline-4">
+<h4 id="orge2542d3">FastAPI Integration:</h4>
+<div class="outline-text-4" id="text-orge2542d3">
+<p>
+Pydantic is the data validation and serialization backbone of FastAPI.
+</p>
+</div>
+</div>
+<div id="outline-container-org98845da" class="outline-4">
+<h4 id="org98845da">Django Integration:</h4>
+<div class="outline-text-4" id="text-org98845da">
+<p>
+Pydantic models can be used to validate API response payloads.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1fc7e34" class="outline-3">
+<h3 id="org1fc7e34">Further reading and documentation</h3>
+<div class="outline-text-3" id="text-org1fc7e34">
+<p>
+can be found here:
+</p>
+<ul class="org-ul">
+<li>[Pydantic Documentation](<a href="https://pydantic-docs.helpmanual.io/">https://pydantic-docs.helpmanual.io/</a>)</li>
+<li>[FastAPI Documentation](<a href="https://fastapi.tiangolo.com/">https://fastapi.tiangolo.com/</a>)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8f6bc61" class="outline-3">
+<h3 id="org8f6bc61">The Essence</h3>
+<div class="outline-text-3" id="text-org8f6bc61">
+<p>
+This should provide a comprehensive understanding of Pydantic's main
+features and capabilities.
+</p>
+</div>
+</div>
+</div>
