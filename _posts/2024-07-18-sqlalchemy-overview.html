@@ -25,13 +25,30 @@ tags: [overview]
 <li><a href="#org61c32f2">Resources:</a></li>
 </ul>
 </li>
+<li><a href="#org6616d92">Prerequisites</a></li>
 <li><a href="#org4fb31e7">What is SQLAlchemy, and what are the main components of this library?</a>
 <ul>
 <li><a href="#org11cad68">Main Components of SQLAlchemy:</a></li>
 <li><a href="#org607d23f">Below is an example</a></li>
-<li><a href="#org21ddbf0">Explanations:**</a></li>
+<li><a href="#org8b66fa6">Explanations:</a></li>
 </ul>
 </li>
+<li><a href="#orgdf569a8">What is the purpose of usage of object-relational mapping?</a>
+<ul>
+<li><a href="#orgf136bdc">Purpose of ORM Usage:</a></li>
+<li><a href="#orgf3bae64">Example Use Cases in SQLAlchemy:</a>
+<ul>
+<li><a href="#orgd0a9805">1. Abstraction and Simplicity:</a></li>
+<li><a href="#org7160370">2. Maintainability:</a></li>
+<li><a href="#orgdb90618">3. Portability:</a></li>
+<li><a href="#orgc98f38b">4. Security:</a></li>
+</ul>
+</li>
+<li><a href="#org40143e3">Additional Considerations:</a></li>
+<li><a href="#org6fd312a">The Essence</a></li>
+</ul>
+</li>
+<li><a href="#org548d87f">Clarification</a></li>
 </ul>
 </div>
 </div>
@@ -205,6 +222,28 @@ areas of interest or projects you might be working on!
 </div>
 </div>
 </div>
+<div id="outline-container-org6616d92" class="outline-2">
+<h2 id="org6616d92">Prerequisites</h2>
+<div class="outline-text-2" id="text-org6616d92">
+<div class="org-src-container">
+<pre class="src src-sh">pip install sqlalchemy
+</pre>
+</div>
+
+<pre class="example" id="orgb8fae91">
+Collecting sqlalchemy
+  Downloading SQLAlchemy-2.0.31-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 3.6 MB/s eta 0:00:00
+=4.6.0 in /home/alioth/.virtualenvs/FastAPI/lib/python3.11/site-packages (from sqlalchemy) (4.12.2)
+Collecting greenlet!=0.4.17
+  Downloading greenlet-3.0.3-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (620 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 620.0/620.0 kB 4.0 MB/s eta 0:00:00
+
+Installing collected packages: greenlet, sqlalchemy
+Successfully installed greenlet-3.0.3 sqlalchemy-2.0.31
+</pre>
+</div>
+</div>
 
 <div id="outline-container-org4fb31e7" class="outline-2">
 <h2 id="org4fb31e7">What is SQLAlchemy, and what are the main components of this library?</h2>
@@ -276,7 +315,8 @@ ORM:
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">SQLAlchemy Core Example</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">Create an engine and connect to the database (SQLite in this case)</span>
-<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///example.db'</span>, echo=<span class="org-constant">True</span>) metadata = MetaData()
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///:memory:'</span>, echo=<span class="org-constant">True</span>)
+metadata = MetaData()
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Define a table using SQLAlchemy Core</span>
 user_table = Table(<span class="org-string">'users'</span>, metadata, Column(<span class="org-string">'id'</span>, Integer,
@@ -296,28 +336,84 @@ Base = declarative_base()
 <span class="org-keyword">class</span> <span class="org-type">User</span>(Base):
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'users'</span>
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String) age = Column(Integer)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   age = Column(Integer)
 
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Create a session</span>
-Session = sessionmaker(bind=engine) session = Session()
+Session = sessionmaker(bind=engine)
+session = Session()
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Add a new user to the database</span>
-new_user = User(name=<span class="org-string">"Alice"</span>, age=30) session.add(new_user)
+new_user = User(name=<span class="org-string">"Alice"</span>, age=30)
+session.add(new_user)
 session.commit()
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Query the database</span>
 <span class="org-keyword">for</span> user <span class="org-keyword">in</span> session.query(User).<span class="org-builtin">all</span>():
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name,
-<span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span>   <span class="org-highlight-indentation"> </span> user.age)
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name, user.age)
+</pre>
+</div>
+
+<pre class="example" id="org94fb934">
+2024-07-20 10:33:03,681 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-20 10:33:03,682 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2024-07-20 10:33:03,682 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-20 10:33:03,682 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("users")
+2024-07-20 10:33:03,683 INFO sqlalchemy.engine.Engine [raw sql] ()
+2024-07-20 10:33:03,683 INFO sqlalchemy.engine.Engine 
+CREATE TABLE users (
+	id INTEGER NOT NULL, 
+	name VARCHAR, 
+	age INTEGER, 
+	PRIMARY KEY (id)
+)
+
+
+2024-07-20 10:33:03,684 INFO sqlalchemy.engine.Engine [no key 0.00011s] ()
+2024-07-20 10:33:03,684 INFO sqlalchemy.engine.Engine COMMIT
+/tmp/babel-C8lSuP/python-uwm0l3:20: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  Base = declarative_base()
+2024-07-20 10:33:03,688 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-20 10:33:03,690 INFO sqlalchemy.engine.Engine INSERT INTO users (name, age) VALUES (?, ?)
+2024-07-20 10:33:03,690 INFO sqlalchemy.engine.Engine [generated in 0.00016s] ('Alice', 30)
+2024-07-20 10:33:03,690 INFO sqlalchemy.engine.Engine COMMIT
+2024-07-20 10:33:03,691 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-20 10:33:03,692 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.age AS users_age 
+FROM users
+2024-07-20 10:33:03,692 INFO sqlalchemy.engine.Engine [generated in 0.00013s] ()
+1 Alice 30
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Add another user to the database</span>
+<span class="org-variable-name">new_user</span> = User(name=<span class="org-string">"Bob"</span>, age=32)
+session.add(new_user)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Query the database</span>
+<span class="org-keyword">for</span> user <span class="org-keyword">in</span> session.query(User).<span class="org-builtin">all</span>():
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name, user.age)
+</pre>
+</div>
+
+<pre class="example">
+2024-07-20 10:35:27,323 INFO sqlalchemy.engine.Engine INSERT INTO users (name, age) VALUES (?, ?)
+2024-07-20 10:35:27,323 INFO sqlalchemy.engine.Engine [cached since 143.6s ago] ('Bob', 32)
+2024-07-20 10:35:27,323 INFO sqlalchemy.engine.Engine COMMIT
+2024-07-20 10:35:27,323 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-07-20 10:35:27,324 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.age AS users_age 
+FROM users
+2024-07-20 10:35:27,324 INFO sqlalchemy.engine.Engine [cached since 143.6s ago] ()
+1 Alice 30
+2 Bob 32
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org21ddbf0" class="outline-3">
-<h3 id="org21ddbf0">Explanations:**</h3>
-<div class="outline-text-3" id="text-org21ddbf0">
+<div id="outline-container-org8b66fa6" class="outline-3">
+<h3 id="org8b66fa6">Explanations:</h3>
+<div class="outline-text-3" id="text-org8b66fa6">
 <ol class="org-ol">
 <li><b>Core Example:</b>
 <ul class="org-ul">
@@ -344,5 +440,342 @@ databases. For further exploration, refer to the official SQLAlchemy
 documentation and tutorials.
 </p>
 </div>
+</div>
+</div>
+
+
+<div id="outline-container-orgdf569a8" class="outline-2">
+<h2 id="orgdf569a8">What is the purpose of usage of object-relational mapping?</h2>
+<div class="outline-text-2" id="text-orgdf569a8">
+<p>
+Object-Relational Mapping (ORM) is a programming technique used to
+convert data between incompatible type systems in object-oriented
+programming languages. In simpler terms, ORM allows developers to
+interact with a relational database using the idioms and patterns of
+their preferred programming language, transforming complex SQL queries
+and operations into more intuitive and manageable code constructs.
+</p>
+</div>
+
+<div id="outline-container-orgf136bdc" class="outline-3">
+<h3 id="orgf136bdc">Purpose of ORM Usage:</h3>
+<div class="outline-text-3" id="text-orgf136bdc">
+<ol class="org-ol">
+<li><b>Abstraction and Simplicity:</b>
+<ul class="org-ul">
+<li><b>Reduces Boilerplate Code:</b> ORM frameworks abstract much of the
+repetitive SQL code that developers would otherwise need to
+write. This leads to cleaner and more readable code.</li>
+<li><b>Ease of Use:</b> By representing tables as classes and rows as
+objects, ORMs allow developers to use object-oriented principles
+to interact with database records.</li>
+</ul></li>
+
+<li><b>Maintainability:</b>
+<ul class="org-ul">
+<li><b>Centralized Schema Management:</b> With ORM, the database schema
+is often defined in the application's code. This centralizes
+schema changes and helps keep the database schema in sync with
+the application logic.</li>
+<li><b>Shorter Development Cycle:</b> ORM simplifies CRUD (Create, Read,
+Update, Delete) operations, making it easier to implement and
+maintain code, especially in large applications.</li>
+</ul></li>
+
+<li><b>Portability:</b>
+<ul class="org-ul">
+<li><b>Database-agnostic Code:</b> ORMs provide a layer of abstraction
+that allows applications to be more database-agnostic. By
+changing the ORM configuration, you can switch databases with
+minimal changes to the application code.</li>
+</ul></li>
+
+<li><b>Productivity:</b>
+<ul class="org-ul">
+<li><b>Faster Prototyping:</b> ORMs enable faster development cycles by
+allowing developers to quickly prototype applications without
+needing to write complex SQL queries.</li>
+<li><b>Declarative Relationships:</b> Defining relationships
+(one-to-one, one-to-many, many-to-many) between tables is more
+straightforward and declarative with ORM, leading to fewer errors
+and more predictable behavior.</li>
+</ul></li>
+
+<li><b>Security:</b>
+<ul class="org-ul">
+<li><b>SQL Injection Protection:</b> ORMs often include mechanisms to
+prevent SQL injection attacks by properly escaping and
+parameterizing queries, reducing the risk of introducing
+vulnerabilities.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf3bae64" class="outline-3">
+<h3 id="orgf3bae64">Example Use Cases in SQLAlchemy:</h3>
+<div class="outline-text-3" id="text-orgf3bae64">
+</div>
+<div id="outline-container-orgd0a9805" class="outline-4">
+<h4 id="orgd0a9805">1. Abstraction and Simplicity:</h4>
+<div class="outline-text-4" id="text-orgd0a9805">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> sessionmaker
+<span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> Column, Integer, String, create_engine
+<span class="org-keyword">from</span> sqlalchemy.ext.declarative
+<span class="org-keyword">import</span> declarative_base <span class="org-keyword">from</span> sqlalchemy.orm
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define the database connection and base</span>
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///example.db'</span>, echo=<span class="org-constant">True</span>)
+<span class="org-comment-delimiter">#</span><span class="org-comment">**Explanation of the Connection URL:**</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">- `sqlite://`: Specifies that the SQLite dialect should be used.</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">- `/example.db`: Indicates that the database file `example.db` is located in the current working directory.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an engine that uses an in-memory SQLite database</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">engine = create_engine('sqlite:///:memory:', echo=True)</span>
+
+Base = declarative_base()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define a User class mapped to a users table</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">User</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'users'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   age = Column(Integer)
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a session</span>
+Session = sessionmaker(bind=engine)
+session = Session()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Adding a new user (CRUD operation)</span>
+new_user = User(name=<span class="org-string">"Alice"</span>, age=30)
+session.add(new_user)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Querying the database</span>
+users = session.query(User).<span class="org-builtin">all</span>()
+
+<span class="org-keyword">for</span> user <span class="org-keyword">in</span> users:
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name, user.age)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7160370" class="outline-4">
+<h4 id="org7160370">2. Maintainability:</h4>
+<div class="outline-text-4" id="text-org7160370">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Alter the User class to add a new column</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">class User(Base):</span>
+<span class="org-comment-delimiter">#     </span><span class="org-comment">__tablename__ = 'users'</span>
+<span class="org-comment-delimiter">#     </span><span class="org-comment">id = Column(Integer, primary_key=True)</span>
+<span class="org-comment-delimiter">#     </span><span class="org-comment">name = Column(String)</span>
+<span class="org-comment-delimiter">#     </span><span class="org-comment">age = Column(Integer)</span>
+<span class="org-comment-delimiter">#     </span><span class="org-comment">email = Column(String)  # Added column</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment"># Reflect the changes in the database schema</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Base.metadata.create_all(engine)</span>
+
+<span class="org-keyword">for</span> user <span class="org-keyword">in</span> session.query(User).<span class="org-builtin">all</span>():
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name, user.age)
+</pre>
+</div>
+
+<pre class="example">
+2024-07-20 10:46:30,462 INFO sqlalchemy.engine.Engine SELECT users.id AS users_id, users.name AS users_name, users.age AS users_age 
+FROM users
+2024-07-20 10:46:30,462 INFO sqlalchemy.engine.Engine [cached since 806.8s ago] ()
+1 Alice 30
+2 Bob 32
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgdb90618" class="outline-4">
+<h4 id="orgdb90618">3. Portability:</h4>
+<div class="outline-text-4" id="text-orgdb90618">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">Changing the database connection string to use PostgreSQL instead of SQLite</span>
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'postgresql://user:password@localhost/dbname'</span>)
+<span class="org-variable-name">Session</span> = sessionmaker(bind=engine)
+session = Session()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Existing ORM code remains unchanged, ensuring portability across databases</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc98f38b" class="outline-4">
+<h4 id="orgc98f38b">4. Security:</h4>
+<div class="outline-text-4" id="text-orgc98f38b">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">ORM helps prevent SQL injection by using parameterized queries</span>
+<span class="org-variable-name">user_id</span> = 1
+<span class="org-variable-name">user</span> = session.query(User).<span class="org-builtin">filter</span>(User.<span class="org-builtin">id</span> == user_id).one()
+<span class="org-builtin">print</span>(user.name)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org40143e3" class="outline-3">
+<h3 id="org40143e3">Additional Considerations:</h3>
+<div class="outline-text-3" id="text-org40143e3">
+<ul class="org-ul">
+<li>ORMs come with some overhead, which can impact performance in
+high-throughput applications.</li>
+<li>Direct SQL queries might still be necessary for complex queries or
+performance-critical parts of an application.</li>
+<li>Understanding the underlying SQL and being aware of the trade-offs
+is important when using ORMs.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6fd312a" class="outline-3">
+<h3 id="org6fd312a">The Essence</h3>
+<div class="outline-text-3" id="text-org6fd312a">
+<p>
+Overall, the purpose of ORM is to bridge the gap between relational
+databases and object-oriented programming, providing a more intuitive
+and efficient way to interact with databases while improving code
+maintainability, security, and portability.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org548d87f" class="outline-2">
+<h2 id="org548d87f">Clarification</h2>
+<div class="outline-text-2" id="text-org548d87f">
+<p>
+So, as I can understand the string:
+```
+engine = create_engine('sqlite:///example.db', echo=True)
+```
+initiate database in RAM, not at the hard drive?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Actually, the provided string:
+
+<span class="org-markdown-markup">```</span><span class="org-markdown-language-keyword">org</span>
+#+begin<span class="org-markdown-markup">_</span><span class="org-markdown-italic">src python</span>
+<span class="org-markdown-italic">engine = create</span><span class="org-markdown-markup">_</span>engine('sqlite:///example.db', echo=True)
+</pre>
+</div>
+<p>
+```
+</p>
+
+<p>
+initializes a connection to an SQLite database stored in a file named `example.db` located in the current working directory on the hard drive. The `sqlite:///example.db` URL indicates that SQLite should use a file-based database.
+</p>
+
+<p>
+<b><b>Explanation of the Connection URL:</b></b>
+</p>
+<ul class="org-ul">
+<li>`sqlite://`: Specifies that the SQLite dialect should be used.</li>
+<li>`/example.db`: Indicates that the database file `example.db` is located in the current working directory.</li>
+</ul>
+
+<p>
+If you want to create a SQLite database in RAM (which resides in memory and is ephemeral), you need to modify the connection string as follows:
+</p>
+
+<p>
+```org
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///:memory:'</span>, echo=<span class="org-constant">True</span>)
+</pre>
+</div>
+<p>
+```
+</p>
+
+<p>
+<b><b>Explanation of the In-Memory Connection URL:</b></b>
+</p>
+<ul class="org-ul">
+<li>`sqlite://`: Specifies that the SQLite dialect should be used.</li>
+<li>`/:memory:`: Indicates that the SQLite database should be created in RAM.</li>
+</ul>
+
+<p>
+<b><b>Example Initializing a Database in RAM:</b></b>
+```org
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> sqlalchemy <span class="org-keyword">import</span> create_engine, Table, Column, Integer, String, MetaData
+<span class="org-keyword">from</span> sqlalchemy.ext.declarative <span class="org-keyword">import</span> declarative_base
+<span class="org-keyword">from</span> sqlalchemy.orm <span class="org-keyword">import</span> sessionmaker
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an engine that uses an in-memory SQLite database</span>
+<span class="org-variable-name">engine</span> = create_engine(<span class="org-string">'sqlite:///:memory:'</span>, echo=<span class="org-constant">True</span>)
+metadata = MetaData()
+Base = declarative_base()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define a Table and ORM model</span>
+user_table = Table(<span class="org-string">'users'</span>, metadata,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  Column(<span class="org-string">'id'</span>, Integer, primary_key=<span class="org-constant">True</span>),
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  Column(<span class="org-string">'name'</span>, String),
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>  Column(<span class="org-string">'age'</span>, Integer))
+
+<span class="org-keyword">class</span> <span class="org-type">User</span>(Base):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   __tablename__ = <span class="org-string">'users'</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span> = Column(Integer, primary_key=<span class="org-constant">True</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name = Column(String)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   age = Column(Integer)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the table in the in-memory database</span>
+metadata.create_all(engine)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a session</span>
+Session = sessionmaker(bind=engine)
+session = Session()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add a new user to the in-memory database</span>
+new_user = User(name=<span class="org-string">"Alice"</span>, age=30)
+session.add(new_user)
+session.commit()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Query the in-memory database</span>
+<span class="org-keyword">for</span> user <span class="org-keyword">in</span> session.query(User).<span class="org-builtin">all</span>():
+<span class="org-highlight-indentation"> </span>   <span class="org-builtin">print</span>(user.<span class="org-builtin">id</span>, user.name, user.age)
+</pre>
+</div>
+<p>
+```
+</p>
+
+<p>
+<b><b>Points to Note:</b></b>
+</p>
+<ol class="org-ol">
+<li><b><b>Persistence:</b></b> The `example.db` file persists on the filesystem, making the database durable until manually deleted.</li>
+<li><b><b>In-Memory Database:</b></b> The `:memory:` database is temporary, meaning it is lost when the program exits. It is useful for testing or situations where you need a fast, transient database.</li>
+<li><b><b>Connection URL Details:</b></b>
+<ul class="org-ul">
+<li>`sqlite:///example.db`: File-based SQLite database on disk.</li>
+<li>`sqlite:///:memory:`: In-memory SQLite database.</li>
+</ul></li>
+</ol>
+
+<p>
+In conclusion, to create a database in RAM, you need to use
+`sqlite:///:memory:`, whereas `sqlite:///example.db` creates a durable
+database file on the hard drive.  #+end_src
+</p>
 </div>
 </div>
