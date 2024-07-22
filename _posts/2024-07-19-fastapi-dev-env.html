@@ -1,0 +1,481 @@
+---
+layout: page
+title: FastAPI Development
+tagline: " environment set up"
+permalink: /python/fastapi-dev-env.html
+categories: [FastAPI, Python]
+tags: [dev-env]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org118434d">Preface</a></li>
+<li><a href="#org79af4a0">Prerequisites</a>
+<ul>
+<li><a href="#org4a04f84">A separate venv</a></li>
+<li><a href="#org7664e6f">Install <code>FastAPI</code></a></li>
+</ul>
+</li>
+<li><a href="#org7b533b8">A Primitive App</a></li>
+<li><a href="#orgbc70ca9">Manual testing</a></li>
+<li><a href="#org25cf1db">Enter <code>uinttest</code></a>
+<ul>
+<li><a href="#orgec91ea5">FastAPI Application</a></li>
+<li><a href="#org844eff1">Unit Tests</a></li>
+<li><a href="#org2369ba2">Explanation</a></li>
+<li><a href="#org771bb7a">Running the Tests</a></li>
+</ul>
+</li>
+<li><a href="#orgf3bd693">Corrections <b>The Snag</b></a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org118434d" class="outline-2">
+<h2 id="org118434d">Preface</h2>
+<div class="outline-text-2" id="text-org118434d">
+<p>
+Emacs text editor is powerful enough to simplify the task of <code>FastAPI</code>
+development by providing its faculties inside Org-mode Babel Python
+code blocks.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org79af4a0" class="outline-2">
+<h2 id="org79af4a0">Prerequisites</h2>
+<div class="outline-text-2" id="text-org79af4a0">
+</div>
+<div id="outline-container-org4a04f84" class="outline-3">
+<h3 id="org4a04f84">A separate venv</h3>
+<div class="outline-text-3" id="text-org4a04f84">
+<div class="org-src-container">
+<pre class="src src-elisp">pyvenv-create
+pyvenv-activate
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7664e6f" class="outline-3">
+<h3 id="org7664e6f">Install <code>FastAPI</code></h3>
+<div class="outline-text-3" id="text-org7664e6f">
+<div class="org-src-container">
+<pre class="src src-sh">pip list
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-markdown">Package    Version
+<span class="org-markdown-hr">---------- -------</span>
+pip        23.0.1
+setuptools 66.1.1
+wheel      0.38.4
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-sh">pip install fastapi
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-markdown">Collecting fastapi
+  Downloading fastapi-0.111.1-py3-none-any.whl (92 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 92.2/92.2 kB 1.2 MB/s eta 0:00:00
+
+Collecting starlette&lt;0.38.0,&gt;=0.37.2
+  Downloading starlette-0.37.2-py3-none-any.whl (71 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 71.9/71.9 kB 1.3 MB/s eta 0:00:00
+
+Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,&lt;3.0.0,&gt;=1.7.4
+  Using cached pydantic-2.8.2-py3-none-any.whl (423 kB)
+Collecting typing-extensions&gt;=4.8.0
+  Using cached typing<span class="org-markdown-markup">_</span><span class="org-markdown-italic">extensions-4.12.2-py3-none-any.whl (37 kB)</span>
+<span class="org-markdown-italic">Collecting fastapi-cli&gt;=0.0.2</span>
+<span class="org-markdown-italic">  Downloading fastapi</span><span class="org-markdown-markup">_</span>cli-0.0.4-py3-none-any.whl (9.5 kB)
+Collecting httpx&gt;=0.23.0
+  Using cached httpx-0.27.0-py3-none-any.whl (75 kB)
+Collecting jinja2&gt;=2.11.2
+  Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 133.3/133.3 kB 1.5 MB/s eta 0:00:00
+
+Collecting python-multipart&gt;=0.0.7
+  Downloading python<span class="org-markdown-markup">_</span><span class="org-markdown-italic">multipart-0.0.9-py3-none-any.whl (22 kB)</span>
+<span class="org-markdown-italic">Collecting email</span><span class="org-markdown-markup">_</span>validator&gt;=2.0.0
+  Downloading email_validator-2.2.0-py3-none-any.whl (33 kB)
+Collecting uvicorn[standard]&gt;=0.12.0
+  Downloading uvicorn-0.30.1-py3-none-any.whl (62 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 62.4/62.4 kB 2.4 MB/s eta 0:00:00
+
+Collecting dnspython&gt;=2.0.0
+  Downloading dnspython-2.6.1-py3-none-any.whl (307 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 307.7/307.7 kB 2.4 MB/s eta 0:00:00
+
+Collecting idna&gt;=2.0.0
+  Using cached idna-3.7-py3-none-any.whl (66 kB)
+Collecting typer&gt;=0.12.3
+  Downloading typer-0.12.3-py3-none-any.whl (47 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 47.2/47.2 kB 1.1 MB/s eta 0:00:00
+
+Collecting anyio
+  Using cached anyio-4.4.0-py3-none-any.whl (86 kB)
+Collecting certifi
+  Using cached certifi-2024.7.4-py3-none-any.whl (162 kB)
+Collecting httpcore==1.*
+  Using cached httpcore-1.0.5-py3-none-any.whl (77 kB)
+Collecting sniffio
+  Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Collecting h11&lt;0.15,&gt;=0.13
+  Using cached h11-0.14.0-py3-none-any.whl (58 kB)
+Collecting MarkupSafe&gt;=2.0
+  Downloading MarkupSafe-2.1.5-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (28 kB)
+Collecting annotated-types&gt;=0.4.0
+  Using cached annotated<span class="org-markdown-markup">_</span><span class="org-markdown-italic">types-0.7.0-py3-none-any.whl (13 kB)</span>
+<span class="org-markdown-italic">Collecting pydantic-core==2.20.1</span>
+<span class="org-markdown-italic">  Using cached pydantic</span><span class="org-markdown-markup">_</span>core-2.20.1-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (2.1 MB)
+Collecting click&gt;=7.0
+  Downloading click-8.1.7-py3-none-any.whl (97 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 97.9/97.9 kB 1.6 MB/s eta 0:00:00
+
+Collecting httptools&gt;=0.5.0
+  Downloading httptools-0.6.1-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>5<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux1<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (318 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 318.5/318.5 kB 1.8 MB/s eta 0:00:00
+
+Collecting python-dotenv&gt;=0.13
+  Downloading python<span class="org-markdown-markup">_</span><span class="org-markdown-italic">dotenv-1.0.1-py3-none-any.whl (19 kB)</span>
+<span class="org-markdown-italic">Collecting pyyaml&gt;=5.1</span>
+<span class="org-markdown-italic">  Downloading PyYAML-6.0.1-cp311-cp311-manylinux</span><span class="org-markdown-markup">_</span>2<span class="org-markdown-markup">_</span><span class="org-markdown-italic">17</span><span class="org-markdown-markup">_</span>x86<span class="org-markdown-markup">_</span><span class="org-markdown-italic">64.manylinux2014</span><span class="org-markdown-markup">_</span>x86_64.whl (757 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 757.7/757.7 kB 2.2 MB/s eta 0:00:00
+
+Collecting uvloop!=0.15.0,!=0.15.1,&gt;=0.14.0
+  Downloading uvloop-0.19.0-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (3.5 MB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 3.5/3.5 MB 564.1 kB/s eta 0:00:00
+
+Collecting watchfiles&gt;=0.13
+  Downloading watchfiles-0.22.0-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (1.2 MB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 1.2/1.2 MB 497.8 kB/s eta 0:00:00
+
+Collecting websockets&gt;=10.4
+  Downloading websockets-12.0-cp311-cp311-manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>5<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux1<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux<span class="org-markdown-markup">_</span><span class="org-markdown-italic">2</span><span class="org-markdown-markup">_</span>17<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.manylinux2014<span class="org-markdown-markup">_</span><span class="org-markdown-italic">x86</span><span class="org-markdown-markup">_</span>64.whl (130 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 130.9/130.9 kB 497.4 kB/s eta 0:00:00
+
+Collecting shellingham&gt;=1.3.0
+  Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+Collecting rich&gt;=10.11.0
+  Downloading rich-13.7.1-py3-none-any.whl (240 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 240.7/240.7 kB 584.5 kB/s eta 0:00:00
+
+Collecting markdown-it-py&gt;=2.2.0
+  Downloading markdown<span class="org-markdown-markup">_</span><span class="org-markdown-italic">it</span><span class="org-markdown-markup">_</span>py-3.0.0-py3-none-any.whl (87 kB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 87.5/87.5 kB 703.1 kB/s eta 0:00:00
+
+Collecting pygments&lt;3.0.0,&gt;=2.13.0
+  Downloading pygments-2.18.0-py3-none-any.whl (1.2 MB)
+     &#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473;&#9473; 1.2/1.2 MB 744.5 kB/s eta 0:00:00
+
+Collecting mdurl~=0.1
+  Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: websockets, uvloop, typing-extensions, sniffio, shellingham, pyyaml, python-multipart, python-dotenv, pygments, mdurl, MarkupSafe, idna, httptools, h11, dnspython, click, certifi, annotated-types, uvicorn, pydantic-core, markdown-it-py, jinja2, httpcore, email<span class="org-markdown-markup">_</span><span class="org-markdown-italic">validator, anyio, watchfiles, starlette, rich, pydantic, httpx, typer, fastapi-cli, fastapi</span>
+<span class="org-markdown-italic">Successfully installed MarkupSafe-2.1.5 annotated-types-0.7.0 anyio-4.4.0 certifi-2024.7.4 click-8.1.7 dnspython-2.6.1 email</span><span class="org-markdown-markup">_</span>validator-2.2.0 fastapi-0.111.1 fastapi-cli-0.0.4 h11-0.14.0 httpcore-1.0.5 httptools-0.6.1 httpx-0.27.0 idna-3.7 jinja2-3.1.4 markdown-it-py-3.0.0 mdurl-0.1.2 pydantic-2.8.2 pydantic-core-2.20.1 pygments-2.18.0 python-dotenv-1.0.1 python-multipart-0.0.9 pyyaml-6.0.1 rich-13.7.1 shellingham-1.5.4 sniffio-1.3.1 starlette-0.37.2 typer-0.12.3 typing-extensions-4.12.2 uvicorn-0.30.1 uvloop-0.19.0 watchfiles-0.22.0 websockets-12.0
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip list
+</pre>
+</div>
+
+<pre class="example" id="orgc336092">
+
+Package           Version
+----------------- --------
+annotated-types   0.7.0
+anyio             4.4.0
+certifi           2024.7.4
+click             8.1.7
+dnspython         2.6.1
+email_validator   2.2.0
+fastapi           0.111.1
+fastapi-cli       0.0.4
+h11               0.14.0
+httpcore          1.0.5
+httptools         0.6.1
+httpx             0.27.0
+idna              3.7
+Jinja2            3.1.4
+markdown-it-py    3.0.0
+MarkupSafe        2.1.5
+mdurl             0.1.2
+pip               23.0.1
+pydantic          2.8.2
+pydantic_core     2.20.1
+Pygments          2.18.0
+python-dotenv     1.0.1
+python-multipart  0.0.9
+PyYAML            6.0.1
+rich              13.7.1
+setuptools        66.1.1
+shellingham       1.5.4
+sniffio           1.3.1
+starlette         0.37.2
+typer             0.12.3
+typing_extensions 4.12.2
+uvicorn           0.30.1
+uvloop            0.19.0
+watchfiles        0.22.0
+websockets        12.0
+wheel             0.38.4
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b533b8" class="outline-2">
+<h2 id="org7b533b8">A Primitive App</h2>
+<div class="outline-text-2" id="text-org7b533b8">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
+
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc70ca9" class="outline-2">
+<h2 id="orgbc70ca9">Manual testing</h2>
+<div class="outline-text-2" id="text-orgbc70ca9">
+<p>
+As it is <a href="https://fastapi.tiangolo.com/#check-it">explained</a> in your browser.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org25cf1db" class="outline-2">
+<h2 id="org25cf1db">Enter <code>uinttest</code></h2>
+<div class="outline-text-2" id="text-org25cf1db">
+<p>
+I wrote a primitive <code>FastAPI</code> app:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
+
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
+</pre>
+</div>
+
+<p>
+can you write the <code>unittest</code> for it?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown">Certainly! To write <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">unittest</span><span class="org-markdown-markup">`</span> tests for your FastAPI application, we
+can use the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> provided by FastAPI which is a wrapper around
+Starlette's <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span>. This allows us to simulate HTTP requests to
+our endpoints and verify their responses.
+
+Below is how you can structure your unit tests using the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">unittest</span><span class="org-markdown-markup">`</span>
+module:
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgec91ea5" class="outline-3">
+<h3 id="orgec91ea5">FastAPI Application</h3>
+<div class="outline-text-3" id="text-orgec91ea5">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org844eff1" class="outline-3">
+<h3 id="org844eff1">Unit Tests</h3>
+<div class="outline-text-3" id="text-org844eff1">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+<span class="org-keyword">from</span> code.awesomeapp.main <span class="org-keyword">import</span> app  <span class="org-comment-delimiter"># </span><span class="org-comment">Assuming your FastAPI app is saved in main.py</span>
+
+<span class="org-variable-name">client</span> = TestClient(app)
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">response</span> = client.get(<span class="org-string">"/"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">response</span> = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+
+<pre class="example">
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.014s
+
+OK
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2369ba2" class="outline-3">
+<h3 id="org2369ba2">Explanation</h3>
+<div class="outline-text-3" id="text-org2369ba2">
+<ol class="org-ol">
+<li><b><b>Importing FastAPI App</b></b>:
+<ul class="org-ul">
+<li>Import the FastAPI app instance from the file where it is defined (<code>main</code> in this case).</li>
+</ul></li>
+
+<li><b><b>Test Client</b></b>:
+<ul class="org-ul">
+<li>Create an instance of <code>TestClient</code>, passing in the FastAPI app object. This client will be used to make requests to the endpoints for testing.</li>
+</ul></li>
+
+<li><b><b>Unit Test Class</b></b>:
+<ul class="org-ul">
+<li>Define a class <code>TestFastAPI</code> that inherits from <code>unittest.TestCase</code>. This class will contain all our test methods.</li>
+</ul></li>
+
+<li><b><b>Test Methods</b></b>:
+<ul class="org-ul">
+<li><code>test_read_root</code>:
+<ul class="org-ul">
+<li>This method tests the root endpoint <code>/</code>. We expect a 200 status code and a JSON response <code>{"Hello": "World"}</code>.</li>
+</ul></li>
+<li><code>test_read_item_with_query</code>:
+<ul class="org-ul">
+<li>This method tests the <code>/items/{item_id}</code> endpoint with an additional query parameter <code>q</code>. We expect a 200 status code and a JSON response containing the item ID and the query parameter.</li>
+</ul></li>
+<li><code>test_read_item_without_query</code>:
+<ul class="org-ul">
+<li>This method tests the <code>/items/{item_id}</code> endpoint without the query parameter <code>q</code>. We expect a 200 status code and a JSON response containing the item ID with <code>q</code> as <code>None</code>.</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org771bb7a" class="outline-3">
+<h3 id="org771bb7a">Running the Tests</h3>
+<div class="outline-text-3" id="text-org771bb7a">
+<p>
+To run the tests, you can:
+</p>
+<ol class="org-ol">
+<li>Save the application code in <code>main.py</code>.</li>
+<li>Save the test code in a separate file, e.g., <code>test_main.py</code>.</li>
+<li><p>
+Execute the tests using the <code>unittest</code> command in your terminal:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">cd</span> code/awesomeapp/
+python -m unittest test_main.py
+</pre>
+</div>
+
+<pre class="example">
+
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.015s
+
+OK
+</pre></li>
+</ol>
+
+<p>
+Alternatively, if you're working within Emacs with Org-mode and Babel,
+you can execute the test code block within the Org document.
+</p>
+
+<p>
+This setup will help you ensure that your FastAPI application works as
+expected.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf3bd693" class="outline-2">
+<h2 id="orgf3bd693">Corrections <b>The Snag</b></h2>
+<div class="outline-text-2" id="text-orgf3bd693">
+<p>
+My Org file with Babel code snippets and the <code>main.py</code> are in the
+different dirictories. The relative path is <code>code/awesomeapp/main.py</code>
+Correct the <code>import</code> statement in accordion with these facts, please.
+</p>
+
+<p>
+In addition: I want to run <code>unittest</code> directly as a Babel code
+snippet. So don't use this in the bottom:
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+<p>
+instead, replace it with:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<blockquote>
+<p>
+These corrections are incomprehensible to OpenAI.
+</p>
+</blockquote>
+</div>
+</div>
