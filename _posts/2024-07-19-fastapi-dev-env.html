@@ -27,7 +27,6 @@ tags: [dev-env]
 <li><a href="#org771bb7a">Running the Tests</a></li>
 </ul>
 </li>
-<li><a href="#orgf3bd693">Corrections <b>The Snag</b></a></li>
 </ul>
 </div>
 </div>
@@ -182,7 +181,7 @@ Installing collected packages: websockets, uvloop, typing-extensions, sniffio, s
 </pre>
 </div>
 
-<pre class="example" id="orgc336092">
+<pre class="example" id="org9487d92">
 
 Package           Version
 ----------------- --------
@@ -441,41 +440,5 @@ This setup will help you ensure that your FastAPI application works as
 expected.
 </p>
 </div>
-</div>
-</div>
-
-<div id="outline-container-orgf3bd693" class="outline-2">
-<h2 id="orgf3bd693">Corrections <b>The Snag</b></h2>
-<div class="outline-text-2" id="text-orgf3bd693">
-<p>
-My Org file with Babel code snippets and the <code>main.py</code> are in the
-different dirictories. The relative path is <code>code/awesomeapp/main.py</code>
-Correct the <code>import</code> statement in accordion with these facts, please.
-</p>
-
-<p>
-In addition: I want to run <code>unittest</code> directly as a Babel code
-snippet. So don't use this in the bottom:
-</p>
-
-
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
-<span class="org-highlight-indentation"> </span>   unittest.main()
-</pre>
-</div>
-<p>
-instead, replace it with:
-</p>
-<div class="org-src-container">
-<pre class="src src-python">unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
-</pre>
-</div>
-
-<blockquote>
-<p>
-These corrections are incomprehensible to OpenAI.
-</p>
-</blockquote>
 </div>
 </div>
