@@ -11,17 +11,9 @@ tags: []
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#org1bc1074">Preface</a></li>
-<li><a href="#org85e2833">Prerequisites</a>
-<ul>
-<li><a href="#orga04d6bb">The App <b>&amp;</b> the Test Suite in a Single Block</a></li>
-</ul>
-</li>
+<li><a href="#org85e2833">Prerequisites</a></li>
 <li><a href="#orgd7cdfa7">TestClient module</a></li>
-<li><a href="#orgf9cb8bf">All Supported HTTP Request's Methods</a>
-<ul>
-<li><a href="#org21a9d59">Extended FastAPI Application with All HTTP Methods</a></li>
-</ul>
-</li>
+<li><a href="#orgdc0aa93">Test All Supported HTTP Request's Methods</a></li>
 </ul>
 </div>
 </div>
@@ -33,13 +25,15 @@ Just examining by testing.
 </p>
 </div>
 </div>
+
+
 <div id="outline-container-org85e2833" class="outline-2">
 <h2 id="org85e2833">Prerequisites</h2>
 <div class="outline-text-2" id="text-org85e2833">
-</div>
-<div id="outline-container-orga04d6bb" class="outline-3">
-<h3 id="orga04d6bb">The App <b>&amp;</b> the Test Suite in a Single Block</h3>
-<div class="outline-text-3" id="text-orga04d6bb">
+<p>
+The App <b>&amp;</b> the Test Suite in a Single Block
+</p>
+
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> unittest
 <span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
@@ -94,7 +88,7 @@ OK
 </pre>
 </div>
 </div>
-</div>
+
 
 <div id="outline-container-orgd7cdfa7" class="outline-2">
 <h2 id="orgd7cdfa7">TestClient module</h2>
@@ -261,288 +255,7 @@ part of the FastAPI testing workflow.
 </div>
 </div>
 
-<div id="outline-container-orgf9cb8bf" class="outline-2">
-<h2 id="orgf9cb8bf">All Supported HTTP Request's Methods</h2>
-<div class="outline-text-2" id="text-orgf9cb8bf">
-<p>
-I've wrapped the app code and the test suite into a single Babel code snippet:
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">import</span> unittest
-<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
-<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
-<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
 
-
-<span class="org-variable-name">app</span> = FastAPI()
-
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
-
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">The Test Suite</span>
-<span class="org-comment-delimiter">#</span>
-client = TestClient(app)
-
-<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
-
-unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
-</pre>
-</div>
-
-<p>
-and it works. Now I want to:
-</p>
-
-<p>
-extend the basic FastAPI application to use all HTTP request methods
-(GET, PUT, POST, DELETE, PATCH, HEAD, OPTIONS, TRACE);
-extend the test suite in accordion with these methods.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-markdown">
-Certainly! Let's extend the FastAPI application to support all the
-HTTP request methods (<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PATCH</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">HEAD</span><span class="org-markdown-markup">`</span>,
-<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">OPTIONS</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TRACE</span><span class="org-markdown-markup">`</span>), and also extend the test suite to test these
-endpoints.
-
-<span class="org-markdown-markup">**</span><span class="org-markdown-bold">Extended FastAPI Application</span><span class="org-markdown-markup">**</span>
-</pre>
-</div>
-</div>
-
-<div id="outline-container-org21a9d59" class="outline-3">
-<h3 id="org21a9d59">Extended FastAPI Application with All HTTP Methods</h3>
-<div class="outline-text-3" id="text-org21a9d59">
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">import</span> unittest
-<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
-<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
-<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
-
-<span class="org-variable-name">app</span> = FastAPI()
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">In-memory storage for demonstration purposes</span>
-<span class="org-variable-name">items</span> = {}
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
-
-<span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">create_item</span>(item_id: <span class="org-builtin">int</span>, item: <span class="org-builtin">dict</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"item"</span>: item}
-
-<span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: <span class="org-builtin">dict</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Error"</span>: <span class="org-string">"Item not found"</span>}, 404
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"item"</span>: item}
-
-<span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Error"</span>: <span class="org-string">"Item not found"</span>}, 404
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">del</span> items[item_id]
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Message"</span>: <span class="org-string">"Item deleted"</span>}
-
-<span class="org-type">@app.patch</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">patch_item</span>(item_id: <span class="org-builtin">int</span>, item: <span class="org-builtin">dict</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Error"</span>: <span class="org-string">"Item not found"</span>}, 404
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[item_id].update(item)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"item"</span>: items[item_id]}
-
-<span class="org-type">@app.head</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">head_item</span>(item_id: <span class="org-builtin">int</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Error"</span>: <span class="org-string">"Item not found"</span>}, 404
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items[item_id]
-
-<span class="org-type">@app.options</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">options_item</span>(item_id: <span class="org-builtin">int</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Allow"</span>: [<span class="org-string">"GET"</span>, <span class="org-string">"POST"</span>, <span class="org-string">"PUT"</span>, <span class="org-string">"DELETE"</span>, <span class="org-string">"PATCH"</span>, <span class="org-string">"HEAD"</span>, <span class="org-string">"OPTIONS"</span>, <span class="org-string">"TRACE"</span>]}
-
-<span class="org-type">@app.trace</span>(<span class="org-string">"/items/"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">trace_items</span>():
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Message"</span>: <span class="org-string">"TRACE endpoint"</span>}
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">The Test Suite</span>
-<span class="org-comment-delimiter">#</span>
-client = TestClient(app)
-
-<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_create_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_update_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.put(<span class="org-string">"/items/"</span>, json={<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.put(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Updated Item1"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Updated Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.delete(<span class="org-string">"/items/1"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Message"</span>: <span class="org-string">"Item deleted"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_patch_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.patch(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"description"</span>: <span class="org-string">"Updated description"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>, <span class="org-string">"description"</span>: <span class="org-string">"Updated description"</span>}})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_head_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/"</span>, json={<span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.head(<span class="org-string">"/items/1"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_options_item</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.options(<span class="org-string">"/items/1"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Allow"</span>: [<span class="org-string">"GET"</span>, <span class="org-string">"POST"</span>, <span class="org-string">"PUT"</span>, <span class="org-string">"DELETE"</span>, <span class="org-string">"PATCH"</span>, <span class="org-string">"HEAD"</span>, <span class="org-string">"OPTIONS"</span>, <span class="org-string">"TRACE"</span>]})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_trace_items</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.request(<span class="org-string">"TRACE"</span>, <span class="org-string">"/items/"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Message"</span>: <span class="org-string">"TRACE endpoint"</span>})
-
-
-unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
-</pre>
-</div>
-
-<pre class="example" id="org9aa7d5d">
-FF..F....F
-======================================================================
-FAIL: test_create_item (__main__.TestFastAPI.test_create_item)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/tmp/babel-C8lSuP/python-7NQNHi", line 84, in test_create_item
-    self.assertEqual(response.status_code, 200)
-AssertionError: 422 != 200
-
-======================================================================
-FAIL: test_delete_item (__main__.TestFastAPI.test_delete_item)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/tmp/babel-C8lSuP/python-7NQNHi", line 97, in test_delete_item
-    self.assertDictEqual(response.json(), {"Message": "Item deleted"})
-AssertionError: [{'Error': 'Item not found'}, 404] is not an instance of &lt;class 'dict'&gt; : First argument is not a dictionary
-
-======================================================================
-FAIL: test_patch_item (__main__.TestFastAPI.test_patch_item)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/tmp/babel-C8lSuP/python-7NQNHi", line 103, in test_patch_item
-    self.assertDictEqual(response.json(), {"item_id": 1, "item": {"name": "Item1", "description": "Updated description"}})
-AssertionError: [{'Error': 'Item not found'}, 404] is not an instance of &lt;class 'dict'&gt; : First argument is not a dictionary
-
-======================================================================
-FAIL: test_update_item (__main__.TestFastAPI.test_update_item)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/tmp/babel-C8lSuP/python-7NQNHi", line 91, in test_update_item
-    self.assertDictEqual(response.json(), {"item_id": 1, "item": {"name": "Updated Item1"}})
-AssertionError: [{'Error': 'Item not found'}, 404] is not an instance of &lt;class 'dict'&gt; : First argument is not a dictionary
-
-----------------------------------------------------------------------
-Ran 10 tests in 0.037s
-
-FAILED (failures=4)
-</pre>
-
-
-<p>
-### Explanation of the Extended Application
-</p>
-
-<ul class="org-ul">
-<li><b><b>`GET /items/{item_id}`</b></b>: Retrieves an item with optional query parameters.</li>
-<li><b><b>`POST /items/`</b></b>: Creates a new item.</li>
-<li><b><b>`PUT /items/{item_id}`</b></b>: Updates an existing item.</li>
-<li><b><b>`DELETE /items/{item_id}`</b></b>: Deletes an item.</li>
-<li><b><b>`PATCH /items/{item_id}`</b></b>: Partially updates an item.</li>
-<li><b><b>`HEAD /items/{item_id}`</b></b>: Retrieves metadata for an item.</li>
-<li><b><b>`OPTIONS /items/{item_id}`</b></b>: Lists allowed methods.</li>
-<li><b><b>`TRACE /items/`</b></b>: Echoes the received request, used for diagnostics.</li>
-</ul>
-
-<p>
-### Explanation of the Extended Test Suite
-</p>
-
-<ul class="org-ul">
-<li><b><b>Test for Each HTTP Method</b></b>: Each test validates the respective HTTP method:
-<ul class="org-ul">
-<li>`test_read_root`: Tests the root `GET /` endpoint.</li>
-<li>`test_read_item_with_query` and `test_read_item_without_query`: Test the `GET /items/{item_id}` endpoint with and without query parameters.</li>
-<li>`test_create_item`: Tests the `POST /items/` endpoint.</li>
-<li>`test_update_item`: Tests the `PUT /items/{item_id}` endpoint.</li>
-<li>`test_delete_item`: Tests the `DELETE /items/{item_id}` endpoint.</li>
-<li>`test_patch_item`: Tests the `PATCH /items/{item_id}` endpoint.</li>
-<li>`test_head_item`: Tests the `HEAD /items/{item_id}` endpoint.</li>
-<li>`test_options_item`: Tests the `OPTIONS /items/{item_id}` endpoint.</li>
-<li>`test_trace_items`: Tests the `TRACE /items/` endpoint.</li>
-</ul></li>
-</ul>
-
-<p>
-This setup ensures your FastAPI application correctly handles all
-major HTTP request methods and that the corresponding endpoints
-function as expected. You can simply run this code block in your
-Org-mode file, and it will execute the tests for the extended FastAPI
-application.
-</p>
-</div>
-</div>
+<div id="outline-container-orgdc0aa93" class="outline-2">
+<h2 id="orgdc0aa93">Test All Supported HTTP Request's Methods</h2>
 </div>
