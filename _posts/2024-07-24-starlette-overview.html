@@ -1,0 +1,299 @@
+---
+layout: page
+title: Starlette General Concepts
+tagline: " brief overivew"
+permalink: /python/starlette-bief-overview.html
+categories: [Starlette, Python]
+tags: [overview]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9c2805a">Preamble</a></li>
+<li><a href="#org91f5e78">Main Features</a>
+<ul>
+<li><a href="#orga3df33b">ASGI Compatibility:</a></li>
+<li><a href="#orgbad6b1b">Routing:</a></li>
+<li><a href="#org68ad565">Request and Response Middleware:</a></li>
+<li><a href="#org287c48f">Session Management:</a></li>
+<li><a href="#org9e43565">WebSockets:</a></li>
+<li><a href="#orgcffaa7c">Static Files:</a></li>
+<li><a href="#org8249458">Background Tasks:</a></li>
+<li><a href="#orgf38ce52">GraphQL:</a></li>
+<li><a href="#orge69be5a">Testing:</a></li>
+<li><a href="#org0cac59f">CORS:</a></li>
+</ul>
+</li>
+<li><a href="#orgff1057b">Underlying Concepts of Starlette:</a>
+<ul>
+<li><a href="#org5737b4c">ASGI:</a></li>
+<li><a href="#org8e92aee">Event Loop:</a></li>
+<li><a href="#orge2abed3">Dependency Injection:</a></li>
+<li><a href="#org4dc9e06">ACID Transactions:</a></li>
+<li><a href="#orga46eb71">FastAPI Integration:</a></li>
+</ul>
+</li>
+<li><a href="#org35eed56">Example Code:</a></li>
+<li><a href="#org5f7bf55">References and Further Reading:</a></li>
+<li><a href="#org5e5362e">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9c2805a" class="outline-2">
+<h2 id="org9c2805a">Preamble</h2>
+<div class="outline-text-2" id="text-org9c2805a">
+<blockquote>
+<p>
+Starlette is a lightweight ASGI (Asynchronous Server Gateway
+Interface) framework/toolkit, which is ideal for building async web
+services in Python.
+</p>
+</blockquote>
+
+
+<p>
+Starlette is an impressive <i>and minimalist</i> ASGI framework designed
+for building efficient and high-performance web services in
+Python.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org91f5e78" class="outline-2">
+<h2 id="org91f5e78">Main Features</h2>
+<div class="outline-text-2" id="text-org91f5e78">
+</div>
+<div id="outline-container-orga3df33b" class="outline-3">
+<h3 id="orga3df33b">ASGI Compatibility:</h3>
+<div class="outline-text-3" id="text-orga3df33b">
+<p>
+<b>Asynchronous Server Gateway Interface (ASGI)</b>: Starlette is built on
+the ASGI specification which provides an interface between
+asynchronous Python web servers and web applications or
+frameworks. It’s designed to be fully asynchronous and capable of
+handling a wide range of networking interfaces like HTTP, WebSockets,
+and more.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbad6b1b" class="outline-3">
+<h3 id="orgbad6b1b">Routing:</h3>
+<div class="outline-text-3" id="text-orgbad6b1b">
+<ul class="org-ul">
+<li><b>URL Routing</b>: Starlette provides a dynamic and flexible
+routing system for matching URL paths to Python functions. This
+feature supports path parameters, converters, and custom routes.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org68ad565" class="outline-3">
+<h3 id="org68ad565">Request and Response Middleware:</h3>
+<div class="outline-text-3" id="text-org68ad565">
+<ul class="org-ul">
+<li><b>Middleware</b>: Starlette supports middleware for request and
+response interception. This allows for tasks like authentication,
+logging, and error handling before the actual endpoint handler is
+invoked.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org287c48f" class="outline-3">
+<h3 id="org287c48f">Session Management:</h3>
+<div class="outline-text-3" id="text-org287c48f">
+<ul class="org-ul">
+<li><b>Sessions and Cookies</b>: It includes session and cookie
+management systems, allowing secure and stateful interactions
+with clients.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9e43565" class="outline-3">
+<h3 id="org9e43565">WebSockets:</h3>
+<div class="outline-text-3" id="text-org9e43565">
+<ul class="org-ul">
+<li><b>WebSocket Support</b>: Starlette has native support for handling
+WebSocket connections, enabling real-time communication between
+the client and server.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcffaa7c" class="outline-3">
+<h3 id="orgcffaa7c">Static Files:</h3>
+<div class="outline-text-3" id="text-orgcffaa7c">
+<ul class="org-ul">
+<li><b>Static Files Handling</b>: Starlette can serve static files
+including HTML, CSS, JavaScript, and other assets, making it easy
+to serve front-end applications or static content.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8249458" class="outline-3">
+<h3 id="org8249458">Background Tasks:</h3>
+<div class="outline-text-3" id="text-org8249458">
+<ul class="org-ul">
+<li><b>Background Task Management</b>: Easily manage background tasks
+allowing for deferred, out-of-band processing of time-consuming
+operations.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf38ce52" class="outline-3">
+<h3 id="orgf38ce52">GraphQL:</h3>
+<div class="outline-text-3" id="text-orgf38ce52">
+<ul class="org-ul">
+<li><b>GraphQL Integration</b>: It provides integration with GraphQL,
+supporting advanced API development paradigms.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge69be5a" class="outline-3">
+<h3 id="orge69be5a">Testing:</h3>
+<div class="outline-text-3" id="text-orge69be5a">
+<ul class="org-ul">
+<li><b>TestClient</b>: Starlette includes tools for testing
+applications, including a `TestClient` for writing unit tests
+and integration tests.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0cac59f" class="outline-3">
+<h3 id="org0cac59f">CORS:</h3>
+<div class="outline-text-3" id="text-org0cac59f">
+<ul class="org-ul">
+<li><b>Cross-Origin Resource Sharing (CORS)</b>: Built-in middleware
+supports configuring CORS policies for secure cross-origin
+requests.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgff1057b" class="outline-2">
+<h2 id="orgff1057b">Underlying Concepts of Starlette:</h2>
+<div class="outline-text-2" id="text-orgff1057b">
+</div>
+<div id="outline-container-org5737b4c" class="outline-3">
+<h3 id="org5737b4c">ASGI:</h3>
+<div class="outline-text-3" id="text-org5737b4c">
+<ul class="org-ul">
+<li>The ASGI standard allows for an advanced concurrency model and
+greater scalability than WSGI (Web Server Gateway
+Interface). Starlette fully leverages ASGI by supporting async
+programming, making it ideal for I/O-bound and high-concurrency
+applications.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e92aee" class="outline-3">
+<h3 id="org8e92aee">Event Loop:</h3>
+<div class="outline-text-3" id="text-org8e92aee">
+<ul class="org-ul">
+<li>At the core of Starlette's asynchronous capabilities is the event
+loop provided by Python's `asyncio` library. It allows Starlette
+to handle many simultaneous connections efficiently by managing
+asynchronous tasks.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge2abed3" class="outline-3">
+<h3 id="orge2abed3">Dependency Injection:</h3>
+<div class="outline-text-3" id="text-orge2abed3">
+<ul class="org-ul">
+<li>Starlette’s design promotes clean architecture and separation of
+concerns by supporting dependency injection patterns. This aids
+in creating modular and testable code.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4dc9e06" class="outline-3">
+<h3 id="org4dc9e06">ACID Transactions:</h3>
+<div class="outline-text-3" id="text-org4dc9e06">
+<ul class="org-ul">
+<li>Starlette can be used with databases via <i>async ORMs that support
+ACID transactions</i>, providing transactional integrity and
+durability.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga46eb71" class="outline-3">
+<h3 id="orga46eb71">FastAPI Integration:</h3>
+<div class="outline-text-3" id="text-orga46eb71">
+<ul class="org-ul">
+<li>Starlette is also foundational for FastAPI, another popular web
+framework for building modern APIs with Python 3.6+ based on
+standard Python-type hints. By understanding Starlette, one
+inherently grasps significant parts of FastAPI as well.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org35eed56" class="outline-2">
+<h2 id="org35eed56">Example Code:</h2>
+<div class="outline-text-2" id="text-org35eed56">
+<p>
+Here's a simple example to illustrate the usage of Starlette:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> starlette.applications <span class="org-keyword">import</span> Starlette
+<span class="org-keyword">from</span> starlette.responses <span class="org-keyword">import</span> JSONResponse
+<span class="org-keyword">from</span> starlette.routing <span class="org-keyword">import</span> Route
+<span class="org-keyword">import</span> uvicorn
+
+
+<span class="org-keyword">async def</span> <span class="org-function-name">homepage</span>(request):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> JSONResponse({<span class="org-string">'hello'</span>: <span class="org-string">'world'</span>})
+
+<span class="org-variable-name">routes</span> = [Route(<span class="org-string">'/'</span>, homepage), ]
+
+<span class="org-variable-name">app</span> = Starlette(debug=<span class="org-constant">True</span>, routes=routes)
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   uvicorn.run(app, host=<span class="org-string">'127.0.0.1'</span>, port=8000)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5f7bf55" class="outline-2">
+<h2 id="org5f7bf55">References and Further Reading:</h2>
+<div class="outline-text-2" id="text-org5f7bf55">
+<ul class="org-ul">
+<li><a href="https://www.starlette.io/">Starlette Documentation</a></li>
+<li><a href="https://asgi.readthedocs.io/en/latest/">ASGI Specification</a></li>
+<li><a href="https://fastapi.tiangolo.com/">FastAPI Documentation</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5e5362e" class="outline-2">
+<h2 id="org5e5362e">Conclusion</h2>
+<div class="outline-text-2" id="text-org5e5362e">
+<p>
+Starlette's minimalistic yet powerful design makes it a robust choice
+for creating async-based web services in Python, whether as a
+standalone framework or as part of FastAPI for more feature-rich
+applications.
+</p>
+</div>
+</div>
