@@ -37,6 +37,44 @@ tags: [overview]
 </li>
 </ul>
 </li>
+<li><a href="#org5a06325">What is the purpose of usage of FastAPI?</a>
+<ul>
+<li><a href="#org8e5febf"><b>High Performance</b>:</a></li>
+<li><a href="#org60cef72">Developer Productivity:</a></li>
+<li><a href="#org7042733">Ease of Use:</a></li>
+<li><a href="#orgf90a4d3">Data Validation and Serialization:</a></li>
+<li><a href="#orgd36d1f1">Asynchronous Support:</a></li>
+<li><a href="#orgb29c4c3">Dependency Injection:</a></li>
+<li><a href="#orgb0dbf0b">Interactive API Documentation:</a></li>
+<li><a href="#org355ebaf">Security:</a></li>
+<li><a href="#orgc819e43">Example Purposes</a></li>
+<li><a href="#org0b21e43">Example of FastAPI Usage</a></li>
+<li><a href="#org7e94918">Summary</a></li>
+</ul>
+</li>
+<li><a href="#org6ae96ea">What is Starlette framework and how it used in FastAPI?</a>
+<ul>
+<li><a href="#org2ce3255">ASGI Support:</a></li>
+<li><a href="#org8df5df2">Routing:</a></li>
+<li><a href="#orgb38b3cc">Middleware:</a></li>
+<li><a href="#org51f102e">Session Management:</a></li>
+<li><a href="#org2ec515e">Authentication:</a></li>
+<li><a href="#org018774a">WebSockets:</a></li>
+<li><a href="#org299c2ca">GraphQL:</a></li>
+<li><a href="#orgd428d09">How FastAPI Uses Starlette</a></li>
+<li><a href="#org0fd209e">Example: Using FastAPI with Starlette Features</a></li>
+<li><a href="#orgd0d6cac">Explanation</a></li>
+</ul>
+</li>
+<li><a href="#orgb09cfdf">What is Pydantic and how FastAPI uses it for the data parts?</a>
+<ul>
+<li><a href="#orgea50c27">Key Features of Pydantic</a></li>
+<li><a href="#orgd462525">How FastAPI Uses Pydantic</a></li>
+<li><a href="#orgd88b7da">Example: Using Pydantic with FastAPI</a></li>
+<li><a href="#orgeba0df1">Explanation</a></li>
+<li><a href="#org1004dd9">Summary</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -619,6 +657,653 @@ This setup will help you develop and test a RESTful API using FastAPI
 and <code>unittest</code> within Emacs efficiently.
 </p>
 </div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a06325" class="outline-2">
+<h2 id="org5a06325">What is the purpose of usage of FastAPI?</h2>
+<div class="outline-text-2" id="text-org5a06325">
+<p>
+The purpose of using FastAPI is to provide a high-performance,
+easy-to-use web framework for building APIs with Python. It is
+designed to make the development of web services efficient and
+enjoyable, offering several benefits that address common needs and
+challenges faced by developers. Here are some key purposes and
+advantages of FastAPI:
+</p>
+
+<p>
+<b>Key Purposes and Advantages of FastAPI</b>
+</p>
+</div>
+
+<div id="outline-container-org8e5febf" class="outline-3">
+<h3 id="org8e5febf"><b>High Performance</b>:</h3>
+<div class="outline-text-3" id="text-org8e5febf">
+<ul class="org-ul">
+<li>FastAPI is built on Starlette for the web parts and Pydantic for
+the data parts, both of which are extremely performant
+frameworks.
+<ul class="org-ul">
+<li>It is designed to handle a large number of simultaneous requests
+efficiently, making it suitable for high-load scenarios.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org60cef72" class="outline-3">
+<h3 id="org60cef72">Developer Productivity:</h3>
+<div class="outline-text-3" id="text-org60cef72">
+<ul class="org-ul">
+<li>FastAPI uses Python’s type hints to automatically generate
+validation, serialization, and documentation, reducing
+boilerplate code and speeding up development.</li>
+<li>The automatic generation of OpenAPI and JSON Schema documentation
+helps in creating self-documenting APIs, which can be explored
+using interactive tools like Swagger UI and ReDoc.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7042733" class="outline-3">
+<h3 id="org7042733">Ease of Use:</h3>
+<div class="outline-text-3" id="text-org7042733">
+<ul class="org-ul">
+<li>The framework is designed to be intuitive, with a clear and
+concise API, making it easy for beginners to pick up and for
+experienced developers to be productive quickly.</li>
+<li>FastAPI provides a straightforward way to define both synchronous
+and asynchronous endpoints using Python’s native async/await
+syntax.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf90a4d3" class="outline-3">
+<h3 id="orgf90a4d3">Data Validation and Serialization:</h3>
+<div class="outline-text-3" id="text-orgf90a4d3">
+<ul class="org-ul">
+<li>Using Pydantic, FastAPI ensures that the data entering your API
+meets the defined type constraints. This prevents many common
+bugs related to data handling.</li>
+<li>It automatically handles JSON serialization and deserialization, simplifying the process of working with JSON data.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd36d1f1" class="outline-3">
+<h3 id="orgd36d1f1">Asynchronous Support:</h3>
+<div class="outline-text-3" id="text-orgd36d1f1">
+<ul class="org-ul">
+<li>Built-in support for asynchronous programming allows for
+non-blocking operations, which is particularly useful for
+I/O-bound tasks like database queries, network requests, etc.</li>
+<li>FastAPI makes it easy to convert from synchronous to asynchronous
+applications, leveraging Python's <code>async</code> and <code>await</code> keywords.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb29c4c3" class="outline-3">
+<h3 id="orgb29c4c3">Dependency Injection:</h3>
+<div class="outline-text-3" id="text-orgb29c4c3">
+<ul class="org-ul">
+<li>FastAPI includes a simple but powerful dependency injection
+system that allows you to manage and inject dependencies easily.</li>
+<li>This promotes clean, modular code and makes it easier to manage
+cross-cutting concerns like database connections, authentication,
+etc.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb0dbf0b" class="outline-3">
+<h3 id="orgb0dbf0b">Interactive API Documentation:</h3>
+<div class="outline-text-3" id="text-orgb0dbf0b">
+<ul class="org-ul">
+<li>By default, FastAPI provides interactive API documentation
+through Swagger UI and ReDoc. This makes testing and exploring
+the API straightforward and comprehensive.</li>
+<li>These tools are invaluable for developers, allowing them to
+interact with endpoints directly from the browser.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org355ebaf" class="outline-3">
+<h3 id="org355ebaf">Security:</h3>
+<div class="outline-text-3" id="text-org355ebaf">
+<ul class="org-ul">
+<li>FastAPI includes easy-to-use tools for handling security,
+including OAuth2, JWT tokens, and scopes.</li>
+<li>Security dependencies can be included with the same dependency
+injection system, keeping the security implementations clean and
+manageable.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc819e43" class="outline-3">
+<h3 id="orgc819e43">Example Purposes</h3>
+<div class="outline-text-3" id="text-orgc819e43">
+<p>
+Here are some common use cases where FastAPI is particularly advantageous:
+</p>
+
+<ul class="org-ul">
+<li><b>Microservices</b>: Building microservices that handle JSON payloads
+efficiently.</li>
+<li><b>Data-Driven APIs</b>: Creating RESTful APIs to interface with data
+stores (SQL or NoSQL databases).</li>
+<li><b>ML and AI</b>: Serving machine learning models or AI services through
+an API.</li>
+<li><b>WebSockets</b>: Implementing real-time communication features (like
+chat applications) with WebSockets support.</li>
+<li><b>Prototyping</b>: Quickly prototyping and iterating over API designs
+before final implementation.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0b21e43" class="outline-3">
+<h3 id="org0b21e43">Example of FastAPI Usage</h3>
+<div class="outline-text-3" id="text-org0b21e43">
+<p>
+Below is a simple example to illustrate how FastAPI can be used to
+create a RESTful API:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> List
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">price</span>: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-variable-name">items</span> = []
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/"</span>, response_model=List[Item])
+<span class="org-keyword">async def</span> <span class="org-function-name">read_items</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items.append(item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items[item_id]
+
+<span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> items.pop(item_id)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7e94918" class="outline-3">
+<h3 id="org7e94918">Summary</h3>
+<div class="outline-text-3" id="text-org7e94918">
+<p>
+In summary, FastAPI is used to create fast, robust, and maintainable
+APIs with minimal effort, high performance, and excellent developer
+experience. It is particularly suitable for modern web applications,
+microservices, and tasks requiring efficient I/O operations.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ae96ea" class="outline-2">
+<h2 id="org6ae96ea">What is Starlette framework and how it used in FastAPI?</h2>
+<div class="outline-text-2" id="text-org6ae96ea">
+<p>
+<b>Starlette</b> is an ASGI (Asynchronous Server Gateway Interface)
+framework designed for building web applications. It's lightweight and
+focuses on providing the essential tools needed for web applications,
+such as routing, middleware, and session handling, among other
+features. FastAPI leverages Starlette for its web server parts,
+meaning that FastAPI extends Starlette and incorporates it as the
+underlying framework for handling HTTP requests and ASGI applications.
+</p>
+
+<p>
+<b>Key Features of Starlette</b>
+</p>
+</div>
+
+<div id="outline-container-org2ce3255" class="outline-3">
+<h3 id="org2ce3255">ASGI Support:</h3>
+<div class="outline-text-3" id="text-org2ce3255">
+<p>
+Starlette is built to support ASGI (the asynchronous successor to
+WSGI). This enables asynchronous request handling, allowing for better
+performance in I/O-bound and concurrent operations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8df5df2" class="outline-3">
+<h3 id="org8df5df2">Routing:</h3>
+<div class="outline-text-3" id="text-org8df5df2">
+<p>
+Starlette provides an easy and powerful routg mechanism which lets you
+map URLs to endpoints (functions or class-based views).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb38b3cc" class="outline-3">
+<h3 id="orgb38b3cc">Middleware:</h3>
+<div class="outline-text-3" id="text-orgb38b3cc">
+<p>
+Starlette supports middleware, which are hooks that intercept
+requests and responses at different stages for various purposes
+(e.g., logging, security checks, etc.).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org51f102e" class="outline-3">
+<h3 id="org51f102e">Session Management:</h3>
+<div class="outline-text-3" id="text-org51f102e">
+<p>
+Starlette includes built-in support for session management, which
+is essential for maintaining user states.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2ec515e" class="outline-3">
+<h3 id="org2ec515e">Authentication:</h3>
+<div class="outline-text-3" id="text-org2ec515e">
+<p>
+Starlette provides authentication tools and utility functions,
+making it easy to implement user authentication and authorization.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org018774a" class="outline-3">
+<h3 id="org018774a">WebSockets:</h3>
+<div class="outline-text-3" id="text-org018774a">
+<p>
+Starlette has built-in support for WebSockets, which is useful for
+real-time, bidirectional communication between clients and servers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org299c2ca" class="outline-3">
+<h3 id="org299c2ca">GraphQL:</h3>
+<div class="outline-text-3" id="text-org299c2ca">
+<p>
+Starlette supports GraphQL via integration with libraries such as
+Graphene, making it flexible for various API paradigms.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd428d09" class="outline-3">
+<h3 id="orgd428d09">How FastAPI Uses Starlette</h3>
+<div class="outline-text-3" id="text-orgd428d09">
+<p>
+FastAPI builds on Starlette to provide a more comprehensive framework
+specifically aimed at creating APIs with Python. The key
+functionalities that FastAPI inherits from Starlette and expands upon
+include:
+</p>
+
+<ul class="org-ul">
+<li><b>Routing</b>: FastAPI uses Starlette's routing capabilities but adds
+features for parameterized routes, path parameters, and dependency
+injection.</li>
+<li><b>Middleware</b>: FastAPI fully supports Starlette's middleware
+functionalities and adds its own set of middleware for tasks like
+request validation and security.</li>
+<li><b>Requests and Responses</b>: FastAPI extends the request and response
+handling to include data validation, automatic
+serialization/deserialization using Pydantic.</li>
+<li><b>WebSockets and Background Tasks</b>: FastAPI supports WebSockets and
+background tasks via Starlette, making it easier to build real-time
+applications.</li>
+<li><b>Exception Handling</b>: FastAPI uses Starlette's exception handling
+mechanisms, making it simple to define custom error responses.</li>
+<li><b>Static Files</b>: FastAPI can serve static files through Starlette's
+static file serving tools.</li>
+</ul>
+
+<p>
+In essence, FastAPI extends Starlette's capabilities with additional
+layers of abstraction that make it easier to build APIs, focusing
+mainly on rapid development and type safety.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fd209e" class="outline-3">
+<h3 id="org0fd209e">Example: Using FastAPI with Starlette Features</h3>
+<div class="outline-text-3" id="text-org0fd209e">
+<p>
+Here's a simple example demonstrating how FastAPI utilizes some of Starlette's features:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI, HTTPException, Request
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+<span class="org-keyword">from</span> starlette.middleware.sessions <span class="org-keyword">import</span> SessionMiddleware
+<span class="org-keyword">from</span> starlette.staticfiles <span class="org-keyword">import</span> StaticFiles
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Adding session middleware</span>
+app.add_middleware(SessionMiddleware, secret_key=<span class="org-string">"!secret"</span>)
+
+<span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   price: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">In-memory items storage</span>
+items = []
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">read_items</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items.append(item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items[item_id]
+
+<span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items.pop(item_id)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Mounting static files, for example, serving files from 'static' directory</span>
+app.mount(<span class="org-string">"/static"</span>, StaticFiles(directory=<span class="org-string">"static"</span>), name=<span class="org-string">"static"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Example of middleware that logs requests</span>
+<span class="org-type">@app.middleware</span>(<span class="org-string">"http"</span>)
+<span class="org-keyword">async def</span> <span class="org-function-name">log_requests</span>(request: Request, call_next):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">print</span>(f<span class="org-string">"Request URL: </span>{request.url}<span class="org-string">"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = <span class="org-keyword">await</span> call_next(request)
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> response
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd0d6cac" class="outline-3">
+<h3 id="orgd0d6cac">Explanation</h3>
+<div class="outline-text-3" id="text-orgd0d6cac">
+<ol class="org-ol">
+<li><b>Session Middleware</b>:
+<ul class="org-ul">
+<li>We add a session middleware to handle session management, using
+Starlette's <code>SessionMiddleware</code>.</li>
+</ul></li>
+
+<li><b>CRUD Operations</b>:
+<ul class="org-ul">
+<li>Demonstrates basic CRUD operations on items, using FastAPI’s
+routing and data validation.</li>
+</ul></li>
+
+<li><b>Static Files</b>:
+<ul class="org-ul">
+<li>Serves static files using Starlette’s <code>StaticFiles</code>.</li>
+</ul></li>
+
+<li><b>Custom Middleware</b>:
+<ul class="org-ul">
+<li>Example of logging middleware that prints the URL of incoming
+requests, showcasing how easy it is to implement custom
+middleware.</li>
+</ul></li>
+</ol>
+
+<p>
+By combining FastAPI with the robust features of Starlette, you can
+efficiently build scalable and high-performance web
+applications. FastAPI not only makes it easier but also ensures that
+you adhere to best practices and modern web standards.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgb09cfdf" class="outline-2">
+<h2 id="orgb09cfdf">What is Pydantic and how FastAPI uses it for the data parts?</h2>
+<div class="outline-text-2" id="text-orgb09cfdf">
+<p>
+<b>Pydantic</b> is a data validation and parsing library for Python. It
+uses Python type annotations to perform data validation and type
+coercion, making it easy to ensure that input data conforms to
+expected types and structures. Pydantic is highly efficient and
+provides a clean, declarative way to define data models.
+</p>
+</div>
+
+<div id="outline-container-orgea50c27" class="outline-3">
+<h3 id="orgea50c27">Key Features of Pydantic</h3>
+<div class="outline-text-3" id="text-orgea50c27">
+<ol class="org-ol">
+<li><b>Type Validation</b>:
+<ul class="org-ul">
+<li>Pydantic validates the data against the types specified in the
+class annotations. If the data does not match the expected type,
+Pydantic will raise a validation error.</li>
+</ul></li>
+
+<li><b>Type Coercion</b>:
+<ul class="org-ul">
+<li>Pydantic can coerce different types into the expected format if
+they are convertible. For example, a string that represents an
+integer can be automatically converted to an integer type.</li>
+</ul></li>
+
+<li><b>Nested Models</b>:
+<ul class="org-ul">
+<li>Pydantic supports nested data models, allowing complex data
+validation and serialization to be managed hierarchically.</li>
+</ul></li>
+
+<li><b>Data Serialization and Deserialization</b>:
+<ul class="org-ul">
+<li>Pydantic can serialize and deserialize data easily, converting
+Python objects into JSON-compatible dictionaries and vice versa.</li>
+</ul></li>
+
+<li><b>Default Values</b>:
+<ul class="org-ul">
+<li>You can specify default values for fields in your models, which
+will be used if the corresponding data is missing.</li>
+</ul></li>
+
+<li><b>Custom Validation</b>:
+<ul class="org-ul">
+<li>Pydantic allows for custom validation methods, enabling more
+complex validation logic where necessary.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd462525" class="outline-3">
+<h3 id="orgd462525">How FastAPI Uses Pydantic</h3>
+<div class="outline-text-3" id="text-orgd462525">
+<p>
+FastAPI integrates Pydantic to handle the data parts of the
+API. Specifically, FastAPI uses Pydantic for:
+</p>
+
+<ol class="org-ol">
+<li><b>Request Validation</b>:
+<ul class="org-ul">
+<li>FastAPI uses Pydantic models to validate the data sent in HTTP
+requests. When defining endpoints, you can specify that they
+accept Pydantic models as parameters, and FastAPI will
+automatically validate the incoming request data against these
+models.</li>
+</ul></li>
+
+<li><b>Response Serialization</b>:
+<ul class="org-ul">
+<li>When returning data from your endpoints, you can use Pydantic
+models to ensure that the response data adheres to a particular
+structure. FastAPI will serialize the response data using the
+specified Pydantic model.</li>
+</ul></li>
+
+<li><b>Automatic Documentation</b>:
+<ul class="org-ul">
+<li>Pydantic models are used to generate OpenAPI schema definitions
+automatically. This means that the request and response data
+structures are documented in the interactive API docs (Swagger UI
+and ReDoc) without any additional effort from the developer.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd88b7da" class="outline-3">
+<h3 id="orgd88b7da">Example: Using Pydantic with FastAPI</h3>
+<div class="outline-text-3" id="text-orgd88b7da">
+<p>
+Here's a simple example to illustrate how FastAPI uses Pydantic models
+for request validation and response serialization:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI, HTTPException
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> List
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define a Pydantic model for an Item</span>
+<span class="org-keyword">class</span> <span class="org-type">Item</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">name</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span> = <span class="org-constant">None</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">price</span>: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tax: <span class="org-builtin">float</span> = <span class="org-constant">None</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">In-memory items storage</span>
+<span class="org-variable-name">items</span> = []
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/items/"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">create_item</span>(item: Item):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   Create a new item.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   The request body is validated against the ~Item~ Pydantic model.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   """</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items.append(item)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> item
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/"</span>, response_model=List[Item])
+<span class="org-keyword">async def</span> <span class="org-function-name">read_items</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   Retrieve all items.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   The response body is serialized using the ~Item~ Pydantic model.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   """</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> items
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>, response_model=Item)
+<span class="org-keyword">async def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-doc">"""</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   Retrieve a specific item by ID.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   The response body is serialized using the ~Item~ Pydantic model.</span>
+<span class="org-doc"><span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span></span><span class="org-doc">   """</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id &gt;= <span class="org-builtin">len</span>(items) <span class="org-keyword">or</span> item_id &lt; 0:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> items[item_id]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeba0df1" class="outline-3">
+<h3 id="orgeba0df1">Explanation</h3>
+<div class="outline-text-3" id="text-orgeba0df1">
+<ol class="org-ol">
+<li><b>Request Validation</b>:
+<ul class="org-ul">
+<li>The <code>create_item</code> endpoint takes an <code>Item</code> model as a
+parameter. FastAPI uses the Pydantic model to validate the data
+in the POST request body. If the data does not conform to the
+<code>Item</code> model, FastAPI returns a 422 Unprocessable Entity response
+with details about the validation errors.</li>
+</ul></li>
+
+<li><b>Response Serialization</b>:
+<ul class="org-ul">
+<li>The <code>read_items</code> and <code>read_item</code> endpoints return data that is
+automatically serialized using the <code>Item</code> Pydantic model. This
+ensures that the response data conforms to the expected
+structure.</li>
+</ul></li>
+
+<li><b>Automatic Documentation</b>:
+<ul class="org-ul">
+<li>Pydantic models used in request bodies and response models are
+automatically included in the OpenAPI schema generated by
+FastAPI. This results in detailed, interactive API documentation.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1004dd9" class="outline-3">
+<h3 id="org1004dd9">Summary</h3>
+<div class="outline-text-3" id="text-org1004dd9">
+<p>
+<b>Pydantic</b> is a powerful tool for data validation and serialization in
+Python. FastAPI leverages Pydantic to handle the data validation and
+serialization parts of the API seamlessly. This makes FastAPI not only
+high-performance but also developer-friendly, enabling rapid
+development of robust and reliable APIs.  #+end_src
+</p>
 </div>
 </div>
 </div>
