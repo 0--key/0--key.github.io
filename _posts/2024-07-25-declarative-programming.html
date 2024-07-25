@@ -1,0 +1,342 @@
+---
+layout: page
+title: Declarative Programming
+tagline: " trust but verify"
+permalink: /python/declarative-programming.html
+categories: [FastAPI, Python, Declarative Programming, OpenAI]
+tags: [intro]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org309141b">Preface</a>
+<ul>
+<li><a href="#orgbddeacb">Definition of DS</a></li>
+<li><a href="#org088cdac">Characteristics of DS</a></li>
+<li><a href="#orgb578db5">Definition of IS</a></li>
+<li><a href="#orgd41a53e">Characteristics of IS</a></li>
+<li><a href="#org8e949ff">Stirring them Up!</a></li>
+</ul>
+</li>
+<li><a href="#org4888c35">HTTP Methods</a>
+<ul>
+<li><a href="#orgf7b493d">Question</a></li>
+<li><a href="#orge2457b4">Answer</a>
+<ul>
+<li><a href="#org0ed09b8">Code</a></li>
+<li><a href="#orgf7d5d83">Explanation of the Extended Application</a></li>
+<li><a href="#org7f46e7c">Explanation of the Extended Test Suite</a></li>
+<li><a href="#orga56d699">Counclusion</a></li>
+<li><a href="#org0759ff1">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org309141b" class="outline-2">
+<h2 id="org309141b">Preface</h2>
+<div class="outline-text-2" id="text-org309141b">
+<p>
+<code>OpenAI</code> opens new horizons in software development. It is now possible
+to write programs in a <i>declarative style</i> by simply describing the
+desired outcome. This approach allows developers to focus on what they
+want to achieve, rather than detailing the step-by-step instructions
+to get there. As a result, the development process becomes more
+intuitive and efficient, fostering innovation and reducing the
+complexity of coding.
+</p>
+</div>
+
+<div id="outline-container-orgbddeacb" class="outline-3">
+<h3 id="orgbddeacb">Definition of DS</h3>
+<div class="outline-text-3" id="text-orgbddeacb">
+<p>
+The <i>declarative style of programming</i> focuses on what the program
+should accomplish without explicitly specifying the steps to achieve
+that result. It describes the logic of computation without describing
+its control flow.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org088cdac" class="outline-3">
+<h3 id="org088cdac">Characteristics of DS</h3>
+<div class="outline-text-3" id="text-org088cdac">
+<ul class="org-ul">
+<li>Higher-level expression of computation;</li>
+<li>Emphasis on what to do, rather than how to do it;</li>
+<li>Often involves the use of expressions and declarations instead of
+explicit control flow.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgb578db5" class="outline-3">
+<h3 id="orgb578db5">Definition of IS</h3>
+<div class="outline-text-3" id="text-orgb578db5">
+<p>
+The imperative style of programming focuses on how to perform tasks
+using statements that change a program's state. It describes the steps
+that the computer must take to achieve a goal.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd41a53e" class="outline-3">
+<h3 id="orgd41a53e">Characteristics of IS</h3>
+<div class="outline-text-3" id="text-orgd41a53e">
+<ul class="org-ul">
+<li>Sequence of commands (instructions) to be executed;</li>
+<li>Manipulation of variables and data structures;</li>
+<li>Explicit control flow using loops, conditionals, and function
+calls.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org8e949ff" class="outline-3">
+<h3 id="org8e949ff">Stirring them Up!</h3>
+<div class="outline-text-3" id="text-org8e949ff">
+<p>
+The task is to compose a question that defines the task clearly enough
+for OpenAI to comprehend. Naturally, this requires clarity in the
+plain English definition, as well as the provision of clear and lucid
+examples. By doing so, the instructions will be more precise, ensuring
+that OpenAI can process and generate the desired outcome
+effectively. This approach not only aids comprehension but also
+enhances the overall accuracy of the solution provided.
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org4888c35" class="outline-2">
+<h2 id="org4888c35">HTTP Methods</h2>
+<div class="outline-text-2" id="text-org4888c35">
+</div>
+<div id="outline-container-orgf7b493d" class="outline-3">
+<h3 id="orgf7b493d">Question</h3>
+<div class="outline-text-3" id="text-orgf7b493d">
+<p>
+I write Python code block where I put the app and the test suite
+together in sake of clarity:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+
+
+<span class="org-variable-name">app</span> = FastAPI()
+<span class="org-variable-name">client</span> = TestClient(app)
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Method"</span>: <span class="org-string">"GET"</span>}
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPIGetMethod</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-variable-name">response</span> = client.get(<span class="org-string">"/"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Method"</span>: <span class="org-string">"GET"</span>})
+
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<pre class="example">
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+OK
+</pre>
+
+<p>
+Now I want to extend my app by adding new endpoints for POST, DELETE
+and PUT methods.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge2457b4" class="outline-3">
+<h3 id="orge2457b4">Answer</h3>
+<div class="outline-text-3" id="text-orge2457b4">
+<p>
+Certainly! Let's extend the FastAPI application to include endpoints
+for <code>POST</code>, <code>DELETE</code>, and <code>PUT</code> methods. We will also update the test
+suite to verify the functionality of these new endpoints.
+</p>
+</div>
+
+<div id="outline-container-org0ed09b8" class="outline-4">
+<h4 id="org0ed09b8">Code</h4>
+<div class="outline-text-4" id="text-org0ed09b8">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union, Dict
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI, HTTPException
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+
+<span class="org-variable-name">app</span> = FastAPI()
+<span class="org-variable-name">client</span> = TestClient(app)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">In-memory storage for demonstration purposes</span>
+<span class="org-variable-name">items</span> = {}
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Method"</span>: <span class="org-string">"GET"</span>}
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">create_item</span>(item_id: <span class="org-builtin">int</span>, item: Dict):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">in</span> items:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=400, detail=<span class="org-string">"Item already exists"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Method"</span>: <span class="org-string">"POST"</span>, <span class="org-string">"item_id"</span>: item_id, <span class="org-string">"item"</span>: item}
+
+<span class="org-type">@app.put</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">update_item</span>(item_id: <span class="org-builtin">int</span>, item: Dict):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   items[<span class="org-variable-name">item_id</span>] = item
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Method"</span>: <span class="org-string">"PUT"</span>, <span class="org-string">"item_id"</span>: item_id, <span class="org-string">"item"</span>: item}
+
+<span class="org-type">@app.delete</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">delete_item</span>(item_id: <span class="org-builtin">int</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">if</span> item_id <span class="org-keyword">not</span> <span class="org-keyword">in</span> items:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">raise</span> HTTPException(status_code=404, detail=<span class="org-string">"Item not found"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">del</span> items[item_id]
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Method"</span>: <span class="org-string">"DELETE"</span>, <span class="org-string">"item_id"</span>: item_id}
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Method"</span>: <span class="org-string">"GET"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_create_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.post(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Method"</span>: <span class="org-string">"POST"</span>, <span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>}})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_create_item_already_exists</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.post(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Item1 Duplicate"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 400)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"detail"</span>: <span class="org-string">"Item already exists"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_update_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.put(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Updated Item1"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Method"</span>: <span class="org-string">"PUT"</span>, <span class="org-string">"item_id"</span>: 1, <span class="org-string">"item"</span>: {<span class="org-string">"name"</span>: <span class="org-string">"Updated Item1"</span>}})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_update_item_not_found</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.put(<span class="org-string">"/items/999"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Non-existent Item"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 404)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"detail"</span>: <span class="org-string">"Item not found"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_item</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   client.post(<span class="org-string">"/items/1"</span>, json={<span class="org-string">"name"</span>: <span class="org-string">"Item1"</span>})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.delete(<span class="org-string">"/items/1"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Method"</span>: <span class="org-string">"DELETE"</span>, <span class="org-string">"item_id"</span>: 1})
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_delete_item_not_found</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.delete(<span class="org-string">"/items/999"</span>)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 404)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"detail"</span>: <span class="org-string">"Item not found"</span>})
+
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<pre class="example">
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.031s
+
+OK
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf7d5d83" class="outline-4">
+<h4 id="orgf7d5d83">Explanation of the Extended Application</h4>
+<div class="outline-text-4" id="text-orgf7d5d83">
+<ol class="org-ol">
+<li><b><b>Endpoints</b></b>:
+<ul class="org-ul">
+<li><code>GET /</code>: Returns a simple JSON response indicating the request method.</li>
+<li><code>POST /items/{item_id}</code>: Creates a new item with a given ID. Returns an error if the item already exists.</li>
+<li><code>PUT /items/{item_id}</code>: Updates an existing item. Returns an error if the item does not exist.</li>
+<li><code>DELETE /items/{item_id}</code>: Deletes an item by ID. Returns an error if the item does not exist.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7f46e7c" class="outline-4">
+<h4 id="org7f46e7c">Explanation of the Extended Test Suite</h4>
+<div class="outline-text-4" id="text-org7f46e7c">
+<ol class="org-ol">
+<li><b><b>Testing GET Method</b></b>:
+<ul class="org-ul">
+<li><code>test_read_root</code>: Verifies the <code>GET /</code> endpoint.</li>
+</ul></li>
+
+<li><b><b>Testing POST Method</b></b>:
+<ul class="org-ul">
+<li><code>test_create_item</code>: Verifies the <code>POST /items/{item_id}</code> endpoint for creating a new item.</li>
+<li><code>test_create_item_already_exists</code>: Verifies that attempting to create an item that already exists returns a 400 status code and appropriate error message.</li>
+</ul></li>
+
+<li><b><b>Testing PUT Method</b></b>:
+<ul class="org-ul">
+<li><code>test_update_item</code>: Verifies the <code>PUT /items/{item_id}</code> endpoint for updating an existing item.</li>
+<li><code>test_update_item_not_found</code>: Verifies that attempting to update a non-existent item returns a 404 status code and appropriate error message.</li>
+</ul></li>
+
+<li><b><b>Testing DELETE Method</b></b>:
+<ul class="org-ul">
+<li><code>test_delete_item</code>: Verifies the <code>DELETE /items/{item_id}</code> endpoint for deleting an existing item.</li>
+<li><code>test_delete_item_not_found</code>: Verifies that attempting to delete a non-existent item returns a 404 status code and appropriate error message.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orga56d699" class="outline-4">
+<h4 id="orga56d699">Counclusion</h4>
+<div class="outline-text-4" id="text-orga56d699">
+<p>
+This setup ensures your FastAPI application now correctly handles
+<code>POST</code>, <code>PUT</code>, and <code>DELETE</code> methods, and the corresponding tests
+validate these endpoints thoroughly.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0759ff1" class="outline-4">
+<h4 id="org0759ff1">Notes</h4>
+<div class="outline-text-4" id="text-org0759ff1">
+<p>
+You can execute the code block in your Org-mode file, and it will run
+the tests for the extended FastAPI application.
+</p>
+</div>
+</div>
+</div>
+</div>
