@@ -1,0 +1,349 @@
+---
+layout: page
+title: OpenAI API
+tagline: " simulator on localhost"
+permalink: /openai/api/simulator-gpt-4o-mini.html
+categories: [FastAPI, Python, Declarative Programming, OpenAI]
+tags: [simulator, gpt-4o-mini]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4907589">Preface</a></li>
+<li><a href="#org5b6c9ec">Prerequisites</a>
+<ul>
+<li><a href="#org2ce583d">Key</a></li>
+<li><a href="#org22021a9">Virtual Environment</a></li>
+</ul>
+</li>
+<li><a href="#org058ce81">Description</a></li>
+<li><a href="#orgfa05714"><code>Create Assistant</code> API Simulacrum</a></li>
+<li><a href="#org93ef966">FastAPI Application for Simulating OpenAI Responses</a>
+<ul>
+<li><a href="#orgac2aca8">Explanation of the FastAPI Application</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4907589" class="outline-2">
+<h2 id="org4907589">Preface</h2>
+<div class="outline-text-2" id="text-org4907589">
+<p>
+<code>OpenAI</code> opens new horizons in software development. It is now possible
+to write programs in a <i>declarative style</i> by simply describing the
+desired outcome. This approach allows developers to focus on what they
+want to achieve, rather than detailing the step-by-step instructions
+to get there. As a result, the development process becomes more
+intuitive and efficient, fostering innovation and reducing the
+complexity of coding.
+</p>
+</div>
+</div>
+<div id="outline-container-org5b6c9ec" class="outline-2">
+<h2 id="org5b6c9ec">Prerequisites</h2>
+<div class="outline-text-2" id="text-org5b6c9ec">
+</div>
+<div id="outline-container-org2ce583d" class="outline-3">
+<h3 id="org2ce583d">Key</h3>
+<div class="outline-text-3" id="text-org2ce583d">
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">OPENAI_API_MOCK_KEY</span>=<span class="org-string">'sk-the-mock-key-for-openai-simulation-on-localhost'</span>
+<span class="org-builtin">echo</span> $<span class="org-variable-name">OPENAI_API_MOCK_KEY</span>
+</pre>
+</div>
+
+<pre class="example">
+
+sk-the-mock-key-for-openai-simulation-on-localhost
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org22021a9" class="outline-3">
+<h3 id="org22021a9">Virtual Environment</h3>
+<div class="outline-text-3" id="text-org22021a9">
+<div class="org-src-container">
+<pre class="src src-sh">pip list
+</pre>
+</div>
+
+<pre class="example" id="org24382e4">
+Package           Version
+----------------- --------
+annotated-types   0.7.0
+anyio             4.4.0
+certifi           2024.7.4
+click             8.1.7
+dnspython         2.6.1
+email_validator   2.2.0
+fastapi           0.111.1
+fastapi-cli       0.0.4
+greenlet          3.0.3
+h11               0.14.0
+httpcore          1.0.5
+httptools         0.6.1
+httpx             0.27.0
+idna              3.7
+iniconfig         2.0.0
+Jinja2            3.1.4
+markdown-it-py    3.0.0
+MarkupSafe        2.1.5
+mdurl             0.1.2
+packaging         24.1
+pip               23.0.1
+pluggy            1.5.0
+pydantic          2.8.2
+pydantic_core     2.20.1
+pydantic-settings 2.3.4
+Pygments          2.18.0
+pytest            8.3.2
+python-dotenv     1.0.1
+python-multipart  0.0.9
+PyYAML            6.0.1
+rich              13.7.1
+setuptools        66.1.1
+shellingham       1.5.4
+sniffio           1.3.1
+SQLAlchemy        2.0.31
+starlette         0.37.2
+typer             0.12.3
+typing_extensions 4.12.2
+uvicorn           0.30.1
+uvloop            0.19.0
+watchfiles        0.22.0
+websockets        12.0
+wheel             0.38.4
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org058ce81" class="outline-2">
+<h2 id="org058ce81">Description</h2>
+<div class="outline-text-2" id="text-org058ce81">
+<p>
+For sake of simplicity in OpenAI application developmnet I want to
+build a FastAPI application for simulating responces from OpenAI
+server. It should allow to test and debug my application on localhost
+with minimum interruptions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfa05714" class="outline-2">
+<h2 id="orgfa05714"><code>Create Assistant</code> API Simulacrum</h2>
+<div class="outline-text-2" id="text-orgfa05714">
+<p>
+I want to build a FastAPI application for simulating responses from
+OpenAI server. For very beginning create the endpoint
+<code>create_assistant</code> which on the request:
+</p>
+
+
+<p>
+```
+curl "<a href="https://api.openai.com/v1/assistants">https://api.openai.com/v1/assistants</a>" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_MOCK_KEY" \
+  -H "OpenAI-Beta: assistants=v2" \
+  -d '{
+    "instructions": "You are a personal math tutor.",
+    "name": "Math Tutor",
+    "description": "The description of the assistant",
+    "tools": [{"type": "code_interpreter"}],
+    "model": "gpt-4-turbo",
+    "temperature": 0.8,
+    "top_p": 1.0
+  }'
+```
+returns the response:
+</p>
+
+<p>
+```
+{
+  "id": "asst_abc123",
+  "object": "assistant",
+  "created_at": 1698984975,
+  "name": "Math Tutor",
+  "description": "The description of the assistant.",
+  "model": "gpt-4-turbo",
+  "instructions": "You are a personal math tutor.",
+  "tools": [
+    {
+      "type": "code_interpreter"
+    }
+  ],
+  "metadata": {},
+  "top_p": 1.0,
+  "temperature": 0.8,
+  "response_format": "auto"
+}
+```
+</p>
+
+<p>
+Where <code>id</code>, <code>object</code>, <code>created_at</code>, <code>metadata</code>, <code>response_format</code> are
+mock values, but <code>name</code>, <code>description</code>, <code>model</code>, <code>instructions</code>,
+<code>tools</code>, <code>top_p</code>, <code>temperature</code> are values from request <code>data</code>.
+</p>
+
+<p>
+In addition write the <code>unittest</code> for testing <code>create_assistant</code> with
+```unittest.main(exit=False)``` at the bottom.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93ef966" class="outline-2">
+<h2 id="org93ef966">FastAPI Application for Simulating OpenAI Responses</h2>
+<div class="outline-text-2" id="text-org93ef966">
+<p>
+To create a FastAPI application that simulates responses from an
+OpenAI server, we will implement the `create_assistant` endpoint. This
+endpoint will accept a POST request with the specified JSON body and
+return a mocked response.
+</p>
+
+<p>
+Here’s the complete implementation, including the FastAPI application
+and the corresponding unit tests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">import</span> time
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> HTTPException
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+<span class="org-keyword">from</span> pydantic <span class="org-keyword">import</span> BaseModel
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define the request model</span>
+<span class="org-keyword">class</span> <span class="org-type">AssistantRequest</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   instructions: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tools: <span class="org-builtin">list</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   model: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   temperature: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   top_p: <span class="org-builtin">float</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Define the response model (not strictly necessary, but for clarity)</span>
+<span class="org-keyword">class</span> <span class="org-type">AssistantResponse</span>(BaseModel):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">object</span>: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   created_at: <span class="org-builtin">int</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   model: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   instructions: <span class="org-builtin">str</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tools: <span class="org-builtin">list</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   metadata: <span class="org-builtin">dict</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   top_p: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   temperature: <span class="org-builtin">float</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response_format: <span class="org-builtin">str</span>
+
+<span class="org-type">@app.post</span>(<span class="org-string">"/create_assistant"</span>, response_model=AssistantResponse)
+<span class="org-keyword">def</span> <span class="org-function-name">create_assistant</span>(data: AssistantRequest):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   mock_response = AssistantResponse(
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">id</span>=<span class="org-string">"asst_abc123"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-builtin">object</span>=<span class="org-string">"assistant"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   created_at=<span class="org-builtin">int</span>(time.time()),  <span class="org-comment-delimiter"># </span><span class="org-comment">using current time for created_at</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   name=data.name,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   description=data.description,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   model=data.model,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   instructions=data.instructions,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   tools=data.tools,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   metadata={},
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   top_p=data.top_p,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   temperature=data.temperature,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response_format=<span class="org-string">"auto"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   )
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> mock_response
+
+
+client = TestClient(app)
+
+<span class="org-keyword">class</span> <span class="org-type">TestCreateAssistant</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_create_assistant</span>(<span class="org-keyword">self</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   request_data = {
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"instructions"</span>: <span class="org-string">"You are a personal math tutor."</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"name"</span>: <span class="org-string">"Math Tutor"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"description"</span>: <span class="org-string">"The description of the assistant."</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"tools"</span>: [{<span class="org-string">"type"</span>: <span class="org-string">"code_interpreter"</span>}],
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"model"</span>: <span class="org-string">"gpt-4-turbo"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"temperature"</span>: 0.8,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"top_p"</span>: 1.0
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   }
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.post(<span class="org-string">"/create_assistant"</span>, json=request_data)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   expected_response = {
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"id"</span>: <span class="org-string">"asst_abc123"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"object"</span>: <span class="org-string">"assistant"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"created_at"</span>: response.json()[<span class="org-string">"created_at"</span>],  <span class="org-comment-delimiter"># </span><span class="org-comment">Expecting a timestamp</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"name"</span>: <span class="org-string">"Math Tutor"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"description"</span>: <span class="org-string">"The description of the assistant."</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"model"</span>: <span class="org-string">"gpt-4-turbo"</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"instructions"</span>: <span class="org-string">"You are a personal math tutor."</span>,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"tools"</span>: [
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   {<span class="org-string">"type"</span>: <span class="org-string">"code_interpreter"</span>}
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   ],
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"metadata"</span>: {},
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"top_p"</span>: 1.0,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"temperature"</span>: 0.8,
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-string">"response_format"</span>: <span class="org-string">"auto"</span>
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   }
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), expected_response)
+
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<pre class="example">
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+OK
+</pre>
+
+
+<p>
+```
+</p>
+</div>
+
+<div id="outline-container-orgac2aca8" class="outline-3">
+<h3 id="orgac2aca8">Explanation of the FastAPI Application</h3>
+<div class="outline-text-3" id="text-orgac2aca8">
+<ol class="org-ol">
+<li><b>AssistantRequest Model</b>:
+<ul class="org-ul">
+<li>This `BaseModel` defines the expected request parameters for the
+assistant creation.</li>
+</ul></li>
+
+<li><b>AssistantResponse Model</b>:
+<ul class="org-ul">
+<li>This `BaseModel` defines the structure of the mocked response.</li>
+</ul></li>
+
+<li><b>POST Endpoint</b>:
+<ul class="org-ul">
+<li>The `/create_assistant` endpoint takes an `AssistantRequest`
+object as input and returns an `AssistantResponse` object. It
+generates a mock response with preset values for certain fields
+while using the values from the request for others.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
