@@ -11,7 +11,6 @@ tags: []
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#org865714b">Preface</a></li>
-<li><a href="#orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</a></li>
 <li><a href="#orgc4dacde">TestClient module</a>
 <ul>
 <li><a href="#org1f773dd">Main Features of TestClient</a></li>
@@ -25,6 +24,7 @@ tags: []
 </li>
 </ul>
 </li>
+<li><a href="#orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</a></li>
 <li><a href="#org4d2755e">Summary</a></li>
 </ul>
 </div>
@@ -50,65 +50,6 @@ comprehensible.
 </blockquote>
 </div>
 </div>
-
-<div id="outline-container-orgf59c5f7" class="outline-2">
-<h2 id="orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</h2>
-<div class="outline-text-2" id="text-orgf59c5f7">
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">import</span> unittest
-<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
-<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
-<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
-
-
-<span class="org-variable-name">app</span> = FastAPI()
-
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
-
-
-<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
-<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">The Test Suite</span>
-<span class="org-comment-delimiter">#</span>
-client = TestClient(app)
-
-<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
-        response = client.get(<span class="org-string">"/"</span>)
-        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
-        response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
-        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
-
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
-        response = client.get(<span class="org-string">"/items/42"</span>)
-        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
-
-unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
-</pre>
-</div>
-
-<pre class="example">
-...
-----------------------------------------------------------------------
-Ran 3 tests in 0.010s
-
-OK
-</pre>
-</div>
-</div>
-
 
 <div id="outline-container-orgc4dacde" class="outline-2">
 <h2 id="orgc4dacde">TestClient module</h2>
@@ -335,6 +276,66 @@ features you can take advantage of:
 </div>
 </div>
 </div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf59c5f7" class="outline-2">
+<h2 id="orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</h2>
+<div class="outline-text-2" id="text-orgf59c5f7">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
+<span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+
+
+<span class="org-variable-name">app</span> = FastAPI()
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
+
+
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">The Test Suite</span>
+<span class="org-comment-delimiter">#</span>
+client = TestClient(app)
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
+        response = client.get(<span class="org-string">"/"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
+        response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
+        response = client.get(<span class="org-string">"/items/42"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
+
+unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
+</pre>
+</div>
+
+<pre class="example">
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+OK
+</pre>
 </div>
 </div>
 
