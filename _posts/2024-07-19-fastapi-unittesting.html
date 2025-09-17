@@ -10,30 +10,50 @@ tags: []
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1bc1074">Preface</a></li>
-<li><a href="#org85e2833">Prerequisites</a></li>
-<li><a href="#orgd7cdfa7">TestClient module</a></li>
-<li><a href="#orgdc0aa93">Test All Supported HTTP Request's Methods</a></li>
+<li><a href="#org865714b">Preface</a></li>
+<li><a href="#orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</a></li>
+<li><a href="#orgc4dacde">TestClient module</a>
+<ul>
+<li><a href="#org1f773dd">Main Features of TestClient</a></li>
+<li><a href="#orgb6b776c">Example Usage of TestClient</a>
+<ul>
+<li><a href="#org116f3d6">FastAPI Application</a></li>
+<li><a href="#org13c7b65">Unit Tests</a></li>
+<li><a href="#org122bcfa">Explanation of Example</a></li>
+<li><a href="#org37f5eb2">Advanced Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4d2755e">Summary</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1bc1074" class="outline-2">
-<h2 id="org1bc1074">Preface</h2>
-<div class="outline-text-2" id="text-org1bc1074">
+<div id="outline-container-org865714b" class="outline-2">
+<h2 id="org865714b">Preface</h2>
+<div class="outline-text-2" id="text-org865714b">
 <p>
-Just examining by testing.
+In this article, I aim to explicitly dismantle a live-coding
+methodology using <code>Babel</code>. In the <a href="https://0--key.github.io/python/fastapi-dev-env.html">previous article</a>, I presented two
+code snippets: the application and the test suite, which I separated
+into two distinct files within the file system of my <code>Python</code>
+project. While this is a conventional approach to unit testing, what
+if I want to do something extraordinary and combine both code snippets
+into a single <code>Babel</code> code block?
 </p>
+
+<blockquote>
+<p>
+This way, I can make the content exceptionally clear and
+comprehensible.
+</p>
+</blockquote>
 </div>
 </div>
 
-
-<div id="outline-container-org85e2833" class="outline-2">
-<h2 id="org85e2833">Prerequisites</h2>
-<div class="outline-text-2" id="text-org85e2833">
-<p>
-The App <b>&amp;</b> the Test Suite in a Single Block
-</p>
-
+<div id="outline-container-orgf59c5f7" class="outline-2">
+<h2 id="orgf59c5f7">The App <b>&amp;</b> the Test Suite in a Single Block</h2>
+<div class="outline-text-2" id="text-orgf59c5f7">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> unittest
 <span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
@@ -61,19 +81,19 @@ client = TestClient(app)
 <span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
 
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
+        response = client.get(<span class="org-string">"/"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
 
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   
+        response = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
+
 <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/42"</span>)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
-<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
+        response = client.get(<span class="org-string">"/items/42"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
 
 unittest.main(<span class="org-constant">exit</span>=<span class="org-constant">False</span>)
 </pre>
@@ -90,172 +110,244 @@ OK
 </div>
 
 
-<div id="outline-container-orgd7cdfa7" class="outline-2">
-<h2 id="orgd7cdfa7">TestClient module</h2>
-<div class="outline-text-2" id="text-orgd7cdfa7">
+<div id="outline-container-orgc4dacde" class="outline-2">
+<h2 id="orgc4dacde">TestClient module</h2>
+<div class="outline-text-2" id="text-orgc4dacde">
 <p>
-Can you explanin the main features of TestClient module?
+It seems to be a very opportune moment to learn more about
+<code>TestClient</code>. Let's ask OpenAI about it.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-markdown">Certainly! The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> module in FastAPI is a powerful tool
+<p>
+<b>Can you explanin the main features of TestClient module?</b>
+</p>
+
+<blockquote>
+<p>
+Certainly! The `TestClient` module in FastAPI is a powerful tool
 designed to facilitate testing applications built with FastAPI. It is
-built on top of Starlette's <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span>, which itself wraps around
-<span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">requests</span><span class="org-markdown-markup">`</span>, a popular HTTP library in Python. The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> module
+built on top of Starlette's `TestClient`, which itself wraps around
+`requests`, a popular HTTP library in Python. The `TestClient` module
 is essential for running tests that simulate HTTP requests to your
 application without starting an actual server. Here are the main
-features of the <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> module:
+features of the `TestClient` module:
+</p>
+</blockquote>
+</div>
 
-<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Main Features of TestClient</span>
+<div id="outline-container-org1f773dd" class="outline-3">
+<h3 id="org1f773dd">Main Features of TestClient</h3>
+<div class="outline-text-3" id="text-org1f773dd">
+<ol class="org-ol">
+<li><b>Simulating HTTP Requests</b>:
+<ul class="org-ul">
+<li><code>TestClient</code> allows you to simulate HTTP requests (GET, POST,
+PUT, DELETE, etc.) to your FastAPI application endpoints. This
+helps in verifying the behavior of your API endpoints.</li>
+</ul></li>
 
-<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Simulating HTTP Requests</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> allows you to simulate HTTP requests (GET, POST,
-     PUT, DELETE, etc.) to your FastAPI application endpoints. This
-     helps in verifying the behavior of your API endpoints.
+<li><b>Session Management</b>:
+<ul class="org-ul">
+<li><code>TestClient</code> manages sessions, including cookies and headers,
+making it easier to test workflows that depend on session states.</li>
+</ul></li>
 
-<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Session Management</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> manages sessions, including cookies and headers,
-     making it easier to test workflows that depend on session states.
+<li><b>Response Validation</b>:
+<ul class="org-ul">
+<li>You can validate the response status codes, headers, and body
+content to ensure they meet the expected outcomes. This ensures
+your API behaves as expected under different conditions.</li>
+</ul></li>
 
-<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Response Validation</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> You can validate the response status codes, headers, and body
-     content to ensure they meet the expected outcomes. This ensures
-     your API behaves as expected under different conditions.
+<li><b>Asynchronous Support</b>:
+<ul class="org-ul">
+<li><code>TestClient</code> supports testing asynchronous endpoints. It
+seamlessly handles both synchronous and asynchronous requests,
+maintaining the same interface for simplicity.</li>
+</ul></li>
 
-<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Asynchronous Support</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> supports testing asynchronous endpoints. It
-     seamlessly handles both synchronous and asynchronous requests,
-     maintaining the same interface for simplicity.
+<li><b>Context Management</b>:
+<ul class="org-ul">
+<li>It provides a context manager to handle setup and teardown,
+ensuring clean test environments. This is useful for initializing
+and cleaning up resources needed for tests.</li>
+</ul></li>
 
-<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Context Management</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> It provides a context manager to handle setup and teardown,
-     ensuring clean test environments. This is useful for initializing
-     and cleaning up resources needed for tests.
+<li><b>Integration with Testing Frameworks</b>:
+<ul class="org-ul">
+<li><code>TestClient</code> can be used in conjunction with various testing
+frameworks like <code>unittest</code>, <code>pytest</code>, and others, providing
+flexibility in writing and organizing tests.</li>
+</ul></li>
 
-<span class="org-markdown-list">6.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Integration with Testing Frameworks</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> can be used in conjunction with various testing
-     frameworks like <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">unittest</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">pytest</span><span class="org-markdown-markup">`</span>, and others, providing
-     flexibility in writing and organizing tests.
+<li><b>API Documentation Testing</b>:
+<ul class="org-ul">
+<li>It can automatically check that the documentation URLs (like
+Swagger UI and ReDoc) load correctly and contain the expected
+content, ensuring that the API documentation is always up-to-date
+and functional.</li>
+</ul></li>
+</ol>
+</div>
+</div>
 
-<span class="org-markdown-list">7.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">API Documentation Testing</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> It can automatically check that the documentation URLs (like
-     Swagger UI and ReDoc) load correctly and contain the expected
-     content, ensuring that the API documentation is always up-to-date
-     and functional.
 
-<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Example Usage of TestClient</span>
 
-Here's a more detailed look at how you can use <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> with
+<div id="outline-container-orgb6b776c" class="outline-3">
+<h3 id="orgb6b776c">Example Usage of TestClient</h3>
+<div class="outline-text-3" id="text-orgb6b776c">
+<p>
+Here's a more detailed look at how you can use <code>TestClient</code> with
 FastAPI:
+</p>
+</div>
 
-<span class="org-markdown-header-delimiter">#### </span><span class="org-markdown-header-face-4">FastAPI Application</span>
+<div id="outline-container-org116f3d6" class="outline-4">
+<h4 id="org116f3d6">FastAPI Application</h4>
+<div class="outline-text-4" id="text-org116f3d6">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> fastapi <span class="org-keyword">import</span> FastAPI
+<span class="org-keyword">from</span> typing <span class="org-keyword">import</span> Union
 
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">from fastapi import FastAPI</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">from typing import Union</span></span>
+<span class="org-variable-name">app</span> = FastAPI()
 
-<span class="org-markdown-code"><span class="org-markdown-pre">app = FastAPI()</span></span>
+<span class="org-type">@app.get</span>(<span class="org-string">"/"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_root</span>():
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">return</span> {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>}
 
-<span class="org-markdown-code"><span class="org-markdown-pre">@app.get("/")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">def read_root():</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return {"Hello": "World"}</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">@app.get("/items/{item_id}")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">def read_item(item_id: int, q: Union[str, None] = None):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    return {"item_id": item_id, "q": q}</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
-
-<span class="org-markdown-header-delimiter">#### </span><span class="org-markdown-header-face-4">Unit Tests</span>
-
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">import unittest</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">from fastapi.testclient import TestClient</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">from main import app  # Assuming your FastAPI app is defined in main.py</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">client = TestClient(app)</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">class TestFastAPI(unittest.TestCase):</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">    def test_read_root(self):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        response = client.get("/")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertEqual(response.status_code, 200)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertDictEqual(response.json(), {"Hello": "World"})</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">    def test_read_item_with_query(self):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        response = client.get("/items/42?q=somequery")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertEqual(response.status_code, 200)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertDictEqual(response.json(), {"item_id": 42, "q": "somequery"})</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">    def test_read_item_without_query(self):</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        response = client.get("/items/42")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertEqual(response.status_code, 200)</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">        self.assertDictEqual(response.json(), {"item_id": 42, "q": None})</span></span>
-
-<span class="org-markdown-code"><span class="org-markdown-pre">if __name__ == "__main__":</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">    unittest.main()</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">```</span></span>
-
-<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Explanation of Example</span>
-
-<span class="org-markdown-list">1.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Importing TestClient</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> is imported from <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">fastapi.testclient</span><span class="org-markdown-markup">`</span>. This allows
-     us to create a client instance to interact with our FastAPI
-     application.
-
-<span class="org-markdown-list">2.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Creating an Instance</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> We create an instance of <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> by passing in the FastAPI
-     <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">app</span><span class="org-markdown-markup">`</span>. This client will be used to simulate HTTP requests to the
-     application.
-
-<span class="org-markdown-list">3.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Simulating Requests</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">GET</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">POST</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">PUT</span><span class="org-markdown-markup">`</span>, <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">DELETE</span><span class="org-markdown-markup">`</span>, and other HTTP methods are
-     available to simulate requests to the application endpoints.
-   
-<span class="org-markdown-list">4.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Response Validation</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> The responses can be checked for status codes, headers, and JSON
-     content using the methods and attributes provided by the
-     <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">requests.Response</span><span class="org-markdown-markup">`</span> object returned by <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span>.
-
-<span class="org-markdown-list">5.</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Handling Asynchronous Endpoints</span><span class="org-markdown-markup">**</span>:
-   <span class="org-markdown-list">-</span> The same interface works seamlessly with asynchronous endpoints,
-     allowing tests to be written without worrying about the
-     underlying asynchronous nature.
-
-<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Advanced Features</span>
-
-While the above example covers basic usage, here are some advanced
-features you can take advantage of:
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Context Management</span><span class="org-markdown-markup">**</span>:
-<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  with TestClient(app) as client:</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">      response = client.get("/items/")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">      assert response.status_code == 200</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
-
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Custom Headers and Authentication</span><span class="org-markdown-markup">**</span>:
-<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  response = client.get("/items/", headers={"Authorization": "Bearer token"})</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
-
-<span class="org-markdown-list">-</span> <span class="org-markdown-markup">**</span><span class="org-markdown-bold">Session Management</span><span class="org-markdown-markup">**</span>:
-<span class="org-markdown-code">  </span><span class="org-markdown-code"><span class="org-markdown-markup">```</span></span><span class="org-markdown-code"><span class="org-markdown-language-keyword">python</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  client.cookie_jar.set("session", "session-value")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-pre">  response = client.get("/items/")</span></span>
-<span class="org-markdown-code"><span class="org-markdown-markup">  ```</span></span>
-
-<span class="org-markdown-header-delimiter">### </span><span class="org-markdown-header-face-3">Summary</span>
-
-The <span class="org-markdown-markup">`</span><span class="org-markdown-inline-code">TestClient</span><span class="org-markdown-markup">`</span> module in FastAPI is a powerful and convenient tool
-for testing web applications. It provides easy-to-use interfaces to
-simulate HTTP requests, manage sessions, validate responses, and
-integrate with various testing frameworks, making it an indispensable
-part of the FastAPI testing workflow.
+<span class="org-type">@app.get</span>(<span class="org-string">"/items/{item_id}"</span>)
+<span class="org-keyword">def</span> <span class="org-function-name">read_item</span>(item_id: <span class="org-builtin">int</span>, q: Union[<span class="org-builtin">str</span>, <span class="org-constant">None</span>] = <span class="org-constant">None</span>):
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">return</span> {<span class="org-string">"item_id"</span>: item_id, <span class="org-string">"q"</span>: q}
 </pre>
 </div>
 </div>
 </div>
 
+<div id="outline-container-org13c7b65" class="outline-4">
+<h4 id="org13c7b65">Unit Tests</h4>
+<div class="outline-text-4" id="text-org13c7b65">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> unittest
+<span class="org-keyword">from</span> fastapi.testclient <span class="org-keyword">import</span> TestClient
+<span class="org-keyword">from</span> main <span class="org-keyword">import</span> app  <span class="org-comment-delimiter"># </span><span class="org-comment">Assuming your FastAPI app is defined in main.py</span>
 
-<div id="outline-container-orgdc0aa93" class="outline-2">
-<h2 id="orgdc0aa93">Test All Supported HTTP Request's Methods</h2>
+<span class="org-variable-name">client</span> = TestClient(app)
+
+<span class="org-keyword">class</span> <span class="org-type">TestFastAPI</span>(unittest.TestCase):
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_root</span>(<span class="org-keyword">self</span>):
+        <span class="org-variable-name">response</span> = client.get(<span class="org-string">"/"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"Hello"</span>: <span class="org-string">"World"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_with_query</span>(<span class="org-keyword">self</span>):
+        <span class="org-variable-name">response</span> = client.get(<span class="org-string">"/items/42?q=somequery"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-string">"somequery"</span>})
+
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   <span class="org-keyword">def</span> <span class="org-function-name">test_read_item_without_query</span>(<span class="org-keyword">self</span>):
+        response = client.get(<span class="org-string">"/items/42"</span>)
+        <span class="org-keyword">self</span>.assertEqual(response.status_code, 200)
+        <span class="org-keyword">self</span>.assertDictEqual(response.json(), {<span class="org-string">"item_id"</span>: 42, <span class="org-string">"q"</span>: <span class="org-constant">None</span>})
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> == <span class="org-string">"__main__"</span>:
+<span class="org-highlight-indentation"> </span>   unittest.main()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org122bcfa" class="outline-4">
+<h4 id="org122bcfa">Explanation of Example</h4>
+<div class="outline-text-4" id="text-org122bcfa">
+<ol class="org-ol">
+<li><b>Importing TestClient</b>:
+<ul class="org-ul">
+<li><code>TestClient</code> is imported from <code>fastapi.testclient</code>. This allows
+us to create a client instance to interact with our FastAPI
+application.</li>
+</ul></li>
+
+<li><b>Creating an Instance</b>:
+<ul class="org-ul">
+<li>We create an instance of <code>TestClient</code> by passing in the FastAPI
+<code>app</code>. This client will be used to simulate HTTP requests to the
+application.</li>
+</ul></li>
+
+<li><b>Simulating Requests</b>:
+<ul class="org-ul">
+<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, and other HTTP methods are
+available to simulate requests to the application endpoints.</li>
+</ul></li>
+
+<li><b>Response Validation</b>:
+<ul class="org-ul">
+<li>The responses can be checked for status codes, headers, and JSON
+content using the methods and attributes provided by the
+<code>requests.Response</code> object returned by <code>TestClient</code>.</li>
+</ul></li>
+
+<li><b>Handling Asynchronous Endpoints</b>:
+<ul class="org-ul">
+<li>The same interface works seamlessly with asynchronous endpoints,
+allowing tests to be written without worrying about the
+underlying asynchronous nature.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org37f5eb2" class="outline-4">
+<h4 id="org37f5eb2">Advanced Features</h4>
+<div class="outline-text-4" id="text-org37f5eb2">
+<p>
+While the above example covers basic usage, here are some advanced
+features you can take advantage of:
+</p>
+<ul class="org-ul">
+<li><b>Context Management</b>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">with</span> TestClient(app) <span class="org-keyword">as</span> <span class="org-variable-name">client</span>:
+<span class="org-highlight-indentation"><span class="org-highlight-indentation"> </span></span>   response = client.get(<span class="org-string">"/items/"</span>)
+<span class="org-highlight-indentation"> </span>   <span class="org-keyword">assert</span> response.status_code == 200
+</pre>
+</div>
+
+
+<ul class="org-ul">
+<li><b>Custom Headers and Authentication</b>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">response</span> = client.get(<span class="org-string">"/items/"</span>, headers={<span class="org-string">"Authorization"</span>: <span class="org-string">"Bearer token"</span>})
+</pre>
+</div>
+
+
+<ul class="org-ul">
+<li><b>Session Management</b>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python">client.cookie_jar.<span class="org-builtin">set</span>(<span class="org-string">"session"</span>, <span class="org-string">"session-value"</span>)
+<span class="org-variable-name">response</span> = client.get(<span class="org-string">"/items/"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4d2755e" class="outline-2">
+<h2 id="org4d2755e">Summary</h2>
+<div class="outline-text-2" id="text-org4d2755e">
+<p>
+The <code>TestClient</code> module in FastAPI is a powerful and convenient tool
+for testing web applications. It provides easy-to-use interfaces to
+simulate HTTP requests, manage sessions, validate responses, and
+integrate with various testing frameworks, making it an indispensable
+part of the FastAPI testing workflow.
+</p>
+</div>
 </div>
