@@ -1,0 +1,307 @@
+---
+layout: page
+title: Haiku Composing With AI 
+tagline: " and general sense"
+permalink: /ai/intro/haiku-gen.html
+categories: [Learning, Practice, AI]
+tags: [assisted, haiku]
+---
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0095cd0">Intro</a></li>
+<li><a href="#org50ebdde">The Creative Challenge — Mastering the Haiku</a>
+<ul>
+<li><a href="#orgb3757aa">What is a Haiku?</a></li>
+<li><a href="#orgca52fec">Masters of the Craft: Classic Examples</a></li>
+<li><a href="#org4ac1b92">The AI Dilemma</a></li>
+</ul>
+</li>
+<li><a href="#org6b2ae0a">The Anatomy of the Zero-Prompt</a>
+<ul>
+<li><a href="#org7787339">The Master Zero-Prompt</a></li>
+<li><a href="#org46dbc70">Deconstructing the Zero-Prompt: Why It Works</a>
+<ul>
+<li><a href="#orgc951879">1. Persona Adoption (The "Who")</a></li>
+<li><a href="#orgae22c6e">2. Negative Constraints (The "What to Avoid")</a></li>
+<li><a href="#orgaea37a2">3. Redefining the Rules (Quality over Syllables)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orge365631">Executing on the Go (Right From Your Phone)</a>
+<ul>
+<li><a href="#orgfbe2cd1">Step 1: Copy the Zero-Prompt</a></li>
+<li><a href="#org1c43fc3">Step 2: Open Your AI App of Choice</a></li>
+<li><a href="#orgc1490bd">Step 3: Paste and Run</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0095cd0" class="outline-2">
+<h2 id="org0095cd0">Intro</h2>
+<div class="outline-text-2" id="text-org0095cd0">
+<p>
+It is no secret that Large Language Models (LLMs) are incredibly potent amplifiers of human intent. Yet, because their inner workings are so opaque, they can feel deeply intimidating. Many beginners face "blank page syndrome," unsure of how to communicate with the AI to get the results they want. 
+</p>
+
+<p>
+&gt; 
+&gt; This article aims to demystify this process by revealing a game-changing secret: <b>assisted prompt engineering</b>. 
+&gt; 
+</p>
+
+<p>
+The concept is simple yet paradoxical: we use the LLM to write its own prompts. Today, AI is often far better at structuring prompts—making them precise, contextual, and highly effective—than the average human. Your only job is to kickstart this cycle. To do that, you must learn how to craft a <b>"zero-prompt"</b> (or meta-prompt): the master key that instructs the AI to build the perfect prompt for you.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org50ebdde" class="outline-2">
+<h2 id="org50ebdde">The Creative Challenge — Mastering the Haiku</h2>
+<div class="outline-text-2" id="text-org50ebdde">
+<p>
+To put our LLM-assisted prompting to the test, we need a challenge that requires extreme precision, constraint, and emotional resonance. We need a task where every single word carries immense weight. 
+</p>
+
+<p>
+For this, we turn to one of the most delicate and enduring literary art forms in human history: the <b>haiku</b>.
+</p>
+</div>
+
+<div id="outline-container-orgb3757aa" class="outline-3">
+<h3 id="orgb3757aa">What is a Haiku?</h3>
+<div class="outline-text-3" id="text-orgb3757aa">
+<p>
+Originating in Japan, a haiku is a short, unrhymed poetic form. Traditionally structured in three lines with a 5-7-5 syllable pattern, its true power lies not in its rules, but in its philosophy. 
+</p>
+
+<p>
+A great haiku does not explain; it observes. Using <b>vivid imagery</b> and <b>masterful understatement</b>, a haiku captures a fleeting, crystalline moment—usually focusing on a shift in nature or a sudden insight into the human experience. It is a snapshot of time, frozen in just a few words. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgca52fec" class="outline-3">
+<h3 id="orgca52fec">Masters of the Craft: Classic Examples</h3>
+<div class="outline-text-3" id="text-orgca52fec">
+<p>
+To understand the soul of the haiku, we must look to the Japanese masters who perfected it. Here are three of the most famous haikus ever written:
+</p>
+
+<ul class="org-ul">
+<li><b>Matsuo Bashō (1644–1694)</b>
+Widely regarded as the greatest master of the haiku, Bashō captured the beauty of quiet observation. His most famous poem contrast stillness with sudden movement:
+&gt; <i>An old silent pond&#x2026;</i>
+&gt; <i>A frog jumps into the pond,</i>
+&gt; <i>splash! Silence again.</i></li>
+
+<li><b>Kobayashi Issa (1763–1828)</b>
+Issa’s work is beloved for its warmth, humility, and deep empathy for small, everyday creatures:
+&gt; <i>O snail</i>
+&gt; <i>Climb Mount Fuji,</i>
+&gt; <i>But slowly, slowly!</i></li>
+
+<li><b>Yosa Buson (1716–1784)</b>
+Buson was also a painter, and his haikus are celebrated for their highly visual, almost cinematic quality:
+&gt; <i>Spring rain:</i>
+&gt; <i>Coaxing down</i>
+&gt; <i>The evening sun.</i></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4ac1b92" class="outline-3">
+<h3 id="org4ac1b92">The AI Dilemma</h3>
+<div class="outline-text-3" id="text-org4ac1b92">
+<p>
+On the surface, writing a haiku seems simple—it’s only seventeen syllables, after all. However, Large Language Models are notoriously verbose; they love to over-explain and use flowery language. Left to their own devices, an LLM will almost always write a cliché, rhyming poem instead of a genuine haiku.
+</p>
+
+<p>
+This is exactly why we need a masterfully crafted prompt. Let’s look at how we can use the LLM itself to build the perfect "zero-prompt" to solve this creative puzzle.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6b2ae0a" class="outline-2">
+<h2 id="org6b2ae0a">The Anatomy of the Zero-Prompt</h2>
+<div class="outline-text-2" id="text-org6b2ae0a">
+<p>
+If you ask a standard LLM, <i>"Write 10 haikus about nature,"</i> you will get a predictable, disappointing result. You will likely receive rhyming stanzas, cheesy metaphors, and clichés about "whispering winds" or "dancing autumn leaves." 
+</p>
+
+<p>
+To get authentic, deeply resonant poetry, we must bypass the LLM’s default, lazy settings. We do this by crafting a *Zero-Prompt*—a highly engineered, master instruction set that forces the AI to operate at its absolute limit.
+</p>
+
+<p>
+Below is the Zero-Prompt we will use, followed by a breakdown of why it is structured this way.
+</p>
+
+<p>
+&#x2014;
+</p>
+</div>
+
+<div id="outline-container-org7787339" class="outline-3">
+<h3 id="org7787339">The Master Zero-Prompt</h3>
+<div class="outline-text-3" id="text-org7787339">
+<p>
+Copy and paste this exact prompt into your LLM of choice:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">You are a traditional Japanese Haiku Master from the Edo period, combined with a modern literary scholar who specializes in minimalist poetry. 
+
+Your task is to write 10 original, synthetic haikus in English. 
+
+To achieve the depth of a master, you must strictly adhere to these traditional principles:
+1. FOCUS ON THE MOMENT: Capture a singular, fleeting sensory observation&#8212;a sight, sound, or touch. 
+2. JUXTAPOSITION (Kireji): Each haiku must feature a "cutting" moment&#8212;a contrast or sudden shift between two images or ideas.
+3. SEASONAL REFERENCE (Kigo): Subtly hint at a season without naming it directly (e.g., using "chestnut shell" instead of "autumn").
+4. UNDERSTATEMENT: Do not explain the emotion. Show the physical reality and let the reader feel the subtext.
+
+CRITICAL NEGATIVE CONSTRAINTS:
+- ABSOLUTELY NO RHYMING. True Japanese haiku does not rhyme.
+- BAN ALL AI CLICH&#201;S: Do not use the words "whisper," "dance," "silent," "ancient," "echo," or "breeze."
+- Avoid strict 5-7-5 syllable counting if it compromises the imagery. In English, a natural 3-line cadence (short-long-short) is truer to the Japanese spirit than forced syllable counting.
+
+Generate exactly 10 distinct haikus. Separate each with a blank line.
+</pre>
+</div>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org46dbc70" class="outline-3">
+<h3 id="org46dbc70">Deconstructing the Zero-Prompt: Why It Works</h3>
+<div class="outline-text-3" id="text-org46dbc70">
+<p>
+This prompt doesn't just ask for output; it completely reconfigures how the LLM processes language. Here is the hidden mechanics of this Zero-Prompt:
+</p>
+</div>
+
+<div id="outline-container-orgc951879" class="outline-4">
+<h4 id="orgc951879">1. Persona Adoption (The "Who")</h4>
+<div class="outline-text-4" id="text-orgc951879">
+<p>
+By telling the AI it is a <i>"traditional Japanese Haiku Master&#x2026; combined with a modern literary scholar,"</i> we narrow its semantic search space. It stops looking at generic internet poetry and starts pulling from high-quality translations, academic analyses, and historical texts.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgae22c6e" class="outline-4">
+<h4 id="orgae22c6e">2. Negative Constraints (The "What to Avoid")</h4>
+<div class="outline-text-4" id="text-orgae22c6e">
+<p>
+LLMs are pattern-matching machines. Left unchecked, they default to the most common patterns on the internet (which, for poetry, are cheap rhymes and clichés). By explicitly banning words like <i>whisper</i> and <i>dance</i>, we force the LLM to dig deeper into its vocabulary to find fresher, more vivid imagery.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaea37a2" class="outline-4">
+<h4 id="orgaea37a2">3. Redefining the Rules (Quality over Syllables)</h4>
+<div class="outline-text-4" id="text-orgaea37a2">
+<p>
+One of the biggest mistakes amateur prompt writers make is forcing English LLMs to strictly adhere to the 5-7-5 syllable count. Because Japanese <i>on</i> (sounds) do not translate 1:1 to English syllables, forced 5-7-5 English haikus usually sound bloated. By giving the LLM permission to focus on <b>cadence</b> over rigid math, we allow it to write truly beautiful, natural-sounding poetry.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge365631" class="outline-2">
+<h2 id="orge365631">Executing on the Go (Right From Your Phone)</h2>
+<div class="outline-text-2" id="text-orge365631">
+<p>
+Chances are, you are reading this article right now on your smartphone—perhaps during a commute, on a coffee break, or lounging on the couch. 
+</p>
+
+<p>
+The beauty of modern AI is that you don’t need a powerful desktop computer to run this experiment. You can unlock the full power of a generative AI masterclass in the next 60 seconds, directly from your mobile screen. 
+</p>
+
+<p>
+Here is exactly how to execute this Zero-Prompt on your iOS or Android device.
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+<b>The 3-Step Mobile Workflow</b>
+</p>
+
+<p>
+Follow these quick steps to get your 10 custom haikus:
+</p>
+</div>
+
+<div id="outline-container-orgfbe2cd1" class="outline-3">
+<h3 id="orgfbe2cd1">Step 1: Copy the Zero-Prompt</h3>
+<div class="outline-text-3" id="text-orgfbe2cd1">
+<p>
+Scroll back up to the grey code block in Chapter 2. 
+</p>
+<ul class="org-ul">
+<li><b>On iPhone:</b> Press and hold your finger on the first word of the prompt. Once the selection handles appear, drag the bottom blue dot to the end of the text block, then tap <b>Copy</b>.</li>
+<li><b>On Android:</b> Long-press a word inside the block, drag the selection brackets to highlight the entire prompt, and tap <b>Copy</b> on the floating menu.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1c43fc3" class="outline-3">
+<h3 id="org1c43fc3">Step 2: Open Your AI App of Choice</h3>
+<div class="outline-text-3" id="text-org1c43fc3">
+<p>
+You don't need any special developer tools—just a standard LLM chat interface. Switch to your preferred AI assistant app, or open one in your mobile browser:
+</p>
+<ul class="org-ul">
+<li><b>ChatGPT</b> (Official App on App Store/Google Play)</li>
+<li><b>Claude.ai</b> (Accessible via Safari/Chrome or the iOS App)</li>
+<li><b>Gemini</b> (Official App on Android, Google App on iOS, or gemini.google.com in browser)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc1490bd" class="outline-3">
+<h3 id="orgc1490bd">Step 3: Paste and Run</h3>
+<div class="outline-text-3" id="text-orgc1490bd">
+<ol class="org-ol">
+<li>Tap the chat input box at the bottom of your screen where it says <i>"Message"</i> or <i>"Ask me anything&#x2026;"</i></li>
+<li>Tap the cursor again to trigger the pop-up menu, and select <b>Paste</b>.</li>
+<li>Hit the <b>Send arrow</b> (usually a green, blue, or black arrow icon).</li>
+</ol>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+<b>What to Look For in the Output</b>
+</p>
+
+<p>
+Within seconds, the screen will begin to scroll as the AI generates your 10 synthetic haikus. As you read them on your screen, look closely at how the LLM responded to the strict constraints of the Zero-Prompt:
+</p>
+
+<ul class="org-ul">
+<li>Do you see how it avoided cheap rhymes?</li>
+<li>Notice the absence of cliché words like <i>whisper</i> or <i>ancient</i>.</li>
+<li>Feel the rhythm of the lines—they should sound natural, brief, and poignant, rather than awkwardly stuffed into a rigid 5-7-5 syllable box.</li>
+</ul>
+
+<p>
+In the next chapter, we will look at a few examples of what a successful run looks like, and how you can "curate" these results to find the true masterpiece.
+</p>
+</div>
+</div>
+</div>
